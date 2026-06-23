@@ -191,7 +191,7 @@ https://doi.org/10.5281/zenodo.20499365
 
 ## 🔗 Contact
 - **ORCID:** [0009-0001-1319-3622](https://orcid.org/0009-0001-1319-3622)  
-- **Email:** [jabri.2018@gmail.com](mailto:jabri.2018@gmail.com)  
+- **Email:** [jabri62018@gmail.com](mailto:jabri62018@gmail.com)  
 - **Website:** [Jabri-web.github.io](https://Jabri-web.github.io)
 - **Website:** [Jabri-web.github.io/jabri62018.github.io](https://Jabri-web.github.io/jabri62018.github.io)
 
