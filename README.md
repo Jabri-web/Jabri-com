@@ -120,6 +120,7 @@
 - **ORCID:** [0009-0003-3319-3822](https://orcid.org/0009-0003-3319-3822)  
 - **Email:** [jabri62018@gmail.com](mailto:jabri62018@gmail.com)  
 - **Website:** [Jabri-web.github.io](https://Jabri-web.github.io)
+- **Website:** [Jabri-com](https://Jabri-web.github.io/Jabri-com)
 - **GitHub:** [View All Repositories](https://github.com/Jabri-web?tab=repositories)  
 - **Sponsor:** [Become a sponsor](https://github.com/sponsors/Jabri-web)
 
