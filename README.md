@@ -95,3 +95,35 @@
 | 5.2 | └─ Jabri_np | - | [20145279](https://doi.org/10.5281/zenodo.20145279) |
 | 5.3 | └─ Jabri_gab | - | [20148344](https://doi.org/10.5281/zenodo.20148344) |
 | 5.4 | └─ Jabri_Navier | - | [20149618](https://doi.org/10.5281/zenodo.20149618) |
+| 5.7 | └─ Jabri_Identity | - | [20114317](https://doi.org/10.5281/zenodo.20114317) |
+| 6 | **Jabri_lab** | [Pages](https://jabri-web.github.io/jabri_lab/) | قيد النشر |
+| 7 | **Zx_RieOS_v1.1** | [Pages](https://Jabri-web.github.io/Zx_RieOS_v1.1/) | [19981688](https://doi.org/10.5281/zenodo.19981688) / [20070594](https://doi.org/10.5281/zenodo.20070594) |
+| 8 | **Jabri_RiemannOS** | [Pages](https://jabri-web.github.io/Jabri-RiemannOS/) | - |
+| 9 | **Jabri_Checkout** | [Pages](https://Jabri-web.github.io/Jabri_Checkout/) | [20513840](https://doi.org/10.5281/zenodo.20513840) |
+| 10 | **Jabri-web** | [Pages](https://jabri-web.github.io/Jabri-web/) | [20499365](https://doi.org/10.5281/zenodo.20499365) |
+
+> **Verified 2026-06-09 by Jabri**: كل الروابط 1-10 شغالة. DOI كله `10.5281`. لا
+
+
+#______________________
+## 📊 GitHub Stats
+<div align="center">
+<img src="https://streak-stats.demolab.com?user=Jabri-web&theme=radical&hide_border=true" alt="GitHub Streak"/>
+<br><br>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Jabri-web&layout=compact&theme=radical&hide_border=true" alt="Top Languages"/>
+</div>
+
+## 🤝 Partnerships & Contact
+مهتم بشراكة بحثية أو إعلان مدفوع؟ تواصل معي:
+
+### 🔗 Contact
+- **ORCID:** [0009-0003-3319-3822](https://orcid.org/0009-0003-3319-3822)  
+- **Email:** [jabri.2018@gmail.com](mailto:jabri.2018@gmail.com)  
+- **Website:** [Jabri-web.github.io](https://Jabri-web.github.io)
+- **GitHub:** [View All Repositories](https://github.com/Jabri-web?tab=repositories)  
+- **Sponsor:** [Become a sponsor](https://github.com/sponsors/Jabri-web)
+
+<div align="center">
+<i>"From Riemann zeros to the structure of the universe"</i>
+</div>
+</div>
