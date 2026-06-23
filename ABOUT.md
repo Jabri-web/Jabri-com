@@ -193,7 +193,7 @@ https://doi.org/10.5281/zenodo.20499365
 - **ORCID:** [0009-0001-1319-3622](https://orcid.org/0009-0001-1319-3622)  
 - **Email:** [jabri62018@gmail.com](mailto:jabri62018@gmail.com)  
 - **Website:** [Jabri-web.github.io](https://Jabri-web.github.io)
-- **Website:** [Jabri-com](https://Jabri-web.github.io/jabri-com/)
+- **Website:** [Jabri-com](https://Jabri-web.github.io/Jabri-com/)
 
 **GitHub:** [View All Repositories](https://github.com/Jabri-web?tab=repositories)  
 **Sponsor:** [Become a sponsor](https://github.com/sponsors/Jabri-web)
