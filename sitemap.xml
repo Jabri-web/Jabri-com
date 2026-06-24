@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.0.1">
+  <!-- GitHub Pages -->
+  <url><loc>https://jabri-web.github.io/Jabri-com/</loc></url>
+  <url><loc>https://jabri-web.github.io/Jabri-com/Office.html</loc></url>
+  <url><loc>https://jabri-web.github.io/Jabri-com/Yemen-library.html</loc></url>
+  <url><loc>https://jabri-web.github.io/Jabri-com/Pages-Researches.html</loc></url>
+  <url><loc>https://jabri-web.github.io/Jabri-com/History-pdf.html</loc></url>
+  
+  <!-- Vercel - سريع -->
+  <url><loc>https://jabri-com.vercel.app/</loc></url>
+  <url><loc>https://jabri-com.vercel.app/Office.html</loc></url>
+  <url><loc>https://jabri-com.vercel.app/Yemen-library.html</loc></url>
+  <url><loc>https://jabri-com.vercel.app/Pages-Researches.html</loc></url>
+  <url><loc>https://jabri-com.vercel.app/History-pdf.html</loc></url>
+</urlset>
