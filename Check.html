@@ -17,56 +17,56 @@ h2{color:#6ae3ff;margin:20px 0 10px;font-size:18px;font-weight:400}
 .arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;color:#6ae3ff;cursor:pointer}
 .arrow.left{left:-40px}
 .arrow.right{right:-40px}
-.btn{background:#6ae3ff;color:#000;border:none;padding:10px 30px;border-radius:6px;font-weight:bold;cursor:pointer;margin:20px 0;font-size:16px}
+.btn{background:#6ae3ff;color:#000;border:none;padding:10px 30px;border-radius:6px;font-weight:bold;cursor:pointer;margin:20px 0;font-size:16px;text-decoration:none;display:inline-block}
 .btn:hover{background:#4dc3ff}
 .uploads{border:2px solid #444;border-radius:12px;padding:20px;margin:30px auto;max-width:500px;text-align:left}
 .uploads h3{color:#6ae3ff;margin-bottom:15px;text-align:center}
 table{width:100%;border-collapse:collapse}
 th{color:#aaa;font-size:13px;text-align:left;padding:8px;border-bottom:1px solid #333}
 td{padding:12px 8px;border-bottom:1px solid #222;font-size:14px}
-.open-btn{background:#6ae3ff;color:#000;border:none;padding:5px 12px;border-radius:4px;font-size:12px;cursor:pointer}
+.open-btn{background:#6ae3ff;color:#000;border:none;padding:5px 12px;border-radius:4px;font-size:12px;cursor:pointer;text-decoration:none;display:inline-block}
 </style>
 </head>
 <body>
 
 <div class="topbar">
-<span>”9Æ2</span>
-<span>Jabri-web.org</span>
-<span>+ ¡õ 6å7</span>
+  <span>”9Æ2</span>
+  <span>Jabri-web.org</span>
+  <span>+ ¡õ 6å7</span>
 </div>
 
 <h2>Featured Communities</h2>
 <div class="badge">Yemen PY</div>
 
 <div class="card">
-<span class="arrow left"><</span>
-<h1>Jabri-Yemen</h1>
-<p>open Research<br>Repository</p>
-<span class="arrow right">></span>
+  <span class="arrow left"><</span>
+  <h1>Jabri-Yemen</h1>
+  <p>open Research<br>Repository</p>
+  <span class="arrow right">></span>
 </div>
 
-<button class="btn">Browse</button>
+<!-- زر Browse اشتغل: يفتح صفحة الريبو حقك -->
+<a href="https://github.com/Jabri-web?tab=repositories" class="btn" target="_blank">Browse</a>
 
 <div class="uploads">
-<h3>¡ñ Recent Uploads</h3>
-<table>
-<tr>
-<th>Date (V)</th>
-<th>Type</th>
-<th>Open</th>
-</tr>
-<tr>
-<td>Jabri-Identity</td>
-<td></td>
-<td><button class="open-btn">”9ä8 Open</button></td>
-</tr>
-<tr>
-<td>June1,2026 (v1)<br>Jabri-library</td>
-<td>Database</td>
-<td><button class="open-btn">”9ä8 Open</button></td>
-<button class="btn" onclick="location.href='Router-all.html'">Browse</button>
-</tr>
-</table>
+  <h3>¡ñ Recent Uploads</h3>
+  <table>
+    <tr>
+      <th>Project</th>
+      <th>Type</th>
+      <th>Open</th>
+    </tr>
+    <tr>
+      <td>Jabri-Identity</td>
+      <td>Theory</td>
+      <td><a href="https://doi.org/10.5281/zenodo.20114317" class="open-btn" target="_blank">”9ä8 Open</a></td>
+    </tr>
+    <tr>
+      <td>Jabri-library<br><span style="color:#666;font-size:12px">June 1, 2026 (v1)</span></td>
+      <td>Database</td>
+      <td><a href="https://jabri-web.github.io/jabri62018.github.io/" class="open-btn" target="_blank">”9ä8 Open</a></td>
+    </tr>
+  </table>
 </div>
 
 </body>
