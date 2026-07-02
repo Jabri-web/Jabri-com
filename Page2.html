@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>طائر اليمن | Yemen Bird - أوفلاين</title>
+<style>
+:root{--container-width:400px;--bird-scale:1.15}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Tahoma','Segoe UI',Arial,sans-serif;background:#fff;color:#000;margin:0;padding:20px;text-align:center;overflow-x:hidden;transition:0.3s}
+body.en{direction:ltr;text-align:left}
+
+/* زر اللغة ثابت */
+.lang-btn{position:fixed;top:15px;left:15px;background:#000;color:#fff;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:bold;font-size:14px;z-index:9999;border:2px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
+.lang-btn:hover{background:#333}
+
+.wrapper{width:var(--container-width);margin:0 auto}
+.offline-badge{background:#ff3333;color:#fff;padding:10px;border-radius:8px;margin:15px 0;font-weight:bold;font-size:13px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 15px #ff3333}50%{box-shadow:0 0 25px #ff6666}}
+
+h1{font-size:28px;margin-bottom:5px}
+.sub{font-size:18px;color:#555;margin-bottom:15px}
+.bird-img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:15px 0;border:3px solid #000;background:#f0f0f0;transition:transform 0.6s ease-in-out;animation:pulse 2s infinite ease-in-out;transform:scale(var(--bird-scale))}
+
+.bar-menu{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.bar-menu button,.bar-menu a{width:100%;padding:14px;background:#000;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:bold;cursor:pointer;text-decoration:none;display:block;line-height:1.4;transition:0.2s}
+.bar-menu button:hover,.bar-menu a:hover{background:#333;transform:translateY(-2px)}
+.bar-menu button.exit{background:#c62828}
+.bar-menu button.exit:hover{background:#b71c1c}
+
+.en-text{display:block;font-size:16px}
+.ar-text{display:block;font-size:14px;opacity:0.85;margin-top:3px}
+body.en .ar-text{display:block}
+body:not(.en) .en-text{display:block}
+
+.row-btn{display:flex;gap:10px}
+.row-btn a{flex:1}
+
+.section{display:none;text-align:right;background:#f5f5f5;padding:15px;border-radius:12px;margin:15px 0;border:2px solid #ddd}
+body.en .section{text-align:left}
+.section.active{display:block}
+.section h3{margin-top:0;text-align:center;color:#000}
+.section a{display:block;color:#0066cc;text-decoration:none;margin:6px 0;word-break:break-all;font-size:14px}
+.section a:hover{text-decoration:underline}
+
+.footer-info{margin-top:30px;font-size:14px;color:#555;display:flex;justify-content:space-between;border-top:2px solid #ddd;padding-top:15px}
+
+.ar,.en{display:inline}
+body.en .ar{display:none}
+body:not(.en) .en{display:none}
+</style>
+<script>
+function adjustScreen(){
+  const screenWidth=window.innerWidth;
+  let containerWidth=screenWidth-40;
+  if(containerWidth>400)containerWidth=400;
+  if(containerWidth<300)containerWidth=300;
+  let birdScale=1.12;
+  if(screenWidth<400)birdScale=1.25;
+  else if(screenWidth<768)birdScale=1.18;
+  else birdScale=1.12;
+  document.documentElement.style.setProperty('--container-width',containerWidth+'px');
+  document.documentElement.style.setProperty('--bird-scale',birdScale);
+}
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function updateTime(){
+  const now=new Date();
+  const lang=document.body.classList.contains('en')?'en-US':'ar-SA';
+  document.getElementById('time-footer').innerText=now.toLocaleTimeString(lang);
+  document.getElementById('date-footer').innerText=now.toLocaleDateString(lang);
+  document.getElementById('time-visitor').innerText=now.toLocaleTimeString(lang);
+  document.getElementById('date-visitor').innerText=now.toLocaleDateString(lang);
+}
+function toggleLang(){
+  document.body.classList.toggle('en');
+  document.documentElement.dir=document.body.classList.contains('en')?'ltr':'rtl';
+  document.documentElement.lang=document.body.classList.contains('en')?'en':'ar';
+  localStorage.setItem('lang',document.body.classList.contains('en')?'en':'ar');
+  updateTime();
+}
+window.onload=function(){
+  adjustScreen();
+  if(localStorage.getItem('lang')==='en')document.body.classList.add('en');
+  updateTime();
+  setInterval(updateTime,1000);
+}
+window.onresize=adjustScreen;
+</script>
+</head>
+<body>
+
+<button class="lang-btn" onclick="toggleLang()">
+  <span class="ar"> EN </span>
+  <span class="en"> عربي </span>
+</button>
+
+<div class="wrapper">
+
+<div class="offline-badge">
+  <span class="ar">✓ يعمل بدون انترنت - Offline Mode</span>
+  <span class="en">✓ Works Offline - أوفلاين</span>
+</div>
+
+<h1>
+  <span class="ar"></span>السندباد </span><span class="en">Sindbad Yemen</span><br>
+  <span class="en">Sindbad Yemen</span><span class="ar">سندباد اليمن</span>
+</h1>
+
+<div class="sub">
+  <span class="ar">م/ عبدالله محمد ناصر الجبري</span><span class="en">Eng. Abdulla Mohammed Nasser Al-Jabri</span><br>
+  <span class="en">Eng. Abdulla Mohammed Nasser Al-Jabri</span><span class="ar">م/ جبر عبدالله الجبري</span>
+</div>
+
+<img src="Image/Yemen_bird.png" alt="Yemen Bird" class="bird-img" onerror="this.style.display='none'">
+
+<!-- القائمة الرئيسية -->
+<div class="bar-menu">
+  <a href="Yemen-library.html">
+    <span class="en-text">Contents</span>
+    <span class="ar-text">المحتوى</span>
+  </a>
+  
+  <button onclick="showSection('email')">
+    <span class="en-text">Email</span>
+    <span class="ar-text">البريد</span>
+  </button>
+  
+  <button onclick="showSection('social')">
+    <span class="en-text">Social Media</span>
+    <span class="ar-text">التواصل الاجتماعي</span>
+  </button>
+  
+  <button onclick="showSection('visitor')">
+    <span class="en-text">Visitors</span>
+    <span class="ar-text">الزوار</span>
+  </button>
+  
+  <button onclick="showSection('about')">
+    <span class="en-text">About</span>
+    <span class="ar-text">حول</span>
+  </button>
+  
+  <div class="row-btn">
+    <a href="index.html">
+      <span class="en-text">Home</span>
+      <span class="ar-text">الرئيسية</span>
+    </a>
+  </div>
+  
+  <button class="exit" onclick="history.back()">
+    <span class="en-text">Exit</span>
+    <span class="ar-text">خروج</span>
+  </button>
+</div>
+
+<!-- قسم الإيميل -->
+<div id="email" class="section">
+  <h3><span class="ar">الإيميلات</span><span class="en">Email Addresses</span></h3>
+  <a href="mailto:Jabri62018@gmail.com">Jabri62018@gmail.com</a>
+  <a href="mailto:Jabri62018jr@gmail.com">Jabri62018jr@gmail.com</a>
+  <a href="mailto:Jr62018jr@gmail.com">Jr62018jr@gmail.com</a>
+  <a href="mailto:AlJabriAbdulla23@gmail.com">AlJabriAbdulla23@gmail.com</a>
+  <a href="mailto:JabrAlJabri2025@gmail.com">JabrAlJabri2025@gmail.com</a>
+  <a href="mailto:NassimAbdulla113@gmail.com">NassimAbdulla113@gmail.com</a>
+</div>
+
+<!-- قسم التواصل -->
+<div id="social" class="section">
+  <h3><span class="ar">التواصل الاجتماعي</span><span class="en">Social Media</span></h3>
+  <p style="background:#fff3cd;padding:10px;border-radius:8px;color:#856404;font-size:13px">
+    <span class="ar">⚠ الروابط تحتاج انترنت لفتحها</span>
+    <span class="en">⚠ Links need internet to open</span>
+  </p>
+  <a href="#" onclick="alert('يحتاج انترنت')">Facebook - Jabri2026</a>
+  <a href="#" onclick="alert('يحتاج انترنت')">Instagram</a>
+  <a href="#" onclick="alert('يحتاج انترنت')">Telegram</a>
+  <a href="#" onclick="alert('يحتاج انترنت')">WhatsApp</a>
+  <a href="#" onclick="alert('يحتاج انترنت')">YouTube</a>
+  <a href="#" onclick="alert('يحتاج انترنت')">GitHub Pages</a>
+</div>
+
+<!-- قسم الزوار -->
+<div id="visitor" class="section">
+  <h3><span class="ar">إحصائيات الزوار</span><span class="en">Visitors Stats</span></h3>
+  <p><span class="ar">الوقت:</span><span class="en">Time:</span> <span id="time-visitor"></span></p>
+  <p><span class="ar">التاريخ:</span><span class="en">Date:</span> <span id="date-visitor"></span></p>
+  <p style="color:#666;font-size:13px;margin-top:10px">
+    <span class="ar">ملاحظة: العدادات الخارجية تحتاج انترنت</span>
+    <span class="en">Note: External counters need internet</span>
+  </p>
+</div>
+
+<!-- قسم حول -->
+<div id="about" class="section">
+  <h3><span class="ar">عن الموقع</span><span class="en">About</span></h3>
+  <a href="yemen-photo.html"><span class="ar">1- صور اليمن</span><span class="en">1- Yemen Photos</span></a>
+  <a href="Author-cv.html"><span class="ar">2- السيرة الذاتية</span><span class="en">2- Author CV</span></a>
+  <p style="margin-top:20px;font-weight:bold">Z + C + A = 1</p>
+  <p><span class="ar">باحث مستقل - صنعاء، اليمن 2026</span><span class="en">Independent Researcher - Sana'a, Yemen 2026</span></p>
+</div>
+
+<!-- الفوتر -->
+<div class="footer-info">
+  <span><span class="ar">الوقت:</span><span class="en">Time:</span> <span id="time-footer"></span></span>
+  <span><span class="ar">التاريخ:</span><span class="en">Date:</span> <span id="date-footer"></span></span>
+</div>
+
+</div>
+</body>
+</html>
