@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://jabri-com.vercel.app/sitemap.xml
+Sitemap: https://heavenaljabri.com/sitemap.xml
