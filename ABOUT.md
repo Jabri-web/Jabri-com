@@ -178,6 +178,12 @@ https://Jabri-web.github.io/Jabri-web/
 
 https://doi.org/10.5281/zenodo.20499365
 
+#11-Jabri-com:
+
+https://Jabri-web.github.io/jabri-com/
+
+https://doi.org/10.5281/zenodo.21003990
+
 #__________________
 ## 📊 GitHub Stats
 <div align="center">
@@ -191,9 +197,9 @@ https://doi.org/10.5281/zenodo.20499365
 
 ## 🔗 Contact
 - **ORCID:** [0009-0001-1319-3622](https://orcid.org/0009-0001-1319-3622)  
-- **Email:** [jabri62018@gmail.com](mailto:jabri62018@gmail.com)  
+- **Email:** [jabri.2018@gmail.com](mailto:jabri.2018@gmail.com)  
 - **Website:** [Jabri-web.github.io](https://Jabri-web.github.io)
-- **Website:** [Jabri-com](https://Jabri-web.github.io/Jabri-com/)
+- **Website:** [Jabri-com](https://Jabri-com.vercel.app)
 
 **GitHub:** [View All Repositories](https://github.com/Jabri-web?tab=repositories)  
 **Sponsor:** [Become a sponsor](https://github.com/sponsors/Jabri-web)
