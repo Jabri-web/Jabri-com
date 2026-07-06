@@ -199,5 +199,12 @@ function openFile(){let file=document.getElementById('file-input').value;if(file
 function toggleChat(){let box=document.getElementById('chatBox');box.style.display=box.style.display==='flex'?'none':'flex';}
 function sendMessage(){let input=document.getElementById('chatInput');let msg=input.value.trim();if(!msg)return;let messages=document.getElementById('chatMessages');messages.innerHTML+=`<div class="message user"><div class="message-content">${msg}</div></div>`;input.value='';messages.scrollTop=messages.scrollHeight;setTimeout(()=>{messages.innerHTML+=`<div class="message assistant"><div class="message-content">أهلاً بك في واحة الجبري! كيف أقدر أساعدك؟</div></div>`;messages.scrollTop=messages.scrollHeight;},800);}
 </script>
+
+
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
+</script>
 </body>
 </html>
