@@ -1,315 +1,247 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>السيرة الذاتية - عبدالله الجبري</title>
+<title>CV - Abdulla Al-Jabri</title>
 <style>
-body {
-  background: #f0f0f0;
-  color: #000;
-  font-family: Tahoma, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 1.7;
-  margin: 0;
-  padding: 20px 0;
+* { box-sizing: border-box; }
+body { background: #f0f0f0; color: #000; font-family: Tahoma, Arial, sans-serif; font-size: 12px; line-height: 1.7; margin: 0; padding: 20px 0 120px 0; }
+body.ar { direction: rtl; }
+
+.container { max-width: 210mm; margin: 0 auto; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 15mm 20mm; }
+
+/* زر اللغة فوق */
+.lang-btn{
+  display:block; margin:0 auto 20px auto; background:#FF0000; border:3px solid #fff; color:#fff;
+  padding:14px 32px; border-radius:12px; cursor:pointer; font-weight:900; font-size:17px;
+  box-shadow:0 0 15px rgba(255,0,0,0.7); transition:transform .2s
 }
 
-.page {
-  width: 210mm;
-  min-height: 297mm;
-  padding: 15mm 20mm;
-  box-sizing: border-box;
-  background: #fff;
-  margin: 0 auto 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  position: relative;
-  page-break-after: always;
+/* زر العودة ثابت تحت في النص كامل */
+.back-btn{
+  position:fixed; bottom:25px; left:50%; transform:translateX(-50%);
+  background:#0a0a0f; border:4px solid #00c8ff; color:#00c8ff;
+  padding:16px 45px; border-radius:15px; cursor:pointer; font-weight:900; font-size:18px; text-decoration:none; text-align:center;
+  box-shadow:0 0 20px rgba(0,200,255,0.8); transition:transform .2s; 
+  z-index:99999; white-space:nowrap
 }
+.lang-btn:hover,.back-btn:hover{transform:translateX(-50%) scale(1.08)}
 
-.header, .footer {
-  text-align: center;
-  font-size: 11px;
-  color: #333;
-}
+.header, .footer { text-align: center; font-size: 10px; color: #333; font-weight:bold; margin-bottom: 10px; }
+.footer { margin-top: 15px; }
+h1 { text-align: center; font-size: 17px; margin: 0 0 12px 0; }
+h2 { font-size: 13px; border-bottom: 2px solid #000; padding-bottom: 3px; margin: 15px 0 8px 0; text-align:center; }
+h3 { font-size: 12px; margin: 10px 0 5px 0; }
+.lang-en { direction: ltr; text-align: left; }
+.lang-ar { direction: rtl; text-align: right; display:none;}
+body.ar .lang-en{display:none}
+body.ar .lang-ar{display:block}
+ul { padding-left: 18px; margin: 5px 0; }
+body.ar ul { padding-right: 18px; padding-left: 0; }
+li { margin-bottom: 5px; }
+.section { margin-bottom: 12px; page-break-inside: avoid; }
 
-.header {
-  margin-bottom: 10px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 12mm;
-  left: 0;
-  right: 0;
-}
-
-h1 {
-  text-align: center;
-  font-size: 17px;
-  margin: 0 0 15px 0;
-}
-
-h2 {
-  font-size: 14px;
-  border-bottom: 1px solid #000;
-  padding-bottom: 4px;
-  margin: 18px 0 8px 0;
-  page-break-after: avoid;
-}
-
-.lang-ar {
-  direction: rtl;
-  text-align: right;
-}
-
-.lang-en {
-  direction: ltr;
-  text-align: left;
-}
-
-ul {
-  padding-right: 20px;
-  margin: 5px 0;
-}
-
-.lang-en ul {
-  padding-left: 20px;
-  padding-right: 0;
-}
-
-li {
-  margin: 4px 0;
-}
-
-.section-title {
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  margin: 40px 0;
-  padding: 20px;
-  background: #fff;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
-  max-width: 210mm;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Print Settings */
-@media print {
-  body {
-    background: #fff;
-    padding: 0;
-  }
-  
-  .page {
-    box-shadow: none;
-    margin: 0;
-    page-break-after: always;
-  }
-  
-  .section-title {
-    page-break-before: always;
-  }
-  
-  h2, h1 {
-    page-break-after: avoid;
-  }
-  
-  p, li {
-    page-break-inside: avoid;
-  }
+@media print { 
+  body { background: #fff; padding: 0; } 
+  .container { box-shadow: none; } 
+  .lang-btn,.back-btn{display:none} 
 }
 </style>
 </head>
 <body>
 
-<!-- ============ الجزء العربي ============ -->
-<div class="page">
-  <div class="header">_________C.V_______ 17_5_1442________ت (770577182)___(1/6)_________</div>
-  <h1>السيرة الذاتية</h1>
-  <div class="lang-ar">
-    <p><strong>سيدي العزيز،</strong></p>
-    <p>يساعد متخصصي تكنولوجيا المعلومات على تحويل عملك إلى متكيف. من الاستراتيجية إلى العمليات التجارية إلى البنية التحتية.</p>
-    <p>لذلك أود أن أقدم نفسي لكم كحاصل على درجة البكالوريوس في هندسة الحاسبات؛ وخبرة العمل منذ أبريل 1992 إلى الآن في:</p>
-    <ul>
-      <li>تكنولوجيا المعلومات/ شبكات/ الدعم الفني: الأجهزة والبرامج والمستخدمين.</li>
-      <li>محلل ومبرمج وإدارة قواعد البيانات؛ مطور أنظمة المخازن والمشتريات.</li>
-      <li>الأعمال: التخطيط/ البحث/ التفاوض/ الإدارة.</li>
-    </ul>
-    <p>لقد أرفقت السيرة الذاتية وشهادات التعليم والخبرات للرجوع إليها.</p>
-    <p>سيكون من دواعي سروري أن أدعو لإجراء مقابلة في أي وقت يناسبكم.</p>
-    <p><br>تفضلوا بقبول فائق الاحترام،</p>
-    <p><strong>عبدالله الجبري.</strong></p>
-  </div>
-  <div class="footer">_____ ١ يناير 2021م ___(Jabri62018@gmail.com)_______(770577182)______</div>
+<div class="container">
+
+<!-- زر اللغة فوق -->
+<button class="lang-btn" onclick="toggleLang()">عربي</button>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="header lang-en">_1/6________JR_CV_______ 1 January 2021 ___ (Jabri62018@gmail.com) _____________</div>
+<div class="header lang-ar">_1/6________JR_CV_______ 1 يناير 2021 ___ (Jabri62018@gmail.com) _____________</div>
+
+<h1 class="title lang-en">Profile ___ Al-Jabri Abdulla ___</h1>
+<h1 class="title lang-ar">الملف الشخصي ___ الجبري عبدالله ___</h1>
+
+<div class="lang-en section">
+<p><strong>Name ....:</strong> Abdulla Muhammad Nasser Saleh Al-Jabri.</p>
+<p><strong>Birth:</strong> January 15, 1968 - Bayt Al-Jabri - Anas - Dhamar - Yemen.</p>
+<p><strong>Religion:</strong> Islam (Hanifah, Muslim).</p>
+<p><strong>Residing in:</strong> Safia Haziz - Sana'a - Yemen.</p>
+<p><strong>Nationality:</strong> Yemeni</p>
+<p><strong>Marital Status:</strong> Married</p>
+<p><strong>Number of children:</strong> 3 girls, 4 boys</p>
+<p><strong>Languages:</strong> Arabic - Native / English - Good.</p>
+<p><strong>Email:</strong> jabri62018@gmail.com</p>
+<p><strong>Phone:</strong> 770577182</p>
+<p><strong>Looking for:</strong> Full time job, Work contract.</p>
+<p><strong>Preferred Location:</strong> Gulf Countries, Europe, USA, Australia.</p>
 </div>
 
-<div class="page">
-  <div class="header">_________C.V________ 17_5_1442________ت (770577182)___(2/6)_________</div>
-  <h2>الملف الشخصي</h2>
-  <div class="lang-ar">
-    <p>الاسم ....: عبدالله محمد ناصر صالح الجبري.<br>
-    تاريخ الميلاد: 15 يناير 1968- عنس- ذمار- اليمن.<br>
-    الحالة .............: متزوج.<br>
-    الجنس ...........: ذكر.<br>
-    الدين .............: الإسلام.<br>
-    الجنسية ........: يمني.<br>
-    اللغات ...........: عربي - الأم/ الفطرة. إنجليزية - جيد.<br>
-    البريد : Jabri62018@gmail.com<br>
-    تلفون............: 770577182<br>
-    ابحث عن ....: وظيفة دوام كامل، عقد عمل.<br>
-    الموقع المفضل....: دول الخليج، أوروبا، الولايات المتحدة الأمريكية، أستراليا.</p>
-  </div>
-  <div class="footer">_____ ١ يناير 2021م ___(Jabri62018@gmail.com)_______(770577182)______</div>
+<div class="lang-ar section">
+<p><strong>الاسم ....:</strong> عبدالله محمد ناصر صالح الجبري.</p>
+<p><strong>تاريخ الميلاد:</strong> 15 يناير 1968 - بيت الجبري - عنس - ذمار - اليمن.</p>
+<p><strong>الدين:</strong> الإسلام</p>
+<p><strong>السكن:</strong> الصافية حزيز - صنعاء - اليمن.</p>
+<p><strong>الجنسية:</strong> يمني</p>
+<p><strong>الحالة:</strong> متزوج</p>
+<p><strong>عدد الأولاد:</strong> 3 بنات، 4 أولاد</p>
+<p><strong>اللغات:</strong> عربي - الام / انجليزية - جيد.</p>
+<p><strong>البريد:</strong> jabri62018@gmail.com</p>
+<p><strong>الهاتف:</strong> 770577182</p>
+<p><strong>ابحث عن:</strong> وظيفه دوام كامل ، عقد عمل.</p>
+<p><strong>الموقع المفضل:</strong> دول الخليج ، أوروبا ، الولايات المتحدة الأمريكية ، أستراليا.</p>
+</div>
+<div class="footer lang-en">_1/6____ (1/6) _____ January 2021 __________________________ JR CV_______________</div>
+<div class="footer lang-ar">_1/6____ (1/6) _____ 1 يناير 2021 __________________________ JR CV_______________</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="header lang-en">_2/6____ 1 January 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<div class="header lang-ar">_2/6____ 1 يناير 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<h2 class="lang-en">Education, Qualifications</h2>
+<h2 class="lang-ar">التعليم والمؤهلات</h2>
+
+<div class="lang-en section">
+<p><strong>Bachelor's degree in Computer Engineering.</strong> University of Petroleum and Minerals (KFUPM); Dhahran; Saudi Arabia; 86-91. GPA: 3.2 out of 4.</p>
+<p>- Two honors in the college KFUPM; 88-89; KSA.</p>
+<p>- Certificate of Appreciation and Technical Excellence - YHOC; 1998</p>
+<p><strong>Professional Courses:</strong></p>
+<p>(1) IT managers and data center managers; UNIX; UIT; 2010- Yemen.</p>
+<p>(2) Network management; UIT; 1999- Yemen.</p>
+<p><strong>English Certificates:</strong></p>
+<p>(1) Level 4; YALI; 1998; Grade A - Yemen.</p>
+<p>(2) Advanced Level 5; YALI; 1999; Grade A- Yemen.</p>
+<p>(3) TOEFL preparation certificate; YALI; 1999; Grade A- Yemen.</p>
+<p>- Work experience from 3/1991 to date as an analyst (networks / systems / business).</p>
 </div>
 
-<div class="page">
-  <div class="header">________C.V_________ 17_5_1442________ت (770577182)____(3/6)________</div>
-  <h2>الهدف</h2>
-  <div class="lang-ar">العمل بتكنولوجيا المعلومات؛ البرمجيات؛ الأجهزة؛ الشبكات؛ الاتصالات؛ إدارة قواعد البيانات؛ الإدارة؛ التسويق؛ التخطيط.</div>
-  <h2>الخبرة المهنية</h2>
-  <div class="lang-ar">• التخطيط الاستراتيجي وإدارة المشاريع؛ إعداد الميزانية والخطط والتقارير السنوية؛ تنفيذ النسخ الاحتياطي واستعادة الكوارث.</div>
-  <h2>خبرة العمل: 25 سنة</h2>
-  <p class="lang-ar"><strong>(1) ITT Y17</strong><br>
-  محلل(تكنولوجيا المعلومات/ شبكات/ الأعمال)؛ (ITT) النظم والاتصالات؛ 01/2002 حتى الآن؛ صنعاء- اليمن.</p>
-  <div class="footer">_____ ١ يناير 2021م ___(Jabri62018@gmail.com)_______(770577182)______</div>
+<div class="lang-ar section">
+<p><strong>بكالوريوس هندسة الحاسب الآلي.</strong> جامعة البترول والمعادن (KFUPM)؛ الظهران؛ السعودية؛ 86-91. المعدل: 3.2 من 4.</p>
+<p>- مرتبتي شرف في الكلية KFUPM؛ 88-89؛ السعودية.</p>
+<p>- شهادة تقدير وتميز فني - YHOC؛ 1998</p>
+<p><strong>الدورات المهنية:</strong></p>
+<p>(1) مدراء تكنولوجيا المعلومات ومديرو مراكز البيانات؛ UNIX؛ UIT؛ 2010- اليمن.</p>
+<p>(2) إدارة الشبكة؛ UIT؛ 1999- اليمن.</p>
+<p><strong>شهادات اللغة الإنجليزية:</strong></p>
+<p>(1) المستوى 4؛ YALI؛ 1998؛ تقدير A - اليمن.</p>
+<p>(2) المستوى المتقدم 5؛ YALI؛ 1999؛ تقدير A- اليمن.</p>
+<p>(3) شهادة التحضير للتوفل؛ YALI؛ 1999؛ تقدير A- اليمن.</p>
+<p>- خبرة عمل من 3/1991 حتى الآن كمحلل (شبكات / أنظمة / أعمال).</p>
+</div>
+<div class="footer lang-en">_____ (2/6) _____ January 2021 ______________________________ JR CV_______________</div>
+<div class="footer lang-ar">_____ (2/6) _____ 1 يناير 2021 ______________________________ JR CV_______________</div>
+
+<!-- ============ PAGE 3 ============ -->
+<div class="header lang-en">__3/6___ 1 January 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<div class="header lang-ar">__3/6___ 1 يناير 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<h2 class="lang-en">Objective</h2>
+<h2 class="lang-ar">الهدف</h2>
+<div class="lang-en section"><p>Work with information technology; Software; Devices; Networks; Telecommunications; Database management; Administration; Marketing; Planning.</p></div>
+<div class="lang-ar section"><p>العمل بتكنولوجيا المعلومات؛ البرمجيات؛ الأجهزة؛ الشبكات؛ الاتصالات؛ إدارة قواعد البيانات؛ الإدارة؛ التسويق؛ التخطيط.</p></div>
+
+<h2 class="lang-en">Professional Experience: 25 Years</h2>
+<h2 class="lang-ar">الخبرة المهنية: 25 سنة</h2>
+
+<h3 class="lang-en">(1) ITT Y17 - Analyst (IT / Networks / Business) - 01/2002 to date</h3>
+<h3 class="lang-ar">(1) ITT Y17 - محلل (تكنولوجيا المعلومات / الشبكات / الأعمال) - 01/2002 حتى الآن</h3>
+<div class="lang-en">
+<ul>
+<li>Developing roadmap and building the annual project strategy.</li>
+<li>LAN / WAN maintenance, remote access and routing.</li>
+<li>Managing network infrastructure modernization projects.</li>
+<li>Implementing IT governance and security standards.</li>
+<li>Preparing the annual budget.</li>
+</ul>
+</div>
+<div class="lang-ar">
+<ul>
+<li>تطوير خارطة طريق وبناء استراتيجية المشروع السنوية.</li>
+<li>صيانة LAN / WAN والوصول عن بعد والتوجيه.</li>
+<li>إدارة مشاريع تحديث البنية التحتية للشبكة.</li>
+<li>تنفيذ حوكمة تكنولوجيا المعلومات ومعايير الأمن.</li>
+<li>إعداد الميزانية السنوية.</li>
+</ul>
+</div>
+<div class="footer lang-en">_____ (3/6) _____ January 2021 __________________________ JR CV_______________</div>
+<div class="footer lang-ar">_____ (3/6) _____ 1 يناير 2021 __________________________ JR CV_______________</div>
+
+<!-- ============ PAGE 4 ============ -->
+<div class="header lang-en">___4/6__ 1 January 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<div class="header lang-ar">___4/6__ 1 يناير 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<h3 class="lang-en">(2) YHOC Y6 - Network / Information Systems Analyst - 01/1996 to 02/2002</h3>
+<h3 class="lang-ar">(2) YHOC Y6 - محلل شبكات / أنظمة معلومات - 01/1996 إلى 02/2002</h3>
+<div class="lang-en">
+<ul>
+<li>Network planning and development for oil company.</li>
+<li>Support LAN/WAN and TCP/IP troubleshooting.</li>
+<li>Development of Inventory / Procurement systems - FoxPro then VS-SQL</li>
+<li>Preparation, implementation and maintenance of the network between Sana'a and Marib.</li>
+</ul>
+</div>
+<div class="lang-ar">
+<ul>
+<li>تخطيط وتطوير الشبكة لشركة نفط.</li>
+<li>دعم LAN/WAN واستكشاف أخطاء TCP/IP.</li>
+<li>تطوير أنظمة المخزون / المشتريات - FoxPro ثم VS-SQL</li>
+<li>إعداد وتنفيذ وصيانة الشبكة بين صنعاء ومأرب.</li>
+</ul>
+</div>
+<div class="footer lang-en">_____ (4/6) _____ January 2021 ____________________ JR CV________________________</div>
+<div class="footer lang-ar">_____ (4/6) _____ 1 يناير 2021 ____________________ JR CV________________________</div>
+
+<!-- ============ PAGE 5 ============ -->
+<div class="header lang-en">___5/6__ 1 January 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<div class="header lang-ar">___5/6__ 1 يناير 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<h3 class="lang-en">(3) MI Y7 - Technical Manager - 03/1992 - 01/1999</h3>
+<h3 class="lang-ar">(3) MI Y7 - مدير فني - 03/1992 - 01/1999</h3>
+<div class="lang-en">
+<ul>
+<li>Implementing IT governance.</li>
+<li>Preparation of educational manuals and staff training.</li>
+<li>Managing the IT security team and equipment.</li>
+<li>WAN / LAN setup / installation / maintenance.</li>
+</ul>
+</div>
+<div class="lang-ar">
+<ul>
+<li>تنفيذ حوكمة تكنولوجيا المعلومات.</li>
+<li>إعداد الكتيبات التعليمية وتدريب الموظفين.</li>
+<li>إدارة فريق أمن تكنولوجيا المعلومات والمعدات.</li>
+<li>إعداد / تثبيت / صيانة WAN / LAN.</li>
+</ul>
+</div>
+<div class="footer lang-en">_____ (5/6) _____ January 2021 ____________________ JR CV________________________</div>
+<div class="footer lang-ar">_____ (5/6) _____ 1 يناير 2021 ____________________ JR CV________________________</div>
+
+<!-- ============ PAGE 6 ============ -->
+<div class="header lang-en">___6/6___ 1 January 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<div class="header lang-ar">___6/6___ 1 يناير 2021 ___ (Jabri62018@gmail.com) _______ (770577182) ______</div>
+<h2 class="lang-en">Key Skills</h2>
+<h2 class="lang-ar">المهارات الرئيسية</h2>
+<div class="lang-en section"><p>IT infrastructure; Network analysis; Design and implementation of solutions; Strategic Plan and Roadmap; Policies; Standards; Performance Management; WAN / LAN, Internet; Application analysis and development; Strategy; Planning; Negotiation.</p></div>
+<div class="lang-ar section"><p>البنية التحتية لتقنية المعلومات؛ تحليل الشبكات؛ تصميم وتنفيذ الحلول؛ الخطة الاستراتيجية وخارطة الطريق؛ السياسات؛ المعايير؛ إدارة الأداء؛ WAN / LAN, Internet؛ تحليل وتطوير التطبيقات؛ الاستراتيجية؛ التخطيط؛ التفاوض.</p></div>
+
+<p class="lang-en" style="text-align:center; margin-top:20px;"><strong>_____________eof____________</strong></p>
+<p class="lang-ar" style="text-align:center; margin-top:20px;"><strong>_____________نهاية____________</strong></p>
+<div class="footer lang-en">_____ (6/6) _____ January 2021 ____________________ JR CV________________________</div>
+<div class="footer lang-ar">_____ (6/6) _____ 1 يناير 2021 ____________________ JR CV________________________</div>
+
 </div>
 
-<div class="page">
-  <div class="header">____ITT____C.V_________ 17_5_1442________ت (770577182)__(4/6)______</div>
-  <h2>الدور: محلل(تكنولوجيا المعلومات/ شبكات/ الأعمال)</h2>
-  <div class="lang-ar">
-    <ul>
-      <li>تطوير خارطة طريق وبناء استراتيجية المشروعات السنوية.</li>
-      <li>صيانة شبكات LAN / WAN والوصول عن بعد والتوجيه.</li>
-      <li>إدارة مشاريع تحديث بنية الشبكة.</li>
-      <li>إدارة المخاطر/ التعافي من الكوارث.</li>
-      <li>إعداد الموازنة السنوية.</li>
-    </ul>
-  </div>
-  <div class="footer">_____ ١ يناير 2021م ___(Jabri62018@gmail.com)_______(770577182)______</div>
-</div>
-
-<div class="page">
-  <div class="header">________C.V_________ 17_5_1442________ت (770577182)____(5/6)_______</div>
-  <p class="lang-ar"><strong>(2) YHOC Y6</strong><br>
-  محلل شبكات/ أنظمة معلومات؛ YHOC شركة هنت اليمنية للنفط؛ 01/1996 حتى 02/2002؛ صنعاء / مأرب- اليمن.</p>
-  <ul class="lang-ar">
-    <li>تخطيط وتطوير الشبكة وتوليد الوثائق كنقطة مرجعية.</li>
-    <li>دعم LAN و WAN باستخدام Switches و Hubs وأجهزة الموجهات.</li>
-    <li>تطوير نظامي المخزون/ المشتريات- (Dos / DBA- FoxPro) ثم (Win / VS-SQL).</li>
-  </ul>
-  <div class="footer">_____ ١ يناير 2021م ___(Jabri62018@gmail.com)_______(770577182)______</div>
-</div>
-
-<div class="page">
-  <div class="header">____MI____C.V_________ 17_5_1442________ت (770577182)___(6/6)______</div>
-  <h2>التعليم والمؤهلات</h2>
-  <div class="lang-ar">
-    <p>بكالوريوس هندسة الحاسب الآلي؛ جامعة البترول والمعادن (KFUPM)؛ الظهران؛ السعودية؛ يناير 1992. المعدل: 3.2 من 4.</p>
-    <ul>
-      <li>مديرو تكنولوجيا المعلومات ومديرو مراكز البيانات؛ يونيكس؛ UIT؛ 2010- اليمن.</li>
-      <li>إدارة الشبكة؛ UIT؛ 1999- اليمن.</li>
-    </ul>
-  </div>
-  <div class="footer">_____ ١ يناير 2021م ___(Jabri62018@gmail.com)____(770577182)____6/6__</div>
-</div>
-
-<!-- ============ الجزء الإنجليزي ============ -->
-<div class="section-title">ENGLISH VERSION</div>
-
-<div class="page">
-  <div class="header">_________C.V_______ 17_5_1442________(770577182)___(1/6)_________</div>
-  <h1>Curriculum Vitae</h1>
-  <div class="lang-en">
-    <p><strong>Dear Sir/Madam,</strong></p>
-    <p>IT professionals help transform your business to become adaptive. From strategy to business operations to infrastructure.</p>
-    <p>Therefore I would like to introduce myself as a holder of a Bachelor's degree in Computer Engineering; with work experience from April 1992 to now in:</p>
-    <ul>
-      <li>IT/Networks/Technical Support: Hardware, Software, and Users.</li>
-      <li>Analyst, Programmer, and Database Administration; Warehouse and Procurement Systems Developer.</li>
-      <li>Business: Planning/Research/Negotiation/Management.</li>
-    </ul>
-    <p>I have attached the CV and certificates of education and experience for reference.</p>
-    <p>It would be my pleasure to be invited for an interview at any time convenient for you.</p>
-    <p><br>Sincerely,</p>
-    <p><strong>Abdulla Al-Jabri.</strong></p>
-  </div>
-  <div class="footer">_____ 1 January 2021 ___(Jabri62018@gmail.com)_______(770577182)______</div>
-</div>
-
-<div class="page">
-  <div class="header">_________C.V________ 17_5_1442________(770577182)___(2/6)_________</div>
-  <h2>Profile</h2>
-  <div class="lang-en">
-    <p>Name ....: Abdulla Muhammad Nasser Saleh Al-Jabri.<br>
-    Birth: January 15, 1968 - Anas - Dhamar - Yemen.<br>
-    Marital Status .............: Married.<br>
-    Gender ...........: Male.<br>
-    Religion .............: Islam.<br>
-    Nationality ........: Yemeni.<br>
-    Languages ...........: Arabic - Native. English - Good.<br>
-    Email : Jabri62018@gmail.com<br>
-    Phone: 770577182<br>
-    Seeking ....: Full-time job, Work contract.<br>
-    Preferred Location....: Gulf Countries, Europe, USA, Australia.</p>
-  </div>
-  <div class="footer">_____ 1 January 2021 ___(Jabri62018@gmail.com)_______(770577182)______</div>
-</div>
-
-<div class="page">
-  <div class="header">________C.V_________ 17_5_1442________(770577182)____(3/6)________</div>
-  <h2>Objective</h2>
-  <div class="lang-en">Work with Information Technology; Software; Hardware; Networks; Telecommunications; Database Management; Administration; Marketing; Planning.</div>
-  <h2>Professional Experience</h2>
-  <div class="lang-en">• Strategic planning and project management; Preparing budgets, plans and annual reports; Implementation of backup and disaster recovery.</div>
-  <h2>Work Experience: 25 Years</h2>
-  <p class="lang-en"><strong>(1) ITT Y17</strong><br>
-  Analyst (IT/Networks/Business); (ITT) Systems and Communications; 01/2002 to Present; Sana'a, Yemen.</p>
-  <div class="footer">_____ 1 January 2021 ___(Jabri62018@gmail.com)_______(770577182)______</div>
-</div>
-
-<div class="page">
-  <div class="header">____ITT____C.V_________ 17_5_1442________(770577182)__(4/6)______</div>
-  <h2>Role: Analyst (IT/Networks/Business)</h2>
-  <div class="lang-en">
-    <ul>
-      <li>Developing roadmap and building annual project strategy.</li>
-      <li>LAN/WAN maintenance, remote access and routing.</li>
-      <li>Managing network infrastructure modernization projects.</li>
-      <li>Risk Management/Disaster Recovery.</li>
-      <li>Preparing the annual budget.</li>
-    </ul>
-  </div>
-  <div class="footer">_____ 1 January 2021 ___(Jabri62018@gmail.com)_______(770577182)______</div>
-</div>
-
-<div class="page">
-  <div class="header">________C.V_________ 17_5_1442________(770577182)____(5/6)_______</div>
-  <p class="lang-en"><strong>(2) YHOC Y6</strong><br>
-  Network/Information Systems Analyst; YHOC Yemen Hunt Oil Company; 01/1996 to 02/2002; Sana'a / Marib - Yemen.</p>
-  <ul class="lang-en">
-    <li>Network planning and development and document generation.</li>
-    <li>LAN and WAN support using Switches, Hubs, and Routers.</li>
-    <li>Development of inventory/procurement systems - (Dos/DBA-FoxPro) then (Win/VS-SQL).</li>
-  </ul>
-  <div class="footer">_____ 1 January 2021 ___(Jabri62018@gmail.com)_______(770577182)______</div>
-</div>
-
-<div class="page">
-  <div class="header">____MI____C.V_________ 17_5_1442________(770577182)___(6/6)______</div>
-  <h2>Education & Qualifications</h2>
-  <div class="lang-en">
-    <p>Bachelor's in Computer Engineering; KFUPM; Dhahran; Saudi Arabia; January 1992. GPA: 3.2/4.</p>
-    <ul>
-      <li>IT Managers and Data Center Managers; UNIX; UIT; 2010- Yemen.</li>
-      <li>Network Management; UIT; 1999- Yemen.</li>
-    </ul>
-  </div>
-  <div class="footer">_____ 1 January 2021 ___(Jabri62018@gmail.com)____(770577182)____6/6__</div>
-</div>
+<!-- زر العودة ثابت تحت في النص كامل -->
+<a href="index.html" class="back-btn">→ Back to Heaven</a>
 
 </body>
+<script>
+let isAr = false;
+function toggleLang(){
+  isAr = !isAr;
+  document.body.classList.toggle('ar');
+  document.querySelector('.lang-btn').innerText = isAr ? 'EN' : 'عربي';
+  document.querySelector('.back-btn').innerHTML = isAr ? '← العودة للواحة' : '→ Back to Heaven';
+  document.querySelector('.title').innerText = isAr ? 'الملف الشخصي ___ الجبري عبدالله ___' : 'Profile ___ Al-Jabri Abdulla ___';
+  document.documentElement.lang = isAr ? 'ar' : 'en';
+  document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+}
+</script>
 </html>
