@@ -181,4 +181,10 @@
     <priority>0.6</priority>
   </url>
 
+
+<sitemap>
+  <loc>https://jabri-com.vercel.app/image-sitemap.xml</loc>
+</sitemap>
+
+  
 </urlset>
