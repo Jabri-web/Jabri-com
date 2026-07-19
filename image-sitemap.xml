@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://jabri-com.vercel.app/yemen-photo.html</loc>
+    <lastmod>2026-07-19</lastmod>
+    
+    <!-- مجلد image بحروف صغيرة -->
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/image/Jabri-photo.png</image:loc>
+      <image:title>م/ عبدالله محمد ناصر الجبري</image:title>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/image/Yemen2026.png</image:loc>
+      <image:title>تراث اليمن العريق 2026</image:title>
+    </image:image>
+
+    <!-- مجلد Image بحرف كبير -->
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Yemen.png</image:loc>
+      <image:title>اليمن</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Shamlan2026.png</image:loc>
+      <image:title>شملان 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Jabr2026.png</image:loc>
+      <image:title>جبر 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Baleegh2026.png</image:loc>
+      <image:title>بليغ 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Mostfa2026.png</image:loc>
+      <image:title>مصطفى 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Farah26.png</image:loc>
+      <image:title>فرح 26</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Ameen20262.png</image:loc>
+      <image:title>امين 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Khaled20264.png</image:loc>
+      <image:title>خالد 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Khaled2026.png</image:loc>
+      <image:title>خالد 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Amren20261.png</image:loc>
+      <image:title>امين 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Ameen20263.png</image:loc>
+      <image:title>امين 2026</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://jabri-com.vercel.app/Image/Ameen20264.png</image:loc>
+      <image:title>امين 2026</image:title>
+    </image:image>
+
+  </url>
+
+</urlset>
