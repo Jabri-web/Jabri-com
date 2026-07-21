@@ -10,20 +10,6 @@
       ]
     }
   ],
-  "rewrites": [
-    {
-      "source": "/ar/:path*",
-      "destination": "/ar/:path*"
-    },
-    {
-      "source": "/en/:path*",
-      "destination": "/en/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/$1"
-    }
-  ],
   "redirects": [
     {
       "source": "/",
