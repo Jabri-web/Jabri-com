@@ -14,7 +14,7 @@
 
 <meta name="description" class="meta-desc"
 data-ar="واحة الجبري Heaven Al-Jabri: منصة توثيق تراث اليمن العريق (صنعاء شبام سقطرى) والأبحاث العلمية (نظرية السندباد الموحدة Z+C+A=1). تأسيس وإشراف م/ عبدالله محمد ناصر الجبري المؤسس."
-data-en="Al-Jabri Oasis: Platform for documenting ancient Yemeni heritage and scientific research (Unified Al-Sindbad Theory). Founded by Eng. Abdulla Al-Jabri.">
+data-en="Al-Jabri Oasis: Platform for documenting ancient Yemeni heritage (Sana'a, Shibam, Socotra) and scientific research (Unified Al-Sindbad Theory Z+C+A=1). Founded by Eng. Abdulla Al-Jabri.">
 <meta name="keywords" content="عبدالله الجبري, واحة الجبري, الباحث اليمني, تراث اليمن, نظرية السندباد الموحدة, Abdulla Al-Jabri, Al-Jabri Oasis">
 <meta name="author" content="م/ عبدالله محمد ناصر الجبري | Eng. Abdulla Mohammed Nasser Al-Jabri">
 <link rel="author" href="https://jabri-com.vercel.app/about.html" />
@@ -27,15 +27,15 @@ data-en="Al-Jabri Oasis: Platform for documenting ancient Yemeni heritage and sc
 <meta property="og:locale" content="ar_YE">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="واحة الجبري | Heaven Al-Jabri">
-<meta property="og:title" class="og-title" data-ar="واحة الجبري | Heaven Al-Jabri" data-en="Al-Jabri Oasis | Heaven Al-Jabri">
-<meta property="og:description" class="og-desc" data-ar="توثيق تراث اليمن + أبحاث السندباد" data-en="Yemen Heritage + Al-Sindbad Research">
+<meta property="og:title" class="og-title" data-ar="واحة الجبري | Heaven Al-Jabri - تراث اليمن" data-en="Al-Jabri Oasis | Heaven Al-Jabri - Yemen Heritage">
+<meta property="og:description" class="og-desc" data-ar="توثيق تراث اليمن + أبحاث السندباد الموحدة" data-en="Yemen Heritage + Unified Al-Sindbad Research">
 <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.png">
-<meta property="og:image:alt" content="م/ عبدالله محمد ناصر الجبري المؤس">
+<meta property="og:image:alt" content="م/ عبدالله محمد ناصر الجبري المؤسس">
 <meta property="og:url" content="https://jabri-com.vercel.app/">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" class="tw-title" data-ar="واحة الجبري" data-en="Al-Jabri Oasis">
-<meta name="twitter:description" class="tw-desc" data-ar="تراث اليمن وأبحاث الرياضيات" data-en="Yemen Heritage & Research">
+<meta name="twitter:title" class="tw-title" data-ar="واحة الجبري | Heaven Al-Jabri" data-en="Al-Jabri Oasis | Heaven Al-Jabri">
+<meta name="twitter:description" class="tw-desc" data-ar="تراث اليمن وأبحاث الرياضيات والفيزياء" data-en="Yemen Heritage & Mathematics/Physics Research">
 <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.png">
 <meta name="twitter:image:alt" content="م/ عبدالله الجبري المؤسس">
 
@@ -46,7 +46,7 @@ data-en="Al-Jabri Oasis: Platform for documenting ancient Yemeni heritage and sc
 <meta name="DC.rights" content="© 2026 م/ عبدالله محمد ناصر الجبري" />
 <meta name="copyright" content="© 2026 م/ عبدالله محمد ناصر الجبري. جميع الحقوق محفوظة" />
 
-<!-- Schema.org - مصح 100% -->
+<!-- Schema.org -->
 <script type="application/ld+json">
 {
 "@context": "https://schema.org",
@@ -109,21 +109,100 @@ data-en="Al-Jabri Oasis: Platform for documenting ancient Yemeni heritage and sc
 }
 </script>
 
+<!-- ====== LANGUAGE FUNCTIONS ====== -->
 <script>
-function updateHeadLang(){
-  const isEnglish = document.body.classList.contains('en');
-  const title = document.querySelector('title');
-  if(title) title.textContent = isEnglish ? title.getAttribute('data-en') : title.getAttribute('data-ar');
-  document.querySelectorAll('.meta-desc, .og-title, .og-desc, .tw-title, .tw-desc').forEach(el=>{
-    if(!el) return;
-    el.setAttribute('content', isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-ar'));
-  });
+// Update head language - uses document.documentElement.lang for consistency with footer
+function updateHeadLang() {
+    const isEnglish = document.documentElement.lang === 'en';
+    console.log('🔄 updateHeadLang called, isEnglish:', isEnglish);
+    
+    // Update title
+    const title = document.querySelector('title');
+    if (title) {
+        const newTitle = isEnglish ? title.getAttribute('data-en') : title.getAttribute('data-ar');
+        if (newTitle) {
+            title.textContent = newTitle;
+            console.log('✅ Title updated to:', newTitle.substring(0, 50) + '...');
+        }
+    }
+    
+    // Update meta descriptions
+    document.querySelectorAll('.meta-desc, .og-title, .og-desc, .tw-title, .tw-desc').forEach(el => {
+        if (!el) return;
+        const newContent = isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+        if (newContent) {
+            el.setAttribute('content', newContent);
+        }
+    });
+    
+    console.log('✅ Head meta tags updated');
 }
-const originalToggleLang = window.toggleLang;
+
+// Expose globally
+window.updateHeadLang = updateHeadLang;
+
+// Main toggle language function
 window.toggleLang = function() {
-  if(originalToggleLang) originalToggleLang();
-  updateHeadLang();
-  if(typeof updateFooterLang === 'function') updateFooterLang();
-}
-document.addEventListener('DOMContentLoaded', updateHeadLang);
+    const isEnglish = document.documentElement.lang === 'en';
+    const newLang = isEnglish ? 'ar' : 'en';
+    console.log('🔄 toggleLang called, switching to:', newLang);
+    
+    // Update HTML lang and dir
+    document.documentElement.lang = newLang;
+    document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+    
+    // Update body class
+    document.body.classList.remove('ar', 'en');
+    document.body.classList.add(newLang);
+    
+    // Store preference
+    localStorage.setItem('preferred-language', newLang);
+    
+    // Update head
+    if (typeof updateHeadLang === 'function') {
+        updateHeadLang();
+    }
+    
+    // Update footer
+    if (typeof updateFooterLang === 'function') {
+        updateFooterLang();
+    }
+    
+    // Update button states
+    const langAr = document.getElementById('lang-ar');
+    const langEn = document.getElementById('lang-en');
+    if (langAr) langAr.classList.toggle('active', newLang === 'ar');
+    if (langEn) langEn.classList.toggle('active', newLang === 'en');
+    
+    console.log('✅ Language switched to:', newLang);
+};
+
+// Load saved language on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('preferred-language') || 'ar';
+    console.log('🌐 DOM loaded, saved language:', savedLang);
+    
+    // Set language
+    document.documentElement.lang = savedLang;
+    document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.add(savedLang);
+    
+    // Update head
+    if (typeof updateHeadLang === 'function') {
+        updateHeadLang();
+    }
+    
+    // Update footer
+    if (typeof updateFooterLang === 'function') {
+        updateFooterLang();
+    }
+    
+    // Update button states
+    const langAr = document.getElementById('lang-ar');
+    const langEn = document.getElementById('lang-en');
+    if (langAr) langAr.classList.toggle('active', savedLang === 'ar');
+    if (langEn) langEn.classList.toggle('active', savedLang === 'en');
+    
+    console.log('🎉 Language initialized to:', savedLang);
+});
 </script>
