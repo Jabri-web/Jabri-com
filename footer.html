@@ -27,63 +27,63 @@
   <p id="copyright" style="margin-top:20px;color:#666;font-size:14px;text-align:center;">
     © 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة
   </p>
-
-<!-- Footer Language Script -->
-<script>
-function updateFooterLang() {
-    const isEnglish = document.documentElement.lang === 'en';
-    console.log('🔄 updateFooterLang called, isEnglish:', isEnglish);
-    
-    // Change direction
-    const footer = document.getElementById('site-footer');
-    if (footer) {
+  
+  <!-- Footer Language Script -->
+  <script>
+    function updateFooterLang() {
+      const isEnglish = document.documentElement.lang === 'en';
+      console.log('🔄 updateFooterLang called, isEnglish:', isEnglish);
+      
+      // Change direction
+      const footer = document.getElementById('site-footer');
+      if (footer) {
         footer.dir = isEnglish ? "ltr" : "rtl";
-    }
-    
-    // Update search title
-    const searchTitle = document.getElementById('searchTitle');
-    if (searchTitle) {
+      }
+      
+      // Update search title
+      const searchTitle = document.getElementById('searchTitle');
+      if (searchTitle) {
         searchTitle.innerHTML = isEnglish ?
-            "<strong>🔍 Search for Researcher:</strong>" :
-            "<strong>🔍 البحث عن الباحث:</strong>";
-    }
-    
-    // Update copyright
-    const copyright = document.getElementById('copyright');
-    if (copyright) {
+          "<strong>🔍 Search for Researcher:</strong>" :
+          "<strong>🔍 البحث عن الباحث:</strong>";
+      }
+      
+      // Update copyright
+      const copyright = document.getElementById('copyright');
+      if (copyright) {
         copyright.innerHTML = isEnglish ?
-            "© 2026 Eng. Abdulla Mohammed Nasser Al-Jabri - All Rights Reserved" :
-            "© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة";
-    }
-    
-    // Update all text elements
-    document.querySelectorAll('#site-footer .txt').forEach(el => {
+          "© 2026 Eng. Abdulla Mohammed Nasser Al-Jabri - All Rights Reserved" :
+          "© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة";
+      }
+      
+      // Update all text elements
+      document.querySelectorAll('#site-footer .txt').forEach(el => {
         const newText = isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-ar');
         if (newText) {
-            el.textContent = newText;
+          el.textContent = newText;
         }
+      });
+      
+      console.log('✅ Footer updated');
+    }
+    
+    // Expose globally
+    window.updateFooterLang = updateFooterLang;
+    
+    // Run on DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📄 Footer DOM loaded');
+      if (typeof updateFooterLang === 'function') {
+        updateFooterLang();
+      }
     });
     
-    console.log('✅ Footer updated');
-}
-
-// Expose globally
-window.updateFooterLang = updateFooterLang;
-
-// Run on DOM ready
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('📄 Footer DOM loaded');
-    if (typeof updateFooterLang === 'function') {
+    // Also run when footer is dynamically loaded
+    document.addEventListener('footerLoaded', function() {
+      console.log('📄 Footer loaded event received');
+      if (typeof updateFooterLang === 'function') {
         updateFooterLang();
-    }
-});
-
-// Also run when footer is dynamically loaded
-document.addEventListener('footerLoaded', function() {
-    console.log('📄 Footer loaded event received');
-    if (typeof updateFooterLang === 'function') {
-        updateFooterLang();
-    }
-});
-</script>
+      }
+    });
+  </script>
 </footer>
