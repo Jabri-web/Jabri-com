@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page Title (will be enhanced by header) -->
+    <title>Home - Heaven Al-Jabri</title>
+    
+    <!-- Page-specific SEO -->
+    <meta name="description" content="Home page of Heaven Al-Jabri - Yemen heritage and scientific research in mathematics and theoretical physics">
+    
+    <!-- Language alternates for SEO -->
+    <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/ar/" />
+    <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/" />
+    
+    <!-- Load English header and footer -->
+    <script src="../js/init-page-en.js" defer></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0f;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        
+        body.ar {
+            direction: rtl;
+            font-family: 'Cairo', Tahoma, Arial, sans-serif;
+        }
+        
+        /* Language Switch Button */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            z-index: 9999;
+            display: flex;
+            gap: 4px;
+            background: #1a1a2e;
+            padding: 6px 12px;
+            border-radius: 30px;
+            border: 1px solid #2a2a4e;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        body.ar .lang-switch {
+            left: 20px;
+        }
+        
+        body.en .lang-switch {
+            right: 20px;
+        }
+        
+        .lang-switch button {
+            background: none;
+            border: none;
+            color: #8888bb;
+            padding: 6px 14px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .lang-switch button:hover {
+            color: #d0d0ea;
+            background: #2a2a4e;
+        }
+        
+        .lang-switch button.active {
+            background: #6ae3ff;
+            color: #0b0b16;
+        }
+        
+        .lang-switch button.active:hover {
+            background: #5ad0f0;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0a3d62 0%, #1e6f9f 100%);
+            padding: 60px 20px;
+            border-bottom: 3px solid #6ae3ff;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('../Image/Yemen2026.png') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #6ae3ff;
+            box-shadow: 0 0 20px rgba(106, 227, 255, 0.5);
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #b8e8ff;
+            margin: 5px 0;
+        }
+        
+        .header .equation {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #6ae3ff;
+            margin-top: 15px;
+        }
+        
+        /* Main Content */
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #6ae3ff;
+            margin: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: #1a1a2e;
+            border: 2px solid #2a2a3e;
+            border-radius: 15px;
+            padding: 25px;
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: 0.3s;
+            display: block;
+            text-align: center;
+        }
+        
+        .card:hover {
+            border-color: #6ae3ff;
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(106, 227, 255, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .card h3 {
+            color: #6ae3ff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Language-specific content */
+        .en-text { display: inline; }
+        .ar-text { display: none; }
+        
+        body.ar .en-text { display: none; }
+        body.ar .ar-text { display: inline; }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .lang-switch {
+                top: 10px;
+                padding: 4px 8px;
+            }
+            body.ar .lang-switch { left: 10px; }
+            body.en .lang-switch { right: 10px; }
+            .lang-switch button {
+                padding: 4px 10px;
+                font-size: 0.75rem;
+            }
+            .header h1 { font-size: 1.8rem; }
+            .header img { width: 80px; height: 80px; }
+            .section-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Language Switch -->
+    <div class="lang-switch">
+        <button id="lang-ar" onclick="switchLanguage('ar')">🇸🇦 عربي</button>
+        <button id="lang-en" class="active" onclick="switchLanguage('en')">🇬🇧 English</button>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="../Image/Jabri-photo.png" alt="Eng. Abdulla Al-Jabri">
+            <h1>
+                <span class="en-text">Heaven Al-Jabri</span>
+                <span class="ar-text">واحة الجبري</span>
+            </h1>
+            <p class="subtitle">
+                <span class="en-text">Eng. Abdulla Mohammed Nasser Al-Jabri</span>
+                <span class="ar-text">م/ عبدالله محمد ناصر الجبري</span>
+            </p>
+            <p class="subtitle">
+                <span class="en-text">Researcher in Mathematics & Theoretical Physics</span>
+                <span class="ar-text">باحث في الرياضيات والفيزياء النظرية</span>
+            </p>
+            <div class="equation">Z + C + A = 1</div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Projects Section -->
+        <h2 class="section-title">
+            <span class="en-text">Projects & Portals</span>
+            <span class="ar-text">المشاريع والبوابات</span>
+        </h2>
+        <div class="cards-grid">
+            
+            <a href="Jabri-com-index.html" class="card">
+                <div class="card-icon">🏛️</div>
+                <h3>
+                    <span class="en-text">Main Oasis</span>
+                    <span class="ar-text">الواحة الرئيسية</span>
+                </h3>
+                <p>
+                    <span class="en-text">Yemeni Heritage Gateway</span>
+                    <span class="ar-text">بوابة تراث اليمن العريق</span>
+                </p>
+            </a>
+            
+            <a href="Page1.html" class="card">
+                <div class="card-icon">🗺️</div>
+                <h3>
+                    <span class="en-text">Sindbad Yemen</span>
+                    <span class="ar-text">سندباد اليمن</span>
+                </h3>
+                <p>
+                    <span class="en-text">Journey of Discovery</span>
+                    <span class="ar-text">رحلة الاكتشاف والمعرفة</span>
+                </p>
+            </a>
+            
+            <a href="Page4.html" class="card">
+                <div class="card-icon">🔬</div>
+                <h3>
+                    <span class="en-text">Office & Research</span>
+                    <span class="ar-text">المكتب والبحوث</span>
+                </h3>
+                <p>
+                    <span class="en-text">Riemann & Sundus Theory</span>
+                    <span class="ar-text">أبحاث ريمان ونظرية سندس</span>
+                </p>
+            </a>
+            
+            <a href="Page6.html" class="card">
+                <div class="card-icon">🧪</div>
+                <h3>
+                    <span class="en-text">Jabri Lab</span>
+                    <span class="ar-text">مختبر الجبري</span>
+                </h3>
+                <p>
+                    <span class="en-text">Scientific Experiments</span>
+                    <span class="ar-text">تجارب وتطبيقات علمية</span>
+                </p>
+            </a>
+            
+            <a href="Yemen-library.html" class="card">
+                <div class="card-icon">📚</div>
+                <h3>
+                    <span class="en-text">Yemen Library</span>
+                    <span class="ar-text">مكتبة اليمن</span>
+                </h3>
+                <p>
+                    <span class="en-text">Heritage & Knowledge</span>
+                    <span class="ar-text">تراث ومعرفة وتاريخ</span>
+                </p>
+            </a>
+            
+            <a href="about.html" class="card">
+                <div class="card-icon">👤</div>
+                <h3>
+                    <span class="en-text">About Author</span>
+                    <span class="ar-text">عن المؤلف</span>
+                </h3>
+                <p>
+                    <span class="en-text">CV & Publications</span>
+                    <span class="ar-text">السيرة الذاتية والأعمال</span>
+                </p>
+            </a>
+            
+        </div>
+        
+        <!-- Heritage Section -->
+        <h2 class="section-title">
+            <span class="en-text">Yemen Heritage</span>
+            <span class="ar-text">تراث اليمن</span>
+        </h2>
+        <div class="cards-grid">
+            <a href="Sanaa.html" class="card">
+                <div class="card-icon">🏙️</div>
+                <h3>
+                    <span class="en-text">Old Sana'a</span>
+                    <span class="ar-text">صنعاء القديمة</span>
+                </h3>
+            </a>
+            <a href="Shibam.html" class="card">
+                <div class="card-icon">🏰</div>
+                <h3>
+                    <span class="en-text">Shibam Hadramout</span>
+                    <span class="ar-text">شبام حضرموت</span>
+                </h3>
+            </a>
+            <a href="Soqatra.html" class="card">
+                <div class="card-icon">🏝️</div>
+                <h3>
+                    <span class="en-text">Socotra</span>
+                    <span class="ar-text">سقطرى</span>
+                </h3>
+            </a>
+        </div>
+        
+    </div>
+    
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+    
+    <script>
+        // Language switching function
+        function switchLanguage(lang) {
+            // Update body class
+            document.body.classList.remove('ar', 'en');
+            document.body.classList.add(lang);
+            
+            // Update HTML attributes
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update button states
+            document.getElementById('lang-ar').classList.toggle('active', lang === 'ar');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            
+            // Store preference
+            localStorage.setItem('preferred-language', lang);
+            
+            // Update head and footer if functions exist
+            if (typeof updateHeadLang === 'function') updateHeadLang();
+            if (typeof updateFooterLang === 'function') updateFooterLang();
+            
+            console.log(`🌐 Language switched to: ${lang}`);
+        }
+        
+        // Load saved language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferred-language') || 'en';
+            switchLanguage(savedLang);
+        });
+    </script>
+    
+</body>
+</html>
