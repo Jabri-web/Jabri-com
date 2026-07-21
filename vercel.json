@@ -1,4 +1,29 @@
 {
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/ar/:path*",
+      "destination": "/ar/:path*"
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/en/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
+  ],
   "redirects": [
     {
       "source": "/",
