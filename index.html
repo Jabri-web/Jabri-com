@@ -397,7 +397,7 @@ function toggleChat(){let box=document.getElementById('chatBox');box.style.displ
 <!-ايقونة عداد الزوار
 
 <!-- أيقونة العداد - شمال نصف المسافة -->
-<div id="visitorCounter" style="position:fixed; top:65px; left:25%; transform:translateX(-50%) scale(0.5); transform-origin:center; background:linear-gradient(135deg,#8B4513,#A0522D); color:white; padding:10px 20px; border-radius:50px; font-size:18px; font-weight:bold; box-shadow:0 4px 15px rgba(139,69,19,0.5); z-index:9999; display:flex; align-items:center; gap:8px; border:1px solid #D2B48C;">
+<div id="visitorCounter" style="position:fixed; top:10px; left:50%; transform:translateX(-50%) scale(0.5); transform-origin:center; background:linear-gradient(135deg,#8B4513,#A0522D); color:white; padding:10px 20px; border-radius:50px; font-size:18px; font-weight:bold; box-shadow:0 4px 15px rgba(139,69,19,0.5); z-index:9999; display:flex; align-items:center; gap:8px; border:1px solid #D2B48C;">
   <span id="counterText" data-ar="👥 زوار:" data-en="👥 Visitors:">👥 زوار:</span>
   <span id="counterNumber">1</span>
 </div>
@@ -449,9 +449,84 @@ function toggleChat(){let box=document.getElementById('chatBox');box.style.displ
     }
   }
 </script>
-
 <!---- نهاية ايقونة الززوار
+<!---بداية زر الموسيقى
 
+<!-- ===== زر الموسيقى فوق شمال + سكربت ===== -->
+
+<style>
+  .music-btn-fixed {
+    position: fixed;
+    top: 20px;
+    left: 250px;
+    background: linear-gradient(135deg, #6ae3ff, #3b9fcb);
+    color: #0a0a0f;
+    border: none;
+    padding: 8px 14px; /* اصغر */
+    border-radius: 10px;
+    font-size: 14px; /* اصغر */
+    font-weight: bold;
+    font-family: "Tajawal", Arial, sans-serif;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 0 10px rgba(106, 227, 255, 0.3);
+    z-index: 1000;
+  }
+  .music-btn-fixed.playing {
+    background: linear-gradient(135deg, #ff6a6a, #cb3b3b);
+    color: #fff;
+  }
+  .music-btn-fixed:hover { transform: scale(1.08); }
+</style>
+
+<audio id="oasisMusic" src="Image/music.mp3" loop preload="auto"></audio>
+<button class="music-btn-fixed" id="musicToggle" onclick="toggleMusic()">
+  🎵
+</button>
+
+<script>
+// === سكربت الموسيقى ===
+const music = document.getElementById('oasisMusic');
+const musicBtn = document.getElementById('musicToggle');
+let isPlaying = false;
+music.volume = 0.4;
+
+// اول لمسة تشغل
+function startMusicOnce() {
+  if (!isPlaying) {
+    music.play().then(() => {
+      isPlaying = true;
+      musicBtn.innerHTML = '🔊'; // ايقونة بس
+      musicBtn.classList.add('playing');
+    }).catch(e => console.log(e));
+  }
+  document.removeEventListener('touchstart', startMusicOnce);
+  document.removeEventListener('click', startMusicOnce);
+}
+document.addEventListener('touchstart', startMusicOnce);
+document.addEventListener('click', startMusicOnce);
+
+// زر التشغيل والايقاف
+function toggleMusic() {
+  if (isPlaying) {
+    music.pause();
+    musicBtn.innerHTML = '🎵';
+    musicBtn.classList.remove('playing');
+    isPlaying = false;
+  } else {
+    music.play().then(() => {
+      musicBtn.innerHTML = '🔊';
+      musicBtn.classList.add('playing');
+      isPlaying = true;
+    }).catch(() => {});
+  }
+}
+</script>
+    
+<!--- نهاية زر الموسيقى
   
 </body>
 </html>
