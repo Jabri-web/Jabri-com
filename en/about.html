@@ -37,7 +37,7 @@
       "alternateName": ["م/ عبدالله محمد ناصر الجبري", "Abdulla Al-Jabri"],
       "url": "https://jabri-com.vercel.app/en/about.html",
       "image": "https://jabri-com.vercel.app/image/Jabri-photo.png",
-      "jobTitle": "Researcher & Founder",
+      "jobTitle": "Researcher, Founder & Software Developer",
       "nationality": "Yemeni",
       "email": "mailto:jabri62018@gmail.com",
       "sameAs": [
@@ -55,109 +55,60 @@
         "Theoretical Mathematics",
         "Theoretical Physics",
         "Sindbad Unified Theory",
-        "Yemeni Heritage"
+        "Yemeni Heritage",
+        "Software Development"
       ]
     }
     </script>
 
     <style>
-        /* ===== Same styles as Arabic version (works perfectly for LTR) ===== */
+        /* ===== Same styles as before (unchanged) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0b0b16; font-family: 'Segoe UI', 'Tahoma', Arial, sans-serif; color: #d0d0ea; line-height: 1.8; padding: 20px; }
-
-        /* ===== Language Switcher (Fixed) ===== */
         .lang-switch {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 999;
-            background: #1a1a32;
-            padding: 6px 12px;
-            border-radius: 30px;
-            border: 1px solid #2a2a4e;
-            display: flex;
-            gap: 4px;
+            position: fixed; top: 20px; left: 20px; z-index: 999;
+            background: #1a1a32; padding: 6px 12px; border-radius: 30px;
+            border: 1px solid #2a2a4e; display: flex; gap: 4px;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         .lang-switch a {
-            color: #d0d0ea;
-            text-decoration: none;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: 0.3s;
+            color: #d0d0ea; text-decoration: none; padding: 4px 12px;
+            border-radius: 20px; font-size: 0.9rem; transition: 0.3s;
         }
-        .lang-switch a.active {
-            background: #6ae3ff;
-            color: #0b0b16;
-            font-weight: 700;
-        }
+        .lang-switch a.active { background: #6ae3ff; color: #0b0b16; font-weight: 700; }
         .lang-switch a:hover { background: #6ae3ff40; }
 
-        /* ===== Main Container ===== */
         .container {
-            max-width: 1000px;
-            margin: 60px auto 0;
-            background: #12121f;
-            border-radius: 24px;
-            padding: 30px;
-            border: 1px solid #2a2a4e;
+            max-width: 1000px; margin: 60px auto 0; background: #12121f;
+            border-radius: 24px; padding: 30px; border: 1px solid #2a2a4e;
         }
 
-        /* ===== Header ===== */
         header {
-            text-align: center;
-            padding: 30px 20px 20px;
-            border-bottom: 2px solid #2a2a4e;
-            margin-bottom: 30px;
+            text-align: center; padding: 30px 20px 20px;
+            border-bottom: 2px solid #2a2a4e; margin-bottom: 30px;
         }
         header .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            display: flex; align-items: center; justify-content: center;
+            gap: 15px; flex-wrap: wrap;
         }
         header .logo img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 3px solid #6ae3ff;
-            object-fit: cover;
+            width: 70px; height: 70px; border-radius: 50%;
+            border: 3px solid #6ae3ff; object-fit: cover;
         }
-        header .logo h1 {
-            font-size: 2rem;
-            color: #6ae3ff;
-            margin: 0;
-        }
+        header .logo h1 { font-size: 2rem; color: #6ae3ff; margin: 0; }
         header nav {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            margin-top: 15px; display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 15px;
         }
         header nav a {
-            color: #c0c0d0;
-            text-decoration: none;
-            padding: 6px 18px;
-            border-radius: 30px;
-            border: 1px solid #2a2a4e;
-            transition: 0.3s;
+            color: #c0c0d0; text-decoration: none; padding: 6px 18px;
+            border-radius: 30px; border: 1px solid #2a2a4e; transition: 0.3s;
             font-size: 1rem;
         }
-        header nav a:hover {
-            background: #6ae3ff;
-            color: #0b0b16;
-            border-color: #6ae3ff;
-        }
-        header nav a.active {
-            background: #6ae3ff;
-            color: #0b0b16;
-            border-color: #6ae3ff;
+        header nav a:hover, header nav a.active {
+            background: #6ae3ff; color: #0b0b16; border-color: #6ae3ff;
         }
 
-        /* ===== Content ===== */
         .about-section { padding: 10px 0; }
         .about-header { text-align: center; margin-bottom: 3rem; }
         .about-header h1 { font-size: 2.8rem; color: #6ae3ff; margin-bottom: 0.5rem; }
@@ -165,105 +116,65 @@
 
         .profile-card {
             background: linear-gradient(135deg, #1a1a32 0%, #2a2a4e 100%);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid #2a2a4e;
-            margin-bottom: 2rem;
-            text-align: center;
+            padding: 2.5rem; border-radius: 20px; border: 1px solid #2a2a4e;
+            margin-bottom: 2rem; text-align: center;
         }
         .profile-card .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid #6ae3ff;
-            margin-bottom: 1.5rem;
-            object-fit: cover;
+            width: 150px; height: 150px; border-radius: 50%;
+            border: 3px solid #6ae3ff; margin-bottom: 1.5rem; object-fit: cover;
         }
         .profile-card h2 { color: #6ae3ff; margin: 0; font-size: 2rem; }
         .profile-card .subtitle { color: #a78bfa; font-size: 1.2rem; margin: 0.5rem 0; }
 
         .about-card {
-            background: #1a1a32;
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid #2a2a4e;
-            margin-bottom: 2rem;
+            background: #1a1a32; padding: 2rem; border-radius: 16px;
+            border: 1px solid #2a2a4e; margin-bottom: 2rem;
         }
         .about-card h2 {
-            color: #a78bfa;
-            font-size: 1.8rem;
-            border-bottom: 2px solid #2a2a4e;
-            padding-bottom: 0.8rem;
-            margin-bottom: 1.5rem;
+            color: #a78bfa; font-size: 1.8rem; border-bottom: 2px solid #2a2a4e;
+            padding-bottom: 0.8rem; margin-bottom: 1.5rem;
         }
         .about-card h3 {
-            color: #6ae3ff;
-            font-size: 1.3rem;
-            margin: 1.5rem 0 0.8rem 0;
+            color: #6ae3ff; font-size: 1.3rem; margin: 1.5rem 0 0.8rem 0;
         }
         .about-card p, .about-card li {
-            line-height: 1.9;
-            font-size: 1.1rem;
-            color: #c0c0d0;
+            line-height: 1.9; font-size: 1.1rem; color: #c0c0d0;
         }
         .about-card ul { list-style: none; padding-left: 0; }
-        .about-card li { margin-bottom: 0.8rem; padding-left: 2rem; position: relative; }
+        .about-card li {
+            margin-bottom: 0.8rem; padding-left: 2rem; position: relative;
+        }
         .about-card li::before { content: "✨"; position: absolute; left: 0; }
 
         .btn-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
+            display: flex; gap: 1rem; justify-content: center;
+            flex-wrap: wrap; margin-top: 1.5rem;
         }
         .btn {
-            color: #6ae3ff;
-            text-decoration: none;
-            padding: 10px 28px;
-            border: 2px solid #6ae3ff;
-            border-radius: 30px;
-            transition: 0.3s;
-            font-weight: 700;
-            display: inline-block;
-            font-size: 1rem;
+            color: #6ae3ff; text-decoration: none; padding: 10px 28px;
+            border: 2px solid #6ae3ff; border-radius: 30px; transition: 0.3s;
+            font-weight: 700; display: inline-block; font-size: 1rem;
         }
-        .btn:hover {
-            background: #6ae3ff;
-            color: #0b0b16;
-            transform: scale(1.03);
-        }
+        .btn:hover { background: #6ae3ff; color: #0b0b16; transform: scale(1.03); }
         .btn-primary { background: #6ae3ff; color: #0b0b16; }
         .btn-primary:hover { background: #4dd4ff; }
 
         .back-link { text-align: center; margin-top: 2.5rem; }
 
-        /* ===== Footer ===== */
         footer {
-            margin-top: 40px;
-            padding: 30px 20px 20px;
-            border-top: 2px solid #2a2a4e;
-            text-align: center;
-            color: #888;
-            font-size: 0.9rem;
+            margin-top: 40px; padding: 30px 20px 20px;
+            border-top: 2px solid #2a2a4e; text-align: center;
+            color: #888; font-size: 0.9rem;
         }
         footer .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 15px;
+            display: flex; justify-content: center; flex-wrap: wrap;
+            gap: 15px; margin-bottom: 15px;
         }
-        footer .footer-links a {
-            color: #6ae3ff;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+        footer .footer-links a { color: #6ae3ff; text-decoration: none; transition: 0.3s; }
         footer .footer-links a:hover { text-decoration: underline; }
         footer .copy { color: #666; }
         footer .copy a { color: #6ae3ff; }
 
-        /* ===== Responsive ===== */
         @media (max-width: 600px) {
             .container { padding: 15px; }
             .about-header h1 { font-size: 2rem; }
@@ -276,7 +187,6 @@
 </head>
 <body>
 
-    <!-- ===== Language Switcher ===== -->
     <div class="lang-switch">
         <a href="/ar/about.html">🇸🇦 عربي</a>
         <a href="/en/about.html" class="active">🇬🇧 English</a>
@@ -284,7 +194,6 @@
 
     <div class="container">
 
-        <!-- ===== Header ===== -->
         <header>
             <div class="logo">
                 <img src="/image/Jabri-photo.png" alt="Heaven Al-Jabri Logo">
@@ -299,7 +208,6 @@
             </nav>
         </header>
 
-        <!-- ===== Main Content ===== -->
         <main>
             <section class="about-section">
 
@@ -308,35 +216,38 @@
                     <p>Discover my scientific journey and vision for the future</p>
                 </div>
 
-                <!-- Profile Card -->
+                <!-- Profile Card (Updated) -->
                 <div class="profile-card">
                     <img src="/image/Jabri-photo.png" alt="Eng. Abdulla Mohammed Nasser Al-Jabri" class="profile-img">
                     <h2>Eng. Abdulla Mohammed Nasser Al-Jabri</h2>
-                    <div class="subtitle">🇾🇪 Independent Yemeni Researcher</div>
-                    <p style="color: #a78bfa; font-size: 1.1rem;">Theoretical Mathematics • Theoretical Physics • Yemeni Heritage Documentation</p>
+                    <div class="subtitle">🇾🇪 Independent Yemeni Researcher • Software Developer</div>
+                    <p style="color: #a78bfa; font-size: 1.1rem;">
+                        Theoretical Mathematics • Theoretical Physics • Yemeni Heritage Documentation • Computer Engineering
+                    </p>
                     <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
                         <span style="background: #2a2a4e; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">🧮 Sindbad Theory</span>
                         <span style="background: #2a2a4e; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">🏛️ Yemen Heritage</span>
                         <span style="background: #2a2a4e; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">⚛️ Cosmology</span>
+                        <span style="background: #2a2a4e; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">💻 Software</span>
                     </div>
                 </div>
 
-                <!-- About Me -->
+                <!-- About Me (Updated) -->
                 <div class="about-card">
                     <h2>🌟 About Me</h2>
                     <p>
-                        I am <strong>Abdulla Mohammed Nasser Al-Jabri</strong>, a Yemeni researcher passionate about science and knowledge.
-                        I was born and raised in Yemen, the land of civilization and history. Since childhood, I have been fascinated by the secrets of the universe,
-                        the beauty of mathematics, and the power of physics that governs everything around us.
+                        I am <strong>Eng. Abdulla Mohammed Nasser Al-Jabri</strong>, an independent Yemeni researcher and software developer.
+                        I hold a <strong>Bachelor's degree in Computer Engineering</strong> from King Fahd University of Petroleum and Minerals (KFUPM) in Saudi Arabia.
                     </p>
                     <p style="margin-top: 10px;">
-                        I decided to dedicate my knowledge to serve my homeland and nation. I founded the <strong>Heaven Al-Jabri</strong> platform
-                        to serve as a bridge between the authenticity of the past, represented by Yemen's rich heritage, and the ambition of the future,
-                        represented by rigorous scientific research.
+                        My scientific and technical work focuses on three main pillars: 
+                        <strong>Theoretical Mathematics, Theoretical Physics, and Documenting Yemeni Heritage</strong>.
+                        I founded the <strong>Heaven Al-Jabri platform</strong> and the <strong>Sindbad Yemen Gateway</strong> 
+                        to serve as a bridge between the authenticity of the past and the ambition of the future.
                     </p>
                 </div>
 
-                <!-- Vision & Mission -->
+                <!-- Vision & Mission (unchanged) -->
                 <div class="about-card">
                     <h2>🎯 Vision & Mission</h2>
                     <h3>Vision</h3>
@@ -345,10 +256,9 @@
                     <p>To document and publish Yemeni heritage with full transparency, and to present authentic scientific research that contributes to the advancement of human knowledge and elevates Yemen's name in scientific forums worldwide.</p>
                 </div>
 
-                <!-- Research & Specializations -->
+                <!-- Research & Specializations (unchanged) -->
                 <div class="about-card">
                     <h2>📚 Research & Specializations</h2>
-
                     <h3>🧮 Theoretical Mathematics</h3>
                     <p>I am working on developing the <strong>"Sindbad Unified Theory"</strong>, an attempt to unify different branches of mathematics into a coherent framework. I firmly believe that mathematics is the language of the universe, and deep understanding is the key to solving the riddles of existence.</p>
 
@@ -356,23 +266,23 @@
                     <p>I investigate the fundamentals of the universe, space-time, and unified theories. I strive to understand the laws governing the smallest particles and the largest galaxies. Humanity's journey to understand the cosmos is the greatest adventure of the human mind.</p>
 
                     <h3>🏛️ Documenting Yemeni Heritage</h3>
-                    <p>Yemen is the cradle of civilizations. I work on documenting its landmarks: <strong>Old Sana'a, Shibam Hadramawt, Socotra, Marib, Saada</strong>, and others.
-                    Through photos, stories, and historical research, we preserve this legacy for future generations and showcase Yemen's beauty and grandeur to the world.</p>
+                    <p>Yemen is the cradle of civilizations. I work on documenting its landmarks: <strong>Old Sana'a, Shibam Hadramawt, Socotra, Marib, Saada</strong>, and others. Through photos, stories, and historical research, we preserve this legacy for future generations and showcase Yemen's beauty and grandeur to the world.</p>
                 </div>
 
-                <!-- Achievements -->
+                <!-- Key Software Projects (New) -->
                 <div class="about-card">
-                    <h2>🏆 Achievements & Projects</h2>
+                    <h2>🚀 Key Software Projects</h2>
+                    <p>I develop a range of open‑source projects via <a href="https://github.com/Jabri-web" target="_blank" style="color:#6ae3ff;">GitHub</a> and my own website:</p>
                     <ul>
-                        <li><strong>Founding Heaven Al-Jabri</strong>: An integrated platform for heritage and scientific research.</li>
-                        <li><strong>Sindbad Unified Theory</strong>: Ongoing research to unify mathematical concepts (Z+C+A=1).</li>
-                        <li><strong>Yemen Heritage Archive</strong>: Digital documentation of over 25 historical and natural sites.</li>
-                        <li><strong>Scientific Articles</strong>: Publishing research in physics and mathematics for both the public and specialists.</li>
-                        <li><strong>Sindbad Gateway</strong>: An interactive platform for scientific research and projects.</li>
+                        <li><strong>Sindbad Yemen</strong>: The main portal for heritage and documentation projects for Yemen.</li>
+                        <li><strong>Yemen Bird & Yemen Ankboot</strong>: Software projects for digital archiving and research.</li>
+                        <li><strong>RieOS / RiemannOS</strong>: Experimental systems related to my research on the Riemann zeta function and mathematics.</li>
+                        <li><strong>Jabri Lab</strong>: A digital space for running experiments and sharing research.</li>
+                        <li><strong>Sindbad Unified Theory</strong>: A mathematical framework (Z + C + A = 1).</li>
                     </ul>
                 </div>
 
-                <!-- Contact -->
+                <!-- Contact (unchanged) -->
                 <div class="about-card">
                     <h2>📬 Contact Me</h2>
                     <p>I welcome communication and scientific collaboration. You can follow me or reach out via the following channels:</p>
@@ -385,7 +295,6 @@
                     </div>
                 </div>
 
-                <!-- Back to Home -->
                 <div class="back-link">
                     <a href="/index.html" class="btn">← Back to Home</a>
                     <a href="/research.html" class="btn btn-primary">🔬 Explore Research</a>
@@ -394,7 +303,7 @@
             </section>
         </main>
 
-        <!-- ===== Footer ===== -->
+        <!-- Footer -->
         <footer>
             <div class="footer-links">
                 <a href="/index.html">🏠 Home</a>
