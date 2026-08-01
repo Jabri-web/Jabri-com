@@ -18,15 +18,19 @@
         h2 { font-size: 1.8rem; border-bottom: 1px solid #30363d; padding-bottom: 10px; margin-top: 40px; }
         h3 { font-size: 1.2rem; margin-top: 30px; }
         .card { background: #161b22; padding: 20px; border-radius: 12px; border: 1px solid #30363d; margin-bottom: 20px; }
+        .counter-card { background: #0d1117; border: 2px solid #6ae3ff; border-radius: 16px; padding: 20px 30px; text-align: center; margin-bottom: 30px; }
+        .counter-number { font-size: 4rem; font-weight: 700; color: #a78bfa; letter-spacing: 3px; line-height: 1.2; }
+        .counter-label { font-size: 1rem; color: #8b949e; margin-top: 5px; }
+        .counter-status { font-size: 0.85rem; color: #6ae3ff; margin-top: 8px; }
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
         th { background: #1f2233; color: #6ae3ff; padding: 12px; text-align: right; border-bottom: 2px solid #30363d; }
         td { padding: 10px 12px; border-bottom: 1px solid #1f2233; }
         td a { color: #6ae3ff; text-decoration: none; }
         td a:hover { text-decoration: underline; }
         .highlight-box { background: #11131a; border-right: 4px solid #6ae3ff; padding: 15px 20px; margin: 20px 0; border-radius: 4px; }
-        .center { text-align:center; color: #8a8a9e; }
         footer { margin-top: 40px; padding: 30px; border-top: 1px solid #30363d; text-align: center; }
-        @media (max-width: 600px) { .container { padding: 10px; } table { font-size: 0.7rem; } td, th { padding: 5px; } }
+        .footer-counter { display: inline-block; background: #161b22; padding: 5px 20px; border-radius: 40px; font-size: 0.9rem; border: 1px solid #30363d; margin-top: 10px; }
+        @media (max-width: 600px) { .container { padding: 10px; } table { font-size: 0.7rem; } td, th { padding: 5px; } .counter-number { font-size: 2.8rem; } }
     </style>
 </head>
 <body>
@@ -44,10 +48,19 @@
 </div>
 
 <div class="container">
+    <!-- ✅ صورة قاعدة البيانات -->
+    <img src="Image/dbase.png" alt="Dbase" style="display:block; margin:0 auto 20px; max-width:100%; border-radius:12px; border:1px solid #30363d;">
 
     <div class="highlight-box">
         <h2>📌 ملخص تنفيذي</h2>
         <p><strong>منظومة Jabri-web</strong> هي إطار رقمي ونظري موحد يربط الرياضيات البحتة (فرضية ريمان) بالفيزياء النظرية (النسبية العامة، الطاقة المظلمة) والبنية التحتية الرقمية. تتكون من <strong>12 مستودعاً مترابطاً</strong> (بوابة رئيسية واحدة، 5 مستودعات بحثية أساسية، 3 أنظمة تجريبية، و3 مستودعات راوتر/بوابة) التي تحقق مجتمعة هوية الجبري: <strong>Z + C + A = 1</strong>.</p>
+    </div>
+
+    <!-- 🔥 عداد زوار (بدون Firebase - يستخدم التخزين الداخلي للمتصفح) -->
+    <div class="counter-card" id="visitorCounter">
+        <div class="counter-number" id="visitCount">⏳ جارٍ التحميل...</div>
+        <div class="counter-label">👥 عدد زوار هذه الصفحة (تقديري)</div>
+        <div class="counter-status" id="counterStatus">✅ يعمل بدون Firebase، ولا يسبب أخطاء للأرشفة</div>
     </div>
 
     <h2>🗺️ هيكل المشروع: المستودعات الـ 12</h2>
@@ -112,10 +125,54 @@
         <p>هذا المشروع هو شهادة على قوة البحث المستقل، المتجذر في التراث اليمني والمتطلع إلى البنية الأساسية للواقع.</p>
     </div>
 
+    <p><b>الموقع الرسمي:</b> <a href="ar-page.html" style="color:#00ff88">واحة الجبري</a></p>
+    <p><b>عن الباحث عربي :</b> <a href="about-ar.html" style="color:#00ff88">عبدالله الجبري</a></p>
+    <p><b>عن الباحث انجليزي :</b> <a href="about-en.html" style="color:#00ff88">Abdulla Al-Jabri</a></p>
+
+
     <footer>
         <p>© 2026 م/ عبدالله محمد ناصر الجبري</p>
         <p style="font-size:0.9rem; color:#666;"><i>"From Riemann zeros to the structure of the universe"</i></p>
+        <div class="footer-counter">👥 الزوار (تقديري): <span id="footerVisitCount">0</span></div>
     </footer>
 </div>
+
+<script>
+    // --------------------------------------------------------------
+    // عداد بسيط باستخدام localStorage (بدون Firebase)
+    // يخزن العدد في متصفح الزائر نفسه، ولا يحتاج إنترنت
+    // --------------------------------------------------------------
+    (function() {
+        try {
+            // قراءة العدد القديم
+            let count = localStorage.getItem('jabri_visitor_count');
+            if (count === null) {
+                count = 0;
+            } else {
+                count = parseInt(count, 10);
+            }
+            
+            // زيادة العدد
+            count = count + 1;
+            
+            // حفظ العدد الجديد
+            localStorage.setItem('jabri_visitor_count', count.toString());
+            
+            // عرض العدد في الصفحة
+            const formatted = count.toLocaleString();
+            const mainDisplay = document.getElementById('visitCount');
+            const footerDisplay = document.getElementById('footerVisitCount');
+            
+            if (mainDisplay) mainDisplay.innerText = formatted;
+            if (footerDisplay) footerDisplay.innerText = formatted;
+            
+        } catch (e) {
+            // في حال حدوث خطأ نادر
+            const mainDisplay = document.getElementById('visitCount');
+            if (mainDisplay) mainDisplay.innerText = '⚠️';
+        }
+    })();
+</script>
+
 </body>
 </html>
