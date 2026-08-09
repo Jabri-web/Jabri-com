@@ -1,89 +1,332 @@
-<!-file=index.html
-<!--repo= Jabri_RiemannOS
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="theme-color" content="#000">
-<meta name="color-scheme" content="dark">
-<title>Eng. Abdulla Al-Jabri - P8</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{color-scheme:dark}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#000!important;color:#e0e0e0;font-family:'Cairo',Tahoma,sans-serif;min-height:100vh;display:flex;flex-direction:column}
-
-.header{width:100%;background:#0a0a0a;border-bottom:2px solid #00ffc8;padding:25px 20px;text-align:center;box-shadow:0 0 20px rgba(0,255,200,0.2)}
-.header .name{font-size:26px;color:#6ae3ff;font-weight:bold}
-.header .name-ar{font-size:21px;color:#aaa;margin-top:6px}
-.header .title{font-size:17px;color:#fff;margin-top:8px}
-.header .title-ar{font-size:16px;color:#777;margin-top:4px}
-
-.wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:15px;padding:25px 20px 35px}
-.circle{width:120px;height:120px;border:3px solid #00ffc8;border-radius:50%;background:#0a0a0a;box-shadow:0 0 30px rgba(0,255,200,0.3);overflow:hidden;margin-top:10px}
-.circle img{width:100%;height:100%;object-fit:cover}
-
-.title-box{background:#0a0a0a;border:2px solid #00ffc8;border-radius:12px;padding:16px 40px;color:#00ffc8;font-size:22px;font-weight:bold;min-width:280px;text-align:center;box-shadow:0 0 20px rgba(0,255,200,0.2)}
-
-a.box{background:#0a0a0a;border:2px solid #1e1e2f;border-radius:12px;padding:16px 40px;color:#00ffc8;font-size:20px;font-weight:bold;min-width:280px;text-align:center;text-decoration:none;transition:0.3s;display:block;cursor:pointer}
-a.box:active{transform:scale(0.97);background:#111;box-shadow:0 0 25px rgba(0,255,200,0.4)}
-.row{display:flex;gap:12px}
-.row a.box{min-width:135px;padding:16px 20px;font-size:18px}
-
-.sub{font-size:14px;color:#777;margin-bottom:4px}
-
-.footer{width:100%;background:#0a0a0a;border-top:2px solid #00ffc8;padding:25px 20px;text-align:right;margin-top:auto}
-.contact-title{font-size:22px;color:#00ffc8;font-weight:bold;margin-bottom:12px;border-bottom:1px solid #1e1e2f;padding-bottom:8px}
-.contact-list{list-style:none;margin:0 0 15px 0}
-.contact-list li{margin:10px 0;font-size:17px;color:#aaa}
-.contact-list b{color:#e0e0e0;margin-left:6px}
-.contact-list a{color:#6ae3ff;text-decoration:none;border-bottom:1px solid #6ae3ff}
-.slogan{text-align:center;font-size:18px;color:#00ffc8;font-weight:bold;margin-top:15px;padding-top:15px;border-top:1px solid #1e1e2f}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ===== SEO خاص بالتراث اليمني ===== -->
+    <title>تراث اليمن العريق | صنعاء شبام سقطرى - واحة الجبري</title>
+    <meta name="description" content="توثيق تراث اليمن العريق: صنعاء القديمة، شبام حضرموت، جزيرة سقطرى. صور، تاريخ، وثقافة يمنية أصيلة.">
+    <meta name="keywords" content="تراث اليمن, صنعاء القديمة, شبام حضرموت, سقطرى, اليمن, تاريخ, ثقافة, نزار, البردوني">
+    <meta name="author" content="م/ عبدالله محمد ناصر الجبري | Eng. Abdulla Mohammed Nasser Al-Jabri">
+    <link rel="author" href="https://jabri-com.vercel.app/about.html" />
+    <link rel="canonical" href="https://jabri-com.vercel.app/Page8.html" />
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    
+    <!-- ===== Open Graph ===== -->
+    <meta property="og:locale" content="ar_YE">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="واحة الجبري | تراث اليمن">
+    <meta property="og:title" content="تراث اليمن العريق | صنعاء شبام سقطرى">
+    <meta property="og:description" content="توثيق التراث اليمني العريق: صنعاء، شبام، سقطرى. حضارة وتاريخ يمني أصيل.">
+    <meta property="og:image" content="https://jabri-com.vercel.app/image/Yemen2026.png">
+    <meta property="og:url" content="https://jabri-com.vercel.app/Page8.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="تراث اليمن العريق | صنعاء شبام سقطرى">
+    <meta name="twitter:description" content="توثيق التراث اليمني العريق - واحة الجبري">
+    <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Yemen2026.png">
+    
+    <!-- ===== Schema.org ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "تراث اليمن العريق",
+        "description": "توثيق مدن صنعاء، شبام، سقطرى",
+        "url": "https://jabri-com.vercel.app/Page8.html",
+        "about": [
+            { "@type": "Place", "name": "صنعاء القديمة", "description": "مدينة صنعاء القديمة - تراث يمني عريق" },
+            { "@type": "Place", "name": "شبام حضرموت", "description": "شبام حضرموت - مانهاتن الصحراء" },
+            { "@type": "Place", "name": "سقطرى", "description": "جزيرة سقطرى - درة اليمن" }
+        ],
+        "publisher": { "@type": "Organization", "name": "واحة الجبري" }
+    }
+    </script>
+    
+    <!-- ===== تحميل الهيدر والفوتر العامين (مثل Page12 و Check) ===== -->
+    <script src="js/init-page-root.js" defer></script>
+    
+    <!-- ===== خطوط جوجل ===== -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== ستايل خاص بالصفحة فقط ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0f;
+            color: #e0e0e0;
+            font-family: 'Cairo', Tahoma, Arial, sans-serif;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.en { direction: ltr; font-family: 'Segoe UI', Arial, sans-serif; }
+        
+        .page-content {
+            flex: 1;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        .section-title {
+            font-size: 2rem;
+            color: #ffd700;
+            margin: 40px 0 20px;
+            text-align: center;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .card {
+            background: #1a1a2e;
+            border: 2px solid #2a2a3e;
+            border-radius: 15px;
+            padding: 25px;
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: 0.3s;
+            display: block;
+            text-align: center;
+        }
+        .card:hover {
+            border-color: #ffd700;
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+        .card-icon { font-size: 3rem; margin-bottom: 15px; }
+        .card h3 { color: #ffd700; font-size: 1.3rem; margin-bottom: 10px; }
+        .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
+        
+        .ar-text { display: inline; }
+        .en-text { display: none; }
+        body.en .ar-text { display: none; }
+        body.en .en-text { display: inline; }
+        
+        /* ===== شبكة الأزرار الستة للتراث ===== */
+        .heritage-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0 30px;
+        }
+        .heritage-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(145deg, #1a1a2e, #252545);
+            border: 2px solid #2a2a3e;
+            border-radius: 16px;
+            padding: 20px 15px;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 700;
+            font-size: 1.1rem;
+            font-family: 'Cairo', Arial, sans-serif;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .heritage-btn:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            background: linear-gradient(145deg, #252545, #1a1a2e);
+        }
+        .heritage-btn .btn-icon { font-size: 2rem; }
+        .heritage-btn .btn-label { 
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.3;
+        }
+        .heritage-btn .btn-label small {
+            font-weight: 400;
+            color: #8888aa;
+            font-size: 0.75rem;
+        }
+        body.en .heritage-btn .btn-label { align-items: flex-start; }
+        
+        /* زر العودة للرئيسية */
+        .back-home-btn {
+            display: inline-block;
+            background: #ffd700;
+            color: #0a0a0f;
+            padding: 12px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .back-home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .heritage-buttons-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .heritage-buttons-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.5rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .heritage-btn { padding: 15px; font-size: 1rem; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="name">Eng. Abdulla M. N. Al-Jabri</div>
-  <div class="name-ar">م. عبدالله محمد ناصر الجبري</div>
-  <div class="title">Independent Researcher in Mathematics & Theoretical Physics</div>
-  <div class="title-ar">باحث مستقل في الرياضيات والفيزياء النظرية</div>
-</div>
+    <!-- ===== الهيدر العام ===== -->
+    <div id="header-placeholder"></div>
 
-<div class="wrap">
-  <div class="circle">
-    <img src="Image/Jabri-photo.png" alt="Eng. Abdulla Al-Jabri">
-  </div>
-  
-  <div class="title-box">P8 - Jabri RiemannOS</div>
-  
-  <div class="row">
-    <a href="Profile.html" class="box">Profile</a>
-    <a href="Collab.html" class="box">Collab</a>
-  </div>
-  
-  <a href="History-pdf.html" class="box">
-    <div class="sub">كتب التاريخ</div>
-    History-pdf.html
-  </a>
-  
-  <a href="Dbase.html" class="box">
-    <div class="sub">قواعد البيانات</div>
-    Dbase.html
-  </a>
-</div>
+    <!-- ===== محتوى الصفحة الخاص بالتراث اليمني ===== -->
+    <div class="page-content">
+        
+        <h2 class="section-title">
+            <span class="ar-text">المدن التاريخية</span>
+            <span class="en-text">Historic Cities</span>
+        </h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🏙️</div>
+                <h3>صنعاء القديمة</h3>
+                <p><span class="ar-text">مدينة مسورة من العصور القديمة، تشتهر بالبيوت المبنية من الطين والمزينة بالنقوش الهندسية.</span><span class="en-text">An ancient walled city known for its mud-brick houses decorated with geometric patterns.</span></p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏰</div>
+                <h3>شبام حضرموت</h3>
+                <p><span class="ar-text">"مانهاتن الصحراء" أقدم ناطحات السحاب في العالم من الطوب اللبن.</span><span class="en-text">The "Manhattan of the Desert" – the world's oldest skyscrapers made of mudbrick.</span></p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏝️</div>
+                <h3>سقطرى</h3>
+                <p><span class="ar-text">جزيرة التنين والعجائب الطبيعية، موطن لأندر النباتات في العالم.</span><span class="en-text">Island of dragons and natural wonders, home to the rarest plants on Earth.</span></p>
+            </div>
+        </div>
 
-<div class="footer">
-  <div class="contact-title">Contact</div>
-  <ul class="contact-list">
-    <li><b>ORCID:</b> <a href="https://orcid.org/0009-0001-1319-3622" target="_blank">0009-0001-1319-3622</a></li>
-    <li><b>Email:</b> <a href="mailto:jabri62018@gmail.com">jabri62018@gmail.com</a></li>
-    <li><b>Research Site:</b> <a href="Pages-Researches.html" target="_blank">Pages-Researches.html</a></li>
-    <li><b>Main Site:</b> <a href="Yemen-library.html" target="_blank">Yemen-library.html</a></li>
-  </ul>
-  <div class="slogan">من صنعاء إلى الكون / From Sana'a to the Universe</div>
-</div>
+        <h2 class="section-title">
+            <span class="ar-text">معالم وموروثات</span>
+            <span class="en-text">Landmarks & Heritage</span>
+        </h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🕌</div>
+                <h3>المساجد القديمة</h3>
+                <p><span class="ar-text">مساجد تاريخية تعود للقرون الأولى للإسلام في اليمن.</span><span class="en-text">Historic mosques dating back to the early centuries of Islam.</span></p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>الحرف اليدوية</h3>
+                <p><span class="ar-text">الفضة اليمنية، والخناجر، والمنسوجات، والفخار.</span><span class="en-text">Yemeni silver, daggers, textiles, and pottery.</span></p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📜</div>
+                <h3>المخطوطات</h3>
+                <p><span class="ar-text">مكتبات تاريخية تضم مخطوطات نادرة في العلوم والفلك والطب.</span><span class="en-text">Historic libraries containing rare manuscripts on science, astronomy, and medicine.</span></p>
+            </div>
+        </div>
+
+        <!-- ===== 🌟 شبكة الأزرار الستة (بوابات التراث) ===== -->
+        <h2 class="section-title" style="margin-top:50px;">
+            <span class="ar-text">🗺️ استكشف التراث</span>
+            <span class="en-text">🗺️ Explore Heritage</span>
+        </h2>
+        
+        <div class="heritage-buttons-grid">
+            
+            <!-- 1. التاريخ الكامل -->
+            <a href="History-pdf.html" class="heritage-btn">
+                <span class="btn-icon">📜</span>
+                <span class="btn-label">
+                    <span class="ar-text">التاريخ الكامل</span>
+                    <span class="en-text">Full History</span>
+                    <small><span class="ar-text">وثائق وصور</span><span class="en-text">Docs & Photos</span></small>
+                </span>
+            </a>
+            
+            <!-- 2. نزار -->
+            <a href="Nezar.html" class="heritage-btn">
+                <span class="btn-icon">👤</span>
+                <span class="btn-label">
+                    <span class="ar-text">نزار</span>
+                    <span class="en-text">Nezar</span>
+                    <small><span class="ar-text">شخصية وتراث</span><span class="en-text">Personality & Heritage</span></small>
+                </span>
+            </a>
+            
+            <!-- 3. اليمن البردوني -->
+            <a href="Yemen-Brdoni.html" class="heritage-btn">
+                <span class="btn-icon">🎭</span>
+                <span class="btn-label">
+                    <span class="ar-text">اليمن البردوني</span>
+                    <span class="en-text">Yemen Brdoni</span>
+                    <small><span class="ar-text">فن وتراث</span><span class="en-text">Art & Heritage</span></small>
+                </span>
+            </a>
+            
+            <!-- 4. صنعاء -->
+            <a href="Sanaa.html" class="heritage-btn">
+                <span class="btn-icon">🏙️</span>
+                <span class="btn-label">
+                    <span class="ar-text">صنعاء</span>
+                    <span class="en-text">Sana'a</span>
+                    <small><span class="ar-text">مدينة الألف عام</span><span class="en-text">City of a Thousand Years</span></small>
+                </span>
+            </a>
+            
+            <!-- 5. شبام -->
+            <a href="Shibam.html" class="heritage-btn">
+                <span class="btn-icon">🏰</span>
+                <span class="btn-label">
+                    <span class="ar-text">شبام</span>
+                    <span class="en-text">Shibam</span>
+                    <small><span class="ar-text">مانهاتن الصحراء</span><span class="en-text">Desert Manhattan</span></small>
+                </span>
+            </a>
+            
+            <!-- 6. سقطرى -->
+            <a href="Soqatra.html" class="heritage-btn">
+                <span class="btn-icon">🏝️</span>
+                <span class="btn-label">
+                    <span class="ar-text">سقطرى</span>
+                    <span class="en-text">Socotra</span>
+                    <small><span class="ar-text">جزيرة العجائب</span><span class="en-text">Island of Wonders</span></small>
+                </span>
+            </a>
+            
+        </div>
+        
+        <!-- ===== زر العودة للرئيسية ===== -->
+        <div style="margin: 20px 0 40px; text-align: center;">
+            <a href="https://jabri-com.vercel.app/" class="back-home-btn">🏠 <span class="ar-text">العودة للواحة الرئيسية</span><span class="en-text">Back to Main Oasis</span></a>
+        </div>
+    </div>
+
+    <!-- ===== الفوتر العام ===== -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ===== سكربت اللغة (إذا لم يكن موجوداً في الهيدر العام) ===== -->
+    <script>
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.body.classList.remove('ar', 'en');
+            document.body.classList.add(lang);
+            localStorage.setItem('preferred-language', lang);
+            if (typeof updateCounterLang === 'function') updateCounterLang();
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferred-language') || 'ar';
+            applyLanguage(savedLang);
+        });
+        window.applyLanguage = applyLanguage;
+    </script>
 
 </body>
 </html>
