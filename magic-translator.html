@@ -21,7 +21,7 @@
     .content img { max-width: 100%; border-radius: 8px; }
     .loading { text-align: center; color: #888; padding: 40px; font-size: 1.2rem; }
     .error { text-align: center; color: #ff6a6a; padding: 40px; }
-    .info-bar { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 15px; font-size: 14px; color: var(--muted); }
+    .info-bar { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 15px; font-size: 14px; color: #888; }
     .info-bar a { color: #6ae3ff; text-decoration: none; }
     @media (max-width: 600px) { .container { padding: 15px; } .content { padding: 15px; } }
   </style>
@@ -45,11 +45,7 @@
 </div>
 
 <script>
-// ======================================================================
-// 1. قاموس الترجمة – زوده براحتك (يُفضل إضافة المصطلحات الخاصة بك)
-// ======================================================================
 const DICT = {
-  // عام
   "Repository": "المستودع", "About": "حول", "Description": "الوصف",
   "Installation": "التثبيت", "Usage": "طريقة الاستخدام", "Features": "المميزات",
   "License": "الرخصة", "Contributing": "المساهمة", "Author": "المؤلف",
@@ -77,7 +73,6 @@ const DICT = {
   "Dependency graph": "رسم التبعيات", "Dependabot": "ديبندابوت",
   "Code scanning": "فحص الكود", "Secrets": "أسرار", "Environments": "البيئات",
   "Pages": "الصفحات",
-  // نظرية السندباد – مصطلحات خاصة
   "Unified Sinbad Theory": "نظرية السندباد الموحدة",
   "Yemen Heritage": "تراث اليمن",
   "Al-Jabri Oasis": "واحة الجبري",
@@ -94,7 +89,6 @@ const DICT = {
 function translateText(text) {
   if (!text) return text;
   let result = text;
-  // ترتيب المفاتيح من الأطول للأقصر لتجنب الترجمات الجزئية
   const keys = Object.keys(DICT).sort((a, b) => b.length - a.length);
   for (const en of keys) {
     const regex = new RegExp(`\\b${en.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
@@ -103,9 +97,6 @@ function translateText(text) {
   return result;
 }
 
-// ======================================================================
-// 2. قراءة البارامترات: repo و file
-// ======================================================================
 const params = new URLSearchParams(window.location.search);
 const repo = params.get('repo') || 'Jabri-web';
 const file = params.get('file') || 'README.md';
@@ -114,17 +105,10 @@ const lang = params.get('lang') || 'ar';
 document.getElementById('repoDisplay').textContent = repo;
 document.getElementById('fileDisplay').textContent = file;
 
-// ======================================================================
-// 3. بناء الرابط الخام من GitHub
-// ======================================================================
 const rawUrl = `https://raw.githubusercontent.com/Jabri-web/${repo}/main/${file}`;
 const githubUrl = `https://github.com/Jabri-web/${repo}/blob/main/${file}`;
-
 document.getElementById('backBtn').href = githubUrl;
 
-// ======================================================================
-// 4. تحميل وعرض المحتوى
-// ======================================================================
 async function load() {
   const contentDiv = document.getElementById('content');
   
@@ -132,14 +116,16 @@ async function load() {
     const res = await fetch(rawUrl);
     if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
     
-    let md = await res.text();
+    // === الحل السحري: إجبار الترميز UTF-8 ===
+    const buffer = await res.arrayBuffer();
+    const decoder = new TextDecoder('utf-8');
+    let md = decoder.decode(buffer);
 
-    // تصحيح روابط الصور لتكون مطلقة
+    // تصحيح روابط الصور
     md = md.replace(/!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/g, function(match, alt, src) {
       return `![${alt}](https://raw.githubusercontent.com/Jabri-web/${repo}/main/${src})`;
     });
 
-    // إذا كانت اللغة عربية، نترجم (مع الاحتفاظ بالنصوص الإنجليزية غير المترجمة)
     if (lang === 'ar') {
       md = translateText(md);
       document.documentElement.dir = 'rtl';
@@ -151,7 +137,6 @@ async function load() {
       document.getElementById('langBtn').innerHTML = '🇸🇦 العربية';
     }
 
-    // تحويل Markdown إلى HTML
     const html = marked.parse(md);
     contentDiv.innerHTML = html;
 
@@ -169,24 +154,17 @@ async function load() {
   }
 }
 
-// ======================================================================
-// 5. زر تبديل اللغة – يغير فقط lang
-// ======================================================================
 document.getElementById('langBtn').onclick = function() {
   const newLang = lang === 'ar' ? 'en' : 'ar';
   window.location.href = `?repo=${repo}&file=${file}&lang=${newLang}`;
 };
 
-// ======================================================================
-// 6. تشغيل التحميل
-// ======================================================================
 load();
 
-console.log('🔮 المترجم السحري جاهز (ديناميكي)');
+console.log('🔮 المترجم السحري جاهز (ديناميكي v2.0)');
 console.log(`📂 المستودع: ${repo}`);
 console.log(`📄 الملف: ${file}`);
 console.log(`🌍 اللغة: ${lang}`);
-console.log(`🔗 الرابط الخام: ${rawUrl}`);
 </script>
 
 </body>
