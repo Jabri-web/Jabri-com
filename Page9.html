@@ -15,8 +15,6 @@
     <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/Check.html" />
     <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/Check.html" />
     
-    <!-- مهم جداً: نخفي الصفحة من قوقل -->
-  
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="واحة الجبري | Heaven Al-Jabri" />
@@ -25,7 +23,7 @@
     <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.png" />
     <meta property="og:url" content="https://jabri-com.vercel.app/Check.html" />
 
-    <!-- Schema.org JSON-LD - واحة الجبري (مدمج) -->
+    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -91,10 +89,7 @@
         .links-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
         .links-box a { background: #0a0a0f; color: #6ae3ff; text-decoration: none; padding: 12px; border-radius: 8px; border: 1px solid #2a2a3e; transition: 0.3s; }
         .links-box a:hover { border-color: #6ae3ff; background: #6ae3ff; color: #0a0a0f; }
-        #site-footer { background: #0a0a0f; padding: 30px 15px; border-top: 1px solid #2a2a3e; margin-top: 40px; }
-        #site-footer a { color: #6ae3ff; text-decoration: none; margin: 0 8px; }
-        .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 15px 0; }
-        #copyright { margin-top: 20px; color: #666; font-size: 14px; text-align: center; }
+        /* تم إزالة #site-footer لأن الفوتر سيتم تحميله عبر placeholder */
         .ar, .en { display: inline; }
         body.en .ar { display: none; }
         body:not(.en) .en { display: none; }
@@ -139,15 +134,14 @@
             left: 20px;
         }
         @media (max-width: 600px) {
-            .music-btn-fixed { top: 70px; right: 10px; width: 42px; height: 42px; font-size: 20px; }
-            body.en .music-btn-fixed { right: auto; left: 10px; }
+            .music-btn-fixed { top: 15px; right: 10px; width: 42px; height: 42px; font-size: 20px; }
+            body.en .music-btn-fixed { right: auto; left: 20px; }
         }
     </style>
 </head>
 <body>
     
     <div id="header-placeholder"></div>
-
 
     <!-- ===== زر الموسيقى ===== -->
     <audio id="bgMusic" loop preload="auto">
@@ -156,7 +150,7 @@
     </audio>
     <button class="music-btn-fixed" id="musicToggle" title="تشغيل / إيقاف الموسيقى">🎵</button>
 
-    <button class="lang-btn" onclick="toggleLang()"><span class="ar">🇬🇧 EN</span><span class="en">🇸🇦 عربي</span></button>
+    <button class="lang-btn" onclick="toggleLang()"><span class="ar">🇬🇧 EN</span><span class="en">🇾🇪 عربي</span></button>
     <div id="visitorCounter"><span class="ar">👥 زوار:</span><span class="en">👥 Visitors:</span><span id="visitorCountDisplay">1</span></div>
 
     <div class="container">
@@ -174,24 +168,33 @@
                     <a href="/" class="txt" data-ar="الصفحة الرئيسية" data-en="Home">Home</a>
                     <a href="/about.html" class="txt" data-ar="عن الموقع" data-en="About">About</a>
                     <a href="/contact.html" class="txt" data-ar="اتصل بنا" data-en="Contact">Contact</a>
-                    <a href="/privacy-policy.html" class="txt" data-ar="الخصوصية" data-en="Privacy">Privacy</a>
+                    <a href="privacy-policy.html" class="txt" data-ar="الخصوصية" data-en="Privacy">Privacy</a>
                     <a href="https://orcid.org/0009-0003-3319-3822" target="_blank">ORCID</a>
                     <a href="/sitemap.xml" class="txt" data-ar="خارطة الموقع" data-en="Sitemap">Sitemap</a>
                 </div>
             </section>
         </main>
-         <div id="footer-placeholder"></div>
 
+        <!-- هنا سيتم تحميل الفوتر عبر init-page-root.js -->
+        <div id="footer-placeholder"></div>
+        
+    <p><b>تجربه١: </b><a href="/ar-page.html" style="color:#00ff88"> واحة الجبري</a></p>
+    <p><b>تجربه٢: </b><a href="/en-page.html" style="color:#00ff88"> Heaven Al-Jabri</a></p>
+    <p><b>شغال١: </b><a href="https://jabri-com.vercel.app" style="color:#00ff88"> Heaven Al-Jabri</a></p>
+    <p><b>شغال٢: </b><a href="https://jabricom.vercel.app" style="color:#00ff88"> واحة الجبري</a></p>
+    <p><b>البوابة القديمة: </b><a href="/Page4-old.html" style="color:#00ff88"> واحة الجبري | Heaven Al-Jabri</a></p>
+    <p><b>عن الباحث: </b><a href="/about.html" style="color:#00ff88">عبدالله محمد ناصر الجبري</a></p>
+    <p><b>عن الموقع: </b><a href="/about-ar.html" style="color:#00ff88">عبدالله الجبري</a></p>
+    <p><b>حول الموقع: </b><a href="/about-en.html" style="color:#00ff88"> Abdulla Mohammed Nasser Al-Jabri</a></p>
+    <p><b>البروفايل: </b><a href="https://github.com/Jabri-web" style="color:#00ff88"> عبدالله محمد ناصر الجبري</a></p>
 
-        <footer id="site-footer">
-            <div class="footer-links">
-                <a href="/about.html">ℹ️ <span class="txt" data-ar="عن الموقع" data-en="About">About</span></a>
-                <a href="/contact.html">📞 <span class="txt" data-ar="اتصل بنا" data-en="Contact">Contact</span></a>
-                <a href="/privacy-policy.html">🔒 <span class="txt" data-ar="الخصوصية" data-en="Privacy">Privacy</span></a>
-                <a href="mailto:jabri62018@gmail.com">📧 Email</a>
-            </div>
-            <p id="copyright">© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة</p>
-        </footer>
+    
+      <!-- الحقوق -->
+  <p id="copyright" style="margin-top:20px;color:#666;font-size:14px;text-align:center;">
+    © 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة
+  </p>
+  
+        
     </div>
 
     <script>
@@ -204,7 +207,6 @@
             let isPlaying = false;
             music.volume = 0.4;
 
-            // تشغيل / إيقاف عند النقر
             btn.addEventListener('click', function() {
                 if (isPlaying) {
                     music.pause();
@@ -222,7 +224,6 @@
                 }
             });
 
-            // تشغيل تلقائي عند أول تفاعل مع الصفحة
             function firstInteraction() {
                 if (!isPlaying) {
                     music.play()
@@ -238,14 +239,9 @@
             }
             document.addEventListener('click', firstInteraction);
             document.addEventListener('touchstart', firstInteraction);
-
-            // حفظ حالة التشغيل عند تغيير اللغة (اختياري)
-            window.updateMusicState = function() {
-                // يمكنك إضافة منطق لتحديث نص الزر حسب اللغة إذا أردت
-            };
         })();
 
-        // ===== كود العداد واللغة (موجود مسبقاً) =====
+        // ===== كود العداد واللغة =====
         window.onerror = function(msg, url, line, col, error) {
             const box = document.getElementById('errorBox');
             box.style.display = 'block';
@@ -268,9 +264,8 @@
         }
         function updateFooterLang() {
             const isEn = document.documentElement.lang === 'en';
-            document.getElementById('copyright').textContent = isEn 
-                ? "© 2026 Eng. Abdulla Mohammed Nasser Al-Jabri - All Rights Reserved" 
-                : "© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة";
+            // بما أنه تم إزالة الفوتر الثابت، نحتاج لتحديث النصوص في الفوتر المحمّل (إن وجد)
+            // لكن يمكن ترك هذه الوظيفة للاستخدام العام
             document.querySelectorAll('.txt').forEach(el => {
                 el.textContent = isEn ? el.getAttribute('data-en') : el.getAttribute('data-ar');
             });
@@ -284,12 +279,11 @@
         });
     </script>
     
-    
     <!-- ====================================================================== -->
-<!-- السكربتات من مجلد js/ -->
-<!-- ====================================================================== -->
-<script src="js/init-page-root.js"></script>
-<script src="js/init-page-ar.js"></script>
+    <!-- السكربتات من مجلد js/ (تم إصلاح init-page-root.js) -->
+    <!-- ====================================================================== -->
+    <script src="js/init-page-root.js"></script>
+    <script src="js/init-page-ar.js"></script>
 
 </body>
 </html>
