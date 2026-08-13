@@ -1,13 +1,14 @@
 // ================================================================
-//  init-page-root.js - الإصدار النهائي (الدرع المطلق + 404 + تنظيف الكاش)
+//  init-page-root.js - الإصدار النهائي (الدرع المطلق + اللغة + 404 + تنظيف الكاش)
 //  التاريخ: 2026-08-13
 // ================================================================
 
 (function() {
   'use strict';
-  console.log('🛡️ [init] تفعيل الدرع المطلق (v4.1.0)...');
+  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.0.0)...');
 
   let splashHidden = false;
+  let currentLang = 'ar'; // 'ar' or 'en'
 
   // ===== شاشة الترحيب =====
   function createSplash() {
@@ -71,6 +72,7 @@
     });
   }
 
+  // ===== تحميل الهيدر والفوتر =====
   function loadHeader() {
     const placeholder = document.getElementById('header-placeholder');
     if (!placeholder) {
@@ -239,7 +241,7 @@
   }
 
   // ================================================================
-  //  🧹 تنظيف الكاش ومنع اختناق الشاشة (bfcache)  <-- الجديد
+  //  🧹 تنظيف الكاش ومنع اختناق الشاشة (bfcache)
   // ================================================================
   function setupCacheCleaner() {
     console.log('🧹 [init] تفعيل أداة تنظيف الكاش...');
@@ -287,17 +289,214 @@
     console.log('✅ [init] أداة تنظيف الكاش جاهزة');
   }
 
-  // ===== دالة init الرئيسية =====
+  // ================================================================
+  //  🌍 نظام اللغة (العربية / الإنجليزية)
+  // ================================================================
+  function detectLanguage() {
+    const saved = localStorage.getItem('jabri_lang');
+    if (saved === 'en' || saved === 'ar') return saved;
+    // كشف من متصفح المستخدم
+    const browserLang = navigator.language || navigator.languages?.[0] || 'ar';
+    return browserLang.startsWith('en') ? 'en' : 'ar';
+  }
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('jabri_lang', lang);
+    
+    const html = document.documentElement;
+    html.lang = lang;
+    html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('en', lang === 'en');
+
+    // تحديث زر اللغة
+    const langBtn = document.getElementById('langBtn');
+    if (langBtn) {
+      langBtn.textContent = lang === 'ar' ? '🇸🇦 عربي' : '🇬🇧 English';
+    }
+
+    // تحديث عداد الزوار
+    updateCounterDisplay();
+
+    // تحديث الفوتر
+    updateFooterLang();
+
+    // تحديث نصوص الصفحة التي تحمل class="ar" / class="en"
+    document.querySelectorAll('.ar, .en').forEach(el => {
+      if (lang === 'ar') {
+        el.style.display = el.classList.contains('ar') ? '' : 'none';
+      } else {
+        el.style.display = el.classList.contains('en') ? '' : 'none';
+      }
+    });
+
+    console.log(`🌍 [init] اللغة: ${lang === 'ar' ? 'العربية' : 'English'}`);
+  }
+
+  function toggleLang() {
+    const newLang = currentLang === 'ar' ? 'en' : 'ar';
+    applyLanguage(newLang);
+  }
+
+  function updateCounterDisplay() {
+    const display = document.getElementById('visitorCountDisplay');
+    if (!display) return;
+    try {
+      let count = localStorage.getItem('jabri_visitor_count_root');
+      if (count === null) count = 0;
+      else count = parseInt(count, 10);
+      display.innerText = count.toLocaleString(currentLang === 'ar' ? 'ar-EG' : 'en-US');
+    } catch (e) {
+      display.innerText = '⚠️';
+    }
+  }
+
+  function updateFooterLang() {
+    const isEnglish = currentLang === 'en';
+    const searchTitle = document.getElementById('searchTitle');
+    if (searchTitle) {
+      searchTitle.innerHTML = isEnglish ?
+        "<strong>🔍 Search for Researcher:</strong>" :
+        "<strong>🔍 البحث عن الباحث:</strong>";
+    }
+    const copyright = document.getElementById('copyright');
+    if (copyright) {
+      copyright.textContent = isEnglish ?
+        "© 2026 Eng. Abdulla Mohammed Nasser Al-Jabri - All Rights Reserved" :
+        "© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة";
+    }
+    document.querySelectorAll('#site-footer .txt').forEach(el => {
+      const newText = isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+      if (newText) el.textContent = newText;
+    });
+  }
+
+  // ================================================================
+  //  🎵 نظام الموسيقى
+  // ================================================================
+  function initMusic() {
+    const music = document.getElementById('oasisMusic');
+    const musicBtn = document.getElementById('musicToggle');
+    if (!music || !musicBtn) return;
+    
+    let isPlaying = false;
+    music.volume = 0.4;
+
+    function startMusicOnce() {
+      if (!isPlaying) {
+        music.play().then(() => {
+          isPlaying = true;
+          musicBtn.innerHTML = '🔊';
+          musicBtn.classList.add('playing');
+        }).catch(e => console.log(e));
+      }
+      document.removeEventListener('touchstart', startMusicOnce);
+      document.removeEventListener('click', startMusicOnce);
+    }
+    
+    document.addEventListener('touchstart', startMusicOnce);
+    document.addEventListener('click', startMusicOnce);
+
+    musicBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (isPlaying) {
+        music.pause();
+        musicBtn.innerHTML = '🎵';
+        musicBtn.classList.remove('playing');
+        isPlaying = false;
+        localStorage.setItem('jabri_music_state', 'paused');
+      } else {
+        music.play().then(() => {
+          musicBtn.innerHTML = '🔊';
+          musicBtn.classList.add('playing');
+          isPlaying = true;
+          localStorage.setItem('jabri_music_state', 'playing');
+        }).catch(() => {});
+      }
+    });
+
+    // استرجاع الحالة من localStorage
+    if (localStorage.getItem('jabri_music_state') === 'playing') {
+      music.play().then(() => {
+        musicBtn.innerHTML = '🔊';
+        musicBtn.classList.add('playing');
+        isPlaying = true;
+      }).catch(() => {});
+    }
+  }
+
+  // ================================================================
+  //  🧩 دوال الموقع (login/logout/openFile/toggleChat)
+  // ================================================================
+  function login() {
+    const visitorSection = document.getElementById('visitor-section');
+    const userSection = document.getElementById('user-section');
+    if (visitorSection) visitorSection.classList.add('hidden');
+    if (userSection) userSection.classList.remove('hidden');
+    const username = document.getElementById('username');
+    if (username) username.textContent = 'الزائر';
+  }
+
+  function logout() {
+    const visitorSection = document.getElementById('visitor-section');
+    const userSection = document.getElementById('user-section');
+    if (visitorSection) visitorSection.classList.remove('hidden');
+    if (userSection) userSection.classList.add('hidden');
+  }
+
+  function openFile() {
+    const file = document.getElementById('file-input');
+    if (file && file.value) window.open(file.value, '_blank');
+  }
+
+  function toggleChat() {
+    const box = document.getElementById('chatBox');
+    if (box) box.style.display = box.style.display === 'block' ? 'none' : 'block';
+  }
+
+  // ================================================================
+  //  🏁 دالة init الرئيسية
+  // ================================================================
   function init() {
     createSplash();
     detect404AndHandle();
-    setupCacheCleaner();   // <-- تمت الإضافة هنا
+    setupCacheCleaner();
+
+    // تعيين اللغة
+    const lang = detectLanguage();
+    applyLanguage(lang);
+
+    // تحميل الهيدر والفوتر
     loadHeader();
     loadFooter();
+
+    // تشغيل الموسيقى
+    setTimeout(initMusic, 500);
+
+    // ربط زر اللغة بالدالة العامة
+    window.toggleLang = toggleLang;
+
+    // ربط دوال الموقع بالـ window
+    window.login = login;
+    window.logout = logout;
+    window.openFile = openFile;
+    window.toggleChat = toggleChat;
+
+    // ربط دالة trigger404
+    window.trigger404 = function() {
+      window.location.href = '/404.html';
+    };
 
     document.addEventListener('headerLoaded', function() {
       setDynamicCanonical();
       addDynamicLinks();
+      // إعادة تحديث اللغة بعد تحميل الهيدر
+      applyLanguage(currentLang);
+    });
+
+    document.addEventListener('footerLoaded', function() {
+      // تحديث اللغة بعد تحميل الفوتر
+      applyLanguage(currentLang);
     });
 
     setTimeout(function() {
@@ -306,6 +505,8 @@
         hideSplash();
       }
     }, 5000);
+
+    console.log('✅ [init] التهيئة مكتملة بنجاح');
   }
 
   // ===== تشغيل =====
@@ -315,5 +516,5 @@
     init();
   }
 
-  console.log('✅ init-page-root.js جاهز (النسخة النهائية مع 404 + تنظيف الكاش)');
+  console.log('✅ init-page-root.js جاهز (النسخة النهائية مع اللغة)');
 })();
