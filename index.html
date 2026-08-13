@@ -700,6 +700,37 @@
             margin: 10px 0;
         }
 
+        /* ===== الأزرار الذهبية الجديدة (موسيقى وزوار) ===== */
+        .extra-buttons {
+            position: fixed;
+            bottom: 105px; /* فوق زر المحادثة (25px + 60px + gap) */
+            left: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 997;
+        }
+        .golden-btn {
+            background: linear-gradient(135deg, #ffd700, #f0a500);
+            color: #0a0a0f;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+            transition: 0.3s;
+            display: inline-block;
+            min-width: 130px;
+            letter-spacing: 0.5px;
+        }
+        .golden-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(255, 215, 0, 0.7);
+        }
+
         /* ===== تجاوب الجوالات ===== */
         @media (max-width: 600px) {
             .lang-btn {
@@ -747,6 +778,16 @@
                 height: 50px;
                 font-size: 22px;
             }
+            .extra-buttons {
+                bottom: 80px;
+                left: 15px;
+                gap: 8px;
+            }
+            .golden-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+                min-width: 110px;
+            }
             /* تجاوب المدن */
             .city-grid {
                 grid-template-columns: 1fr 1fr;
@@ -784,6 +825,16 @@
         @media (max-width: 400px) {
             .city-grid {
                 grid-template-columns: 1fr;
+            }
+            .extra-buttons {
+                bottom: 70px;
+                left: 10px;
+                gap: 6px;
+            }
+            .golden-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                min-width: 90px;
             }
         }
     </style>
@@ -1030,6 +1081,12 @@
         </div>
         <p id="copyright">© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة</p>
     </footer>
+
+    <!-- ===== الأزرار الذهبية الجديدة (موسيقى وزوار) ===== -->
+    <div class="extra-buttons">
+        <a href="/music.html" class="golden-btn">🎵 موسيقى</a>
+        <a href="/visitor.html" class="golden-btn">👥 زوار</a>
+    </div>
 
     <!-- ===== المحادثة ===== -->
     <div class="chat-wrapper">
