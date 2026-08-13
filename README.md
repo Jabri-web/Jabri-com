@@ -6,7 +6,7 @@
     <a href="./README.md" style="background: #6ae3ff; color: #0a0a0f; padding: 6px 22px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; margin: 0 5px; display: inline-block;">
         🇬🇧 English (Default)
     </a>
-    <a href="./README-AR.md" style="background: transparent; color: #c9d1d9; padding: 6px 22px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; margin: 0 5px; display: inline-block; border: 1px solid #30363d;">
+    <a href="https://jabri-web.github.io/Jabri-web/magic-translator.html?file=README.md&lang=ar" style="background: transparent; color: #c9d1d9; padding: 6px 22px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; margin: 0 5px; display: inline-block; border: 1px solid #30363d;">
         🇾🇪 Arabic
     </a>
 </div>
@@ -15,7 +15,17 @@
 
 <img src="Image/Jabri-photo.png" width="140" height="140" style="border-radius:50%; border:4px solid #6ae3ff; object-fit:cover;">
 
-# Eng. Abdulla Mohammed Nasser Al-Jabri
+# Eng. Abdulla Mohammed Nasser Al-Jabri | Heaven Al-Jabri
+
+### 👋 About the Researcher
+- 🧭 **Researcher**: Unified Sinbad Theory (Z+C+A=1)  
+- 🏛️ **Heritage**: Digital Archivist for Yemen (Sana'a, Shibam, Socotra)
+- 🎓 **Education**: B.Sc. Computer Science - KFUPM
+- 🌐 **Official Portfolio**: [jabri-com.vercel.app](https://jabri-com.vercel.app/)
+- 📫 **Contact**: jabri62018@gmail.com
+- 🇾🇪 **Mission**: Documenting Yemeni Heritage + Theoretical Research in Math & Physics
+
+---
 
 Bachelor of Science in Computer Engineering... King Fahd University of Petroleum and Minerals - KSA.
 
@@ -85,7 +95,7 @@ Database of all Zx projects + Links + DOI
 | 8 | **Jabri_RiemannOS** | [Pages](https://jabri-web.github.io/Jabri-RiemannOS/) | - |
 | 9 | **Jabri_Checkout** | [Pages](https://Jabri-web.github.io/Jabri_Checkout/) | [20513840](https://doi.org/10.5281/zenodo.20513840) |
 | 10 | **Jabri-web** | [Pages](https://jabri-web.github.io/Jabri-web/) | [20499365](https://doi.org/10.5281/zenodo.20499365) |
-| 11 | **Jabri-com** | [Pages](https://jabri-web.github.io/jabri-com/) | [21003990](https://doi.org/10.5281/zenodo.21003990) |
+| 11 | **Jabri-com** | [Pages](https://jabri-web.github.io/Jabri-com/) | [21003990](https://doi.org/10.5281/zenodo.21003990) |
 
 > **Verified 2026-06-09 by Al-Jabri**: All links 1-11 are working. All DOI `10.5281`. No changes after today.
 
@@ -108,9 +118,7 @@ Database of all Zx projects + Links + DOI
 ## 🤝 Partnerships & Contact
 Interested in research collaboration or paid advertisement? Contact me:
 
-
 ![Dbases](Image/dbase.png)
-
 
 ### 🔗 Contact
 - **ORCID:** [0009-0003-3319-3822](https://orcid.org/0009-0003-3319-3822)  
