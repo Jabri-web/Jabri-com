@@ -283,3 +283,81 @@
 
   console.log('✅ init-page-root.js جاهز (النسخة النهائية مع 404)');
 })();
+
+
+
+
+    <!-- ============================================ -->
+    <!--   🧹 تنظيف الكاش ومنع اختناق الشاشة (مرة واحدة) -->
+    <!-- ============================================ -->
+    <script>
+    (function() {
+        console.log('🧹 بدء تشغيل أداة تنظيف الكاش...');
+
+        // =============================================
+        // 1. منع المتصفح من استخدام bfcache (الذاكرة الخلفية)
+        //    التي تسبب اختناق الشاشة
+        // =============================================
+        window.addEventListener('pageshow', function(event) {
+            // إذا تم استرجاع الصفحة من bfcache (وليس تحميل عادي)
+            if (event.persisted) {
+                console.warn('⚠️ تم استرجاع الصفحة من bfcache، جارٍ تنظيف الاختناق...');
+                
+                // الحل الجذري لكن الفعال: إعادة تحميل الصفحة لتجاوز الكاش القديم
+                // (يتم مرة واحدة فقط عند العودة من bfcache)
+                window.location.reload(true); // true = إعادة تحميل من الخادم (تجاوز الكاش)
+            }
+        });
+
+        // =============================================
+        // 2. تنظيف أي مؤقتات (Intervals) عالقة قد تسبب اختناق
+        // =============================================
+        // نأخذ أعلى رقم معرف للمؤقتات ونلغيها جميعاً (باستثناء المؤقتات الضرورية)
+        // (هذا آمن لأن الصفحة ستعيد تشغيلها عند التحميل)
+        (function clearAllIntervals() {
+            var highestIntervalId = setInterval(function() {}, 0);
+            clearInterval(highestIntervalId);
+            // نلغي كل المؤقتات التي تزيد عن 0 (باستثناء هذا الذي ألغيناه)
+            for (var i = 1; i < highestIntervalId; i++) {
+                clearInterval(i);
+                clearTimeout(i);
+            }
+            console.log('✅ تم تنظيف ' + highestIntervalId + ' مؤقت/تايمر عالق');
+        })();
+
+        // =============================================
+        // 3. منع التخزين المؤقت للصفحة عبر Cache-Control (طبقة إضافية)
+        // =============================================
+        // إضافة هيدر meta لمنع التخزين المؤقت (للمتصفحات التي لا تحترم bfcache)
+        var meta = document.createElement('meta');
+        meta.httpEquiv = 'Cache-Control';
+        meta.content = 'no-cache, no-store, must-revalidate';
+        document.head.appendChild(meta);
+
+        var metaPragma = document.createElement('meta');
+        metaPragma.httpEquiv = 'Pragma';
+        metaPragma.content = 'no-cache';
+        document.head.appendChild(metaPragma);
+
+        var metaExpires = document.createElement('meta');
+        metaExpires.httpEquiv = 'Expires';
+        metaExpires.content = '0';
+        document.head.appendChild(metaExpires);
+
+        // =============================================
+        // 4. عند مغادرة الصفحة، نوقف تشغيل الموسيقى (إن كانت مشغلة)
+        //    لمنع تعارض الصوت مع الصفحة المستعادة
+        // =============================================
+        window.addEventListener('beforeunload', function() {
+            var music = document.getElementById('oasisMusic');
+            if (music) {
+                music.pause();
+                music.currentTime = 0;
+            }
+        });
+
+        console.log('✅ تم تفعيل أداة تنظيف الكاش والاختناق (مرة واحدة) بنجاح');
+    })();
+    </script>
+</body>
+</html>
