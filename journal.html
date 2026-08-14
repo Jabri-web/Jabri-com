@@ -17,7 +17,7 @@
     <meta name="citation_title" content="من صنعاء إلى قوقل: المهندس عبدالله الجبري يحول تراث اليمن إلى نظرية السندباد الموحدة">
     <meta name="citation_author" content="عبدالله محمد ناصر الجبري">
     <meta name="citation_publication_date" content="2026-08-14">
-    <meta name="citation_journal_title" content="واحة الجبري للأبحاث العلمية">
+    <meta name="citation_journal_title" content="واحة الجبري للبحوث العلمية">
     <meta name="citation_doi" content="10.5281/zenodo.20513840">
     <meta name="citation_pdf_url" content="https://jabri-com.vercel.app/papers/sindbad-theory.pdf">
 
@@ -43,7 +43,7 @@
     <meta name="twitter:description" content="قوقل يعترف بباحث يمني ويربط اسمه بنظرية رياضية وتراث اليمن.">
     <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.png">
 
-    <!-- Schema JSON-LD -->
+    <!-- Schema JSON-LD (مع sameAs و FAQ) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -53,6 +53,22 @@
                 "@id": "https://jabri-com.vercel.app/#person",
                 "name": "م/ عبدالله محمد ناصر الجبري",
                 "alternateName": ["Eng. Abdulla Mohammed Nasser Al-Jabri", "Abdulla Al-Jabri", "سندباد اليمن"],
+                "sameAs": [
+                    "https://x.com/JabriAbdulla1",
+                    "https://www.youtube.com/@AbdullaJabri-p3w",
+                    "https://www.facebook.com/share/1BkxjWfLcs/",
+                    "https://www.facebook.com/share/1c2qpFFk8g/",
+                    "https://www.instagram.com/reel/DcABf-LpPHJ/",
+                    "https://t.me/Heaven_Jabri",
+                    "https://www.linkedin.com/in/abdulla-al-jabri",
+                    "https://orcid.org/0009-0003-3319-3822",
+                    "https://github.com/jabri-web",
+                    "https://www.researchgate.net/profile/Abdulla-Al-Jabri",
+                    "https://chat.whatsapp.com/Haty83AA1eTKGLLXUL7QCK",
+                    "https://links.gemspace.com/join/Yemen_paradize",
+                    "https://share.google/httEFOGr9YtazHgrh",
+                    "https://snapchat.com/t/fl7vkuvE"
+                ],
                 "identifier": {
                     "@type": "PropertyValue",
                     "propertyID": "ORCID",
@@ -70,7 +86,7 @@
                 "@id": "https://jabri-com.vercel.app/#org",
                 "name": "واحة الجبري",
                 "alternateName": "Heaven Al-Jabri",
-                "description": "منصة توثيق التراث اليمني وبوابة السندباد للأبحاث العلمية",
+                "description": "منصة توثيق التراث اليمني وبوابة السندباد للبحوث العلمية",
                 "url": "https://jabri-com.vercel.app/",
                 "logo": "https://jabri-com.vercel.app/image/Jabri-photo.png",
                 "founder": { "@id": "https://jabri-com.vercel.app/#person" }
@@ -88,6 +104,17 @@
                 "description": "قوقل يعترف بباحث يمني ويربط اسمه بنظرية رياضية وتراث اليمن.",
                 "inLanguage": "ar",
                 "identifier": "10.5281/zenodo.20513840"
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [{
+                    "@type": "Question",
+                    "name": "من هو المهندس عبدالله الجبري وماهي نظرية السندباد الموحدة؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "المهندس عبدالله محمد ناصر الجبري هو باحث مستقل يمني في الرياضيات والفيزياء النظرية، ومؤسس منصة واحة الجبري. وهو مبتكر نظرية السندباد الموحدة (Z+C+A=1) التي تربط بين التراث اليمني العريق والفيزياء النظرية، وقد حظيت منصته باهتمام وفهرسة خاصة من محرك البحث Google."
+                    }
+                }]
             }
         ]
     }
@@ -115,7 +142,30 @@
             border: 1px solid #2a2a3e;
             box-shadow: 0 20px 60px rgba(0,0,0,0.7);
             margin: 20px 0;
+            position: relative;
         }
+        /* زر اللغة - في أعلى يمين الصفحة */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            left: 20px; /* لأن الاتجاه RTL، اليسار = يمين الصفحة */
+            background: #1a1a2e;
+            border: 1px solid #2a2a3e;
+            border-radius: 30px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            color: #aab;
+            transition: 0.3s;
+        }
+        .lang-switch a {
+            color: #6ae3ff;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 0 4px;
+        }
+        .lang-switch a:hover { text-decoration: underline; }
+        .lang-switch .sep { color: #445; margin: 0 4px; }
+
         h1 {
             font-size: 2.2rem;
             font-weight: 900;
@@ -123,6 +173,7 @@
             margin-bottom: 16px;
             line-height: 1.3;
             text-align: center;
+            margin-top: 10px;
         }
         .meta {
             display: flex;
@@ -239,12 +290,21 @@
             .meta { font-size: 0.8rem; }
             .article-body p { font-size: 1rem; }
             .author-box { flex-direction: column; text-align: center; }
+            .lang-switch { position: static; text-align: center; margin-bottom: 15px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- زر اللغة (AR/EN) في أعلى الصفحة -->
+        <div class="lang-switch">
+            <span>🌐</span>
+            <a href="https://jabri-com.vercel.app/journal.html">AR</a>
+            <span class="sep">|</span>
+            <a href="https://jabri-com.vercel.app/en/journal.html">EN</a>
+        </div>
+
         <h1>🇾🇪 من صنعاء إلى قوقل: المهندس عبدالله الجبري يحول تراث اليمن إلى "نظرية السندباد الموحدة"</h1>
 
         <div class="meta">
@@ -279,9 +339,9 @@
             </div>
         </div>
 
-        <!-- صندوق الكاتب -->
+        <!-- صندوق الكاتب (تم إرجاع مسار الصورة إلى Jabri-photo.png) -->
         <div class="author-box">
-            <img src="https://jabri-com.vercel.app/image/Jabri-photo.png" alt="عبدالله الجبري">
+            <img src="https://jabri-com.vercel.app/image/Jabri-photo.png" alt="عبدالله الجبري - الباحث اليمني ومؤسس واحة الجبري ونظرية السندباد">
             <div class="info">
                 <h3>م/ عبدالله محمد ناصر الجبري</h3>
                 <p>باحث مستقل في الرياضيات والفيزياء النظرية، ومؤسس منصة "واحة الجبري" لتوثيق التراث اليمني ونظرية السندباد الموحدة.</p>
@@ -289,28 +349,29 @@
         </div>
 
         <!-- شبكة الحضور الرقمي -->
-        <h3 style="color:#6ae3ff; margin: 20px 0 10px; text-align:center;">🌐 التواجد الرقمي للباحث</h3>
+        <h3 style="color:#6ae3ff; margin: 20px 0 10px; text-align:center;">🌐 الإمبراطورية الرقمية - 15 منصة</h3>
         <div class="platform-grid">
             <a href="https://orcid.org/0009-0003-3319-3822" target="_blank" class="platform-card"><span class="icon">🆔</span><span class="name">ORCID</span></a>
             <a href="https://github.com/jabri-web" target="_blank" class="platform-card"><span class="icon">🐙</span><span class="name">GitHub</span></a>
             <a href="https://zenodo.org/records/20513840" target="_blank" class="platform-card"><span class="icon">📊</span><span class="name">Zenodo</span></a>
             <a href="https://www.linkedin.com/in/abdulla-al-jabri" target="_blank" class="platform-card"><span class="icon">💼</span><span class="name">LinkedIn</span></a>
             <a href="https://www.researchgate.net/profile/Abdulla-Al-Jabri" target="_blank" class="platform-card"><span class="icon">🧪</span><span class="name">ResearchGate</span></a>
-            <a href="https://scholar.google.com/citations?user=jabri" target="_blank" class="platform-card"><span class="icon">🎓</span><span class="name">Google Scholar</span></a>
-            <a href="https://x.com/jabri_web" target="_blank" class="platform-card"><span class="icon">🐦</span><span class="name">X</span></a>
-            <a href="https://www.youtube.com/@HeavenAlJabri" target="_blank" class="platform-card"><span class="icon">📺</span><span class="name">YouTube</span></a>
-            <a href="https://facebook.com/HeavenAlJabri" target="_blank" class="platform-card"><span class="icon">📘</span><span class="name">Facebook</span></a>
-            <a href="https://instagram.com/heaven_aljabri" target="_blank" class="platform-card"><span class="icon">📷</span><span class="name">Instagram</span></a>
-            <a href="https://t.me/HeavenAlJabri" target="_blank" class="platform-card"><span class="icon">✈️</span><span class="name">Telegram</span></a>
-            <a href="https://en.wikipedia.org/wiki/User:Jabri2026" target="_blank" class="platform-card"><span class="icon">📖</span><span class="name">Wikipedia</span></a>
-            <a href="https://www.kaggle.com/jabriweb" target="_blank" class="platform-card"><span class="icon">🏆</span><span class="name">Kaggle</span></a>
-            <a href="https://medium.com/@jabri62018" target="_blank" class="platform-card"><span class="icon">📝</span><span class="name">Medium</span></a>
+            <a href="https://x.com/JabriAbdulla1" target="_blank" class="platform-card"><span class="icon">🐦</span><span class="name">X (تويتر)</span></a>
+            <a href="https://www.youtube.com/@AbdullaJabri-p3w" target="_blank" class="platform-card"><span class="icon">📺</span><span class="name">YouTube</span></a>
+            <a href="https://www.facebook.com/share/1BkxjWfLcs/" target="_blank" class="platform-card"><span class="icon">📘</span><span class="name">فيسبوك (1)</span></a>
+            <a href="https://www.facebook.com/share/1c2qpFFk8g/" target="_blank" class="platform-card"><span class="icon">📘</span><span class="name">فيسبوك (2)</span></a>
+            <a href="https://www.instagram.com/reel/DcABf-LpPHJ/" target="_blank" class="platform-card"><span class="icon">📷</span><span class="name">انستجرام Reel</span></a>
+            <a href="https://t.me/Heaven_Jabri" target="_blank" class="platform-card"><span class="icon">✈️</span><span class="name">تيليجرام</span></a>
+            <a href="https://chat.whatsapp.com/Haty83AA1eTKGLLXUL7QCK" target="_blank" class="platform-card"><span class="icon">💬</span><span class="name">واتساب</span></a>
+            <a href="https://links.gemspace.com/join/Yemen_paradize" target="_blank" class="platform-card"><span class="icon">🌌</span><span class="name">GemSpace</span></a>
+            <a href="https://share.google/httEFOGr9YtazHgrh" target="_blank" class="platform-card"><span class="icon">🔗</span><span class="name">Google Share</span></a>
+            <a href="https://snapchat.com/t/fl7vkuvE" target="_blank" class="platform-card"><span class="icon">👻</span><span class="name">Snapchat</span></a>
         </div>
 
         <!-- فوتر -->
         <div class="footer-links">
             <a href="https://jabri-com.vercel.app/">🏠 الرئيسية</a>
-            <a href="https://jabri-com.vercel.app/research.html">📚 الأبحاث</a>
+            <a href="https://jabri-com.vercel.app/research.html">📚 البحوث</a>
             <a href="https://jabri-com.vercel.app/about.html">👤 عن الباحث</a>
             <a href="https://jabri-com.vercel.app/contact.html">📞 اتصل بنا</a>
         </div>
@@ -318,7 +379,12 @@
         <div style="margin-top: 24px; font-size: 0.9rem; color: #667; text-align: center; border-top: 1px solid #1e1e2e; padding-top: 18px;">
             © 2026 م/ عبدالله محمد ناصر الجبري – جميع الحقوق محفوظة
         </div>
+        
+        <!-- عداد زوار -->
+        <div style="text-align: center; margin-top: 25px; padding: 12px 20px; background: #1a1a2e; border-radius: 40px; border: 1px solid #2a2a3e; font-size: 0.9rem; color: #aab; display: inline-block; width: auto; margin-left: auto; margin-right: auto;">
+            <span>👥 زوار المنصة اليوم: </span>
+            <img src="https://hitwebcounter.com/counter/counter.php?page=20513840&style=0038&nbdigits=5&type=page&initCount=100" alt="عدد الزوار" style="vertical-align: middle; margin-right: 5px; filter: brightness(1.2);">
+        </div>
     </div>
-
 </body>
 </html>
