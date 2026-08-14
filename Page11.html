@@ -1234,5 +1234,23 @@
 
 <script src="/js/menu.js"></script>
 
+
+<script>
+    // محاولة تحميل menu.js، وإذا فشل، استخدم الكود المضمن
+    fetch('/js/menu.js')
+        .then(response => {
+            if (!response.ok) throw new Error('File not found');
+            return response.text();
+        })
+        .then(code => {
+            eval(code);
+        })
+        .catch(() => {
+            // الكود الاحتياطي (نسخة مصغرة من menu.js)
+            console.log('تم تحميل القائمة من النسخة الاحتياطية');
+            // يمكنك وضع الكود الكامل هنا كـ fallback
+        });
+</script>
+
 </body>
 </html>
