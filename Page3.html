@@ -1,196 +1,122 @@
+<! P3= Yemen-Ankboot=index.html
+<! Repo= Zx_Mother_Function_Jabri
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>م. بليغ عبدالله الجبري | Eng. Baleegh Al-Jabri</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>م. بليغ عبدالله الجبري</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* ── نفس الأنماط السابقة مع إضافة تعديل بسيط للصورة ── */
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Tahoma','Segoe UI',system-ui,sans-serif;background:radial-gradient(ellipse at 30% 20%,#13131f,#07070c);color:#e8e8f0;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:30px 16px;transition:0.3s}
-.card{max-width:580px;width:100%;background:rgba(18,18,30,0.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:40px;padding:40px 28px 48px;box-shadow:0 20px 60px rgba(0,0,0,0.8),0 0 0 1px rgba(106,227,255,0.08);border:1px solid rgba(106,227,255,0.06);position:relative;overflow:hidden}
-.card::before,.card::after{content:'';position:absolute;border-radius:50%;filter:blur(90px);opacity:0.20;pointer-events:none;z-index:0}
-.card::before{width:320px;height:320px;background:#6ae3ff;top:-120px;right:-100px}
-.card::after{width:240px;height:240px;background:#a78bfa;bottom:-80px;left:-80px}
-.card>*{position:relative;z-index:1}
-
-/* زر اللغة */
-.lang-btn{position:fixed;top:18px;left:18px;background:rgba(106,227,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(106,227,255,0.25);color:#e8e8f0;padding:8px 20px;border-radius:60px;cursor:pointer;font-weight:600;font-size:13px;z-index:9999;box-shadow:0 4px 20px rgba(106,227,255,0.15);transition:0.25s;font-family:inherit}
-.lang-btn:hover{background:rgba(106,227,255,0.22);border-color:#6ae3ff;transform:scale(1.03)}
-.lang-btn .ar,.lang-btn .en{display:inline}
-body.en .lang-btn .ar{display:none}
-body:not(.en) .lang-btn .en{display:none}
-
-/* وسام غير متصل */
-.offline-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,51,51,0.10);border:1px solid rgba(255,51,51,0.25);color:#ff6b6b;padding:6px 18px;border-radius:60px;font-size:12px;font-weight:500;margin-bottom:24px;backdrop-filter:blur(4px)}
-.offline-badge::before{content:'●';color:#4ade80;font-size:10px;margin-left:4px}
-
-/* الصورة الشخصية */
-.profile-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:8px}
-.profile-img{width:130px;height:130px;border-radius:50%;border:3px solid rgba(106,227,255,0.40);object-fit:cover;background:#1a1a2e;box-shadow:0 8px 32px rgba(106,227,255,0.12);transition:0.4s}
-.profile-img:hover{transform:scale(1.02);border-color:#6ae3ff}
-
-/* الهدية */
-.greeting{font-size:0.85rem;opacity:0.6;margin:6px 0 2px;letter-spacing:0.5px;font-weight:300;color:#b0b0c8;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px}
-.greeting .cn{color:#fcd34d;opacity:0.9}
-.greeting .spider-icon{width:26px;height:auto;vertical-align:middle;display:inline-block;margin:0 4px;filter:drop-shadow(0 0 6px rgba(106,227,255,0.3));transition:0.3s}
-.greeting .spider-icon:hover{transform:scale(1.1) rotate(-8deg)}
-
-/* الاسم */
-.name{font-size:1.65rem;font-weight:700;margin:6px 0 2px;background:linear-gradient(135deg,#e8e8f0 0%,#a0c4ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.3}
-.name-sub{font-size:0.9rem;opacity:0.5;font-weight:400;-webkit-text-fill-color:#b0b0c8}
-
-/* الفاصل */
-.divider{width:60px;height:2px;background:linear-gradient(90deg,transparent,rgba(106,227,255,0.4),transparent);margin:18px auto 22px;border-radius:4px}
-
-/* الأزرار */
-.btn-grid{display:flex;flex-direction:column;gap:10px;width:100%}
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:18px;color:#e8e8f0;text-decoration:none;font-size:15px;font-weight:500;transition:0.25s;backdrop-filter:blur(4px)}
-.btn:hover{background:rgba(255,255,255,0.06);border-color:rgba(106,227,255,0.25);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.30)}
-.btn .icon{font-size:1.2rem;opacity:0.6;transition:0.3s;flex-shrink:0}
-.btn:hover .icon{opacity:1;transform:scale(1.08)}
-.btn .label-group{display:flex;flex-direction:column;align-items:center;line-height:1.2;flex:1}
-.btn .label-en{font-size:0.8rem;opacity:0.5;font-weight:400}
-body.en .btn .label-ar, body:not(.en) .btn .label-en{display:none}
-
-/* زر شبكة العنكبوت */
-.btn-spider{background:rgba(106,227,255,0.06);border-color:rgba(106,227,255,0.20);box-shadow:0 0 30px rgba(106,227,255,0.04)}
-.btn-spider:hover{background:rgba(106,227,255,0.12);border-color:#6ae3ff}
-.btn-spider .label-en,.btn-spider .label-ar{display:block!important}
-.btn-spider .label-en{font-size:0.7rem;opacity:0.6}
-
-/* زر الخروج */
-.btn-exit{background:rgba(214,40,40,0.06);border-color:rgba(214,40,40,0.15);color:#ff8a8a}
-.btn-exit:hover{background:rgba(214,40,40,0.12);border-color:#d62828;color:#ffb3b3}
-
-/* التذييل */
-.footer-note{margin-top:28px;font-size:0.7rem;opacity:0.25;text-align:center;border-top:1px solid rgba(255,255,255,0.04);padding-top:20px}
-
-/* استجابة */
-@media (max-width:480px){.card{padding:30px 18px 36px}.name{font-size:1.35rem}.btn{font-size:14px;padding:13px 16px}.profile-img{width:110px;height:110px}.lang-btn{top:12px;left:12px;padding:6px 14px;font-size:12px}}
+body {
+  font-family: "Tajawal", Arial, sans-serif;
+  background: #0a0a0f;
+  color: #e8e8f0;
+  text-align: center;
+  padding: 40px 20px;
+  margin: 0;
+}
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid #6ae3ff;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+h2 {
+  color: #6ae3ff;
+  margin: 10px 0 30px 0;
+  font-size: 1.4rem;
+}
+.btn {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  margin: 12px auto;
+  padding: 14px 20px;
+  background: #14141f;
+  color: #e8e8f0;
+  text-decoration: none;
+  border: 1px solid #1f1f2e;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.2s;
+  line-height: 1.4;
+}
+.btn:hover {
+  background: #1f1f2e;
+  border-color: #6ae3ff;
+  color: #6ae3ff;
+}
+.btn.exit {
+  background: #2a0f0f;
+  border-color: #d62828;
+  color: #ff6b6b;
+}
+.btn.exit:hover {
+  background: #d62828;
+  color: #fff;
+}
+.en-text {font-size: 16px; display: block;}
+.ar-text {font-size: 0.95rem; opacity: 0.8; margin-top: 3px; display: block;}
 </style>
-<script>
-function toggleLang(){
-  document.body.classList.toggle('en');
-  document.documentElement.dir=document.body.classList.contains('en')?'ltr':'rtl';
-  document.documentElement.lang=document.body.classList.contains('en')?'en':'ar';
-  localStorage.setItem('lang',document.body.classList.contains('en')?'en':'ar');
-}
-window.onload=function(){
-  if(localStorage.getItem('lang')==='en'){document.body.classList.add('en');document.documentElement.dir='ltr';document.documentElement.lang='en';}
-}
-</script>
 </head>
 <body>
+  
+  <div id="header-placeholder"></div>
 
-<!-- زر تبديل اللغة -->
-<button class="lang-btn" onclick="toggleLang()">
-  <span class="ar">🇬🇧 EN</span>
-  <span class="en">🇸🇦 عربي</span>
-</button>
 
-<div class="card">
+<img src="/image/Baleegh.png" alt="Baleegh" class="profile-img">
+<h2>م. بليغ عبدالله الجبري</h2>
 
-  <!-- وسام العمل دون إنترنت -->
-  <div style="display:flex;justify-content:center;">
-    <div class="offline-badge">
-      <span class="ar">✓ يعمل بدون إنترنت</span>
-      <span class="en">✓ Works Offline</span>
-    </div>
-  </div>
+<!-- زر المحتوى مصلح: يفتح research.html -->
+<a class="btn" href="Yemen-library.html" target="_blank">
+  <span class="en-text">Contents</span>
+  <span class="ar-text">المحتوى</span>
+</a>
 
-  <!-- الصورة الشخصية -->
-  <div class="profile-wrap">
-    <img src="Image/Baleegh.png" alt="Baleegh" class="profile-img" onerror="this.style.display='none'" />
-  </div>
+<a class="btn" href="https://jabri-web.github.io/jabri_lab/" target="_blank">
+  <span class="en-text">Jabri_lab</span>
+  <span class="ar-text">المعمل</span>
+</a>
 
-  <!-- الهدية للشعب الصيني + صورة العنكبوت المصغرة -->
-  <div class="greeting">
-    <span class="ar">🌙 مساء الفل للشعب الصيني كله</span>
-    <span class="en">🌙 Good evening to all the Chinese people</span>
-    <span class="cn"> — 晚安，中国朋友</span>
-    <!-- 🕸️ صورة العنكبوت (تراها في كل اللغات) -->
-    <img src="Image/Ankaboot.png"
-         alt="🕸️"
-         class="spider-icon"
-         onerror="this.src='https://raw.githubusercontent.com/Jabri-web/Baleegh/main/image/Ankaboot.png'" />
-  </div>
+<a class="btn" href="https://jabri-web.github.io/Jabri_Nobble/" target="_blank">
+  <span class="en-text">Jabri_Nobble</span>
+  <span class="ar-text">بحوث الجوائز</span>
+</a>
 
-  <!-- الاسم -->
-  <div class="name">
-    <span class="ar">م. بليغ عبدالله الجبري</span>
-    <span class="en">Eng. Baleegh Al-Jabri</span>
-  </div>
-  <div style="font-size:0.8rem;opacity:0.35;margin-top:-2px;">
-    <span class="ar">واحة الجبري</span>
-    <span class="en">Al-Jabri Oasis</span>
-  </div>
+<a class="btn" href="research.html" target="_blank">
+  <span class="en-text">Researches</span>
+  <span class="ar-text">البحوث الموثقة</span>
+</a>
 
-  <div class="divider"></div>
+<a class="btn" href="yemen-photo.html">
+  <span class="en-text">Yemen-photo</span>
+  <span class="ar-text">السياحة في اليمن</span>
+</a>
 
-  <!-- الأزرار -->
-  <div class="btn-grid">
-    <a class="btn" href="Yemen-library.html">
-      <span class="icon">📚</span>
-      <span class="label-group">
-        <span class="label-ar">المحتوى</span>
-        <span class="label-en">Contents</span>
-      </span>
-    </a>
-    <a class="btn" href="Page6.html">
-      <span class="icon">🧪</span>
-      <span class="label-group">
-        <span class="label-ar">المعمل</span>
-        <span class="label-en">Jabri_lab</span>
-      </span>
-    </a>
-    <a class="btn" href="Page5.html">
-      <span class="icon">🏆</span>
-      <span class="label-group">
-        <span class="label-ar">بحوث الجوائز</span>
-        <span class="label-en">Jabri_Nobble</span>
-      </span>
-    </a>
-    <a class="btn" href="research.html">
-      <span class="icon">📄</span>
-      <span class="label-group">
-        <span class="label-ar">البحوث الموثقة</span>
-        <span class="label-en">Researches</span>
-      </span>
-    </a>
-    <a class="btn" href="yemen-photo.html">
-      <span class="icon">🇾🇪</span>
-      <span class="label-group">
-        <span class="label-ar">السياحة في اليمن</span>
-        <span class="label-en">Yemen‑photo</span>
-      </span>
-    </a>
+<a class="btn exit" href="https://jabri-web.github.io/">
+  <span class="en-text">Exit</span>
+  <span class="ar-text">خروج</span>
+</a>
 
-    <!-- زر شبكة العنكبوت (رابط خارجي) -->
-    <a class="btn btn-spider" href="https://baleegh.vercel.app/" target="_blank" rel="noopener">
-      <span class="icon">🕸️</span>
-      <span class="label-group">
-        <span class="label-ar">شبكة العنكبوت</span>
-        <span class="label-en">Spider Network</span>
-      </span>
-    </a>
 
-    <a class="btn btn-exit" href="index.html">
-      <span class="icon">🚪</span>
-      <span class="label-group">
-        <span class="label-ar">خروج</span>
-        <span class="label-en">Exit</span>
-      </span>
-    </a>
-  </div>
+    <div id="footer-placeholder"></div>
 
-  <div class="footer-note">
-    <span class="ar">© واحة الجبري — ٢٠٢٦</span>
-    <span class="en">© Al‑Jabri Oasis — 2026</span>
-    <span>·</span>
-    <span>v3</span>
-  </div>
 
-</div>
+          <!--div id="header-placeholder"></div>
+    
+    
+    <!--div id="footer-placeholder"></div>
+
+
+        <!-- تحميل الهيدر والفوتر -->
+    <script src="/js/init-page-root.js"></script>
+    <script src="/js/menu.js"></script>
+    
+
 </body>
 </html>

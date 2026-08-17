@@ -1,130 +1,98 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Add hreflang for multilingual -->
-<link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/" />
-<link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/" />
-
-<!-- Add more specific keywords -->
-<meta name="keywords" content="عبدالله الجبري, واحة الجبري, الباحث اليمني, تراث اليمن, نظرية السندباد الموحدة, صنعاء, شبام, سقطرى" />
-
-<!-- Add author in multiple formats -->
-<meta name="author" content="م/ عبدالله محمد ناصر الجبري" />
-<link rel="author" href="https://jabri-com.vercel.app/about.html" />
-
-<!-- Add Dublin Core for academic credibility -->
-<meta name="DC.title" content="واحة الجبري | Heaven Al-Jabri" />
-<meta name="DC.creator" content="م/ عبدالله محمد ناصر الجبري" />
-<meta name="DC.subject" content="تراث اليمن, الرياضيات, الفيزياء النظرية" />
-<meta name="DC.language" content="ar" />
-
-<!-- Add copyright -->
-<meta name="copyright" content="© 2026 م/ عبدالله محمد ناصر الجبري" />
-  
-<!-- 1. Google Verification (مرة واحدة) -->
-<meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
-
-<!-- Google Analytics (مرة واحدة) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EQBMJKBC24"></script>
+<!-- ===== الكانونيكال الديناميكي لكل Repo ===== -->
+<link rel="alternate" hreflang="ar" href="" />
+<link rel="alternate" hreflang="en" href="" />
+<link rel="canonical" href="" />
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-EQBMJKBC24');
+document.addEventListener('DOMContentLoaded', ()=>{
+    const base = window.location.origin;
+    const path = window.location.pathname;
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const arLink = document.querySelector('link[hreflang="ar"]');
+    const enLink = document.querySelector('link[hreflang="en"]');
+    if(canonical) canonical.href = base + path;
+    if(arLink) arLink.href = base + path;
+    if(enLink) enLink.href = base + '/en' + path;
+});
 </script>
 
-<!-- 2. SEO أساسي متقدم (دمج الواحة والسندباد) -->
-<title>واحة الجبري | Heaven Al-Jabri - تراث اليمن العريق وبوابة السندباد</title>
-<meta name="description" content="واحة الجبري Heaven Al-Jabri: توثيق تراث اليمن العريق (صنعاء شبام سقطرى) والأبحاث العلمية (نظرية السندباد الموحدة Z+C+A=1). م/ عبدالله محمد ناصر الجبري.">
+<!-- ===== SEO اساسي ===== -->
+<title>Page1 | سندباد اليمن - Eng. Abdulla Al-Jabri</title>
+<meta name="description" content="Page1 - سندباد اليمن. المستودعات الرئيسية والأبحاث في الرياضيات والفيزياء النظرية. م/ عبدالله محمد ناصر الجبري.">
+<meta name="keywords" content="Page1, سندباد اليمن, عبدالله الجبري, رياضيات, فيزياء نظرية, Riemann, Zx">
 <meta name="author" content="م/ عبدالله محمد ناصر الجبري | Eng. Abdulla Mohammed Nasser Al-Jabri">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://jabri-com.vercel.app/" />
+<link rel="author" href="https://jabri-com.vercel.app/about.html" />
 
-<!-- 3. Open Graph (بطاقة المشاركة) -->
+<!-- ===== Dublin Core ===== -->
+<meta name="DC.title" content="Page1 | سندباد اليمن" />
+<meta name="DC.creator" content="م/ عبدالله محمد ناصر الجبري" />
+<meta name="DC.subject" content="الرياضيات, الفيزياء النظرية, تراث اليمن" />
+<meta name="copyright" content="© 2026 م/ عبدالله محمد ناصر الجبري" />
+
+<!-- ===== Google ===== -->
+<meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+
+<!-- ===== Open Graph + Twitter ===== -->
 <meta property="og:locale" content="ar_YE">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="واحة الجبري | Heaven Al-Jabri">
-<meta property="og:title" content="واحة الجبري | Heaven Al-Jabri - تراث اليمن والسندباد">
-<meta property="og:description" content="باحث يمني في الرياضيات والفيزياء النظرية + توثيق التراث اليمني صنعاء شبام سقطرى + بوابة السندباد">
+<meta property="og:site_name" content="Page1 | سندباد اليمن">
+<meta property="og:title" content="Page1 | سندباد اليمن - Eng. Abdulla Al-Jabri">
+<meta property="og:description" content="المستودعات الرئيسية والأبحاث في الرياضيات والفيزياء النظرية">
 <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://jabri-com.vercel.app/">
-
-<!-- 4. Twitter Card -->
+<meta property="og:url" content="https://jabri-com.vercel.app/Page1.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="واحة الجبري | Heaven Al-Jabri">
-<meta name="twitter:description" content="تراث اليمن العريق وأبحاث الرياضيات والفيزياء">
+<meta name="twitter:title" content="Page1 | سندباد اليمن">
+<meta name="twitter:description" content="المستودعات الرئيسية والأبحاث">
 <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.png">
 
-<!-- 5. Schema.org JSON-LD (المُحسّن للصور والبطاقة الغنية) -->
+<!-- ===== Schema.org JSON-LD ===== -->
 <script type="application/ld+json">
-{ 
-"@context": "https://schema.org", 
-"@graph": [ 
-{ 
-"@type": "Person", 
-"@id": "https://jabri-com.vercel.app/#person", 
-"name": "م/ عبدالله محمد ناصر الجبري", 
-"alternateName": ["Eng. Abdulla Mohammed Nasser Al-Jabri", "Abdulla Al-Jabri"], 
-"url": "https://jabri-com.vercel.app/", 
-"image": "https://jabri-com.vercel.app/image/Jabri-photo.png",
-"jobTitle": "Researcher & Author",
-"nationality": "Yemeni",
-"email": "mailto:jabri62018@gmail.com",
-"sameAs": [
-  "https://jabri-com.vercel.app/",
-  "https://jabricom.vercel.app/",
-  "https://jabri-web.vercel.app/",
-  "https://jabri-web.github.io/",
-  "https://orcid.org/0009-0003-3319-3822",
-  "https://en.wikipedia.org/wiki/User:Jabri2026"
+{
+"@context": "https://schema.org",
+"@graph": [
+  {
+    "@type": "Person",
+    "@id": "https://jabri-com.vercel.app/#person",
+    "name": "م/ عبدالله محمد ناصر الجبري",
+    "alternateName": ["Eng. Abdulla Mohammed Nasser Al-Jabri", "Abdulla Al-Jabri"],
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "ORCID",
+      "value": "0009-0003-3319-3822",
+      "url": "https://orcid.org/0009-0003-3319-3822"
+    },
+    "url": "https://jabri-com.vercel.app/",
+    "image": "https://jabri-com.vercel.app/image/Jabri-photo.png",
+    "jobTitle": "Researcher, Author & Founder",
+    "nationality": "Yemeni",
+    "email": "mailto:jabri62018@gmail.com",
+    "sameAs": [
+      "https://orcid.org/0009-0003-3319-3822",
+      "https://github.com/jabri-web",
+      "https://en.wikipedia.org/wiki/User:Jabri2026"
+    ]
+  },
+  {
+    "@type": "WebPage",
+    "@id": "https://jabri-com.vercel.app/Page1.html#webpage",
+    "url": "https://jabri-com.vercel.app/Page1.html",
+    "name": "Page1 | سندباد اليمن",
+    "description": "المستودعات الرئيسية والأبحاث في الرياضيات والفيزياء النظرية",
+    "publisher": {"@id": "https://jabri-com.vercel.app/#person"},
+    "inLanguage": ["ar", "en"]
+  }
 ]
-}, 
-{ 
-"@type": "Organization", 
-"@id": "https://jabri-com.vercel.app/#org", 
-"name": "واحة الجبري", 
-"alternateName": "Heaven Al-Jabri", 
-"url": "https://jabri-com.vercel.app/", 
-"logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/image/Jabri-photo.png"}, 
-"founder": {"@id": "https://jabri-com.vercel.app/#person"} 
-},
-{ 
-"@type": "WebSite", 
-"@id": "https://jabri-com.vercel.app/#website", 
-"url": "https://jabri-com.vercel.app/", 
-"name": "واحة الجبري | Heaven Al-Jabri",
-"description": "منصة توثيق التراث اليمني وبوابة السندباد للأبحاث العلمية في الرياضيات والفيزياء النظرية",
-"publisher": {"@id": "https://jabri-com.vercel.app/#person"},
-"inLanguage": ["ar", "en"]
-},
-{ 
-"@type": "ImageObject",
-"contentUrl": "https://jabri-com.vercel.app/image/Jabri-photo.png",
-"description": "صورة الباحث اليمني م/ عبدالله محمد ناصر الجبري مؤسس واحة الجبري",
-"name": "Jabri-photo"
-},
-{ 
-"@type": "ImageObject",
-"contentUrl": "https://jabri-com.vercel.app/image/Yemen2026.png",
-"description": "خريطة وجمال تراث اليمن العريق - صنعاء شبام سقطرى",
-"name": "Yemen-Heritage-Map"
-} 
-] 
 }
 </script>
 
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdulla Al-Jabri</title>
+<!-- ===== Google Fonts ===== -->
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 body { background:#0a0a0f; color:#e8e8f0; font-family: "Tajawal", sans-serif; padding: 0; margin: 0; line-height: 1.8; }
 .header { text-align:center; padding: 40px 20px; background: #0a0a0a; margin-bottom:40px; border-bottom: 1px solid #1f1f2e; }
@@ -150,30 +118,34 @@ a:hover { text-decoration:underline; }
 </head>
 <body>
 
-<div class="offline-note">✓ مكتب أوفلاين محلي - شغال بدون نت</div>
+<!-- ===== الهيدر ===== -->
+<div id="header-placeholder"></div>
+
+<!-- ===== المحتوى ===== -->
+<div class="offline-note">✓ اهلا وسهلا بالزوار- Welcome></div>
 
 <div class="header">
-  <img src="Image/Jabri-photo.png" alt="Abdulla Al-Jabri">
+  <img src="/image/Jabri-photo.png" alt="Abdulla Al-Jabri">
   <h1>Eng. Abdulla Mohammed Nasser Al-Jabri</h1>
   <h2>م. عبدالله محمد ناصر الجبري</h2>
   <h2>Independent Researcher in Mathematics & Theoretical Physics</h2>
   <h2>باحث مستقل في الرياضيات والفيزياء النظرية</h2>
-  <a href="Page10.html" class="badge">Visit GitHub Profile</a>
+  <a href="Router-all.html" class="badge">Visit GitHub Profile</a>
 </div>
 
 <div class="container">
 
 <h3>Main Repositories / المستودعات الرئيسية</h3>
 <ul>
-  <li><a href="Page4.html">1. Jabri6218.github.io</a> <span class="desc">- Main Hub & P1 Page</span></li>
-  <li><a href="Page2.html">2. Zx_RieOS_v1.2</a> <span class="desc">- v1.2 Improved Algorithms</span></li>
-  <li><a href="Page3.html">3. Zx_Mother_Function_Jabri</a> <span class="desc">- Core Theory </span></li>
-  <li><a href="Router.html">4. Jabri-web.github.io</a> <span class="desc">- Organization Hub</span></li>
-  <li><a href="Page5.html">5. Jabri_Nobble</a> <span class="desc">- Zx_RiemannOS Archive</span></li>
-  <li><a href="Page6.html">6. jabri_lab</a> <span class="desc">- Zx Function & Millennium Problems</span></li>
-  <li><a href="Page7.html">7. Zx_RieOS_v1.1</a> <span class="desc">- v1.1 Numerical Validation</span></li>
-  <li><a href="Page8.html">8. Jabri_RiemannOS</a> <span class="desc">- Riemann Hypothesis </span></li>
-  <li><a href="Page9.html">9. Jabri_Checkout</a> <span class="desc">- Testing Scripts</span></li>
+  <li><a href="Jabri.html">1. Jabri6218.github.io</a> <span class="desc">- Main Hub & P1 Page</span></li>
+  <li><a href="Jabr.html">2. Zx_RieOS_v1.2</a> <span class="desc">- v1.2 Improved Algorithms</span></li>
+  <li><a href="Baleegh.html">3. Zx_Mother_Function_Jabri</a> <span class="desc">- Core Theory</span></li>
+  <li><a href="Sindbad.html">4. Jabri-web.github.io</a> <span class="desc">- Organization Hub</span></li>
+  <li><a href="Jabri_Nobble.html">5. Jabri_Nobble</a> <span class="desc">- Zx_RiemannOS Archive</span></li>
+  <li><a href="Jabri_lab.html">6. jabri_lab</a> <span class="desc">- Zx Function & Millennium Problems</span></li>
+  <li><a href="Code-os.html">7. Zx_RieOS_v1.1</a> <span class="desc">- v1.1 Numerical Validation</span></li>
+  <li><a href="Code.html">8. Jabri_RiemannOS</a> <span class="desc">- Riemann Hypothesis</span></li>
+  <li><a href="Check.html">9. Jabri_Checkout</a> <span class="desc">- Testing Scripts</span></li>
   <li><a href="Router-all.html">10. Jabri-web</a> <span class="desc">- This Page</span></li>
 </ul>
 
@@ -213,7 +185,7 @@ a:hover { text-decoration:underline; }
 <h3 style="color:#6ae3ff; text-align:center; margin-top:40px">Contact</h3>
 <p style="text-align:center; line-height:1.8">
   ORCID: <a href="https://orcid.org/0009-0003-3319-3822">0009-0003-3319-3822</a><br>
-  Email: <a href="jabri62018@gmail.com">jabri62018@gmail.com</a><br>
+  Email: <a href="mailto:jabri62018@gmail.com">jabri62018@gmail.com</a><br>
   Website: <a href="Router-all.html">jabri62018.github.io</a><br>
   Website: <a href="Page4.html">jabri-web.github.io</a>
 </p>
@@ -223,5 +195,13 @@ a:hover { text-decoration:underline; }
 <p class="center">CC BY 4.0 | Jabri Identity, Z + C + A = 1<br>From Sana'a to the Universe 🇾🇪</p>
 
 </div>
+
+<!-- ===== الفوتر ===== -->
+<div id="footer-placeholder"></div>
+
+<!-- ===== السكريبتات ===== -->
+<script src="/js/init-page-root.js"></script>
+<script src="/js/menu.js"></script>
+
 </body>
 </html>
