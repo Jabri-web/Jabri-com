@@ -1,7 +1,8 @@
 // ============================================================
 //   menu.js - القائمة الذكية الشاملة - واحة الجبري
-//   الإصدار: 5.0.0 - 18 أغسطس 2026
+//   الإصدار: 5.0.2 - 18 أغسطس 2026
 //   المستويات: العلوي (أساسيات) | الوسطى (نظرية) | السفلي (محادثات ديناميكي)
+//   جميع عناصر المحادثات قابلة للنقر وتفتح prompt
 // ============================================================
 
 (function() {
@@ -50,14 +51,13 @@
     // ============================================================
     //   📋 المستوى السفلي: المحادثات وسجلها (ديناميكي)
     // ============================================================
-    // يتم تحديث هذا القسم تلقائياً من localStorage
     let MENU_BOTTOM = [];
 
     // ===== دالة لجلب المحادثات من localStorage =====
     function getChatHistory() {
         try {
             const chats = JSON.parse(localStorage.getItem('jabri_chat_history') || '[]');
-            return chats.slice(0, 10); // آخر 10 محادثات
+            return chats.slice(0, 10);
         } catch(e) {
             return [];
         }
@@ -77,10 +77,8 @@
                 date: date,
                 timestamp: now.getTime()
             });
-            // الاحتفاظ بآخر 50 محادثة فقط
             if (chats.length > 50) chats.shift();
             localStorage.setItem('jabri_chat_history', JSON.stringify(chats));
-            // تحديث القائمة
             updateBottomMenu();
         } catch(e) {
             console.warn('⚠️ فشل حفظ المحادثة:', e);
@@ -95,22 +93,40 @@
             return {
                 name: `💬 ${summary}`,
                 nameEn: `💬 ${summary}`,
-                href: `#chat-${index}`,
+                href: '#',
                 icon: '💬',
                 isChat: true,
                 chatData: chat
             };
         });
 
-        // إذا لم تكن هناك محادثات، نضع رسالة افتراضية
         if (MENU_BOTTOM.length === 0) {
             MENU_BOTTOM = [
-                { name: '💬 لا توجد محادثات بعد', nameEn: '💬 No chats yet', href: '#', icon: '💬', isChat: true },
+                { name: '💬 اضغط هنا لبدء المحادثة', nameEn: '💬 Click here to start chatting', href: '#', icon: '💬', isChat: true },
             ];
         }
 
-        // إعادة بناء القائمة المنسدلة
         buildDropdownMenu();
+        buildMainMenu();
+    }
+
+    // ============================================================
+    //   📋 بناء عنصر القائمة (مع دعم النقر للمحادثات)
+    // ============================================================
+    function buildMenuItem(item) {
+        const isActive = window.location.pathname.includes(item.href.split('/').pop()) && item.href !== '#';
+        const activeStyle = isActive ? 'background:rgba(255,215,0,0.08);border-right:3px solid #ffd700;' : '';
+        
+        // عناصر المحادثات تفتح prompt
+        const isChatItem = item.isChat === true;
+        const onClick = isChatItem ? ` onclick="window.openChatPrompt(); return false;"` : '';
+        const cursor = isChatItem ? 'cursor:pointer;' : '';
+        
+        return `
+            <a href="${item.href}"${onClick} style="color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;display:flex;align-items:center;gap:8px;transition:0.3s;border-bottom:1px solid rgba(255,215,0,0.03);font-size:0.85rem;${activeStyle}${cursor}">
+                <span style="font-size:1rem;">${item.icon || '📄'}</span> ${isArabic ? item.name : item.nameEn}
+            </a>
+        `;
     }
 
     // ============================================================
@@ -141,20 +157,10 @@
         // ---- المستوى السفلي: المحادثات (ديناميكي) ----
         html += `<div class="menu-section" style="border-bottom:2px solid rgba(255,106,106,0.2); padding-bottom:8px; margin-bottom:10px;">`;
         html += `<div style="color:#ff6a6a; font-size:0.7rem; font-weight:bold; letter-spacing:1px; margin-bottom:4px;">💬 ${isArabic ? 'آخر المحادثات' : 'Recent Chats'} <span style="font-size:0.6rem; opacity:0.6;">(${MENU_BOTTOM.length})</span></div>`;
-        if (MENU_BOTTOM.length === 0) {
-            // المحادثات الافتراضية
-            const defaultChats = [
-                { name: '💬 مرحباً بك في واحة الجبري', nameEn: '💬 Welcome to Al-Jabri Oasis', href: '#', icon: '💬' },
-                { name: '💬 كيف يمكنني مساعدتك؟', nameEn: '💬 How can I help you?', href: '#', icon: '💬' },
-            ];
-            defaultChats.forEach(item => {
-                html += buildMenuItem(item);
-            });
-        } else {
-            MENU_BOTTOM.forEach(item => {
-                html += buildMenuItem(item);
-            });
-        }
+        
+        MENU_BOTTOM.forEach(item => {
+            html += buildMenuItem(item);
+        });
         html += `</div>`;
 
         // ---- إضافات ----
@@ -186,17 +192,6 @@
 
         nav.innerHTML = html;
         highlightActiveLink();
-    }
-
-    // ===== دالة مساعدة لبناء عنصر قائمة =====
-    function buildMenuItem(item) {
-        const isActive = window.location.pathname.includes(item.href.split('/').pop()) && item.href !== '#';
-        const activeStyle = isActive ? 'background:rgba(255,215,0,0.08);border-right:3px solid #ffd700;' : '';
-        return `
-            <a href="${item.href}" style="color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;display:flex;align-items:center;gap:8px;transition:0.3s;border-bottom:1px solid rgba(255,215,0,0.03);font-size:0.85rem;${activeStyle}">
-                <span style="font-size:1rem;">${item.icon || '📄'}</span> ${isArabic ? item.name : item.nameEn}
-            </a>
-        `;
     }
 
     function highlightActiveLink() {
@@ -257,8 +252,8 @@
         
         if (MENU_BOTTOM.length === 0) {
             html += `
-                <div style="color:#666; padding:5px 10px; font-size:0.75rem; text-align:center;">
-                    ${isArabic ? 'لا توجد محادثات بعد' : 'No chats yet'}
+                <div onclick="window.openChatPrompt(); return false;" style="padding:4px 10px; border-radius:6px; border-bottom:1px solid rgba(255,106,106,0.05); font-size:0.75rem; color:#ff6a6a; cursor:pointer; text-align:center; transition:0.3s;">
+                    💬 ${isArabic ? 'اضغط هنا لبدء المحادثة' : 'Click here to start chatting'}
                 </div>
             `;
         } else {
@@ -266,7 +261,7 @@
                 const chat = item.chatData || {};
                 const time = chat.time || '';
                 html += `
-                    <div style="padding:4px 10px; border-radius:6px; border-bottom:1px solid rgba(255,106,106,0.05); font-size:0.75rem; color:#ccc; display:flex; justify-content:space-between; align-items:center;">
+                    <div onclick="window.openChatPrompt(); return false;" style="padding:4px 10px; border-radius:6px; border-bottom:1px solid rgba(255,106,106,0.05); font-size:0.75rem; color:#ccc; display:flex; justify-content:space-between; align-items:center; cursor:pointer; transition:0.3s;">
                         <span style="flex:1;">💬 ${isArabic ? chat.message || item.name : chat.message || item.nameEn}</span>
                         <span style="font-size:0.6rem; color:#666; margin-right:8px;">${time}</span>
                     </div>
@@ -296,7 +291,6 @@
     //   🍔 زر القائمة المنسدلة
     // ============================================================
     function buildHamburgerMenu() {
-        // حذف الزر القديم إن وجد
         const oldMenu = document.getElementById('hamburger-menu');
         if (oldMenu) oldMenu.remove();
         const oldDropdown = document.getElementById('menu-dropdown');
@@ -363,10 +357,8 @@
         document.body.appendChild(menuContainer);
         document.body.appendChild(dropdown);
 
-        // بناء محتوى القائمة
         buildDropdownMenu();
 
-        // التحكم في الفتح/الإغلاق
         let isOpen = false;
         let closeTimer;
 
@@ -395,20 +387,52 @@
             }
         });
 
-        // تأثيرات hover
-        dropdown.querySelectorAll('a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                link.style.background = 'rgba(255, 215, 0, 0.08)';
-                link.style.color = '#ffd700';
-                link.style.transform = isArabic ? 'translateX(-4px)' : 'translateX(4px)';
+        dropdown.querySelectorAll('a, div[onclick]').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.background = 'rgba(255, 215, 0, 0.08)';
+                el.style.color = '#ffd700';
             });
-            link.addEventListener('mouseleave', () => {
-                link.style.background = 'transparent';
-                link.style.color = '#fff';
-                link.style.transform = 'translateX(0)';
+            el.addEventListener('mouseleave', () => {
+                el.style.background = 'transparent';
+                el.style.color = el.tagName === 'A' ? '#fff' : '';
             });
         });
     }
+
+    // ============================================================
+    //   💬 فتح محادثة جديدة مع prompt
+    // ============================================================
+    window.openChatPrompt = function() {
+        const message = prompt('💬 اكتب رسالتك:');
+        if (message && message.trim()) {
+            if (window.saveChat) {
+                window.saveChat(message.trim(), 'زائر');
+                alert('✅ تم إرسال رسالتك بنجاح!');
+            } else {
+                try {
+                    const chats = JSON.parse(localStorage.getItem('jabri_chat_history') || '[]');
+                    const now = new Date();
+                    const time = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+                    const date = now.toLocaleDateString('ar-EG');
+                    chats.push({
+                        sender: 'زائر',
+                        message: message.trim(),
+                        time: time,
+                        date: date,
+                        timestamp: now.getTime()
+                    });
+                    if (chats.length > 50) chats.shift();
+                    localStorage.setItem('jabri_chat_history', JSON.stringify(chats));
+                    if (window.updateChatMenu) {
+                        window.updateChatMenu();
+                    }
+                    alert('✅ تم إرسال رسالتك بنجاح!');
+                } catch (e) {
+                    alert('❌ فشل إرسال الرسالة: ' + e.message);
+                }
+            }
+        }
+    };
 
     // ============================================================
     //   🎵 التحكم في الموسيقى
@@ -499,10 +523,8 @@
                 isArabic = false;
                 localStorage.setItem('jabri_lang', 'en');
             }
-            // تحديث القائمة
             buildMainMenu();
             buildDropdownMenu();
-            // تحديث زر القائمة
             const menuBtn = document.getElementById('hamburger-menu');
             if (menuBtn) {
                 const span = menuBtn.querySelector('span:last-child');
@@ -520,9 +542,8 @@
     }
 
     // ============================================================
-    //   📝 تحديث القائمة السفلية ديناميكياً
+    //   📝 تحديث القائمة السفلية ديناميكياً (كل 30 ثانية)
     // ============================================================
-    // تحديث كل 30 ثانية
     setInterval(() => {
         updateBottomMenu();
     }, 30000);
@@ -531,30 +552,25 @@
     //   🚀 التهيئة النهائية
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🌴 menu.js v5.0.0 - القائمة الذكية ثلاثية المستويات');
+        console.log('🌴 menu.js v5.0.2 - القائمة الذكية مع المحادثات');
 
-        // تحديث القائمة السفلية
         updateBottomMenu();
-
-        // بناء القائمة الرئيسية
         buildMainMenu();
-
-        // تهيئة المكونات الأخرى
         initMusic();
         initVisitorCounter();
         initLanguageSwitcher();
-
-        // بناء زر القائمة المنسدلة
         buildHamburgerMenu();
 
         console.log('📅 18 أغسطس 2026');
         console.log('📜 Zx = Z + C + A | Z + C + A = 1');
         console.log('🧮 Z(x) = x^5 ln(x) sin(2π/x) exp(-x/xp)');
         console.log('🇾🇪 اليمن - صنعاء');
-        console.log('💬 القائمة السفلية ديناميكية - عدد المحادثات:', MENU_BOTTOM.length);
+        console.log('💬 المحادثات:', MENU_BOTTOM.length);
     });
 
-    // جعل الدوال عامة
+    // ============================================================
+    //   جعل الدوال عامة
+    // ============================================================
     window.updateChatMenu = updateBottomMenu;
     window.saveChat = window.saveChatMessage;
 
