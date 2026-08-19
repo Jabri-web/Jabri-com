@@ -38,6 +38,8 @@
         { name: 'سقطرى', nameEn: 'Socotra', href: `${langDir}/Soqatra.html`, icon: '🌴' },
         { name: 'المجلة', nameEn: 'Journal', href: `${langDir}/journal.html`, icon: '📰' },
         { name: 'تجربتي مع الـ AI', nameEn: 'My AI Experience', href: `${langDir}/journal2.html`, icon: '🤖' },
+        { name: 'فهرس مشاريع الجبري', nameEn: 'Jabri Projects', href: `${langDir}/jabri-projects.html`, icon: '🤖' },
+
     ];
 
     // ============================================================
@@ -198,11 +200,11 @@
 
     function highlightActiveLink() {
         const links = document.querySelectorAll('#main-menu a');
-        const current = window.location.pathname.split('/').pop() || 'index.html';
+        const current = window.location.pathname.split('/').pop() || 'Page11.html';
 
         links.forEach(link => {
             const href = link.getAttribute('href').split('/').pop();
-            if (href === current || (current === '' && href === 'index.html')) {
+            if (href === current || (current === '' && href === 'Page11.html')) {
                 link.style.background = 'rgba(255, 215, 0, 0.08)';
                 link.style.borderRight = '3px solid #ffd700';
                 link.style.color = '#ffd700';
