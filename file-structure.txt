@@ -1,112 +1,173 @@
-============================================================
-                    واحة الجبري | Heaven Al-Jabri
-                   هيكل الملفات الكامل للمشروع
-============================================================
+================================================================================
+هيكل الملفات - واحة الجبري (الإمبراطورية الرقمية)
+File Structure - Heaven Al-Jabri (Digital Empire)
+================================================================================
+📅 تاريخ التحديث: 21 أغسطس 2026
+📂 المستودع الرئيسي: github.com/Jabri-web
+🌐 الموقع: https://jabri-com.vercel.app/
+================================================================================
 
-الجذر (Root)
-│
-├── index.html                      # الصفحة الرئيسية (الواحة)
-├── journal.html                    # صفحة رسالة قوقل
-├── Sanaa.html                      # صفحة صنعاء
-├── Shibam.html                     # صفحة شبام
-├── Soqatra.html                    # صفحة سقطرى
-├── research.html                   # صفحة البحوث
-├── Office.html                     # صفحة المكتبة
-├── Author-cv.html                  # صفحة السيرة الذاتية
-├── about.html                      # صفحة عن الواحة
-├── author-history.html             # صفحة قصة الباحث
-├── Nezar.html                      # صفحة يا تونس الخضراء
-├── Sindbad-Brdoni.html             # صفحة السندباد اليمني
-│
-├── Page1.html                      # مشروع سندباد اليمن
-├── Page2.html                      # مشروع طائر اليمن
-├── Page3.html                      # مشروع عنكبوت اليمن
-├── Page4.html                      # مشروع مكتبي وبحوثي
-├── Page6.html                      # مشروع مختبر الجبري
-├── Page7.html                      # مشروع RieOS v1.1
-├── Page8.html                      # مشروع RiemannOS
-├── Page9.html                      # مشروع Jabri Checkout
-├── Page11.html                     # مشروع Jabri-com
-├── Page12.html                     # مشروع Jabri.com
-│
-├── Router-all.html                 # صفحة Jabri-web (الموجه)
-│
-├── Yemen-library.html              # مكتبة اليمن
-├── Pages-Researches.html           # صفحات وبحوث
-├── History-pdf.html                # كتب التاريخ
-├── Dbase.html                      # قواعد البيانات
-├── yemen-photo.html                # السياحة في اليمن
-├── research-deep.html              # البحوث المتعمقة
-├── FAQPage.html                    # الأسئلة الشائعة
-├── microtik-deep.html              # المايكروتك للمحترفين
-│
-├── citations.html                  # صفحة الاستشهادات
-├── source.html                     # صفحة المصادر
-├── who-we.html                     # صفحة من نحن
-├── contact.html                    # صفحة اتصل بنا
-├── music.html                      # صفحة الموسيقى
-├── visitor.html                    # صفحة الزوار
-│
-├── ar/                             # المجلد العربي
-│   └── author-history.html         # قصة الباحث - عربي
-│
-├── en/                             # المجلد الإنجليزي
-│   └── author-history.html         # Author History - EN
-│
-├── image/                          # مجلد الصور والميديا
-│   ├── Jabri-photo.webp            # صورة الباحث الرئيسية
-│   ├── Jabri-photo.png             # صورة الباحث (نسخة احتياطية)
-│   ├── door.webp                   # باب اليمن
-│   ├── water1.webp                 # حضرموت - الغنة
-│   ├── water2.webp                 # صهاريج عدن
-│   ├── Yemen-photo1.png            # صورة اليمن 1
-│   ├── Yemen2026.png               # خريطة اليمن 2026
-│   ├── id1.webp                    # صورة الفصل الأول
-│   ├── id2.webp                    # صورة الفصل الثاني
-│   ├── id3.webp                    # صورة الفصل الثالث
-│   ├── heaven1.mp4                 # فيديو 1
-│   ├── heaven2.mp4                 # فيديو 2
-│   ├── heaven3.mp4                 # فيديو 3
-│   └── music.mp3                   # ملف الموسيقى الأساسي
-│
-├── js/                             # مجلد السكريبتات
-│   ├── init-page-root.js           # المكتبة الأساسية للواحة
-│   └── menu.js                     # القائمة الذكية المتعددة اللغات
-│
-├── papers/                         # مجلد الأبحاث (PDF)
-│   └── sindbad-theory.pdf          # نظرية السندباد الموحدة
-│
-├── vercel.json                     # إعدادات Vercel
-├── file-structure.txt              # هذا الملف (هيكل المشروع)
-│
-└── README.md                       # ملف التعريف بالمشروع
+📁 الجذر (Root) - 54 ملف HTML
+================================================================================
+├── 📄 404.html
+├── 📄 about.html
+├── 📄 all-links.html ⭐ (الخريطة الشاملة - Master Sitemap)
+├── 📄 ar-page.html
+├── 📄 contact.html
+├── 📄 Dbase-deep.html
+├── 📄 Dbase.html
+├── 📄 en-page.html
+├── 📄 FAQPage-en.html
+├── 📄 FAQPage.html
+├── 📄 file-structure.html (هذا الملف نفسه - النسخة التفاعلية)
+├── 📄 footer.html
+├── 📄 header-me.html
+├── 📄 header.html
+├── 📄 History-pdf.html
+├── 📄 journal.html
+├── 📄 journal2.html
+├── 📄 journal3.html
+├── 📄 kfupm-msg.html
+├── 📄 magic-translator.html
+├── 📄 microtik-deep.html
+├── 📄 Nezar.html
+├── 📄 Office.html
+├── 📄 Page1.html
+├── 📄 Page10.html
+├── 📄 Page11.html
+├── 📄 Page12.html
+├── 📄 Page2.html
+├── 📄 Page4.html
+├── 📄 Page5.html
+├── 📄 Page6.html
+├── 📄 Page7.html
+├── 📄 Page8.html
+├── 📄 Page9.html
+├── 📄 Pages-Researches.html
+├── 📄 privacy-policy.html
+├── 📄 profile-en.html
+├── 📄 profile.html
+├── 📄 project-ar.html
+├── 📄 project.html
+├── 📄 research-deep.html
+├── 📄 research.html
+├── 📄 Router-all.html
+├── 📄 Sanaa.html
+├── 📄 Shibam.html
+├── 📄 Sindbad-Brdoni.html
+├── 📄 Soqatra.html
+├── 📄 source.html
+├── 📄 theory-ar.html
+├── 📄 theory-en.html
+├── 📄 visitor.html
+├── 📄 who-we.html
+├── 📄 Yemen-library.html
+└── 📄 yemen-photo.html
 
-============================================================
-                    الإحصائيات
-============================================================
+================================================================================
+📂 المجلدات الفرعية (Subdirectories)
+================================================================================
 
-عدد ملفات HTML:    38
-عدد ملفات JS:      2
-عدد ملفات الصور:   11
-عدد ملفات الفيديو: 3
-عدد ملفات الصوت:   1
-عدد المجلدات:      4
+📁 /js/ (الملفات البرمجية - 7 ملفات)
+├── 📄 init-page-ar.js
+├── 📄 init-page-en.js
+├── 📄 init-page-root-old.js
+├── 📄 init-page-root.js
+├── 📄 init-page.js
+├── 📄 language-switcher.js ⭐ (مفتاح تبديل اللغة)
+└── 📄 menu.js
 
-المجموع الكلي:     59 ملفاً
+📁 /image/ (الوسائط المتعددة - 37 ملفاً)
+├── 🖼️ Zx_Equation.png
+├── 🖼️ Zx_Equations.png
+├── 🖼️ door.webp
+├── 🎥 heaven.mp4
+├── 🎥 heaven1.mp4
+├── 🎥 heaven2.mp4
+├── 🎥 heaven3.mp4
+├── 🎥 heaven4.mp4
+├── 🎥 heaven5.mp4
+├── 🖼️ id1.webp
+├── 🖼️ id2.webp
+├── 🖼️ id3.webp
+├── 🖼️ Jabri_photo.png
+├── 🖼️ Khaled2026.png
+├── 🖼️ Khaled20261.png
+├── 🖼️ Khaled20264.png
+├── 🖼️ Mostfa2026.png
+├── 🖼️ Sanaa2026.png
+├── 🖼️ Shamlan2026.png
+├── 🖼️ Sogatra2026.png
+├── 🖼️ Soqatra2026.png
+├── 🖼️ Yemen-bird.png
+├── 🖼️ Yemen-photo1.png
+├── 🖼️ Yemen-photo2.png
+├── 🖼️ Yemen-photo3.png
+├── 🖼️ Ameen20261.png
+├── 🖼️ Ameen20262.png
+├── 🖼️ Ameen20263.png
+├── 🖼️ Baleegh.png
+├── 🖼️ Baleegh2026.png
+├── 🖼️ Farah2026.png
+├── 🖼️ Farah26.png
+├── 🖼️ Jabr2026.png
+├── 🖼️ Jabri-photo.png
+├── 🖼️ Jabri-photo.webp
+├── 🖼️ Jabri-photo2.webp
+└── 📄 Jabri.txt (ملاحظات أو وصف للصور)
 
-============================================================
-                    الروابط الرئيسية
-============================================================
+📁 /ar/ (النسخة العربية - 25 ملفاً - قيد الرفع)
+📁 /en/ (النسخة الإنجليزية - 9 ملفات - قيد الرفع)
 
-الموقع:            https://jabri-com.vercel.app/
-GitHub:            https://github.com/jabri-web
-ORCID:             https://orcid.org/0009-0003-3319-3822
-Zenodo:            https://zenodo.org/records/20513840
+================================================================================
+📊 الإحصاء النهائي (Final Statistics)
+================================================================================
+✅ الجذر (Root) : 54 ملفاً
+✅ /js/ : 7 ملفات
+✅ /image/ : 37 ملفاً
+⏳ /ar/ : 25 ملفاً (متبقي)
+⏳ /en/ : 9 ملفات (متبقي)
+--------------------------------------------------------------------------------
+📦 المجموع الكلي المتوقع : 54 + 7 + 37 + 25 + 9 = 132 ملفاً
+================================================================================
+🗺️ هذه الخريطة هي البوصلة الرقمية لكل مسارات واحة الجبري.
+📌 آخر تحديث: 21 أغسطس 2026 - تم إضافة 37 ملف وسائط في /image/
+================================================================================
 
-============================================================
-                    حقوق النشر
-============================================================
 
-© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة
+================================================================================
+المستودعات المرتبطة (Associated Repositories)
+================================================================================
+📦 المستودع الرئيسي (النشر على Vercel):
+🔗 https://github.com/Jabri-web
 
-============================================================
+📦 المستودعات الفرعية (نظريات ومشاريع متقدمة):
+🧮 Jabri_Nobble (7 مشاريع فرعية):
+- Jabri_Riemann
+- Jabri_np
+- Jabri_gab
+- Jabri_Navier
+- Jabri_Birch
+- Jabri_Hodge
+- Jabri_Identity
+🔭 Jabri_lab (9 مشاريع فرعية):
+- Jabri_5
+- Jabri_28
+- Jabri_Gravity
+- Jabri_Spacetime
+- Jabri_Darkenergy
+- Jabri_Planck
+- Jabri_Hubble
+- Jabri_Periodic
+- Jabri_all
+
+📦 المستودعات الأرشيفية (نسخ احتياطية):
+- jabri62018.github.io
+- Jabri-web.github.io
+- Zx_RieOS_v1.2
+- Zx_RieOS_v1.1
+- Jabri_RiemannOS
+- Jabri_Checkout
+- jabri-com
+- jabri.com
+================================================================================
