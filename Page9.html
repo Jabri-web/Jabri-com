@@ -316,8 +316,6 @@
         <span id="visitorCountDisplay">1</span>
     </div>
 
-    <!-- ===== المحتوى ===== -->
-    <div id="header-placeholder"></div>
 
     <div class="container">
         <header class="header">
@@ -398,269 +396,342 @@
         </div>
 
         <!-- ===== الفوتر ===== -->
-    </div>
+        <div 
 
-    <!-- ====================================================================== -->
-    <!-- السكربتات -->
-    <!-- ====================================================================== -->
-    <script>
-        // ===== توليد الروابط =====
-        function generateLinks() {
-            const pageContainer = document.getElementById('pageLinks');
-            const pages = [];
-            for (let i = 1; i <= 12; i++) {
-                pages.push(`Page${i}.html`);
-            }
-            pageContainer.innerHTML = pages.map(p => 
-                `<a href="/${p}" target="_blank" data-page="${p}">📄 ${p}</a>`
-            ).join('');
 
-            const repoContainer = document.getElementById('repoLinks');
-            const repos = [
-                'Jabri-web', 'Jabri_RiemannOS', 'Zx_Mother_Function_Jabri',
-                'Jabri_Nobble', 'Jabri_Checkout', 'Jabri_Archive'
-            ];
-            repoContainer.innerHTML = repos.map(r =>
-                `<a href="https://github.com/jabri-web/${r}" target="_blank">📁 ${r}</a>`
-            ).join('');
-            document.getElementById('repoCount').innerText = repos.length;
-            document.getElementById('repoCountEn').innerText = repos.length;
+<!-- ====================================================================== -->
+<!-- السكربتات المحدثة والمطورة -->
+<!-- ====================================================================== -->
+<script>
+    // ===== توليد الروابط =====
+    function generateLinks() {
+        const pageContainer = document.getElementById('pageLinks');
+        const pages = [];
+        for (let i = 1; i <= 12; i++) {
+            pages.push(`Page${i}.html`);
         }
+        pageContainer.innerHTML = pages.map(p => 
+            `<a href="/${p}" target="_blank" data-page="${p}">📄 ${p}</a>`
+        ).join('');
 
-        // ===== تسجيل السجل =====
-        function addLog(msg, type = 'info') {
-            const box = document.getElementById('logBox');
-            const colors = {
-                ok: 'log-ok',
-                fail: 'log-fail',
-                warn: 'log-warn',
-                info: 'log-info'
-            };
-            const cls = colors[type] || 'log-info';
-            const time = new Date().toLocaleTimeString();
-            box.innerHTML += `<div class="${cls}">[${time}] ${msg}</div>`;
-            box.scrollTop = box.scrollHeight;
-        }
+        const repoContainer = document.getElementById('repoLinks');
+        const repos = [
+            'Jabri-web', 'Jabri_RiemannOS', 'Zx_Mother_Function_Jabri',
+            'Jabri_Nobble', 'Jabri_Checkout', 'Jabri_Archive'
+        ];
+        repoContainer.innerHTML = repos.map(r =>
+            `<a href="https://github.com/jabri-web/${r}" target="_blank">📁 ${r}</a>`
+        ).join('');
+        document.getElementById('repoCount').innerText = repos.length;
+        document.getElementById('repoCountEn').innerText = repos.length;
+    }
 
-        function clearLogs() {
-            document.getElementById('logBox').innerHTML = '';
-            document.getElementById('resultBody').innerHTML = '';
-            document.getElementById('progressFill').style.width = '0%';
-            addLog('🗑️ <span class="ar">تم مسح السجل</span><span class="en">Logs cleared</span>', 'info');
-        }
+    // ===== تسجيل السجل =====
+    function addLog(msg, type = 'info') {
+        const box = document.getElementById('logBox');
+        const colors = {
+            ok: 'log-ok',
+            fail: 'log-fail',
+            warn: 'log-warn',
+            info: 'log-info'
+        };
+        const cls = colors[type] || 'log-info';
+        const time = new Date().toLocaleTimeString();
+        box.innerHTML += `<div class="${cls}">[${time}] ${msg}</div>`;
+        box.scrollTop = box.scrollHeight;
+    }
 
-        // ===== فحص صفحة =====
-        function checkPage(url) {
-            return new Promise((resolve) => {
-                const start = performance.now();
-                fetch(url, { method: 'HEAD', cache: 'no-cache' })
-                    .then(res => {
-                        const time = Math.round(performance.now() - start);
-                        resolve({ url, status: res.status, time, ok: res.ok });
-                    })
-                    .catch(() => {
-                        const time = Math.round(performance.now() - start);
-                        resolve({ url, status: 404, time, ok: false });
-                    });
-            });
-        }
+    function clearLogs() {
+        document.getElementById('logBox').innerHTML = '';
+        document.getElementById('resultBody').innerHTML = '';
+        document.getElementById('progressFill').style.width = '0%';
+        addLog('🗑️ <span class="ar">تم مسح السجل</span><span class="en">Logs cleared</span>', 'info');
+    }
 
-        // ===== فحص شامل =====
-        async function runFullScan() {
-            const btn = document.getElementById('runFullScan');
-            btn.disabled = true;
-            btn.innerHTML = '⏳ <span class="ar">جاري الفحص...</span><span class="en">Scanning...</span>';
-            document.getElementById('resultBody').innerHTML = '';
-            clearLogs();
-            addLog('🚀 <span class="ar">بدء الفحص الشامل...</span><span class="en">Starting full scan...</span>', 'info');
-
-            const progress = document.getElementById('progressFill');
-            const results = [];
-            const pages = [];
-            for (let i = 1; i <= 12; i++) pages.push(`Page${i}.html`);
-
-            // إضافة صفحات النظرية
-            pages.push('theory-ar.html', 'theory-en.html', 'Checkout.html', 'Check.html');
-
-            let completed = 0;
-            const total = pages.length;
-
-            for (const page of pages) {
-                const url = `/${page}`;
-                const result = await checkPage(url);
-                results.push(result);
-                completed++;
-                progress.style.width = `${(completed / total) * 100}%`;
-                
-                const statusText = result.ok ? '✅' : '❌';
-                const statusClass = result.ok ? 'pass' : 'fail';
-                addLog(`${statusText} ${page} — ${result.status} (${result.time}ms)`, result.ok ? 'ok' : 'fail');
-
-                // تحديث الجدول
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${page}</td>
-                    <td class="${statusClass}">${result.status}</td>
-                    <td>${result.time}</td>
-                    <td class="${statusClass}">${result.ok ? '✔️' : '❌'}</td>
-                `;
-                document.getElementById('resultBody').appendChild(row);
-            }
-
-            // إحصاءات
-            const okCount = results.filter(r => r.ok).length;
-            const failCount = results.filter(r => !r.ok).length;
-            const avgTime = Math.round(results.reduce((sum, r) => sum + r.time, 0) / results.length);
-
-            addLog(`📊 <span class="ar">النتيجة النهائية: ✅ ${okCount} ناجح | ❌ ${failCount} فاشل | ⏱️ متوسط ${avgTime}ms</span><span class="en">Final: ✅ ${okCount} passed | ❌ ${failCount} failed | ⏱️ Avg ${avgTime}ms</span>`, 'info');
-
-            btn.disabled = false;
-            btn.innerHTML = '🚀 <span class="ar">فحص شامل</span><span class="en">Full Scan</span>';
-            progress.style.width = '100%';
-        }
-
-        // ===== اختبار السرعة =====
-        async function runSpeedTest() {
-            const btn = document.getElementById('runSpeedTest');
-            btn.disabled = true;
-            addLog('⚡ <span class="ar">اختبار السرعة...</span><span class="en">Speed test...</span>', 'info');
-
-            const urls = [
-                '/', '/Sanaa.html', '/Shibam.html', '/Soqatra.html',
-                '/theory-ar.html', '/theory-en.html', '/Checkout.html'
-            ];
-            const results = [];
-            for (const url of urls) {
-                const start = performance.now();
-                try {
-                    await fetch(url, { cache: 'no-cache' });
+    // ===== فحص صفحة =====
+    function checkPage(url) {
+        return new Promise((resolve) => {
+            const start = performance.now();
+            fetch(url, { method: 'HEAD', cache: 'no-cache' })
+                .then(res => {
                     const time = Math.round(performance.now() - start);
-                    results.push({ url, time, ok: true });
-                    addLog(`⚡ ${url} — ${time}ms`, 'ok');
-                } catch {
+                    resolve({ url, status: res.status, time, ok: res.ok });
+                })
+                .catch(() => {
                     const time = Math.round(performance.now() - start);
-                    results.push({ url, time, ok: false });
-                    addLog(`❌ ${url} — فشل (${time}ms)`, 'fail');
-                }
-            }
-
-            const avg = Math.round(results.reduce((s, r) => s + r.time, 0) / results.length);
-            const fastest = Math.min(...results.map(r => r.time));
-            const slowest = Math.max(...results.map(r => r.time));
-            addLog(`📊 <span class="ar">السرعة: المتوسط ${avg}ms | الأسرع ${fastest}ms | الأبطأ ${slowest}ms</span><span class="en">Speed: Avg ${avg}ms | Fastest ${fastest}ms | Slowest ${slowest}ms</span>`, 'info');
-            btn.disabled = false;
-        }
-
-        // ===== فحص 404 =====
-        async function run404Test() {
-            const btn = document.getElementById('run404Test');
-            btn.disabled = true;
-            addLog('🚨 <span class="ar">فحص 404...</span><span class="en">404 check...</span>', 'warn');
-
-            const testUrls = [
-                '/nonexistent.html',
-                '/fake-page',
-                '/wrong-path',
-                '/missing-file.js',
-                '/invalid.css'
-            ];
-            let found404 = 0;
-            for (const url of testUrls) {
-                const result = await checkPage(url);
-                if (result.status === 404) {
-                    found404++;
-                    addLog(`🚨 404 تم كشفه: ${url}`, 'warn');
-                } else {
-                    addLog(`✅ ${url} — ${result.status}`, 'ok');
-                }
-            }
-            addLog(`📊 <span class="ar">تم كشف ${found404} من ${testUrls.length} روابط 404</span><span class="en">Found ${found404} of ${testUrls.length} 404 links</span>`, found404 > 0 ? 'warn' : 'ok');
-            btn.disabled = false;
-        }
-
-        // ===== تبديل اللغة =====
-        function toggleLang() {
-            const html = document.documentElement;
-            const newLang = html.lang === 'ar' ? 'en' : 'ar';
-            html.lang = newLang;
-            html.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-            document.body.classList.toggle('en', newLang === 'en');
-            localStorage.setItem('preferred-language', newLang);
-            // تحديث نصوص .txt
-            document.querySelectorAll('.txt').forEach(el => {
-                el.textContent = newLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ar');
-            });
-            // تحديث footer
-            if (typeof updateFooterLang === 'function') updateFooterLang();
-        }
-
-        // ===== عداد الزوار =====
-        (function() {
-            let count = parseInt(localStorage.getItem('jabri_visitor_count_checkout') || '0');
-            count += 1;
-            localStorage.setItem('jabri_visitor_count_checkout', count);
-            document.getElementById('visitorCountDisplay').innerText = count;
-        })();
-
-        // ===== تشغيل الموسيقى =====
-        (function() {
-            const music = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicToggle');
-            if (!music || !btn) return;
-            let isPlaying = false;
-            music.volume = 0.3;
-            btn.addEventListener('click', function() {
-                if (isPlaying) {
-                    music.pause();
-                    btn.innerHTML = '🎵';
-                    btn.classList.remove('playing');
-                    isPlaying = false;
-                } else {
-                    music.play().then(() => {
-                        btn.innerHTML = '🔊';
-                        btn.classList.add('playing');
-                        isPlaying = true;
-                    }).catch(() => {});
-                }
-            });
-            document.addEventListener('click', function firstInteraction() {
-                if (!isPlaying) {
-                    music.play().then(() => {
-                        btn.innerHTML = '🔊';
-                        btn.classList.add('playing');
-                        isPlaying = true;
-                    }).catch(() => {});
-                }
-                document.removeEventListener('click', firstInteraction);
-            });
-        })();
-
-        // ===== ربط الأزرار =====
-        document.addEventListener('DOMContentLoaded', function() {
-            generateLinks();
-            document.getElementById('runFullScan').addEventListener('click', runFullScan);
-            document.getElementById('runSpeedTest').addEventListener('click', runSpeedTest);
-            document.getElementById('run404Test').addEventListener('click', run404Test);
-            document.getElementById('clearLogs').addEventListener('click', clearLogs);
-
-            // استعادة اللغة
-            const savedLang = localStorage.getItem('preferred-language') || 'ar';
-            document.documentElement.lang = savedLang;
-            document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
-            document.body.classList.toggle('en', savedLang === 'en');
-            document.querySelectorAll('.txt').forEach(el => {
-                el.textContent = savedLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ar');
-            });
-
-            console.log('🔍 نظام فحص الواحة جاهز');
-            console.log('📄 12 صفحة + 6 ريبوهات');
-            console.log('🇾🇪 من صنعاء إلى الكون');
+                    resolve({ url, status: 404, time, ok: false });
+                });
         });
-    </script>
+    }
 
-    <!-- تحميل الهيدر والفوتر -->
+    // ===== [جديد] فحص هيكلة الملفات آلياً =====
+    async function checkStructure() {
+        addLog('📂 <span class="ar">جاري التحقق من هيكلة الملفات...</span><span class="en">Checking file structure...</span>', 'info');
+        
+        try {
+            // 1. جلب ملف الهيكلة
+            const response = await fetch('/file-structure.txt');
+            if (!response.ok) {
+                addLog('❌ <span class="ar">تعذر العثور على ملف الهيكلة (file-structure.txt)</span><span class="en">Structure file not found (file-structure.txt)</span>', 'fail');
+                return;
+            }
+            const text = await response.text();
+            
+            // 2. استخراج المسارات (Regex بسيط للبحث عن المسارات داخل الشجرة)
+            // يبحث عن أي كلمة تبدأ بـ / أو ./ أو أي مسار متبوع بـ .html أو .js أو .css أو .txt
+            const pathRegex = /(?:[\/\w.-]+\/)*[\w.-]+\.(?:html|js|css|txt|webp|mp3|json|png|jpg|xml)/g;
+            const paths = text.match(pathRegex);
+            
+            if (!paths || paths.length === 0) {
+                addLog('⚠️ <span class="ar">لم يتم العثور على مسارات صالحة في ملف الهيكلة.</span><span class="en">No valid paths found in structure file.</span>', 'warn');
+                return;
+            }
 
-    <script src="/js/menu.js"></script>
+            // إزالة التكرارات
+            const uniquePaths = [...new Set(paths)];
+            addLog(`📊 <span class="ar">تم العثور على ${uniquePaths.length} ملف في الهيكلة.</span><span class="en">Found ${uniquePaths.length} files in structure.</span>`, 'info');
+
+            // 3. فحص كل مسار
+            let found = 0;
+            let missing = 0;
+            
+            // تقسيم المهام للسرعة (اختياري)
+            for (const filePath of uniquePaths) {
+                // تجاهل المسارات التي تبدأ بـ http أو https (لأننا نفحص الملفات المحلية فقط هنا)
+                if (filePath.startsWith('http')) continue;
+
+                // تنظيف المسار (إزالة "./" أو "/" من البداية إذا وجدت)
+                let cleanPath = filePath.replace(/^\.\/|^\//, '');
+                
+                // التأكد من وجود "/" في البداية للـ Fetch
+                if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+
+                const result = await checkPage(cleanPath);
+                
+                if (result.ok) {
+                    found++;
+                    addLog(`✅ ${cleanPath} — موجود (${result.status})`, 'ok');
+                } else {
+                    missing++;
+                    addLog(`❌ ${cleanPath} — مفقود (${result.status})`, 'fail');
+                }
+            }
+
+            // النتيجة النهائية
+            addLog(`📊 <span class="ar">خلاصة الهيكلة: ✅ ${found} موجود | ❌ ${missing} مفقود</span><span class="en">Structure Summary: ✅ ${found} found | ❌ ${missing} missing</span>`, missing === 0 ? 'ok' : 'fail');
+
+        } catch (error) {
+            addLog(`💥 <span class="ar">خطأ أثناء فحص الهيكلة: ${error.message}</span><span class="en">Structure check error: ${error.message}</span>`, 'fail');
+        }
+    }
+
+    // ===== فحص شامل =====
+    async function runFullScan() {
+        const btn = document.getElementById('runFullScan');
+        btn.disabled = true;
+        btn.innerHTML = '⏳ <span class="ar">جاري الفحص...</span><span class="en">Scanning...</span>';
+        document.getElementById('resultBody').innerHTML = '';
+        clearLogs();
+        addLog('🚀 <span class="ar">بدء الفحص الشامل...</span><span class="en">Starting full scan...</span>', 'info');
+
+        const progress = document.getElementById('progressFill');
+        const results = [];
+        const pages = [];
+        for (let i = 1; i <= 12; i++) pages.push(`Page${i}.html`);
+
+        // إضافة صفحات النظرية والفحص
+        pages.push('theory-ar.html', 'theory-en.html', 'Checkout.html', 'Check.html', 'file-structure.html');
+
+        let completed = 0;
+        const total = pages.length;
+
+        for (const page of pages) {
+            const url = `/${page}`;
+            const result = await checkPage(url);
+            results.push(result);
+            completed++;
+            progress.style.width = `${(completed / total) * 100}%`;
+            
+            const statusText = result.ok ? '✅' : '❌';
+            const statusClass = result.ok ? 'pass' : 'fail';
+            addLog(`${statusText} ${page} — ${result.status} (${result.time}ms)`, result.ok ? 'ok' : 'fail');
+
+            // تحديث الجدول
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${page}</td>
+                <td class="${statusClass}">${result.status}</td>
+                <td>${result.time}</td>
+                <td class="${statusClass}">${result.ok ? '✔️' : '❌'}</td>
+            `;
+            document.getElementById('resultBody').appendChild(row);
+        }
+
+        // إحصاءات
+        const okCount = results.filter(r => r.ok).length;
+        const failCount = results.filter(r => !r.ok).length;
+        const avgTime = Math.round(results.reduce((sum, r) => sum + r.time, 0) / results.length);
+
+        addLog(`📊 <span class="ar">النتيجة النهائية: ✅ ${okCount} ناجح | ❌ ${failCount} فاشل | ⏱️ متوسط ${avgTime}ms</span><span class="en">Final: ✅ ${okCount} passed | ❌ ${failCount} failed | ⏱️ Avg ${avgTime}ms</span>`, 'info');
+
+        btn.disabled = false;
+        btn.innerHTML = '🚀 <span class="ar">فحص شامل</span><span class="en">Full Scan</span>';
+        progress.style.width = '100%';
+    }
+
+    // ===== اختبار السرعة =====
+    async function runSpeedTest() {
+        const btn = document.getElementById('runSpeedTest');
+        btn.disabled = true;
+        addLog('⚡ <span class="ar">اختبار السرعة...</span><span class="en">Speed test...</span>', 'info');
+
+        const urls = [
+            '/', '/Sanaa.html', '/Shibam.html', '/Soqatra.html',
+            '/theory-ar.html', '/theory-en.html', '/Checkout.html'
+        ];
+        const results = [];
+        for (const url of urls) {
+            const start = performance.now();
+            try {
+                await fetch(url, { cache: 'no-cache' });
+                const time = Math.round(performance.now() - start);
+                results.push({ url, time, ok: true });
+                addLog(`⚡ ${url} — ${time}ms`, 'ok');
+            } catch {
+                const time = Math.round(performance.now() - start);
+                results.push({ url, time, ok: false });
+                addLog(`❌ ${url} — فشل (${time}ms)`, 'fail');
+            }
+        }
+
+        const avg = Math.round(results.reduce((s, r) => s + r.time, 0) / results.length);
+        const fastest = Math.min(...results.map(r => r.time));
+        const slowest = Math.max(...results.map(r => r.time));
+        addLog(`📊 <span class="ar">السرعة: المتوسط ${avg}ms | الأسرع ${fastest}ms | الأبطأ ${slowest}ms</span><span class="en">Speed: Avg ${avg}ms | Fastest ${fastest}ms | Slowest ${slowest}ms</span>`, 'info');
+        btn.disabled = false;
+    }
+
+    // ===== فحص 404 =====
+    async function run404Test() {
+        const btn = document.getElementById('run404Test');
+        btn.disabled = true;
+        addLog('🚨 <span class="ar">فحص 404...</span><span class="en">404 check...</span>', 'warn');
+
+        const testUrls = [
+            '/nonexistent.html',
+            '/fake-page',
+            '/wrong-path',
+            '/missing-file.js',
+            '/invalid.css'
+        ];
+        let found404 = 0;
+        for (const url of testUrls) {
+            const result = await checkPage(url);
+            if (result.status === 404) {
+                found404++;
+                addLog(`🚨 404 تم كشفه: ${url}`, 'warn');
+            } else {
+                addLog(`✅ ${url} — ${result.status}`, 'ok');
+            }
+        }
+        addLog(`📊 <span class="ar">تم كشف ${found404} من ${testUrls.length} روابط 404</span><span class="en">Found ${found404} of ${testUrls.length} 404 links</span>`, found404 > 0 ? 'warn' : 'ok');
+        btn.disabled = false;
+    }
+
+    // ===== تبديل اللغة =====
+    function toggleLang() {
+        const html = document.documentElement;
+        const newLang = html.lang === 'ar' ? 'en' : 'ar';
+        html.lang = newLang;
+        html.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+        document.body.classList.toggle('en', newLang === 'en');
+        localStorage.setItem('preferred-language', newLang);
+        // تحديث نصوص .txt
+        document.querySelectorAll('.txt').forEach(el => {
+            el.textContent = newLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+        });
+        // تحديث footer
+        if (typeof updateFooterLang === 'function') updateFooterLang();
+    }
+
+    // ===== عداد الزوار =====
+    (function() {
+        let count = parseInt(localStorage.getItem('jabri_visitor_count_checkout') || '0');
+        count += 1;
+        localStorage.setItem('jabri_visitor_count_checkout', count);
+        document.getElementById('visitorCountDisplay').innerText = count;
+    })();
+
+    // ===== تشغيل الموسيقى =====
+    (function() {
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicToggle');
+        if (!music || !btn) return;
+        let isPlaying = false;
+        music.volume = 0.3;
+        btn.addEventListener('click', function() {
+            if (isPlaying) {
+                music.pause();
+                btn.innerHTML = '🎵';
+                btn.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                music.play().then(() => {
+                    btn.innerHTML = '🔊';
+                    btn.classList.add('playing');
+                    isPlaying = true;
+                }).catch(() => {});
+            }
+        });
+        document.addEventListener('click', function firstInteraction() {
+            if (!isPlaying) {
+                music.play().then(() => {
+                    btn.innerHTML = '🔊';
+                    btn.classList.add('playing');
+                    isPlaying = true;
+                }).catch(() => {});
+            }
+            document.removeEventListener('click', firstInteraction);
+        });
+    })();
+
+    // ===== ربط الأزرار =====
+    document.addEventListener('DOMContentLoaded', function() {
+        generateLinks();
+        document.getElementById('runFullScan').addEventListener('click', runFullScan);
+        document.getElementById('runSpeedTest').addEventListener('click', runSpeedTest);
+        document.getElementById('run404Test').addEventListener('click', run404Test);
+        document.getElementById('clearLogs').addEventListener('click', clearLogs);
+
+        // إضافة زر الفحص الهيكلي (سنضيفه ضمن الأزرار تلقائياً)
+        const btnContainer = document.querySelector('.run-btn')?.parentElement;
+        if(btnContainer) {
+            const btnStructure = document.createElement('button');
+            btnStructure.className = 'run-btn';
+            btnStructure.id = 'runStructureCheck';
+            btnStructure.innerHTML = '📂 <span class="ar">فحص الهيكلة</span><span class="en">Structure Check</span>';
+            btnStructure.style.background = 'linear-gradient(135deg, #00ff88, #009966)';
+            btnStructure.addEventListener('click', checkStructure);
+            btnContainer.appendChild(btnStructure);
+        }
+
+        // استعادة اللغة
+        const savedLang = localStorage.getItem('preferred-language') || 'ar';
+        document.documentElement.lang = savedLang;
+        document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
+        document.body.classList.toggle('en', savedLang === 'en');
+        document.querySelectorAll('.txt').forEach(el => {
+            el.textContent = savedLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+        });
+
+        console.log('🔍 نظام فحص الواحة جاهز');
+        console.log('📄 12 صفحة + 6 ريبوهات + هيكلة ملفات');
+        console.log('🇾🇪 من صنعاء إلى الكون');
+    });
+</script>
+
+<script src="/js/init-page-root.js"></script>
+<script src="/js/init-page-ar.js"></script>
 
 </body>
 </html>
