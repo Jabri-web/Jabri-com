@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     
+      <!-- ===== 1. منع الكاش ===== -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+    
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     
@@ -80,7 +89,8 @@
 </head>
 <body>
     <audio id="bgMusic" loop preload="auto"><source src="image/music.mp3" type="audio/mpeg"></audio>
-    <button class="music-btn-fixed" id="musicToggle" title="🎵 تشغيل / إيقاف"><i class="fas fa-music"></i></button>
+    <button class="music-btn-fixed" id="musicToggle" title="🎵 تشغيل / إيقاف">🎵<i class="fas fa-music"></i></button>
+    
     <button class="lang-btn" onclick="toggleLang()"><i class="fas fa-globe"></i><span class="ar">🇬🇧 English</span><span class="en">🇾🇪 عربي</span></button>
     <div id="visitorCounter"><i class="fas fa-users"></i><span class="ar">زوار:</span><span class="en">Visitors:</span><span id="visitorCountDisplay">1</span></div>
 
@@ -169,5 +179,12 @@
             console.log('🔍 نظام فحص الواحة جاهز'); console.log('📄 12 صفحة + 6 ريبوهات + هيكلة ملفات'); console.log('🇾🇪 من صنعاء إلى الكون');
         });
     </script>
+    
+    <!-- في كل صفحة HTML -->
+    
+    
+    <!-- في كل صفحة HTML -->
+<script src="/js/menu.js"></script>
+    
 </body>
 </html>
