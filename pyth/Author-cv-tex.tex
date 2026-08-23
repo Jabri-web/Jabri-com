@@ -1,0 +1,319 @@
+\href{}{}% ---------------------------------------------------------------
+% السيرة الذاتية - عبد الله الجبري | Abdulla Al-Jabri CV
+% يلزم التجميع باستخدام XeLaTeX
+% ---------------------------------------------------------------
+\documentclass[a4paper,11pt]{article}
+
+% === الحزم الأساسية ===
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{geometry}
+\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+
+% === دعم الصور والجداول والروابط ===
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue}
+
+% === الرأس والتذييل ===
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% === إعدادات الخطوط ===
+\setmainfont{Times New Roman}
+\newfontfamily\arabicfont[Script=Arabic, Scale=1.1]{Amiri}
+
+% === اللغات ===
+\setmainlanguage{english}
+\setotherlanguage{arabic}
+
+% === تنسيق العناوين ===
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=1cm, rightmargin=1cm}
+
+% === ألوان الجدول ===
+\definecolor{headerblue}{RGB}{0,102,204}
+\definecolor{rowlight}{RGB}{240,248,255}
+\definecolor{rowdark}{RGB}{220,235,250}
+
+% === إعدادات الرأس والتذييل ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\#Abdulla\_AlJabri (Sanaa-Yemen) \today}}
+\fancyfoot[C]{\_\_\_\_\_\_\_ \\ \thepage/\pageref{LastPage} \\ \#عبدالله\_الجبري (صنعاء-اليمن) \href{https://jabri-com.vercel.app/}{https://jabri-com.vercel.app/}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\begin{document}
+
+% ================================================================
+% القسم الأول: اللغة الإنجليزية
+% ================================================================
+\begin{otherlanguage}{english}
+
+\begin{center}
+\begin{tabular}{@{}c c@{}}
+\tikz{\node[circle,draw,inner sep=0pt,minimum size=2.5cm]{\includegraphics[width=2.5cm]{jabri2020.png}};}
+& \begin{tabular}{@{}l@{}}
+{\Huge \textbf{Abdulla Mohammed Nasser Al-Jabri}} \\
+\vspace{0.2cm}
+{\large \textbf{Network / IT / Business Analyst}} \\
+\vspace{0.2cm}
+{\small Email: jabri62018@gmail.com \quad | \quad Phone: +967 770 577 182 \quad | \quad Sana'a, Yemen}
+\end{tabular}
+\end{tabular}
+\end{center}
+\rule{\textwidth}{0.5pt}
+
+\section*{Personal Profile}
+\begin{tabular}{@{}ll}
+Full Name & : Abdulla Mohammed Nasser Al-Jabri \\
+Date of Birth & : 15 Jan 1968 – Ans – Dhamar – Yemen \\
+Marital Status& : Married - 3 Daughters, 4 Sons \\
+Nationality & : Yemeni \\
+Languages & : Arabic (Native), English (Good) \\
+Website & : \url{https://jabri-com.vercel.app/}
+\end{tabular}
+
+\section*{Objective}
+To obtain a challenging position in IT, Software, Hardware, Networking, Telecommunications, Database Management, and Strategic Planning. Seeking to leverage 25+ years of experience in a dynamic environment. Open to relocation in Gulf States, Europe, USA, Australia.
+
+\section*{Professional Experience}
+
+\subsection*{IT / Network / Business Analyst}
+\textbf{ITT – Systems \& Communications} \hfill \textbf{01/2002 – Present} \\
+Sana'a – Yemen
+\begin{itemize}
+\item Develop annual project roadmaps and IT strategy for government data centers
+\item Maintain LAN/WAN, Remote Access, Routing and Network Security Standards
+\item Manage migration from DOS/Windows to Unix/Windows XP
+\item Implement IT Governance, Policies, Risk Management and Disaster Recovery
+\item Prepare annual IT budget and evaluate IT departments nationwide
+\end{itemize}
+
+\subsection*{Network / Information Systems Analyst - Programmer DBA}
+\textbf{YHOC – Yemen Hunt Oil Company} \hfill \textbf{01/1996 – 02/2002} \\
+Sana'a / Marib – Yemen
+\begin{itemize}
+\item Planned and developed network architecture and documentation
+\item Managed migration: DOS/Novell → Windows/Novell → Windows NT Server
+\item Developed Inventory and Procurement Systems: DOS/FoxPro → Win/VS-SQL
+\item Supported Active Directory, DHCP, DNS, Group Policy, IIS
+\end{itemize}
+
+\section*{Education \& Certifications}
+\textbf{B.Sc. Computer Engineering} \hfill \textbf{1986-1991} \\
+King Fahd University of Petroleum \& Minerals (KFUPM), Dhahran, KSA \\
+GPA: 3.2/4.0 | Dean's Honor List x2
+
+\textbf{Professional Certificates:}
+\begin{itemize}
+\item IT \& Data Center Managers - Unix - UIT, 2010
+\item Network Management, Maintenance, Implementation - UIT, 1999
+\item Y2K Project Management - YHOC, 1999
+\end{itemize}
+
+\section*{Key Skills}
+IT Infrastructure, Network Analysis, Strategic Planning, Project Management, Disaster Recovery, Windows/Linux, LAN/WAN/TCP/IP, Active Directory, SQL, C++, Negotiation
+
+\section*{Research}
+\textbf{Wahat Al-Jabri}: Founder of Digital Cultural \& Scientific Platform \\
+\textbf{Theory}: "Sindbad Unified Theory" Z+C+A=1 - Parameter-Free Physics Framework
+
+% ====== جدول المشاريع والـ DOIs ======
+\section*{Research Projects \& DOIs}
+
+\begin{longtable}{>{\raggedright}p{1.2cm} >{\raggedright}p{3.5cm} >{\raggedright}p{3.5cm} >{\raggedright}p{3.5cm}}
+\caption{Complete List of Jabri Research Projects}
+\label{tab:projects}\\
+\toprule
+\# & \textbf{Project} & \textbf{GitHub Pages} & \textbf{DOI Zenodo} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}%
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+\toprule
+\# & \textbf{Project} & \textbf{GitHub Pages} & \textbf{DOI Zenodo} \\
+\midrule
+\endhead
+\bottomrule
+\multicolumn{4}{r}{{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+1 & Jabri6218.github.io & \href{https://jabri-web.github.io/jabri62018.github.io/}{Pages} & \href{https://doi.org/10.5281/zenodo.20403864}{20403864} \\
+2 & Zx\_RieOS\_v1.2 & \href{https://jabri-web.github.io/Zx_RieOS_v1.2/}{Pages} & \href{https://doi.org/10.5281/zenodo.20100622}{20100622} \\
+3 & Zx\_Mother\_Function\_Jabri & \href{https://Jabri-web.github.io/Zx_Mother_Function_Jabri/}{Pages} & -- \\
+4 & Jabri-web.github.io & \href{https://Jabri-web.github.io/}{Pages} & \href{https://doi.org/10.5281/zenodo.20499365}{20499365} / \href{https://doi.org/10.5281/zenodo.20404167}{20404167} \\
+5 & Jabri\_Nobble & \href{https://jabri-web.github.io/Jabri_Nobble/}{Pages} & \href{https://doi.org/10.5281/zenodo.20148770}{20148770} \\
+5.1 & └─ Jabri\_Riemann & -- & \href{https://doi.org/10.5281/zenodo.20139904}{20139904} / \href{https://doi.org/10.5281/zenodo.20145337}{20145337} \\
+5.2 & └─ Jabri\_np & -- & \href{https://doi.org/10.5281/zenodo.20145279}{20145279} \\
+5.3 & └─ Jabri\_gab & -- & \href{https://doi.org/10.5281/zenodo.20148344}{20148344} \\
+5.4 & └─ Jabri\_Navier & -- & \href{https://doi.org/10.5281/zenodo.20149618}{20149618} \\
+5.7 & └─ Jabri\_Identity & -- & \href{https://doi.org/10.5281/zenodo.20114317}{20114317} \\
+6 & Jabri\_lab & \href{https://jabri-web.github.io/jabri_lab/}{Pages} & Publishing \\
+6.1 & └─ Jabri\_5 & -- & Publishing \\
+6.2 & └─ Jabri\_28 & -- & Publishing \\
+6.3 & └─ Jabri\_Gravity & -- & Publishing \\
+6.4 & └─ Jabri\_Spacetime & -- & Publishing \\
+6.5 & └─ Jabri\_Darkenergy & -- & Publishing \\
+6.6 & └─ Jabri\_Planck & -- & Publishing \\
+6.7 & └─ Jabri\_Hubble & -- & Publishing \\
+6.8 & └─ Jabri\_Periodic & -- & Publishing \\
+6.9 & └─ Jabri\_all & -- & Publishing \\
+7 & Zx\_RieOS\_v1.1 & \href{https://Jabri-web.github.io/Zx_RieOS_v1.1/}{Pages} & \href{https://doi.org/10.5281/zenodo.19981688}{19981688} / \href{https://doi.org/10.5281/zenodo.20070594}{20070594} \\
+8 & Jabri\_RiemannOS & \href{https://jabri-web.github.io/Jabri-RiemannOS/}{Pages} & -- \\
+9 & Jabri\_Checkout & \href{https://jabri-web.github.io/Jabri_Checkout/}{Pages} & \href{https://doi.org/10.5281/zenodo.20513840}{20513840} \\
+10 & Jabri-web & \href{https://jabri-web.github.io/Jabri-web/}{Pages} & \href{https://doi.org/10.5281/zenodo.20499365}{20499365} \\
+11 & Jabri-com & \href{https://jabri-web.github.io/jabri-com/}{Pages} & \href{https://doi.org/10.5281/zenodo.21003990}{21003990} \\
+12 & jabri.com & \href{https://jabri-web.github.io/jabri/}{Pages} & \href{https://doi.org/10.5281/zenodo.21003991}{21003991} \\
+
+\end{longtable}
+
+\end{otherlanguage}
+
+\newpage
+
+% ================================================================
+% القسم الثاني: اللغة العربية
+% ================================================================
+\begin{otherlanguage}{arabic}
+
+\begin{center}
+\begin{tabular}{@{}c c@{}}
+\tikz{\node[circle,draw,inner sep=0pt,minimum size=2.5cm]{\includegraphics[width=2.5cm]{jabri2020.png}};}
+& \begin{tabular}{@{}l@{}}
+{\Huge \textbf{عبد الله محمد ناصر الجبري}} \\
+\vspace{0.2cm}
+{\large \textbf{محلل شبكات / تكنولوجيا معلومات / أعمال}} \\
+\vspace{0.2cm}
+{\small البريد: jabri62018@gmail.com \quad | \quad الهاتف: 770577182 \quad | \quad صنعاء، اليمن}
+\end{tabular}
+\end{tabular}
+\end{center}
+\rule{\textwidth}{0.5pt}
+
+\section*{الملف الشخصي}
+\begin{tabular}{@{}ll}
+الاسم الكامل & : عبد الله محمد ناصر الجبري \\
+تاريخ الميلاد & : 15 يناير 1968 – عنس – ذمار – اليمن \\
+الحالة الاجتماعية& : متزوج - 3 بنات، 4 أولاد \\
+الجنسية & : يمني \\
+اللغات & : العربية (اللغة الأم)، الإنجليزية (جيد) \\
+الموقع & : \url{https://jabri-com.vercel.app/}
+\end{tabular}
+
+\section*{الهدف}
+العمل في مجال تكنولوجيا المعلومات، البرمجيات، الأجهزة، الشبكات، الاتصالات، إدارة قواعد البيانات، الإدارة، التسويق، والتخطيط الاستراتيجي. خبرة 25+ عام. مستعد للتنقل لدول الخليج، أوروبا، أمريكا، أستراليا.
+
+\section*{الخبرة المهنية}
+
+\subsection*{محلل (تكنولوجيا المعلومات / شبكات / أعمال)}
+\textbf{ITT – النظم والاتصالات} \hfill \textbf{2002 – حتى الآن} \\
+صنعاء – اليمن
+\begin{itemize}
+\item تطوير خارطة طريق وبناء استراتيجية المشروعات السنوية
+\item صيانة شبكات LAN/WAN والوصول عن بعد والتوجيه وأمن الشبكات
+\item إدارة التحول من DOS/Windows إلى Unix/Windows XP
+\item تنفيذ حوكمة تكنولوجيا المعلومات وإدارة المخاطر والتعافي من الكوارث
+\item إعداد الميزانية السنوية لتكنولوجيا المعلومات وتقييم إدارات تقنية المعلومات على مستوى الجمهورية
+\end{itemize}
+
+\subsection*{محلل شبكات / أنظمة معلومات – مبرمج DBA}
+\textbf{YHOC – شركة هنت اليمنية للنفط} \hfill \textbf{1996 – 2002} \\
+صنعاء / مأرب – اليمن
+\begin{itemize}
+\item تخطيط وتطوير الشبكة وتطوير نظامي المخزون والمشتريات
+\item إدارة التحول من DOS/Novell إلى Windows NT Server
+\item تطوير أنظمة المخزون والمشتريات: DOS/FoxPro → Win/VS-SQL
+\item دعم Active Directory و DHCP و DNS وسياسات المجموعة و IIS
+\end{itemize}
+
+\section*{التعليم والشهادات}
+\textbf{بكالوريوس هندسة الحاسب الآلي} \hfill \textbf{1986-1991} \\
+جامعة البترول والمعادن KFUPM، الظهران، السعودية \\
+المعدل: 3.2 من 4.0 | مرتبة الشرف مرتين
+
+\textbf{الشهادات المهنية:}
+\begin{itemize}
+\item مدراء تكنولوجيا المعلومات ومراكز البيانات - Unix - المعهد، 2010
+\item إدارة وصيانة وتنفيذ الشبكات - المعهد، 1999
+\item إدارة مشروع Y2K - شركة هنت، 1999
+\end{itemize}
+
+\section*{المهارات الأساسية}
+البنية التحتية لتكنولوجيا المعلومات، تحليل الشبكات، التخطيط الاستراتيجي، إدارة المشاريع، التعافي من الكوارث، Windows/Linux، LAN/WAN، Active Directory، SQL، التفاوض
+
+\section*{الأبحاث والمبادرات}
+\textbf{واحة الجبري}: مؤسس المنصة الرقمية الثقافية والعلمية \\
+\textbf{النظرية}: "نظرية السندباد الموحدة" Z+C+A=1 - إطار فيزيائي بلا معاملات
+
+% ====== جدول المشاريع والـ DOIs ======
+\section*{المشاريع البحثية والـ DOIs}
+
+\begin{longtable}{>{\raggedright}p{1.2cm} >{\raggedright}p{3.5cm} >{\raggedright}p{3.5cm} >{\raggedright}p{3.5cm}}
+\caption{القائمة الكاملة لمشاريع الجبري البحثية}
+\label{tab:projects-ar}\\
+\toprule
+\# & \textbf{المشروع} & \textbf{GitHub Pages} & \textbf{DOI Zenodo} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}%
+{{\bfseries \tablename\ \thetable{} -- تكملة من الصفحة السابقة}} \\
+\toprule
+\# & \textbf{المشروع} & \textbf{GitHub Pages} & \textbf{DOI Zenodo} \\
+\midrule
+\endhead
+\bottomrule
+\multicolumn{4}{r}{{تكملة في الصفحة التالية}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+1 & Jabri6218.github.io & \href{https://jabri-web.github.io/jabri62018.github.io/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.20403864}{20403864} \\
+2 & Zx\_RieOS\_v1.2 & \href{https://jabri-web.github.io/Zx_RieOS_v1.2/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.20100622}{20100622} \\
+3 & Zx\_Mother\_Function\_Jabri & \href{https://Jabri-web.github.io/Zx_Mother_Function_Jabri/}{الصفحة} & -- \\
+4 & Jabri-web.github.io & \href{https://Jabri-web.github.io/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.20499365}{20499365} / \href{https://doi.org/10.5281/zenodo.20404167}{20404167} \\
+5 & Jabri\_Nobble & \href{https://jabri-web.github.io/Jabri_Nobble/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.20148770}{20148770} \\
+5.1 & └─ Jabri\_Riemann & -- & \href{https://doi.org/10.5281/zenodo.20139904}{20139904} / \href{https://doi.org/10.5281/zenodo.20145337}{20145337} \\
+5.2 & └─ Jabri\_np & -- & \href{https://doi.org/10.5281/zenodo.20145279}{20145279} \\
+5.3 & └─ Jabri\_gab & -- & \href{https://doi.org/10.5281/zenodo.20148344}{20148344} \\
+5.4 & └─ Jabri\_Navier & -- & \href{https://doi.org/10.5281/zenodo.20149618}{20149618} \\
+5.7 & └─ Jabri\_Identity & -- & \href{https://doi.org/10.5281/zenodo.20114317}{20114317} \\
+6 & Jabri\_lab & \href{https://jabri-web.github.io/jabri_lab/}{الصفحة} & قيد النشر \\
+6.1 & └─ Jabri\_5 & -- & قيد النشر \\
+6.2 & └─ Jabri\_28 & -- & قيد النشر \\
+6.3 & └─ Jabri\_Gravity & -- & قيد النشر \\
+6.4 & └─ Jabri\_Spacetime & -- & قيد النشر \\
+6.5 & └─ Jabri\_Darkenergy & -- & قيد النشر \\
+6.6 & └─ Jabri\_Planck & -- & قيد النشر \\
+6.7 & └─ Jabri\_Hubble & -- & قيد النشر \\
+6.8 & └─ Jabri\_Periodic & -- & قيد النشر \\
+6.9 & └─ Jabri\_all & -- & قيد النشر \\
+7 & Zx\_RieOS\_v1.1 & \href{https://Jabri-web.github.io/Zx_RieOS_v1.1/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.19981688}{19981688} / \href{https://doi.org/10.5281/zenodo.20070594}{20070594} \\
+8 & Jabri\_RiemannOS & \href{https://jabri-web.github.io/Jabri-RiemannOS/}{الصفحة} & -- \\
+9 & Jabri\_Checkout & \href{https://jabri-web.github.io/Jabri_Checkout/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.20513840}{20513840} \\
+10 & Jabri-web & \href{https://jabri-web.github.io/Jabri-web/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.20499365}{20499365} \\
+11 & Jabri-com & \href{https://jabri-web.github.io/jabri-com/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.21003990}{21003990} \\
+12 & jabri.com & \href{https://jabri-web.github.io/jabri/}{الصفحة} & \href{https://doi.org/10.5281/zenodo.21003991}{21003991} \\
+
+\end{longtable}
+
+\vspace{1cm}
+\begin{flushleft}
+\textbf{عبد الله الجبري} \\
+\textbf{التوقيع:}...........................
+\end{flushleft}
+
+\end{otherlanguage}
+
+\end{document}
