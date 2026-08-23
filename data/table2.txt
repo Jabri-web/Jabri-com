@@ -1,0 +1,125 @@
+# 📊 تقرير الروابط والمشاريع – Jabri Ecosystem
+
+**تاريخ التحديث:** 23 أغسطس 2026
+**الحالة:** ✅ جميع الروابط 1-12 شغالة
+
+---
+
+## 🔗 Pages (GitHub Pages) – 12/12 شغالة
+
+| # | المشروع | الرابط | الحالة |
+|---|---------|--------|--------|
+| 1 | Jabri6218.github.io | https://jabri-web.github.io/jabri62018.github.io/ | ✅ |
+| 2 | Zx_RieOS_v1.2 | https://jabri-web.github.io/Zx_RieOS_v1.2/ | ✅ |
+| 3 | Zx_Mother_Function_Jabri | https://Jabri-web.github.io/Zx_Mother_Function_Jabri/ | ✅ |
+| 4 | Jabri-web.github.io | https://Jabri-web.github.io/ | ✅ |
+| 5 | Jabri_Nobble | https://jabri-web.github.io/Jabri_Nobble/ | ✅ |
+| 6 | Jabri_lab | https://jabri-web.github.io/jabri_lab/ | ✅ |
+| 7 | Zx_RieOS_v1.1 | https://Jabri-web.github.io/Zx_RieOS_v1.1/ | ✅ |
+| 8 | Jabri_RiemannOS | https://jabri-web.github.io/Jabri-RiemannOS/ | ✅ |
+| 9 | Jabri_Checkout | https://jabri-web.github.io/Jabri_Checkout/ | ✅ |
+| 10 | Jabri-web | https://jabri-web.github.io/Jabri-web/ | ✅ |
+| 11 | Jabri-com | https://jabri-web.github.io/jabri-com/ | ✅ |
+| 12 | jabri.com | https://jabri-web.github.io/jabri/ | ✅ |
+
+---
+
+## 🧙 الساحر (Magic Translator) – 12/12 شغال
+
+| # | المشروع | الرابط |
+|---|---------|--------|
+| 1 | Jabri6218.github.io | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=jabri62018.github.io&file=README.md&lang=ar |
+| 2 | Zx_RieOS_v1.2 | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Zx_RieOS_v1.2&file=README.md&lang=ar |
+| 3 | Zx_Mother_Function_Jabri | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Zx_Mother_Function_Jabri&file=README.md&lang=ar |
+| 4 | Jabri-web.github.io | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Jabri-web.github.io&file=README.md&lang=ar |
+| 5 | Jabri_Nobble | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Jabri_Nobble&file=README.md&lang=ar |
+| 6 | Jabri_lab | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Jabri_lab&file=README.md&lang=ar |
+| 7 | Zx_RieOS_v1.1 | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Zx_RieOS_v1.1&file=README.md&lang=ar |
+| 8 | Jabri_RiemannOS | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Jabri-RiemannOS&file=README.md&lang=ar |
+| 9 | Jabri_Checkout | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Jabri_Checkout&file=README.md&lang=ar |
+| 10 | Jabri-web | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=Jabri-web&file=README.md&lang=ar |
+| 11 | Jabri-com | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=jabri-com&file=README.md&lang=ar |
+| 12 | jabri.com | https://jabri-web.github.io/Jabri-web/magic-translator.html?repo=jabri&file=README.md&lang=ar |
+
+---
+
+## 📦 DOIs / Zenodo – العدد الإجمالي
+
+**📌 المجموع الكلي: 19 DOI**
+
+| # | المشروع | DOI Zenodo |
+|---|---------|------------|
+| 1 | Jabri6218.github.io | 20403864 |
+| 2 | Zx_RieOS_v1.2 | 20100622 |
+| 3 | Zx_Mother_Function_Jabri | — |
+| 4 | Jabri-web.github.io | 20499365 |
+| 5 | Jabri-web.github.io | 20404167 |
+| 6 | Jabri_Nobble | 20148770 |
+| 7 | Jabri_Riemann | 20139904 |
+| 8 | Jabri_Riemann | 20145337 |
+| 9 | Jabri_np | 20145279 |
+| 10 | Jabri_gab | 20148344 |
+| 11 | Jabri_Navier | 20149618 |
+| 12 | Jabri_Identity | 20114317 |
+| 13 | Zx_RieOS_v1.1 | 19981688 |
+| 14 | Zx_RieOS_v1.1 | 20070594 |
+| 15 | Jabri_Checkout | 20513840 |
+| 16 | Jabri-web | 20499365 |
+| 17 | Jabri-com | 21003990 |
+| 18 | jabri.com | 21003991 |
+| 19 | Zx_RieOS_v1.2 (Gold) | 20100622 |
+
+---
+
+## 📊 Dbase – قاعدة البيانات (12 مشروع)
+
+| # | المشروع | الرابط |
+|---|---------|--------|
+| 1 | Jabri6218.github.io | https://jabri-web.github.io/jabri62018.github.io/ |
+| 2 | Zx_RieOS_v1.2 | https://jabri-web.github.io/Zx_RieOS_v1.2/ |
+| 3 | Zx_Mother_Function_Jabri | https://Jabri-web.github.io/Zx_Mother_Function_Jabri/ |
+| 4 | Jabri-web.github.io | https://Jabri-web.github.io/ |
+| 5 | Jabri_Nobble | https://jabri-web.github.io/Jabri_Nobble/ |
+| 6 | Jabri_lab | https://jabri-web.github.io/jabri_lab/ |
+| 7 | Zx_RieOS_v1.1 | https://Jabri-web.github.io/Zx_RieOS_v1.1/ |
+| 8 | Jabri_RiemannOS | https://jabri-web.github.io/Jabri-RiemannOS/ |
+| 9 | Jabri_Checkout | https://jabri-web.github.io/Jabri_Checkout/ |
+| 10 | Jabri-web | https://jabri-web.github.io/Jabri-web/ |
+| 11 | Jabri-com | https://jabri-web.github.io/jabri-com/ |
+| 12 | jabri.com | https://jabri-web.github.io/jabri/ |
+
+---
+
+## 👤 Gist Profile
+
+**رابط Gist:** https://gist.github.com/Jabri-web
+
+**المحتوى المقترح:**
+
+```markdown
+# 👤 Abdulla Al-Jabri | عبدالله الجبري
+
+**Yemeni Researcher | Independent IT Analyst | Theoretical Physicist**
+
+- 🧭 **Unified Sinbad Theory:** Z + C + A = 1
+- 🏛️ **Digital Archivist:** Yemen Heritage (Sana'a, Shibam, Socotra)
+- 🎓 **B.Sc. Computer Engineering** – KFUPM, KSA
+- 📧 **Email:** jabri62018@gmail.com
+- 🌐 **Website:** https://jabri-com.vercel.app/
+- 🔗 **ORCID:** 0009-0003-3319-3822
+- 📦 **12 Research Projects** – All with DOIs on Zenodo
+
+## 📚 Key Projects
+1. **Zx_RieOS_v1.2** – Gold Edition (DOI: 20100622)
+2. **Jabri_Riemann** – Riemann Hypothesis (DOI: 20139904)
+3. **Jabri_np** – P vs NP (DOI: 20145279)
+4. **Jabri_gab** – Yang-Mills Mass Gap (DOI: 20148344)
+5. **Jabri_Navier** – Navier-Stokes (DOI: 20149618)
+6. **Jabri_Identity** – Z + C + A = 1 (DOI: 20114317)
+
+## 🧮 The Mother Function
+Z(x) = x⁵ ln(x) sin(2π/x) e^(-x/xp)
+Z_t = Z + C + A = 1
+
+---
+*From Sana'a, Yemen – with Z_t = 1*
