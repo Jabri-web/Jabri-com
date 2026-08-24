@@ -1,0 +1,11 @@
+# Set the owner of the entire repo
+* @Jabri-web
+
+# Docs owners
+/docs/ @Jabri-web
+
+# Issue templates owners  
+/.github/ISSUE_TEMPLATE/ @Jabri-web
+
+# Core code owners - غيرها حسب مشروعك
+/src/ @Jabri-web
