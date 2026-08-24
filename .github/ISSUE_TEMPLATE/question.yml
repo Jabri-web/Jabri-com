@@ -1,0 +1,13 @@
+name: Question
+description: Ask a question or get help about the project
+title: "[Question]: "
+labels: ["question"]
+body:
+    - type: textarea
+    id: question
+    attributes:
+      label: "Your Question"
+      description: "What do you want to ask?"
+      placeholder: "Example: How do I use this project?"
+    validations:
+      required: true
