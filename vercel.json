@@ -15,5 +15,10 @@
       "source": "/en/(.*)",
       "destination": "/$1"
     }
-  ]
+  ],
+  "functions": {
+    "image/read-folder.php": {
+      "runtime": "@vercel/php"
+    }
+  }
 }
