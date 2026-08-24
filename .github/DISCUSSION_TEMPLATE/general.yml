@@ -1,0 +1,10 @@
+title: "General Discussion"
+body:
+    - type: textarea
+    id: what
+    attributes:
+      label: "What do you want to discuss?"
+      description: "Ask a question, share an idea, or start a conversation"
+      placeholder: "Write your discussion here..."
+    validations:
+      required: true
