@@ -1,0 +1,18 @@
+name: General Discussion
+description: Ask a question, share an idea, or start a conversation
+title: "[Discussion]: "
+labels: ["discussion"]
+body:
+    - type: markdown
+    attributes:
+      value: |
+        ### Welcome! 👋
+        Use this template for questions, ideas, and general discussion.
+    - type: textarea
+    id: discussion
+    attributes:
+      label: "What do you want to discuss?"
+      description: "Please describe your question or idea"
+      placeholder: "Write your discussion here..."
+    validations:
+      required: true
