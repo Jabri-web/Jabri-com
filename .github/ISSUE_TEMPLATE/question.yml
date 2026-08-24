@@ -1,0 +1,23 @@
+name: Question
+description: Ask a question about the project
+title: "[Question]: "
+labels: ["question"]
+body:
+    - type: markdown
+    attributes:
+      value: |
+        Thanks for reaching out! Please ask your question below.
+    - type: textarea
+    id: question
+    attributes:
+      label: "Your Question"
+      description: "What do you want to know?"
+      placeholder: "I was wondering about..."
+    validations:
+      required: true
+    - type: textarea
+    id: context
+    attributes:
+      label: "Context"
+      description: "Add any context or code that helps"
+      placeholder: "Optional"
