@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+    - name: 📖 Documentation
+    url: https://github.com/Jabri-web/Jabri-com#readme
+    about: Check the README first
+    - name: 🐛 Bug Report
+    url: https://github.com/Jabri-web/Jabri-com/issues/new?template=bug_report.md
+    about: Report a bug
+    - name: 💡 Feature Request  
+    url: https://github.com/Jabri-web/Jabri-com/issues/new?template=feature_request.md
+    about: Suggest a new feature
+    - name: 🔒 Security Policy
+    url: https://github.com/Jabri-web/Jabri-com/security/policy
+    about: Report a security vulnerability
