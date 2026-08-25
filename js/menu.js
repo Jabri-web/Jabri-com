@@ -1,6 +1,6 @@
 // ============================================================
 //   menu.js - القائمة الذكية الشاملة - واحة الجبري
-//   الإصدار: 5.0.3 - 19 أغسطس 2026
+//   الإصدار: 5.0.4 - 25 أغسطس 2026
 //   المستويات: العلوي (أساسيات) | الوسطى (نظرية) | السفلي (محادثات ديناميكي)
 //   جميع عناصر المحادثات قابلة للنقر وتفتح prompt
 // ============================================================
@@ -31,17 +31,23 @@
     // ============================================================
     const MENU_TOP = [
         { name: 'الرئيسية', nameEn: 'Home', href: `${langDir}/`, icon: '🏠' },
-        // 🎓 تمت إضافة رسالة الجامعة هنا
+        // 🎓 رسالة جامعة KFUPM
         { name: 'رسالة جامعة KFUPM', nameEn: 'KFUPM Alumni Letter', href: `${langDir}/kfupm-msg.html`, icon: '🎓' },
+        // 🆕 معرض اليمن
+        { name: '📸 معرض اليمن', nameEn: '📸 Yemen Gallery', href: `${langDir}/gallery.html`, icon: '📸' },
+        // 🆕 تشخيص المستودعات
+        { name: '📊 تشخيص المستودعات', nameEn: '📊 Repo Diagnosis', href: `${langDir}/diagnose.html`, icon: '📊' },
+        // 🆕 رحلة الوعي
+        { name: '🌌 رحلة الوعي', nameEn: '🌌 Consciousness Journey', href: `${langDir}/wonder.html`, icon: '🌌' },
         { name: 'صنعاء', nameEn: "Sana'a", href: `${langDir}/Sanaa.html`, icon: '🏛️' },
         { name: 'شبام', nameEn: 'Shibam', href: `${langDir}/Shibam.html`, icon: '🏗️' },
         { name: 'سقطرى', nameEn: 'Socotra', href: `${langDir}/Soqatra.html`, icon: '🌴' },
         { name: 'المجلة', nameEn: 'Journal', href: `${langDir}/journal.html`, icon: '📰' },
         { name: 'تجربتي مع الـ AI', nameEn: 'My AI Experience', href: `${langDir}/journal2.html`, icon: '🤖' },
         { name: 'فهرس مشاريع الجبري', nameEn: 'Jabri Projects', href: `${langDir}/jabri-projects.html`, icon: '🤖' },
-        { name: 'رسالة من صنعاء', nameEn: 'Sanaa msg', href: `${langDir}/journal3.html`, icon: '🤖' },
-
-
+        { name: 'رسالة من صنعاء', nameEn: 'Sanaa msg', href: `${langDir}/journal3.html`, icon: '📜' },
+        // 🆕 نظام الفحص
+        { name: '🔍 نظام الفحص', nameEn: '🔍 Checkout System', href: `${langDir}/Checkout.html`, icon: '🔍' },
     ];
 
     // ============================================================
@@ -173,14 +179,17 @@
         html += `
             <div style="border-top:2px solid #ffd700; margin:12px 0 8px 0; padding-top:10px;">
                 <div style="color:#ffd700; font-size:0.7rem; font-weight:bold; text-align:center; letter-spacing:1px; margin-bottom:6px;">
-                    ⭐ ${isArabic ? 'إنجازات اليوم - 19 أغسطس 2026' : "Today's Achievements — Aug 19, 2026"}
+                    ⭐ ${isArabic ? 'إنجازات اليوم - 25 أغسطس 2026' : "Today's Achievements — Aug 25, 2026"}
                 </div>
                 <div style="display:flex; flex-direction:column; gap:4px; font-size:0.78rem; color:#ccc; padding:0 4px;">
                     <div style="display:flex; align-items:center; gap:8px; background:rgba(255,215,0,0.04); padding:5px 10px; border-radius:6px; border-right:3px solid #ffd700;">
-                        <span>🧮</span> <span>${isArabic ? 'الدالة الأم - اشتقاق ثابت الجاذبية' : 'Mother Function — Gravitational Constant'}</span>
+                        <span>📸</span> <span>${isArabic ? 'معرض اليمن - قراءة مباشرة من GitHub' : 'Yemen Gallery — Direct GitHub API'}</span>
                     </div>
                     <div style="display:flex; align-items:center; gap:8px; background:rgba(255,215,0,0.04); padding:5px 10px; border-radius:6px; border-right:3px solid #ffd700;">
-                        <span>🌌</span> <span>${isArabic ? 'النظرية الموحدة Zx = Z + C + A' : 'Unified Theory Zx = Z + C + A'}</span>
+                        <span>📊</span> <span>${isArabic ? 'تشخيص المستودعات - 12 ريبو تحت الفحص' : 'Repo Diagnosis — 12 repos under scan'}</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; background:rgba(255,215,0,0.04); padding:5px 10px; border-radius:6px; border-right:3px solid #ffd700;">
+                        <span>🌌</span> <span>${isArabic ? 'رحلة الوعي - فيزياء الكم والنسبية' : 'Consciousness Journey — Quantum Physics & Relativity'}</span>
                     </div>
                 </div>
             </div>
@@ -558,7 +567,8 @@
     //   🚀 التهيئة النهائية
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🌴 menu.js v5.0.3 - القائمة الذكية مع المحادثات + رسالة KFUPM');
+        console.log('🌴 menu.js v5.0.4 - القائمة الذكية مع المحادثات + معرض + تشخيص + وعي');
+        console.log('📸 معرض اليمن | 📊 تشخيص المستودعات | 🌌 رحلة الوعي');
 
         updateBottomMenu();
         buildMainMenu();
@@ -567,12 +577,15 @@
         initLanguageSwitcher();
         buildHamburgerMenu();
 
-        console.log('📅 19 أغسطس 2026');
+        console.log('📅 25 أغسطس 2026');
         console.log('📜 Zx = Z + C + A | Z + C + A = 1');
         console.log('🧮 Z(x) = x^5 ln(x) sin(2π/x) exp(-x/xp)');
         console.log('🇾🇪 اليمن - صنعاء');
         console.log('🎓 رسالة جامعة KFUPM مضافة');
         console.log('💬 المحادثات:', MENU_BOTTOM.length);
+        console.log('📸 معرض اليمن: gallery.html');
+        console.log('📊 تشخيص المستودعات: diagnose.html');
+        console.log('🌌 رحلة الوعي: wonder.html');
     });
 
     // ============================================================
