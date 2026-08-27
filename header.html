@@ -505,6 +505,8 @@
 
 
 
+
+
 <script>
 // ===== تشغيل الصوت تلقائي بعد اول تفاعل =====
 (function() {
@@ -517,34 +519,36 @@
     if (musicPlayed) return;
     musicPlayed = true;
     
-    audio.volume = 1; // الصوت عالي
+    // إزالة المستمعين فوراً لمنع أي تنفيذ إضافي
+    document.removeEventListener('click', playMusic);
+    document.removeEventListener('touchstart', playMusic);
+    
+    audio.volume = 1;
     audio.play().then(() => {
-      // غير الايقونات لـ 🔊
       document.querySelectorAll('#musicTopBtn, #musicBottomBtn').forEach(b => {
         b.textContent = '🔊'; 
         b.classList.add('playing');
       });
-      console.log('🎵 الموسيقى اشتغلت');
+      console.log('🎵 تم تشغيل الموسيقى تلقائياً');
     }).catch(err => {
-      console.log('الصوت محظور:', err);
+      // إذا فشل التشغيل، نسمح للمستخدم بتشغيلها يدوياً لاحقاً
+      musicPlayed = false; // نعيد العلم للخلف ليتسنى للمستخدم تشغيلها لاحقاً
+      console.log('لم يتم تشغيل الصوت تلقائياً:', err);
     });
-
-    // نشيل المستمع بعد اول مرة
-    document.removeEventListener('click', playMusic);
-    document.removeEventListener('touchstart', playMusic);
   }
 
-  // نستنى اول ضغطة او لمسة
   document.addEventListener('click', playMusic);
   document.addEventListener('touchstart', playMusic);
 
-  // لو المستخدم ضغط زر الموسيقى يدوي نوقفه/نشغله عادي
+  // دالة التبديل اليدوي (تم تعديلها قليلاً)
   window.toggleMusic = function() {
     if (!audio) return;
     const btns = document.querySelectorAll('#musicTopBtn, #musicBottomBtn');
     if (audio.paused) {
-      audio.play();
-      btns.forEach(b => { b.textContent = '🔊'; b.classList.add('playing'); });
+      audio.play().then(() => {
+        btns.forEach(b => { b.textContent = '🔊'; b.classList.add('playing'); });
+        musicPlayed = true; // نؤكد أن الموسيقى مشغلة
+      }).catch(() => {});
     } else {
       audio.pause();
       btns.forEach(b => { b.textContent = '🎵'; b.classList.remove('playing'); });
@@ -552,6 +556,8 @@
   };
 })();
 </script>
+
+
 
 
 
