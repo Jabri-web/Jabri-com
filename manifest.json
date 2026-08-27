@@ -1,0 +1,9 @@
+{
+  "name": "واحة الجبري",
+  "short_name": "الواحة",
+  "description": "المنصة الرسمية لعبدالله الجبري ونظرية Z-C-A",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a23",
+  "theme_color": "#00d4ff"
+}
