@@ -1,16 +1,30 @@
 {
   "name": "واحة الجبري",
   "short_name": "الواحة",
-  "description": "الدالة الأم Z(x) ونظرية السندباد الموحدة",
+  "description": "الدالة Z(x) ونظرية Z+C+A=1 - تراث اليمن",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#ffd700",
+  "lang": "ar",
+  "dir": "rtl",
   "icons": [
     {
       "src": "/image/Jabri-photo.webp",
       "sizes": "512x512",
       "type": "image/webp"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "السندباد اليمني",
+      "short_name": "السندباد", 
+      "url": "/Sindbad-Brdoni.html"
+    },
+    {
+      "name": "نزار قباني",
+      "short_name": "نزار",
+      "url": "/Nezar.html"
     }
   ]
 }
