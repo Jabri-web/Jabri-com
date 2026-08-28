@@ -1,18 +1,23 @@
 {
-  "name": "واحة الجبري",
-  "short_name": "واحة الجبري",
-  "description": "الدالة Z(x) ونظرية Z+C+A=1 - تراث اليمن",
+  "name": "واحة الجبري - Heaven Al-Jabri",
+  "short_name": "Heaven Al-Jabri",
+  "description": "Z(x) Function and Z+C+A=1 Theory - Yemeni Heritage",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#ffd700",
-  "lang": "ar",
-  "dir": "rtl",
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
-      "src": "/image/Jabri-photo.webp",
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png", 
       "sizes": "512x512",
-      "type": "image/webp"
+      "type": "image/png"
     }
   ]
 }
