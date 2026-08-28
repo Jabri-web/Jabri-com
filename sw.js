@@ -1,11 +1,12 @@
 const CACHE_NAME = 'aljabri-v1';
 const urlsToCache = [
   '/',
+  '/icon-192.png',
+  '/icon-512.png',
   '/Sindbad-Brdoni.html',
   '/Nezar.html',
   '/image/Jabri-photo.webp',
-  '/image/Yemen2026.png',
-  '/music.mp3' // ضفناه
+  '/music.mp3'
 ];
 
 self.addEventListener('install', e => {
