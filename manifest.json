@@ -1,21 +1,45 @@
 {
   "name": "Heaven Al-Jabri",
-  "short_name": "Al-Jabri",
-  "start_url": "/Header.html",
-  "scope": "/",
+  "short_name": "واحة الجبري",
+  "description": "تطبيق واحة الجبري - موسيقى باب اليمن الأصيلة والتراث اليمني",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0f",
-  "theme_color": "#ffd700",
+  "background_color": "#0A0A0F",
+  "theme_color": "#FFD700",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+  "scope": "/",
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "entertainment", "culture"],
+  "screenshots": [
+    {
+      "src": "/screenshot1.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "label": "الشاشة الرئيسية - باب اليمن"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "تشغيل الموسيقى",
+      "short_name": "موسيقى",
+      "description": "تشغيل موسيقى باب اليمن مباشرة",
+      "url": "/?action=play",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
