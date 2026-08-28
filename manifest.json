@@ -10,21 +10,16 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "/image/Jabri-photo.webp",
-      "sizes": "512x512",
-      "type": "image/webp"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "السندباد اليمني",
-      "short_name": "السندباد", 
-      "url": "/Sindbad-Brdoni.html"
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "name": "نزار قباني",
-      "short_name": "نزار",
-      "url": "/Nezar.html"
+      "src": "/icon-512.png",
+      "sizes": "512x512", 
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
