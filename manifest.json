@@ -1,21 +1,16 @@
 {
   "name": "واحة الجبري",
   "short_name": "الواحة",
-  "description": "موقع واحة الجبري الرسمي",
+  "description": "الدالة الأم Z(x) ونظرية السندباد الموحدة",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a23",
-  "theme_color": "#00d4ff",
+  "background_color": "#0a0a0f",
+  "theme_color": "#ffd700",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png", 
+      "src": "/image/Jabri-photo.webp",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ]
 }
