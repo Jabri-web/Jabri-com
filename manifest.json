@@ -1,6 +1,6 @@
 {
   "name": "واحة الجبري",
-  "short_name": "الواحة",
+  "short_name": "واحة الجبري",
   "description": "الدالة Z(x) ونظرية Z+C+A=1 - تراث اليمن",
   "start_url": "/",
   "display": "standalone",
@@ -10,14 +10,9 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
+      "src": "/image/Jabri-photo.webp",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ]
 }
