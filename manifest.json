@@ -24,7 +24,11 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["music", "entertainment", "culture"],
+  "categories": [
+    "music",
+    "entertainment",
+    "culture"
+  ],
   "screenshots": [
     {
       "src": "/screenshot1.jpg",
@@ -39,7 +43,12 @@
       "short_name": "موسيقى",
       "description": "تشغيل موسيقى باب اليمن مباشرة",
       "url": "/?action=play",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
