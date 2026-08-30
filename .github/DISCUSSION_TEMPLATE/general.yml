@@ -1,19 +1,20 @@
-title: "مناقشة عامة"
-labels: ["general"]
-body:
-    - type: textarea
-    id: What
-    attributes:
-      label: "ما الذي تريد مناقشته؟"
-      description: "اسأل سؤال او شارك فكرة"
-      placeholder: "اكتب هنا..."
-    validations:
-      required: true
-    - type: input
-    id: Links
-    attributes:
-      label: "روابط مفيدة"
-      description: "اختياري"
-      placeholder: "https://"
-    validations:
-      required: false
+---
+version: 2
+
+updates:
+- package-ecosystem: "npm"
+  directory: "/"
+  schedule:
+    interval: "weekly"
+  groups:
+    minor-npm-dependencies:
+      # NPM: Only group minor and patch updates (we want to carefully review major updates)
+      update-types: [minor, patch]
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "weekly"
+  groups:
+    minor-actions-dependencies:
+      # GitHub Actions: Only group minor and patch updates (we want to carefully review major updates)
+      update-types: [minor, patch]
