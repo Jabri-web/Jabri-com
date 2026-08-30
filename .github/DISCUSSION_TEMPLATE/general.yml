@@ -4,8 +4,8 @@ labels: ["general"]
     id: What
     attributes:
      label: "ما الذي تريد مناقشته؟"
-      description: "اسأل سؤال او شارك فكرة"
-      placeholder: "اكتب هنا..."
+     description: "اسأل سؤال او شارك فكرة"
+     placeholder: "اكتب هنا..."
     validations:
       required: true
     - type: input
