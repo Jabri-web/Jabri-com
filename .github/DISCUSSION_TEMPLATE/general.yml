@@ -1,8 +1,8 @@
 title: "مناقشة عامة"
 labels: ["general"]
 body:
-- type: textarea
- id: What
+ - type: textarea
+  id: What
     attributes:
       label: "ما الذي تريد مناقشته؟"
       description: "اسأل سؤال او شارك فكرة عن Z(x)"
