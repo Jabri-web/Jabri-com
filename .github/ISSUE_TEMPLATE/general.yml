@@ -8,7 +8,7 @@ body:
   attributes:
     value: |
       مرحبا بك في واحة الجبري
-      استخدم هذا القالب للمناقشات العامة
+      استخدم هذا القالب للمناقشات العامة والاسئلة العلمية
 - type: textarea
   id: topic
   attributes:
@@ -26,16 +26,6 @@ body:
   validations:
     required: true
 - type: checkboxes
-  
-  - type: checkboxes
-  id: terms
-  attributes:
-    label: الموافقة
-    options:
-            - label: اوافق على معايير واحة الجبري
-        required: true
-  
-  
   id: terms
   attributes:
     label: الموافقة
