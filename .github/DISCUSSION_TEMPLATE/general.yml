@@ -1,10 +1,12 @@
-title: "General Discussion"
+
+title: "مناقشة عامة"
+labels: ["general"]
 body:
     - type: textarea
-    id: what
+    id: What
     attributes:
-      label: "What do you want to discuss?"
-      description: "Ask a question, share an idea, or start a conversation"
-      placeholder: "Write your discussion here..."
+      label: "ما الذي تريد مناقشته؟"
+      description: "اسأل سؤال او شارك فكرة عن Z(x)"
+      placeholder: "اكتب نقاشك هنا..."
     validations:
       required: true
