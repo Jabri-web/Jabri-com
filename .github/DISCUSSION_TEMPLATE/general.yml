@@ -3,9 +3,9 @@ labels: ["general"]
 body:
 - type: textarea
 id: What
-    attributes:
-      label: "ما الذي تريد مناقشته؟"
-      description: "اسأل سؤال او شارك فكرة عن Z(x)"
-      placeholder: "اكتب نقاشك هنا..."
-    validations:
-      required: true
+attributes:
+ label: "ما الذي تريد مناقشته؟"
+ description: "اسأل سؤال او شارك فكرة عن Z(x)"
+ placeholder: "اكتب نقاشك هنا..."
+ validations:
+ required: true
