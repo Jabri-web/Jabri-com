@@ -1,10 +1,15 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
-
+name: 🧮 اقتراح نظري
+about: مناقشة معادلة او برهان جديد
+title: "[Theory] "
+labels: theory
 ---
 
+### المعادلة / الفكرة
+اكتب المعادلة هنا
 
+### البرهان او الشرح
+اشرح فكرتك
+
+### المراجع
+لو في مراجع
