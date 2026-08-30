@@ -1,6 +1,6 @@
-title:"مناقشة عامة"
+title: "مناقشة عامة"
 labels: ["general"]
- - type: textarea
+    -type: textarea
     id: What
     attributes:
      label: "ما الذي تريد مناقشته؟"
@@ -8,8 +8,8 @@ labels: ["general"]
     placeholder: "اكتب هنا..."
     validations:
       required: true
-    - type: input
-    id: Links
+     -type: input
+     id: Links
     attributes:
       label: "روابط مفيدة"
       description: "اختياري"
