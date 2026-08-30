@@ -1,11 +1,18 @@
-title: "مناقشة عامة"
-labels: ["general"]
-body:
- - type: textarea
-   id: What
-   attributes:
-      label: "ما الذي تريد مناقشته؟"
-      description: "اسأل سؤال او شارك فكرة عن Z(x)"
-      placeholder: "اكتب نقاشك هنا..."
-    validations:
-      required: true
+# Common validation errors when creating issue forms
+
+You may see some of these common validation errors when creating, saving, or viewing issue forms.
+
+<!--UI-LINK: We link to individual anchors within this file from the issue template editor when the given YAML error is thrown. Links to and anchors within this file should be preserved or should be updated in github/github if they are changed -->
+
+> \[!NOTE]
+> Issue forms are currently in public preview and subject to change.
+
+## Required top level key `name` is missing
+
+The template does not contain a `name` field, which means it is not clear what to call your issue template when giving users a list of options.
+
+### Example of "required top level key `name` is missing" error
+
+```yaml
+description: "Thank you for reporting a bug!"
+...
