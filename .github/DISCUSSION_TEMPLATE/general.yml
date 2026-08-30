@@ -1,7 +1,7 @@
 title: "مناقشة عامة"
 labels: ["general"]
 body:
-    - type: textarea
+- type: textarea
     id: What
     attributes:
       label: "ما الذي تريد مناقشته؟"
