@@ -1,20 +1,18 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
+name: ✨ Feature Request
+about: اقتراح ميزة جديدة لنظرية Z(x)
+title: "[Feature] "
+labels: enhancement
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### هل الميزة مرتبطة بمشكلة؟
+مثال: دائما احبط لما [...]
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+### الحل المقترح
+صف الميزة التي تريدها بوضوح
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+### بدائل اخرى
+هل فكرت في حلول بديلة؟
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### سياق اضافي
+اضف اي سياق عن نظرية Z(x) هنا
