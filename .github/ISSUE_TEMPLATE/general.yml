@@ -1,18 +1,37 @@
-name: General Discussion
-description: Ask a question, share an idea, or start a conversation
+
+name: 💬 مناقشة عامة
+description: افتح نقاش عن نظرية Z(x) او واحة الجبري
 title: "[Discussion]: "
 labels: ["discussion"]
 body:
     - type: markdown
     attributes:
       value: |
-        ### Welcome! 👋
-        Use this template for questions, ideas, and general discussion.
+        مرحبا بك في **واحة الجبري** 🌴
+        استخدم هذا القالب للمناقشات العامة والأسئلة العلمية
+
     - type: textarea
-    id: discussion
+    id: topic
     attributes:
-      label: "What do you want to discuss?"
-      description: "Please describe your question or idea"
-      placeholder: "Write your discussion here..."
+      label: موضوع النقاش
+      description: عن ماذا تريد ان تتحدث؟
+      placeholder: مثال: برهان جديد لمعادلة Z(x)
     validations:
       required: true
+
+    - type: textarea
+    id: details
+    attributes:
+      label: التفاصيل
+      description: اشرح فكرتك بالتفصيل
+      placeholder: اكتب هنا...
+    validations:
+      required: true
+
+    - type: checkboxes
+    id: terms
+    attributes:
+      label: الموافقة
+      options:
+                - label: اوافق على معايير واحة الجبري
+          required: true
