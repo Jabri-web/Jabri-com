@@ -3,7 +3,7 @@ labels: ["general"]
  - type: textarea
     id: What
     attributes:
-      label: "ما الذي تريد مناقشته؟"
+     label: "ما الذي تريد مناقشته؟"
       description: "اسأل سؤال او شارك فكرة"
       placeholder: "اكتب هنا..."
     validations:
