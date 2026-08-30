@@ -1,4 +1,4 @@
-title: "مناقشة عامة"
+title:"مناقشة عامة"
 labels: ["general"]
  - type: textarea
     id: What
