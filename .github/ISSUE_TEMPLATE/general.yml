@@ -26,6 +26,16 @@ body:
   validations:
     required: true
 - type: checkboxes
+  
+  - type: checkboxes
+  id: terms
+  attributes:
+    label: الموافقة
+    options:
+            - label: اوافق على معايير واحة الجبري
+        required: true
+  
+  
   id: terms
   attributes:
     label: الموافقة
