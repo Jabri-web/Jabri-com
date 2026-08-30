@@ -1,3 +1,10 @@
 name: "Bug report"
-description: "Thank you for reporting a bug!"
-...
+body:
+- type: input
+  id: name
+  attributes:
+    label: First name
+- type: input
+  id: surname
+  attributes:
+    label: Last name
