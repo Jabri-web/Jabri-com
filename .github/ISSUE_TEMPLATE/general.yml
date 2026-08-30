@@ -1,7 +1,7 @@
 name: "💬 مناقشة عامة"
 description: "افـتح نقاش عن نظرية Z(x) او واحة الجبري"
-title: "[Discussion]"
-labels: 
+title: "Discussion"
+labels:
     - discussion
 body:
     - type: markdown
