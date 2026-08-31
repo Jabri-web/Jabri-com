@@ -1,8 +1,10 @@
 ---
-name: 🧮 اقتراح نظري
+name: "\U0001F9EE اقتراح نظري"
 about: مناقشة معادلة او برهان جديد
 title: "[Theory] "
-labels: theory
+labels: ''
+assignees: ''
+
 ---
 
 ### المعادلة / الفكرة

@@ -1,8 +1,10 @@
 ---
-name: ✨ Feature Request
+name: "✨ Feature Request"
 about: اقتراح ميزة جديدة لنظرية Z(x)
 title: "[Feature] "
 labels: enhancement
+assignees: ''
+
 ---
 
 ### هل الميزة مرتبطة بمشكلة؟
