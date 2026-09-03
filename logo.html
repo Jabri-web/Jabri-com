@@ -14,14 +14,14 @@
     <meta name="description" content="بوابة واحة الجبري - تراث اليمن العريق" />
     <meta name="author" content="م/ عبدالله محمد ناصر الجبري" />
     
-    <link rel="canonical" href="https://jabri-com.vercel.app/logo.html" />
+    <link rel="canonical" href="https://jabri-com.vercel.app/" />
     
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="واحة الجبري" />
     <meta property="og:title" content="واحة الجبري - البوابة الرئيسية" />
     <meta property="og:description" content="بوابة واحة الجبري - تراث اليمن العريق" />
     <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
-    <meta property="og:url" content="https://jabri-com.vercel.app/logo.html" />
+    <meta property="og:url" content="https://jabri-com.vercel.app/" />
 
     <style>
         * {
@@ -856,8 +856,8 @@
 </head>
 <body class="night device-desktop">
 
-    <!-- ===== فيديو الخلفية ===== -->
-    <video class="bg-video" id="bgVideo" autoplay muted playsinline poster="oasis-poster.jpg">
+    <!-- ===== فيديو الخلفية مع loop ===== -->
+    <video class="bg-video" id="bgVideo" autoplay muted playsinline loop poster="oasis-poster.jpg">
         <source src="/image/heaven3.mp4" type="video/mp4" id="videoSource" />
     </video>
 
@@ -884,7 +884,7 @@
             </a>
             <a class="btn-exit" id="exitBtn"><i class="fas fa-power-off"></i> <span class="ar">خروج</span><span class="en">Exit</span></a>
             <a class="btn-lang" id="langToggle"><i class="fas fa-globe"></i> <span id="langLabel">عربي</span></a>
-            <a class="btn-settings" id="settingsToggle"><i class="fas fa-cog"></i> <span id="settingsLabel">إعدادات</span></a>
+            <a class="btn-settings" id="settingsToggle" onclick="openSettings()"><i class="fas fa-cog"></i> <span id="settingsLabel">إعدادات</span></a>
         </div>
     </header>
 
@@ -1009,7 +1009,7 @@
 
     </div>
 
-    <!-- ===== الأزرار السفلية (بدون popups - توجيه مباشر) ===== -->
+    <!-- ===== الأزرار السفلية ===== -->
     <div class="bottom-bar">
         <a class="btn-b" data-action="chat" data-page="Page11.html"><i class="fas fa-comment-dots"></i> <span class="ar">محادثة</span><span class="en">Chat</span></a>
         <a class="btn-b" data-action="lang" data-page="Page11.html"><i class="fas fa-language"></i> <span class="ar">عربي</span><span class="en">English</span></a>
@@ -1056,6 +1056,33 @@
     </div>
 
     <script>
+        // ============================================================
+        // ===== تشغيل الصوت تلقائياً عند أول لمسة =====
+        // ============================================================
+
+        document.addEventListener('click', function firstInteraction() {
+            const bgMusic = document.getElementById('bgMusic');
+            if (bgMusic) {
+                bgMusic.volume = 0.3;
+                bgMusic.play().catch(function() {
+                    console.log('⚠️ المتصفح منع التشغيل التلقائي');
+                });
+            }
+            document.removeEventListener('click', firstInteraction);
+        }, { once: true });
+
+        // أيضاً للمس (Touch) على الجوال
+        document.addEventListener('touchstart', function firstTouch() {
+            const bgMusic = document.getElementById('bgMusic');
+            if (bgMusic) {
+                bgMusic.volume = 0.3;
+                bgMusic.play().catch(function() {
+                    console.log('⚠️ المتصفح منع التشغيل التلقائي');
+                });
+            }
+            document.removeEventListener('touchstart', firstTouch);
+        }, { once: true });
+
         // ============================================================
         // ===== نظام تسجيل الدخول =====
         // ============================================================
@@ -1167,18 +1194,14 @@
         });
 
         // ============================================================
-        // ===== الأزرار السفلية - توجيه مباشر بدون popups =====
+        // ===== الأزرار السفلية =====
         // ============================================================
 
         document.querySelectorAll('.btn-b').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const page = this.dataset.page || 'Page11.html';
-                const action = this.dataset.action || '';
-
-                console.log(`🔗 توجيه إلى: ${page} (${action})`);
-
-                // التوجيه المباشر إلى الصفحة
+                console.log(`🔗 توجيه إلى: ${page}`);
                 window.location.href = page;
             });
         });
@@ -1202,12 +1225,30 @@
         document.getElementById('exitBtn').addEventListener('click', function(e) {
             e.preventDefault();
             console.log('👋 خروج من الواحة');
-            // توجيه إلى صفحة الخروج أو إغلاق النافذة
             window.location.href = 'https://www.google.com';
         });
 
         // ============================================================
-        // ===== باقي الكود (الإعدادات، الفيديو، الصوت) =====
+        // ===== الإعدادات =====
+        // ============================================================
+
+        function openSettings() {
+            document.getElementById('settingsOverlay').classList.add('active');
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsOverlay').classList.remove('active');
+        }
+
+        document.getElementById('settingsOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeSettings();
+        });
+
+        window.openSettings = openSettings;
+        window.closeSettings = closeSettings;
+
+        // ============================================================
+        // ===== إعدادات الجهاز =====
         // ============================================================
 
         let currentDevice = 'desktop';
@@ -1237,25 +1278,14 @@
             document.getElementById('currentStatus').textContent = deviceText + ' · ' + modeText;
         }
 
-        function openSettings() {
-            document.getElementById('settingsOverlay').classList.add('active');
-        }
-
-        function closeSettings() {
-            document.getElementById('settingsOverlay').classList.remove('active');
-        }
-
-        document.getElementById('settingsOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeSettings();
-        });
-
         window.setDevice = setDevice;
         window.setMode = setMode;
-        window.closeSettings = closeSettings;
 
+        // ============================================================
         // ===== فيديو =====
+        // ============================================================
+
         const video = document.getElementById('bgVideo');
-        const videoSource = document.getElementById('videoSource');
         const progressFill = document.getElementById('progressFill');
         const timeDisplay = document.getElementById('timeDisplay');
 
@@ -1273,9 +1303,11 @@
             timeDisplay.textContent = formatTime(Math.floor(current)) + ' / ' + formatTime(Math.floor(duration));
         });
 
+        // ============================================================
         // ===== الصوت =====
+        // ============================================================
+
         const soundBtn = document.getElementById('soundBtn');
-        const soundText = document.getElementById('soundText');
         const bgMusic = document.getElementById('bgMusic');
         let isSoundOn = false;
 
@@ -1293,7 +1325,10 @@
             }
         });
 
+        // ============================================================
         // ===== تبديل اللغة =====
+        // ============================================================
+
         let currentLang = 'ar';
 
         document.getElementById('langToggle').addEventListener('click', function(e) {
@@ -1307,7 +1342,10 @@
             document.getElementById('settingsLabel').textContent = newLang === 'ar' ? 'إعدادات' : 'Settings';
         });
 
+        // ============================================================
         // ===== عداد الزوار =====
+        // ============================================================
+
         let visitorsCount = 1247;
         setInterval(() => {
             visitorsCount += Math.random() > 0.6 ? 1 : 0;
@@ -1317,7 +1355,10 @@
             }
         }, 10000);
 
+        // ============================================================
         // ===== بدء التشغيل =====
+        // ============================================================
+
         document.body.classList.add('night', 'device-desktop');
         document.getElementById('nightBtn').classList.add('active');
         document.getElementById('desktopBtn').classList.add('active');
@@ -1325,12 +1366,18 @@
 
         video.play().catch(function() {});
 
-        console.log('🌴 واحة الجبري v4.0 - البوابة الرئيسية');
+        console.log('🌴 واحة الجبري v5.0 - البوابة الرئيسية');
         console.log('📌 logo.html هو الصفحة الرئيسية (index)');
-        console.log('🔗 جميع الأزرار السفلية توجّه إلى Page11.html أو Page12.html');
+        console.log('🔗 جميع الأزرار توجّه إلى Page11.html أو Page12.html');
+        console.log('🎵 الصوت يشتغل عند أول لمسة للشاشة');
+        console.log('🔄 الفيديو يعيد التشغيل تلقائياً (loop)');
         console.log('👤 نظام المستخدمين والصلاحيات جاهز');
         console.log('🇾🇪 من صنعاء إلى الكون');
     </script>
     
+    
+    
+    <script src="/js/menu.js"></script>
+
 </body>
 </html>
