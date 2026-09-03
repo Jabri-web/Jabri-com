@@ -981,7 +981,7 @@
 
         <!-- ===== شبكة البراند ===== -->
         <div class="brand-grid">
-            <div class="brand-card" data-page="/index.html">
+            <div class="brand-card" data-page="/Page11.html">
                 <div class="card-icon"><i class="fas fa-crown"></i></div>
                 <div class="card-name">واحة الجبري</div>
                 <div class="card-sub">تراث اليمن العريق</div>
@@ -1189,7 +1189,7 @@
 
         document.querySelectorAll('.brand-card').forEach(card => {
             card.addEventListener('click', function() {
-                const page = this.dataset.page || 'index.html';
+                const page = this.dataset.page || '/Page11.html';
                 console.log(`🔗 توجيه إلى: ${page}`);
                 window.location.href = page;
             });
