@@ -2,10 +2,11 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>واحة الجبري | Heaven Al-Jabri - Z(x) ونظرية السندباد الموحدة</title>
+  
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#00d4ff">
+  <meta name="theme-color" content="#0a0a0f">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -15,14 +16,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
-  
   <!-- ====================================================================== -->
   <!-- 1. منع الكاش + PWA -->
   <!-- ====================================================================== -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="theme-color" content="#0a0a0f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   
   <!-- ====================================================================== -->
@@ -35,6 +34,7 @@
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-image-preview:large">
+  <meta name="bingbot" content="index, follow, max-image-preview:large">
   
   <!-- ====================================================================== -->
   <!-- 3. العنوان والوصف + Citation -->
@@ -255,12 +255,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
-
-
   <!-- ====================================================================== -->
-  <!-- 11. Styles -->
+  <!-- 11. Styles (تم تعديل الألوان لتناسب الواحة) -->
   <!-- ====================================================================== -->
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Cairo', sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; padding: 20px; user-select: none; -webkit-user-select: none; }
@@ -271,17 +268,20 @@
         padding: 0 20px; pointer-events: none;
     }
     .top-header-buttons > * { pointer-events: auto; }
+    
+    /* التعديل: ألوان ذهبية داكنة مع خلفية شفافة لتناسب الواحة */
     .top-btn {
-        background: linear-gradient(135deg, #ffd700, #f0a500) !important;
-        color: #0a0a0f !important; border: 2px solid #ffd700 !important;
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.4) !important;
+        background: rgba(20, 20, 20, 0.8) !important; /* خلفية داكنة شفافة */
+        color: #ffd700 !important; /* نص ذهبي */
+        border: 2px solid #ffd700 !important;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3) !important;
         border-radius: 30px !important; font-weight: 900 !important;
         cursor: pointer; font-family: 'Cairo', sans-serif;
         display: inline-flex; align-items: center; justify-content: center; gap: 6px;
         height: 44px; font-size: 13px; padding: 0 16px;
         transition: all 0.3s ease !important; text-decoration: none;
     }
-    .top-btn:hover { transform: scale(1.08) !important; box-shadow: 0 0 40px rgba(255, 215, 0, 0.8) !important; }
+    .top-btn:hover { transform: scale(1.08) !important; box-shadow: 0 0 40px rgba(255, 215, 0, 0.7) !important; background: rgba(20, 20, 20, 0.95) !important; }
     .top-btn.menu { width: 44px; padding: 0; font-size: 18px; }
     .top-btn.lang { width: auto; min-width: 60px; padding: 0 14px; font-size: 12px; }
 
@@ -337,14 +337,12 @@
   </style>
 </head>
 
-
-
 <body>
 
   <div class="top-header-buttons">
     <div style="display:flex; gap:8px;">
       <button class="top-btn menu" onclick="window.toggleMenu()" title="القائمة">☰</button>
-      <button class="top-btn lang" onclick="window.toggleLang()" title="تبديل اللغة">
+      <button class="top-btn lang" id="langTopBtn" onclick="window.toggleLang()" title="تبديل اللغة">
         <span class="en">🇾🇪 عربي</span>
         <span class="ar">🇬🇧 EN</span>
       </button>
@@ -360,17 +358,13 @@
     
     <a href="/about-waha.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> عن واحة الجبري</a>
 
-
     <a href="/heaven-info.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> عن الواحة</a>
-
-
-
 
     <a href="/about.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> عن الباحث</a>
     
     <a href="/Author-cv.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> سيرة الباحث</a>
     
-      <a href="https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> ويكيبيديا</a>
+    <a href="https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> ويكيبيديا</a>
     
     <a href="/Sindbad-theory.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">📐</span> نظرية السندباد</a>
     <a href="/theory-ar.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🧮</span> الدالة الأم Z(x)</a>
@@ -567,11 +561,7 @@
       };
     })();
   </script>
-  
 
-  
-  
-  
   <div id="header-placeholder"></div>
   <div id="footer-placeholder"></div>
   
