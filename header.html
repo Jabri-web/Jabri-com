@@ -1,5 +1,5 @@
 <!-- ========================================================== -->
-<!-- header.html - المكون النهائي 100% (السيو + CSS الكامل + الواجهة) -->
+<!-- header.html - الهيدر العام + CSS الكامل -->
 <!-- ========================================================== -->
 
 <!-- ===== وسوم السيو (SEO) ===== -->
@@ -75,7 +75,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- ========================================================== -->
-<!-- CSS الكامل (الهيدر + الواحة) - سيظهر عند تحميل الهيدر -->
+<!-- CSS الكامل (الهيدر + الواحة) -->
 <!-- ========================================================== -->
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -85,6 +85,9 @@
     /* ===== إعادة الخلفية الداكنة ===== */
     body.night { background: #0a0f0d; color: #f5efe6; }
     body.day { background: #f5efe6; color: #1a1a1a; }
+
+    /* ===== الفيديو والخلفية ===== */
+    .bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; object-fit: cover; opacity: 0.3; }
 
     /* ===== الهيدر ===== */
     .top-header-buttons {
