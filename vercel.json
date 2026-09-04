@@ -1,39 +1,19 @@
 {
-"version": 2,
-"name": "waha-al-jabri",
-"builds": [
-{ "src": "*.html", "use": "@vercel/static" },
-{ "src": "*.htm", "use": "@vercel/static" },
-{ "src": "*.xml", "use": "@vercel/static" },
-{ "src": "*.txt", "use": "@vercel/static" },
-{ "src": "image/**", "use": "@vercel/static" },
-{ "src": "Image/**", "use": "@vercel/static" },
-{ "src": "ar/**", "use": "@vercel/static" },
-{ "src": "en/**", "use": "@vercel/static" }
-],
-"routes": [
-{ "src": "/", "dest": "/index.html" },
-{ "src": "/Sindbad-theory", "dest": "/Sindbad-theory.html" },
-{ "src": "/calculator", "dest": "/calculator.html" },
-{ "src": "/journal4", "dest": "/journal4.html" },
-{ "src": "/theory-ar", "dest": "/theory-ar.html" },
-{ "src": "/theory-en", "dest": "/theory-en.htm" },
-{ "src": "/about", "dest": "/about.html" },
-{ "src": "/en/ar/(.*)", "dest": "/ar/$1", "status": 301 },
-{ "src": "/ar/en/(.*)", "dest": "/en/$1", "status": 301 },
-{ "src": "/image/(.*)", "dest": "/image/$1" },
-{ "src": "/Image/(.*)", "dest": "/Image/$1" },
-{ "src": "/ar/(.*)", "dest": "/ar/$1" },
-{ "src": "/en/(.*)", "dest": "/en/$1" }
-],
-"headers": [
-{
-"source": "/(.*)",
-"headers": [
-{ "key": "X-Robots-Tag", "value": "index, follow" },
-{ "key": "X-Content-Type-Options", "value": "nosniff" },
-{ "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
-]
-}
-]
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/en/(.*)",
+      "destination": "/$1"
+    }
+  ]
 }
