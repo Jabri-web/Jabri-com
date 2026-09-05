@@ -2,7 +2,7 @@
   "name": "Heaven Al-Jabri | واحة الجبري",
   "short_name": "واحة الجبري",
   "description": "تطبيق واحة الجبري - موسيقى باب اليمن الأصيلة ونظرية السندباد الموحدة Z+C+A=1",
-  "start_url": "/",
+  "start_url": "/logo.html",
   "display": "standalone",
   "background_color": "#0A0A0F",
   "theme_color": "#c9a84c",
