@@ -1377,6 +1377,30 @@
     
     
     
+    
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(function(reg) {
+                // مقارنة الإصدارات
+                reg.update().then(function() {
+                    console.log('✅ التطبيق تم تحديثه تلقائياً');
+                });
+                
+                // عندما يفتح المستخدم التطبيق، يقارن الإصدار ويدفع التحديث
+                navigator.serviceWorker.addEventListener('controllerchange', function() {
+                    if (confirm('يتوفر تحديث جديد لواحة الجبري. هل تريد التحديث الآن؟')) {
+                        window.location.reload();
+                    }
+                });
+            });
+    }
+</script>
+    
+    
+    
+    
+    
    <div id="header-placeholder"></div>
   <div id="footer-placeholder"></div>
   
