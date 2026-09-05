@@ -1,0 +1,52 @@
+{
+  "name": "Heaven Al-Jabri | واحة الجبري",
+  "short_name": "واحة الجبري",
+  "description": "تطبيق واحة الجبري - موسيقى باب اليمن الأصيلة ونظرية السندباد الموحدة Z+C+A=1",
+  "start_url": "/logo.html",
+  "display": "standalone",
+  "background_color": "#0A0A0F",
+  "theme_color": "#c9a84c",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "culture", "education", "اليمن"],
+  "screenshots": [
+    {
+      "src": "/screenshot1.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "label": "الشاشة الرئيسية - واحة الجبري"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "تشغيل موسيقى باب اليمن",
+      "short_name": "موسيقى",
+      "description": "تشغيل موسيقى الشكيرة",
+      "url": "/?action=play",
+      "icons": [{"src": "/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "نظرية السندباد",
+      "short_name": "النظرية",
+      "description": "Z+C+A=1 الدالة الأم",
+      "url": "/Sindbad-theory",
+      "icons": [{"src": "/icon-192.png", "sizes": "192x192"}]
+    }
+  ]
+}
