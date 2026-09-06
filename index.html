@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1200, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    
+    <!-- ✅ الشريط العلوي أسود فخم (تم إزالة الذهبي) -->
     <meta name="theme-color" content="#0a0a0f">
     <meta name="apple-mobile-web-app-capable" content="yes">
     
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#c9a84c">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
@@ -27,6 +28,7 @@
     <meta property="og:url" content="https://jabri-com.vercel.app/" />
 
     <style>
+        /* ===== كل الـ CSS نفسه ===== */
         * {
             margin: 0;
             padding: 0;
@@ -1378,19 +1380,15 @@
         console.log('🇾🇪 من صنعاء إلى الكون');
     </script>
     
-    
-    
-    
+    <!-- ===== تسجيل Service Worker ===== -->
     <script>
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
+        navigator.serviceWorker.register('/sw.js')
             .then(function(reg) {
-                // مقارنة الإصدارات
                 reg.update().then(function() {
                     console.log('✅ التطبيق تم تحديثه تلقائياً');
                 });
                 
-                // عندما يفتح المستخدم التطبيق، يقارن الإصدار ويدفع التحديث
                 navigator.serviceWorker.addEventListener('controllerchange', function() {
                     if (confirm('يتوفر تحديث جديد لواحة الجبري. هل تريد التحديث الآن؟')) {
                         window.location.reload();
@@ -1398,42 +1396,13 @@
                 });
             });
     }
-</script>
+    </script>
     
+    <div id="header-placeholder"></div>
+    <div id="footer-placeholder"></div>
     
-    <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').then(reg => {
-            reg.onupdatefound = () => {
-                const newWorker = reg.installing;
-                newWorker.onstatechange = () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                        alert('📢 ترميمة جديدة نزلت! اضغط موافق لتحديث واحة الجبري');
-                        window.location.reload();
-                    }
-                };
-            };
-        });
-    }
-</script>
+    <script src="/js/init-page-root.js"></script>
+    <script src="/js/menu.js"></script>
     
-    <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js');
-        
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-            alert('📢 ترميمة جديدة نزلت! جاري تحديث واحة الجبري...');
-            window.location.reload();
-        });
-    }
-</script>
-    
-    
-   <div id="header-placeholder"></div>
-  <div id="footer-placeholder"></div>
-  
-  <script src="/js/init-page-root.js"></script>
-  <script src="/js/menu.js"></script>
-  
 </body>
 </html>

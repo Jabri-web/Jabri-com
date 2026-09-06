@@ -1,4 +1,5 @@
-const CACHE_NAME = 'heaven-aljabri-v3'; // غير الرقم مع كل redeployment v4, v5...
+const CACHE_NAME = 'heaven-aljabri-v4'; // تم الترقية إلى v4
+
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
@@ -10,7 +11,27 @@ const FILES_TO_CACHE = [
   '/music.mp3',
   '/Sindbad-Brdoni.html',
   '/Nezar.html',
-  '/offline.html' // صفحة 404 مخصصة
+  '/offline.html',
+  '/Page1.html',
+  '/Page2.html',
+  '/Page11.html',
+  '/Page12.html',
+  '/Yemen-library.html',
+  '/Router-all.html',
+  '/Dbase.html',
+  '/research.html',
+  '/Pages-Researches.html',
+  '/Office.html',
+  '/Check.html',
+  '/about.html',
+  '/about-ar.html',
+  '/about-en.html',
+  '/about-waha.html',
+  '/Author-cv.html',
+  '/cv-2026a.html',
+  '/cv-2026e.html',
+  '/profile.html',
+  '/profile-en.html'
 ];
 
 // التثبيت: خزن كل شي
