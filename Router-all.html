@@ -89,10 +89,7 @@
     </script>
 
     <!-- ======== الأنماط (CSS) ======== -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <!-- تم إزالة روابط الخطوط الخارجية نهائيًا لمنع أخطاء التحميل، وسنستخدم خطوط النظام (System Fonts) -->
     <style>
         /* ---------- الأنماط العامة ---------- */
         * {
@@ -104,7 +101,7 @@
         body {
             background: #0a0a0a;
             color: #fff;
-            font-family: 'Cairo', 'Tahoma', 'Segoe UI', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Tahoma", sans-serif;
             text-align: center;
             padding: 20px;
             min-height: 100vh;
@@ -115,7 +112,7 @@
 
         body.en {
             direction: ltr;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
         /* زر تبديل اللغة (ثابت) */
@@ -222,8 +219,10 @@
             padding-bottom: 10px;
             display: inline-block;
         }
+        
+        /* استبدال الأيقونات بخطوط نظام لمنع مشاكل FontAwesome */
         .section-title i {
-            margin-left: 10px;
+            display: none; 
         }
 
         .grid {
@@ -296,7 +295,7 @@
             color: #e8e8f0;
             padding: 30px 15px;
             border-top: 1px solid #2a2a3e;
-            font-family: 'Tajawal', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin-top: 40px;
         }
 
@@ -392,7 +391,6 @@
 
         <!-- ===== المشاريع الأساسية 1→12 ===== -->
         <h2 class="section-title">
-            <i class="fas fa-project-diagram"></i>
             <span class="ar-text">المشاريع الأساسية 1→12</span>
             <span class="en-text">Core Projects 1→12</span>
         </h2>
@@ -462,7 +460,6 @@
 
         <!-- ===== المكتبة والبحوث ===== -->
         <h2 class="section-title">
-            <i class="fas fa-book"></i>
             <span class="ar-text">المكتبة والبحوث</span>
             <span class="en-text">Library & Research</span>
         </h2>
@@ -508,20 +505,15 @@
                 <span class="icon">👥</span>
                 <span class="ar-text">من نحن</span><span class="en-text">Who We Are</span>
             </a>
-            
-            
             <a href="explore.html" class="btn">
                 <span class="icon">👥</span>
                 <span class="ar-text"> المستكشف</span><span class="en-text">Explore</span>
             </a>
-            
             <a href="gallery.html" class="btn">
                 <span class="icon">👥</span>
                 <span class="ar-text"> الاستديو</span><span class="en-text">Gallery</span>
             </a>
-            
-            
-        </div>""
+        </div>
 
         <div class="datetime" id="dt"></div>
 
@@ -532,8 +524,6 @@
     <!-- ============================================ -->
 
     <footer id="site-footer" dir="rtl">
-
-        <!-- البحث عن الباحث -->
         <div class="footer-search">
             <p id="searchTitle"><strong>🔍 البحث عن الباحث:</strong></p>
             <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
@@ -544,7 +534,6 @@
             </div>
         </div>
 
-        <!-- الروابط -->
         <div class="footer-links">
             <a href="https://orcid.org/0009-0003-3319-3822" target="_blank" rel="noopener">🆔 <span class="txt" data-ar="ORCID" data-en="ORCID">ORCID</span></a>
             <a href="https://zenodo.org/records/20513840" target="_blank" rel="noopener">📊 <span class="txt" data-ar="زينودو" data-en="Zenodo">زينودو</span></a>
@@ -562,7 +551,6 @@
         </div>
 
         <p id="copyright">© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة</p>
-
     </footer>
 
     <!-- ============================================ -->
@@ -570,26 +558,14 @@
     <!-- ============================================ -->
 
     <script>
-        // ====== دالة تحديث الفوتر ======
         function updateFooterLang() {
             const isEnglish = document.documentElement.lang === 'en';
             const footer = document.getElementById('site-footer');
             if (footer) footer.dir = isEnglish ? "ltr" : "rtl";
-
             const searchTitle = document.getElementById('searchTitle');
-            if (searchTitle) {
-                searchTitle.innerHTML = isEnglish ?
-                    "<strong>🔍 Search for Researcher:</strong>" :
-                    "<strong>🔍 البحث عن الباحث:</strong>";
-            }
-
+            if (searchTitle) searchTitle.innerHTML = isEnglish ? "<strong>🔍 Search for Researcher:</strong>" : "<strong>🔍 البحث عن الباحث:</strong>";
             const copyright = document.getElementById('copyright');
-            if (copyright) {
-                copyright.textContent = isEnglish ?
-                    "© 2026 Eng. Abdulla Mohammed Nasser Al-Jabri - All Rights Reserved" :
-                    "© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة";
-            }
-
+            if (copyright) copyright.textContent = isEnglish ? "© 2026 Eng. Abdulla Mohammed Nasser Al-Jabri - All Rights Reserved" : "© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة";
             document.querySelectorAll('#site-footer .txt').forEach(el => {
                 const newText = isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-ar');
                 if (newText) el.textContent = newText;
@@ -598,20 +574,16 @@
 
         window.updateFooterLang = updateFooterLang;
 
-        // ====== دالة تبديل اللغة ======
         function applyLanguage(lang) {
             document.documentElement.lang = lang;
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
             document.body.classList.remove('ar', 'en');
             document.body.classList.add(lang);
-
             const langAr = document.getElementById('lang-ar');
             const langEn = document.getElementById('lang-en');
             if (langAr) langAr.classList.toggle('active', lang === 'ar');
             if (langEn) langEn.classList.toggle('active', lang === 'en');
-
             if (typeof updateFooterLang === 'function') updateFooterLang();
-
             localStorage.setItem('preferred-language', lang);
         }
 
@@ -623,34 +595,20 @@
 
         window.applyLanguage = applyLanguage;
 
-        // ====== تحميل اللغة المحفوظة ======
         document.addEventListener('DOMContentLoaded', function() {
             const savedLang = localStorage.getItem('preferred-language') || 'ar';
             applyLanguage(savedLang);
-
             updateTime();
             setInterval(updateTime, 60000);
         });
 
-        // ====== دالة الوقت ======
         function updateTime() {
             const now = new Date();
             const lang = document.body.classList.contains('en') ? 'en-US' : 'ar-EG';
-            const options = {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            };
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
             const el = document.getElementById('dt');
             if (el) el.textContent = now.toLocaleDateString(lang, options);
         }
     </script>
-
-    <!-- تم حذف سكربتات /js/init-page-root.js و /js/menu.js لأنها تسبب أخطاء 404 -->
-    <!-- إذا كنت تحتاجها، تأكد من وضعها في مجلد /js/ على GitHub -->
-
 </body>
 </html>
