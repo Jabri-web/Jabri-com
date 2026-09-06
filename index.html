@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1200, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     
     <!-- ✅ الشريط العلوي أسود فخم (تم إزالة الذهبي) -->
@@ -36,13 +36,11 @@
         }
 
         html {
-            min-width: 1200px;
-            overflow-x: auto;
+            overflow-x: hidden;
         }
 
         body {
-            min-width: 1200px;
-            overflow-x: auto;
+            overflow-x: hidden;
             background: #0a0f0d;
             color: #f5efe6;
             font-family: 'Cairo', 'Tajawal', sans-serif;
@@ -862,12 +860,12 @@
 <body class="night device-desktop">
 
     <!-- ===== فيديو الخلفية مع loop ===== -->
-    <video class="bg-video" id="bgVideo" autoplay muted playsinline loop poster="/oasis-poster.jpg">
+    <video class="bg-video" id="bgVideo" muted playsinline loop preload="none" poster="/Image/oasis-poster.jpg">
         <source src="/image/heaven3.mp4" type="video/mp4" id="videoSource" />
     </video>
 
     <!-- ===== موسيقى خلفية ===== -->
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop preload="none">
         <source src="sanaani.mp3" type="audio/mpeg" />
         <source src="hadrami.mp3" type="audio/mpeg" />
     </audio>
