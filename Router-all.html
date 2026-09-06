@@ -89,9 +89,9 @@
     </script>
 
     <!-- ======== الأنماط (CSS) ======== -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         /* ---------- الأنماط العامة ---------- */
@@ -353,7 +353,7 @@
         }
     </style>
 </head>
-<body>
+<body class="ar">
 
     <!-- ============================================ -->
     <!--          زر تبديل اللغة (ثابت)               -->
@@ -531,7 +531,7 @@
     <!--                الفوتر (التذييل)              -->
     <!-- ============================================ -->
 
-    <footer id="site-footer">
+    <footer id="site-footer" dir="rtl">
 
         <!-- البحث عن الباحث -->
         <div class="footer-search">
@@ -547,16 +547,16 @@
         <!-- الروابط -->
         <div class="footer-links">
             <a href="https://orcid.org/0009-0003-3319-3822" target="_blank" rel="noopener">🆔 <span class="txt" data-ar="ORCID" data-en="ORCID">ORCID</span></a>
-            <a href="https://zenodo.org/records/20513840" target="_blank" rel="noopener">📊 <span class="txt" data-ar="زينودو" data-en="Zenodo">Zenodo</span></a>
-            <a href="https://overleaf.com/project" target="_blank" rel="noopener">📝 <span class="txt" data-ar="اوفرليف" data-en="Overleaf">Overleaf</span></a>
-            <a href="https://colab.research.google.com/drive/12oG9B7DgsQpTWlvfMm4awnpbt34yPv_h" target="_blank" rel="noopener">🧠 <span class="txt" data-ar="كولاب" data-en="Colab">Colab</span></a>
-            <a href="https://github.com/jabri-web" target="_blank" rel="noopener">🐙 <span class="txt" data-ar="جيتهاب" data-en="GitHub">GitHub</span></a>
-            <a href="https://en.wikipedia.org/wiki/User:Jabri2026" target="_blank" rel="noopener">📖 <span class="txt" data-ar="ويكيبيديا" data-en="Wikipedia">Wikipedia</span></a>
-            <a href="mailto:jabri62018@gmail.com">📧 <span class="txt" data-ar="البريد" data-en="Email">Email</span></a>
-            <a href="Author-cv.html">📄 <span class="txt" data-ar="السيرة الذاتية" data-en="C.V">C.V</span></a>
-            <a href="citations.html">♻️ <span class="txt" data-ar="الاستشهادات" data-en="Citations">Citations</span></a>
-            <a href="source.html">📜 <span class="txt" data-ar="المصادر" data-en="Source">Source</span></a>
-            <a href="about.html">ℹ️ <span class="txt" data-ar="عن الموقع" data-en="About">About</span></a>
+            <a href="https://zenodo.org/records/20513840" target="_blank" rel="noopener">📊 <span class="txt" data-ar="زينودو" data-en="Zenodo">زينودو</span></a>
+            <a href="https://overleaf.com/project" target="_blank" rel="noopener">📝 <span class="txt" data-ar="اوفرليف" data-en="Overleaf">اوفرليف</span></a>
+            <a href="https://colab.research.google.com/drive/12oG9B7DgsQpTWlvfMm4awnpbt34yPv_h" target="_blank" rel="noopener">🧠 <span class="txt" data-ar="كولاب" data-en="Colab">كولاب</span></a>
+            <a href="https://github.com/jabri-web" target="_blank" rel="noopener">🐙 <span class="txt" data-ar="جيتهاب" data-en="GitHub">جيتهاب</span></a>
+            <a href="https://en.wikipedia.org/wiki/User:Jabri2026" target="_blank" rel="noopener">📖 <span class="txt" data-ar="ويكيبيديا" data-en="Wikipedia">ويكيبيديا</span></a>
+            <a href="mailto:jabri62018@gmail.com">📧 <span class="txt" data-ar="البريد" data-en="Email">البريد</span></a>
+            <a href="Author-cv.html">📄 <span class="txt" data-ar="السيرة الذاتية" data-en="C.V">السيرة الذاتية</span></a>
+            <a href="citations.html">♻️ <span class="txt" data-ar="الاستشهادات" data-en="Citations">الاستشهادات</span></a>
+            <a href="source.html">📜 <span class="txt" data-ar="المصادر" data-en="Source">المصادر</span></a>
+            <a href="about.html">ℹ️ <span class="txt" data-ar="عن الموقع" data-en="About">عن الموقع</span></a>
             <a href="who-we.html">👥 <span class="txt" data-ar="من نحن" data-en="Who We Are">من نحن</span></a>
             <a href="sitemap.html">🗺️ <span class="txt" data-ar="خارطة الموقع" data-en="Sitemap">خارطة الموقع</span></a>
         </div>
@@ -649,7 +649,8 @@
         }
     </script>
 
-    <!-- تمت إزالة السكريبتات التي تسبب أخطاء 404 (init-page-root.js و menu.js) لأنها غير موجودة على المسار /js/ -->
+    <!-- تم حذف سكربتات /js/init-page-root.js و /js/menu.js لأنها تسبب أخطاء 404 -->
+    <!-- إذا كنت تحتاجها، تأكد من وضعها في مجلد /js/ على GitHub -->
 
 </body>
 </html>
