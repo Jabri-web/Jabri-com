@@ -1,0 +1,92 @@
+تعليمات تحويل واحة الجبري إلى APK
+================================
+
+الطريقة الموصى بها: Capacitor + Android Studio
+
+1) المتطلبات
+- Node.js إصدار LTS.
+- Android Studio مع Android SDK و Android SDK Platform.
+- Java JDK 17.
+- رابط الموقع المنشور، مثال:
+  https://jabri-com.vercel.app/
+
+2) إنشاء مشروع APK جديد
+افتح Terminal داخل مجلد فارغ ونفّذ:
+
+npm create vite@latest jabri-apk -- --template vanilla
+cd jabri-apk
+npm install
+npm install @capacitor/core @capacitor/cli @capacitor/android
+npx cap init "واحة الجبري" "com.jabri.waha" --web-dir dist
+
+3) اجعل التطبيق يفتح الموقع المنشور
+أنشئ ملف capacitor.config.ts وضع فيه:
+
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.jabri.waha',
+  appName: 'واحة الجبري',
+  webDir: 'dist',
+  server: {
+    url: 'https://jabri-com.vercel.app/',
+    cleartext: false
+  }
+};
+
+export default config;
+
+4) إضافة Android وفتح Android Studio
+
+npx cap add android
+npx cap sync android
+npx cap open android
+
+5) إعدادات Android داخل Android Studio
+- انتظر انتهاء Gradle Sync.
+- افتح app ثم src ثم main ثم AndroidManifest.xml.
+- تأكد من وجود إذن الإنترنت:
+
+<uses-permission android:name="android.permission.INTERNET" />
+
+- اجعل اسم التطبيق الظاهر: واحة الجبري.
+- غيّر أيقونة التطبيق من Android Studio عبر Image Asset Studio.
+- استخدم الأيقونتين الموجودتين في مجلد Image: icon-192.png و icon-512.png.
+
+6) إنشاء APK تجريبي
+من Android Studio:
+Build > Build Bundle(s) / APK(s) > Build APK(s)
+
+سيظهر الملف غالباً هنا:
+android/app/build/outputs/apk/debug/app-debug.apk
+
+7) إنشاء APK للنشر
+من Android Studio:
+Build > Generate Signed Bundle / APK > APK
+ثم أنشئ Keystore جديداً واحفظه في مكان آمن جداً.
+لا تفقد كلمة مرور الـ Keystore؛ لا يمكن تحديث التطبيق المنشور بدونها.
+
+الملف النهائي غالباً:
+android/app/build/outputs/apk/release/app-release.apk
+
+8) اختبار قبل التثبيت
+- اختبر فتح الموقع بدون اتصال مستقر.
+- اختبر زر الرجوع.
+- اختبر الفيديو والصوت.
+- اختبر الوضع العمودي على شاشة صغيرة.
+- اختبر الروابط الخارجية وفتحها في المتصفح.
+
+9) ملاحظة مهمة للأداء
+النسخة المحسنة من index.html تؤجل تحميل فيديو الخلفية والصوت، وتستخدم preload="none" لتقليل البطء واستهلاك البيانات. لا تجعل فيديو الخلفية يعمل تلقائياً بالصوت؛ تشغيل الصوت يجب أن يكون بعد ضغط المستخدم.
+
+10) تحديث APK بعد أي تعديل للموقع
+إذا كان التطبيق يستخدم الرابط المنشور، يكفي نشر تعديل الموقع.
+أما إذا تم تضمين ملفات الموقع داخل التطبيق، فنفّذ:
+
+npm run build
+npx cap copy android
+npx cap sync android
+
+ثم أعد بناء APK من Android Studio.
+
+ملاحظة: لا تستخدم ملف APK الموجود في المستودع للتحديث مباشرة إذا لم تكن تملك مفتاح التوقيع الأصلي له. أنشئ APK جديداً بمفتاح محفوظ، أو استخدم نفس الـ Keystore القديم.
