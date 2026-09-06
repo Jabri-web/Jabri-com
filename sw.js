@@ -1,14 +1,14 @@
-const CACHE_NAME = 'heaven-aljabri-v4'; // تم الترقية إلى v4
+const CACHE_NAME = 'heaven-aljabri-v5'; // تحديث الكاش بعد تجهيز ملفات PWA
 
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
   '/logo.html',
   '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/image/Jabri-photo.webp',
-  '/music.mp3',
+  '/Image/icon-192.png',
+  '/Image/icon-512.png',
+  '/Image/Jabri-photo.webp',
+  '/Image/music.mp3',
   '/Sindbad-Brdoni.html',
   '/Nezar.html',
   '/offline.html',
