@@ -7,6 +7,9 @@
     <meta name="theme-color" content="#0a0a0f">
     <meta name="apple-mobile-web-app-capable" content="yes">
     
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c9a84c">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     
@@ -1398,7 +1401,32 @@
 </script>
     
     
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+            reg.onupdatefound = () => {
+                const newWorker = reg.installing;
+                newWorker.onstatechange = () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        alert('📢 ترميمة جديدة نزلت! اضغط موافق لتحديث واحة الجبري');
+                        window.location.reload();
+                    }
+                };
+            };
+        });
+    }
+</script>
     
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js');
+        
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            alert('📢 ترميمة جديدة نزلت! جاري تحديث واحة الجبري...');
+            window.location.reload();
+        });
+    }
+</script>
     
     
    <div id="header-placeholder"></div>
