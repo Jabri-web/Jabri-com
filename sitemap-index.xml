@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- الملف الرئيسي (الصفحات الأساسية والهوية) -->
   <sitemap>
-    <loc>https://jabri-com.vercel.app/sitemap-general.xml</loc>
+    <loc>https://jabri-com.vercel.app/4-sitemap.xml</loc>
     <lastmod>2026-08-10</lastmod>
   </sitemap>
+  
+  <!-- ملف القواعد والأنظمة (Page1-12) -->
   <sitemap>
-    <loc>https://jabri-com.vercel.app/sitemap-pages.xml</loc>
+    <loc>https://jabri-com.vercel.app/2-sitemap-pages.xml</loc>
     <lastmod>2026-08-10</lastmod>
   </sitemap>
+  
 </sitemapindex>
