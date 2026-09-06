@@ -7,9 +7,15 @@
     <lastmod>2026-08-10</lastmod>
   </sitemap>
   
-  <!-- ملف القواعد والأنظمة (Page1-12) -->
+  <!-- 파일 القواعد والأنظمة (Page1-12) -->
   <sitemap>
-    <loc>https://jabri-com.vercel.app//sitemap-pages.xml</loc>
+    <loc>https://jabri-com.vercel.app/sitemap-pages.xml</loc>
+    <lastmod>2026-08-10</lastmod>
+  </sitemap>
+  
+  <!-- ملف المحتوى الإضافي (المجلات والمعارض والمستكشفات) -->
+  <sitemap>
+    <loc>https://jabri-com.vercel.app/sitemap-content.xml</loc>
     <lastmod>2026-08-10</lastmod>
   </sitemap>
   
