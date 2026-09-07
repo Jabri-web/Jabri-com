@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0f">
     <title>واحة الجبري | إحصائيات المشاريع والبحوث 1-12</title>
     <meta name="description" content="لوحة تحكم واحة الجبري: إحصائيات شاملة لجميع المشاريع، المستودعات، صفحات الساحر، وأرقام DOI الخاصة بالباحث عبدالله الجبري.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://jabri-com.vercel.app/projects-dashboard.html" />
+    <link rel="manifest" href="/manifest.json">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #0a0a0f;
             color: #e8e8f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
             min-height: 100vh;
         }
@@ -21,7 +23,7 @@
         .header {
             text-align: center;
             padding: 30px 20px;
-            background: #101018;
+            background: linear-gradient(135deg, #101018, #0d0d14);
             border: 1px solid #2a2a3e;
             border-radius: 15px;
             margin-bottom: 30px;
@@ -49,7 +51,9 @@
             border-radius: 12px;
             padding: 20px;
             text-align: center;
+            transition: 0.3s;
         }
+        .stat-card:hover { border-color: #6ae3ff; transform: translateY(-3px); }
         .stat-card .number { font-size: 2.5rem; font-weight: 800; color: #6ae3ff; }
         .stat-card .label { font-size: 0.9rem; color: #888; margin-top: 5px; }
 
@@ -89,13 +93,13 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 600;
             text-decoration: none;
             transition: 0.2s;
-            border: 1px solid transparent;
+            border: 1px solid;
         }
         .btn-repo { background: rgba(106, 227, 255, 0.1); border-color: #6ae3ff; color: #6ae3ff; }
         .btn-repo:hover { background: #6ae3ff; color: #0a0a0f; }
@@ -105,7 +109,7 @@
         .btn-doi:hover { background: #ff6a6a; color: #0a0a0f; }
 
         .badge { 
-            padding: 3px 8px; 
+            padding: 4px 10px; 
             border-radius: 4px; 
             font-size: 0.75rem; 
             font-weight: bold; 
@@ -124,29 +128,17 @@
 <body>
 
     <div class="header">
-        <img src="https://avatars.githubusercontent.com/u/200000000?v=4" alt="Abdulla Al-Jabri" onerror="this.style.display='none'">
+        <img src="/image/Jabri-photo.png" alt="Abdulla Al-Jabri" onerror="this.src='https://avatars.githubusercontent.com/u/200000000?v=4'">
         <h1>Eng. Abdulla Mohammed Nasser Al-Jabri</h1>
         <p>باحث مستقل في الرياضيات والفيزياء النظرية | واحة الجبري</p>
         <p style="margin-top:10px;color:#ffd700;font-family:monospace">Z_t = 1 | Z + C + A = 1</p>
     </div>
 
     <div class="stats-grid">
-        <div class="stat-card">
-            <div class="number">12</div>
-            <div class="label">مشروع رئيسي</div>
-        </div>
-        <div class="stat-card">
-            <div class="number">10</div>
-            <div class="label">صفحة ساحر</div>
-        </div>
-        <div class="stat-card">
-            <div class="number">15+</div>
-            <div class="label">رقم DOI</div>
-        </div>
-        <div class="stat-card">
-            <div class="number">100%</div>
-            <div class="label">روابط شغالة</div>
-        </div>
+        <div class="stat-card"><div class="number">12</div><div class="label">مشروع رئيسي</div></div>
+        <div class="stat-card"><div class="number">10</div><div class="label">صفحة ساحر</div></div>
+        <div class="stat-card"><div class="number">15+</div><div class="label">رقم DOI</div></div>
+        <div class="stat-card"><div class="number">100%</div><div class="label">روابط شغالة</div></div>
     </div>
 
     <h2>📊 لوحة المشاريع الرئيسية 1-12</h2>
@@ -157,109 +149,25 @@
             <tr>
                 <th>#</th>
                 <th>Project / المشروع</th>
-                <th>📖 صفحات الساحر</th>
-                <th>🔗 المستودع (Repo)</th>
-                <th>📄 الصفحة (Page)</th>
-                <th>📜 DOI / Zenodo</th>
+                <th>📖 الساحر</th>
+                <th>🔗 Repo</th>
+                <th>📄 Pages</th>
+                <th>📜 DOI</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><b>1</b></td>
-                <td><b>Jabri6218.github.io</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page1.html&repo=jabri62018.github.io&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/jabri62018.github.io" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/jabri62018.github.io/Jabri.html" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.20403864" target="_blank" class="btn btn-doi">📜 20403864</a></td>
-            </tr>
-            <tr>
-                <td><b>2</b></td>
-                <td><b>Zx_RieOS_v1.2</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page2.html&repo=Zx_RieOS_v1.2&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Zx_RieOS_v1.2" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/Zx_RieOS_v1.2/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.20100622" target="_blank" class="btn btn-doi">📜 20100622</a></td>
-            </tr>
-            <tr>
-                <td><b>3</b></td>
-                <td><b>Zx_Mother_Function_Jabri</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page3.html&repo=Zx_Mother_Function_Jabri&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Zx_Mother_Function_Jabri" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/Zx_Mother_Function_Jabri/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><span class="badge badge-gold">قيد النشر</span></td>
-            </tr>
-            <tr>
-                <td><b>4</b></td>
-                <td><b>Jabri-web.github.io</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page4.html&repo=Jabri-web.github.io&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Jabri-web.github.io" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://Jabri-web.github.io/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.20499365" target="_blank" class="btn btn-doi">📜 20499365</a></td>
-            </tr>
-            <tr>
-                <td><b>5</b></td>
-                <td><b>Jabri_Nobble - الحزمة الكبرى</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page5.html&repo=Jabri_Nobble&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Jabri_Nobble" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/Jabri_Nobble/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.20148770" target="_blank" class="btn btn-doi">📜 20148770</a></td>
-            </tr>
-            <tr>
-                <td><b>6</b></td>
-                <td><b>Jabri_lab - المختبر 9 أقسام</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page6.html&repo=Jabri_lab&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Jabri_lab" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/Jabri_lab/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><span class="badge badge-gold">قيد النشر</span></td>
-            </tr>
-            <tr>
-                <td><b>7</b></td>
-                <td><b>Zx_RieOS_v1.1</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page7.html&repo=Zx_RieOS_v1.1&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Zx_RieOS_v1.1" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/Zx_RieOS_v1.1/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.19981688" target="_blank" class="btn btn-doi">📜 19981688</a></td>
-            </tr>
-            <tr>
-                <td><b>8</b></td>
-                <td><b>Jabri_RiemannOS</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page8.html&repo=Jabri-RiemannOS&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Jabri-RiemannOS" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/Jabri-RiemannOS/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.20139904" target="_blank" class="btn btn-doi">📜 20139904</a></td>
-            </tr>
-            <tr>
-                <td><b>9</b></td>
-                <td><b>Jabri_Checkout</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page9.html&repo=Jabri_Checkout&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Jabri_Checkout" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/Jabri_Checkout/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.20513840" target="_blank" class="btn btn-doi">📜 20513840</a></td>
-            </tr>
-            <tr>
-                <td><b>10</b></td>
-                <td><b>Jabri-web Router</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page10.html&repo=Jabri-web&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Jabri-web" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-web.github.io/Jabri-web/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.20499365" target="_blank" class="btn btn-doi">📜 20499365</a></td>
-            </tr>
-            <tr>
-                <td><b>11</b></td>
-                <td><b>Jabri-com - النشر</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page11.html&repo=Jabri-com&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Jabri-com" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-com.vercel.app/" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.21003990" target="_blank" class="btn btn-doi">📜 21003990</a></td>
-            </tr>
-            <tr>
-                <td><b>12</b></td>
-                <td><b>jabri.com hyper Router</b></td>
-                <td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page12.html&repo=Jabri_Checkout&lang=ar" target="_blank" class="btn btn-page">📖 الساحر</a></td>
-                <td><a href="https://github.com/Jabri-web/Jabri_Checkout" target="_blank" class="btn btn-repo">🔗 Repo</a></td>
-                <td><a href="https://jabri-com.vercel.app/router" target="_blank" class="btn btn-page">📄 Pages</a></td>
-                <td><a href="https://doi.org/10.5281/zenodo.20513840" target="_blank" class="btn btn-doi">📜 20513840</a></td>
-            </tr>
+            <tr><td><b>1</b></td><td><b>jabri62018.github.io</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page1.html&repo=jabri62018.github.io&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/jabri62018.github.io" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/jabri62018.github.io/Jabri.html" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.20403864" target="_blank" rel="noopener" class="btn btn-doi">📜 20403864</a></td></tr>
+            <tr><td><b>2</b></td><td><b>Zx_RieOS_v1.2</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page2.html&repo=Zx_RieOS_v1.2&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Zx_RieOS_v1.2" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/Zx_RieOS_v1.2/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.20100622" target="_blank" rel="noopener" class="btn btn-doi">📜 20100622</a></td></tr>
+            <tr><td><b>3</b></td><td><b>Zx_Mother_Function_Jabri</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page3.html&repo=Zx_Mother_Function_Jabri&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Zx_Mother_Function_Jabri" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/Zx_Mother_Function_Jabri/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><span class="badge badge-gold">قيد النشر</span></td></tr>
+            <tr><td><b>4</b></td><td><b>Jabri-web.github.io</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page4.html&repo=Jabri-web.github.io&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Jabri-web.github.io" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://Jabri-web.github.io/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.20499365" target="_blank" rel="noopener" class="btn btn-doi">📜 20499365</a></td></tr>
+            <tr><td><b>5</b></td><td><b>Jabri_Nobble - الحزمة الكبرى</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page5.html&repo=Jabri_Nobble&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Jabri_Nobble" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/Jabri_Nobble/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.20148770" target="_blank" rel="noopener" class="btn btn-doi">📜 20148770</a></td></tr>
+            <tr><td><b>6</b></td><td><b>Jabri_lab - المختبر 9 أقسام</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page6.html&repo=Jabri_lab&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Jabri_lab" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/Jabri_lab/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><span class="badge badge-gold">قيد النشر</span></td></tr>
+            <tr><td><b>7</b></td><td><b>Zx_RieOS_v1.1</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page7.html&repo=Zx_RieOS_v1.1&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Zx_RieOS_v1.1" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/Zx_RieOS_v1.1/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.19981688" target="_blank" rel="noopener" class="btn btn-doi">📜 19981688</a></td></tr>
+            <tr><td><b>8</b></td><td><b>Jabri_RiemannOS</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page8.html&repo=Jabri-RiemannOS&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Jabri-RiemannOS" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/Jabri-RiemannOS/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.20139904" target="_blank" rel="noopener" class="btn btn-doi">📜 20139904</a></td></tr>
+            <tr><td><b>9</b></td><td><b>Jabri_Checkout</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page9.html&repo=Jabri_Checkout&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Jabri_Checkout" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/Jabri_Checkout/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.20513840" target="_blank" rel="noopener" class="btn btn-doi">📜 20513840</a></td></tr>
+            <tr><td><b>10</b></td><td><b>Jabri-web Router</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page10.html&repo=Jabri-web&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Jabri-web" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-web.github.io/Jabri-web/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.20499365" target="_blank" rel="noopener" class="btn btn-doi">📜 20499365</a></td></tr>
+            <tr><td><b>11</b></td><td><b>Jabri-com - النشر</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page11.html&repo=Jabri-com&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Jabri-com" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-com.vercel.app/" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.21003990" target="_blank" rel="noopener" class="btn btn-doi">📜 21003990</a></td></tr>
+            <tr><td><b>12</b></td><td><b>jabri.com hyper Router</b></td><td><a href="https://jabri-com.vercel.app/magic-translator.html?file=Page12.html&repo=Jabri_Checkout&lang=ar" target="_blank" rel="noopener" class="btn btn-page">📖 الساحر</a></td><td><a href="https://github.com/Jabri-web/Jabri_Checkout" target="_blank" rel="noopener" class="btn btn-repo">🔗 Repo</a></td><td><a href="https://jabri-com.vercel.app/router" target="_blank" rel="noopener" class="btn btn-page">📄 Pages</a></td><td><a href="https://doi.org/10.5281/zenodo.20513840" target="_blank" rel="noopener" class="btn btn-doi">📜 20513840</a></td></tr>
         </tbody>
     </table>
     </div>
