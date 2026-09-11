@@ -782,6 +782,30 @@
         });
     }
     </script>
+    
+    
+    <!-- ===== Popup التحديث الفخم ===== -->
+<div id="updatePopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 99999; justify-content: center; align-items: center;">
+    <div style="background: linear-gradient(135deg, #1a1a1a, #0a0a0f); border: 2px solid #c9a84c; border-radius: 20px; padding: 30px 40px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 30px 80px rgba(201, 168, 76, 0.3); animation: slideUp 0.4s ease;">
+        <div style="font-size: 50px; margin-bottom: 15px;">🎉</div>
+        <h2 style="color: #c9a84c; font-family: 'Cairo', sans-serif; margin-bottom: 15px;">واحة الجبري تحدّثت!</h2>
+        <p style="color: #ddd; font-family: 'Cairo', sans-serif; margin-bottom: 25px; line-height: 1.6;">يتوفر إصدار جديد من التطبيق. هل تريد التحديث الآن؟</p>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button id="updateNowBtn" style="background: #c9a84c; color: #0a0a0f; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; font-size: 16px; cursor: pointer; font-family: 'Cairo', sans-serif; transition: 0.3s;">رائع! 🚀</button>
+            <button id="updateLaterBtn" style="background: transparent; color: #c9a84c; border: 2px solid #c9a84c; padding: 12px 30px; border-radius: 30px; font-weight: bold; font-size: 16px; cursor: pointer; font-family: 'Cairo', sans-serif; transition: 0.3s;">لاحقاً</button>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+    
+    
+    
 
     <!-- ===== السكربتات الأساسية (مرة واحدة فقط) ===== -->
     <script src="/js/init-page-root.js"></script>
