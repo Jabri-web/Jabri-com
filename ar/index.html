@@ -743,49 +743,54 @@
     </script>
     
     
-    
-    <!-- السكربتات -->
-<script src="js/init-page-root.js"></script>
-<script src="js/menu.js"></script>
-
-<!-- SW Registration (نسخة واحدة فقط) -->
-<script>
+        <!-- ===== تسجيل Service Worker + إشعارات التحديث ===== -->
+    <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
+            navigator.serviceWorker.register('/sw.js')
                 .then(reg => {
+                    console.log('✅ [SW] تم التسجيل بنجاح');
+
+                    // 🔍 التحقق من وجود تحديث عند تحميل الصفحة
+                    reg.update();
+
+                    // 📢 الاستماع لأي تحديث جديد
                     reg.addEventListener('updatefound', () => {
                         const newWorker = reg.installing;
+                        console.log('🔄 [SW] جاري تثبيت تحديث جديد...');
+
                         newWorker.addEventListener('statechange', () => {
-                            if (newWorker.state === 'installed' &&
-                                navigator.serviceWorker.controller) {
-                                if (confirm('يتوفر تحديث جديد لواحة الجبري. هل تريد التحديث الآن؟')) {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // 🎉 ظهور رسالة التحديث للمستخدم
+                                if (confirm('✨ يتوفر تحديث جديد لواحة الجبري. هل تريد التحديث الآن؟')) {
                                     newWorker.postMessage({ action: 'skipWaiting' });
                                 }
                             }
                         });
                     });
                 })
-                .catch(err => console.error('❌ [SW] فشل:', err));
+                .catch(err => console.error('❌ [SW] فشل التسجيل:', err));
         });
-        
-        let refreshing;
+
+        // 🔄 إعادة تحميل الصفحة عند تغيير الـ SW (مرة واحدة فقط)
+        let refreshing = false;
         navigator.serviceWorker.addEventListener('controllerchange', () => {
             if (refreshing) return;
             refreshing = true;
+            console.log('🔄 [SW] تم تفعيل الإصدار الجديد، إعادة تحميل الصفحة...');
             window.location.reload();
         });
     }
-</script>
-    
-    
-    
-    
-    <div id="header-placeholder"></div>
-    <div id="footer-placeholder"></div>
-    
+    </script>
+
+    <!-- ===== السكربتات الأساسية (مرة واحدة فقط) ===== -->
     <script src="/js/init-page-root.js"></script>
     <script src="/js/menu.js"></script>
-    
+
+    <!-- ===== عناصر placeholder ===== -->
+    <div id="header-placeholder"></div>
+    <div id="footer-placeholder"></div>
+
 </body>
 </html>
+    
