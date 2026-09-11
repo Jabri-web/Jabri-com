@@ -36,7 +36,7 @@
       "name": "نظرية السندباد",
       "short_name": "النظرية",
       "description": "الدالة الأم Z(x) ونظرية السندباد الموحدة",
-      "url": "/theory-ar.html",
+      "url": "/ar/theory-ar.html", 
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     },
     {
@@ -44,6 +44,13 @@
       "short_name": "الموسيقى",
       "description": "موسيقى باب اليمن الأصيلة",
       "url": "/music.html",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "واحة الجبري",
+      "short_name": "الواحة",
+      "description": "صفحة logo والواحة",
+      "url": "/logo.html",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     }
   ]
