@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>♟️ الشطرنج الذكي | واحة الجبري</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================================
+           التصميم المتكامل - الشطرنج الذكي
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a12;
+            color: #e8e4d8;
+            font-family: 'Tajawal', 'Noto Sans Symbols 2', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 136, 0.02) 0%, transparent 60%);
+        }
+
+        .chess-container {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(16, 16, 30, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.05) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chess-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, 
+                rgba(212, 175, 55, 0.02), 
+                rgba(0, 255, 136, 0.02), 
+                rgba(212, 175, 55, 0.02));
+            animation: rotateGlow 30s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .chess-container>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(135deg, #D4AF37, #f5e56b, #D4AF37);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s ease-in-out infinite;
+            margin-bottom: 4px;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle span { color: #D4AF37; font-weight: 700; }
+
+        .board-wrapper {
+            position: relative;
+            padding: 8px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+            border-radius: 12px;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.05);
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            aspect-ratio: 1;
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        #board > div {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Emoji', sans-serif;
+            font-size: 2.4rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        #board > div.light {
+            background: #f0d9b5;
+        }
+
+        #board > div.dark {
+            background: #b58863;
+        }
+
+        #board > div.selected {
+            background: #7fc97f !important;
+            box-shadow: inset 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        #board > div.valid-move::after {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 30%;
+            background: rgba(0, 255, 136, 0.25);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        #board > div.capture::after {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border: 4px solid rgba(255, 0, 0, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .piece-white {
+            color: #1a1a1a;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .piece-black {
+            color: #1a1a1a;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+        }
+
+        .player-indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .player-indicator.white { background: #f0f0f0; }
+        .player-indicator.black { background: #1a1a1a; }
+
+        .game-status {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .game-status.playing {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+        }
+
+        .game-status.check {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            animation: pulseCheck 1s ease-in-out infinite;
+        }
+
+        .game-status.checkmate {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+        }
+
+        .game-status.stalemate {
+            background: rgba(234, 179, 8, 0.1);
+            color: #facc15;
+        }
+
+        @keyframes pulseCheck {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .btn-chess {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .btn-chess:hover { transform: translateY(-2px); }
+        .btn-chess:active { transform: scale(0.95); }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37, #b8952e);
+            color: #0a0a12;
+        }
+        .btn-gold:hover { box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3); }
+
+        .btn-blue {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+        .btn-blue:hover { box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3); }
+
+        .btn-red {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+        .btn-red:hover { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.3); }
+
+        .btn-green {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+        .btn-green:hover { box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3); }
+
+        .move-history-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            max-height: 160px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .move-history-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .move-history-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .move-history-container::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 10px;
+        }
+
+        .move-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.85rem;
+            color: #a8a4a0;
+            transition: all 0.2s ease;
+        }
+
+        .move-entry:hover {
+            background: rgba(212, 175, 55, 0.05);
+            color: #e8e4d8;
+        }
+
+        .move-number {
+            color: #D4AF37;
+            font-weight: 700;
+            min-width: 30px;
+        }
+
+        .move-capture { color: #f87171; }
+
+        .captured-pieces {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            font-size: 1.2rem;
+            min-height: 30px;
+            padding: 4px 0;
+        }
+
+        .captured-pieces .piece {
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        .captured-pieces .piece:hover {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding-top: 12px;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+            padding: 4px 12px;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: #D4AF37;
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #D4AF37;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover { color: #f5e56b; }
+
+        @media (max-width: 768px) {
+            .chess-container { padding: 16px; border-radius: 20px; }
+            h1 { font-size: 1.8rem; }
+            #board > div { font-size: 1.6rem; }
+            .btn-chess { padding: 6px 12px; font-size: 0.75rem; }
+        }
+
+        @media (max-width: 480px) {
+            .chess-container { padding: 10px; border-radius: 16px; }
+            #board > div { font-size: 1.2rem; }
+            h1 { font-size: 1.4rem; }
+            .player-info { padding: 8px 12px; }
+        }
+
+        .flex-col { flex-direction: column; }
+        .flex-row { flex-direction: row; }
+        .flex-wrap { flex-wrap: wrap; }
+        .gap-1 { gap: 4px; }
+        .gap-2 { gap: 8px; }
+        .gap-3 { gap: 12px; }
+        .gap-4 { gap: 16px; }
+        .gap-6 { gap: 24px; }
+        .flex-1 { flex: 1; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .text-center { text-align: center; }
+        .text-sm { font-size: 0.85rem; }
+        .text-xs { font-size: 0.7rem; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-gray-500 { color: #6b7280; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gold { color: #D4AF37; }
+        .w-full { width: 100%; }
+        .max-w-\[520px\] { max-width: 520px; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .mb-1 { margin-bottom: 4px; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-3 { margin-bottom: 12px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mt-2 { margin-top: 8px; }
+        .mt-4 { margin-top: 16px; }
+        .mt-6 { margin-top: 24px; }
+        .pt-4 { padding-top: 16px; }
+        .border-t { border-top: 1px solid rgba(212, 175, 55, 0.08); }
+        .hidden { display: none; }
+
+        @media (min-width: 1024px) {
+            .lg\:flex-row { flex-direction: row; }
+            .lg\:w-80 { width: 320px; }
+            .lg\:flex-1 { flex: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="chess-container">
+    <h1>♟️ الشطرنج الذكي</h1>
+    <div class="subtitle"><span>واحة الجبري</span> · 29 أغسطس 2026</div>
+
+    <div class="flex-col gap-6" style="display:flex; flex-direction:column; gap:24px;">
+        
+        <!-- اللوحة والمعلومات -->
+        <div class="flex-col gap-6" style="display:flex; flex-direction:column; gap:24px;">
+            
+            <!-- اللوحة -->
+            <div class="board-wrapper mx-auto w-full max-w-[520px]">
+                <div id="board"></div>
+            </div>
+
+            <!-- المعلومات -->
+            <div class="flex-col gap-4" style="display:flex; flex-direction:column; gap:16px;">
+                
+                <!-- حالة اللاعب -->
+                <div class="player-info">
+                    <div class="player-indicator white" id="playerIndicator"></div>
+                    <div>
+                        <div class="text-gray-400 text-sm">دور اللعب</div>
+                        <div id="currentPlayer" class="text-xl font-bold text-gold">⚪ أبيض</div>
+                    </div>
+                </div>
+
+                <!-- حالة اللعبة -->
+                <div id="gameStatus" class="game-status playing">🎮 لعبة جديدة!</div>
+
+                <!-- الأزرار -->
+                <div class="flex-row flex-wrap gap-2" style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <button id="resetGame" class="btn-chess btn-red">🔄 إعادة</button>
+                    <button id="undoMove" class="btn-chess btn-gold">↩️ تراجع</button>
+                    <button id="aiMove" class="btn-chess btn-blue">🤖 AI</button>
+                </div>
+
+                <!-- القطع المأسورة -->
+                <div>
+                    <div class="text-gray-400 text-sm mb-1">⚫ قطع الأسود المأسورة</div>
+                    <div id="capturedBlack" class="captured-pieces"><span class="text-gray-600 text-sm">—</span></div>
+                </div>
+                <div>
+                    <div class="text-gray-400 text-sm mb-1">⚪ قطع الأبيض المأسورة</div>
+                    <div id="capturedWhite" class="captured-pieces"><span class="text-gray-600 text-sm">—</span></div>
+                </div>
+
+                <!-- سجل الحركات -->
+                <div>
+                    <div class="text-gray-400 text-sm mb-1">📜 سجل الحركات</div>
+                    <div id="moveHistory" class="move-history-container">
+                        <div class="text-center text-gray-600 text-sm py-4">لا توجد حركات بعد</div>
+                    </div>
+                </div>
+
+                <!-- روابط -->
+                <div class="nav-links">
+                    <a href="/">🏠 الرئيسية</a>
+                    <a href="/theory-ar.html">📐 النظرية</a>
+                    <a href="/handsa.html">🧮 هندسة الأعداد</a>
+                    <a href="/jabri-projects.html">📦 المشاريع</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            ✍ <strong class="text-gold">#عبدالله_الجبري</strong> · صنعاء — اليمن
+            <br>
+            <a href="https://github.com/jabri-com" target="_blank">🐙 GitHub</a>
+            &nbsp;·&nbsp;
+            <a href="https://t.me/Jabri2025" target="_blank">📱 Telegram</a>
+        </footer>
+    </div>
+</div>
+
+<!-- ============================================================
+     سكربت الشطرنج المتكامل
+     ============================================================ -->
+<script>
+(function() {
+    'use strict';
+
+    // ============================================================
+    //   عناصر DOM
+    // ============================================================
+    const board = document.getElementById('board');
+    const currentPlayerDisplay = document.getElementById('currentPlayer');
+    const statusDisplay = document.getElementById('gameStatus');
+    const moveHistoryDisplay = document.getElementById('moveHistory');
+    const resetBtn = document.getElementById('resetGame');
+    const undoBtn = document.getElementById('undoMove');
+    const aiBtn = document.getElementById('aiMove');
+    const capturedWhiteEl = document.getElementById('capturedWhite');
+    const capturedBlackEl = document.getElementById('capturedBlack');
+    const playerIndicator = document.getElementById('playerIndicator');
+
+    // ============================================================
+    //   حالة اللعبة
+    // ============================================================
+    let selectedPiece = null;
+    let currentPlayer = 'white';
+    let gameState = 'playing';
+    let moveHistory = [];
+    let capturedPieces = { white: [], black: [] };
+    let boardState = [];
+    let isAiThinking = false;
+
+    const initialBoard = [
+        ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'],
+        ['♟', '♟', '♟', '♟', '♟', '♟', '♟', '♟'],
+        ['', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', ''],
+        ['♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙'],
+        ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']
+    ];
+
+    const pieceValues = {
+        '♙': 1, '♟': 1,
+        '♘': 3, '♞': 3,
+        '♗': 3, '♝': 3,
+        '♖': 5, '♜': 5,
+        '♕': 9, '♛': 9,
+        '♔': 100, '♚': 100
+    };
+
+    // ============================================================
+    //   دوال مساعدة
+    // ============================================================
+    function isWhitePiece(piece) {
+        return '♔♕♖♗♘♙'.includes(piece);
+    }
+
+    function isBlackPiece(piece) {
+        return '♚♛♜♝♞♟'.includes(piece);
+    }
+
+    function getPieceColor(piece) {
+        if (isWhitePiece(piece)) return 'white';
+        if (isBlackPiece(piece)) return 'black';
+        return null;
+    }
+
+    function getSquarePosition(square) {
+        return {
+            x: parseInt(square.dataset.col),
+            y: parseInt(square.dataset.row)
+        };
+    }
+
+    function getSquareFromPosition(row, col) {
+        return document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+    }
+
+    function isInBounds(row, col) {
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
+
+    function deepCopyBoard(b) {
+        return b.map(row => [...row]);
+    }
+
+    // ============================================================
+    //   إنشاء اللوحة
+    // ============================================================
+    function createBoard() {
+        board.innerHTML = '';
+        boardState = deepCopyBoard(initialBoard);
+        
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                const square = document.createElement('div');
+                const isLight = (i + j) % 2 === 0;
+                square.className = isLight ? 'light' : 'dark';
+                square.dataset.row = i;
+                square.dataset.col = j;
+                square.textContent = boardState[i][j];
+                
+                if (boardState[i][j]) {
+                    square.dataset.piece = boardState[i][j];
+                    square.classList.add(isWhitePiece(boardState[i][j]) ? 'piece-white' : 'piece-black');
+                }
+                
+                square.addEventListener('click', () => handleSquareClick(square));
+                board.appendChild(square);
+            }
+        }
+        
+        updateStatus();
+        updateMoveHistory();
+        updateCapturedDisplay();
+    }
+
+    // ============================================================
+    //   معالجة النقر
+    // ============================================================
+    function handleSquareClick(square) {
+        if (gameState === 'checkmate' || gameState === 'stalemate' || isAiThinking) return;
+        
+        const piece = square.textContent;
+        
+        if (selectedPiece) {
+            if (square !== selectedPiece) {
+                const startPos = getSquarePosition(selectedPiece);
+                const endPos = getSquarePosition(square);
+                const movingPiece = selectedPiece.textContent;
+                
+                const moveResult = validateMove(startPos, endPos, movingPiece, square.textContent);
+                
+                if (moveResult.valid) {
+                    const moveInfo = {
+                        piece: movingPiece,
+                        startPos: startPos,
+                        endPos: endPos,
+                        captured: square.textContent,
+                        isEnPassant: moveResult.isEnPassant || false,
+                        isCastling: moveResult.isCastling || false,
+                        promotion: null
+                    };
+                    
+                    if (movingPiece.toLowerCase() === '♙' && (endPos.y === 0 || endPos.y === 7)) {
+                        const promotionPiece = prompt('اختر قطعة للترقية (♕♖♗♘):', '♕');
+                        if (promotionPiece && '♕♖♗♘'.includes(promotionPiece)) {
+                            moveInfo.promotion = promotionPiece;
+                        } else {
+                            moveInfo.promotion = '♕';
+                        }
+                    }
+                    
+                    makeMove(moveInfo);
+                    moveHistory.push(moveInfo);
+                    
+                    currentPlayer = currentPlayer === 'white' ? 'black' : 'white';
+                    updateStatus();
+                    updateMoveHistory();
+                    updateCapturedDisplay();
+                    updatePlayerDisplay();
+                    
+                    if (isCheckmate(currentPlayer)) {
+                        gameState = 'checkmate';
+                        statusDisplay.textContent = `🏆 ${currentPlayer === 'white' ? 'الأسود' : 'الأبيض'} يفوز!`;
+                        statusDisplay.className = 'game-status checkmate';
+                    } else if (isStalemate(currentPlayer)) {
+                        gameState = 'stalemate';
+                        statusDisplay.textContent = '🤝 تعادل!';
+                        statusDisplay.className = 'game-status stalemate';
+                    } else if (isInCheck(currentPlayer)) {
+                        statusDisplay.textContent = `⚠️ كش على ${currentPlayer === 'white' ? 'الأبيض' : 'الأسود'}`;
+                        statusDisplay.className = 'game-status check';
+                    } else {
+                        gameState = 'playing';
+                        statusDisplay.textContent = `${currentPlayer === 'white' ? '⚪ أبيض' : '⚫ أسود'} يلعب`;
+                        statusDisplay.className = 'game-status playing';
+                    }
+                }
+            }
+            
+            if (selectedPiece) {
+                selectedPiece.classList.remove('selected');
+                selectedPiece = null;
+            }
+            
+        } else if (piece) {
+            const pieceColor = getPieceColor(piece);
+            if (pieceColor === currentPlayer) {
+                selectedPiece = square;
+                square.classList.add('selected');
+            }
+        }
+    }
+
+    // ============================================================
+    //   التحقق من الحركات
+    // ============================================================
+    function validateMove(start, end, piece, targetPiece) {
+        const dx = end.x - start.x;
+        const dy = end.y - start.y;
+        const isWhite = isWhitePiece(piece);
+        const result = { valid: false, isEnPassant: false, isCastling: false };
+        
+        if (targetPiece && getPieceColor(targetPiece) === getPieceColor(piece)) return result;
+        if (!isInBounds(end.y, end.x)) return result;
+        
+        let valid = false;
+        
+        switch (piece) {
+            case '♙':
+            case '♟':
+                valid = validatePawnMove(start, end, isWhite, !!targetPiece, result);
+                break;
+            case '♖':
+            case '♜':
+                valid = validateRookMove(start, end);
+                break;
+            case '♘':
+            case '♞':
+                valid = validateKnightMove(dx, dy);
+                break;
+            case '♗':
+            case '♝':
+                valid = validateBishopMove(dx, dy);
+                break;
+            case '♕':
+            case '♛':
+                valid = validateQueenMove(start, end);
+                break;
+            case '♔':
+            case '♚':
+                valid = validateKingMove(start, end, piece, result);
+                break;
+        }
+        
+        if (valid) {
+            const tempBoard = deepCopyBoard(boardState);
+            tempBoard[start.y][start.x] = '';
+            tempBoard[end.y][end.x] = piece;
+            if (isKingInCheck(tempBoard, isWhite ? 'white' : 'black')) {
+                return { valid: false, isEnPassant: false, isCastling: false };
+            }
+            result.valid = true;
+        }
+        
+        return result;
+    }
+
+    function validatePawnMove(start, end, isWhite, isCapture, result) {
+        const dx = end.x - start.x;
+        const dy = end.y - start.y;
+        const direction = isWhite ? -1 : 1;
+        
+        if (!isCapture && dx === 0) {
+            if (dy === direction) return true;
+            const firstMove = (isWhite && start.y === 6) || (!isWhite && start.y === 1);
+            if (firstMove && dy === 2 * direction) {
+                const between = getSquareFromPosition(start.y + direction, start.x);
+                if (!between.textContent) return true;
+            }
+            return false;
+        }
+        
+        if (isCapture && dy === direction && Math.abs(dx) === 1) {
+            if (!getSquareFromPosition(end.y, end.x).textContent) {
+                const lastMove = moveHistory[moveHistory.length - 1];
+                if (lastMove) {
+                    const lastPiece = lastMove.piece;
+                    const lastStart = lastMove.startPos;
+                    const lastEnd = lastMove.endPos;
+                    if (lastPiece.toLowerCase() === '♟' &&
+                        Math.abs(lastEnd.y - lastStart.y) === 2 &&
+                        lastEnd.y === start.y &&
+                        lastEnd.x === end.x) {
+                        result.isEnPassant = true;
+                        return true;
+                    }
+                }
+                return false;
+            }
+            return true;
+        }
+        
+        return false;
+    }
+
+    function validateRookMove(start, end) {
+        if (start.x !== end.x && start.y !== end.y) return false;
+        return !isPieceBetween(start, end);
+    }
+
+    function validateKnightMove(dx, dy) {
+        return (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
+               (Math.abs(dx) === 1 && Math.abs(dy) === 2);
+    }
+
+    function validateBishopMove(dx, dy) {
+        return Math.abs(dx) === Math.abs(dy);
+    }
+
+    function validateQueenMove(start, end) {
+        return validateRookMove(start, end) || validateBishopMove(end.x - start.x, end.y - start.y);
+    }
+
+    function validateKingMove(start, end, piece, result) {
+        const dx = Math.abs(end.x - start.x);
+        const dy = Math.abs(end.y - start.y);
+        
+        if (dx <= 1 && dy <= 1) return true;
+        
+        if (dx === 2 && dy === 0) {
+            const isWhite = isWhitePiece(piece);
+            const row = isWhite ? 7 : 0;
+            const rookCol = end.x > start.x ? 7 : 0;
+            const rook = boardState[row][rookCol];
+            
+            if (rook && (rook === '♖' || rook === '♜')) {
+                const kingMoved = moveHistory.some(m => 
+                    m.piece === piece && m.startPos.x === start.x && m.startPos.y === start.y
+                );
+                if (!kingMoved) {
+                    const rookMoved = moveHistory.some(m => 
+                        m.piece === rook && m.startPos.x === rookCol && m.startPos.y === row
+                    );
+                    if (!rookMoved) {
+                        const step = end.x > start.x ? 1 : -1;
+                        let blocked = false;
+                        for (let i = start.x + step; i !== rookCol; i += step) {
+                            if (boardState[row][i]) { blocked = true; break; }
+                        }
+                        if (!blocked) {
+                            const isWhiteColor = isWhite ? 'white' : 'black';
+                            const tempBoard = deepCopyBoard(boardState);
+                            if (!isKingInCheck(tempBoard, isWhiteColor)) {
+                                const midX = start.x + step;
+                                tempBoard[start.y][start.x] = '';
+                                tempBoard[start.y][midX] = piece;
+                                if (!isKingInCheck(tempBoard, isWhiteColor)) {
+                                    tempBoard[start.y][midX] = '';
+                                    tempBoard[start.y][end.x] = piece;
+                                    if (!isKingInCheck(tempBoard, isWhiteColor)) {
+                                        result.isCastling = true;
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    function isPieceBetween(start, end) {
+        const dx = end.x - start.x;
+        const dy = end.y - start.y;
+        const steps = Math.max(Math.abs(dx), Math.abs(dy));
+        const xStep = dx === 0 ? 0 : dx / steps;
+        const yStep = dy === 0 ? 0 : dy / steps;
+        
+        for (let i = 1; i < steps; i++) {
+            const x = start.x + i * xStep;
+            const y = start.y + i * yStep;
+            if (boardState[y][x]) return true;
+        }
+        return false;
+    }
+
+    // ============================================================
+    //   تنفيذ الحركة
+    // ============================================================
+    function makeMove(moveInfo) {
+        const { startPos, endPos, piece, captured, isEnPassant, isCastling, promotion } = moveInfo;
+        
+        if (captured) {
+            const color = getPieceColor(captured);
+            capturedPieces[color].push(captured);
+        }
+        
+        boardState[startPos.y][startPos.x] = '';
+        boardState[endPos.y][endPos.x] = promotion || piece;
+        
+        if (isEnPassant) {
+            boardState[startPos.y][endPos.x] = '';
+            const capturedSquare = getSquareFromPosition(startPos.y, endPos.x);
+            if (capturedSquare) {
+                capturedPieces[currentPlayer === 'white' ? 'black' : 'white'].push(capturedSquare.textContent);
+                capturedSquare.textContent = '';
+            }
+        }
+        
+        if (isCastling) {
+            const row = endPos.y;
+            const rookStartCol = endPos.x > startPos.x ? 7 : 0;
+            const rookEndCol = endPos.x > startPos.x ? endPos.x - 1 : endPos.x + 1;
+            boardState[row][rookEndCol] = boardState[row][rookStartCol];
+            boardState[row][rookStartCol] = '';
+        }
+        
+        updateBoardUI();
+    }
+
+    function updateBoardUI() {
+        const squares = document.querySelectorAll('#board > div');
+        squares.forEach(square => {
+            const row = parseInt(square.dataset.row);
+            const col = parseInt(square.dataset.col);
+            const piece = boardState[row][col];
+            square.textContent = piece || '';
+            square.dataset.piece = piece || '';
+            square.className = square.className
+                .replace(/piece-white/g, '')
+                .replace(/piece-black/g, '')
+                .replace(/selected/g, '')
+                .replace(/valid-move/g, '')
+                .replace(/capture/g, '');
+            
+            if (piece) {
+                square.classList.add(isWhitePiece(piece) ? 'piece-white' : 'piece-black');
+            }
+        });
+    }
+
+    // ============================================================
+    //   الكش والكش مات
+    // ============================================================
+    function findKing(board, color) {
+        const king = color === 'white' ? '♔' : '♚';
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                if (board[i][j] === king) {
+                    return { x: j, y: i };
+                }
+            }
+        }
+        return null;
+    }
+
+    function isKingInCheck(board, color) {
+        const kingPos = findKing(board, color);
+        if (!kingPos) return true;
+        
+        const enemyColor = color === 'white' ? 'black' : 'white';
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                const piece = board[i][j];
+                if (piece && getPieceColor(piece) === enemyColor) {
+                    const move = validateMove(
+                        { x: j, y: i },
+                        kingPos,
+                        piece,
+                        board[kingPos.y][kingPos.x]
+                    );
+                    if (move.valid) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function isInCheck(color) {
+        return isKingInCheck(boardState, color);
+    }
+
+    function isCheckmate(color) {
+        if (!isInCheck(color)) return false;
+        return !hasLegalMoves(color);
+    }
+
+    function isStalemate(color) {
+        if (isInCheck(color)) return false;
+        return !hasLegalMoves(color);
+    }
+
+    function hasLegalMoves(color) {
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                const piece = boardState[i][j];
+                if (piece && getPieceColor(piece) === color) {
+                    for (let ti = 0; ti < 8; ti++) {
+                        for (let tj = 0; tj < 8; tj++) {
+                            const move = validateMove(
+                                { x: j, y: i },
+                                { x: tj, y: ti },
+                                piece,
+                                boardState[ti][tj]
+                            );
+                            if (move.valid) return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // ============================================================
+    //   الذكاء الاصطناعي
+    // ============================================================
+    function getBestMove(color) {
+        let bestMove = null;
+        let bestScore = -Infinity;
+        
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                const piece = boardState[i][j];
+                if (piece && getPieceColor(piece) === color) {
+                    for (let ti = 0; ti < 8; ti++) {
+                        for (let tj = 0; tj < 8; tj++) {
+                            const target = boardState[ti][tj];
+                            if (target && getPieceColor(target) === color) continue;
+                            
+                            const move = validateMove(
+                                { x: j, y: i },
+                                { x: tj, y: ti },
+                                piece,
+                                target
+                            );
+                            
+                            if (move.valid) {
+                                let score = 0;
+                                if (target) score += pieceValues[target] * 10;
+                                score += (3.5 - Math.abs(tj - 3.5)) * 0.5;
+                                score += (3.5 - Math.abs(ti - 3.5)) * 0.5;
+                                
+                                const tempBoard = deepCopyBoard(boardState);
+                                tempBoard[i][j] = '';
+                                tempBoard[ti][tj] = piece;
+                                if (isKingInCheck(tempBoard, color)) score -= 50;
+                                
+                                if (score > bestScore) {
+                                    bestScore = score;
+                                    bestMove = { start: { x: j, y: i }, end: { x: tj, y: ti }, target: target };
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return bestMove;
+    }
+
+    function makeAIMove() {
+        if (isAiThinking || gameState === 'checkmate' || gameState === 'stalemate') return;
+        
+        isAiThinking = true;
+        statusDisplay.textContent = '🤔 AI يفكر...';
+        statusDisplay.className = 'game-status playing';
+        
+        setTimeout(() => {
+            const color = currentPlayer;
+            const move = getBestMove(color);
+            
+            if (move) {
+                const startSquare = getSquareFromPosition(move.start.y, move.start.x);
+                const endSquare = getSquareFromPosition(move.end.y, move.end.x);
+                
+                if (startSquare && endSquare) {
+                    selectedPiece = startSquare;
+                    handleSquareClick(endSquare);
+                }
+            }
+            
+            isAiThinking = false;
+            updateStatus();
+        }, 500);
+    }
+
+    // ============================================================
+    //   تحديث واجهة المستخدم
+    // ============================================================
+    function updatePlayerDisplay() {
+        if (currentPlayerDisplay) {
+            currentPlayerDisplay.textContent = `${currentPlayer === 'white' ? '⚪ أبيض' : '⚫ أسود'}`;
+        }
+        if (playerIndicator) {
+            playerIndicator.className = `player-indicator ${currentPlayer}`;
+        }
+    }
+
+    function updateStatus() {
+        if (statusDisplay) {
+            if (gameState === 'checkmate') {
+                statusDisplay.textContent = `🏆 ${currentPlayer === 'white' ? 'الأسود' : 'الأبيض'} يفوز!`;
+                statusDisplay.className = 'game-status checkmate';
+            } else if (gameState === 'stalemate') {
+                statusDisplay.textContent = '🤝 تعادل!';
+                statusDisplay.className = 'game-status stalemate';
+            } else if (isInCheck(currentPlayer)) {
+                statusDisplay.textContent = `⚠️ كش على ${currentPlayer === 'white' ? 'الأبيض' : 'الأسود'}`;
+                statusDisplay.className = 'game-status check';
+            } else {
+                statusDisplay.textContent = `${currentPlayer === 'white' ? '⚪ أبيض' : '⚫ أسود'} يلعب`;
+                statusDisplay.className = 'game-status playing';
+            }
+        }
+    }
+
+    function updateMoveHistory() {
+        if (!moveHistoryDisplay) return;
+        const lastMoves = moveHistory.slice(-8).reverse();
+        if (lastMoves.length === 0) {
+            moveHistoryDisplay.innerHTML = '<div class="text-center text-gray-600 text-sm py-4">لا توجد حركات بعد</div>';
+            return;
+        }
+        moveHistoryDisplay.innerHTML = lastMoves.map((move, idx) => {
+            const num = moveHistory.length - idx;
+            const from = String.fromCharCode(97 + move.startPos.x) + (8 - move.startPos.y);
+            const to = String.fromCharCode(97 + move.endPos.x) + (8 - move.endPos.y);
+            const capture = move.captured ? '×' : '';
+            return `<div class="move-entry">
+                <span class="move-number">${num}.</span>
+                <span>${move.piece} ${from}${capture}${to}</span>
+                <span style="color:#666;font-size:0.7rem;">${new Date().toLocaleTimeString('ar-EG', {hour:'2-digit',minute:'2-digit'})}</span>
+            </div>`;
+        }).join('');
+    }
+
+    function updateCapturedDisplay() {
+        if (capturedWhiteEl) {
+            const pieces = capturedPieces.white;
+            capturedWhiteEl.innerHTML = pieces.length ? 
+                pieces.map(p => `<span class="piece">${p}</span>`).join('') :
+                '<span class="text-gray-600 text-sm">—</span>';
+        }
+        if (capturedBlackEl) {
+            const pieces = capturedPieces.black;
+            capturedBlackEl.innerHTML = pieces.length ?
+                pieces.map(p => `<span class="piece">${p}</span>`).join('') :
+                '<span class="text-gray-600 text-sm">—</span>';
+        }
+    }
+
+    // ============================================================
+    //   إعادة الضبط والتراجع
+    // ============================================================
+    function resetGame() {
+        boardState = deepCopyBoard(initialBoard);
+        moveHistory = [];
+        capturedPieces = { white: [], black: [] };
+        currentPlayer = 'white';
+        gameState = 'playing';
+        selectedPiece = null;
+        isAiThinking = false;
+        
+        updateBoardUI();
+        updatePlayerDisplay();
+        updateStatus();
+        updateMoveHistory();
+        updateCapturedDisplay();
+        
+        statusDisplay.textContent = '🎮 لعبة جديدة!';
+        statusDisplay.className = 'game-status playing';
+    }
+
+    function undoMove() {
+        if (moveHistory.length === 0 || isAiThinking) return;
+        
+        const lastMove = moveHistory.pop();
+        boardState[lastMove.startPos.y][lastMove.startPos.x] = lastMove.piece;
+        boardState[lastMove.endPos.y][lastMove.endPos.x] = lastMove.captured || '';
+        
+        if (lastMove.isEnPassant) {
+            boardState[lastMove.startPos.y][lastMove.endPos.x] = '♟';
+        }
+        
+        if (lastMove.isCastling) {
+            const row = lastMove.endPos.y;
+            const rookEndCol = lastMove.endPos.x > lastMove.startPos.x ? lastMove.endPos.x - 1 : lastMove.endPos.x + 1;
+            const rookStartCol = lastMove.endPos.x > lastMove.startPos.x ? 7 : 0;
+            boardState[row][rookStartCol] = boardState[row][rookEndCol];
+            boardState[row][rookEndCol] = '';
+        }
+        
+        currentPlayer = currentPlayer === 'white' ? 'black' : 'white';
+        gameState = 'playing';
+        selectedPiece = null;
+        
+        updateBoardUI();
+        updatePlayerDisplay();
+        updateStatus();
+        updateMoveHistory();
+        updateCapturedDisplay();
+    }
+
+    // ============================================================
+    //   الأزرار
+    // ============================================================
+    if (resetBtn) resetBtn.addEventListener('click', resetGame);
+    if (undoBtn) undoBtn.addEventListener('click', undoMove);
+    if (aiBtn) aiBtn.addEventListener('click', makeAIMove);
+
+    // ============================================================
+    //   🚀 تشغيل اللعبة
+    // ============================================================
+    createBoard();
+    updatePlayerDisplay();
+    updateStatus();
+
+    console.log('♟️ الشطرنج الذكي | واحة الجبري v2.0.0');
+    console.log('📅 29 أغسطس 2026');
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 لعبة الذاكرة | واحة الجبري</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================================
+           التصميم المتكامل - لعبة الذاكرة
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a12;
+            color: #e8e4d8;
+            font-family: 'Tajawal', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 136, 0.02) 0%, transparent 60%);
+        }
+
+        .game-container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(16, 16, 30, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.05) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, 
+                rgba(212, 175, 55, 0.02), 
+                rgba(0, 255, 136, 0.02), 
+                rgba(212, 175, 55, 0.02));
+            animation: rotateGlow 30s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .game-container>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(135deg, #D4AF37, #f5e56b, #D4AF37);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s ease-in-out infinite;
+            margin-bottom: 4px;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle span { color: #D4AF37; font-weight: 700; }
+
+        /* ============================================================
+           اختيار المستوى
+           ============================================================ */
+        .level-selector {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-level {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: #888;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+        }
+
+        .btn-level.active {
+            background: rgba(212, 175, 55, 0.1);
+            color: #D4AF37;
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-level:hover:not(.active) {
+            background: rgba(212, 175, 55, 0.05);
+            color: #D4AF37;
+        }
+
+        /* ============================================================
+           لوحة اللعبة
+           ============================================================ */
+        .game-board {
+            display: grid;
+            gap: 10px;
+            max-width: 500px;
+            margin: 16px auto;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+        }
+
+        .card {
+            aspect-ratio: 1;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(212, 175, 55, 0.05);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+
+        .card::after {
+            content: '?';
+            font-size: 2rem;
+            color: #D4AF37;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        .card.flipped::after {
+            opacity: 0;
+        }
+
+        .card:hover:not(.flipped):not(.matched) {
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.05);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+            background: linear-gradient(145deg, #1a2a3a, #2a4a5a);
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        .card.matched {
+            background: rgba(46, 204, 113, 0.15);
+            border-color: #2ecc71;
+            cursor: default;
+            transform: scale(0.95);
+            animation: matchPulse 0.6s ease;
+        }
+
+        .card.matched::after {
+            opacity: 0;
+        }
+
+        @keyframes matchPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0.95); }
+        }
+
+        .card .emoji {
+            display: none;
+            font-size: 2.5rem;
+            animation: popIn 0.3s ease;
+        }
+
+        .card.flipped .emoji {
+            display: block;
+        }
+
+        .card.matched .emoji {
+            display: block;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+            70% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* ============================================================
+           المعلومات
+           ============================================================ */
+        .info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            margin: 12px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .info-item {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .info-item .value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #D4AF37;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .info-item .value.moves { color: #60a5fa; }
+        .info-item .value.score { color: #4ade80; }
+        .info-item .value.time { color: #facc15; }
+
+        /* ============================================================
+           الأزرار
+           ============================================================ */
+        .btn-chess {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-chess:hover { transform: translateY(-2px); }
+        .btn-chess:active { transform: scale(0.95); }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37, #b8952e);
+            color: #0a0a12;
+        }
+        .btn-gold:hover { box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3); }
+
+        .btn-red {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+        .btn-red:hover { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.3); }
+
+        .btn-blue {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+        .btn-blue:hover { box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3); }
+
+        .buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        /* ============================================================
+           الروابط والتذييل
+           ============================================================ */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            margin-top: 16px;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+            padding: 4px 12px;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: #D4AF37;
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #D4AF37;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover { color: #f5e56b; }
+
+        /* ============================================================
+           تصميم متجاوب
+           ============================================================ */
+        @media (max-width: 600px) {
+            .game-container { padding: 16px; }
+            h1 { font-size: 1.8rem; }
+            .card { font-size: 2rem; }
+            .info { flex-direction: column; gap: 8px; }
+            .game-board { gap: 6px; padding: 8px; }
+        }
+
+        @media (max-width: 400px) {
+            .card .emoji { font-size: 1.8rem; }
+            .card::after { font-size: 1.5rem; }
+            .game-board { gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>🧠 لعبة الذاكرة</h1>
+    <div class="subtitle"><span>واحة الجبري</span> · Memory Game</div>
+
+    <!-- اختيار المستوى -->
+    <div class="level-selector">
+        <button class="btn-level active" data-level="4x4" onclick="setLevel('4x4')">🔰 4×4</button>
+        <button class="btn-level" data-level="4x6" onclick="setLevel('4x6')">🔥 4×6</button>
+        <button class="btn-level" data-level="6x6" onclick="setLevel('6x6')">💎 6×6</button>
+    </div>
+
+    <!-- المعلومات -->
+    <div class="info">
+        <div class="info-item">
+            🎯 المحاولات
+            <span class="value moves" id="moves">0</span>
+        </div>
+        <div class="info-item">
+            ⭐ النقاط
+            <span class="value score" id="score">0</span>
+        </div>
+        <div class="info-item">
+            ⏱️ الوقت
+            <span class="value time" id="timer">00:00</span>
+        </div>
+        <div class="info-item">
+            🎮 المستوى
+            <span class="value" id="levelDisplay" style="font-size:1rem; color:#888;">4×4</span>
+        </div>
+    </div>
+
+    <!-- لوحة اللعبة -->
+    <div class="game-board" id="board"></div>
+
+    <!-- الأزرار -->
+    <div class="buttons">
+        <button class="btn-chess btn-gold" onclick="startGame()">🔄 إعادة اللعب</button>
+        <button class="btn-chess btn-blue" onclick="toggleSound()">🔊 الصوت</button>
+    </div>
+
+    <!-- الروابط -->
+    <div class="nav-links">
+        <a href="/">🏠 الرئيسية</a>
+        <a href="/chess.html">♟️ الشطرنج</a>
+        <a href="/tic-tac-toe.html">❌⭕ تيك تاك تو</a>
+        <a href="/sudoku.html">🧩 سودوكو</a>
+        <a href="/handsa.html">🧮 هندسة الأعداد</a>
+    </div>
+
+    <footer>
+        ✍ <strong class="text-gold">#عبدالله_الجبري</strong> · صنعاء — اليمن
+        <br>
+        <a href="https://github.com/jabri-com" target="_blank">🐙 GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="https://t.me/Jabri2025" target="_blank">📱 Telegram</a>
+    </footer>
+</div>
+
+<!-- ============================================================
+     سكربت لعبة الذاكرة المتكامل
+     ============================================================ -->
+<script>
+(function() {
+    'use strict';
+
+    // ============================================================
+    //   العناصر
+    // ============================================================
+    const board = document.getElementById('board');
+    const movesEl = document.getElementById('moves');
+    const scoreEl = document.getElementById('score');
+    const timerEl = document.getElementById('timer');
+    const levelDisplay = document.getElementById('levelDisplay');
+
+    // ============================================================
+    //   إعدادات اللعبة
+    // ============================================================
+    const EMOJIS = ['🍎', '🍌', '🍇', '🍓', '🍉', '🍊', '🍒', '🥝', '🍑', '🥭', '🍋', '🍈'];
+    const LEVELS = {
+        '4x4': { cols: 4, rows: 4, pairs: 8 },
+        '4x6': { cols: 4, rows: 6, pairs: 12 },
+        '6x6': { cols: 6, rows: 6, pairs: 18 }
+    };
+
+    let currentLevel = '4x4';
+    let cards = [];
+    let flippedCards = [];
+    let moves = 0;
+    let score = 0;
+    let canFlip = true;
+    let timer = 0;
+    let timerInterval = null;
+    let soundEnabled = true;
+    let matchedPairs = 0;
+    let totalPairs = 8;
+    let gameStarted = false;
+
+    // ============================================================
+    //   المؤثرات الصوتية (Web Audio)
+    // ============================================================
+    function playSound(type) {
+        if (!soundEnabled) return;
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            const sounds = {
+                flip: { freq: 440, duration: 0.1 },
+                match: { freq: 880, duration: 0.2 },
+                fail: { freq: 220, duration: 0.2 },
+                win: { freq: 660, duration: 0.3 }
+            };
+            
+            const sound = sounds[type] || sounds.flip;
+            osc.frequency.value = sound.freq;
+            osc.type = 'sine';
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + sound.duration);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + sound.duration);
+        } catch(e) {}
+    }
+
+    function toggleSound() {
+        soundEnabled = !soundEnabled;
+        document.querySelector('.btn-blue').textContent = soundEnabled ? '🔊 الصوت' : '🔇 كتم';
+    }
+
+    // ============================================================
+    //   دوال اللعبة
+    // ============================================================
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function setLevel(level) {
+        currentLevel = level;
+        document.querySelectorAll('.btn-level').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.level === level);
+        });
+        const config = LEVELS[level];
+        levelDisplay.textContent = level;
+        startGame();
+    }
+
+    function startGame() {
+        // إيقاف المؤقت
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        
+        const config = LEVELS[currentLevel];
+        const pairs = config.pairs;
+        const totalCards = pairs * 2;
+        
+        // اختيار الإيموجيات
+        const selectedEmojis = EMOJIS.slice(0, pairs);
+        cards = shuffle([...selectedEmojis, ...selectedEmojis]);
+        
+        // إعادة تعيين المتغيرات
+        flippedCards = [];
+        moves = 0;
+        score = 0;
+        matchedPairs = 0;
+        totalPairs = pairs;
+        timer = 0;
+        canFlip = true;
+        gameStarted = false;
+        
+        // تحديث العرض
+        updateInfo();
+        timerEl.textContent = '00:00';
+        
+        // إنشاء اللوحة
+        board.style.gridTemplateColumns = `repeat(${config.cols}, 1fr)`;
+        board.innerHTML = '';
+        
+        cards.forEach((emoji, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.emoji = emoji;
+            card.dataset.index = index;
+            card.innerHTML = `<span class="emoji">${emoji}</span>`;
+            card.addEventListener('click', () => handleCardClick(card));
+            board.appendChild(card);
+        });
+    }
+
+    function handleCardClick(card) {
+        if (!canFlip) return;
+        if (card.classList.contains('flipped')) return;
+        if (card.classList.contains('matched')) return;
+        
+        // بدء المؤقت عند أول نقرة
+        if (!gameStarted) {
+            gameStarted = true;
+            timerInterval = setInterval(() => {
+                timer++;
+                updateTimer();
+            }, 1000);
+        }
+        
+        // قلب البطاقة
+        card.classList.add('flipped');
+        flippedCards.push(card);
+        playSound('flip');
+        
+        if (flippedCards.length === 2) {
+            moves++;
+            canFlip = false;
+            updateInfo();
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        const [card1, card2] = flippedCards;
+        const isMatch = card1.dataset.emoji === card2.dataset.emoji;
+        
+        if (isMatch) {
+            card1.classList.add('matched');
+            card2.classList.add('matched');
+            score++;
+            matchedPairs++;
+            playSound('match');
+            
+            flippedCards = [];
+            canFlip = true;
+            updateInfo();
+            
+            if (matchedPairs === totalPairs) {
+                gameWon();
+            }
+        } else {
+            playSound('fail');
+            setTimeout(() => {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                flippedCards = [];
+                canFlip = true;
+            }, 800);
+        }
+    }
+
+    function gameWon() {
+        playSound('win');
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        
+        const timeStr = formatTime(timer);
+        const stars = score <= totalPairs * 0.5 ? '⭐⭐⭐' : 
+                     score <= totalPairs * 0.7 ? '⭐⭐' : '⭐';
+        
+        setTimeout(() => {
+            alert(`🎉 فزت باللعبة!\n\n${stars}\n\n⏱️ الوقت: ${timeStr}\n🎯 المحاولات: ${moves}\n⭐ النقاط: ${score}\n\n${score <= 8 ? '🏆 ممتاز!' : '💪 أحسنت!'}`);
+        }, 300);
+    }
+
+    // ============================================================
+    //   تحديث واجهة المستخدم
+    // ============================================================
+    function updateInfo() {
+        movesEl.textContent = moves;
+        scoreEl.textContent = score;
+    }
+
+    function updateTimer() {
+        timerEl.textContent = formatTime(timer);
+    }
+
+    function formatTime(seconds) {
+        const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+        const secs = String(seconds % 60).padStart(2, '0');
+        return `${mins}:${secs}`;
+    }
+
+    // ============================================================
+    //   ربط الأزرار العامة
+    // ============================================================
+    window.startGame = startGame;
+    window.setLevel = setLevel;
+    window.toggleSound = toggleSound;
+
+    // ============================================================
+    //   🚀 تشغيل اللعبة
+    // ============================================================
+    startGame();
+    console.log('🧠 لعبة الذاكرة | واحة الجبري v2.0.0');
+    console.log('📅 29 أغسطس 2026');
+
+})();
+</script>
+
+</body>
+</html>

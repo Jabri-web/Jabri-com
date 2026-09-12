@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❌⭕ تيك تاك تو | واحة الجبري</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================================
+           التصميم المتكامل - تيك تاك تو
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a12;
+            color: #e8e4d8;
+            font-family: 'Tajawal', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 136, 0.02) 0%, transparent 60%);
+        }
+
+        .game-container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(16, 16, 30, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.05) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, 
+                rgba(212, 175, 55, 0.02), 
+                rgba(0, 255, 136, 0.02), 
+                rgba(212, 175, 55, 0.02));
+            animation: rotateGlow 30s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .game-container>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(135deg, #D4AF37, #f5e56b, #D4AF37);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s ease-in-out infinite;
+            margin-bottom: 4px;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle span { color: #D4AF37; font-weight: 700; }
+
+        .board-wrapper {
+            position: relative;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+            border-radius: 16px;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.05);
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            aspect-ratio: 1;
+            width: 100%;
+        }
+
+        .cell {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            color: #D4AF37;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .cell:hover:not(.taken) {
+            background: rgba(212, 175, 55, 0.05);
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: scale(1.02);
+        }
+
+        .cell.taken {
+            cursor: default;
+            animation: popIn 0.3s ease;
+        }
+
+        .cell.winning {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: #00ff88;
+            animation: pulseWin 1s ease-in-out infinite;
+        }
+
+        .cell.x {
+            color: #ff6b6b;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.2);
+        }
+
+        .cell.o {
+            color: #4ecdc4;
+            text-shadow: 0 0 30px rgba(78, 205, 196, 0.2);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulseWin {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .player-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .player-indicator.x { background: #ff6b6b; }
+        .player-indicator.o { background: #4ecdc4; }
+
+        .score {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .score span {
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .score .x-score { color: #ff6b6b; }
+        .score .o-score { color: #4ecdc4; }
+        .score .draw-score { color: #facc15; }
+
+        .game-status {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .game-status.playing {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+        }
+
+        .game-status.win-x {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+
+        .game-status.win-o {
+            background: rgba(78, 205, 196, 0.1);
+            color: #4ecdc4;
+        }
+
+        .game-status.draw {
+            background: rgba(234, 179, 8, 0.1);
+            color: #facc15;
+        }
+
+        .btn-chess {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-chess:hover { transform: translateY(-2px); }
+        .btn-chess:active { transform: scale(0.95); }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37, #b8952e);
+            color: #0a0a12;
+        }
+        .btn-gold:hover { box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3); }
+
+        .btn-red {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+        .btn-red:hover { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.3); }
+
+        .btn-blue {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+        .btn-blue:hover { box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3); }
+
+        .btn-green {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+        .btn-green:hover { box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3); }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            margin-top: 16px;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+            padding: 4px 12px;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: #D4AF37;
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #D4AF37;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover { color: #f5e56b; }
+
+        .mode-selector {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .mode-selector .btn-chess {
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .btn-mode {
+            background: rgba(255, 255, 255, 0.05);
+            color: #888;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-mode.active {
+            background: rgba(212, 175, 55, 0.1);
+            color: #D4AF37;
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-mode:hover {
+            background: rgba(212, 175, 55, 0.05);
+            color: #D4AF37;
+        }
+
+        @media (max-width: 600px) {
+            .game-container { padding: 16px; }
+            h1 { font-size: 1.8rem; }
+            .cell { font-size: 3rem; }
+            .game-info { flex-direction: column; align-items: stretch; }
+            .score { justify-content: center; }
+        }
+
+        @media (max-width: 400px) {
+            .cell { font-size: 2.4rem; }
+            .board-wrapper { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>❌⭕ تيك تاك تو</h1>
+    <div class="subtitle"><span>واحة الجبري</span> · XO Game</div>
+
+    <!-- اختيار الوضع -->
+    <div class="mode-selector">
+        <button class="btn-chess btn-mode active" data-mode="pvp" onclick="setMode('pvp')">👥 لاعب ضد لاعب</button>
+        <button class="btn-chess btn-mode" data-mode="pve" onclick="setMode('pve')">🤖 ضد الكمبيوتر</button>
+        <button class="btn-chess btn-mode" data-mode="hard" onclick="setMode('hard')">🔥 صعب</button>
+    </div>
+
+    <!-- اللوحة -->
+    <div class="board-wrapper">
+        <div id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+    </div>
+
+    <!-- المعلومات -->
+    <div class="game-info">
+        <div class="player-info">
+            <div class="player-indicator x" id="playerIndicator"></div>
+            <div>
+                <div class="text-gray-400 text-sm">دور اللعب</div>
+                <div id="currentPlayer" class="text-xl font-bold text-gold">❌ X</div>
+            </div>
+        </div>
+
+        <div class="score">
+            <span class="x-score">❌ <span id="xScore">0</span></span>
+            <span class="draw-score">🤝 <span id="drawScore">0</span></span>
+            <span class="o-score">⭕ <span id="oScore">0</span></span>
+        </div>
+    </div>
+
+    <!-- حالة اللعبة -->
+    <div id="gameStatus" class="game-status playing" style="margin-top:12px;">
+        🎮 دور ❌
+    </div>
+
+    <!-- الأزرار -->
+    <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+        <button id="resetGame" class="btn-chess btn-red flex-1">🔄 إعادة</button>
+        <button id="undoMove" class="btn-chess btn-gold flex-1">↩️ تراجع</button>
+    </div>
+
+    <!-- الروابط -->
+    <div class="nav-links">
+        <a href="/">🏠 الرئيسية</a>
+        <a href="/chess.html">♟️ الشطرنج</a>
+        <a href="/memory.html">🧠 الذاكرة</a>
+        <a href="/sudoku.html">🧩 سودوكو</a>
+        <a href="/handsa.html">🧮 هندسة الأعداد</a>
+    </div>
+
+    <footer>
+        ✍ <strong class="text-gold">#عبدالله_الجبري</strong> · صنعاء — اليمن
+        <br>
+        <a href="https://github.com/jabri-com" target="_blank">🐙 GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="https://t.me/Jabri2025" target="_blank">📱 Telegram</a>
+    </footer>
+</div>
+
+<!-- ============================================================
+     سكربت تيك تاك تو المتكامل
+     ============================================================ -->
+<script>
+(function() {
+    'use strict';
+
+    // ============================================================
+    //   عناصر DOM
+    // ============================================================
+    const cells = document.querySelectorAll('.cell');
+    const statusDisplay = document.getElementById('gameStatus');
+    const currentPlayerDisplay = document.getElementById('currentPlayer');
+    const playerIndicator = document.getElementById('playerIndicator');
+    const xScoreEl = document.getElementById('xScore');
+    const oScoreEl = document.getElementById('oScore');
+    const drawScoreEl = document.getElementById('drawScore');
+    const resetBtn = document.getElementById('resetGame');
+    const undoBtn = document.getElementById('undoMove');
+
+    // ============================================================
+    //   حالة اللعبة
+    // ============================================================
+    let board = ['', '', '', '', '', '', '', '', ''];
+    let currentPlayer = 'X';
+    let gameActive = true;
+    let gameMode = 'pvp'; // 'pvp', 'pve', 'hard'
+    let moveHistory = [];
+    let scores = { X: 0, O: 0, draw: 0 };
+    let isAiThinking = false;
+
+    const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+        [0, 4, 8], [2, 4, 6] // diagonals
+    ];
+
+    // ============================================================
+    //   دوال اللعبة
+    // ============================================================
+    function handleCellClick(index) {
+        if (!gameActive || board[index] || isAiThinking) return;
+        if (gameMode !== 'pvp' && currentPlayer === 'O') return;
+
+        makeMove(index, currentPlayer);
+        
+        if (gameActive && gameMode !== 'pvp' && currentPlayer === 'O') {
+            isAiThinking = true;
+            setTimeout(() => {
+                const aiMove = getAIMove();
+                if (aiMove !== null) {
+                    makeMove(aiMove, 'O');
+                }
+                isAiThinking = false;
+            }, 300);
+        }
+    }
+
+    function makeMove(index, player) {
+        board[index] = player;
+        moveHistory.push({ index, player });
+        updateCell(index, player);
+
+        const winInfo = checkWin(player);
+        if (winInfo) {
+            gameActive = false;
+            highlightWin(winInfo.pattern);
+            statusDisplay.textContent = `🏆 ${player === 'X' ? '❌ X' : '⭕ O'} يفوز!`;
+            statusDisplay.className = `game-status win-${player.toLowerCase()}`;
+            scores[player]++;
+            updateScores();
+            return;
+        }
+
+        if (board.every(cell => cell !== '')) {
+            gameActive = false;
+            statusDisplay.textContent = '🤝 تعادل!';
+            statusDisplay.className = 'game-status draw';
+            scores.draw++;
+            updateScores();
+            return;
+        }
+
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        updatePlayerDisplay();
+        statusDisplay.textContent = `🎮 دور ${currentPlayer === 'X' ? '❌ X' : '⭕ O'}`;
+        statusDisplay.className = 'game-status playing';
+    }
+
+    function checkWin(player) {
+        for (const pattern of winPatterns) {
+            if (pattern.every(idx => board[idx] === player)) {
+                return { player, pattern };
+            }
+        }
+        return null;
+    }
+
+    function updateCell(index, player) {
+        const cell = cells[index];
+        cell.textContent = player === 'X' ? '✕' : '◯';
+        cell.className = `cell taken ${player.toLowerCase()}`;
+    }
+
+    function highlightWin(pattern) {
+        pattern.forEach(idx => {
+            cells[idx].classList.add('winning');
+        });
+    }
+
+    function updatePlayerDisplay() {
+        const display = currentPlayer === 'X' ? '❌ X' : '⭕ O';
+        currentPlayerDisplay.textContent = display;
+        playerIndicator.className = `player-indicator ${currentPlayer.toLowerCase()}`;
+    }
+
+    function updateScores() {
+        xScoreEl.textContent = scores.X;
+        oScoreEl.textContent = scores.O;
+        drawScoreEl.textContent = scores.draw;
+    }
+
+    // ============================================================
+    //   الذكاء الاصطناعي
+    // ============================================================
+    function getAIMove() {
+        const isHard = gameMode === 'hard';
+        
+        // 1. فوز مباشر
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === '') {
+                board[i] = 'O';
+                if (checkWin('O')) {
+                    board[i] = '';
+                    return i;
+                }
+                board[i] = '';
+            }
+        }
+
+        // 2. منع فوز الخصم
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === '') {
+                board[i] = 'X';
+                if (checkWin('X')) {
+                    board[i] = '';
+                    return i;
+                }
+                board[i] = '';
+            }
+        }
+
+        if (isHard) {
+            // 3. استراتيجية متقدمة
+            const corners = [0, 2, 6, 8];
+            const center = 4;
+            const edges = [1, 3, 5, 7];
+
+            // المركز
+            if (board[center] === '') return center;
+
+            // الزوايا
+            const availableCorners = corners.filter(i => board[i] === '');
+            if (availableCorners.length > 0) {
+                return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+            }
+
+            // الحواف
+            const availableEdges = edges.filter(i => board[i] === '');
+            if (availableEdges.length > 0) {
+                return availableEdges[Math.floor(Math.random() * availableEdges.length)];
+            }
+        }
+
+        // 4. حركة عشوائية
+        const empty = board.map((v, i) => v === '' ? i : null).filter(v => v !== null);
+        return empty.length > 0 ? empty[Math.floor(Math.random() * empty.length)] : null;
+    }
+
+    // ============================================================
+    //   وضع اللعبة
+    // ============================================================
+    function setMode(mode) {
+        gameMode = mode;
+        document.querySelectorAll('.btn-mode').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.mode === mode);
+        });
+        resetGame();
+        
+        const modeNames = {
+            'pvp': '👥 لاعب ضد لاعب',
+            'pve': '🤖 ضد الكمبيوتر',
+            'hard': '🔥 صعب'
+        };
+        statusDisplay.textContent = `🎮 ${modeNames[mode]}`;
+        statusDisplay.className = 'game-status playing';
+    }
+
+    // ============================================================
+    //   إعادة الضبط والتراجع
+    // ============================================================
+    function resetGame() {
+        board = ['', '', '', '', '', '', '', '', ''];
+        currentPlayer = 'X';
+        gameActive = true;
+        moveHistory = [];
+        isAiThinking = false;
+
+        cells.forEach(cell => {
+            cell.textContent = '';
+            cell.className = 'cell';
+        });
+
+        updatePlayerDisplay();
+        statusDisplay.textContent = `🎮 دور ❌ X`;
+        statusDisplay.className = 'game-status playing';
+        updateScores();
+    }
+
+    function undoMove() {
+        if (moveHistory.length === 0 || isAiThinking) return;
+        
+        const lastMove = moveHistory.pop();
+        board[lastMove.index] = '';
+        cells[lastMove.index].textContent = '';
+        cells[lastMove.index].className = 'cell';
+        
+        if (moveHistory.length > 0) {
+            currentPlayer = moveHistory[moveHistory.length - 1].player === 'X' ? 'O' : 'X';
+        } else {
+            currentPlayer = 'X';
+        }
+        
+        gameActive = true;
+        updatePlayerDisplay();
+        statusDisplay.textContent = `🎮 دور ${currentPlayer === 'X' ? '❌ X' : '⭕ O'}`;
+        statusDisplay.className = 'game-status playing';
+    }
+
+    // ============================================================
+    //   ربط الأحداث
+    // ============================================================
+    cells.forEach((cell, index) => {
+        cell.addEventListener('click', () => handleCellClick(index));
+    });
+
+    if (resetBtn) resetBtn.addEventListener('click', resetGame);
+    if (undoBtn) undoBtn.addEventListener('click', undoMove);
+
+    // تعريف setMode في النطاق العام
+    window.setMode = setMode;
+
+    // ============================================================
+    //   🚀 تشغيل اللعبة
+    // ============================================================
+    resetGame();
+    console.log('❌⭕ تيك تاك تو | واحة الجبري v1.0.0');
+    console.log('📅 29 أغسطس 2026');
+
+})();
+</script>
+
+</body>
+</html>
