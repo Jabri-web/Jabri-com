@@ -1,3 +1,37 @@
+https://[اسم اليوزر].github.io/[اسم المستودع]/[اسم الملف]
+
+
+https://github.com/[اسم اليوزر]/[اسم المستودع]/blob/main/[اسم الملف]
+
+🔗 Live Demo: https://jabri-web.github.io/Jabri-com/all-links.html
+📦 Source Code: https://github.com/Jabri-web/Jabri-com/blob/main/all-links.html
+📄 DOI: 10.5281/zenodo.21970418
+
+
+____________________
+https://github.com/Jabri-web/Jabri-com/blob/main/all-links.html
+
+How to call file in github.com:
+
+
+https://github.com/Jabri-web/Jabri-com/blob/main/all-links.html
+
+______________________
+
+https://jabri-web.github.io/Jabri-com/
+
+
+This gow to call page in github.io:
+https://jabri-web.github.io/Jabri-com/
+________<____________
+
+
+https://jabri-web.github.io/Jabri-com/
+
+
+This gow to call page in github.io:
+https://jabri-web.github.io/Jabri-com/all-links.html
+_________________________
 
 # المستودع/الورقة DOI
 1 jabri62018.github.io 21006432
@@ -439,7 +473,7 @@ index.html
 logo.html
 catalog.html
 all-links.html
-monitor.html
+monitor
 
 
 # ─────────────────────────────────────────────
@@ -668,7 +702,7 @@ vercel.json
 # ═══════════════════════════════════════════════════════════
 # الإحصائيات
 # ═══════════════════════════════════════════════════════════
-# صفحات HTML في الجذر: ~75
+# صفحات HTML76/ في الجذر:75
 # صفحات /ar/: 4
 # صفحات /en/: 4
 # صفحات /game/: 1
