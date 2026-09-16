@@ -476,6 +476,58 @@ img { max-width: 100%; display: block; }
   margin: 20px 0 15px;
 }
 
+/* ═══════════════════ قسم DOIs (ذهبي) ═══════════════════ */
+.dois-section {
+  border-inline-end-color: #d4af37 !important;
+}
+.dois-section .section-title {
+  color: #d4af37;
+}
+.dois-section .badge {
+  background: rgba(212, 175, 55, .15);
+  color: #d4af37;
+}
+.dois-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #d4af37, #f4e5a1);
+  color: #0a0a0f;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, .3);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, .5);
+}
+.btn-cyan {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(106, 227, 255, .15);
+  color: var(--acc);
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid var(--acc);
+  transition: background var(--transition), transform var(--transition);
+}
+.btn-cyan:hover {
+  background: rgba(106, 227, 255, .25);
+  transform: translateY(-2px);
+}
+
 /* ═══════════════════ زر العودة للأعلى ═══════════════════ */
 .back-to-top {
   position: fixed;
@@ -521,6 +573,8 @@ img { max-width: 100%; display: block; }
   .section-block { padding: 16px 18px; }
   .back-to-top { bottom: 16px; left: 16px; width: 42px; height: 42px; }
   .search-bar-wrap { top: 8px; padding: 8px; }
+  .dois-actions { flex-direction: column; }
+  .btn-gold, .btn-cyan { width: 100%; justify-content: center; }
 }
 
 /* ═══════════════════ تقليل الحركة ═══════════════════ */
@@ -769,6 +823,7 @@ img { max-width: 100%; display: block; }
       <h3>⚙️ 8 — الملفات النظامية والمساندة</h3>
       <ul class="inline-list">
         <li><a href="/all-links.html">🗺️ خريطة المسارات (هذه الصفحة)</a></li>
+        <li><a href="/table-all.html">📊 جدول DOIs الكامل</a></li>
         <li><a href="/sitemap.xml">🗺️ Sitemap.xml</a></li>
         <li><a href="/robots.txt">🤖 Robots.txt</a></li>
         <li><a href="/404.html">🚫 صفحة الخطأ 404</a></li>
@@ -866,6 +921,30 @@ img { max-width: 100%; display: block; }
     </p>
   </footer>
 
+  <!-- ═══════════════════════════════════════════════════════
+       🆕 قسم DOIs — رابط إلى الجدول الكامل
+       ═══════════════════════════════════════════════════════ -->
+  <section class="section-block dois-section">
+    <h2 class="section-title">
+      📜 سجل DOIs الرسمي
+      <span class="badge">28 معرف رسمي</span>
+    </h2>
+
+    <p style="color: var(--txt-dim); margin-bottom: 15px;">
+      الفهرس الكامل لكل DOIs الرسمية على Zenodo — المستودعات (9) + الأوراق العلمية (19).
+    </p>
+
+    <div class="dois-actions">
+      <a href="/table-all.html" class="btn-gold">
+        📊 فتح الجدول الكامل — 28 DOI
+      </a>
+
+      <a href="/repos.json" download class="btn-cyan">
+        ⬇️ تنزيل repos.json
+      </a>
+    </div>
+  </section>
+
 </main>
 
 <!-- ═══ زر العودة للأعلى ═══ -->
@@ -940,6 +1019,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       document.querySelectorAll('.section-block').forEach(function (s) {
         var anyVisible = s.querySelectorAll('.inline-list li:not(.hidden), .links-grid li:not(.hidden)').length > 0;
+        /* لا تخفي قسم DOIs أبداً */
+        if (s.classList.contains('dois-section')) return;
         s.classList.toggle('hidden', !anyVisible);
       });
 
@@ -1007,9 +1088,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 })();
 </script>
-
-<script src="/js/init-page-root.js" defer></script>
-<script src="/js/menu.js" defer></script>
 
 </body>
 </html>
