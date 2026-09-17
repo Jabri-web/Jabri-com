@@ -4,6 +4,7 @@
 
   <!-- ═══════════════════════════════════════════════════════
        الصفحة الرئيسية متعددة اللغات (hreflang)
+       الجذر "/" = العربي (الافتراضي) | "/en/" = الإنجليزي
        ═══════════════════════════════════════════════════════ -->
 
   <!-- الجذر: عربي (افتراضي) -->
@@ -13,17 +14,6 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/"/>
-  </url>
-
-  <!-- AR: عربي (نسخة فرعية) -->
-  <url>
-    <loc>https://jabri-com.vercel.app/ar/</loc>
-    <lastmod>2026-09-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/"/>
   </url>
@@ -76,11 +66,34 @@
   <url><loc>https://jabri-com.vercel.app/profile</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
 
   <!-- ═══════════════════════════════════════════════════════
-       النظرية
+       النظرية (مع ربط عربي ↔ إنجليزي)
        ═══════════════════════════════════════════════════════ -->
-  <url><loc>https://jabri-com.vercel.app/Sindbad-theory</loc><lastmod>2026-09-17</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://jabri-com.vercel.app/theory-ar</loc><lastmod>2026-09-17</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://jabri-com.vercel.app/theory-en</loc><lastmod>2026-09-17</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url>
+    <loc>https://jabri-com.vercel.app/Sindbad-theory</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://jabri-com.vercel.app/theory-ar</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/theory-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/theory-en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/theory-ar"/>
+  </url>
+
+  <url>
+    <loc>https://jabri-com.vercel.app/theory-en</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/theory-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/theory-en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/theory-ar"/>
+  </url>
 
   <!-- ═══════════════════════════════════════════════════════
        البحث
