@@ -68,11 +68,6 @@
   "redirects": [
     { "source": "/diagmose.html", "destination": "/diagnose.html", "permanent": true },
     { "source": "/en/index.html", "destination": "/en/", "permanent": true },
-    { "source": "/ar", "destination": "/", "permanent": true },
-    { "source": "/ar/", "destination": "/", "permanent": true },
-    { "source": "/ar/:path*", "destination": "/", "permanent": true },
-    { "source": "/ar-page", "destination": "/", "permanent": true },
-    { "source": "/ar-page.html", "destination": "/", "permanent": true },
-    { "source": "/ar-page/:path*", "destination": "/", "permanent": true }
+    { "source": "/ar/index.html", "destination": "/ar/", "permanent": true }
   ]
 }
