@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/(.*)",
@@ -26,13 +26,6 @@
       "headers": [{ "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }]
     },
     {
-      "source": "/manifest.json",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" },
-        { "key": "Content-Type", "value": "application/manifest+json" }
-      ]
-    },
-    {
       "source": "/sitemap(.*).xml",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=3600" },
@@ -47,29 +40,21 @@
       ]
     },
     {
-      "source": "/icon-(.*).png",
+      "source": "/(images|image|icon-)(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    },
-    {
-      "source": "/images/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    },
-    {
-      "source": "/image/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    },
-    {
-      "source": "/js/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }]
     }
   ],
   "redirects": [
-    { "source": "/diagmose.html", "destination": "/diagnose", "permanent": true },
-    { "source": "/author-cv.html", "destination": "/Author-cv", "permanent": true },
-    { "source": "/ar/unified-theory.html", "destination": "/ar/Sindbad-theory", "permanent": true },
-    { "source": "/Jabri_Nobble.html", "destination": "/Page5", "permanent": true },
-    { "source": "/en/index.html", "destination": "/en", "permanent": true },
-    { "source": "/ar/index.html", "destination": "/ar", "permanent": true },
-    { "source": "/Checkout.html", "destination": "/Page9", "permanent": true }
+    { "source": "/ar-page", "destination": "/ar/", "permanent": true },
+    { "source": "/ar-page/", "destination": "/ar/", "permanent": true },
+    { "source": "/en-page", "destination": "/en/", "permanent": true },
+    { "source": "/en-page/", "destination": "/en/", "permanent": true },
+    { "source": "/Jabri-com-index", "destination": "/", "permanent": true },
+    { "source": "/Jabri-com-index/", "destination": "/", "permanent": true },
+    { "source": "/diagmose.html", "destination": "/diagnose/", "permanent": true },
+    { "source": "/author-cv.html", "destination": "/Author-cv/", "permanent": true },
+    { "source": "/ar/unified-theory.html", "destination": "/ar/Sindbad-theory/", "permanent": true },
+    { "source": "/Jabri_Nobble.html", "destination": "/Page5/", "permanent": true },
+    { "source": "/Checkout.html", "destination": "/Page9/", "permanent": true }
   ]
 }
