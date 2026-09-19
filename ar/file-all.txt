@@ -1,0 +1,1756 @@
+واحة الجبري
+_______________
+https://jabri-com.vercel.app/
+
+
+واحة الجبري: موقع شغال وانتهى الى مرحلة التوثيق..
+الا اذا وجد تحديث للضرورة القصوى.
+
+
+
+
+كل حاجة في github مسموح
+ماعدا صفحاتها..مثل:
+https://Jabri-web.github.io/
+https://Jabri-web.github.io/Jabri-com/
+لكنها مقبولة لدى قوقل وتعمل للموقع دعاية مرعبة...
+
+لجاءنا للذهاب الى vercel...
+كل العالم يشاهد موقع: واحة الجبري
+لا يوجد غير اربعة مشاريع فيه مخصصة باسم الريبو:
+https://jabri-com.vercel.app/ repo11
+https://jabricom.vercel.app/ repo12
+https://jabri-web.vercel.app/ repo10
+https://jabri-web.github.io/ repo4
+عملنا بديل لاستعراص صفحات githhub في قواعد البيانات باشياء مثل صفحات الساحر... وصفحات مرآة اليمن.
+
+
+معنا نظام يدوي للهيدر والفوتر في كل صفحة... وايضا نظام الى لتحميل هيدر عام وفوتر عام لكل صفحة...
+حتى تتم ارشفة الموقع سنحذف اليدوي ونبقي على الالي...
+
+اللغات:
+مدمج في الروت
+عربي خالصar
+اجليزي خالص en
+
+
+_______المجلدات_____folder;
+/ .....root 98% of files
+ar/.....Arabic files
+en/.....English files
+js/....
+publish/..
+game/..
+image/.. all multimedia
+
+_______files_______
+# ───────────────────────────────
+# 1. الصفحات الرئيسية (Main Pages)
+# ───────────────────────────────
+1-index.html...(ar,en)
+2-logo.html
+3-catalog.html
+4-all-links.html
+5-table-all.html
+6-monitor.html
+
+# ───────────────────────────────
+# 2. صفحات Page 1-12 (بأحرف كبيرة P)
+# ───────────────────────────────
+/....root
+7-Page1.html
+8-Page2.html
+9-Page3.html
+10-Page4.html
+11-Page5.html
+12-Page6.html
+13-Page7.html
+14-Page8.html
+15-Page9.html
+16-Page10.html
+17-Page11.html
+18-Page12.html
+
+# ───────────────────────────────
+# 3. صفحات About (نبذة)
+# ───────────────────────────────
+/..root
+19-about.html...(ar,en)
+20-about-ar.html
+21-about-en.html
+22-about-waha.html
+
+# ────────────────────────────
+# 4. المؤلف والسيرة الذاتية (Author & CV)
+# ───────────────────────────
+/...root
+23-Author-cv.html
+24-author-history.html
+25-cv-2026a.html
+26-cv-2026e.html
+27-founder.html
+28-profile.html
+29-profile-en.html
+
+# ────────────────────────────
+# 5. النظرية الموحدة (Theory)
+# ─────────────────────────────
+/....root
+30-theory-ar.html
+31-theory-en.html
+32-Sindbad-theory.html
+33-Sindbad-Brdoni.html
+
+# ───────────────────────────────
+# 6. البحث العلمي (Research)
+# ────────────────────────────────
+/...root
+34-research.html
+35-research-deep.html
+36-Pages-Researches.html
+
+# ──────────────────────────────
+# 7. التراث اليمني (Yemeni Heritage)
+# ──────────────────────────────
+/....root
+37-Sanaa.html
+38-Shibam.html
+39-Soqatra.html
+40-Yemen-library.html
+41-gallery.html
+42-yemen-photo.html
+43-yemen-photo2.html
+44-yemen-photo-api.html
+45-yemen-photo-php.html
+
+# ───────────────────────────────
+# 8. المجلات (Journals)
+# ───────────────────────────────
+/...root:
+46-journal.html
+47-journal2.html
+48-journal3.html
+49-journal4.html
+50-History-pdf.html
+
+# ──────────────────────────────
+# 9. الأدوات (Tools)
+# ──────────────────────────────
+/...root:
+51-calculator.html
+52-handsa.html
+53-char-balance.html
+54-Check.html
+55-magic-translator.html
+56-diagnose.html
+
+# ────────────────────────────
+# 10. قواعد البيانات والشبكة (Databases & Network)
+# ────────────────────────────
+/...root:
+57-Dbase.html
+58-Dbase-deep.html
+59-microtik.html
+60-microtik-deep.html
+
+# ─────────────────────────────
+# 11. المكتبة والمحتوى (Library & Content)
+# ─────────────────────────────
+/..root:
+61-Office.html
+62-source.html
+63-citations.html
+64-music.html
+65-taraif.html
+66-Nezar.html
+67-wonder.html
+68-heaven-info.html
+69-visitor.html
+70-who-we.html
+71-project.html
+72-project-ar.html
+73-poster.html
+
+# ────────────────────────────
+# 12. التواصل والنظام (Contact & System)
+# ─────────────────────────────
+/..root:
+74-contact.html...(ar,en)
+75-FAQPage.html
+76-FAQPage-en.html
+77-privacy-policy.html
+78-404.html
+79-dashboard.html
+
+# ──────────────────────────────
+# 13. أدوات المطور (Developer Tools)
+# ───────────────────────────────
+/...root:
+80-file-structure.html
+81-file-structure2.html
+82-Router-all.html
+83-repos-auto.html
+84-repos-sqr.html
+85-current-auto.html
+
+# ──────────────────────────────
+# 14. المتنوع (Miscellaneous)
+# ──────────────────────────────
+/...root:
+86-kfupm-msg.html
+87-explore.html
+
+# ═══════════════════════════
+# المجلدات الفرعية (Subfolders)
+# ════════════════════════════
+# ─────────────────────────────
+# 15. مجلد /ar/ (النسخة العربية)
+# ─────────────────────────────
+88-ar/index.html
+89-ar/about.html
+90-ar/contact.html
+91-ar/journal.html
+
+# ──────────────────────────────
+# 16. مجلد /en/(النسخة الإنجليزية)
+# ───────────────────────────────
+92-en/index.html
+93-en/about.html
+94-en/contact.html
+95-en/journal.html
+
+# ──────────────────────────────
+# 17. مجلد /game/ (الألعاب)
+# ──────────────────────────────
+96-game/game-auto.html
+
+# ──────────────────────────────
+# 18. مجلد /publish/ (النشر)
+# ──────────────────────────────
+97-publish/publish.html
+_____________________
+Total=97
+
+
+🇾🇪🇾🇪🇾🇪🇾🇪
+♻️♻️♻️♻️
+_____NO indexing______________
+# ────────────────────────────
+# 19. الأجزاء -لاتفهرس
+# ───────────────────────────
+/..root;general files
+1-header.html
+2-footer.html
+3-hero.html
+4-offline.html
+
+# ─────────────────────────────
+# 20. مجلد /js/ (الجافاسكريبت)
+# ─────────────────────────────
+js/...general files;
+1-js/init-page-root.js
+2-js/menu.js
+
+# ═════════════════════════════
+# ملفات النظام (System Files — في الجذر)
+# ═════════════════════════════
+/..root:system general files:
+1-manifest.json
+2-robots.txt
+3-sitemap.xml
+4-sw.js
+5-vercel.json
+6-file-all.txt
+# ═════════════════════════════
+
+
+
+
+__________________
+
+
+https://jabri-com.vercel.app/
+
+
+مرحبا صديقي:
+
+تذكر انا موقع وصل لاخر مرحلة وهي التوثيق فلا تدعي الغباء وتدعينا للمربع صفر لو لو لو سمحت...
+
+اما تفتح عقلك او تنسحب...
+
+تحياتي....
+
+#عبدالله_الجبري
+الجمعة 18 سبتمبر 2026
+
+
+
+
+♻️♻️♻️
+____(collected data)_____
+Offical technical guide
+دليل فني رسمي
+
+(Technical Documentation) لمشروع "واحة الجبري" والإمبراطورية الرقمية الخاصة بعبدالله الجبري. تم تقسيم الدليل إلى 5 أقسام رئيسية لسهولة القراءة والتنقل.
+_________________________
+
+
+📘 الدليل الفني الشامل: إمبراطورية الجبري الرقمية
+
+---
+
+📌 القسم 1: أدلة الاستدعاء والربط (Linking & Tools Syntax)
+
+1.1 صيغ استدعاء الملفات والصفحات
+
+البيئة الصيغة القياسية مثال تطبيقي
+GitHub Repo (الكود المصدري) https://github.com/[User]/[Repo]/blob/main/[File] https://github.com/Jabri-web/Jabri-com/blob/main/all-links.html
+GitHub Pages (صفحة منشورة) https://[User].github.io/[Repo]/[File] https://jabri-web.github.io/Jabri-com/all-links.html
+Vercel (الموقع الرئيسي) https://[Domain]/[File] https://jabri-com.vercel.app/all-links.html
+Magic Translator (الترجمة السحرية) https://jabri-web.github.io/Jabri-web/magic-translator.html?file=[File]&lang=[ar/en] ...magic-translator.html?file=README.md&lang=ar
+
+1.2 مثال تطبيقي (Row 2 - Zx_RieOS_v1.2)
+
+هذا هو الكود القياسي لصف واحد في جدول البيانات، يوضح كيفية دمج "مرآة اليمن" (التي تشير إلى Page2.html على Vercel) و"الساحر" (أداة الترجمة):
+
+```html
+<tr>
+  <td>2</td>
+  <td><b>Zx_RieOS_v1.2</b> - الذهبي النهائي</td>
+  <td><a href="https://jabri-web.github.io/Zx_RieOS_v1.2" target="_blank" class="link-live">فتح</a></td>
+  <td><a href="/Page2.html" target="_blank" class="link-vercel">Page2 - اليمن (مرآة اليمن)</a></td>
+  <td><a href="https://jabri-web.github.io/Jabri-web/magic-translator.html?file=README.md&lang=ar" target="_blank" class="link-wizard">الساحر</a></td>
+  <td><a href="https://github.com/Jabri-web/Zx_RieOS_v1.2" target="_blank" class="link-repo">Repo</a></td>
+  <td><a href="https://doi.org/10.5281/zenodo.20100622" target="_blank" class="link-doi">20100622</a></td>
+</tr>
+```
+
+---
+
+🗺️ القسم 2: خريطة الإمبراطورية الرقمية (Heaven Al-Jabri Map)
+
+👤 الباحث: م/ عبدالله محمد ناصر الجبري (Eng. Abdulla Mohammed Nasser Al-Jabri)
+📍 الموقع: صنعاء – اليمن
+🔗 رابط الموقع: https://jabri-com.vercel.app
+📊 ORCID: 0009-0003-3319-3822
+
+🧭 الطبقة 1: البوابات والواجهات (Gateway Layer)
+
+# المشروع الدور الرابط المباشر
+1 jabri62018.github.io البوابة الرئيسية زيارة
+4 Jabri-web.github.io الواجهة الثانية زيارة
+10 Jabri-web Router الرئيسي زيارة
+11 jabri-com النشر على Vercel زيارة
+12 jabri.com Hyper Router زيارة
+
+🧠 الطبقة 2: النواة ونظام التشغيل (Core OS Layer)
+
+# المشروع الدور الرابط المباشر
+3 Zx-Mother-Function-Jabri الدالة الأم Z(x) زيارة
+8 Jabri-RiemannOS نظام ريمان النظري زيارة
+2 Zx-RieOS-v1.2 الذهبي النهائي زيارة
+7 Zx-RieOS-v1.1 الإصدار السابق زيارة
+
+🏆 الطبقة 3: الحزمة الكبرى - مسائل الألفية (Jabri-Nobble)
+
+📦 المستودع الأم: github.com/Jabri-web/Jabri_Nobble
+
+# المشروع المسألة الرابط المباشر
+5.1 Jabri-Riemann فرضية ريمان زيارة
+5.2 Jabri-np P vs NP زيارة
+5.3 Jabri-gab الفجوة (Gap) زيارة
+5.4 Jabri-Navier معادلات نافييه-ستوكس زيارة
+5.5 Jabri-Birch بيرش-سوينرتون-داير زيارة
+5.6 Jabri-Hodge حدسية هودج زيارة
+5.7 Jabri-Identity الهوية Z_t = 1 زيارة
+
+🧪 الطبقة 4: مختبر الفيزياء والكون (Jabri-Lab)
+
+📦 المستودع الأم: github.com/Jabri-web/Jabri_lab
+
+# المشروع التخصص الرابط المباشر
+6.1 Jabri-5 معامل 5 زيارة
+6.2 Jabri-28 معامل 28 زيارة
+6.3 Jabri-Gravity الجاذبية زيارة
+6.4 Jabri-Spacetime الزمكان زيارة
+6.5 Jabri-Darkenergy الطاقة المظلمة زيارة
+6.6 Jabri-Planck ثابت بلانك زيارة
+6.7 Jabri-Hubble ثابت هابل زيارة
+6.8 Jabri-Periodic الدورية زيارة
+6.9 Jabri-all الدمج الكلي زيارة
+
+🛠️ الطبقة 5: الأدوات والتشخيص (Tools Layer)
+
+# المشروع الدور الرابط المباشر
+9 Jabri-Checkout نقطة التحقق - فحص وتشخيص النظام زيارة
+
+---
+
+🗂️ القسم 3: هيكل مستودعات GitHub (Organization Map)
+
+الهوية: Z + C + A = 1 | التحقق: 2026-06-09
+
+```text
+📁 Jabri-web/ <-- Organization Root
+│
+├── 1. Jabri6218.github.io
+│   DOI: 10.5281/zenodo.20403864
+│   Pages: https://jabri-web.github.io/jabri62018.github.io/
+│   Desc: Main Portal Index - Central hub for all projects
+│
+├── 2. Zx-RieOS-v1.2
+│   DOI: 10.5281/zenodo.20100622 [x2]
+│   Pages: https://jabri-web.github.io/Zx_RieOS_v1.2/
+│   Desc: Experimental OS based on Zx Function & Riemann Zeros
+│
+├── 3. Zx-Mother-Function-Jabri
+│   DOI: -
+│   Pages: https://jabri-web.github.io/Zx_Mother_Function_Jabri/
+│   Desc: Core Zx Mother Function Implementation
+│
+├── 4. Jabri-web.github.io
+│   DOI: 10.5281/zenodo.20499365 / 10.5281/zenodo.20404167
+│   Pages: https://jabri-web.github.io/
+│   Desc: Secondary Main Portal
+│
+├── 5. Jabri-Nobble (Millennium Problems Research Suite)
+│   DOI: 10.5281/zenodo.20148770
+│   Pages: https://jabri-web.github.io/Jabri_Nobble/
+│   ├── 5-1. Jabri-Riemann (DOI: 20139904 / 20145337)
+│   ├── 5-2. Jabri-np (DOI: 20145279)
+│   ├── 5-3. Jabri-gab (DOI: 20148344)
+│   ├── 5-4. Jabri-Navier (DOI: 20149618)
+│   ├── 5-5. Jabri-Birch (DOI: -)
+│   ├── 5-6. Jabri-Hodge (DOI: -)
+│   └── 5-7. Jabri-S-care [Jabri-Identity] (DOI: 20114317)
+│
+├── 6. Jabri-lab (Digital Laboratory for Experiments)
+│   DOI: Publishing
+│   Pages: https://jabri-web.github.io/jabri_lab/
+│   ├── 6-1. Jabri-5
+│   ├── 6-2. Jabri-28
+│   ├── 6-3. Jabri-Gravity
+│   ├── 6-4. Jabri-Spacetime
+│   ├── 6-5. Jabri-DarkEnergy
+│   ├── 6-6. Jabri-Planck
+│   ├── 6-7. Jabri-Hubble
+│   ├── 6-8. Jabri-Periodic
+│   └── 6-9. Jabri-all
+│
+├── 7. Zx-RieOS-v1.1
+│   DOI: 10.5281/zenodo.19981688 / 10.5281/zenodo.20070594
+│   Pages: https://jabri-web.github.io/Zx_RieOS_v1.1/
+│
+├── 8. Jabri-RiemannOS
+│   DOI: -
+│   Pages: https://jabri-web.github.io/Jabri-RiemannOS/
+│
+├── 9. Jabri-Checkout
+│   DOI: 10.5281/zenodo.20513840
+│   Pages: https://jabri-web.github.io/Jabri_Checkout/
+│
+├── 10. Jabri-web [ROUTER FOR GITHUB]
+├── 11. jabri-com [ROUTER FOR AL-WAHA & VERCEL]
+└── 12. jabri.com [ROUTER FOR 10++ 11]
+```
+
+📋 متطلبات كل مستودع (REQUIREMENTS FOR EACH REPO):
+
+1. README.md + README-AR.md
+2. ABOUT.md + ABOUT-AR.md (مع شريط تبديل اللغة)
+3. رابط الموقع الرئيسي: https://jabri-com.vercel.app
+4. الرخصة: CC BY 4.0
+
+---
+
+📜 القسم 4: سجل معرفات DOI (DOI Registry)
+
+# اسم المستودع / الورقة رقم DOI الرابط المباشر
+1 jabri62018.github.io 21006432 DOI
+2 Zx_RieOS_v1.2 20100622 DOI
+4 Jabri-web.github.io 20404167 DOI
+5 Jabri_Nobble 20148770 DOI
+7 Zx_RieOS_v1.1 19981688 DOI
+9 Jabri_Checkout 21970064 ⭐ DOI
+10 Jabri-web 20499365 DOI
+11 Jabri-com 21970418 DOI
+12 jabri.com 21970523 DOI
+5.1 Riemann Hypothesis 20139904 DOI
+5.2 P ≠ NP 20145337 DOI
+5.3 Yang-Mills 20148344 DOI
+5.4 Navier-Stokes 20149618 DOI
+5.7 Hubble Tension (IRIS) 20114317 DOI
+🆕 Zx_RieOS v1.1 (قديم) 19645066 ⭐ DOI
+🆕 4+1 Eigenvalue Law 20100622 DOI
+🆕 RiemannOS v1.0 19700735 DOI
+🆕 Zx_total_v3.2.1 19956313 DOI
+🆕 Jabri_Checkout v2.0 21970064 ⭐ DOI
+
+---
+
+📂 القسم 5: هيكل ملفات موقع jabri-com.vercel.app
+
+📊 الإحصائيات العامة:
+
+· الإجمالي: ~92 ملف
+· صفحات HTML: 76 (75 في الجذر + 1 في المجلدات الفرعية)
+· يُفهرس في Sitemap: ~75 صفحة
+· لا يُفهرس: الأجزاء (Partials) + ملفات النظام + JS
+
+5.1 المجلدات الأساسية (Subfolders)
+
+```text
+/ .....root (98% من الملفات)
+ar/ .....ملفات النسخة العربية (index, about, contact, journal)
+en/ .....ملفات النسخة الإنجليزية (index, about, contact, journal)
+js/ .....ملفات الجافاسكريبت (init-page-root.js, menu.js)
+publish/..ملفات النشر (publish.html)
+game/..ملفات الألعاب (game-auto.html)
+image/..جميع الوسائط المتعددة (Jabri-photo.png, Yemen2026.png)
+```
+
+5.2 قائمة الملفات حسب الفئة (File Categories)
+
+الفئة الملفات
+1. الصفحات الرئيسية index.html, logo.html, catalog.html, all-links.html, monitor
+2. صفحات Page 1-12 Page1.html إلى Page12.html
+3. صفحات About about.html, about-ar.html, about-en.html, about-waha.html
+4. المؤلف والسيرة الذاتية Author-cv.html, author-history.html, cv-2026a.html, cv-2026e.html, founder.html, profile.html, profile-en.html
+5. النظرية الموحدة theory-ar.html, theory-en.html, Sindbad-theory.html, Sindbad-Brdoni.html
+6. البحث العلمي research.html, research-deep.html, Pages-Researches.html
+7. التراث اليمني Sanaa.html, Shibam.html, Soqatra.html, Yemen-library.html, gallery.html, yemen-photo.html, yemen-photo2.html, yemen-photo-api.html, yemen-photo-php.html
+8. المجلات journal.html, journal2.html, journal3.html, journal4.html, History-pdf.html
+9. الأدوات calculator.html, handsa.html, char-balance.html, Check.html, magic-translator.html, diagnose.html
+10. قواعد البيانات والشبكة Dbase.html, Dbase-deep.html, microtik.html, microtik-deep.html
+11. المكتبة والمحتوى Office.html, source.html, citations.html, music.html, taraif.html, Nezar.html, wonder.html, heaven-info.html, visitor.html, who-we.html, project.html, project-ar.html, poster.html, bazar.html (not yet)
+12. التواصل والنظام contact.html, FAQPage.html, FAQPage-en.html, privacy-policy.html, 404.html, offline.html, dashboard.html
+13. أدوات المطور file-structure.html, file-structure2.html, Router-all.html, repos-auto.html, repos-sqr.html, current-auto.html
+14. المتنوع kfupm-msg.html, explore.html
+15. الأجزاء (لا تُفهرس) header.html, footer.html, hero.html
+16. ملفات النظام manifest.json, robots.txt, sitemap.xml, sw.js, vercel.json
+
+---
+
+© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة.
+__________________________
+
+_______Root file:
+# المجموعة عدد الملفات أسماء الملفات
+1 الصفحات الرئيسية 5 index.html, logo.html, catalog.html, all-links.html, monitor
+2 صفحات Page 1-12 12 Page1.html … Page12.html
+3 صفحات About 4 about.html, about-ar.html, about-en.html, about-waha.html
+4 المؤلف والسيرة الذاتية 7 Author-cv.html, author-history.html, cv-2026a.html, cv-2026e.html, founder.html, profile.html, profile-en.html
+5 النظرية الموحدة 4 theory-ar.html, theory-en.html, Sindbad-theory.html, Sindbad-Brdoni.html
+6 البحث العلمي 3 research.html, research-deep.html, Pages-Researches.html
+7 التراث اليمني 9 Sanaa.html, Shibam.html, Soqatra.html, Yemen-library.html, gallery.html, yemen-photo.html, yemen-photo2.html, yemen-photo-api.html, yemen-photo-php.html
+8 المجلات 5 journal.html, journal2.html, journal3.html, journal4.html, History-pdf.html
+9 الأدوات 6 calculator.html, handsa.html, char-balance.html, Check.html, magic-translator.html, diagnose.html
+10 قواعد البيانات والشبكة 4 Dbase.html, Dbase-deep.html, microtik.html, microtik-deep.html
+11 المكتبة والمحتوى 14 Office.html, source.html, citations.html, music.html, taraif.html, Nezar.html, wonder.html, heaven-info.html, visitor.html, who-we.html, project.html, project-ar.html, poster.html, bazar.html (not yet)
+12 التواصل والنظام 7 contact.html, FAQPage.html, FAQPage-en.html, privacy-policy.html, 404.html, offline.html, dashboard.html
+13 أدوات المطور 6 file-structure.html, file-structure2.html, Router-all.html, repos-auto.html, repos-sqr.html, current-auto.html
+14 المتنوع 2 kfupm-msg.html, explore.html
+15 الأجزاء (Partials) — لا تُفهرس 3 header.html, footer.html, hero.html
+16 ملفات النظام 5 manifest.json, robots.txt, sitemap.xml, sw.js, vercel.json
+مجموع ملفات الجذر 96 ملف (منها 87 HTML + 3 Partial + 5 نظام + 1 monitor)
+_______________________
+
+______Subfolders files:
+# المجموعة عدد الملفات أسماء الملفات
+17 /ar/ — النسخة العربية 4 ar/index.html, ar/about.html, ar/contact.html, ar/journal.html
+18 /en/ — النسخة الإنجليزية 4 en/index.html, en/about.html, en/contact.html, en/journal.html
+19 /game/ — الألعاب 1 game/game-auto.html
+20 /publish/ — النشر 1 publish/publish.html
+21 /js/ — الجافاسكريبت 2 js/init-page-root.js, js/menu.js
+22 /image/ — الوسائط 2 image/Jabri-photo.png, image/Yemen2026.png
+مجموع المجلدات الفرعية 14 ملف
+____________________
+
+Grand total:
+البيان العدد
+مجموع ملفات الجذر 96
+مجموع المجلدات الفرعية 14
+الإجمالي الكلي 110 ملف
+صفحات HTML القابلة للفهرسة ~75 صفحة
+ملفات لا تُفهرس Partials + JS + System + Images
+مجموع المجاميع (الفئات) 22 مجموعة
+__________________
+
+____eof (collected data)___
+♻️♻️♻️
+♻️♻️♻️
+
+👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+🇾🇪🇾🇪🇾🇪
+🇾🇪🇾🇪🇾🇪
+________Technical file _________
+Technical file-all.txt::
+_________________________
+
+# ============================================================
+# دليل واحة الجبري | Heaven Al-Jabri - الإصدار الذهبي v1.0
+# المؤلف: م/ عبدالله محمد ناصر الجبري
+# الهوية: Z + C + A = 1 | ORCID: 0009-0003-3319-3822
+# التاريخ: 2026-09-15
+# ============================================================
+
+📌 القسم 1: قانون الاستدعاء الموحد (Unified Linking Law)
+
+| البيئة | الصيغة | مثال |
+| GitHub Source | github.com/[User]/[Repo]/blob/main/[File] | github.com/Jabri-web/Jabri-com/blob/main/all-links.html |
+| GitHub Live | [User].github.io/[Repo]/[File] | jabri-web.github.io/Jabri-com/all-links.html |
+| Yemen Mirror | jabri-com.vercel.app/Page[X].html | jabri-com.vercel.app/Page2.html |
+| Magic Translator | .../magic-translator.html?repo=[Repo]&file=[File]&lang=[ar/en] | ...?repo=Zx_RieOS_v1.2&file=README.md&lang=ar |
+
+🗺️ القسم 2: خريطة الإمبراطورية (5 طبقات)
+
+الطبقة 1 - البوابات: jabri62018.github.io, Jabri-web.github.io, Jabri-web, jabri-com, jabri.com
+الطبقة 2 - النواة: Zx_Mother_Function_Jabri, Jabri_RiemannOS, Zx_RieOS_v1.2, Zx_RieOS_v1.1
+الطبقة 3 - Nobble (الألفية): Jabri_Riemann, Jabri_np, Jabri_gab, Jabri_Navier, Jabri_Birch, Jabri_Hodge, Jabri_Identity
+الطبقة 4 - Lab (المختبر): Jabri_5, Jabri_28, Jabri_Gravity, Jabri_Spacetime, Jabri_Darkenergy, Jabri_Planck, Jabri_Hubble, Jabri_Periodic, Jabri_all
+الطبقة 5 - الأدوات: Jabri_Checkout
+
+🗂️ القسم 3: هيكل المنظمة Jabri-web/
+[1] jabri62018.github.io DOI: 20403864
+[2] Zx_RieOS_v1.2 DOI: 20100622
+[3] Zx_Mother_Function_Jabri DOI: -
+[4] Jabri-web.github.io DOI: 20499365 / 20404167
+[5] Jabri_Nobble DOI: 20148770
+[6] Jabri_lab DOI: Publishing
+[7] Zx_RieOS_v1.1 DOI: 19981688 / 20070594
+[8] Jabri_RiemannOS DOI: -
+[9] Jabri_Checkout DOI: 20513840
+[10] Jabri-web (Router)
+[11] jabri-com (Vercel Router)
+[12] jabri.com (Hyper Router)
+
+📜 القسم 4: سجل DOI الكامل مع الروابط المباشرة (19 معرف)
+
+| # | الاسم | رقم DOI | الرابط المباشر |
+|---|-------|---------|----------------|
+| 1 | jabri62018.github.io | 21006432 | https://doi.org/10.5281/zenodo.21006432 |
+| 2 | Zx_RieOS_v1.2 | 20100622 | https://doi.org/10.5281/zenodo.20100622 |
+| 3 | Jabri-web.github.io | 20404167 | https://doi.org/10.5281/zenodo.20404167 |
+| 4 | Jabri_Nobble | 20148770 | https://doi.org/10.5281/zenodo.20148770 |
+| 5 | Zx_RieOS_v1.1 | 19981688 | https://doi.org/10.5281/zenodo.19981688 |
+| 6 | Jabri_Checkout | 21970064 | https://doi.org/10.5281/zenodo.21970064 |
+| 7 | Jabri-web | 20499365 | https://doi.org/10.5281/zenodo.20499365 |
+| 8 | Jabri-com | 21970418 | https://doi.org/10.5281/zenodo.21970418 |
+| 9 | jabri.com | 21970523 | https://doi.org/10.5281/zenodo.21970523 |
+| 10 | Riemann Hypothesis | 20139904 | https://doi.org/10.5281/zenodo.20139904 |
+| 11 | P ≠ NP | 20145337 | https://doi.org/10.5281/zenodo.20145337 |
+| 12 | Yang-Mills | 20148344 | https://doi.org/10.5281/zenodo.20148344 |
+| 13 | Navier-Stokes | 20149618 | https://doi.org/10.5281/zenodo.20149618 |
+| 14 | Hubble Tension (IRIS) | 20114317 | https://doi.org/10.5281/zenodo.20114317 |
+| 15 | Zx_RieOS v1.1 (قديم) | 19645066 | https://doi.org/10.5281/zenodo.19645066 |
+| 16 | 4+1 Eigenvalue Law | 20100622 | https://doi.org/10.5281/zenodo.20100622 |
+| 17 | RiemannOS v1.0 | 19700735 | https://doi.org/10.5281/zenodo.19700735 |
+| 18 | Zx_total_v3.2.1 | 19956313 | https://doi.org/10.5281/zenodo.19956313 |
+| 19 | Jabri_Checkout v2.0 | 21970064 | https://doi.org/10.5281/zenodo.21970064 |
+
+📂 القسم 5: مجاميع الملفات (File Groups)
+
+🏠 ملفات الجذر (96 ملف):
+[1] الصفحات الرئيسية (5): index, logo, catalog, all-links, monitor
+[2] صفحات Page 1-12 (12): Page1.html … Page12.html
+[3] صفحات About (4): about, about-ar, about-en, about-waha
+[4] المؤلف والسيرة (7): Author-cv, author-history, cv-2026a, cv-2026e, founder, profile, profile-en
+[5] النظرية الموحدة (4): theory-ar, theory-en, Sindbad-theory, Sindbad-Brdoni
+[6] البحث العلمي (3): research, research-deep, Pages-Researches
+[7] التراث اليمني (9): Sanaa, Shibam, Soqatra, Yemen-library, gallery, yemen-photo, yemen-photo2, yemen-photo-api, yemen-photo-php
+[8] المجلات (5): journal, journal2, journal3, journal4, History-pdf
+[9] الأدوات (6): calculator, handsa, char-balance, Check, magic-translator, diagnose
+[10] قواعد البيانات (4): Dbase, Dbase-deep, microtik, microtik-deep
+[11] المكتبة والمحتوى (14): Office, source, citations, music, taraif, Nezar, wonder, heaven-info, visitor, who-we, project, project-ar, poster, bazar (not yet)
+[12] التواصل والنظام (7): contact, FAQPage, FAQPage-en, privacy-policy, 404, offline, dashboard
+[13] أدوات المطور (6): file-structure, file-structure2, Router-all, repos-auto, repos-sqr, current-auto
+[14] المتنوع (2): kfupm-msg, explore
+[15] الأجزاء - Partials (3): header, footer, hero (لا تُفهرس)
+[16] ملفات النظام (5): manifest.json, robots.txt, sitemap.xml, sw.js, vercel.json
+
+📁 المجلدات الفرعية (14 ملف):
+[17] /ar/ (4): index, about, contact, journal
+[18] /en/ (4): index, about, contact, journal
+[19] /game/ (1): game-auto.html
+[20] /publish/ (1): publish.html
+[21] /js/ (2): init-page-root.js, menu.js
+[22] /image/ (2): Jabri-photo.png, Yemen2026.png
+
+📊 الإحصائيات:
+- مجموع ملفات الجذر: 96
+- مجموع المجلدات الفرعية: 14
+- الإجمالي الكلي: ~110 ملف
+- صفحات HTML القابلة للفهرسة: ~75
+- مجموع المجاميع: 22 مجموعة
+
+📞 تواصل مع الباحث:
+- البريد: jabri62018@gmail.com
+- GitHub: https://github.com/jabri-web
+- ORCID: https://orcid.org/0009-0003-3319-3822
+- الرخصة: CC BY 4.0
+
+© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة.
+__________eof____________
+____eof(Technical info______
+🇾🇪🇾🇪🇾🇪
+🇾🇪🇾🇪🇾🇪
+♻️♻️
+♻️♻️♻️
+
+________
+wed 26,Sept. 2026AD DOI Udate:
+
+
+📋 القائمة الكاملة: DOIs للريبوهات + الصفحات الثلاث
+
+---
+
+🗂️ الجزء 1: DOIs للمستودعات (Repos)
+
+الجدول الرسمي:
+
+# المستودع DOI الرابط الحالة
+1 Jabri-web/Jabri-com 10.5281/zenodo.21970418 https://doi.org/10.5281/zenodo.21970418 ✅ ON
+2 Jabri-web/Jabri-web 10.5281/zenodo.20499365 https://doi.org/10.5281/zenodo.20499365 ✅ ON
+3 Jabri-web/Jabri-web.github.io 10.5281/zenodo.20404167 https://doi.org/10.5281/zenodo.20404167 ✅ ON
+4 Jabri-web/Jabri_Checkout 10.5281/zenodo.21970064 https://doi.org/10.5281/zenodo.21970064 ✅ ON
+5 Jabri-web/Jabri_Nobble 10.5281/zenodo.20148770 https://doi.org/10.5281/zenodo.20148770 ✅ ON
+6 Jabri-web/Zx_RieOS_v1.1 10.5281/zenodo.19981688 https://doi.org/10.5281/zenodo.19981688 ✅ ON
+7 Jabri-web/Zx_RieOS_v1.2 10.5281/zenodo.20100622 https://doi.org/10.5281/zenodo.20100622 ✅ ON (قديم)
+8 Jabri-web/jabri.com 10.5281/zenodo.21970523 https://doi.org/10.5281/zenodo.21970523 ✅ ON
+9 Jabri-web/jabri62018.github.io 10.5281/zenodo.21006432 https://doi.org/10.5281/zenodo.21006432 ✅ ON
+
+⚠️ تنبيه مهم:
+
+الرقم 21006432 يظهر في القائمة، لكن في صفحة Zenodo الرسمية ظهر الرقم 20403864.
+
+يجب التحقق يدوياً:
+
+· https://zenodo.org/records/21006432 ← هل يعمل؟
+· https://zenodo.org/records/20403864 ← هل يعمل؟
+
+---
+
+📄 الجزء 2: DOIs للصفحات الثلاث (3 Pages)
+
+الصفحة 1 من 3 — للمستودعات (Repos) ✅
+
+# المستودع DOI الرابط
+1 Jabri-web/Jabri-com 10.5281/zenodo.21970418 https://doi.org/10.5281/zenodo.21970418
+2 Jabri-web/Jabri-web 10.5281/zenodo.20499365 https://doi.org/10.5281/zenodo.20499365
+3 Jabri-web/Jabri-web.github.io 10.5281/zenodo.20404167 https://doi.org/10.5281/zenodo.20404167
+4 Jabri-web/Jabri_Checkout 10.5281/zenodo.21970064 https://doi.org/10.5281/zenodo.21970064
+5 Jabri-web/Jabri_Nobble 10.5281/zenodo.20148770 https://doi.org/10.5281/zenodo.20148770
+6 Jabri-web/Zx_RieOS_v1.1 10.5281/zenodo.19981688 https://doi.org/10.5281/zenodo.19981688
+7 Jabri-web/Zx_RieOS_v1.2 10.5281/zenodo.20100622 https://doi.org/10.5281/zenodo.20100622
+8 Jabri-web/jabri.com 10.5281/zenodo.21970523 https://doi.org/10.5281/zenodo.21970523
+9 Jabri-web/jabri62018.github.io 10.5281/zenodo.21006432 https://doi.org/10.5281/zenodo.21006432
+
+---
+
+الصفحة 2 من 3 — للأوراق العلمية (Papers)
+
+# الورقة DOI الرابط
+1 P vs NP via Jabri Identity 10.5281/zenodo.20145279 https://doi.org/10.5281/zenodo.20145279
+2 Navier-Stokes Existence 10.5281/zenodo.20149618 https://doi.org/10.5281/zenodo.20149618
+3 Yang-Mills Mass Gap 10.5281/zenodo.20148344 https://doi.org/10.5281/zenodo.20148344
+4 Zx_RiemannOS v1.3 (P≠NP) 10.5281/zenodo.20145337 https://doi.org/10.5281/zenodo.20145337
+5 Hubble Tension Resolution 10.5281/zenodo.20114317 https://doi.org/10.5281/zenodo.20114317
+6 Zx_RieOS v1.2 GOLD (Dataset) 10.5281/zenodo.20100628 https://doi.org/10.5281/zenodo.20100628
+7 Zx_RieOS v1.2 GOLD (Dataset) 10.5281/zenodo.20100622 https://doi.org/10.5281/zenodo.20100622
+8 Zx_RieOS v1.1 (Complete Package) 10.5281/zenodo.20070594 https://doi.org/10.5281/zenodo.20070594
+9 Zx_RiemannOS v1.1 (Framework) 10.5281/zenodo.19981688 https://doi.org/10.5281/zenodo.19981688
+10 Zx_total_v2 (Mother Function) 10.5281/zenodo.19963026 https://doi.org/10.5281/zenodo.19963026
+
+---
+
+الصفحة 3 من 3 — للأوراق التأسيسية (Foundation Papers)
+
+# الورقة DOI الرابط
+1 Jabri-RiemannOS v3.2.1 10.5281/zenodo.19956313 https://doi.org/10.5281/zenodo.19956313
+2 RiemannOS v1.0 - Z_t Total Record v3 10.5281/zenodo.19700735 https://doi.org/10.5281/zenodo.19700735
+3 Jabri-RiemannOS v3.1.2 10.5281/zenodo.19717379 https://doi.org/10.5281/zenodo.19717379
+4 Zx_Mother_Function v3.0.1 10.5281/zenodo.19717561 https://doi.org/10.5281/zenodo.19717561
+5 RiemannOS v1.0 - Z_t Engine 10.5281/zenodo.19644280 https://doi.org/10.5281/zenodo.19644280
+6 Derivation of G (Publication) 10.5281/zenodo.19644689 https://doi.org/10.5281/zenodo.19644689
+7 Derivation of G (Publication) 10.5281/zenodo.19644804 https://doi.org/10.5281/zenodo.19644804
+8 Derivation of G (In review) 10.5281/zenodo.19644808 https://doi.org/10.5281/zenodo.19644808
+9 Derivation of G (Code DOI) 10.5281/zenodo.19645066 https://doi.org/10.5281/zenodo.19645066
+
+---
+
+💻 الجزء 3: ملف JSON الموحّد للـ Developer
+
+هيكل مقترح (Three-Tier System):
+
+```json
+{
+"version": "2.0.0",
+"updated": "2026-09-16",
+"author": {
+"name": "Abdulla Mohammed Nasser Al-Jabri",
+"orcid": "0009-0003-3319-3822",
+"github": "Jabri-web"
+},
+
+"repos": {
+"Jabri-com": { "doi": "10.5281/zenodo.21970418", "url": "https://jabri-com.vercel.app", "status": "active" },
+"Jabri-web": { "doi": "10.5281/zenodo.20499365", "url": "https://jabri-web.github.io", "status": "active" },
+"Jabri-web.github.io": { "doi": "10.5281/zenodo.20404167", "url": "https://jabri-web.github.io/Jabri-web.github.io", "status": "active" },
+"Jabri_Checkout": { "doi": "10.5281/zenodo.21970064", "url": "https://jabri-web.github.io/Jabri_Checkout", "status": "active" },
+"Jabri_Nobble": { "doi": "10.5281/zenodo.20148770", "url": "https://jabri-web.github.io/Jabri_Nobble", "status": "active" },
+"Zx_RieOS_v1.1": { "doi": "10.5281/zenodo.19981688", "url": "https://jabri-web.github.io/Zx_RieOS_v1.1", "status": "active" },
+"Zx_RieOS_v1.2": { "doi": "10.5281/zenodo.20100622", "url": "https://jabri-web.github.io/Zx_RieOS_v1.2", "status": "deprecated" },
+"jabri.com": { "doi": "10.5281/zenodo.21970523", "url": "https://jabri.com", "status": "active" },
+"jabri62018.github.io": { "doi": "10.5281/zenodo.21006432", "url": "https://jabri62018.github.io", "status": "active" }
+},
+
+"papers_page2": {
+"P_vs_NP": { "doi": "10.5281/zenodo.20145279" },
+"Navier_Stokes": { "doi": "10.5281/zenodo.20149618" },
+"Yang_Mills": { "doi": "10.5281/zenodo.20148344" },
+"Zx_RiemannOS_v1_3": { "doi": "10.5281/zenodo.20145337" },
+"Hubble_Tension": { "doi": "10.5281/zenodo.20114317" },
+"Zx_RieOS_v1_2_Dataset_1": { "doi": "10.5281/zenodo.20100628" },
+"Zx_RieOS_v1_2_Dataset_2": { "doi": "10.5281/zenodo.20100622" },
+"Zx_RieOS_v1_1_Package": { "doi": "10.5281/zenodo.20070594" },
+"Zx_RiemannOS_v1_1": { "doi": "10.5281/zenodo.19981688" },
+"Zx_total_v2": { "doi": "10.5281/zenodo.19963026" }
+},
+
+"papers_page3": {
+"Jabri_RiemannOS_v3_2_1": { "doi": "10.5281/zenodo.19956313" },
+"RiemannOS_v1_0_Total": { "doi": "10.5281/zenodo.19700735" },
+"Jabri_RiemannOS_v3_1_2": { "doi": "10.5281/zenodo.19717379" },
+"Zx_Mother_Function_v3_0_1": { "doi": "10.5281/zenodo.19717561" },
+"RiemannOS_v1_0_Engine": { "doi": "10.5281/zenodo.19644280" },
+"Derivation_G_Pub_1": { "doi": "10.5281/zenodo.19644689" },
+"Derivation_G_Pub_2": { "doi": "10.5281/zenodo.19644804" },
+"Derivation_G_InReview": { "doi": "10.5281/zenodo.19644808" },
+"Derivation_G_Code": { "doi": "10.5281/zenodo.19645066" }
+}
+}
+```
+
+---
+
+⚠️ تحذير: تكرار DOI في القائمة
+
+لاحظت تكرارات يجب مراجعتها:
+
+# DOI المشكلة
+1 19981688 مذكور في Repos (#6) و Papers Page 2 (#9)
+2 20100622 مذكور في Repos (#7) و Papers Page 2 (#7)
+
+سؤال: هل هذا صحيح (نفس الإصدار في فئتين)؟ أم خطأ في التصنيف؟
+
+---
+
+📊 الإحصائيات النهائية
+
+الفئة العدد
+Repos 9
+Papers Page 2 10
+Papers Page 3 9
+DOI فريد (بعد إزالة التكرار) ~26
+DOIs إجمالي ~28
+
+---
+
+🎯 الخلاصة
+
+✅ ما تم:
+
+المكون الحالة
+جدول DOIs للريبوهات ✅ جاهز
+جدول Papers Page 2 ✅ جاهز
+جدول Papers Page 3 ✅ جاهز
+JSON للـ developer ✅ جاهز
+
+⚠️ ما يحتاج تحقق:
+
+1. jabri62018.github.io: 21006432 أم 20403864؟
+2. تكرار 19981688: في Repos و Papers
+3. تكرار 20100622: في Repos و Papers
+4. 19644808: "In review" — هل يكتمل؟
+
+---
+
+_____________
+
+
+
+_______footer;_______
+1- https://www.google.com/search?q=الدالة+الأم+Z(x)+نظرية+السندباد+الموحدة&udm=50
+2- https://www.google.com/search?q=Z(x)+%3D+x%5E5+ln(x)+sin(2%CF%80%2Fx)+exp(-x%2Fxp)&udm=50
+3- https://www.google.com/search?q=Z+%2B+C+%2B+A+%3D+1&udm=50
+4- https://www.google.com/search?q=مهندس+عبدالله+محمد+ناصر+الجبري&udm=50
+5- https://www.google.com/search?q=Eng.+Abdulla+Mohammed+Nasser+Al-Jabri&udm=50
+6-ORCID: https://orcid.org/0009-0003-3319-3822
+7-Zenodo: https://zenodo.org/records/20513840
+8- https://overleaf.com/project
+9- https://colab.research.google.com/drive/12oG9B7DgsQpTWlvfMm4awnpbt34yPv_h
+10- https://github.com/Jabri-web
+11- https://en.wikipedia.org/wiki/User:Jabri2026
+12- https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html
+_______________________
+
+
+ملاحظات للرفقاء ال AI:
+
+[9/11, 3:54 AM] عبدالله الجبري2026: // ============================================
+// 📜 دستور واحة الجبري التقني
+// بتاريخ: 11 سبتمبر 2026
+// ============================================
+
+المادة 1: المتصفح = مصنع التطبيقات
+✅ لا WebIntoApp
+✅ لا PWABuilder
+✅ لا Median
+
+المادة 2: manifest.json = بطاقة الهوية
+✅ تُعرّف التطبيق
+✅ تُعرض الأيقونات
+✅ تُحدد start_url
+
+المادة 3: service-worker.js = محرك التحديثات
+✅ يُخزّن الملفات
+✅ يُحدّث تلقائياً
+✅ يمسح الكاش القديم
+
+المادة 4: CACHE_NAME = المتحكم الوحيد
+✅ v5.x = تحديث صامت
+✅ v6.x = Popup فخم
+
+المادة 5: لا حاجة لأي موقع خارجي
+✅ GitHub + Vercel = كافيان
+✅ manifest + SW = كافيان
+✅ "Install" = زر سحري
+[9/11, 3:54 AM] عبدالله الجبري2026: 👁️
+[9/11, 3:54 AM] عبدالله الجبري2026: ☀️ صباح 15 سبتمبر 2026:
+
+1. 📄 نُلمّع manifest.json
+⬜ إضافة screenshots أكبر
+⬜ إضافة shortcuts
+⬜ تعديل start_url
+
+2. 🔧 نُحسّن service-worker.js
+⬜ CACHE_NAME = v5.2
+⬜ مسح أسرع للكاش
+⬜ تحديث تلقائي
+
+3. 🎉 نضيف Popup v6.0
+⬜ تصميم ذهبي فخم
+⬜ رسالة "واحة الجبري تحدّثت"
+⬜ زر "رائع!"
+
+4. 📤 نرفع إلى GitHub
+⬜ اختبار التثبيت
+⬜ اختبار التحديث
+⬜ الاحتفال! 🎉
+
+🌙 مساء 15 سبتمبر:
+
+النتيجة:
+✅ PWA جديدة
+✅ APK تلقائي
+✅ تحديثات تلقائية
+✅
+صفر مواقع خارجية
+
+
+
+
+
+
+تمام. فهمت. سأعيد لك الملفات الخمسة بحالة تشغيلية كاملة بحيث تعمل صفحات HTML التي سيرفعها الأخ (Page1..Page12, about, theory, ... الخ) بدون أي 404.
+
+المنطق: بما أنك ستستعيد الـ HTML بمساراته الأصلية كما في sitemap (بدون .html)، يجب أن يعود cleanUrls وtrailingSlash، لكن مع إصلاح الأخطاء التي سببت 404 من أول ضغطة سابقًا.
+
+---
+
+📄 الملف 1: vercel.json
+
+الإصلاحات:
+
+· إرجاع cleanUrls: true (لأن sitemap يستخدم /Page1 بدون .html)
+· إرجاع trailingSlash: false (لأن sitemap لا يحتوي / في النهاية)
+· حذف كل redirects القديمة (كانت فيها أخطاء مطبعية مثل /diagmose.html)
+· إبقاء headers كما هي
+
+```json
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
+        { "key": "Service-Worker-Allowed", "value": "/" }
+      ]
+    },
+    {
+      "source": "/manifest.json",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    },
+    {
+      "source": "/(.*)\\.png",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/sitemap(.*).xml",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" },
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" },
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+📄 الملف 2: sw.js
+
+الإصلاحات:
+
+· CORE_ASSETS تعود لتخزين الملفات الأساسية الموجودة فعلًا
+· حذف /offline.html من التخزين (غير موجود في sitemap)
+· الاحتفاظ بكل منطق Network First + SWR
+
+```js
+const CACHE_NAME = 'heaven-al-jabri-v8.0-gold';
+const CORE_ASSETS = ['/', '/logo', '/manifest.json'];
+const NEVER_CACHE = ['/sw.js', '/sitemap.xml', '/robots.txt', '/vercel.json'];
+const FETCH_TIMEOUT = 3000;
+
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(c => Promise.allSettled(CORE_ASSETS.map(u => c.add(new Request(u, { cache: 'reload' })))))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+      .then(() => self.clients.matchAll({ type: 'window' }))
+      .then(clients => clients.forEach(c => c.postMessage({ type: 'SW_ACTIVATED', version: CACHE_NAME })))
+  );
+});
+
+function timeoutFetch(req, ms) {
+  return Promise.race([
+    fetch(req),
+    new Promise((_, rej) => setTimeout(() => rej(new Error('SW-timeout')), ms))
+  ]);
+}
+
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  const url = e.request.url;
+
+  if (!url.startsWith(self.location.origin)) return;
+  if (NEVER_CACHE.some(p => url.endsWith(p))) return;
+
+  // HTML — Network First + timeout
+  if (e.request.mode === 'navigate' || e.request.headers.get('accept')?.includes('text/html')) {
+    e.respondWith(
+      timeoutFetch(e.request, FETCH_TIMEOUT)
+        .then(res => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+          }
+          return res;
+        })
+        .catch(async () =>
+          (await caches.match(e.request)) ||
+          (await caches.match('/logo')) ||
+          (await caches.match('/')) ||
+          new Response('Offline', { status: 503 })
+        )
+    );
+    return;
+  }
+
+  // Static — Stale While Revalidate
+  e.respondWith(
+    caches.match(e.request).then(cached => {
+      const network = timeoutFetch(e.request, FETCH_TIMEOUT)
+        .then(res => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+          }
+          return res;
+        })
+        .catch(async () => {
+          if (e.request.destination === 'image') {
+            return (await caches.match('/image/Yemen2026.png')) ||
+                   new Response('', { status: 404 });
+          }
+          return cached || new Response('', { status: 504 });
+        });
+      return cached || network;
+    })
+  );
+});
+
+self.addEventListener('message', e => {
+  if (e.data?.action === 'skipWaiting' || e.data === 'SKIP_WAITING') self.skipWaiting();
+  if (e.data?.action === 'checkVersion')
+    e.source?.postMessage({ type: 'VERSION_INFO', version: CACHE_NAME });
+});
+```
+
+---
+
+📄 الملف 3: manifest.json
+
+الإصلاحات:
+
+· start_url = /logo (نفس slug sitemap بدون .html)
+· إرجاع shortcuts بمسارات صحيحة (بدون .html)
+
+```json
+{
+  "name": "Heaven Al-Jabri | واحة الجبري",
+  "short_name": "واحة الجبري",
+  "description": "تطبيق واحة الجبري - موسيقى باب اليمن الأصيلة ونظرية السندباد الموحدة Z+C+A=1",
+  "start_url": "/logo",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0F",
+  "theme_color": "#c9a84c",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education", "science", "music", "culture"],
+  "screenshots": [
+    {
+      "src": "/image/screenshot1.webp",
+      "sizes": "1080x1920",
+      "type": "image/webp",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/image/screenshot2.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "نظرية السندباد",
+      "short_name": "النظرية",
+      "description": "الدالة الأم Z(x) ونظرية السندباد الموحدة",
+      "url": "/theory-ar",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "الموسيقى اليمنية",
+      "short_name": "الموسيقى",
+      "description": "موسيقى باب اليمن الأصيلة",
+      "url": "/music",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "واحة الجبري",
+      "short_name": "الواحة",
+      "description": "صفحة logo والواحة",
+      "url": "/logo",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
+```
+
+---
+
+📄 الملف 4: robots.txt
+
+الإصلاحات: إعادة الفتح الكامل + الإبقاء على Sitemap.
+
+```
+# Heaven Al-Jabri - واحة الجبري
+# Z+C+A=1 - آخر تحديث: 2026/09/18
+
+User-agent: Googlebot
+Allow: /
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /private/
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /image/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /dashboard
+Disallow: /api/
+
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /private/
+Disallow: /*?*utm_*
+Disallow: /*?*fbclid=*
+Disallow: /*?*gclid=*
+
+Sitemap: https://jabri-com.vercel.app/sitemap.xml
+```
+
+ملاحظة: حذفت Disallow: /login (لا يوجد /login في sitemap)، وأبقيت /dashboard لأنه موجود فعلًا.
+
+---
+
+📄 الملف 5: sitemap.xml
+
+الإصلاحات على النسخة التي أرسلتها:
+
+1. حذف changefreq وpriority — جوجل يتجاهلهما، ونظافتهما أفضل
+2. توحيد lastmod — كلها 2026-09-18 (تاريخ اليوم) بدل 2026-09-12، لأنك أعدت الرفع اليوم
+3. إضافة lastmod للروابط الناقصة (/ar, /en)
+4. تصحيح /diagmose إن وجد — غير موجود، جيد
+5. إضافة /ar و/en بالشكل الصحيح
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Pages -->
+  <url><loc>https://jabri-com.vercel.app/</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/logo</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/catalog</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/all-links</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Pages 1-12 -->
+  <url><loc>https://jabri-com.vercel.app/Page1</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page2</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page3</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page4</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page5</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page6</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page7</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page8</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page9</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page10</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page11</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page12</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- About -->
+  <url><loc>https://jabri-com.vercel.app/about</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/about-ar</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/about-en</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/about-waha</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Author / CV -->
+  <url><loc>https://jabri-com.vercel.app/Author-cv</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/author-history</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/cv-2026a</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/cv-2026e</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/founder</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/profile</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/profile-en</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Theory -->
+  <url><loc>https://jabri-com.vercel.app/theory-ar</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/theory-en</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Sindbad-theory</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Sindbad-Brdoni</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Research -->
+  <url><loc>https://jabri-com.vercel.app/research</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/research-deep</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Pages-Researches</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Yemen Heritage -->
+  <url><loc>https://jabri-com.vercel.app/Sanaa</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Shibam</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Soqatra</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Yemen-library</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/gallery</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/yemen-photo</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/yemen-photo2</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Journals -->
+  <url><loc>https://jabri-com.vercel.app/journal</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/journal2</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/journal3</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/journal4</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/History-pdf</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Tools -->
+  <url><loc>https://jabri-com.vercel.app/calculator</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/handsa</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/char-balance</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Check</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/magic-translator</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/diagnose</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Database & Network -->
+  <url><loc>https://jabri-com.vercel.app/Dbase</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Dbase-deep</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/microtik</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/microtik-deep</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Library & Content -->
+  <url><loc>https://jabri-com.vercel.app/Office</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/source</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/citations</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/music</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/taraif</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Nezar</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/wonder</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/heaven-info</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/visitor</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/visitor5</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/who-we</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/project</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/project-ar</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/poster</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Contact & System -->
+  <url><loc>https://jabri-com.vercel.app/contact</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/FAQPage</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/FAQPage-en</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/privacy-policy</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/kfupm-msg</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/explore</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- i18n -->
+  <url><loc>https://jabri-com.vercel.app/ar</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/ar/about</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/ar/contact</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/ar/journal</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/en</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/en/about</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/en/contact</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/en/journal</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Subfolders -->
+  <url><loc>https://jabri-com.vercel.app/game/game-auto</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/publish/publish</loc><lastmod>2026-09-18</lastmod></url>
+
+</urlset>
+```
+
+---
+
+✅ الخلاصة
+
+الملف الحالة ملاحظة
+vercel.json ✅ جاهز يعيد cleanUrls بدون redirects مكسورة
+sw.js ✅ جاهز CORE_ASSETS صحيحة، v8.0
+manifest.json ✅ جاهز start_url = /logo + shortcuts
+robots.txt ✅ جاهز مفتوح + Sitemap
+sitemap.xml ✅ جاهز 84 رابط، بدون changefreq/priority
+
+بعد رفع هذه الملفات مع HTML الذي سيضيفه الأخ:
+
+· ✅ لا 404 من أول ضغطة
+· ✅ التطبيق (APK/PWA) يعمل
+· ✅ Google يفهرس الروابط بنجاح
+
+بالتوفيق يا هندسة. 🌙
+
+
+
+
+sitemap.xml updated on sept.18,2026;
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Pages -->
+  <url><loc>https://jabri-com.vercel.app/</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/logo.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/catalog.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/all-links.html</loc><lastmod>2026-09-18</lastmod></url>
+  <!-- Pages 1-12 -->
+  <url><loc>https://jabri-com.vercel.app/Page1.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page2.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page3.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page4.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page5.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page6.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page7.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page8.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page9.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page10.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page11.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Page12.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- About -->
+  <url><loc>https://jabri-com.vercel.app/about.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/about-ar.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/about-en.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/about-waha.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Author / CV -->
+  <url><loc>https://jabri-com.vercel.app/Author-cv.htmlv</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/author-history.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/cv-2026a.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/cv-2026e.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/founder.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/profile.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/profile-en.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Theory -->
+  <url><loc>https://jabri-com.vercel.app/theory-ar.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/theory-en.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Sindbad-theory.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Sindbad-Brdoni.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Research -->
+  <url><loc>https://jabri-com.vercel.app/research.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/research-deep.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Pages-Researches.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Yemen Heritage -->
+  <url><loc>https://jabri-com.vercel.app/Sanaa.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Shibam.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Soqatra.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Yemen-library.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/gallery.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/yemen-photo.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/yemen-photo2.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/yemen-photo-api.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Journals -->
+  <url><loc>https://jabri-com.vercel.app/journal.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/journal2.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/journal3.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/journal4.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/History-pdf.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Tools -->
+  <url><loc>https://jabri-com.vercel.app/calculator.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/handsa.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/char-balance.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Check.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/magic-translator.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/diagnose.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Database & Network -->
+  <url><loc>https://jabri-com.vercel.app/Dbase.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Dbase-deep.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/microtik.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/microtik-deep.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Library & Content -->
+  <url><loc>https://jabri-com.vercel.app/Office.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/source.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/citations.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/music.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/taraif.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/Nezar.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/wonder.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/heaven-info.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/visitor.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/catalogue.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/who-we.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/project.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/project-ar.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/poster.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Contact & System -->
+  <url><loc>https://jabri-com.vercel.app/contact.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/FAQPage.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/FAQPage-en.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/privacy-policy.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/kfupm-msg.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/explore.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- i18n -->
+  <url><loc>https://jabri-com.vercel.app/ar</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/ar/about.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/ar/contact.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/ar/journal.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/en</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/en/about.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/en/contact.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/en/journal.html</loc><lastmod>2026-09-18</lastmod></url>
+
+  <!-- Subfolders -->
+  <url><loc>https://jabri-com.vercel.app/game/game-auto.html</loc><lastmod>2026-09-18</lastmod></url>
+  <url><loc>https://jabri-com.vercel.app/publish/publish.html</loc><lastmod>2026-09-18</lastmod></url>
+</urlset>
+
+
+
+
+
+
+
+
+
+_______المجلدات_____folder;
+/ .....root 98% of files
+ar/.....Arabic files
+en/.....English files
+js/....
+publish/..
+game/..
+image/.. all multimedia
+
+_______files_______
+
+# ═════════════════════════════
+# قائمة ملفات موقع jabri-com.vercel.app
+# التاريخ: 2026-09-12
+# الإجمالي: ~92 ملف
+# ══════════════════════════════
+
+
+# ───────────────────────────────
+# 1. الصفحات الرئيسية (Main Pages)
+# ───────────────────────────────
+1-index.html...(ar,en)
+2-logo.html
+3-catalog.html
+4-all-links.html
+5-table-all.html
+6-monitor.html
+
+# ───────────────────────────────
+# 2. صفحات Page 1-12 (بأحرف كبيرة P)
+# ───────────────────────────────
+/....root
+7-Page1.html
+8-Page2.html
+9-Page3.html
+10-Page4.html
+11-Page5.html
+12-Page6.html
+13-Page7.html
+14-Page8.html
+15-Page9.html
+16-Page10.html
+17-Page11.html
+18-Page12.html
+
+# ───────────────────────────────
+# 3. صفحات About (نبذة)
+# ───────────────────────────────
+/..root
+19-about.html...(ar,en)
+20-about-ar.html
+21-about-en.html
+22-about-waha.html
+
+# ────────────────────────────
+# 4. المؤلف والسيرة الذاتية (Author & CV)
+# ───────────────────────────
+/...root
+23-Author-cv.html
+24-author-history.html
+25-cv-2026a.html
+26-cv-2026e.html
+27-founder.html
+28-profile.html
+29-profile-en.html
+
+# ────────────────────────────
+# 5. النظرية الموحدة (Theory)
+# ─────────────────────────────
+/....root
+30-theory-ar.html
+31-theory-en.html
+32-Sindbad-theory.html
+33-Sindbad-Brdoni.html
+
+# ───────────────────────────────
+# 6. البحث العلمي (Research)
+# ────────────────────────────────
+/...root
+34-research.html
+35-research-deep.html
+36-Pages-Researches.html
+
+# ──────────────────────────────
+# 7. التراث اليمني (Yemeni Heritage)
+# ──────────────────────────────
+/....root
+37-Sanaa.html
+38-Shibam.html
+39-Soqatra.html
+40-Yemen-library.html
+41-gallery.html
+42-yemen-photo.html
+43-yemen-photo2.html
+44-yemen-photo-api.html
+45-yemen-photo-php.html
+
+# ───────────────────────────────
+# 8. المجلات (Journals)
+# ───────────────────────────────
+/...root:
+46-journal.html
+47-journal2.html
+48-journal3.html
+49-journal4.html
+50-History-pdf.html
+
+# ──────────────────────────────
+# 9. الأدوات (Tools)
+# ──────────────────────────────
+/...root:
+51-calculator.html
+52-handsa.html
+53-char-balance.html
+54-Check.html
+55-magic-translator.html
+56-diagnose.html
+
+# ────────────────────────────
+# 10. قواعد البيانات والشبكة (Databases & Network)
+# ────────────────────────────
+/...root:
+57-Dbase.html
+58-Dbase-deep.html
+59-microtik.html
+60-microtik-deep.html
+
+# ─────────────────────────────
+# 11. المكتبة والمحتوى (Library & Content)
+# ─────────────────────────────
+/..root:
+61-Office.html
+62-source.html
+63-citations.html
+64-music.html
+65-taraif.html
+66-Nezar.html
+67-wonder.html
+68-heaven-info.html
+69-visitor.html
+70-who-we.html
+71-project.html
+72-project-ar.html
+73-poster.html
+
+# ────────────────────────────
+# 12. التواصل والنظام (Contact & System)
+# ─────────────────────────────
+/..root:
+74-contact.html...(ar,en)
+75-FAQPage.html
+76-FAQPage-en.html
+77-privacy-policy.html
+78-404.html
+79-dashboard.html
+
+# ──────────────────────────────
+# 13. أدوات المطور (Developer Tools)
+# ───────────────────────────────
+/...root:
+80-file-structure.html
+81-file-structure2.html
+82-Router-all.html
+83-repos-auto.html
+84-repos-sqr.html
+85-current-auto.html
+
+# ──────────────────────────────
+# 14. المتنوع (Miscellaneous)
+# ──────────────────────────────
+/...root:
+86-kfupm-msg.html
+87-explore.html
+
+# ═══════════════════════════
+# المجلدات الفرعية (Subfolders)
+# ════════════════════════════
+# ─────────────────────────────
+# 15. مجلد /ar/ (النسخة العربية)
+# ─────────────────────────────
+88-ar/index.html
+89-ar/about.html
+90-ar/contact.html
+91-ar/journal.html
+
+# ──────────────────────────────
+# 16. مجلد /en/(النسخة الإنجليزية)
+# ───────────────────────────────
+92-en/index.html
+93-en/about.html
+94-en/contact.html
+95-en/journal.html
+
+# ──────────────────────────────
+# 17. مجلد /game/ (الألعاب)
+# ──────────────────────────────
+96-game/game-auto.html
+
+# ──────────────────────────────
+# 18. مجلد /publish/ (النشر)
+# ──────────────────────────────
+97-publish/publish.html
+_____________________
+Total=97
+
+
+🇾🇪🇾🇪🇾🇪🇾🇪
+♻️♻️♻️♻️
+_____NO indexing______________
+# ────────────────────────────
+# 19. الأجزاء -لاتفهرس
+# ───────────────────────────
+/..root;general files
+1-header.html
+2-footer.html
+3-hero.html
+4-offline.html
+
+# ─────────────────────────────
+# 20. مجلد /js/ (الجافاسكريبت)
+# ─────────────────────────────
+js/...general files;
+1-js/init-page-root.js
+2-js/menu.js
+
+# ═════════════════════════════
+# ملفات النظام (System Files — في الجذر)
+# ═════════════════════════════
+/..root:system general files:
+1-manifest.json
+2-robots.txt
+3-sitemap.xml
+4-sw.js
+5-vercel.json
+6-file-all.txt
+# ═════════════════════════════
+
+
