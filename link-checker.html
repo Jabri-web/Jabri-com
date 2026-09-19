@@ -3,17 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فحص روابط sitemap.xml — واحة الجبري</title>
+<title>أداة فحص الروابط — واحة الجبري</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #0a0a0f; color: #e8e8f0; font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; line-height: 1.7; }
   .container { max-width: 1100px; margin: 0 auto; }
+
   h1 { color: #6ae3ff; text-align: center; margin-bottom: 20px; font-size: 1.8rem; }
+
+  .note { background: #1a1a2e; border-right: 3px solid #6ae3ff; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; color: #8a8a9e; }
+
+  /* ═══ حقل الإدخال ═══ */
+  .input-section {
+    background: #1a1a2e;
+    border: 2px solid #2a2a4e;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+  .input-section label {
+    display: block;
+    color: #6ae3ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+  .input-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .input-row input {
+    flex: 1;
+    min-width: 200px;
+    padding: 14px 18px;
+    background: #0f0f1a;
+    border: 2px solid #2a2a4e;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    direction: ltr;
+    transition: border-color 0.3s;
+  }
+  .input-row input:focus {
+    border-color: #6ae3ff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(106, 227, 255, 0.15);
+  }
+  .input-row input::placeholder {
+    color: #555;
+    direction: rtl;
+  }
+  .input-row button {
+    background: linear-gradient(135deg, #00ff88, #00cc6a);
+    color: #0a0a0f;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+    transition: 0.3s;
+    white-space: nowrap;
+  }
+  .input-row button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  }
+  .input-row button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ═══ نتيجة الفحص الفردي ═══ */
+  .single-result {
+    display: none;
+    background: #0f0f1a;
+    border: 2px solid #2a2a4e;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-top: 15px;
+    font-size: 1rem;
+  }
+  .single-result.visible { display: block; }
+  .single-result.ok { border-color: #22c55e; background: rgba(34, 197, 94, 0.05); }
+  .single-result.redirect { border-color: #f59e0b; background: rgba(245, 158, 11, 0.05); }
+  .single-result.error { border-color: #ef4444; background: rgba(239, 68, 68, 0.05); }
+  .single-result .label { color: #8a8a9e; font-size: 0.85rem; }
+  .single-result .url-display { color: #b8e6ff; word-break: break-all; direction: ltr; margin: 5px 0; font-family: monospace; }
+  .single-result .status-badge { font-weight: 900; font-size: 1.2rem; margin-top: 8px; }
+
+  /* ═══ الأدوات العامة ═══ */
   .controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 25px; }
-  button { background: linear-gradient(135deg, #6ae3ff, #4dd4ff); color: #0a0a0f; border: none; padding: 12px 30px; border-radius: 30px; font-weight: 700; cursor: pointer; font-size: 15px; font-family: inherit; transition: 0.3s; }
-  button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(106,227,255,0.4); }
-  button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-  button.stop { background: linear-gradient(135deg, #ff4444, #cc0000); color: #fff; }
+  button.main-btn {
+    background: linear-gradient(135deg, #6ae3ff, #4dd4ff);
+    color: #0a0a0f;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+    transition: 0.3s;
+  }
+  button.main-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(106, 227, 255, 0.4); }
+  button.main-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  button.main-btn.stop { background: linear-gradient(135deg, #ff4444, #cc0000); color: #fff; }
+
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 25px; }
   .stat { background: #1a1a2e; border: 2px solid #2a2a4e; border-radius: 12px; padding: 15px; text-align: center; }
   .stat .num { font-size: 1.8rem; font-weight: 900; display: block; }
@@ -22,8 +122,10 @@
   .stat.redirect { border-color: #f59e0b; } .stat.redirect .num { color: #f59e0b; }
   .stat.error { border-color: #ef4444; } .stat.error .num { color: #ef4444; }
   .stat.total { border-color: #6ae3ff; } .stat.total .num { color: #6ae3ff; }
+
   .progress-bar { width: 100%; height: 8px; background: #1a1a2e; border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
   .progress-fill { height: 100%; background: linear-gradient(90deg, #6ae3ff, #22c55e); transition: width 0.3s; width: 0%; }
+
   .log { background: #0f0f1a; border: 1px solid #2a2a4e; border-radius: 12px; padding: 15px; max-height: 60vh; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 13px; }
   .log-item { padding: 6px 0; border-bottom: 1px solid #1a1a2e; display: flex; gap: 10px; align-items: center; }
   .log-item:last-child { border-bottom: none; }
@@ -35,24 +137,38 @@
   .url { flex: 1; word-break: break-all; color: #b8e6ff; }
   .url a { color: #b8e6ff; text-decoration: none; }
   .url a:hover { text-decoration: underline; }
-  input[type="text"] { width: 100%; padding: 12px 16px; background: #1a1a2e; border: 2px solid #2a2a4e; border-radius: 8px; color: #fff; font-size: 14px; font-family: inherit; margin-bottom: 15px; }
-  input[type="text"]:focus { border-color: #6ae3ff; outline: none; }
+
   .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; justify-content: center; }
-  .note { background: #1a1a2e; border-right: 3px solid #6ae3ff; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; color: #8a8a9e; }
+
+  @media (max-width: 600px) {
+    .input-row button { width: 100%; }
+    h1 { font-size: 1.4rem; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>🔗 أداة فحص روابط sitemap.xml</h1>
+  <h1>🔗 أداة فحص الروابط</h1>
 
   <div class="note">
-    💡 <strong>ملاحظة:</strong> هذه الأداة تفحص كل رابط في sitemap.xml وتُظهر حالته (200 / 301 / 404). قد يستغرق الفحص دقائق حسب عدد الروابط. لا تغلق الصفحة أثناء الفحص.
+    💡 <strong>ملاحظة:</strong> يمكنك فحص <strong>رابط واحد</strong> بإدخاله في الحقل أدناه، أو <strong>فحص كل روابط sitemap.xml</strong> بزر "ابدأ الفحص". الأداة تُظهر حالة كل رابط (200 / 301 / 404).
   </div>
 
+  <!-- ═══ فحص رابط فردي ═══ -->
+  <div class="input-section">
+    <label for="singleUrl">🔍 افحص رابطاً واحداً:</label>
+    <div class="input-row">
+      <input type="url" id="singleUrl" placeholder="https://jabri-com.vercel.app/Page4.html" dir="ltr">
+      <button id="checkSingleBtn" type="button">⚡ افحص الرابط</button>
+    </div>
+    <div class="single-result" id="singleResult"></div>
+  </div>
+
+  <!-- ═══ فحص شامل ═══ -->
   <div class="controls">
-    <button id="startBtn">▶️ ابدأ الفحص</button>
-    <button id="stopBtn" class="stop" disabled>⏹️ إيقاف</button>
-    <button id="exportBtn" disabled>📥 تصدير النتائج</button>
+    <button class="main-btn" id="startBtn">▶️ ابدأ فحص sitemap.xml</button>
+    <button class="main-btn stop" id="stopBtn" disabled>⏹️ إيقاف</button>
+    <button class="main-btn" id="exportBtn" disabled>📥 تصدير النتائج</button>
   </div>
 
   <div class="stats">
@@ -78,6 +194,9 @@ const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const exportBtn = document.getElementById('exportBtn');
 const progressFill = document.getElementById('progressFill');
+const singleResult = document.getElementById('singleResult');
+const singleUrlInput = document.getElementById('singleUrl');
+const checkSingleBtn = document.getElementById('checkSingleBtn');
 
 function updateStats() {
   const total = results.length;
@@ -102,6 +221,77 @@ function addLog(url, status, statusText, httpCode) {
   logEl.scrollTop = logEl.scrollHeight;
 }
 
+/* ═══ فحص رابط واحد ═══ */
+async function checkUrl(url) {
+  return new Promise((resolve) => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => {
+      controller.abort();
+      resolve({ url, status: 'error', statusText: '⏰ مهلة', httpCode: 0 });
+    }, 10000);
+
+    fetch(url, { method: 'HEAD', signal: controller.signal, redirect: 'follow' })
+      .then(res => {
+        clearTimeout(timeout);
+        const code = res.status;
+        if (code >= 200 && code < 300) {
+          resolve({ url, status: 'ok', statusText: '✅ 200', httpCode: code });
+        } else if (code >= 300 && code < 400) {
+          resolve({ url, status: 'redirect', statusText: '🔀 ' + code, httpCode: code });
+        } else {
+          resolve({ url, status: 'error', statusText: '❌ ' + code, httpCode: code });
+        }
+      })
+      .catch(err => {
+        clearTimeout(timeout);
+        resolve({ url, status: 'error', statusText: '⚠️ خطأ في الاتصال', httpCode: 0 });
+      });
+  });
+}
+
+/* ═══ زر الفحص الفردي ═══ */
+checkSingleBtn.addEventListener('click', async function() {
+  let url = singleUrlInput.value.trim();
+  if (!url) {
+    singleResult.className = 'single-result visible error';
+    singleResult.innerHTML = '<p class="status-badge" style="color:#ef4444;">⚠️ الرجاء إدخال رابط أولاً</p>';
+    return;
+  }
+  // إضافة https:// تلقائياً إذا لم تكن موجودة
+  if (!/^https?:\/\//i.test(url)) {
+    url = 'https://' + url;
+  }
+
+  singleResult.className = 'single-result visible';
+  singleResult.innerHTML = '<p class="status-badge" style="color:#6ae3ff;">⏳ جاري الفحص...</p>';
+  checkSingleBtn.disabled = true;
+
+  const result = await checkUrl(url);
+
+  singleResult.className = 'single-result visible ' + result.status;
+  let color = '#22c55e';
+  if (result.status === 'redirect') color = '#f59e0b';
+  if (result.status === 'error') color = '#ef4444';
+
+  singleResult.innerHTML = `
+    <div class="label">🔗 الرابط المفحوص:</div>
+    <div class="url-display"><a href="${result.url}" target="_blank" rel="noopener" style="color:#b8e6ff;">${result.url}</a></div>
+    <div class="status-badge" style="color:${color};">${result.statusText}</div>
+    <div class="label" style="margin-top:5px;">HTTP Code: ${result.httpCode || '—'}</div>
+  `;
+
+  checkSingleBtn.disabled = false;
+});
+
+/* ═══ فحص Enter ═══ */
+singleUrlInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    checkSingleBtn.click();
+  }
+});
+
+/* ═══ فحص sitemap كامل ═══ */
 async function fetchSitemap() {
   logEl.innerHTML = '';
   addLog(SITEMAP_URL, 'pending', '⏳ جاري...', '');
@@ -120,40 +310,6 @@ async function fetchSitemap() {
     logEl.innerHTML = '';
     addLog(SITEMAP_URL, 'error', '❌ خطأ', e.message);
     return [];
-  }
-}
-
-async function checkLink(url) {
-  try {
-    // نستخدم fetch مع mode: 'no-cors' لتفادي مشاكل CORS
-    // لكن هذا لا يعطينا حالة HTTP. لذا نستخدم تقنية الصورة.
-    return await new Promise((resolve) => {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => {
-        controller.abort();
-        resolve({ url, status: 'error', statusText: '⏰ مهلة', httpCode: 0 });
-      }, 10000);
-
-      fetch(url, { method: 'HEAD', signal: controller.signal, redirect: 'follow' })
-        .then(res => {
-          clearTimeout(timeout);
-          const code = res.status;
-          if (code >= 200 && code < 300) {
-            resolve({ url, status: 'ok', statusText: '✅ 200', httpCode: code });
-          } else if (code >= 300 && code < 400) {
-            resolve({ url, status: 'redirect', statusText: '🔀 ' + code, httpCode: code });
-          } else {
-            resolve({ url, status: 'error', statusText: '❌ ' + code, httpCode: code });
-          }
-        })
-        .catch(err => {
-          clearTimeout(timeout);
-          // في حالة CORS، نعتبر الرابط "غير معروف" وليس خطأ
-          resolve({ url, status: 'error', statusText: '⚠️ CORS', httpCode: 0 });
-        });
-    });
-  } catch (e) {
-    return { url, status: 'error', statusText: '❌ خطأ', httpCode: 0 };
   }
 }
 
@@ -180,10 +336,9 @@ async function runCheck() {
     if (!isRunning) break;
     const url = urls[i];
     addLog(url, 'pending', '⏳ جاري...', '');
-    const result = await checkLink(url);
+    const result = await checkUrl(url);
     results.push(result);
 
-    // إزالة السجل المؤقت وإضافة النتيجة النهائية
     const lastChild = logEl.lastElementChild;
     if (lastChild) lastChild.remove();
     addLog(url, result.status, result.statusText, result.httpCode);
