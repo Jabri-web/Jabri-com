@@ -7,11 +7,10 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U">
 
-<title>📊 Jabri Empire Monitor v5.2 | لوحة مراقبة Z+C+A=1</title>
+<title>📊 Jabri Empire Monitor v5.4 | لوحة مراقبة Z+C+A=1</title>
 <meta name="description" content="لوحة مراقبة إمبراطورية الجبري - متابعة 12 مستودع و28 DOI وحالة الأرشفة">
 
 <link rel="canonical" href="https://jabri-com.vercel.app/monitor.html">
-
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="manifest" href="/manifest.json">
 
@@ -27,8 +26,6 @@
   gtag('js', new Date());
   gtag('config', 'G-EQBMJKBC24');
 </script>
-
-
 
 <style>
 :root{--bg:#0a0a0f;--bg-alt:#0d1117;--bg-card:#161b22;--bg-elevated:#1c2333;--bd:#1f1f2e;--bd2:#2a2a3e;--bd3:#3a3a4e;--txt:#e8e8f0;--txt-dim:#8a8a9e;--txt-muted:#5a5a6e;--acc:#6ae3ff;--green:#25c26e;--green2:#1fa056;--gold:#c9a84c;--orange:#ff9800;--red:#ff5555;--purple:#a855f7;--radius:14px;--shadow:0 8px 30px rgba(0,0,0,.4);--transition:.25s cubic-bezier(.4,0,.2,1)}
@@ -54,6 +51,11 @@ button,input,select{font-family:inherit}
 .tool-btn.active{background:var(--acc);border-color:var(--acc);color:#000}
 .tool-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .tool-btn kbd{background:rgba(0,0,0,.2);padding:1px 6px;border-radius:4px;font-size:.7rem;font-family:"JetBrains Mono",monospace}
+.tool-btn.tracker{background:linear-gradient(135deg,var(--acc),#3b9fcb);border-color:var(--acc);color:#000}
+.tool-btn.tracker:hover{box-shadow:0 8px 20px rgba(106,227,255,.3);color:#000}
+.tool-btn.single{background:linear-gradient(135deg,#ff9800,#e67e00);border-color:#ff9800;color:#000}
+.tool-btn.bulk{background:linear-gradient(135deg,var(--purple),#7c3aed);border-color:var(--purple);color:#fff}
+.tool-btn.files{background:linear-gradient(135deg,var(--gold),#a8862e);border-color:var(--gold);color:#000}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
 .stat-card{background:linear-gradient(135deg,var(--bg-alt),var(--bg-card));border:1px solid var(--bd);border-radius:14px;padding:16px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all var(--transition)}
 .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold))}
@@ -97,6 +99,8 @@ tbody td:first-child{color:var(--gold);font-weight:900;text-align:center;width:4
 .icon-btn.fav-active{background:var(--gold);border-color:var(--gold);color:#000}
 .icon-btn.archive-btn{background:linear-gradient(135deg,rgba(37,194,110,.2),rgba(37,194,110,.1));border-color:var(--green);color:var(--green);width:24px;height:24px;font-size:.7rem}
 .icon-btn.archive-btn:hover{background:var(--green);color:#000;transform:scale(1.2)}
+.icon-btn.preview-btn{background:linear-gradient(135deg,rgba(106,227,255,.2),rgba(106,227,255,.1));border-color:var(--acc);color:var(--acc);width:24px;height:24px;font-size:.7rem}
+.icon-btn.preview-btn:hover{background:var(--acc);color:#000;transform:scale(1.2)}
 .badge{display:inline-block;padding:3px 9px;border-radius:5px;font-size:.68rem;font-weight:900;letter-spacing:.3px;white-space:nowrap}
 .badge.type-archive{background:rgba(37,194,110,.15);color:var(--green);border:1px solid rgba(37,194,110,.35)}
 .badge.type-not-indexed{background:rgba(255,152,0,.15);color:var(--orange);border:1px solid rgba(255,152,0,.35)}
@@ -106,6 +110,13 @@ tbody td:first-child{color:var(--gold);font-weight:900;text-align:center;width:4
 .badge.type-doi{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid rgba(168,85,247,.35)}
 .badge.cat{background:rgba(106,227,255,.08);color:var(--acc);border:1px solid rgba(106,227,255,.2);border-radius:20px}
 .badge.layer{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.05));color:var(--gold);border:1px solid rgba(201,168,76,.4)}
+.badge.new{background:var(--green);color:#000}
+.badge.deleted{background:var(--red);color:#fff}
+.badge.same{background:#444;color:#aaa}
+.badge.ok{background:var(--green);color:#000}
+.badge.redirect{background:var(--gold);color:#000}
+.badge.error{background:var(--red);color:#fff}
+.badge.pending{background:#333;color:#888}
 .code-cell{font-family:"JetBrains Mono",monospace;direction:ltr;color:var(--purple);font-weight:700;background:rgba(168,85,247,.1);padding:2px 8px;border-radius:4px;font-size:.72rem;display:inline-block;cursor:pointer;transition:all var(--transition)}
 .code-cell:hover{background:rgba(168,85,247,.25)}
 .file-name{font-family:"JetBrains Mono",monospace;font-size:.82rem;direction:ltr;color:var(--txt);font-weight:700;display:inline-block;word-break:break-all}
@@ -162,21 +173,132 @@ tbody td:first-child{color:var(--gold);font-weight:900;text-align:center;width:4
 .footer a{color:var(--acc);text-decoration:none}
 .section-title{color:var(--acc);font-family:"Cairo";font-size:1.1rem;font-weight:800;margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .view-section{display:none}.view-section.visible{display:block}
-@media(max-width:700px){body{padding:12px}.toolbar{flex-direction:column;align-items:stretch}.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ═══ نوافذ الأدوات ═══ */
+.tool-modal{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding:5vh 12px;overflow-y:auto}
+.tool-modal.active{display:flex}
+.tool-modal-box{background:var(--bg-card);border:2px solid var(--bd2);border-radius:16px;width:100%;max-width:1000px;padding:20px;position:relative;animation:slideDown .3s}
+.tool-modal-close{position:absolute;top:12px;left:16px;background:var(--bd2);border:none;color:var(--txt);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all var(--transition)}
+.tool-modal-close:hover{background:var(--red);color:#fff;transform:rotate(90deg)}
+.tool-modal-title{color:var(--acc);font-family:"Cairo";font-size:1.2rem;font-weight:900;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tool-modal-title i{color:var(--gold)}
+.tool-note{background:#1a1a2e;border-right:3px solid var(--acc);padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:.85rem;color:var(--txt-dim)}
+.tool-note strong{color:var(--acc)}
+.tool-note code{background:var(--bg);padding:2px 8px;border-radius:5px;color:var(--green);font-family:"JetBrains Mono",monospace;font-size:.78rem}
+.tool-input-box{background:var(--bg-alt);border:2px solid var(--bd2);border-radius:12px;padding:14px;margin-bottom:14px}
+.tool-input-box label{display:block;color:var(--acc);font-weight:700;margin-bottom:8px;font-size:.85rem}
+.tool-input-row{display:flex;gap:10px;flex-wrap:wrap}
+.tool-input-row input{flex:1;min-width:200px;padding:11px 14px;background:var(--bg);border:2px solid var(--bd2);border-radius:10px;color:var(--txt);font-size:.85rem;font-family:"JetBrains Mono",monospace;direction:ltr;outline:none}
+.tool-input-row input:focus{border-color:var(--acc)}
+.single-result{display:none;background:var(--bg-alt);border:2px solid var(--bd2);border-radius:12px;padding:14px;margin-top:12px}
+.single-result.visible{display:block}
+.single-result.ok{border-color:var(--green);background:rgba(37,194,110,.05)}
+.single-result.redirect{border-color:var(--gold);background:rgba(201,168,76,.05)}
+.single-result.error{border-color:var(--red);background:rgba(255,85,85,.05)}
+.single-result .label{color:var(--txt-dim);font-size:.75rem}
+.single-result .url-display{color:#b8e6ff;word-break:break-all;direction:ltr;font-family:"JetBrains Mono",monospace;margin:4px 0;font-size:.78rem}
+.single-result .status-badge{font-weight:900;font-size:1.05rem;margin-top:6px}
+.progress-bar{width:100%;height:7px;background:var(--bg-card);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--green));transition:width .3s;width:0%}
+.log-box{background:var(--bg-alt);border:1px solid var(--bd);border-radius:12px;padding:12px;max-height:50vh;overflow-y:auto;font-family:"JetBrains Mono",monospace;font-size:.75rem}
+.log-item{padding:5px 0;border-bottom:1px solid #1a1a2e;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.log-item:last-child{border-bottom:none}
+.log-item .url{flex:1;word-break:break-all;color:#b8e6ff;font-size:.72rem}
+.log-item .url a{color:#b8e6ff;text-decoration:none}
+.log-item .meta{color:var(--txt-muted);font-size:.68rem}
+.section-box{background:var(--bg-alt);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:14px;max-height:400px;overflow-y:auto}
+.section-box h3{color:var(--acc);font-size:.95rem;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.section-box h3.green{color:var(--green)}
+.section-box h3.red{color:var(--red)}
+.section-box h3 .count{background:var(--bd);color:var(--txt-dim);font-size:.7rem;padding:2px 8px;border-radius:20px;margin-right:auto}
+.quick-links{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.quick-links button{padding:5px 10px;font-size:.7rem;background:var(--bg);border:1px solid var(--bd2);border-radius:20px;color:var(--acc);cursor:pointer;font-family:"JetBrains Mono",monospace}
+.quick-links button:hover{background:var(--acc);color:#000}
+
+/* ═══ معاينة الملف ═══ */
+.modal-preview{position:fixed;inset:0;z-index:99997;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding:3vh 12px;overflow-y:auto}
+.modal-preview.active{display:flex}
+.preview-box{background:var(--bg-card);border:2px solid var(--bd2);border-radius:16px;width:100%;max-width:1100px;padding:16px;position:relative;animation:slideDown .3s}
+.preview-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.preview-title{flex:1;font-family:"JetBrains Mono",monospace;color:var(--acc);font-weight:700;font-size:.9rem;direction:ltr;word-break:break-all}
+.preview-actions{display:flex;gap:6px;flex-wrap:wrap}
+.preview-actions button,.preview-actions a{background:var(--bg-alt);border:2px solid var(--bd2);color:var(--txt-dim);padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:all var(--transition)}
+.preview-actions button:hover,.preview-actions a:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
+.preview-actions button.active{background:var(--acc);border-color:var(--acc);color:#000}
+.preview-close{position:absolute;top:12px;left:12px;background:var(--bd2);border:none;color:var(--txt);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all var(--transition);z-index:10}
+.preview-close:hover{background:var(--red);color:#fff;transform:rotate(90deg)}
+.preview-body{background:var(--bg);border:1px solid var(--bd);border-radius:10px;overflow:auto;min-height:300px;max-height:70vh}
+.preview-body iframe{width:100%;height:65vh;border:none;background:#fff;display:block}
+.preview-body pre{margin:0;padding:16px;font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--txt);direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-word;background:var(--bg-alt)}
+.preview-body img{max-width:100%;height:auto;display:block;margin:0 auto;padding:16px}
+.preview-body .info-msg{padding:40px 20px;text-align:center;color:var(--txt-dim)}
+.preview-body .info-msg i{font-size:3rem;color:var(--bd3);margin-bottom:14px;display:block}
+.preview-body .info-msg .size-badge{display:inline-block;background:var(--bg-card);border:1px solid var(--bd2);padding:4px 14px;border-radius:20px;font-family:"JetBrains Mono",monospace;font-size:.75rem;color:var(--gold);margin-top:10px}
+.preview-loading{display:flex;align-items:center;justify-content:center;padding:60px 20px;color:var(--txt-dim);flex-direction:column;gap:12px}
+.preview-loading i{font-size:2rem;color:var(--acc)}
+
+@media(max-width:700px){body{padding:12px}.toolbar{flex-direction:column;align-items:stretch}.stats-grid{grid-template-columns:repeat(2,1fr)}.tool-modal-box{padding:16px}}
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<!-- Palette -->
 <div class="palette-overlay" id="paletteOverlay" role="dialog" aria-modal="true"><div class="palette"><div class="palette-header"><i class="fas fa-search" style="color:var(--green)"></i><input type="text" class="palette-input" id="paletteInput" placeholder="اكتب أمراً أو ابحث..."><span style="background:var(--bg-alt);padding:4px 10px;border-radius:6px;font-size:.72rem;font-family:JetBrains Mono,monospace">ESC</span></div><div class="palette-results" id="paletteResults"></div><div class="palette-footer"><span><kbd>↑↓</kbd> تنقل · <kbd>↵</kbd> تنفيذ</span><span><kbd>Ctrl+K</kbd> فتح</span></div></div></div>
+
+<!-- Modal 1: رصد التحديثات -->
+<div class="tool-modal" id="modalTracker"><div class="tool-modal-box"><button class="tool-modal-close" onclick="closeModal('modalTracker')">✕</button><h2 class="tool-modal-title"><i class="fas fa-radar"></i> 🛰️ رصد التحديثات</h2><div class="tool-note">💡 يقارن بين نسختين من <code>sitemap.xml</code> أو <code>file-all2.txt</code> ويُظهر: <strong>ما الجديد 🆕</strong> — <strong>ما المحذوف 🗑️</strong> — <strong>ما المشترك ✅</strong>.</div><div class="toolbar" style="margin-bottom:14px"><div class="toolbar-group"><button class="tool-btn primary" id="trackerCheckSitemap"><i class="fas fa-radar"></i> رصد sitemap</button><button class="tool-btn tracker" id="trackerCheckFiles"><i class="fas fa-file-lines"></i> رصد file-all2</button></div><div class="toolbar-group"><button class="tool-btn" id="trackerSave"><i class="fas fa-save"></i> حفظ الحالة</button><button class="tool-btn" id="trackerReset" style="background:linear-gradient(135deg,#ff5555,#cc0000);border-color:#ff5555;color:#fff"><i class="fas fa-trash"></i> إعادة تعيين</button></div></div><div class="stats-grid" style="grid-template-columns:repeat(4,1fr)"><div class="stat-card"><span class="num" id="tTotal">0</span><span class="lbl">الإجمالي</span></div><div class="stat-card gold"><span class="num" id="tNew">0</span><span class="lbl">🆕 جديد</span></div><div class="stat-card red"><span class="num" id="tDeleted">0</span><span class="lbl">🗑️ محذوف</span></div><div class="stat-card blue"><span class="num" id="tSame">0</span><span class="lbl">✅ مشترك</span></div></div><div class="section-box" id="tNewSection" style="display:none"><h3 class="green"><i class="fas fa-plus-circle"></i> جديد <span class="count" id="tNewCount">0</span></h3><div id="tNewList"></div></div><div class="section-box" id="tDelSection" style="display:none"><h3 class="red"><i class="fas fa-minus-circle"></i> محذوف <span class="count" id="tDelCount">0</span></h3><div id="tDelList"></div></div><div class="section-box" id="tSameSection"><h3><i class="fas fa-check-circle"></i> مشترك <span class="count" id="tSameCount">0</span></h3><div id="tSameList"><div style="text-align:center;padding:20px;color:var(--txt-dim);font-size:.85rem">اضغط "رصد sitemap" للبدء</div></div></div></div></div>
+
+<!-- Modal 2: فحص رابط -->
+<div class="tool-modal" id="modalSingle"><div class="tool-modal-box"><button class="tool-modal-close" onclick="closeModal('modalSingle')">✕</button><h2 class="tool-modal-title"><i class="fas fa-crosshairs"></i> 🎯 فحص رابط فردي</h2><div class="tool-note">💡 أدخل رابطاً (داخلي/خارجي) واضغط "افحص".</div><div class="tool-input-box"><label><i class="fas fa-link"></i> الرابط:</label><div class="tool-input-row"><input type="url" id="singleUrl" placeholder="https://jabri-com.vercel.app/ar/profile.html" dir="ltr"><button class="tool-btn primary" id="checkSingleBtn"><i class="fas fa-bolt"></i> افحص</button></div><div class="single-result" id="singleResult"></div></div><div class="tool-note">💡 <strong>روابط سريعة:</strong><div class="quick-links"><button onclick="quickCheck('/ar/profile.html')">/ar/profile.html</button><button onclick="quickCheck('/en/profile.html')">/en/profile.html</button><button onclick="quickCheck('/ar/project.html')">/ar/project.html</button><button onclick="quickCheck('/sitemap.xml')">/sitemap.xml</button><button onclick="quickCheck('/robots.txt')">/robots.txt</button><button onclick="quickCheck('/file-all2.txt')">/file-all2.txt</button></div></div></div></div>
+
+<!-- Modal 3: فحص شامل -->
+<div class="tool-modal" id="modalBulk"><div class="tool-modal-box"><button class="tool-modal-close" onclick="closeModal('modalBulk')">✕</button><h2 class="tool-modal-title"><i class="fas fa-list-check"></i> 📋 فحص شامل</h2><div class="tool-note">💡 يفحص كل روابط <code>sitemap.xml</code> (110+ رابطاً).</div><div class="toolbar" style="margin-bottom:14px"><button class="tool-btn primary" id="bulkStart"><i class="fas fa-play"></i> ابدأ</button><button class="tool-btn" id="bulkStop" disabled style="background:linear-gradient(135deg,#ff5555,#cc0000);border-color:#ff5555;color:#fff"><i class="fas fa-stop"></i> إيقاف</button><button class="tool-btn" id="bulkExport" disabled style="background:linear-gradient(135deg,var(--gold),#a8862e);border-color:var(--gold);color:#000"><i class="fas fa-download"></i> CSV</button></div><div class="stats-grid" style="grid-template-columns:repeat(4,1fr)"><div class="stat-card"><span class="num" id="bTotal">0</span><span class="lbl">الإجمالي</span></div><div class="stat-card"><span class="num" id="bOk">0</span><span class="lbl">200 OK</span></div><div class="stat-card gold"><span class="num" id="bRedirect">0</span><span class="lbl">301/302</span></div><div class="stat-card red"><span class="num" id="bError">0</span><span class="lbl">404/أخطاء</span></div></div><div class="progress-bar"><div class="progress-fill" id="bulkProgress"></div></div><div class="log-box" id="bulkLog"><div style="text-align:center;padding:20px;color:var(--txt-dim);font-size:.85rem">اضغط "ابدأ" للبدء</div></div></div></div>
+
+<!-- Modal 4: مقارنة الملفات -->
+<div class="tool-modal" id="modalFiles"><div class="tool-modal-box"><button class="tool-modal-close" onclick="closeModal('modalFiles')">✕</button><h2 class="tool-modal-title"><i class="fas fa-code-compare"></i> 📁 مقارنة الملفات</h2><div class="tool-note">💡 يقارن بين <code>file-all.txt</code> و <code>file-all2.txt</code>.</div><div class="toolbar" style="margin-bottom:14px"><button class="tool-btn primary" id="fileCompare"><i class="fas fa-code-compare"></i> قارن</button><button class="tool-btn tracker" id="fileDownload3"><i class="fas fa-save"></i> file-all3.txt</button><button class="tool-btn" id="fileExportDiff" disabled style="background:linear-gradient(135deg,var(--gold),#a8862e);border-color:var(--gold);color:#000"><i class="fas fa-download"></i> تصدير</button></div><div class="stats-grid" style="grid-template-columns:repeat(4,1fr)"><div class="stat-card"><span class="num" id="fTotal">0</span><span class="lbl">إجمالي file-all2</span></div><div class="stat-card gold"><span class="num" id="fNew">0</span><span class="lbl">🆕 جديد</span></div><div class="stat-card red"><span class="num" id="fDeleted">0</span><span class="lbl">🗑️ محذوف</span></div><div class="stat-card blue"><span class="num" id="fSame">0</span><span class="lbl">✅ مشترك</span></div></div><div class="section-box" id="fNewSection" style="display:none"><h3 class="green"><i class="fas fa-plus-circle"></i> جديدة <span class="count" id="fNewCount">0</span></h3><div id="fNewList"></div></div><div class="section-box" id="fDelSection" style="display:none"><h3 class="red"><i class="fas fa-minus-circle"></i> محذوفة <span class="count" id="fDelCount">0</span></h3><div id="fDelList"></div></div><div class="section-box" id="fSameSection"><h3><i class="fas fa-check-circle"></i> مشتركة <span class="count" id="fSameCount">0</span></h3><div id="fSameList"><div style="text-align:center;padding:20px;color:var(--txt-dim);font-size:.85rem">اضغط "قارن" للبدء</div></div></div></div></div>
+
+<!-- Modal 5: معاينة الملف -->
+<div class="modal-preview" id="modalPreview"><div class="preview-box"><button class="preview-close" onclick="closePreview()">✕</button><div class="preview-header"><div class="preview-title" id="previewTitle">—</div><div class="preview-actions" id="previewActions"></div></div><div class="preview-body" id="previewBody"><div class="preview-loading"><i class="fas fa-spinner fa-spin"></i><span>جاري التحميل...</span></div></div></div></div>
+
 <div class="container">
-<header class="page-header"><h1>🌌 Jabri Empire Monitor</h1><p class="subtitle">نظام مراقبة الإمبراطورية — v5.2 (أرشفة يدوية)</p><div class="identity-chip">Z + C + A = 1 · Heaven Al-Jabri</div></header>
-<div class="toolbar"><div class="toolbar-group"><button class="tool-btn primary" id="btnPalette" type="button"><i class="fas fa-search"></i> ابحث <kbd>Ctrl+K</kbd></button><button class="tool-btn" id="btnHealth" type="button"><i class="fas fa-heart-pulse"></i> نبض Google</button></div><div class="toolbar-group"><button class="tool-btn active" data-view="table" type="button"><i class="fas fa-list"></i> جدول</button><button class="tool-btn" data-view="cards" type="button"><i class="fas fa-th-large"></i> شبكة</button><button class="tool-btn" data-view="map" type="button"><i class="fas fa-project-diagram"></i> خريطة</button><button class="tool-btn" data-view="timeline" type="button"><i class="fas fa-clock-rotate-left"></i> زمني</button></div><div class="toolbar-group"><button class="tool-btn" id="btnResetArchive" type="button" title="مسح كل الأرشفة اليدوية"><i class="fas fa-rotate-left"></i> مسح الأرشيف</button><button class="tool-btn" id="btnExportJson" type="button"><i class="fas fa-file-code"></i> JSON</button><button class="tool-btn" id="btnExportCsv" type="button"><i class="fas fa-file-csv"></i> CSV</button><button class="tool-btn" id="btnTheme" type="button"><i class="fas fa-moon"></i></button></div></div>
-<div class="stats-grid" id="statsGrid"><div class="stat-card" data-stat="total" data-filter="all"><span class="num">0</span><span class="lbl">إجمالي</span></div><div class="stat-card gold" data-stat="archive" data-filter="archive"><span class="num">0</span><span class="lbl">📦 مؤرشف</span></div><div class="stat-card orange" data-stat="notIndexed" data-filter="not-indexed"><span class="num">0</span><span class="lbl">🆕 غير مؤرشف</span></div><div class="stat-card blue" data-stat="system" data-filter="system"><span class="num">0</span><span class="lbl">⚙️ النظام</span></div><div class="stat-card purple" data-stat="repo" data-filter="repo"><span class="num">0</span><span class="lbl">📚 ريبوز</span></div><div class="stat-card red" data-stat="doi" data-filter="doi"><span class="num">0</span><span class="lbl">🔗 DOI</span></div></div>
-<div class="search-bar"><div class="search-input-wrap"><i class="fas fa-search"></i><input type="search" id="searchInput" class="search-input" placeholder="ابحث بالاسم، الوصف، DOI، الفئة..."><button class="clear-search" id="clearSearch" type="button"><i class="fas fa-times"></i></button></div><div class="filter-chips" id="filterChips"><button class="chip active" data-filter="all" type="button">🌐 الكل <span class="cnt" id="cAll">0</span></button><button class="chip" data-filter="archive" type="button">📦 مؤرشف <span class="cnt" id="cArchive">0</span></button><button class="chip" data-filter="not-indexed" type="button">🆕 غير <span class="cnt" id="cNotIndexed">0</span></button><button class="chip" data-filter="system" type="button">⚙️ نظام <span class="cnt" id="cSystem">0</span></button><button class="chip" data-filter="repo" type="button">📚 ريبوز <span class="cnt" id="cRepo">0</span></button><button class="chip" data-filter="doi" type="button">🔗 DOI <span class="cnt" id="cDoi">0</span></button><button class="chip" data-filter="partial" type="button">📄 أجزاء <span class="cnt" id="cPartial">0</span></button><button class="chip" data-filter="favorites" type="button">⭐ مفضلة <span class="cnt" id="cFav">0</span></button></div><div class="sub-toolbar"><select class="sort-select" id="sortSelect"><option value="default">📋 افتراضي</option><option value="name">🔤 الاسم أ-ي</option><option value="name-desc">🔤 الاسم ي-أ</option><option value="date">📅 التاريخ</option><option value="type">🏷️ النوع</option><option value="layer">🔷 الطبقة</option></select><p class="results-info">عرض <strong id="visibleCount">0</strong> من <strong id="totalCount">0</strong></p><p class="results-info" id="healthSummary" style="margin-inline-start:auto"></p></div></div>
-<main id="main"><section id="mainSection" class="view-section visible"><div id="tableView" class="table-wrap"><table><thead><tr><th style="width:40px">#</th><th style="width:36px">•</th><th>الاسم</th><th>الفئة / الطبقة</th><th>النوع</th><th>DOI</th><th>التاريخ</th><th style="width:80px">إجراءات</th></tr></thead><tbody id="tbody"></tbody></table></div><div id="cardsView" class="cards-grid" style="display:none"></div><div class="empty-state" id="emptyState"><i class="fas fa-inbox"></i><h3>لا توجد نتائج</h3><p>جرّب كلمة بحث مختلفة</p></div></section><section id="mapSection" class="view-section"><h2 class="section-title">🗺️ خريطة الإمبراطورية</h2><div class="empire-map"><div class="empire-layers" id="empireLayers"></div></div></section><section id="timelineSection" class="view-section"><h2 class="section-title">⏱️ العرض الزمني <span class="count" id="timelineCount"></span></h2><div class="timeline" id="timelineContainer"></div></section></main>
-<footer class="footer"><div class="identity">Z + C + A = 1</div><p id="footerSummary">—</p><p style="margin-top:10px"><a href="/Dbase.html"><i class="fas fa-database"></i> قواعد البيانات</a> · <a href="/Check.html"><i class="fas fa-circle-check"></i> الفحص</a> · <a href="/Page11.html"><i class="fas fa-home"></i> الواحة</a></p><p style="margin-top:12px;color:var(--txt-muted);font-size:.75rem">© 2026 م/ عبدالله محمد ناصر الجبري · CC BY 4.0 · v5.2</p></footer>
+<header class="page-header"><h1>🌌 Jabri Empire Monitor</h1><p class="subtitle">نظام مراقبة الإمبراطورية — v5.4 (رصد + فحص + معاينة + أرشفة)</p><div class="identity-chip">Z + C + A = 1 · Heaven Al-Jabri</div></header>
+
+<div class="toolbar">
+  <div class="toolbar-group">
+    <button class="tool-btn primary" id="btnPalette" type="button"><i class="fas fa-search"></i> ابحث <kbd>Ctrl+K</kbd></button>
+    <button class="tool-btn" id="btnHealth" type="button"><i class="fas fa-heart-pulse"></i> نبض Google</button>
+  </div>
+  <div class="toolbar-group">
+    <button class="tool-btn tracker" id="btnOpenTracker" type="button"><i class="fas fa-radar"></i> رصد التحديثات</button>
+    <button class="tool-btn single" id="btnOpenSingle" type="button"><i class="fas fa-crosshairs"></i> فحص رابط</button>
+    <button class="tool-btn bulk" id="btnOpenBulk" type="button"><i class="fas fa-list-check"></i> فحص شامل</button>
+    <button class="tool-btn files" id="btnOpenFiles" type="button"><i class="fas fa-code-compare"></i> مقارنة الملفات</button>
+  </div>
+  <div class="toolbar-group">
+    <button class="tool-btn active" data-view="table" type="button"><i class="fas fa-list"></i> جدول</button>
+    <button class="tool-btn" data-view="cards" type="button"><i class="fas fa-th-large"></i> شبكة</button>
+    <button class="tool-btn" data-view="map" type="button"><i class="fas fa-project-diagram"></i> خريطة</button>
+    <button class="tool-btn" data-view="timeline" type="button"><i class="fas fa-clock-rotate-left"></i> زمني</button>
+  </div>
+  <div class="toolbar-group">
+    <button class="tool-btn" id="btnResetArchive" type="button"><i class="fas fa-rotate-left"></i> مسح الأرشيف</button>
+    <button class="tool-btn" id="btnExportJson" type="button"><i class="fas fa-file-code"></i> JSON</button>
+    <button class="tool-btn" id="btnExportCsv" type="button"><i class="fas fa-file-csv"></i> CSV</button>
+    <button class="tool-btn" id="btnTheme" type="button"><i class="fas fa-moon"></i></button>
+  </div>
 </div>
+
+<div class="stats-grid" id="statsGrid"><div class="stat-card" data-stat="total" data-filter="all"><span class="num">0</span><span class="lbl">إجمالي</span></div><div class="stat-card gold" data-stat="archive" data-filter="archive"><span class="num">0</span><span class="lbl">📦 مؤرشف</span></div><div class="stat-card orange" data-stat="notIndexed" data-filter="not-indexed"><span class="num">0</span><span class="lbl">🆕 غير مؤرشف</span></div><div class="stat-card blue" data-stat="system" data-filter="system"><span class="num">0</span><span class="lbl">⚙️ النظام</span></div><div class="stat-card purple" data-stat="repo" data-filter="repo"><span class="num">0</span><span class="lbl">📚 ريبوز</span></div><div class="stat-card red" data-stat="doi" data-filter="doi"><span class="num">0</span><span class="lbl">🔗 DOI</span></div></div>
+
+<div class="search-bar"><div class="search-input-wrap"><i class="fas fa-search"></i><input type="search" id="searchInput" class="search-input" placeholder="ابحث بالاسم، الوصف، DOI، الفئة..."><button class="clear-search" id="clearSearch" type="button"><i class="fas fa-times"></i></button></div><div class="filter-chips" id="filterChips"><button class="chip active" data-filter="all" type="button">🌐 الكل <span class="cnt" id="cAll">0</span></button><button class="chip" data-filter="archive" type="button">📦 مؤرشف <span class="cnt" id="cArchive">0</span></button><button class="chip" data-filter="not-indexed" type="button">🆕 غير <span class="cnt" id="cNotIndexed">0</span></button><button class="chip" data-filter="system" type="button">⚙️ نظام <span class="cnt" id="cSystem">0</span></button><button class="chip" data-filter="repo" type="button">📚 ريبوز <span class="cnt" id="cRepo">0</span></button><button class="chip" data-filter="doi" type="button">🔗 DOI <span class="cnt" id="cDoi">0</span></button><button class="chip" data-filter="partial" type="button">📄 أجزاء <span class="cnt" id="cPartial">0</span></button><button class="chip" data-filter="favorites" type="button">⭐ مفضلة <span class="cnt" id="cFav">0</span></button></div><div class="sub-toolbar"><select class="sort-select" id="sortSelect"><option value="default">📋 افتراضي</option><option value="name">🔤 الاسم أ-ي</option><option value="name-desc">🔤 الاسم ي-أ</option><option value="date">📅 التاريخ</option><option value="type">🏷️ النوع</option><option value="layer">🔷 الطبقة</option></select><p class="results-info">عرض <strong id="visibleCount">0</strong> من <strong id="totalCount">0</strong></p><p class="results-info" id="healthSummary" style="margin-inline-start:auto"></p></div></div>
+
+<main id="main"><section id="mainSection" class="view-section visible"><div id="tableView" class="table-wrap"><table><thead><tr><th style="width:40px">#</th><th style="width:36px">•</th><th>الاسم</th><th>الفئة / الطبقة</th><th>النوع</th><th>DOI</th><th>التاريخ</th><th style="width:110px">إجراءات</th></tr></thead><tbody id="tbody"></tbody></table></div><div id="cardsView" class="cards-grid" style="display:none"></div><div class="empty-state" id="emptyState"><i class="fas fa-inbox"></i><h3>لا توجد نتائج</h3><p>جرّب كلمة بحث مختلفة</p></div></section><section id="mapSection" class="view-section"><h2 class="section-title">🗺️ خريطة الإمبراطورية</h2><div class="empire-map"><div class="empire-layers" id="empireLayers"></div></div></section><section id="timelineSection" class="view-section"><h2 class="section-title">⏱️ العرض الزمني <span class="count" id="timelineCount"></span></h2><div class="timeline" id="timelineContainer"></div></section></main>
+
+<footer class="footer"><div class="identity">Z + C + A = 1</div><p id="footerSummary">—</p><p style="margin-top:10px"><a href="/Dbase.html"><i class="fas fa-database"></i> قواعد البيانات</a> · <a href="/Check.html"><i class="fas fa-circle-check"></i> الفحص</a> · <a href="/Page11.html"><i class="fas fa-home"></i> الواحة</a></p><p style="margin-top:12px;color:var(--txt-muted);font-size:.75rem">© 2026 م/ عبدالله محمد ناصر الجبري · CC BY 4.0 · v5.4</p></footer>
+</div>
+
 <script>
 const PAGES=[
 { name:'Office.html', url:'/Office.html', type:'archive', cat:'المكتبة', date:'2026/09/05' },
@@ -258,12 +380,18 @@ const PAGES=[
 { name:'explore.html', url:'/explore.html', type:'not-indexed', cat:'متنوع' },
 { name:'ar/index.html', url:'/ar/index.html', type:'not-indexed', cat:'ar' },
 { name:'ar/about.html', url:'/ar/about.html', type:'not-indexed', cat:'ar' },
+{ name:'ar/profile.html', url:'/ar/profile.html', type:'not-indexed', cat:'ar' },
+{ name:'ar/project.html', url:'/ar/project.html', type:'not-indexed', cat:'ar' },
 { name:'ar/contact.html', url:'/ar/contact.html', type:'not-indexed', cat:'ar' },
 { name:'ar/journal.html', url:'/ar/journal.html', type:'not-indexed', cat:'ar' },
+{ name:'ar/Router-all.html', url:'/ar/Router-all.html', type:'not-indexed', cat:'ar' },
 { name:'en/index.html', url:'/en/index.html', type:'not-indexed', cat:'en' },
 { name:'en/about.html', url:'/en/about.html', type:'not-indexed', cat:'en' },
+{ name:'en/profile.html', url:'/en/profile.html', type:'not-indexed', cat:'en' },
+{ name:'en/project.html', url:'/en/project.html', type:'not-indexed', cat:'en' },
 { name:'en/contact.html', url:'/en/contact.html', type:'not-indexed', cat:'en' },
 { name:'en/journal.html', url:'/en/journal.html', type:'not-indexed', cat:'en' },
+{ name:'en/Router-all.html', url:'/en/Router-all.html', type:'not-indexed', cat:'en' },
 { name:'game/game-auto.html', url:'/game/game-auto.html', type:'not-indexed', cat:'game' },
 { name:'publish/publish.html', url:'/publish/publish.html', type:'not-indexed', cat:'publish' },
 { name:'Check.html', url:'/Check.html', type:'system', cat:'نظام', date:'2026/09/10' },
@@ -276,6 +404,8 @@ const PAGES=[
 { name:'repos-sqr.html', url:'/repos-sqr.html', type:'system', cat:'نظام' },
 { name:'current-auto.html', url:'/current-auto.html', type:'system', cat:'نظام' },
 { name:'dashboard.html', url:'/dashboard.html', type:'system', cat:'نظام' },
+{ name:'link-checker.html', url:'/link-checker.html', type:'system', cat:'نظام' },
+{ name:'update-tracker.html', url:'/update-tracker.html', type:'system', cat:'نظام' },
 { name:'header.html', url:'/header.html', type:'partial', cat:'أجزاء' },
 { name:'footer.html', url:'/footer.html', type:'partial', cat:'أجزاء' },
 { name:'hero.html', url:'/hero.html', type:'partial', cat:'أجزاء' },
@@ -338,204 +468,53 @@ const State={filter:'all',search:'',sort:'default',view:'table',health:{},favori
 try{State.favorites=JSON.parse(localStorage.getItem('jabri_monitor_favs')||'[]');State.theme=localStorage.getItem('jabri_monitor_theme')||'dark';State.health=JSON.parse(sessionStorage.getItem('jabri_health_cache')||'{}');State.archived=JSON.parse(localStorage.getItem('jabri_monitor_archived')||'{}')}catch(e){}
 
 function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
-function doiLink(d){return 'https://doi.org/10.5281/zenodo.'+d}
 function itemKey(it){return it.url ? 'url:'+it.url : (it.kind||'')+':'+(it.name||'')+':'+(it.doi||'')}
 function saveFavs(){try{localStorage.setItem('jabri_monitor_favs',JSON.stringify(State.favorites))}catch(e){}}
 function isFav(k){return State.favorites.indexOf(k)!==-1}
 function toggleFav(k){const i=State.favorites.indexOf(k);if(i===-1){State.favorites.push(k);toast('⭐ أُضيف للمفضلة','success')}else{State.favorites.splice(i,1);toast('أُزيل من المفضلة','info')}saveFavs();render();updateStats()}
 
-/* ═══════════════════════════════════════════════════════════════
-   نظام الأرشفة اليدوية (v5.2 الجديد)
-   ═══════════════════════════════════════════════════════════════ */
 function saveArchived(){try{localStorage.setItem('jabri_monitor_archived',JSON.stringify(State.archived))}catch(e){}}
 function isArchived(it){if(it.type==='archive') return true;return State.archived[it.url]===true}
-function toggleArchive(it){
-  if(!it.url){toast('لا يوجد رابط','warn');return}
-  if(it.type==='archive'){toast('مؤرشف أصلاً في البيانات','info');return}
-  if(State.archived[it.url]){
-    delete State.archived[it.url];
-    toast('↩️ أُلغي: '+it.name,'info');
-  } else {
-    State.archived[it.url]=true;
-    toast('📦 تمت الأرشفة: '+it.name,'success');
-  }
-  saveArchived();render();updateStats();
-}
-function resetAllArchive(){
-  if(!confirm('هل تريد مسح كل الأرشفة اليدوية؟ (لن يتأثر المؤرشف في البيانات الأصلية)')) return;
-  State.archived={};
-  saveArchived();render();updateStats();
-  toast('🗑️ تم مسح الأرشيف اليدوي','info');
-}
+function toggleArchive(it){if(!it.url){toast('لا يوجد رابط','warn');return}if(it.type==='archive'){toast('مؤرشف أصلاً في البيانات','info');return}if(State.archived[it.url]){delete State.archived[it.url];toast('↩️ أُلغي: '+it.name,'info');}else{State.archived[it.url]=true;toast('📦 تمت الأرشفة: '+it.name,'success');}saveArchived();render();updateStats();}
+function resetAllArchive(){if(!confirm('هل تريد مسح كل الأرشفة اليدوية؟')) return;State.archived={};saveArchived();render();updateStats();toast('🗑️ تم مسح الأرشيف اليدوي','info');}
 
 function toast(msg,type){type=type||'info';const c=document.getElementById('toastContainer');const el=document.createElement('div');el.className='toast '+type;const icons={success:'check-circle',info:'info-circle',warn:'exclamation-triangle',error:'times-circle'};el.innerHTML='<i class="fas fa-'+(icons[type]||'info-circle')+'"></i><span style="flex:1;font-size:.88rem;font-weight:600">'+msg+'</span>';c.appendChild(el);setTimeout(()=>{el.style.opacity='0';el.style.transform='translateX(-30px)';setTimeout(()=>el.remove(),300)},2800)}
 function getAllItems(){const items=[];PAGES.forEach(p=>items.push({...p,kind:'page'}));REPOS.forEach(r=>items.push({...r,kind:'repo',type:'repo'}));DOIS.forEach(d=>items.push({...d,kind:'doi',type:'doi'}));return items}
 
-/* ✅ الإحصائيات مع الأرشفة اليدوية */
-function countByType(){
-  const c={all:0,archive:0,'not-indexed':0,system:0,partial:0,repo:0,doi:0,favorites:0};
-  PAGES.forEach(p=>{
-    c.all++;
-    if(isArchived(p)) c.archive++;
-    else c[p.type]=(c[p.type]||0)+1;
-  });
-  REPOS.forEach(()=>{c.all++;c.repo++});
-  DOIS.forEach(()=>{c.all++;c.doi++});
-  c.favorites=State.favorites.length;
-  return c;
-}
+function countByType(){const c={all:0,archive:0,'not-indexed':0,system:0,partial:0,repo:0,doi:0,favorites:0};PAGES.forEach(p=>{c.all++;if(isArchived(p)) c.archive++;else c[p.type]=(c[p.type]||0)+1;});REPOS.forEach(()=>{c.all++;c.repo++});DOIS.forEach(()=>{c.all++;c.doi++});c.favorites=State.favorites.length;return c;}
 
-function getVisible(){
-  const s=State.search.toLowerCase().trim();const f=State.filter;
-  let items=getAllItems().filter(it=>{
-    if(f==='favorites'){if(!isFav(itemKey(it))) return false}
-    else if(f==='archive'){if(!isArchived(it)) return false}
-    else if(f==='not-indexed'){if(isArchived(it)||it.type==='repo'||it.type==='doi') return false}
-    else if(f!=='all'){if(it.type!==f||isArchived(it)) return false}
-    if(s){const hay=((it.name||'')+' '+(it.desc||'')+' '+(it.doi||'')+' '+(it.cat||'')+' '+(it.layer||'')).toLowerCase();if(hay.indexOf(s)===-1) return false}
-    return true
-  });
-  if(State.sort==='name') items.sort((a,b)=>(a.name||'').localeCompare(b.name||'', 'ar'));
-  else if(State.sort==='name-desc') items.sort((a,b)=>(b.name||'').localeCompare(a.name||'', 'ar'));
-  else if(State.sort==='date') items.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-  else if(State.sort==='type') items.sort((a,b)=>(a.type||'').localeCompare(b.type||''));
-  else if(State.sort==='layer') items.sort((a,b)=>(a.layer||99)-(b.layer||99));
-  return items;
-}
+function getVisible(){const s=State.search.toLowerCase().trim();const f=State.filter;let items=getAllItems().filter(it=>{if(f==='favorites'){if(!isFav(itemKey(it))) return false}else if(f==='archive'){if(!isArchived(it)) return false}else if(f==='not-indexed'){if(isArchived(it)||it.type==='repo'||it.type==='doi') return false}else if(f!=='all'){if(it.type!==f||isArchived(it)) return false}if(s){const hay=((it.name||'')+' '+(it.desc||'')+' '+(it.doi||'')+' '+(it.cat||'')+' '+(it.layer||'')).toLowerCase();if(hay.indexOf(s)===-1) return false}return true});if(State.sort==='name') items.sort((a,b)=>(a.name||'').localeCompare(b.name||'', 'ar'));else if(State.sort==='name-desc') items.sort((a,b)=>(b.name||'').localeCompare(a.name||'', 'ar'));else if(State.sort==='date') items.sort((a,b)=>(b.date||'').localeCompare(a.date||''));else if(State.sort==='type') items.sort((a,b)=>(a.type||'').localeCompare(b.type||''));else if(State.sort==='layer') items.sort((a,b)=>(a.layer||99)-(b.layer||99));return items;}
 
-function renderTable(items){
- const tbody=document.getElementById('tbody');tbody.innerHTML='';
- const frag=document.createDocumentFragment();
- const typeLabels={archive:'📦 مؤرشف','not-indexed':'🆕 غير',system:'⚙️ نظام',partial:'📄 جزء',repo:'📚 ريبو',doi:'🔗 DOI'};
- items.forEach((it,i)=>{
-  const key=itemKey(it);const fav=isFav(key);
-  const tr=document.createElement('tr');
-  const catLabel=it.cat?'<span class="badge cat">'+escapeHtml(it.cat)+'</span>':(it.layer?'<span class="badge layer">L'+it.layer+'</span>':'—');
-  const doiCell=it.doi?'<span class="code-cell" data-copy-doi="'+it.doi+'">'+it.doi+'</span>':'—';
-  const hState=State.health[it.url]||'';
-  const dateCell=it.date?'<span class="date-badge'+(it.date==='اليوم'?' today':'')+'">'+it.date+'</span>':'—';
-  
-  /* ✅ النوع + زر الأرشفة */
-  let typeCell;
-  if(isArchived(it)){
-    typeCell='<span class="badge type-archive">📦 مؤرشف</span>';
-  } else if(it.type==='not-indexed' && it.url){
-    typeCell='<span class="badge type-not-indexed">🆕 غير</span> <button class="icon-btn archive-btn" data-archive="'+escapeHtml(it.url)+'" title="أرشِف الآن">✅</button>';
-  } else {
-    typeCell='<span class="badge type-'+it.type+'">'+(typeLabels[it.type]||it.type)+'</span>';
-  }
-  
-  tr.innerHTML='<td>'+(i+1)+'</td><td><span class="health-dot '+hState+'" data-health="'+escapeHtml(it.url||'')+'"></span></td><td><span class="file-name">'+escapeHtml(it.name)+'</span>'+(it.desc?'<div class="file-desc">'+escapeHtml(it.desc)+'</div>':'')+'</td><td>'+catLabel+'</td><td>'+typeCell+'</td><td>'+doiCell+'</td><td>'+dateCell+'</td><td style="white-space:nowrap"><button class="icon-btn '+(fav?'fav-active':'')+'" data-fav="'+escapeHtml(key)+'" title="مفضلة">⭐</button>'+(it.url?'<a href="'+it.url+'" target="_blank" rel="noopener noreferrer" class="icon-btn" title="فتح" style="margin-inline-start:4px"><i class="fas fa-external-link-alt"></i></a>':'')+'</td>';
-  frag.appendChild(tr);
- });
- tbody.appendChild(frag);
- document.getElementById('tableView').style.display=items.length?'':'none';
- document.getElementById('emptyState').classList.toggle('visible',items.length===0);
-}
+function renderTable(items){const tbody=document.getElementById('tbody');tbody.innerHTML='';const frag=document.createDocumentFragment();const typeLabels={archive:'📦 مؤرشف','not-indexed':'🆕 غير',system:'⚙️ نظام',partial:'📄 جزء',repo:'📚 ريبو',doi:'🔗 DOI'};items.forEach((it,i)=>{const key=itemKey(it);const fav=isFav(key);const tr=document.createElement('tr');const catLabel=it.cat?'<span class="badge cat">'+escapeHtml(it.cat)+'</span>':(it.layer?'<span class="badge layer">L'+it.layer+'</span>':'—');const doiCell=it.doi?'<span class="code-cell" data-copy-doi="'+it.doi+'">'+it.doi+'</span>':'—';const hState=State.health[it.url]||'';const dateCell=it.date?'<span class="date-badge'+(it.date==='اليوم'?' today':'')+'">'+it.date+'</span>':'—';let typeCell;if(isArchived(it)){typeCell='<span class="badge type-archive">📦 مؤرشف</span>';}else if(it.type==='not-indexed' && it.url){typeCell='<span class="badge type-not-indexed">🆕 غير</span> <button class="icon-btn archive-btn" data-archive="'+escapeHtml(it.url)+'" title="أرشِف الآن">✅</button>';}else{typeCell='<span class="badge type-'+it.type+'">'+(typeLabels[it.type]||it.type)+'</span>';}tr.innerHTML='<td>'+(i+1)+'</td><td><span class="health-dot '+hState+'" data-health="'+escapeHtml(it.url||'')+'"></span></td><td><span class="file-name">'+escapeHtml(it.name)+'</span>'+(it.desc?'<div class="file-desc">'+escapeHtml(it.desc)+'</div>':'')+'</td><td>'+catLabel+'</td><td>'+typeCell+'</td><td>'+doiCell+'</td><td>'+dateCell+'</td><td style="white-space:nowrap">'+(it.url?'<button class="icon-btn preview-btn" data-preview="'+escapeHtml(it.url)+'" title="معاينة">👁️</button> ':'')+'<button class="icon-btn '+(fav?'fav-active':'')+'" data-fav="'+escapeHtml(key)+'" title="مفضلة">⭐</button>'+(it.url?'<a href="'+it.url+'" target="_blank" rel="noopener noreferrer" class="icon-btn" title="فتح" style="margin-inline-start:4px"><i class="fas fa-external-link-alt"></i></a>':'')+'</td>';frag.appendChild(tr);});tbody.appendChild(frag);document.getElementById('tableView').style.display=items.length?'':'none';document.getElementById('emptyState').classList.toggle('visible',items.length===0);}
 
-function renderCards(items){
- const grid=document.getElementById('cardsView');grid.innerHTML='';
- const typeLabels={archive:'📦 مؤرشف','not-indexed':'🆕 غير',system:'⚙️ نظام',partial:'📄 جزء',repo:'📚 ريبو',doi:'🔗 DOI'};
- items.forEach(it=>{
-  const key=itemKey(it);const fav=isFav(key);
-  const card=document.createElement('div');card.className='item-card type-'+(isArchived(it)?'archive':it.type);
-  let typeBadge;
-  if(isArchived(it)) typeBadge='<span class="badge type-archive">📦 مؤرشف</span>';
-  else if(it.type==='not-indexed' && it.url) typeBadge='<span class="badge type-not-indexed">🆕 غير</span> <button class="icon-btn archive-btn" data-archive="'+escapeHtml(it.url)+'">✅</button>';
-  else typeBadge='<span class="badge type-'+it.type+'">'+(typeLabels[it.type]||it.type)+'</span>';
-  card.innerHTML='<div class="head"><div class="title">'+escapeHtml(it.name)+'</div><div class="actions"><button class="icon-btn '+(fav?'fav-active':'')+'" data-fav="'+escapeHtml(key)+'">⭐</button></div></div>'+(it.desc?'<div class="desc">'+escapeHtml(it.desc)+'</div>':'')+'<div class="meta">'+typeBadge+(it.cat?'<span class="badge cat">'+escapeHtml(it.cat)+'</span>':'')+(it.layer?'<span class="badge layer">L'+it.layer+'</span>':'')+'</div><div class="foot">'+(it.doi?'<span class="code-cell" data-copy-doi="'+it.doi+'">'+it.doi+'</span>':'<span></span>')+(it.url?'<a href="'+it.url+'" target="_blank" rel="noopener noreferrer" class="link-btn">فتح ↗</a>':'')+'</div>';
-  grid.appendChild(card);
- });
- grid.style.display=items.length?'grid':'none';
- document.getElementById('emptyState').classList.toggle('visible',items.length===0);
-}
+function renderCards(items){const grid=document.getElementById('cardsView');grid.innerHTML='';const typeLabels={archive:'📦 مؤرشف','not-indexed':'🆕 غير',system:'⚙️ نظام',partial:'📄 جزء',repo:'📚 ريبو',doi:'🔗 DOI'};items.forEach(it=>{const key=itemKey(it);const fav=isFav(key);const card=document.createElement('div');card.className='item-card type-'+(isArchived(it)?'archive':it.type);let typeBadge;if(isArchived(it)) typeBadge='<span class="badge type-archive">📦 مؤرشف</span>';else if(it.type==='not-indexed' && it.url) typeBadge='<span class="badge type-not-indexed">🆕 غير</span> <button class="icon-btn archive-btn" data-archive="'+escapeHtml(it.url)+'">✅</button>';else typeBadge='<span class="badge type-'+it.type+'">'+(typeLabels[it.type]||it.type)+'</span>';card.innerHTML='<div class="head"><div class="title">'+escapeHtml(it.name)+'</div><div class="actions">'+(it.url?'<button class="icon-btn preview-btn" data-preview="'+escapeHtml(it.url)+'" title="معاينة">👁️</button> ':'')+'<button class="icon-btn '+(fav?'fav-active':'')+'" data-fav="'+escapeHtml(key)+'">⭐</button></div></div>'+(it.desc?'<div class="desc">'+escapeHtml(it.desc)+'</div>':'')+'<div class="meta">'+typeBadge+(it.cat?'<span class="badge cat">'+escapeHtml(it.cat)+'</span>':'')+(it.layer?'<span class="badge layer">L'+it.layer+'</span>':'')+'</div><div class="foot">'+(it.doi?'<span class="code-cell" data-copy-doi="'+it.doi+'">'+it.doi+'</span>':'<span></span>')+(it.url?'<a href="'+it.url+'" target="_blank" rel="noopener noreferrer" class="link-btn">فتح ↗</a>':'')+'</div>';grid.appendChild(card);});grid.style.display=items.length?'grid':'none';document.getElementById('emptyState').classList.toggle('visible',items.length===0);}
 
-function renderMap(){
- const layers=[{n:1,title:'بوابات الدخول — Gateway',desc:'البوابات والراوترات',items:['jabri62018.github.io','Jabri-web.github.io','jabri-com','jabri.com']},{n:2,title:'النواة — Core OS',desc:'الدالة الأم و RiemannOS',items:['Zx_Mother_Function_Jabri','Jabri_RiemannOS','Zx_RieOS_v1.2']},{n:3,title:'مسائل الألفية — Millennium',desc:'Jabri_Nobble و 7 مسائل',items:['Jabri_Nobble','Riemann','P vs NP','Yang-Mills','Navier']},{n:4,title:'مختبر الفيزياء — Jabri Lab',desc:'Gravity, Spacetime, Planck...',items:['Jabri_lab','Jabri_5','Jabri_Gravity','Jabri_Spacetime','Jabri_Planck','Jabri_Hubble']},{n:5,title:'أدوات التشخيص — Tools',desc:'الفحص والتحقق',items:['Jabri_Checkout']}];
- const container=document.getElementById('empireLayers');container.innerHTML='';
- layers.forEach(l=>{
-  const row=document.createElement('div');row.className='layer-row';row.dataset.layer='L'+l.n;
-  row.innerHTML='<div class="layer-info"><div class="layer-title">'+escapeHtml(l.title)+'</div><div class="layer-desc">'+escapeHtml(l.desc)+'</div></div><div class="layer-items">'+l.items.map(it=>'<span class="layer-pill" data-jump="'+escapeHtml(it)+'">'+escapeHtml(it)+'</span>').join('')+'</div>';
-  container.appendChild(row);
- });
- container.querySelectorAll('.layer-pill').forEach(pill=>{
-  pill.addEventListener('click',()=>{State.search=pill.dataset.jump;document.getElementById('searchInput').value=State.search;document.getElementById('clearSearch').classList.add('visible');switchView('table');render()});
- });
-}
+function renderMap(){const layers=[{n:1,title:'بوابات الدخول — Gateway',desc:'البوابات والراوترات',items:['jabri62018.github.io','Jabri-web.github.io','jabri-com','jabri.com']},{n:2,title:'النواة — Core OS',desc:'الدالة الأم و RiemannOS',items:['Zx_Mother_Function_Jabri','Jabri_RiemannOS','Zx_RieOS_v1.2']},{n:3,title:'مسائل الألفية — Millennium',desc:'Jabri_Nobble و 7 مسائل',items:['Jabri_Nobble','Riemann','P vs NP','Yang-Mills','Navier']},{n:4,title:'مختبر الفيزياء — Jabri Lab',desc:'Gravity, Spacetime, Planck...',items:['Jabri_lab','Jabri_5','Jabri_Gravity','Jabri_Spacetime','Jabri_Planck','Jabri_Hubble']},{n:5,title:'أدوات التشخيص — Tools',desc:'الفحص والتحقق',items:['Jabri_Checkout']}];const container=document.getElementById('empireLayers');container.innerHTML='';layers.forEach(l=>{const row=document.createElement('div');row.className='layer-row';row.dataset.layer='L'+l.n;row.innerHTML='<div class="layer-info"><div class="layer-title">'+escapeHtml(l.title)+'</div><div class="layer-desc">'+escapeHtml(l.desc)+'</div></div><div class="layer-items">'+l.items.map(it=>'<span class="layer-pill" data-jump="'+escapeHtml(it)+'">'+escapeHtml(it)+'</span>').join('')+'</div>';container.appendChild(row);});container.querySelectorAll('.layer-pill').forEach(pill=>{pill.addEventListener('click',()=>{State.search=pill.dataset.jump;document.getElementById('searchInput').value=State.search;document.getElementById('clearSearch').classList.add('visible');switchView('table');render()});});}
 
-function renderTimeline(){
- const container=document.getElementById('timelineContainer');
- const items=getVisible().filter(i=>i.date && i.date!=='اليوم');items.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
- container.innerHTML='';document.getElementById('timelineCount').textContent=items.length+' عنصر';
- items.forEach(it=>{const el=document.createElement('div');el.className='timeline-item';el.innerHTML='<div class="timeline-date">'+escapeHtml(it.date||'')+'</div><div class="timeline-title">'+escapeHtml(it.name)+'</div>'+(it.desc?'<div style="color:var(--txt-dim);font-size:.82rem">'+escapeHtml(it.desc)+'</div>':'');container.appendChild(el)});
-}
+function renderTimeline(){const container=document.getElementById('timelineContainer');const items=getVisible().filter(i=>i.date && i.date!=='اليوم');items.sort((a,b)=>(b.date||'').localeCompare(a.date||''));container.innerHTML='';document.getElementById('timelineCount').textContent=items.length+' عنصر';items.forEach(it=>{const el=document.createElement('div');el.className='timeline-item';el.innerHTML='<div class="timeline-date">'+escapeHtml(it.date||'')+'</div><div class="timeline-title">'+escapeHtml(it.name)+'</div>'+(it.desc?'<div style="color:var(--txt-dim);font-size:.82rem">'+escapeHtml(it.desc)+'</div>':'');container.appendChild(el)});}
 
-function render(){
- const items=getVisible();
- document.getElementById('visibleCount').textContent=items.length;
- document.getElementById('totalCount').textContent=getAllItems().length;
- if(State.view==='table'){renderTable(items);document.getElementById('cardsView').style.display='none';}
- else if(State.view==='cards'){renderCards(items);document.getElementById('tableView').style.display='none';}
- else if(State.view==='map') renderMap();
- else if(State.view==='timeline') renderTimeline();
-}
+function render(){const items=getVisible();document.getElementById('visibleCount').textContent=items.length;document.getElementById('totalCount').textContent=getAllItems().length;if(State.view==='table'){renderTable(items);document.getElementById('cardsView').style.display='none';}else if(State.view==='cards'){renderCards(items);document.getElementById('tableView').style.display='none';}else if(State.view==='map') renderMap();else if(State.view==='timeline') renderTimeline();}
 
-function switchView(view){
- State.view=view;
- document.querySelectorAll('.view-section').forEach(s=>s.classList.remove('visible'));
- const map={table:'mainSection',cards:'mainSection',map:'mapSection',timeline:'timelineSection'};
- document.getElementById(map[view]).classList.add('visible');
- if(view==='table'){document.getElementById('tableView').style.display='';document.getElementById('cardsView').style.display='none';}
- else if(view==='cards'){document.getElementById('tableView').style.display='none';document.getElementById('cardsView').style.display='grid';}
- document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
- render();
-}
+function switchView(view){State.view=view;document.querySelectorAll('.view-section').forEach(s=>s.classList.remove('visible'));const map={table:'mainSection',cards:'mainSection',map:'mapSection',timeline:'timelineSection'};document.getElementById(map[view]).classList.add('visible');if(view==='table'){document.getElementById('tableView').style.display='';document.getElementById('cardsView').style.display='none';}else if(view==='cards'){document.getElementById('tableView').style.display='none';document.getElementById('cardsView').style.display='grid';}document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));render();}
 
-function updateStats(){
- const c=countByType();const set=(sel,val)=>{const el=document.querySelector(sel);if(el) el.textContent=val};
- set('[data-stat="total"] .num',c.all);set('[data-stat="archive"] .num',c.archive);set('[data-stat="notIndexed"] .num',c['not-indexed']);set('[data-stat="system"] .num',c.system);set('[data-stat="repo"] .num',c.repo);set('[data-stat="doi"] .num',c.doi);
- set('#cAll',c.all);set('#cArchive',c.archive);set('#cNotIndexed',c['not-indexed']);set('#cSystem',c.system);set('#cRepo',c.repo);set('#cDoi',c.doi);set('#cPartial',c.partial||0);set('#cFav',c.favorites);
- document.getElementById('footerSummary').textContent=c.all+' عنصر · '+c.archive+' مؤرشف · '+c['not-indexed']+' غير مؤرشف · '+c.repo+' ريبو · '+c.doi+' DOI';
-}
+function updateStats(){const c=countByType();const set=(sel,val)=>{const el=document.querySelector(sel);if(el) el.textContent=val};set('[data-stat="total"] .num',c.all);set('[data-stat="archive"] .num',c.archive);set('[data-stat="notIndexed"] .num',c['not-indexed']);set('[data-stat="system"] .num',c.system);set('[data-stat="repo"] .num',c.repo);set('[data-stat="doi"] .num',c.doi);set('#cAll',c.all);set('#cArchive',c.archive);set('#cNotIndexed',c['not-indexed']);set('#cSystem',c.system);set('#cRepo',c.repo);set('#cDoi',c.doi);set('#cPartial',c.partial||0);set('#cFav',c.favorites);document.getElementById('footerSummary').textContent=c.all+' عنصر · '+c.archive+' مؤرشف · '+c['not-indexed']+' غير مؤرشف · '+c.repo+' ريبو · '+c.doi+' DOI';}
 
-async function checkHealth(){
- const btn=document.getElementById('btnHealth');btn.disabled=true;
- const all=getAllItems();let ok=0,warn=0,error=0,ext=0;let processed=0;
- document.querySelectorAll('.health-dot').forEach(d=>{if(!d.dataset.health.startsWith('http')) d.className='health-dot checking'});
- toast('💓 بدء النبض الذكي - فحص الروابط الداخلية فقط','info');
- const internal=all.filter(i=>i.url && i.url.startsWith('/'));
- const external=all.filter(i=>i.url && !i.url.startsWith('/'));
- external.forEach(it=>{State.health[it.url]='external';ext++;});
- for(let i=0;i<internal.length;i+=5){
-  const batch=internal.slice(i,i+5);
-  await Promise.all(batch.map(async it=>{
-   const u=it.url;const sel='[data-health="'+CSS.escape(u)+'"]';const dot=document.querySelector(sel);
-   const start=performance.now();
-   try{
-    const bust=location.origin+u+'?_='+Date.now()+'_'+Math.random().toString(36).slice(2);
-    const ctrl=new AbortController();const t=setTimeout(()=>ctrl.abort(),8000);
-    const res=await fetch(bust,{method:'HEAD',cache:'no-store',signal:ctrl.signal});
-    clearTimeout(t);const ms=Math.round(performance.now()-start);
-    let st=res.ok?(ms>2500?'warn':'ok'):'error';
-    State.health[u]=st;
-    if(st==='ok') ok++; else if(st==='warn') warn++; else error++;
-    if(dot){dot.className='health-dot '+st;dot.title=ms+'ms · '+res.status;}
-   }catch(err){
-    const st=err.name==='AbortError'?'warn':'error';
-    State.health[u]=st;if(st==='warn') warn++; else error++;
-    if(dot){dot.className='health-dot '+st;dot.title=err.name==='AbortError'?'انتهت المدة':'فشل';}
-   }
-   processed++;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> '+processed+'/'+internal.length;
-  }));
- }
- try{sessionStorage.setItem('jabri_health_cache',JSON.stringify(State.health))}catch(e){}
- btn.disabled=false;btn.innerHTML='<i class="fas fa-heart-pulse"></i> نبض Google';
- const msg='💓 داخلي: ✅ '+ok+' · ⚠️ '+warn+' · ❌ '+error+' · خارجي: 🌐 '+ext;
- toast(msg,error>0?'error':warn>0?'warn':'success');
- document.getElementById('healthSummary').textContent='✅ '+ok+' · ⚠️ '+warn+' · ❌ '+error+' · 🌐 '+ext;
-}
+async function checkHealth(){const btn=document.getElementById('btnHealth');btn.disabled=true;const all=getAllItems();let ok=0,warn=0,error=0,ext=0;let processed=0;document.querySelectorAll('.health-dot').forEach(d=>{if(!d.dataset.health.startsWith('http')) d.className='health-dot checking'});toast('💓 بدء النبض الذكي','info');const internal=all.filter(i=>i.url && i.url.startsWith('/'));const external=all.filter(i=>i.url && !i.url.startsWith('/'));external.forEach(it=>{State.health[it.url]='external';ext++;});for(let i=0;i<internal.length;i+=5){const batch=internal.slice(i,i+5);await Promise.all(batch.map(async it=>{const u=it.url;const sel='[data-health="'+CSS.escape(u)+'"]';const dot=document.querySelector(sel);const start=performance.now();try{const bust=location.origin+u+'?_='+Date.now()+'_'+Math.random().toString(36).slice(2);const ctrl=new AbortController();const t=setTimeout(()=>ctrl.abort(),8000);const res=await fetch(bust,{method:'HEAD',cache:'no-store',signal:ctrl.signal});clearTimeout(t);const ms=Math.round(performance.now()-start);let st=res.ok?(ms>2500?'warn':'ok'):'error';State.health[u]=st;if(st==='ok') ok++; else if(st==='warn') warn++; else error++;if(dot){dot.className='health-dot '+st;dot.title=ms+'ms · '+res.status;}}catch(err){const st=err.name==='AbortError'?'warn':'error';State.health[u]=st;if(st==='warn') warn++; else error++;if(dot){dot.className='health-dot '+st;}}processed++;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> '+processed+'/'+internal.length;}));}try{sessionStorage.setItem('jabri_health_cache',JSON.stringify(State.health))}catch(e){}btn.disabled=false;btn.innerHTML='<i class="fas fa-heart-pulse"></i> نبض Google';const msg='💓 داخلي: ✅ '+ok+' · ⚠️ '+warn+' · ❌ '+error+' · خارجي: 🌐 '+ext;toast(msg,error>0?'error':warn>0?'warn':'success');document.getElementById('healthSummary').textContent='✅ '+ok+' · ⚠️ '+warn+' · ❌ '+error+' · 🌐 '+ext;}
 
-const Commands=[{title:'نبض Google',sub:'فحص الروابط الداخلية',icon:'action',action:()=>checkHealth()},{title:'تبديل المظهر',sub:'Dark / Light',icon:'action',action:()=>toggleTheme()},{title:'تصدير JSON',sub:'نسخ احتياطي',icon:'action',action:()=>exportJSON()},{title:'تصدير CSV',sub:'للإكسل',icon:'action',action:()=>exportCSV()},{title:'مسح الأرشيف اليدوي',sub:'إعادة تعيين',icon:'action',action:()=>resetAllArchive()},{title:'عرض الجدول',sub:'Table',icon:'action',action:()=>switchView('table')},{title:'عرض الشبكة',sub:'Grid',icon:'action',action:()=>switchView('cards')},{title:'خريطة الإمبراطورية',sub:'Map',icon:'action',action:()=>switchView('map')}];
+const Commands=[
+ {title:'نبض Google',sub:'فحص الروابط الداخلية',icon:'action',action:()=>checkHealth()},
+ {title:'رصد التحديثات',sub:'sitemap vs file-all2',icon:'action',action:()=>openModal('modalTracker')},
+ {title:'فحص رابط فردي',sub:'single link',icon:'action',action:()=>openModal('modalSingle')},
+ {title:'فحص شامل',sub:'bulk scan',icon:'action',action:()=>openModal('modalBulk')},
+ {title:'مقارنة الملفات',sub:'file-all vs file-all2',icon:'action',action:()=>openModal('modalFiles')},
+ {title:'تبديل المظهر',sub:'Dark / Light',icon:'action',action:()=>toggleTheme()},
+ {title:'تصدير JSON',sub:'نسخ احتياطي',icon:'action',action:()=>exportJSON()},
+ {title:'تصدير CSV',sub:'للإكسل',icon:'action',action:()=>exportCSV()},
+ {title:'مسح الأرشيف اليدوي',sub:'إعادة تعيين',icon:'action',action:()=>resetAllArchive()},
+ {title:'عرض الجدول',sub:'Table',icon:'action',action:()=>switchView('table')},
+ {title:'عرض الشبكة',sub:'Grid',icon:'action',action:()=>switchView('cards')},
+ {title:'خريطة الإمبراطورية',sub:'Map',icon:'action',action:()=>switchView('map')}
+];
 let paletteSel=0;let paletteItems=[];
 function buildPaletteResults(q){q=q.toLowerCase().trim();const res=[];Commands.forEach(c=>{if(!q||(c.title+' '+c.sub).toLowerCase().includes(q)) res.push({kind:'action',title:c.title,sub:c.sub,icon:c.icon,action:c.action})});getAllItems().forEach(it=>{const hay=((it.name||'')+' '+(it.desc||'')+' '+(it.doi||'')).toLowerCase();if(!q||hay.includes(q)) res.push({kind:it.kind,title:it.name,sub:it.desc||it.doi||it.url||'',url:it.url,action:()=>{if(it.url) window.open(it.url,'_blank','noopener,noreferrer')}})});return res.slice(0,12)}
 function openPalette(){document.getElementById('paletteOverlay').classList.add('active');const inp=document.getElementById('paletteInput');inp.value='';inp.focus();paletteSel=0;renderPalette('')}
@@ -543,11 +522,54 @@ function closePalette(){document.getElementById('paletteOverlay').classList.remo
 function renderPalette(q){paletteItems=buildPaletteResults(q);const container=document.getElementById('paletteResults');container.innerHTML='';if(!paletteItems.length){container.innerHTML='<div style="padding:24px;text-align:center;color:var(--txt-dim)">لا نتائج</div>';return}paletteItems.forEach((it,i)=>{const el=document.createElement('div');el.className='palette-result'+(i===paletteSel?' selected':'');const iconClass=it.kind==='page'?'page':it.kind==='repo'?'repo':it.kind==='doi'?'doi':'action';const faIcon=it.kind==='page'?'file':it.kind==='repo'?'code-branch':it.kind==='doi'?'link':'bolt';el.innerHTML='<div class="pr-icon '+iconClass+'"><i class="fas fa-'+faIcon+'"></i></div><div style="flex:1;min-width:0"><div class="pr-title">'+escapeHtml(it.title)+'</div>'+(it.sub?'<div class="pr-sub">'+escapeHtml(it.sub)+'</div>':'')+'</div>';el.addEventListener('click',()=>{it.action();closePalette()});container.appendChild(el)})}
 async function copyText(t){try{await navigator.clipboard.writeText(t);toast('📋 تم النسخ','success')}catch(e){toast('تعذّر النسخ','error')}}
 function copyDOI(d){copyText('10.5281/zenodo.'+d+'\nhttps://doi.org/10.5281/zenodo.'+d)}
-function exportJSON(){const data={generated:new Date().toISOString(),version:'5.2',pages:PAGES,repos:REPOS,dois:DOIS,favorites:State.favorites,archived:State.archived,health:State.health};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jabri-monitor-5.2-'+Date.now()+'.json';a.click();URL.revokeObjectURL(a.href);toast('📤 تم تصدير JSON','success')}
-function exportCSV(){const items=getVisible();const header=['name','type','archived','cat','doi','url','desc','date'];const rows=items.map(it=>[it.name,it.type,isArchived(it)?'نعم':'لا',it.cat||'',it.doi||'',it.url||'',(it.desc||'').replace(/,/g,';'),it.date||'']);const csv=[header.join(','),...rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','))].join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jabri-monitor-5.2-'+Date.now()+'.csv';a.click();URL.revokeObjectURL(a.href);toast('📊 تم تصدير CSV','success')}
+function exportJSON(){const data={generated:new Date().toISOString(),version:'5.4',pages:PAGES,repos:REPOS,dois:DOIS,favorites:State.favorites,archived:State.archived,health:State.health};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jabri-monitor-5.4-'+Date.now()+'.json';a.click();URL.revokeObjectURL(a.href);toast('📤 تم تصدير JSON','success')}
+function exportCSV(){const items=getVisible();const header=['name','type','archived','cat','doi','url','desc','date'];const rows=items.map(it=>[it.name,it.type,isArchived(it)?'نعم':'لا',it.cat||'',it.doi||'',it.url||'',(it.desc||'').replace(/,/g,';'),it.date||'']);const csv=[header.join(','),...rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','))].join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jabri-monitor-5.4-'+Date.now()+'.csv';a.click();URL.revokeObjectURL(a.href);toast('📊 تم تصدير CSV','success')}
 function toggleTheme(){State.theme=State.theme==='dark'?'light':'dark';applyTheme();try{localStorage.setItem('jabri_monitor_theme',State.theme)}catch(e){}toast('🌓 المظهر: '+(State.theme==='dark'?'ليلي':'نهاري'),'info')}
 function applyTheme(){document.body.classList.toggle('light',State.theme==='light');const icon=document.querySelector('#btnTheme i');if(icon) icon.className=State.theme==='dark'?'fas fa-moon':'fas fa-sun'}
 
+/* ═══ الأدوات ═══ */
+function openModal(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';}
+document.querySelectorAll('.tool-modal').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m){m.classList.remove('active');document.body.style.overflow='';}});});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') document.querySelectorAll('.tool-modal.active').forEach(m=>{m.classList.remove('active');document.body.style.overflow='';});});
+
+/* رصد التحديثات */
+const STORAGE_SITEMAP='jabri_snapshot_sitemap';const STORAGE_FILES='jabri_snapshot_files';
+async function fetchSitemapLinks(){try{const r=await fetch('/sitemap.xml?_='+Date.now());if(!r.ok) throw new Error();const xml=new DOMParser().parseFromString(await r.text(),'text/xml');return Array.from(xml.querySelectorAll('url > loc')).map(u=>u.textContent.trim()).sort();}catch(e){return []}}
+async function fetchFileList(){try{const r=await fetch('/file-all2.txt?_='+Date.now());if(!r.ok) throw new Error();const t=await r.text();const rx=/([\w][\w\-. ()\/]*\.(?:html|js|json|txt|md|png|jpg|jpeg|webp|svg|xml|css|ico|py|ipynb|mp3))/gi;return Array.from(new Set((t.match(rx)||[]).map(m=>m.trim()).filter(m=>m.length>5))).sort();}catch(e){return []}}
+function compareLists(prev,curr){const p=new Set(prev),c=new Set(curr);return{new:curr.filter(l=>!p.has(l)),deleted:prev.filter(l=>!c.has(l)),same:curr.filter(l=>p.has(l))}}
+async function doTrackerCheck(source){const key=source==='sitemap'?STORAGE_SITEMAP:STORAGE_FILES;const current=source==='sitemap'?await fetchSitemapLinks():await fetchFileList();if(!current.length){toast('❌ فشل التحميل','error');return}const prev=JSON.parse(localStorage.getItem(key)||'null');if(!prev){localStorage.setItem(key,JSON.stringify(current));toast('ℹ️ أول مرة. تم حفظ '+current.length+' عنصراً','info');return}const diff=compareLists(prev,current);displayTrackerDiff(diff,current.length);toast('🔔 🆕 '+diff.new.length+' · 🗑️ '+diff.deleted.length+' · ✅ '+diff.same.length,'success');}
+function displayTrackerDiff(diff,total){document.getElementById('tTotal').textContent=total;document.getElementById('tNew').textContent=diff.new.length;document.getElementById('tDeleted').textContent=diff.deleted.length;document.getElementById('tSame').textContent=diff.same.length;const ns=document.getElementById('tNewSection');if(diff.new.length){ns.style.display='block';document.getElementById('tNewCount').textContent=diff.new.length;document.getElementById('tNewList').innerHTML=diff.new.map(u=>'<div class="log-item"><span class="badge new">🆕</span><span class="url">'+escapeHtml(u)+'</span></div>').join('');}else ns.style.display='none';const ds=document.getElementById('tDelSection');if(diff.deleted.length){ds.style.display='block';document.getElementById('tDelCount').textContent=diff.deleted.length;document.getElementById('tDelList').innerHTML=diff.deleted.map(u=>'<div class="log-item"><span class="badge deleted">🗑️</span><span class="url">'+escapeHtml(u)+'</span></div>').join('');}else ds.style.display='none';document.getElementById('tSameCount').textContent=diff.same.length;document.getElementById('tSameList').innerHTML=diff.same.slice(0,80).map(u=>'<div class="log-item"><span class="badge same">✅</span><span class="url">'+escapeHtml(u)+'</span></div>').join('')+(diff.same.length>80?'<div style="padding:10px;text-align:center;color:var(--txt-dim);font-size:.8rem">... و'+(diff.same.length-80)+' آخر</div>':'');}
+function saveTrackerState(){const links=getAllItems().filter(i=>i.url).map(i=>i.url);localStorage.setItem(STORAGE_SITEMAP,JSON.stringify(links));toast('✅ حفظ '+links.length+' رابط','success');}
+function resetTracker(){if(!confirm('⚠️ مسح الحالة المحفوظة؟')) return;localStorage.removeItem(STORAGE_SITEMAP);localStorage.removeItem(STORAGE_FILES);toast('✅ تم المسح','info');}
+
+/* فحص رابط */
+async function checkSingleUrl(url){return new Promise(resolve=>{const ctrl=new AbortController();const t=setTimeout(()=>{ctrl.abort();resolve({url,status:'error',statusText:'⏰ مهلة',httpCode:0,time:0})},10000);const start=performance.now();fetch(url,{method:'HEAD',signal:ctrl.signal,redirect:'follow',cache:'no-store'}).then(res=>{clearTimeout(t);const ms=Math.round(performance.now()-start);const code=res.status;if(code>=200&&code<300) resolve({url,status:'ok',statusText:'✅ '+code+' OK',httpCode:code,time:ms});else if(code>=300&&code<400) resolve({url,status:'redirect',statusText:'🔀 '+code,httpCode:code,time:ms});else resolve({url,status:'error',statusText:'❌ '+code,httpCode:code,time:ms});}).catch(()=>{clearTimeout(t);resolve({url,status:'error',statusText:'⚠️ خطأ',httpCode:0,time:Math.round(performance.now()-start)});});});}
+async function doSingleCheck(){let url=document.getElementById('singleUrl').value.trim();if(!url){toast('⚠️ أدخل رابط','warn');return}if(!/^https?:\/\//i.test(url)) url='https://jabri-com.vercel.app'+(url.startsWith('/')?url:'/'+url);const box=document.getElementById('singleResult');box.className='single-result visible';box.innerHTML='<p class="status-badge" style="color:var(--acc)">⏳ جاري...</p>';const btn=document.getElementById('checkSingleBtn');btn.disabled=true;const r=await checkSingleUrl(url);box.className='single-result visible '+r.status;let color='var(--green)';if(r.status==='redirect') color='var(--gold)';if(r.status==='error') color='var(--red)';box.innerHTML='<div class="label">🔗 الرابط:</div><div class="url-display"><a href="'+escapeHtml(r.url)+'" target="_blank" rel="noopener" style="color:#b8e6ff">'+escapeHtml(r.url)+'</a></div><div class="status-badge" style="color:'+color+'">'+r.statusText+'</div><div class="label" style="margin-top:5px">HTTP: '+(r.httpCode||'—')+' | الوقت: '+r.time+'ms</div>';btn.disabled=false;}
+function quickCheck(path){document.getElementById('singleUrl').value='https://jabri-com.vercel.app'+path;doSingleCheck();}
+
+/* فحص شامل */
+let bulkResults=[];let isBulkRunning=false;
+async function runBulkCheck(){if(isBulkRunning) return;isBulkRunning=true;const startBtn=document.getElementById('bulkStart');const stopBtn=document.getElementById('bulkStop');const exportBtn=document.getElementById('bulkExport');const logBox=document.getElementById('bulkLog');const progress=document.getElementById('bulkProgress');startBtn.disabled=true;stopBtn.disabled=false;exportBtn.disabled=true;bulkResults=[];logBox.innerHTML='';progress.style.width='0%';const urls=await fetchSitemapLinks();if(!urls.length){logBox.innerHTML='<div style="padding:20px;text-align:center;color:var(--red)">❌ فشل التحميل</div>';startBtn.disabled=false;stopBtn.disabled=true;isBulkRunning=false;return;}logBox.innerHTML='<div class="log-item"><span class="badge ok">✅</span><span class="url">تم تحميل '+urls.length+' رابط</span></div>';document.getElementById('bTotal').textContent=urls.length;let okC=0,rC=0,eC=0;for(let i=0;i<urls.length;i++){if(!isBulkRunning) break;const r=await checkSingleUrl(urls[i]);bulkResults.push(r);if(r.status==='ok') okC++; else if(r.status==='redirect') rC++; else eC++;const div=document.createElement('div');div.className='log-item';div.innerHTML='<span class="badge '+r.status+'">'+r.statusText+'</span><span class="url">'+escapeHtml(r.url)+'</span><span class="meta">['+(r.httpCode||'—')+'] '+r.time+'ms</span>';logBox.appendChild(div);logBox.scrollTop=logBox.scrollHeight;document.getElementById('bOk').textContent=okC;document.getElementById('bRedirect').textContent=rC;document.getElementById('bError').textContent=eC;progress.style.width=((i+1)/urls.length*100)+'%';}startBtn.disabled=false;stopBtn.disabled=true;exportBtn.disabled=false;isBulkRunning=false;toast('✅ اكتمل الفحص: '+okC+' OK','success');}
+function stopBulkCheck(){isBulkRunning=false;document.getElementById('bulkStop').disabled=true;document.getElementById('bulkStart').disabled=false;}
+function exportBulkCsv(){if(!bulkResults.length) return;let csv='URL,Status,HTTP,Time\n';bulkResults.forEach(r=>{csv+='"'+r.url+'","'+r.statusText+'",'+r.httpCode+','+r.time+'\n';});const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='bulk-'+Date.now()+'.csv';a.click();}
+
+/* مقارنة الملفات */
+let fileDiffResult={new:[],deleted:[],same:[]};
+async function compareFiles(){const btn=document.getElementById('fileCompare');btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> جاري...';const [t1,t2]=await Promise.all([fetch('/file-all.txt?_='+Date.now()).then(r=>r.text()).catch(()=>''),fetch('/file-all2.txt?_='+Date.now()).then(r=>r.text()).catch(()=>'')]);const parse=txt=>{const rx=/([\w][\w\-. ()\/]*\.(?:html|js|json|txt|md|png|jpg|jpeg|webp|svg|xml|css|ico|py|ipynb|mp3))/gi;return Array.from(new Set((txt.match(rx)||[]).map(m=>m.trim()).filter(m=>m.length>5))).sort()};const f1=parse(t1),f2=parse(t2);const s1=new Set(f1),s2=new Set(f2);fileDiffResult.new=f2.filter(f=>!s1.has(f));fileDiffResult.deleted=f1.filter(f=>!s2.has(f));fileDiffResult.same=f2.filter(f=>s1.has(f));displayFileDiff(f2.length);btn.disabled=false;btn.innerHTML='<i class="fas fa-code-compare"></i> قارن';document.getElementById('fileExportDiff').disabled=false;toast('✅ 🆕 '+fileDiffResult.new.length+' · 🗑️ '+fileDiffResult.deleted.length+' · ✅ '+fileDiffResult.same.length,'success');}
+function displayFileDiff(total){document.getElementById('fTotal').textContent=total;document.getElementById('fNew').textContent=fileDiffResult.new.length;document.getElementById('fDeleted').textContent=fileDiffResult.deleted.length;document.getElementById('fSame').textContent=fileDiffResult.same.length;const ns=document.getElementById('fNewSection');if(fileDiffResult.new.length){ns.style.display='block';document.getElementById('fNewCount').textContent=fileDiffResult.new.length;document.getElementById('fNewList').innerHTML=fileDiffResult.new.map(f=>'<div class="log-item"><span class="badge new">🆕</span><span class="url">'+escapeHtml(f)+'</span></div>').join('');}else ns.style.display='none';const ds=document.getElementById('fDelSection');if(fileDiffResult.deleted.length){ds.style.display='block';document.getElementById('fDelCount').textContent=fileDiffResult.deleted.length;document.getElementById('fDelList').innerHTML=fileDiffResult.deleted.map(f=>'<div class="log-item"><span class="badge deleted">🗑️</span><span class="url">'+escapeHtml(f)+'</span></div>').join('');}else ds.style.display='none';document.getElementById('fSameCount').textContent=fileDiffResult.same.length;document.getElementById('fSameList').innerHTML=fileDiffResult.same.slice(0,80).map(f=>'<div class="log-item"><span class="badge same">✅</span><span class="url">'+escapeHtml(f)+'</span></div>').join('')+(fileDiffResult.same.length>80?'<div style="padding:10px;text-align:center;color:var(--txt-dim);font-size:.8rem">... و'+(fileDiffResult.same.length-80)+' آخر</div>':'');}
+function downloadFile3(){const all=[...fileDiffResult.same,...fileDiffResult.new].sort();if(!all.length){toast('⚠️ اضغط "قارن" أولاً','warn');return}let c='# file-all3.txt\n# '+new Date().toLocaleString('ar-EG')+'\n# الإجمالي: '+all.length+'\n\n';all.forEach((f,i)=>{c+=(i+1)+'-'+f+'\n';});const blob=new Blob([c],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='file-all3.txt';a.click();toast('📥 تم تنزيل file-all3.txt','success');}
+function exportFileDiff(){let r='📊 تقرير المقارنة\n'+new Date().toLocaleString('ar-EG')+'\n\n';if(fileDiffResult.new.length) r+='🆕 ('+fileDiffResult.new.length+'):\n'+fileDiffResult.new.map(f=>'   + '+f).join('\n')+'\n\n';if(fileDiffResult.deleted.length) r+='🗑️ ('+fileDiffResult.deleted.length+'):\n'+fileDiffResult.deleted.map(f=>'   - '+f).join('\n');const blob=new Blob([r],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='diff-report.txt';a.click();}
+
+/* معاينة الملف */
+let currentPreviewUrl='';
+async function openPreview(url){if(!url){toast('⚠️ لا يوجد رابط','warn');return}currentPreviewUrl=url;const modal=document.getElementById('modalPreview');const title=document.getElementById('previewTitle');const body=document.getElementById('previewBody');const actions=document.getElementById('previewActions');title.textContent=url;body.innerHTML='<div class="preview-loading"><i class="fas fa-spinner fa-spin"></i><span>جاري التحميل...</span></div>';actions.innerHTML='';modal.classList.add('active');document.body.style.overflow='hidden';const ext=(url.split('.').pop()||'').toLowerCase().split('?')[0];const fullUrl=url.startsWith('http')?url:location.origin+url;const btnOpen='<a href="'+fullUrl+'" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> فتح</a>';const btnCopy='<button onclick="copyText(\''+fullUrl+'\')"><i class="fas fa-copy"></i> نسخ</button>';const btnIframe='<button onclick="switchPreviewMode(\'iframe\')" id="btnModeIframe"><i class="fas fa-desktop"></i> عرض كصفحة</button>';const btnSource='<button onclick="switchPreviewMode(\'source\')" id="btnModeSource"><i class="fas fa-code"></i> عرض المصدر</button>';if(ext==='html'||ext==='htm'){actions.innerHTML=btnIframe+btnSource+btnOpen+btnCopy;body.innerHTML='<iframe src="'+fullUrl+'?_='+Date.now()+'" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>';document.getElementById('btnModeIframe').classList.add('active');return;}if(['png','jpg','jpeg','webp','svg','gif','ico','bmp'].includes(ext)){actions.innerHTML=btnOpen+btnCopy;body.innerHTML='<img src="'+fullUrl+'?_='+Date.now()+'" alt="معاينة" onerror="this.parentElement.innerHTML=\'<div class=&quot;info-msg&quot;><i class=&quot;fas fa-image&quot;></i><div>تعذّر تحميل الصورة</div></div>\'">';return;}const textExts=['txt','json','xml','js','css','md','py','ipynb','yml','yaml','log','csv'];if(textExts.includes(ext)){actions.innerHTML=btnSource+btnOpen+btnCopy;try{const res=await fetch(fullUrl+'?_='+Date.now());if(!res.ok) throw new Error('HTTP '+res.status);const text=await res.text();const sizeKB=(new Blob([text]).size/1024).toFixed(1);body.innerHTML='<pre>'+escapeHtml(text)+'</pre><div class="info-msg" style="border-top:1px solid var(--bd);padding:12px"><span class="size-badge">📦 '+sizeKB+' KB · '+text.split('\n').length+' سطر</span></div>';}catch(e){body.innerHTML='<div class="info-msg"><i class="fas fa-exclamation-triangle"></i><div>تعذّر تحميل الملف</div><div style="font-size:.75rem;color:var(--txt-muted);margin-top:8px">'+escapeHtml(e.message)+'</div></div>';}return;}actions.innerHTML=btnOpen+btnCopy;if(ext==='pdf'){body.innerHTML='<iframe src="'+fullUrl+'?_='+Date.now()+'"></iframe>';}else if(['mp3','mp4','wav','ogg','webm'].includes(ext)){const tag=(ext==='mp3'||ext==='wav'||ext==='ogg')?'audio':'video';body.innerHTML='<div style="padding:40px 20px;text-align:center"><'+tag+' controls style="max-width:100%;width:600px"><source src="'+fullUrl+'">متصفحك لا يدعم هذا الملف</'+tag+'></div>';}else{body.innerHTML='<div class="info-msg"><i class="fas fa-file"></i><div>لا يمكن معاينة هذا النوع</div><div style="font-size:.75rem;color:var(--txt-muted);margin-top:8px">النوع: .'+ext+'</div><div style="margin-top:14px"><a href="'+fullUrl+'" target="_blank" class="tool-btn primary" style="text-decoration:none;display:inline-flex"><i class="fas fa-download"></i> فتح الملف</a></div></div>';}}
+async function switchPreviewMode(mode){if(!currentPreviewUrl) return;const fullUrl=currentPreviewUrl.startsWith('http')?currentPreviewUrl:location.origin+currentPreviewUrl;const body=document.getElementById('previewBody');const btnIf=document.getElementById('btnModeIframe');const btnSrc=document.getElementById('btnModeSource');if(mode==='iframe'){if(btnIf) btnIf.classList.add('active');if(btnSrc) btnSrc.classList.remove('active');body.innerHTML='<iframe src="'+fullUrl+'?_='+Date.now()+'" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>';}else{if(btnSrc) btnSrc.classList.add('active');if(btnIf) btnIf.classList.remove('active');body.innerHTML='<div class="preview-loading"><i class="fas fa-spinner fa-spin"></i><span>جاري التحميل...</span></div>';try{const res=await fetch(fullUrl+'?_='+Date.now());if(!res.ok) throw new Error('HTTP '+res.status);const text=await res.text();const sizeKB=(new Blob([text]).size/1024).toFixed(1);body.innerHTML='<pre>'+escapeHtml(text)+'</pre><div class="info-msg" style="border-top:1px solid var(--bd);padding:12px"><span class="size-badge">📦 '+sizeKB+' KB · '+text.split('\n').length+' سطر</span></div>';}catch(e){body.innerHTML='<div class="info-msg"><i class="fas fa-exclamation-triangle"></i><div>تعذّر التحميل</div></div>';}}}
+function closePreview(){document.getElementById('modalPreview').classList.remove('active');document.body.style.overflow='';document.getElementById('previewBody').innerHTML='<div class="preview-loading"><i class="fas fa-spinner fa-spin"></i><span>جاري التحميل...</span></div>';}
+document.getElementById('modalPreview').addEventListener('click',function(e){if(e.target===this) closePreview();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape') closePreview();});
+
+/* التهيئة */
 document.addEventListener('DOMContentLoaded',()=>{
  applyTheme();updateStats();render();
  Object.keys(State.health).forEach(u=>{try{const sel='[data-health="'+CSS.escape(u)+'"]';const dot=document.querySelector(sel);if(dot){dot.className='health-dot '+State.health[u];}}catch(e){}});
@@ -565,19 +587,34 @@ document.addEventListener('DOMContentLoaded',()=>{
  document.getElementById('btnPalette').addEventListener('click',openPalette);
  document.getElementById('btnResetArchive').addEventListener('click',resetAllArchive);
  
+ document.getElementById('btnOpenTracker').addEventListener('click',()=>openModal('modalTracker'));
+ document.getElementById('btnOpenSingle').addEventListener('click',()=>openModal('modalSingle'));
+ document.getElementById('btnOpenBulk').addEventListener('click',()=>openModal('modalBulk'));
+ document.getElementById('btnOpenFiles').addEventListener('click',()=>openModal('modalFiles'));
+ 
+ document.getElementById('trackerCheckSitemap').addEventListener('click',()=>doTrackerCheck('sitemap'));
+ document.getElementById('trackerCheckFiles').addEventListener('click',()=>doTrackerCheck('files'));
+ document.getElementById('trackerSave').addEventListener('click',saveTrackerState);
+ document.getElementById('trackerReset').addEventListener('click',resetTracker);
+ 
+ document.getElementById('checkSingleBtn').addEventListener('click',doSingleCheck);
+ document.getElementById('singleUrl').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();doSingleCheck();}});
+ 
+ document.getElementById('bulkStart').addEventListener('click',runBulkCheck);
+ document.getElementById('bulkStop').addEventListener('click',stopBulkCheck);
+ document.getElementById('bulkExport').addEventListener('click',exportBulkCsv);
+ 
+ document.getElementById('fileCompare').addEventListener('click',compareFiles);
+ document.getElementById('fileDownload3').addEventListener('click',downloadFile3);
+ document.getElementById('fileExportDiff').addEventListener('click',exportFileDiff);
+ 
  document.body.addEventListener('click',e=>{
-  /* ✅ زر الأرشفة */
+  const pvBtn=e.target.closest('[data-preview]');
+  if(pvBtn){openPreview(pvBtn.dataset.preview);return;}
   const archBtn=e.target.closest('[data-archive]');
-  if(archBtn){
-    const url=archBtn.dataset.archive;
-    const item=getAllItems().find(i=>i.url===url);
-    if(item) toggleArchive(item);
-    return;
-  }
-  /* زر المفضلة */
+  if(archBtn){const url=archBtn.dataset.archive;const item=getAllItems().find(i=>i.url===url);if(item) toggleArchive(item);return;}
   const favBtn=e.target.closest('[data-fav]');
   if(favBtn){toggleFav(favBtn.dataset.fav);return}
-  /* خلية DOI */
   const copyCell=e.target.closest('[data-copy-doi]');
   if(copyCell){copyDOI(copyCell.dataset.copyDoi);return}
  });
@@ -596,7 +633,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   else if(e.key==='/'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();si.focus()}
  });
  document.getElementById('paletteOverlay').addEventListener('click',e=>{if(e.target.id==='paletteOverlay') closePalette()});
- console.log('✅ Jabri Empire Monitor v5.2 — جاهز - '+getAllItems().length+' عنصر');
+ console.log('✅ Jabri Empire Monitor v5.4 — جاهز - '+getAllItems().length+' عنصر');
 });
 </script>
 </body>
