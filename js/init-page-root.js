@@ -1,11 +1,11 @@
 // ================================================================
-//  init-page-root.js - v5.3.1 (APK Ready + Auth + Lang + Splash Logo)
+//  init-page-root.js - v5.5 (Secure + Smart 404 + No bustCache on Web)
 //  Heaven Al-Jabri | واحة الجبري
 // ================================================================
 
 (function() {
   'use strict';
-  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.3.1 - APK + Auth + Lang + Splash Logo)...');
+  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.5 - Secure + Smart 404)...');
 
   // ✅ كشف البيئة
   const IS_APK = window.location.protocol === 'file:' || 
@@ -20,15 +20,12 @@
   let splashHidden = false;
 
   /* ================================================================
-     ✅ [v5.2] WahaAuth — نظام الدخول الموحّد
+     ✅ [v5.5] WahaAuth — واجهة آمنة (بدون كلمات سر مكشوفة)
+     ------------------------------------------------------------
+     ملاحظة أمنية: AUTH_USERS تم حذفها من الفرونت لسبب أمني.
+     للدخول الحقيقي: استخدم Vercel Function (/api/auth) لاحقاً.
      ================================================================ */
   const AUTH_KEY = 'waha_user';
-  const AUTH_USERS = {
-    'admin':     { password: '12345',   role: 'admin',     name: 'المدير'  },
-    'moderator': { password: 'mod123',  role: 'moderator', name: 'مشرف'   },
-    'user':      { password: 'user123', role: 'user',      name: 'مستخدم' },
-    'guest':     { password: 'guest',   role: 'guest',     name: 'زائر'   }
-  };
 
   let _currentUser = null;
   try {
@@ -56,43 +53,41 @@
     hasRole: function(role) {
       return !!_currentUser && _currentUser.role === role;
     },
-    loginLocal: function(username, password) {
-      username = String(username || '').trim();
-      password = String(password || '').trim();
-      if (!username || !password) {
-        return { ok: false, error: 'الرجاء إدخال اسم المستخدم وكلمة المرور' };
-      }
-      const u = AUTH_USERS[username];
-      if (u && u.password === password) {
-        _currentUser = {
-          name: u.name,
-          role: u.role,
-          username: username,
-          provider: 'local',
-          since: Date.now()
-        };
-        _persistAuth();
-        return { ok: true, user: Object.assign({}, _currentUser) };
-      }
-      return { ok: false, error: 'اسم المستخدم أو كلمة المرور غير صحيحة' };
-    },
-    loginGoogle: function() {
-      _currentUser = {
-        name: 'مستخدم Google',
-        role: 'google',
-        email: 'user@gmail.com',
-        provider: 'google',
-        since: Date.now()
+
+    /* ⚠️ [v5.5] Login محلي معطّل — استخدم /api/auth لاحقاً */
+    loginLocal: function(/* username, password */) {
+      console.warn('🔒 [v5.5] الدخول المحلي معطّل لأسباب أمنية. استخدم /api/auth');
+      return {
+        ok: false,
+        error: 'الدخول المحلي معطّل حالياً. قريباً سيتوفر الدخول عبر خدمة آمنة.'
       };
-      _persistAuth();
-      return { ok: true, user: Object.assign({}, _currentUser) };
     },
+
+    /* Google login — stub (يحتاج OAuth حقيقي) */
+    loginGoogle: function() {
+      console.warn('🔒 [v5.5] الدخول عبر Google — قيد التطوير');
+      return {
+        ok: false,
+        error: 'الدخول عبر Google قيد التطوير. تابعنا قريباً.'
+      };
+    },
+
+    /* Logout — يعمل دائماً */
     logout: function() {
       _currentUser = null;
       _persistAuth();
       return { ok: true };
+    },
+
+    /* للاستخدام الداخلي فقط */
+    _setUser: function(user) {
+      _currentUser = user;
+      _persistAuth();
+      return { ok: true, user: Object.assign({}, _currentUser) };
     }
   };
+
+  console.log('🔒 [WahaAuth] v5.5 — آمن: Login معطّل، Logout يعمل');
 
   /* ================================================================
      ✅ [v5.2] Lang Switcher — تبديل اللغة الذكي
@@ -198,7 +193,6 @@
       '/'
     ];
 
-    // ✅ حماية: لو الفحص أخذ أكثر من 3 ثواني، انتقل مباشرة
     const safety = setTimeout(function() {
       console.warn('⏰ [lang] timeout - تحويل مباشر');
       window.location.href = '/' + target + '/';
@@ -236,14 +230,9 @@
     document.body.classList.add(t, 'device-' + d);
   }
 
-  // تصدير عام
   window.switchLanguage = switchLanguage;
   window.toggleLang = switchLanguage;
   window.getCurrentLanguage = _getCurrentLang;
-
-  /* ================================================================
-     ⬇️ من هنا الكود الأصلي v5.1
-     ================================================================ */
 
   /* ================================================================
      ✅ [v5.3.1] Splash Screen — مع شعار الواحة
@@ -303,20 +292,10 @@
           }
 
           @keyframes splashPulse {
-            0%, 100% {
-              transform: scale(1);
-              box-shadow: 0 0 60px rgba(201,168,76,0.5);
-            }
-            50% {
-              transform: scale(1.06);
-              box-shadow: 0 0 90px rgba(201,168,76,0.9);
-            }
+            0%, 100% { transform: scale(1);    box-shadow: 0 0 60px rgba(201,168,76,0.5); }
+            50%      { transform: scale(1.06); box-shadow: 0 0 90px rgba(201,168,76,0.9); }
           }
-
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
+          @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
           @media (max-width:600px) {
             .splash-logo { width: 96px; height: 96px; }
@@ -339,10 +318,18 @@
     setTimeout(() => { if (el) el.remove(); }, 800);
   }
 
+  /* ================================================================
+     ✅ [v5.5] bustCache — يعمل فقط في APK
+     ------------------------------------------------------------
+     على الويب: نترك Vercel cache يعمل (أسرع + أقل استهلاك)
+     في APK: نكسر الكاش (لأن الملفات محلية)
+     ================================================================ */
   function bustCache(url) {
-    if (IS_APK) return url;
-    const sep = url.includes('?') ? '&' : '?';
-    return url + sep + '_t=' + Date.now();
+    if (IS_APK) {
+      const sep = url.includes('?') ? '&' : '?';
+      return url + sep + '_t=' + Date.now();
+    }
+    return url;
   }
 
   function safelyExecuteScripts(container) {
@@ -366,9 +353,6 @@
     });
   }
 
-  // ================================================================
-  //  ✅ تحميل HTML مع XHR + timeout
-  // ================================================================
   function loadHTMLFile(placeholder, filename, onSuccess, onFail) {
     if (!placeholder) {
       if (onFail) onFail(new Error('placeholder not found'));
@@ -448,7 +432,6 @@
     );
   }
 
-  // ===== الروابط الديناميكية =====
   function addDynamicLinks() {
     const currentPath = window.location.pathname;
     const currentFile = currentPath.split('/').pop() || 'index.html';
@@ -490,7 +473,25 @@
     console.log('🔗 روابط ديناميكية مضافة لـ ' + currentFile);
   }
 
+  /* ================================================================
+     ✅ [v5.5] setDynamicCanonical — يتخطى 404
+     ================================================================ */
   function setDynamicCanonical() {
+    // ❌ لا نضيف canonical على صفحات 404
+    if (document.title.includes('404') ||
+        document.body.innerHTML.includes('404 Not Found') ||
+        document.body.innerHTML.includes('Page Not Found')) {
+      console.log('⏭️ [canonical] تم التخطي (صفحة 404)');
+      return;
+    }
+
+    // ❌ ولا على الصفحة الرئيسية (index)
+    const path = window.location.pathname;
+    if (path === '/' || path === '/index.html' || path === '') {
+      console.log('⏭️ [canonical] تم التخطي (الصفحة الرئيسية)');
+      return;
+    }
+
     const currentUrl = window.location.href.split('?')[0].split('#')[0];
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
@@ -501,7 +502,9 @@
     canonicalLink.href = currentUrl;
   }
 
-  // ===== كاشف 404 (فقط على الويب) =====
+  /* ================================================================
+     ✅ [v5.4] كاشف 404 مع Smart URL Fix
+     ================================================================ */
   function detect404AndHandle() {
     if (IS_APK) {
       console.log('⏭️ [404] تم تخطي كاشف 404 (بيئة APK)');
@@ -530,6 +533,74 @@
   }
 
   function handle404Error() {
+    tryToFixUrl(function(fixed) {
+      if (fixed) {
+        console.log('✨ [404] تم إصلاح URL تلقائياً');
+        return;
+      }
+      show404Overlay();
+    });
+  }
+
+  /* ================================================================
+     ✅ [v5.4] tryToFixUrl — إضافة .html أو index.html تلقائياً
+     ================================================================ */
+  function tryToFixUrl(callback) {
+    var path = window.location.pathname;
+    var lastSegment = path.split('/').pop();
+
+    var hasExtension = lastSegment && lastSegment.indexOf('.') !== -1;
+    var isRoot = (path === '/' || path === '');
+
+    if (hasExtension || isRoot) {
+      console.log('⏭️ [404-Fix] تخطي — الملف فيه امتداد أو الجذر');
+      callback(false);
+      return;
+    }
+
+    var candidates = [];
+
+    if (path.endsWith('/')) {
+      var clean = path.slice(0, -1);
+      candidates.push(path + 'index.html');
+      candidates.push(clean + '.html');
+    } else {
+      candidates.push(path + '.html');
+      candidates.push(path + '/index.html');
+    }
+
+    console.log('🔧 [404-Fix] محاولة إصلاح:', path);
+    console.log('🔧 [404-Fix] المرشحون:', candidates);
+
+    (function tryNext(i) {
+      if (i >= candidates.length) {
+        console.warn('❌ [404-Fix] فشلت كل المحاولات');
+        callback(false);
+        return;
+      }
+
+      var url = candidates[i];
+
+      fetch(url, { method: 'HEAD', cache: 'no-cache', redirect: 'follow' })
+        .then(function (res) {
+          if (res.ok) {
+            console.log('✅ [404-Fix] وُجد:', url);
+            window.location.replace(url);
+            callback(true);
+          } else {
+            tryNext(i + 1);
+          }
+        })
+        .catch(function () {
+          tryNext(i + 1);
+        });
+    })(0);
+  }
+
+  /* ================================================================
+     ✅ [v5.4] show404Overlay
+     ================================================================ */
+  function show404Overlay() {
     if (sessionStorage.getItem('jabri404Handled')) return;
     sessionStorage.setItem('jabri404Handled', 'true');
 
@@ -563,7 +634,9 @@
     }, 7000);
   }
 
-  // ===== init الرئيسية =====
+  /* ================================================================
+     ✅ init الرئيسية
+     ================================================================ */
   function init() {
     initLang();
     initTheme();
@@ -597,5 +670,5 @@
     init();
   }
 
-  console.log('✅ init-page-root.js جاهز (v5.3.1 - APK + Auth + Lang + Splash Logo)');
+  console.log('✅ init-page-root.js جاهز (v5.5 - Secure + Smart 404)');
 })();
