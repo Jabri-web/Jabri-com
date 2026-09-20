@@ -662,7 +662,6 @@
             window.switchLanguage();
         } else {
             console.warn('⚠️ switchLanguage غير متاح بعد');
-            // احتياطي بسيط
             var path = window.location.pathname;
             var isArabic = path.indexOf('/ar/') !== -1 || (path.indexOf('/en/') === -1 && document.documentElement.lang !== 'en');
             var fileName = path.split('/').pop() || 'index.html';
@@ -674,7 +673,6 @@
 
     // ========== التهيئة الأولية عند DOMContentLoaded ==========
     document.addEventListener('DOMContentLoaded', function() {
-        // اللغة (يعتمد على init-page-root.js، لكن هنا احتياطي)
         var savedLang = localStorage.getItem('waha_lang') || localStorage.getItem('lang') || 'ar';
         if (savedLang === 'en') {
             document.documentElement.dir = 'ltr';
@@ -684,7 +682,6 @@
             document.documentElement.lang = 'ar';
         }
 
-        // الوضع والجهاز
         var savedTheme = localStorage.getItem('theme') || 'night';
         var savedDevice = localStorage.getItem('device') || 'desktop';
         document.body.classList.remove('day', 'night', 'device-desktop', 'device-phone');
@@ -701,7 +698,6 @@
 
         updateLoginUI();
 
-        // تشغيل الصوت عند أول تفاعل
         document.addEventListener('click', function firstInteraction() {
             var audio = document.getElementById('bgMusic');
             if (audio && audio.paused) {
