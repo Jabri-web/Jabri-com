@@ -1,10 +1,11 @@
 // ================================================================
-//  init-page-root.js - v5.1 (APK Ready)
+//  init-page-root.js - v5.2 (APK Ready + Auth + Lang Switcher)
+//  Heaven Al-Jabri | واحة الجبري
 // ================================================================
 
 (function() {
   'use strict';
-  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.1.0 - APK Ready)...');
+  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.2.0 - APK + Auth + Lang)...');
 
   // ✅ كشف البيئة
   const IS_APK = window.location.protocol === 'file:' || 
@@ -17,6 +18,194 @@
   console.log('🌍 [init] البيئة:', IS_APK ? '📱 APK' : '🌐 Web');
 
   let splashHidden = false;
+
+  /* ================================================================
+     ✅ [جديد v5.2] WahaAuth — نظام الدخول الموحّد
+     ================================================================ */
+  const AUTH_KEY = 'waha_user';
+  const AUTH_USERS = {
+    'admin':     { password: '12345',   role: 'admin',     name: 'المدير'  },
+    'moderator': { password: 'mod123',  role: 'moderator', name: 'مشرف'   },
+    'user':      { password: 'user123', role: 'user',      name: 'مستخدم' },
+    'guest':     { password: 'guest',   role: 'guest',     name: 'زائر'   }
+  };
+
+  let _currentUser = null;
+  try {
+    const raw = localStorage.getItem(AUTH_KEY);
+    if (raw) _currentUser = JSON.parse(raw);
+  } catch (e) { _currentUser = null; }
+
+  function _persistAuth() {
+    try {
+      if (_currentUser) localStorage.setItem(AUTH_KEY, JSON.stringify(_currentUser));
+      else localStorage.removeItem(AUTH_KEY);
+    } catch (e) {}
+    window.dispatchEvent(new CustomEvent('waha:auth-changed', {
+      detail: { user: _currentUser ? Object.assign({}, _currentUser) : null }
+    }));
+  }
+
+  window.WahaAuth = {
+    getUser: function() {
+      return _currentUser ? Object.assign({}, _currentUser) : null;
+    },
+    isLoggedIn: function() {
+      return !!_currentUser;
+    },
+    hasRole: function(role) {
+      return !!_currentUser && _currentUser.role === role;
+    },
+    loginLocal: function(username, password) {
+      username = String(username || '').trim();
+      password = String(password || '').trim();
+      if (!username || !password) {
+        return { ok: false, error: 'الرجاء إدخال اسم المستخدم وكلمة المرور' };
+      }
+      const u = AUTH_USERS[username];
+      if (u && u.password === password) {
+        _currentUser = {
+          name: u.name,
+          role: u.role,
+          username: username,
+          provider: 'local',
+          since: Date.now()
+        };
+        _persistAuth();
+        return { ok: true, user: Object.assign({}, _currentUser) };
+      }
+      return { ok: false, error: 'اسم المستخدم أو كلمة المرور غير صحيحة' };
+    },
+    loginGoogle: function() {
+      _currentUser = {
+        name: 'مستخدم Google',
+        role: 'google',
+        email: 'user@gmail.com',
+        provider: 'google',
+        since: Date.now()
+      };
+      _persistAuth();
+      return { ok: true, user: Object.assign({}, _currentUser) };
+    },
+    logout: function() {
+      _currentUser = null;
+      _persistAuth();
+      return { ok: true };
+    }
+  };
+
+  /* ================================================================
+     ✅ [جديد v5.2] Lang Switcher — تبديل اللغة الذكي
+     ================================================================ */
+  const LANG_KEY = 'waha_lang';
+  const SUPPORTED_LANGS = ['ar', 'en'];
+
+  function _getCurrentLang() {
+    const p = window.location.pathname.toLowerCase();
+    if (p.startsWith('/en/') || p === '/en') return 'en';
+    if (p.startsWith('/ar/') || p === '/ar') return 'ar';
+    const s = localStorage.getItem(LANG_KEY);
+    if (SUPPORTED_LANGS.indexOf(s) !== -1) return s;
+    return document.documentElement.lang === 'en' ? 'en' : 'ar';
+  }
+
+  function _getCurrentFile() {
+    let p = window.location.pathname;
+    p = p.replace(/^\/(ar|en)(\/|$)/i, '/');
+    p = p.replace(/\/+$/, '');
+    if (p === '' || p === '/') return 'index.html';
+    const f = p.split('/').pop();
+    if (!f || f.indexOf('.') === -1) return 'index.html';
+    return f;
+  }
+
+  const _EXISTS_CACHE = new Map();
+  function _pathExists(url) {
+    if (_EXISTS_CACHE.has(url)) return Promise.resolve(_EXISTS_CACHE.get(url));
+    return fetch(url, { method: 'HEAD', cache: 'no-cache', redirect: 'follow' })
+      .then(function(r) { _EXISTS_CACHE.set(url, r.ok); return r.ok; })
+      .catch(function() { _EXISTS_CACHE.set(url, false); return false; });
+  }
+
+  function _findFirstExisting(paths) {
+    return paths.reduce(function(p, cur) {
+      return p.then(function(found) {
+        if (found) return found;
+        return _pathExists(cur).then(function(ok) { return ok ? cur : null; });
+      });
+    }, Promise.resolve(null));
+  }
+
+  function _showLangLoader() {
+    let el = document.getElementById('waha-lang-loader');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'waha-lang-loader';
+      el.style.cssText = 'position:fixed;inset:0;z-index:999999;background:rgba(10,15,13,0.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#c9a84c;font-family:Cairo,Tajawal,sans-serif;font-size:1.1rem;font-weight:900;';
+      el.innerHTML = '<div style="text-align:center;"><div style="font-size:52px;animation:waha-spin 1.2s linear infinite;">🌐</div><div style="margin-top:16px;">جاري تبديل اللغة...</div><div style="margin-top:6px;font-size:0.8rem;opacity:0.6;font-weight:400;">Switching language...</div></div><style>@keyframes waha-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>';
+      document.body.appendChild(el);
+    }
+    el.style.display = 'flex';
+  }
+
+  let _switching = false;
+  function switchLanguage() {
+    if (_switching) return;
+    _switching = true;
+
+    const current = _getCurrentLang();
+    const target = current === 'ar' ? 'en' : 'ar';
+    const file = _getCurrentFile();
+
+    localStorage.setItem(LANG_KEY, target);
+
+    const t = setTimeout(_showLangLoader, 280);
+
+    const candidates = [
+      '/' + target + '/' + file,
+      '/' + target + '/index.html',
+      '/' + target + '/',
+      '/'
+    ];
+
+    _findFirstExisting(candidates).then(function(url) {
+      clearTimeout(t);
+      url = url || '/' + target + '/';
+      console.log('🌐 [lang]', current, '→', target, '|', file, '→', url);
+      window.location.href = url;
+    }).catch(function() {
+      clearTimeout(t);
+      window.location.href = '/' + target + '/';
+    });
+  }
+
+  function initLang() {
+    const lang = _getCurrentLang();
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.body.classList.toggle('lang-ar', lang === 'ar');
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+
+    const label = document.getElementById('langLabel');
+    if (label) label.textContent = lang === 'ar' ? 'English' : 'عربي';
+  }
+
+  function initTheme() {
+    const t = localStorage.getItem('theme') || 'night';
+    const d = localStorage.getItem('device') || 'desktop';
+    document.body.classList.remove('day', 'night', 'device-desktop', 'device-phone');
+    document.body.classList.add(t, 'device-' + d);
+  }
+
+  // تصدير عام
+  window.switchLanguage = switchLanguage;
+  window.toggleLang = switchLanguage; // توافق مع الكود القديم
+  window.getCurrentLanguage = _getCurrentLang;
+
+  /* ================================================================
+     ⬇️ من هنا الكود الأصلي v5.1 كما هو بدون تغيير
+     ================================================================ */
 
   // ===== شاشة الترحيب =====
   function createSplash() {
@@ -276,6 +465,10 @@
 
   // ===== init الرئيسية =====
   function init() {
+    // ✅ [جديد v5.2] تهيئة اللغة والوضع
+    initLang();
+    initTheme();
+
     createSplash();
     
     if (!IS_APK) {
@@ -288,6 +481,8 @@
     document.addEventListener('headerLoaded', function() {
       setDynamicCanonical();
       addDynamicLinks();
+      // إعادة تهيئة اللغة بعد تحميل الهيدر (لتحديث #langLabel إن وُجد)
+      initLang();
     });
 
     setTimeout(function() {
@@ -304,5 +499,5 @@
     init();
   }
 
-  console.log('✅ init-page-root.js جاهز (v5.1 - APK Ready)');
+  console.log('✅ init-page-root.js جاهز (v5.2 - APK + Auth + Lang)');
 })();
