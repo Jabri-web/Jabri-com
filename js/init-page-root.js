@@ -1,11 +1,11 @@
 // ================================================================
-//  init-page-root.js - v5.5 (Secure + Smart 404 + No bustCache on Web)
+//  init-page-root.js - v5.6 (Secure + Smart 404 + Lang Root Fallback)
 //  Heaven Al-Jabri | واحة الجبري
 // ================================================================
 
 (function() {
   'use strict';
-  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.5 - Secure + Smart 404)...');
+  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.6 - Secure + Smart 404 + Lang Fallback)...');
 
   // ✅ كشف البيئة
   const IS_APK = window.location.protocol === 'file:' || 
@@ -21,9 +21,6 @@
 
   /* ================================================================
      ✅ [v5.5] WahaAuth — واجهة آمنة (بدون كلمات سر مكشوفة)
-     ------------------------------------------------------------
-     ملاحظة أمنية: AUTH_USERS تم حذفها من الفرونت لسبب أمني.
-     للدخول الحقيقي: استخدم Vercel Function (/api/auth) لاحقاً.
      ================================================================ */
   const AUTH_KEY = 'waha_user';
 
@@ -79,7 +76,7 @@
       return { ok: true };
     },
 
-    /* للاستخدام الداخلي فقط */
+    /* للاستخدام الداخلي فقط (من /api/auth) */
     _setUser: function(user) {
       _currentUser = user;
       _persistAuth();
@@ -173,6 +170,9 @@
     el.style.display = 'flex';
   }
 
+  /* ================================================================
+     ✅ [v5.6] switchLanguage — مع fallback للـ root
+     ================================================================ */
   let _switching = false;
   function switchLanguage() {
     if (_switching) return;
@@ -186,8 +186,16 @@
 
     const t = setTimeout(_showLangLoader, 280);
 
+    /* المرشحون بترتيب الأولوية:
+       1) /en/Page4.html        (نفس الملف في اللغة الأخرى)
+       2) /Page4.html           (نفس الملف في الجذر - root fallback)
+       3) /en/index.html        (index اللغة الأخرى)
+       4) /en/                  (جذر اللغة)
+       5) /                     (الجذر)
+    */
     const candidates = [
       '/' + target + '/' + file,
+      '/' + file,
       '/' + target + '/index.html',
       '/' + target + '/',
       '/'
@@ -320,9 +328,6 @@
 
   /* ================================================================
      ✅ [v5.5] bustCache — يعمل فقط في APK
-     ------------------------------------------------------------
-     على الويب: نترك Vercel cache يعمل (أسرع + أقل استهلاك)
-     في APK: نكسر الكاش (لأن الملفات محلية)
      ================================================================ */
   function bustCache(url) {
     if (IS_APK) {
@@ -474,7 +479,7 @@
   }
 
   /* ================================================================
-     ✅ [v5.5] setDynamicCanonical — يتخطى 404
+     ✅ [v5.5] setDynamicCanonical — يتخطى 404 و index
      ================================================================ */
   function setDynamicCanonical() {
     // ❌ لا نضيف canonical على صفحات 404
@@ -485,7 +490,7 @@
       return;
     }
 
-    // ❌ ولا على الصفحة الرئيسية (index)
+    // ❌ ولا على الصفحة الرئيسية
     const path = window.location.pathname;
     if (path === '/' || path === '/index.html' || path === '') {
       console.log('⏭️ [canonical] تم التخطي (الصفحة الرئيسية)');
@@ -503,7 +508,7 @@
   }
 
   /* ================================================================
-     ✅ [v5.4] كاشف 404 مع Smart URL Fix
+     ✅ [v5.4] كاشف 404
      ================================================================ */
   function detect404AndHandle() {
     if (IS_APK) {
@@ -543,57 +548,113 @@
   }
 
   /* ================================================================
-     ✅ [v5.4] tryToFixUrl — إضافة .html أو index.html تلقائياً
+     ✅ [v5.6] tryToFixUrl — منطق محسّن مع root fallback
+     ------------------------------------------------------------
+     القواعد:
+     1) /ar أو /en → /ar/index.html أو /en/index.html
+     2) /ar/Page4 → /ar/Page4.html ثم /Page4.html (root fallback)
+     3) /Page4 → /Page4.html ثم /Page4/index.html
+     4) فشل → 404 overlay
      ================================================================ */
   function tryToFixUrl(callback) {
     var path = window.location.pathname;
     var lastSegment = path.split('/').pop();
 
+    /* ===== قاعدة 1: /ar أو /en (بدون slash) ===== */
+    if (/^\/(ar|en)$/i.test(path)) {
+        var lang = path.substring(1);
+        console.log('🌐 [404-Fix] اللغة بدون slash:', lang);
+
+        var langIndex = '/' + lang + '/index.html';
+        fetch(langIndex, { method: 'HEAD', cache: 'no-cache' })
+            .then(function(res) {
+                if (res.ok) {
+                    console.log('✅ [404-Fix] →', langIndex);
+                    window.location.replace(langIndex);
+                } else {
+                    console.log('⚠️ [404-Fix] اللغة غير متوفرة → root');
+                    window.location.replace('/');
+                }
+                callback(true);
+            })
+            .catch(function() {
+                window.location.replace('/');
+                callback(true);
+            });
+        return;
+    }
+
+    /* ===== تجاهل: ملف له امتداد أو الجذر ===== */
     var hasExtension = lastSegment && lastSegment.indexOf('.') !== -1;
     var isRoot = (path === '/' || path === '');
 
     if (hasExtension || isRoot) {
-      console.log('⏭️ [404-Fix] تخطي — الملف فيه امتداد أو الجذر');
-      callback(false);
-      return;
+        console.log('⏭️ [404-Fix] تخطي — ملف له امتداد أو الجذر');
+        callback(false);
+        return;
     }
+
+    /* ===== كشف البيئة: هل نحن في مجلد لغة؟ ===== */
+    var isInLangFolder = /^\/(ar|en)\//i.test(path);
+    var langMatch = path.match(/^\/(ar|en)\/(.+)$/i);
 
     var candidates = [];
 
-    if (path.endsWith('/')) {
-      var clean = path.slice(0, -1);
-      candidates.push(path + 'index.html');
-      candidates.push(clean + '.html');
+    if (isInLangFolder && langMatch) {
+        /* /ar/Page4 → نجرب:
+           1) /ar/Page4.html
+           2) /Page4.html (root fallback) ⭐
+           3) /ar/Page4/index.html
+        */
+        var lang = langMatch[1];
+        var fileName = langMatch[2];
+
+        candidates.push('/' + lang + '/' + fileName + '.html');
+        candidates.push('/' + fileName + '.html');
+        candidates.push('/' + lang + '/' + fileName + '/index.html');
+
+        console.log('🔧 [404-Fix] داخل مجلد اللغة — أولوية الـ root fallback');
     } else {
-      candidates.push(path + '.html');
-      candidates.push(path + '/index.html');
+        /* /Page4 → نجرب:
+           1) /Page4.html
+           2) /Page4/index.html
+        */
+        if (path.endsWith('/')) {
+            var clean = path.slice(0, -1);
+            candidates.push(path + 'index.html');
+            candidates.push(clean + '.html');
+        } else {
+            candidates.push(path + '.html');
+            candidates.push(path + '/index.html');
+        }
     }
 
     console.log('🔧 [404-Fix] محاولة إصلاح:', path);
     console.log('🔧 [404-Fix] المرشحون:', candidates);
 
+    /* ===== فحص متسلسل ===== */
     (function tryNext(i) {
-      if (i >= candidates.length) {
-        console.warn('❌ [404-Fix] فشلت كل المحاولات');
-        callback(false);
-        return;
-      }
+        if (i >= candidates.length) {
+            console.warn('❌ [404-Fix] فشلت كل المحاولات');
+            callback(false);
+            return;
+        }
 
-      var url = candidates[i];
+        var url = candidates[i];
 
-      fetch(url, { method: 'HEAD', cache: 'no-cache', redirect: 'follow' })
-        .then(function (res) {
-          if (res.ok) {
-            console.log('✅ [404-Fix] وُجد:', url);
-            window.location.replace(url);
-            callback(true);
-          } else {
-            tryNext(i + 1);
-          }
-        })
-        .catch(function () {
-          tryNext(i + 1);
-        });
+        fetch(url, { method: 'HEAD', cache: 'no-cache', redirect: 'follow' })
+            .then(function(res) {
+                if (res.ok) {
+                    console.log('✅ [404-Fix] وُجد:', url);
+                    window.location.replace(url);
+                    callback(true);
+                } else {
+                    tryNext(i + 1);
+                }
+            })
+            .catch(function() {
+                tryNext(i + 1);
+            });
     })(0);
   }
 
@@ -670,5 +731,5 @@
     init();
   }
 
-  console.log('✅ init-page-root.js جاهز (v5.5 - Secure + Smart 404)');
+  console.log('✅ init-page-root.js جاهز (v5.6 - Secure + Smart 404 + Lang Fallback)');
 })();
