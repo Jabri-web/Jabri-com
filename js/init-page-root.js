@@ -1,11 +1,11 @@
 // ================================================================
-//  init-page-root.js - v5.2 (APK Ready + Auth + Lang Switcher)
+//  init-page-root.js - v5.3 (APK Ready + Auth + Lang + Waha Logo)
 //  Heaven Al-Jabri | واحة الجبري
 // ================================================================
 
 (function() {
   'use strict';
-  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.2.0 - APK + Auth + Lang)...');
+  console.log('🛡️ [init] تفعيل الدرع المطلق (v5.3.0 - APK + Auth + Lang + Logo)...');
 
   // ✅ كشف البيئة
   const IS_APK = window.location.protocol === 'file:' || 
@@ -20,7 +20,7 @@
   let splashHidden = false;
 
   /* ================================================================
-     ✅ [جديد v5.2] WahaAuth — نظام الدخول الموحّد
+     ✅ [v5.2] WahaAuth — نظام الدخول الموحّد
      ================================================================ */
   const AUTH_KEY = 'waha_user';
   const AUTH_USERS = {
@@ -95,7 +95,7 @@
   };
 
   /* ================================================================
-     ✅ [جديد v5.2] Lang Switcher — تبديل اللغة الذكي
+     ✅ [v5.2] Lang Switcher — تبديل اللغة الذكي
      ================================================================ */
   const LANG_KEY = 'waha_lang';
   const SUPPORTED_LANGS = ['ar', 'en'];
@@ -136,13 +136,43 @@
     }, Promise.resolve(null));
   }
 
+  /* ================================================================
+     ✅ [v5.3] Lang Loader — شعار الواحة بدل 🌐
+     ================================================================ */
   function _showLangLoader() {
     let el = document.getElementById('waha-lang-loader');
     if (!el) {
       el = document.createElement('div');
       el.id = 'waha-lang-loader';
       el.style.cssText = 'position:fixed;inset:0;z-index:999999;background:rgba(10,15,13,0.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#c9a84c;font-family:Cairo,Tajawal,sans-serif;font-size:1.1rem;font-weight:900;';
-      el.innerHTML = '<div style="text-align:center;"><div style="font-size:52px;animation:waha-spin 1.2s linear infinite;">🌐</div><div style="margin-top:16px;">جاري تبديل اللغة...</div><div style="margin-top:6px;font-size:0.8rem;opacity:0.6;font-weight:400;">Switching language...</div></div><style>@keyframes waha-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>';
+      el.innerHTML = `
+        <div style="text-align:center;">
+          <img src="/icon-192.png"
+               alt="واحة الجبري"
+               style="width:96px;height:96px;border-radius:50%;
+                      border:3px solid #c9a84c;
+                      box-shadow:0 0 40px rgba(201,168,76,0.5);
+                      animation:waha-pulse 1.6s ease-in-out infinite;
+                      object-fit:cover;">
+          <div style="margin-top:20px;">جاري تبديل اللغة...</div>
+          <div style="margin-top:6px;font-size:0.8rem;opacity:0.6;font-weight:400;">Switching language...</div>
+          <div style="margin-top:18px;display:flex;justify-content:center;gap:6px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#c9a84c;animation:waha-dot 1.4s ease-in-out infinite;animation-delay:0s;"></span>
+            <span style="width:8px;height:8px;border-radius:50%;background:#c9a84c;animation:waha-dot 1.4s ease-in-out infinite;animation-delay:0.2s;"></span>
+            <span style="width:8px;height:8px;border-radius:50%;background:#c9a84c;animation:waha-dot 1.4s ease-in-out infinite;animation-delay:0.4s;"></span>
+          </div>
+        </div>
+        <style>
+          @keyframes waha-pulse {
+            0%, 100% { transform: scale(1);    box-shadow: 0 0 40px rgba(201,168,76,0.5); }
+            50%      { transform: scale(1.08); box-shadow: 0 0 70px rgba(201,168,76,0.9); }
+          }
+          @keyframes waha-dot {
+            0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+            40%           { opacity: 1;   transform: scale(1.2); }
+          }
+        </style>
+      `;
       document.body.appendChild(el);
     }
     el.style.display = 'flex';
@@ -168,13 +198,21 @@
       '/'
     ];
 
+    // ✅ [v5.3] حماية: لو الفحص أخذ أكثر من 3 ثواني، انتقل مباشرة
+    const safety = setTimeout(function() {
+      console.warn('⏰ [lang] timeout - تحويل مباشر');
+      window.location.href = '/' + target + '/';
+    }, 3000);
+
     _findFirstExisting(candidates).then(function(url) {
       clearTimeout(t);
+      clearTimeout(safety);
       url = url || '/' + target + '/';
       console.log('🌐 [lang]', current, '→', target, '|', file, '→', url);
       window.location.href = url;
     }).catch(function() {
       clearTimeout(t);
+      clearTimeout(safety);
       window.location.href = '/' + target + '/';
     });
   }
@@ -465,7 +503,7 @@
 
   // ===== init الرئيسية =====
   function init() {
-    // ✅ [جديد v5.2] تهيئة اللغة والوضع
+    // ✅ [v5.2] تهيئة اللغة والوضع
     initLang();
     initTheme();
 
@@ -499,5 +537,5 @@
     init();
   }
 
-  console.log('✅ init-page-root.js جاهز (v5.2 - APK + Auth + Lang)');
+  console.log('✅ init-page-root.js جاهز (v5.3 - APK + Auth + Lang + Logo)');
 })();
