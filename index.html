@@ -382,7 +382,7 @@
 
     <!-- ========= الشريط السفلي ========= -->
     <nav class="bottom-bar" aria-label="روابط سريعة">
-        <a class="btn-b" data-action="chat" data-page="/Page11.html">
+        <a class="btn-b" data-action="chat">
             <i class="fas fa-comment-dots"></i>
             <span class="ar">محادثة</span><span class="en">Chat</span>
         </a>
@@ -418,11 +418,9 @@
     <!-- ========= الفوتر عبر placeholder ========= -->
     <div id="footer-placeholder"></div>
 
-    <!-- ========= السكربتات (ترتيب مهم) ========= -->
-    <script src="/js/auth.js" defer></script>
-    <script src="/js/lang-switcher.js" defer></script>
-    <script src="/js/init-page-root.js" defer></script>
-    <script src="/js/menu.js" defer></script>
+    <!-- ========= السكربتات (مع كسر الكاش) ========= -->
+    <script src="/js/init-page-root.js?v=5.3.1" defer></script>
+    <script src="/js/menu.js?v=6.1" defer></script>
 
     <script>
     (function () {
@@ -501,7 +499,7 @@
             document.body.classList.add(t, 'device-' + d);
         });
 
-        console.log('🌴 واحة الجبري v6.1 — الرئيسية');
+        console.log('🌴 واحة الجبري v6.2 — الرئيسية');
     })();
     </script>
 
