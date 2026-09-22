@@ -933,8 +933,6 @@
 </script>
 
 <!-- ========================================================== -->
-<!-- 18. نافذة تحميل تطبيق الأندرويد (APK)                     -->
-<!-- ========================================================== -->
 <div id="apk-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 999999; justify-content: center; align-items: center; font-family: 'Cairo', sans-serif; direction: rtl; backdrop-filter: blur(5px);">
     <div style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); padding: 30px; border-radius: 20px; text-align: center; max-width: 350px; width: 90%; border: 2px solid #c9a227; box-shadow: 0 20px 60px rgba(201, 162, 39, 0.5); position: relative;">
         <span id="apk-close-x" style="position: absolute; top: 10px; left: 15px; font-size: 28px; cursor: pointer; color: #c9a84c; transition: 0.3s;" onmouseover="this.style.color='#ffd700'" onmouseout="this.style.color='#c9a84c'">&times;</span>
@@ -944,7 +942,14 @@
         <a href="/app-release.apk" download style="display: block; background: linear-gradient(135deg, #c9a227, #e6c34a); color: #0d1117; text-decoration: none; padding: 14px; border-radius: 30px; font-weight: bold; font-size: 16px; margin-bottom: 15px; transition: transform 0.3s; box-shadow: 0 6px 20px rgba(201,162,39,0.5);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">⬇️ تحميل التطبيق (APK)</a>
         <button id="apk-close-btn" style="background: transparent; border: none; color: #888; cursor: pointer; font-size: 14px; padding: 5px; font-family: 'Cairo', sans-serif;">لاحقاً</button>
     </div>
+    
+    
 </div>
+
+
+
+
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -979,4 +984,5 @@
 </script>
 
 <!-- ✨ فاحص الروابط الذكي v2.0 -->
-<script src="/js/link-checker.js" async></script>
+<!-- ✨ فاحص الروابط الذكي v2.3 — Bot-Proof -->
+<script src="/js/link-checker.js?v=2.3" async></script>
