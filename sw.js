@@ -1,5 +1,5 @@
 // ================================================================
-//  sw.js - v10.0 (Dual Cache Architecture + Bot-Proof)
+//  sw.js - v10.1 (Dual Cache Architecture + Bot-Proof Fixed)
 //  Heaven Al-Jabri | واحة الجبري
 //  ─────────────────────────────────────────────────────────────
 //  🎯 الفكرة:
@@ -7,17 +7,17 @@
 //    • CACHE_SHELL   → يخدم offline (ثابت، مُرقَّم بالإصدار)
 //    • CACHE_RUNTIME → يخدم الأداء (متحرك، يُنظَّف مع كل إصدار)
 //  ─────────────────────────────────────────────────────────────
-//  🔄 v10.0: قفزة إصدار كبرى لإجبار كل الزوار + Googlebot
-//           على تحميل menu.js v6.4 + link-checker.js v2.3
+//  🔄 v10.1: إصلاح جذري لمشكلة "خطأ إعادة التوجيه" (Redirect Error)
+//           1. استثناء Googlebot تماماً من تدخل Service Worker.
+//           2. منع إرجاع الصفحة الرئيسية كبديل لصفحة مفقودة (Soft 404).
 // ================================================================
 
-const VERSION = '10.0';                            // ← تغيّر من 9.2
+const VERSION = '10.1';                            // ← تم تحديث الإصدار لإجبار التحديث
 const CACHE_SHELL   = 'waha-shell-v'   + VERSION;
 const CACHE_RUNTIME = 'waha-runtime-v' + VERSION;
 
 // ─────────────────────────────────────────────────────────────
 //  الملفات الجوهرية — تُخزَّن عند التثبيت (خدمة Offline)
-//  ⚠️ أضف/احذف بحذر — هذي هي أساس الـ APK offline
 // ─────────────────────────────────────────────────────────────
 const SHELL_FILES = [
   '/',
@@ -96,7 +96,7 @@ self.addEventListener('activate', event => {
 });
 
 // ================================================================
-//  fetch — 4 استراتيجيات حسب نوع المورد
+//  fetch — 4 استراتيجيات حسب نوع المورد + استثناء Googlebot
 // ================================================================
 self.addEventListener('fetch', event => {
   const req = event.request;
@@ -107,14 +107,21 @@ self.addEventListener('fetch', event => {
   // ② نتجاهل النطاقات الخارجية (CDN، fonts.googleapis، إلخ)
   if (!req.url.startsWith(self.location.origin)) return;
 
-  // ③ نتجاهل المسارات الحساسة
+  // ③ 🛑 حماية محركات البحث (Googlebot): لا تتدخل أبداً
+  //    نترك الطلب يمر مباشرة إلى خادم Vercel لضمان عدم حدوث أي تحويل خاطئ.
+  const userAgent = req.headers.get('user-agent') || '';
+  if (userAgent.includes('Googlebot') || userAgent.includes('Bingbot') || userAgent.includes('YandexBot')) {
+    return; 
+  }
+
+  // ④ نتجاهل المسارات الحساسة
   if (BYPASS_PATTERN.test(req.url)) return;
 
   const url = new URL(req.url);
   const path = url.pathname;
 
   // ─────────────────────────────────────────────────────────────
-  //  ④ الصفحات (navigate) → Network First
+  //  ⑤ الصفحات (navigate) → Network First
   // ─────────────────────────────────────────────────────────────
   if (req.mode === 'navigate') {
     event.respondWith(networkFirst(req, CACHE_RUNTIME));
@@ -122,7 +129,7 @@ self.addEventListener('fetch', event => {
   }
 
   // ─────────────────────────────────────────────────────────────
-  //  ⑤ ملفات جوهرية (Shell) → Shell First
+  //  ⑥ ملفات جوهرية (Shell) → Shell First
   // ─────────────────────────────────────────────────────────────
   if (SHELL_FILES.indexOf(path) !== -1) {
     event.respondWith(shellFirst(req));
@@ -130,7 +137,7 @@ self.addEventListener('fetch', event => {
   }
 
   // ─────────────────────────────────────────────────────────────
-  //  ⑥ صور/أيقونات → Cache First Forever
+  //  ⑦ صور/أيقونات → Cache First Forever
   // ─────────────────────────────────────────────────────────────
   if (/\.(png|jpg|jpeg|webp|svg|gif|ico|bmp|avif)$/i.test(path)) {
     event.respondWith(cacheFirstForever(req, CACHE_RUNTIME));
@@ -138,7 +145,7 @@ self.addEventListener('fetch', event => {
   }
 
   // ─────────────────────────────────────────────────────────────
-  //  ⑦ فيديو/صوت → Cache First Forever
+  //  ⑧ فيديو/صوت → Cache First Forever
   // ─────────────────────────────────────────────────────────────
   if (/\.(mp4|webm|mp3|ogg|wav|m4a)$/i.test(path)) {
     event.respondWith(cacheFirstForever(req, CACHE_RUNTIME));
@@ -146,7 +153,7 @@ self.addEventListener('fetch', event => {
   }
 
   // ─────────────────────────────────────────────────────────────
-  //  ⑧ الباقي (JS/CSS/خطوط) → Stale-While-Revalidate
+  //  ⑨ الباقي (JS/CSS/خطوط) → Stale-While-Revalidate
   // ─────────────────────────────────────────────────────────────
   event.respondWith(staleWhileRevalidate(req, CACHE_RUNTIME));
 });
@@ -172,17 +179,17 @@ async function networkFirst(req, cacheName) {
       console.log('📦 [sw] offline fallback:', req.url);
       return cached;
     }
-    // آخر حل — الصفحة الرئيسية
-    const home = await caches.match('/') || await caches.match('/index.html');
-    if (home) return home;
-
+    
+    // 🛑 إصلاح جذري: لا نرجع الصفحة الرئيسية كبديل (Soft 404)
+    // بدلاً من ذلك، نرجع استجابة 404 حقيقية ليعرف جوجل أن الصفحة غير موجودة.
+    console.warn('⚠️ [sw] networkFirst فشل ولا يوجد كاش:', req.url);
     return new Response(
       '<html dir="rtl"><body style="background:#0a0a0f;color:#ffd700;font-family:sans-serif;text-align:center;padding:50px;">' +
       '<h2>🌴 واحة الجبري</h2>' +
-      '<p>أنت غير متصل بالإنترنت</p>' +
-      '<p style="font-size:0.9em;opacity:0.7;">You are offline</p>' +
+      '<p>عذراً، هذه الصفحة غير متوفرة حالياً.</p>' +
+      '<p style="font-size:0.9em;opacity:0.7;">Page Not Found</p>' +
       '</body></html>',
-      { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+      { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
     );
   }
 }
@@ -294,5 +301,5 @@ self.addEventListener('message', event => {
 // ================================================================
 //  تسجيل بدء التشغيل
 // ================================================================
-console.log('%c🌴 [sw] Heaven Al-Jabri v' + VERSION + ' loaded',
+console.log('%c🌴 [sw] Heaven Al-Jabri v' + VERSION + ' loaded (Bot-Proof)',
             'color:#ffd700;font-weight:700;background:#0d1117;padding:2px 8px;border-radius:4px');
