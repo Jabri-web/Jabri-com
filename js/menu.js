@@ -1,13 +1,14 @@
 // ============================================================
-//   menu.js - v6.4 (Bot-Proof + Fixed APK Paths + XSS-Safe)
+//   menu.js - v6.5 (Web-Only + Bot-Proof + XSS-Safe)
 //   Heaven Al-Jabri | واحة الجبري
 //   ─────────────────────────────────────────────────────────
-//   🔒 v6.4 (إصلاحات GSC + مسارات APK):
-//     • IS_BOT: كشف Googlebot/Bingbot/etc وإخفاء روابط التنزيل
-//     • تصحيح مسار APK/ZIP إلى /apk/jabri-heaven-v2.0.{apk,zip}
-//     • حذف /unified-calc.html (غير موجود) من MENU_TOP
-//     • downloadWaha لا تعمل إلا لغير الروبوتات
-//     • كل إصلاحات v6.3 محفوظة (XSS-safe, buildUrl, ...)
+//   🆕 v6.5 (تنظيف شامل):
+//     • ❌ حُذف كل ما يخص APK (IS_WV, IS_FILE, APP_ROOT, IS_APK)
+//     • ❌ حُذف downloadWaha (نُقلت إلى /about-waha.html)
+//     • ❌ حُذف قسم "تنزيل الواحة" من القائمتين
+//     • ✅ أُبقي IS_BOT لحماية GSC
+//     • ✅ أُبقي esc() و buildUrl() المبسّط
+//     • ✅ كل إصلاحات v6.4 محفوظة (ما عدا APK)
 // ============================================================
 
 (function() {
@@ -16,54 +17,17 @@
     // ============================================================
     //   🌍 كشف البيئة
     // ============================================================
-    const PROTO   = location.protocol;
-    const IS_FILE = PROTO === 'file:';
-    const IS_WV   = (navigator.userAgent || '').indexOf('wv') !== -1;
-    const IS_APK  = IS_FILE || IS_WV ||
-                    (PROTO !== 'http:' && PROTO !== 'https:' &&
-                     (location.hostname || '').indexOf('vercel') === -1 &&
-                     (location.hostname || '').indexOf('github') === -1);
-
-    // 🛡️ [v6.4] كشف الروبوتات — لا نعرض لهم روابط الملفات
     const UA = navigator.userAgent || '';
+
+    // 🛡️ كشف الروبوتات — لا نعرض لهم محادثات أو prompt
     const IS_BOT = /googlebot|bingbot|slurp|duckduckbot|yandexbot|baiduspider|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|applebot|semrushbot|ahrefsbot|mj12bot|dotbot|petalbot/i.test(UA);
 
-    console.log('🌍 [menu.js] البيئة:', IS_APK ? '📱 APK' : '🌐 Web',
-                IS_BOT ? '| 🤖 BOT' : '| 👤 Human');
+    console.log('🌍 [menu.js] الوضع: Web' + (IS_BOT ? ' | 🤖 BOT' : ' | 👤 Human'));
 
-    // ============================================================
-    //   📁 اكتشاف جذر التطبيق على APK
-    // ============================================================
-    let APP_ROOT = '/';
-    if (IS_APK) {
-        const p = location.pathname.replace(/\\/g, '/');
-        const KNOWN_ROOTS = [
-            '/android_asset/www/',
-            '/android_asset/public/',
-            '/assets/www/',
-            '/assets/public/',
-            '/www/'
-        ];
-        for (let i = 0; i < KNOWN_ROOTS.length; i++) {
-            const idx = p.indexOf(KNOWN_ROOTS[i]);
-            if (idx !== -1) {
-                APP_ROOT = p.substring(0, idx + KNOWN_ROOTS[i].length);
-                break;
-            }
-        }
-        if (APP_ROOT === '/' && p.lastIndexOf('/') !== -1) {
-            APP_ROOT = p.substring(0, p.lastIndexOf('/') + 1);
-        }
-        console.log('📁 [menu.js] APP_ROOT =', APP_ROOT);
-    }
-
-    // ✅ [v6.4] النطاق الرسمي للموقع
+    // ✅ النطاق الرسمي
     const SITE_URL = 'https://jabri-com.vercel.app';
 
-    // ✅ [v6.4] المسارات الحقيقية للملفات (موجودة في /apk/)
-    const APK_DOWNLOAD_PATH = '/apk/jabri-heaven-v2.0.apk';
-    const ZIP_DOWNLOAD_PATH = '/apk/jabri-heaven-v2.0.zip';
-
+    // ✅ اكتشاف اللغة من المسار
     const currentPath = location.pathname;
     let langDir = '';
     let isArabic = true;
@@ -77,25 +41,10 @@
     }
 
     // ============================================================
-    //   🔗 بناء الروابط
+    //   🔗 بناء الروابط (نسخة ويب مبسّطة)
     // ============================================================
     function buildUrl(path) {
-        if (IS_APK) {
-            const target = String(path || '/').replace(/^\//, '');
-            const currentDir = location.pathname.substring(
-                0, location.pathname.lastIndexOf('/') + 1
-            );
-            let relFromRoot = currentDir;
-            if (relFromRoot.indexOf(APP_ROOT) === 0) {
-                relFromRoot = relFromRoot.substring(APP_ROOT.length);
-            } else {
-                relFromRoot = '';
-            }
-            const depth = (relFromRoot.match(/\//g) || []).length;
-            const upPrefix = depth > 0 ? '../'.repeat(depth) : '';
-            return upPrefix + target;
-        }
-        return SITE_URL + langDir + path;
+        return SITE_URL + langDir + (path || '/');
     }
 
     // ============================================================
@@ -129,7 +78,6 @@
         { name: 'مستكشف الواحة', nameEn: 'Explore', path: '/explore.html', icon: '🗂️' },
         { name: 'رسالة من صنعاء', nameEn: 'Message from Sanaa', path: '/journal3.html', icon: '✉️' },
         { name: 'مختبر Z(x)', nameEn: 'Z(x) Lab', path: '/Pages-Researches.html', icon: '🧮' },
-        // ⛔ [v6.4] حُذف: unified-calc.html (غير موجود في الموقع)
         { name: 'معرض صنعاء', nameEn: 'Sanaa Gallery', path: '/gallery.html', icon: '🖼️' },
         { name: '🎮 مركز الألعاب', nameEn: '🎮 Games Hub', path: '/game/game-auto.html', icon: '🎮' }
     ];
@@ -237,32 +185,26 @@
     // ============================================================
     function buildMenuItem(item) {
         const finalHref = item.href || buildUrl(item.path || '/');
-        const isActive = !IS_APK &&
-                         finalHref !== '#' &&
+        const isActive = finalHref !== '#' &&
                          location.pathname.indexOf(finalHref.split('/').pop()) !== -1;
         const activeStyle = isActive
             ? 'background:rgba(255,215,0,0.08);border-right:3px solid #ffd700;'
             : '';
 
-        const isChatItem     = item.isChat === true;
-        const isDownloadItem = item.isDownload === true;
-        const isWikiItem     = item.isWiki === true;
+        const isChatItem = item.isChat === true;
+        const isWikiItem = item.isWiki === true;
 
         const onClick = isChatItem
             ? ' onclick="window.openChatPrompt(); return false;"'
-            : isDownloadItem
-            ? ' onclick="window.downloadWaha(\'' + esc(item.type) + '\'); return false;"'
             : isWikiItem
             ? ' onclick="window.openWiki(); return false;"'
             : '';
 
-        const cursor = (isChatItem || isDownloadItem || isWikiItem) ? 'cursor:pointer;' : '';
+        const cursor = (isChatItem || isWikiItem) ? 'cursor:pointer;' : '';
         const target = item.external ? ' target="_blank" rel="noopener noreferrer"' : '';
         const label  = esc(isArabic ? item.name : item.nameEn);
         const icon   = esc(item.icon || '📄');
-        const hrefAttr = finalHref === '#'
-            ? '#'
-            : (item.external ? finalHref : finalHref);
+        const hrefAttr = finalHref === '#' ? '#' : finalHref;
 
         return '<a href="' + hrefAttr + '"' + target + onClick +
                ' style="color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;' +
@@ -305,28 +247,6 @@
                 (isArabic ? 'النظرية' : 'Theory') + '</div>';
         MENU_MIDDLE.forEach(function(item) { html += buildMenuItem(item); });
         html += '</div>';
-
-        // 🛡️ [v6.4] قسم التنزيل — يُبنى فقط لغير الروبوتات
-        if (!IS_APK && !IS_BOT) {
-            html += '<div class="menu-section" style="border-bottom:2px solid rgba(255,106,106,0.2);' +
-                    ' padding-bottom:8px; margin-bottom:10px;">' +
-                    '<div style="color:#ff6a6a; font-size:0.7rem; font-weight:bold;' +
-                    ' letter-spacing:1px; margin-bottom:4px;">⬇️ ' +
-                    (isArabic ? 'تنزيل الواحة' : 'Download Waha') + '</div>';
-            html += buildMenuItem({ name: '📱 تنزيل APK', nameEn: '📱 Download APK',
-                                    href: '#', icon: '📱', isDownload: true, type: 'apk' });
-            html += buildMenuItem({ name: '📦 تنزيل ZIP', nameEn: '📦 Download ZIP',
-                                    href: '#', icon: '📦', isDownload: true, type: 'zip' });
-            html += '</div>';
-        } else if (IS_APK) {
-            html += '<div class="menu-section" style="border-bottom:2px solid rgba(255,106,106,0.2);' +
-                    ' padding-bottom:8px; margin-bottom:10px;">' +
-                    '<div style="color:#888; font-size:0.75rem; padding:6px 12px;' +
-                    ' text-align:center;">✅ ' +
-                    (isArabic ? 'أنت تستخدم التطبيق بالفعل' : 'You are already using the app') +
-                    '</div></div>';
-        }
-        // ⛔ للـ BOT: لا قسم تنزيل إطلاقاً
 
         html += '<div class="menu-section" style="border-bottom:2px solid rgba(106,227,255,0.2);' +
                 ' padding-bottom:8px; margin-bottom:10px;">' +
@@ -409,7 +329,7 @@
             '<span style="font-size:1.1rem;">🆔</span> ORCID</a>';
 
         nav.innerHTML = html;
-        if (!IS_APK) highlightActiveLink();
+        highlightActiveLink();
     }
 
     // ============================================================
@@ -419,8 +339,8 @@
         const dropdown = document.getElementById('menu-dropdown');
         if (!dropdown) return;
 
-        const arHref = IS_APK ? buildUrl('/index.html') : '/ar/';
-        const enHref = IS_APK ? buildUrl('/index.html') : '/en/';
+        const arHref = '/ar/';
+        const enHref = '/en/';
 
         let html =
             '<div style="display:flex; gap:8px; justify-content:center; padding-bottom:12px;' +
@@ -483,26 +403,6 @@
                     esc(isArabic ? item.name : item.nameEn) + '</a>';
         });
         html += '</div>';
-
-        // 🛡️ [v6.4] قسم التنزيل — يُبنى فقط لغير الروبوتات
-        if (!IS_APK && !IS_BOT) {
-            html += '<div style="border-bottom:2px solid rgba(255,106,106,0.15);' +
-                    ' padding-bottom:6px; margin-bottom:8px;">' +
-                    '<div style="color:#ff6a6a; font-size:0.65rem; font-weight:bold;' +
-                    ' letter-spacing:1px; margin-bottom:4px;">⬇️ ' +
-                    (isArabic ? 'تنزيل الواحة' : 'Download Waha') + '</div>' +
-                    '<div onclick="window.downloadWaha(\'apk\')" style="color:#fff;' +
-                    ' padding:5px 10px;border-radius:6px;display:flex;align-items:center;' +
-                    ' gap:8px;cursor:pointer;font-size:0.82rem;' +
-                    ' border-bottom:1px solid rgba(255,106,106,0.03);">' +
-                    '<span>📱</span> ' + (isArabic ? 'تنزيل APK' : 'Download APK') + '</div>' +
-                    '<div onclick="window.downloadWaha(\'zip\')" style="color:#fff;' +
-                    ' padding:5px 10px;border-radius:6px;display:flex;align-items:center;' +
-                    ' gap:8px;cursor:pointer;font-size:0.82rem;' +
-                    ' border-bottom:1px solid rgba(255,106,106,0.03);">' +
-                    '<span>📦</span> ' + (isArabic ? 'تنزيل ZIP' : 'Download ZIP') + '</div>' +
-                    '</div>';
-        }
 
         html += '<div style="border-bottom:2px solid rgba(106,227,255,0.15);' +
                 ' padding-bottom:6px; margin-bottom:8px;">' +
@@ -648,7 +548,7 @@
             }
         });
 
-        console.log('🌴 [menu] buildHamburgerMenu v6.4');
+        console.log('🌴 [menu] buildHamburgerMenu v6.5');
     }
 
     // ============================================================
@@ -673,7 +573,7 @@
     //   🌐 دوال عامة
     // ============================================================
     window.openChatPrompt = function() {
-        if (IS_BOT) return; // ⛔ لا prompt للروبوتات
+        if (IS_BOT) return;
         const message = prompt(isArabic ? '💬 اكتب رسالتك:' : '💬 Write your message:');
         if (message && message.trim()) {
             window.saveChatMessage(message.trim());
@@ -689,56 +589,6 @@
         );
     };
 
-    // ✅ [v6.4] downloadWaha — يستخدم المسار الصحيح + لا يعمل للروبوتات
-    window.downloadWaha = function(type) {
-        // ⛔ حماية مزدوجة: لا تنزيل للروبوتات
-        if (IS_BOT) {
-            console.log('🤖 [menu] downloadWaha تم استدعاؤها من روبوت — تجاهل');
-            return;
-        }
-
-        if (IS_APK) {
-            alert(isArabic ? '✅ أنت تستخدم التطبيق بالفعل!'
-                           : '✅ You are already using the app!');
-            return;
-        }
-
-        const defaultName = type === 'apk'
-            ? 'jabri-heaven-v2.0.apk'
-            : 'jabri-heaven-v2.0.zip';
-
-        const folder = prompt(
-            isArabic ? '📁 ادخل اسم المجلد للحفظ:' : '📁 Enter folder name to save:',
-            '11-Jabri-com/apk'
-        );
-        if (folder === null) return;
-
-        const filename = prompt(
-            isArabic ? '📝 ادخل اسم الملف:' : '📝 Enter file name:',
-            defaultName
-        );
-        if (filename === null) return;
-
-        // ✅ [v6.4] المسار الصحيح — الملف موجود فعلاً في /apk/
-        const downloadUrl = type === 'apk'
-            ? SITE_URL + APK_DOWNLOAD_PATH
-            : SITE_URL + ZIP_DOWNLOAD_PATH;
-
-        console.log('📥 [menu] تنزيل:', downloadUrl);
-
-        const a = document.createElement('a');
-        a.href = downloadUrl;
-        a.download = filename;
-        a.rel = 'noopener noreferrer';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        alert(isArabic
-            ? '✅ بدأ التنزيل!\nالمجلد: ' + folder + '\nالملف: ' + filename
-            : '✅ Download started!\nFolder: ' + folder + '\nFile: ' + filename);
-    };
-
     // ============================================================
     //   🚀 التهيئة
     // ============================================================
@@ -747,9 +597,8 @@
             updateBottomMenu();
             buildMainMenu();
             buildHamburgerMenu();
-            console.log('🌴 menu.js v6.4 — ' +
-                        (IS_APK ? '📱 APK Mode' : '🌐 Web Mode') +
-                        (IS_BOT ? ' | 🤖 BOT detected — download links hidden' : ''));
+            console.log('🌴 menu.js v6.5 — Web Only' +
+                        (IS_BOT ? ' | 🤖 BOT detected' : ''));
         } catch (e) {
             console.error('❌ [menu] خطأ في التشغيل:', e);
         }
