@@ -1,14 +1,13 @@
 // ============================================================
-//   menu.js - v6.5 (Web-Only + Bot-Proof + XSS-Safe)
+//   menu.js - v6.6 (Smart Wait + No Delete + Bot-Proof)
 //   Heaven Al-Jabri | واحة الجبري
 //   ─────────────────────────────────────────────────────────
-//   🆕 v6.5 (تنظيف شامل):
-//     • ❌ حُذف كل ما يخص APK (IS_WV, IS_FILE, APP_ROOT, IS_APK)
-//     • ❌ حُذف downloadWaha (نُقلت إلى /about-waha.html)
-//     • ❌ حُذف قسم "تنزيل الواحة" من القائمتين
-//     • ✅ أُبقي IS_BOT لحماية GSC
-//     • ✅ أُبقي esc() و buildUrl() المبسّط
-//     • ✅ كل إصلاحات v6.4 محفوظة (ما عدا APK)
+//   🆕 v6.6 (الإصلاح الجذري):
+//     • ✅ منع حذف زر القائمة (hamburger-menu)
+//     • ✅ نظام مراقبة ذكي (Polling) للبحث عن القائمة والزر
+//     • ✅ استماع لحدث headerLoaded كخط دفاع ثانٍ
+//     • ✅ حماية الكود من الانهيار (null checks)
+//     • ✅ تنظيف القائمة المنسدلة القديمة فقط (وليس الزر)
 // ============================================================
 
 (function() {
@@ -41,7 +40,7 @@
     }
 
     // ============================================================
-    //   🔗 بناء الروابط (نسخة ويب مبسّطة)
+    //   🔗 بناء الروابط
     // ============================================================
     function buildUrl(path) {
         return SITE_URL + langDir + (path || '/');
@@ -216,11 +215,14 @@
     }
 
     // ============================================================
-    //   📋 القائمة الرئيسية
+    //   📋 القائمة الرئيسية (محصّنة ضد null)
     // ============================================================
     function buildMainMenu() {
         const nav = document.querySelector('#main-menu');
-        if (!nav) return;
+        if (!nav) {
+            console.warn('⚠️ [menu] #main-menu غير موجود — تخطي buildMainMenu');
+            return false; // فشل
+        }
 
         let html = '';
 
@@ -330,14 +332,18 @@
 
         nav.innerHTML = html;
         highlightActiveLink();
+        return true; // نجاح
     }
 
     // ============================================================
-    //   📋 القائمة المنسدلة
+    //   📋 القائمة المنسدلة (محصّنة ضد null)
     // ============================================================
     function buildDropdownMenu() {
         const dropdown = document.getElementById('menu-dropdown');
-        if (!dropdown) return;
+        if (!dropdown) {
+            console.warn('⚠️ [menu] #menu-dropdown غير موجود — تخطي');
+            return;
+        }
 
         const arHref = '/ar/';
         const enHref = '/en/';
@@ -471,37 +477,45 @@
     }
 
     // ============================================================
-    //   ☰ قائمة الهامبرغر
+    //   ☰ قائمة الهامبرغر (الإصلاح الجذري)
     // ============================================================
     function buildHamburgerMenu() {
-        const oldDropdown = document.getElementById('menu-dropdown');
-        if (oldDropdown) oldDropdown.remove();
-        const oldYellowBtn = document.getElementById('hamburger-menu');
-        if (oldYellowBtn) oldYellowBtn.remove();
+        // ✅ ① لا تحذف الزر — فقط ابحث عنه
+        const headerBtn = document.querySelector('.top-btn.menu');
+        if (headerBtn) {
+            console.log('✅ [menu] وجدنا زر القائمة في الهيدر');
+        } else {
+            console.warn('⚠️ [menu] زر القائمة غير موجود في الهيدر بعد');
+        }
 
-        const dropdown = document.createElement('div');
-        dropdown.id = 'menu-dropdown';
-        dropdown.style.cssText =
-            'display: none !important;' +
-            'position: fixed !important;' +
-            'top: 75px !important;' +
-            (isArabic ? 'right: 20px' : 'left: 20px') + ' !important;' +
-            'background: rgba(10, 10, 20, 0.97) !important;' +
-            'border: 2px solid #ffd700 !important;' +
-            'border-radius: 16px !important;' +
-            'padding: 18px 16px !important;' +
-            'min-width: 300px !important;' +
-            'max-width: 90vw !important;' +
-            'max-height: 70vh !important;' +
-            'overflow-y: auto !important;' +
-            'z-index: 9998 !important;' +
-            'flex-direction: column !important;' +
-            'direction: ' + (isArabic ? 'rtl' : 'ltr') + ' !important;' +
-            "font-family: 'Cairo', 'Tahoma', sans-serif !important;" +
-            'backdrop-filter: blur(16px) !important;' +
-            'box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9) !important;';
+        // ✅ ② أنشئ القائمة المنسدلة فقط إذا لم تكن موجودة
+        let dropdown = document.getElementById('menu-dropdown');
+        if (!dropdown) {
+            dropdown = document.createElement('div');
+            dropdown.id = 'menu-dropdown';
+            dropdown.style.cssText =
+                'display: none !important;' +
+                'position: fixed !important;' +
+                'top: 75px !important;' +
+                (isArabic ? 'right: 20px' : 'left: 20px') + ' !important;' +
+                'background: rgba(10, 10, 20, 0.97) !important;' +
+                'border: 2px solid #ffd700 !important;' +
+                'border-radius: 16px !important;' +
+                'padding: 18px 16px !important;' +
+                'min-width: 300px !important;' +
+                'max-width: 90vw !important;' +
+                'max-height: 70vh !important;' +
+                'overflow-y: auto !important;' +
+                'z-index: 9998 !important;' +
+                'flex-direction: column !important;' +
+                'direction: ' + (isArabic ? 'rtl' : 'ltr') + ' !important;' +
+                "font-family: 'Cairo', 'Tahoma', sans-serif !important;" +
+                'backdrop-filter: blur(16px) !important;' +
+                'box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9) !important;';
+            document.body.appendChild(dropdown);
+        }
 
-        document.body.appendChild(dropdown);
+        // ✅ ③ ابنِ محتوى القائمة المنسدلة
         buildDropdownMenu();
 
         let isOpen = false;
@@ -520,25 +534,48 @@
             dropdown.style.display = 'none';
         }
 
+        // ✅ ④ نظام مراقبة ذكي — يبحث عن الزر حتى يجده
         function bindHeaderMenuBtn() {
-            const headerBtn = document.querySelector('.top-btn.menu');
-            if (!headerBtn) return false;
-            if (headerBtn.dataset.wahaBound === '1') return true;
+            const btn = document.querySelector('.top-btn.menu');
+            if (!btn) return false;
+            if (btn.dataset.wahaBound === '1') return true;
 
-            headerBtn.removeAttribute('onclick');
-            headerBtn.dataset.wahaBound = '1';
-            headerBtn.addEventListener('click', toggleDropdown);
-
+            btn.removeAttribute('onclick');
+            btn.dataset.wahaBound = '1';
+            btn.addEventListener('click', toggleDropdown);
             console.log('✅ [menu] زر ☰ مربوط بنجاح');
             return true;
         }
 
-        if (!bindHeaderMenuBtn()) {
-            document.addEventListener('headerLoaded', bindHeaderMenuBtn);
-            setTimeout(bindHeaderMenuBtn, 500);
-            setTimeout(bindHeaderMenuBtn, 1500);
-            setTimeout(bindHeaderMenuBtn, 3000);
+        // 🆕 نظام مراقبة ذكي
+        let attempts = 0;
+        const maxAttempts = 20; // 10 ثوانٍ كحد أقصى
+
+        function waitForHeaderBtn() {
+            attempts++;
+            const found = bindHeaderMenuBtn();
+
+            if (found) {
+                console.log('✅ [menu] تم العثور على الزر بعد ' + attempts + ' محاولة');
+                return;
+            }
+
+            if (attempts < maxAttempts) {
+                setTimeout(waitForHeaderBtn, 500);
+            } else {
+                console.warn('⚠️ [menu] لم يتم العثور على زر القائمة بعد ' + maxAttempts + ' محاولة');
+            }
         }
+
+        // ابدأ البحث فوراً
+        waitForHeaderBtn();
+
+        // ✅ ⑤ خط دفاع إضافي: استمع لحدث headerLoaded
+        document.addEventListener('headerLoaded', function() {
+            console.log('🎯 [menu] حدث headerLoaded — إعادة المحاولة');
+            setTimeout(bindHeaderMenuBtn, 100);
+            setTimeout(bindHeaderMenuBtn, 500);
+        });
 
         window.toggleMenu = toggleDropdown;
 
@@ -548,7 +585,7 @@
             }
         });
 
-        console.log('🌴 [menu] buildHamburgerMenu v6.5');
+        console.log('🌴 [menu] buildHamburgerMenu v6.6');
     }
 
     // ============================================================
@@ -590,14 +627,54 @@
     };
 
     // ============================================================
-    //   🚀 التهيئة
+    //   🚀 التهيئة (محصّنة ضد الأخطاء)
     // ============================================================
     function init() {
         try {
-            updateBottomMenu();
-            buildMainMenu();
+            console.log('🌴 [menu] بدء التهيئة...');
+
+            // ① بناء القائمة المنسدلة أولاً (لا تعتمد على الهيدر)
             buildHamburgerMenu();
-            console.log('🌴 menu.js v6.5 — Web Only' +
+
+            // ② محاولة بناء القائمة الرئيسية (تعتمد على الهيدر)
+            let attempts = 0;
+            const maxAttempts = 30; // 15 ثانية
+
+            function tryBuildMainMenu() {
+                attempts++;
+                const mainMenu = document.querySelector('#main-menu');
+
+                if (mainMenu) {
+                    console.log('✅ [menu] تم العثور على #main-menu بعد ' + attempts + ' محاولة');
+                    buildMainMenu();
+                    updateBottomMenu();
+                    highlightActiveLink();
+                    return;
+                }
+
+                if (attempts < maxAttempts) {
+                    setTimeout(tryBuildMainMenu, 500);
+                } else {
+                    console.warn('⚠️ [menu] لم يتم العثور على #main-menu بعد ' + maxAttempts + ' محاولة');
+                    buildDropdownMenu();
+                }
+            }
+
+            tryBuildMainMenu();
+
+            // ③ خط دفاع إضافي: استمع لحدث headerLoaded
+            document.addEventListener('headerLoaded', function() {
+                console.log('🎯 [menu] حدث headerLoaded — إعادة بناء القائمة');
+                setTimeout(function() {
+                    const mainMenu = document.querySelector('#main-menu');
+                    if (mainMenu && !mainMenu.dataset.built) {
+                        buildMainMenu();
+                        mainMenu.dataset.built = 'true';
+                    }
+                }, 200);
+            });
+
+            console.log('🌴 menu.js v6.6 — Web Only' +
                         (IS_BOT ? ' | 🤖 BOT detected' : ''));
         } catch (e) {
             console.error('❌ [menu] خطأ في التشغيل:', e);
