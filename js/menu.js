@@ -1,13 +1,12 @@
 // ============================================================
-//   menu.js - v6.6 (Smart Wait + No Delete + Bot-Proof)
+//   menu.js - v7.1 (Header-Compatible Edition)
 //   Heaven Al-Jabri | واحة الجبري
 //   ─────────────────────────────────────────────────────────
-//   🆕 v6.6 (الإصلاح الجذري):
-//     • ✅ منع حذف زر القائمة (hamburger-menu)
-//     • ✅ نظام مراقبة ذكي (Polling) للبحث عن القائمة والزر
-//     • ✅ استماع لحدث headerLoaded كخط دفاع ثانٍ
-//     • ✅ حماية الكود من الانهيار (null checks)
-//     • ✅ تنظيف القائمة المنسدلة القديمة فقط (وليس الزر)
+//   🆕 v7.1:
+//     • ✅ يستدعى مرة واحدة فقط — مفيش Polling — مفيش تعليق
+//     • ✅ زر اللغة منسّق مع زر اللغة في الهيدر (نفس المنطق)
+//     • ✅ زر اللغة يقلب المجلد فقط (/ar/ ⇄ /en/) — بدون fetch
+//     • ✅ كل أزرار الهيدر شغالة زي ما هي (📖 ⚙️ 🔑)
 // ============================================================
 
 (function() {
@@ -17,11 +16,9 @@
     //   🌍 كشف البيئة
     // ============================================================
     const UA = navigator.userAgent || '';
-
-    // 🛡️ كشف الروبوتات — لا نعرض لهم محادثات أو prompt
     const IS_BOT = /googlebot|bingbot|slurp|duckduckbot|yandexbot|baiduspider|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|applebot|semrushbot|ahrefsbot|mj12bot|dotbot|petalbot/i.test(UA);
 
-    console.log('🌍 [menu.js] الوضع: Web' + (IS_BOT ? ' | 🤖 BOT' : ' | 👤 Human'));
+    console.log('🌍 [menu.js v7.1] Web' + (IS_BOT ? ' | 🤖 BOT' : ' | 👤 Human'));
 
     // ✅ النطاق الرسمي
     const SITE_URL = 'https://jabri-com.vercel.app';
@@ -44,6 +41,35 @@
     // ============================================================
     function buildUrl(path) {
         return SITE_URL + langDir + (path || '/');
+    }
+
+    // ============================================================
+    //   🔄 زر اللغة: يقلب المجلد فقط — بدون قراءة ملفات
+    //   ✅ منسّق مع window.toggleLang في header.html
+    // ============================================================
+    function buildLangUrl(targetLang) {
+        var path = window.location.pathname;
+        var search = window.location.search;
+        var hash = window.location.hash;
+        var newPath;
+
+        if (path.indexOf('/ar/') === 0) {
+            newPath = path.replace('/ar/', '/' + targetLang + '/');
+        } else if (path.indexOf('/en/') === 0) {
+            newPath = path.replace('/en/', '/' + targetLang + '/');
+        } else {
+            newPath = '/' + targetLang + '/';
+        }
+
+        return newPath + search + hash;
+    }
+
+    // ✅ نُعرّف toggleLang هنا كمان لو مش موجود في header.html
+    if (!window.toggleLang) {
+        window.toggleLang = function() {
+            var target = isArabic ? 'en' : 'ar';
+            window.location.href = buildLangUrl(target);
+        };
     }
 
     // ============================================================
@@ -172,183 +198,56 @@
                     isChat: true
                 }];
             }
-            buildDropdownMenu();
-            buildMainMenu();
+
+            renderDropdown();
         } catch (e) {
             console.warn('⚠️ [menu] فشل تحديث القائمة:', e);
         }
     }
 
     // ============================================================
-    //   🧱 بناء عنصر قائمة
+    //   🎨 أنماط مشتركة
     // ============================================================
-    function buildMenuItem(item) {
-        const finalHref = item.href || buildUrl(item.path || '/');
-        const isActive = finalHref !== '#' &&
-                         location.pathname.indexOf(finalHref.split('/').pop()) !== -1;
-        const activeStyle = isActive
-            ? 'background:rgba(255,215,0,0.08);border-right:3px solid #ffd700;'
-            : '';
+    const SECTION_STYLE = 'border-bottom:2px solid rgba(255,215,0,0.15);' +
+                          ' padding-bottom:6px; margin-bottom:8px;';
+    const SECTION_TITLE = 'color:#ffd700; font-size:0.68rem; font-weight:bold;' +
+                          ' letter-spacing:1px; margin-bottom:4px;';
+    const LINK_STYLE = 'color:#fff;padding:5px 10px;border-radius:6px;' +
+                       'text-decoration:none;display:flex;align-items:center;gap:8px;' +
+                       'border-bottom:1px solid rgba(255,215,0,0.03);font-size:0.82rem;' +
+                       'transition:0.2s;';
 
-        const isChatItem = item.isChat === true;
-        const isWikiItem = item.isWiki === true;
-
-        const onClick = isChatItem
-            ? ' onclick="window.openChatPrompt(); return false;"'
-            : isWikiItem
-            ? ' onclick="window.openWiki(); return false;"'
-            : '';
-
-        const cursor = (isChatItem || isWikiItem) ? 'cursor:pointer;' : '';
-        const target = item.external ? ' target="_blank" rel="noopener noreferrer"' : '';
-        const label  = esc(isArabic ? item.name : item.nameEn);
-        const icon   = esc(item.icon || '📄');
-        const hrefAttr = finalHref === '#' ? '#' : finalHref;
+    // ============================================================
+    //   🧱 بناء عنصر رابط
+    // ============================================================
+    function buildLink(item) {
+        var href = item.href || buildUrl(item.path || '/');
+        var target = item.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+        var onClick = item.isChat ? ' onclick="window.openChatPrompt(); return false;"'
+                    : item.isWiki ? ' onclick="window.openWiki(); return false;"'
+                    : '';
+        var label = esc(isArabic ? item.name : item.nameEn);
+        var icon = esc(item.icon || '📄');
+        var hrefAttr = href === '#' ? '#' : esc(href);
 
         return '<a href="' + hrefAttr + '"' + target + onClick +
-               ' style="color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;' +
-               'display:flex;align-items:center;gap:8px;transition:0.3s;' +
-               'border-bottom:1px solid rgba(255,215,0,0.03);font-size:0.85rem;' +
-               activeStyle + cursor + '">' +
-               '<span style="font-size:1rem;">' + icon + '</span> ' + label +
+               ' style="' + LINK_STYLE + '">' +
+               '<span style="font-size:0.9rem;">' + icon + '</span> ' + label +
                '</a>';
     }
 
     // ============================================================
-    //   📋 القائمة الرئيسية (محصّنة ضد null)
+    //   📋 بناء القائمة المنسدلة كاملة
     // ============================================================
-    function buildMainMenu() {
-        const nav = document.querySelector('#main-menu');
-        if (!nav) {
-            console.warn('⚠️ [menu] #main-menu غير موجود — تخطي buildMainMenu');
-            return false; // فشل
-        }
+    function renderDropdown() {
+        var dropdown = document.getElementById('menu-dropdown');
+        if (!dropdown) return;
 
-        let html = '';
+        // ✅ زر اللغة — منسّق مع الهيدر (يقلب المجلد بس)
+        var arHref = buildLangUrl('ar');
+        var enHref = buildLangUrl('en');
 
-        html += '<div class="menu-section" style="border-bottom:2px solid rgba(255,215,0,0.2);' +
-                ' padding-bottom:8px; margin-bottom:10px;">' +
-                '<div style="color:#ffd700; font-size:0.7rem; font-weight:bold;' +
-                ' letter-spacing:1px; margin-bottom:4px;">📌 ' +
-                (isArabic ? 'الأساسيات' : 'Essentials') + '</div>';
-        MENU_TOP.forEach(function(item) { html += buildMenuItem(item); });
-        html += '</div>';
-
-        html += '<div class="menu-section" style="border-bottom:2px solid rgba(0,255,128,0.2);' +
-                ' padding-bottom:8px; margin-bottom:10px;">' +
-                '<div style="color:#00ff88; font-size:0.7rem; font-weight:bold;' +
-                ' letter-spacing:1px; margin-bottom:4px;">🎮 ' +
-                (isArabic ? 'مركز الألعاب' : 'Games Hub') + '</div>';
-        GAMES.forEach(function(item) { html += buildMenuItem(item); });
-        html += '</div>';
-
-        html += '<div class="menu-section" style="border-bottom:2px solid rgba(106,227,255,0.2);' +
-                ' padding-bottom:8px; margin-bottom:10px;">' +
-                '<div style="color:#6ae3ff; font-size:0.7rem; font-weight:bold;' +
-                ' letter-spacing:1px; margin-bottom:4px;">🧠 ' +
-                (isArabic ? 'النظرية' : 'Theory') + '</div>';
-        MENU_MIDDLE.forEach(function(item) { html += buildMenuItem(item); });
-        html += '</div>';
-
-        html += '<div class="menu-section" style="border-bottom:2px solid rgba(106,227,255,0.2);' +
-                ' padding-bottom:8px; margin-bottom:10px;">' +
-                '<div style="color:#6ae3ff; font-size:0.7rem; font-weight:bold;' +
-                ' letter-spacing:1px; margin-bottom:4px;">📖 ' +
-                (isArabic ? 'ويكيبيديا' : 'Wikipedia') + '</div>';
-        html += buildMenuItem({
-            name: '📖 عربي - ويكيبيديا',
-            nameEn: '📖 English - Wikipedia',
-            href: 'https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html',
-            icon: '📖',
-            isWiki: true,
-            external: true
-        });
-        html += '</div>';
-
-        html += '<div class="menu-section" style="border-bottom:2px solid rgba(255,106,106,0.2);' +
-                ' padding-bottom:8px; margin-bottom:10px;">' +
-                '<div style="color:#ff6a6a; font-size:0.7rem; font-weight:bold;' +
-                ' letter-spacing:1px; margin-bottom:4px;">💬 ' +
-                (isArabic ? 'آخر المحادثات' : 'Recent Chats') +
-                ' <span style="font-size:0.6rem; opacity:0.6;">(' + MENU_BOTTOM.length + ')</span>' +
-                '</div>';
-        MENU_BOTTOM.forEach(function(item) { html += buildMenuItem(item); });
-        html += '</div>';
-
-        const today = new Date();
-        const dateStr = today.toLocaleDateString(isArabic ? 'ar-EG' : 'en-US', {
-            year: 'numeric', month: 'long', day: 'numeric'
-        });
-
-        html +=
-            '<div style="border-top:2px solid #ffd700; margin:12px 0 8px 0; padding-top:10px;">' +
-                '<div style="color:#ffd700; font-size:0.7rem; font-weight:bold;' +
-                ' text-align:center; letter-spacing:1px; margin-bottom:6px;">' +
-                    '⭐ ' + (isArabic ? 'إنجازات اليوم - ' : "Today's Achievements — ") + esc(dateStr) +
-                '</div>' +
-                '<div style="display:flex; flex-direction:column; gap:4px;' +
-                ' font-size:0.78rem; color:#ccc; padding:0 4px;">' +
-                    '<div style="display:flex; align-items:center; gap:8px;' +
-                    ' background:rgba(255,215,0,0.04); padding:5px 10px;' +
-                    ' border-radius:6px; border-right:3px solid #ffd700;">' +
-                        '<span>🧮</span> <span>' +
-                        (isArabic ? 'الدالة الأم - اشتقاق ثابت الجاذبية'
-                                  : 'Mother Function — Gravitational Constant') +
-                        '</span></div>' +
-                    '<div style="display:flex; align-items:center; gap:8px;' +
-                    ' background:rgba(255,215,0,0.04); padding:5px 10px;' +
-                    ' border-radius:6px; border-right:3px solid #ffd700;">' +
-                        '<span>🌌</span> <span>' +
-                        (isArabic ? 'النظرية الموحدة Zx = Z + C + A'
-                                  : 'Unified Theory Zx = Z + C + A') +
-                        '</span></div>' +
-                    '<div style="display:flex; align-items:center; gap:8px;' +
-                    ' background:rgba(0,255,128,0.04); padding:5px 10px;' +
-                    ' border-radius:6px; border-right:3px solid #00ff88;">' +
-                        '<span>🎮</span> <span>' +
-                        (isArabic ? 'مركز الألعاب - 3 ألعاب جديدة'
-                                  : 'Games Hub - 3 new games') +
-                        '</span></div>' +
-                '</div>' +
-            '</div>';
-
-        html +=
-            '<div style="border-top:1px solid rgba(255,215,0,0.08); margin:6px 0 4px 0;' +
-            ' padding-top:6px;"></div>' +
-            '<a href="https://en.wikipedia.org/wiki/User:Jabri2026" target="_blank"' +
-            ' rel="noopener noreferrer" style="color:#fff;padding:8px 12px;border-radius:8px;' +
-            ' text-decoration:none;display:flex;align-items:center;gap:10px;' +
-            ' border-bottom:1px solid rgba(255,215,0,0.04);font-size:0.9rem;">' +
-            '<span style="font-size:1.1rem;">🌐</span> Wikipedia</a>' +
-            '<a href="https://github.com/jabri-com" target="_blank"' +
-            ' rel="noopener noreferrer" style="color:#fff;padding:8px 12px;border-radius:8px;' +
-            ' text-decoration:none;display:flex;align-items:center;gap:10px;' +
-            ' border-bottom:1px solid rgba(255,215,0,0.04);font-size:0.9rem;">' +
-            '<span style="font-size:1.1rem;">🐙</span> GitHub</a>' +
-            '<a href="https://orcid.org/0009-0003-3319-3822" target="_blank"' +
-            ' rel="noopener noreferrer" style="color:#fff;padding:8px 12px;border-radius:8px;' +
-            ' text-decoration:none;display:flex;align-items:center;gap:10px;font-size:0.9rem;">' +
-            '<span style="font-size:1.1rem;">🆔</span> ORCID</a>';
-
-        nav.innerHTML = html;
-        highlightActiveLink();
-        return true; // نجاح
-    }
-
-    // ============================================================
-    //   📋 القائمة المنسدلة (محصّنة ضد null)
-    // ============================================================
-    function buildDropdownMenu() {
-        const dropdown = document.getElementById('menu-dropdown');
-        if (!dropdown) {
-            console.warn('⚠️ [menu] #menu-dropdown غير موجود — تخطي');
-            return;
-        }
-
-        const arHref = '/ar/';
-        const enHref = '/en/';
-
-        let html =
+        var html =
             '<div style="display:flex; gap:8px; justify-content:center; padding-bottom:12px;' +
             ' border-bottom:2px solid rgba(255,215,0,0.12); margin-bottom:10px; flex-wrap:wrap;">' +
                 '<a href="' + esc(arHref) + '" style="color:' +
@@ -365,68 +264,47 @@
                 '; font-size:0.85rem;">🇬🇧 English</a>' +
             '</div>';
 
-        html += '<div style="border-bottom:2px solid rgba(255,215,0,0.15);' +
-                ' padding-bottom:6px; margin-bottom:8px;">' +
-                '<div style="color:#ffd700; font-size:0.65rem; font-weight:bold;' +
-                ' letter-spacing:1px; margin-bottom:4px;">📌 ' +
+        // ─── الأساسيات ───
+        html += '<div style="' + SECTION_STYLE + '">' +
+                '<div style="' + SECTION_TITLE + '">📌 ' +
                 (isArabic ? 'الأساسيات' : 'Essentials') + '</div>';
-        MENU_TOP.forEach(function(item) {
-            html += '<a href="' + esc(buildUrl(item.path)) + '"' +
-                    ' style="color:#fff;padding:5px 10px;border-radius:6px;' +
-                    ' text-decoration:none;display:flex;align-items:center;gap:8px;' +
-                    ' border-bottom:1px solid rgba(255,215,0,0.03);font-size:0.82rem;">' +
-                    '<span style="font-size:0.9rem;">' + esc(item.icon) + '</span> ' +
-                    esc(isArabic ? item.name : item.nameEn) + '</a>';
-        });
+        MENU_TOP.forEach(function(item) { html += buildLink(item); });
         html += '</div>';
 
-        html += '<div style="border-bottom:2px solid rgba(0,255,128,0.15);' +
-                ' padding-bottom:6px; margin-bottom:8px;">' +
-                '<div style="color:#00ff88; font-size:0.65rem; font-weight:bold;' +
+        // ─── الألعاب ───
+        html += '<div style="' + SECTION_STYLE + '">' +
+                '<div style="color:#00ff88; font-size:0.68rem; font-weight:bold;' +
                 ' letter-spacing:1px; margin-bottom:4px;">🎮 ' +
                 (isArabic ? 'مركز الألعاب' : 'Games Hub') + '</div>';
-        GAMES.forEach(function(item) {
-            html += '<a href="' + esc(buildUrl(item.path)) + '"' +
-                    ' style="color:#fff;padding:5px 10px;border-radius:6px;' +
-                    ' text-decoration:none;display:flex;align-items:center;gap:8px;' +
-                    ' border-bottom:1px solid rgba(0,255,128,0.03);font-size:0.82rem;">' +
-                    '<span style="font-size:0.9rem;">' + esc(item.icon) + '</span> ' +
-                    esc(isArabic ? item.name : item.nameEn) + '</a>';
-        });
+        GAMES.forEach(function(item) { html += buildLink(item); });
         html += '</div>';
 
-        html += '<div style="border-bottom:2px solid rgba(106,227,255,0.15);' +
-                ' padding-bottom:6px; margin-bottom:8px;">' +
-                '<div style="color:#6ae3ff; font-size:0.65rem; font-weight:bold;' +
+        // ─── النظرية ───
+        html += '<div style="' + SECTION_STYLE + '">' +
+                '<div style="color:#6ae3ff; font-size:0.68rem; font-weight:bold;' +
                 ' letter-spacing:1px; margin-bottom:4px;">🧠 ' +
                 (isArabic ? 'النظرية' : 'Theory') + '</div>';
-        MENU_MIDDLE.forEach(function(item) {
-            html += '<a href="' + esc(buildUrl(item.path)) + '"' +
-                    ' style="color:#fff;padding:5px 10px;border-radius:6px;' +
-                    ' text-decoration:none;display:flex;align-items:center;gap:8px;' +
-                    ' border-bottom:1px solid rgba(106,227,255,0.03);font-size:0.82rem;">' +
-                    '<span style="font-size:0.9rem;">' + esc(item.icon) + '</span> ' +
-                    esc(isArabic ? item.name : item.nameEn) + '</a>';
-        });
+        MENU_MIDDLE.forEach(function(item) { html += buildLink(item); });
         html += '</div>';
 
-        html += '<div style="border-bottom:2px solid rgba(106,227,255,0.15);' +
-                ' padding-bottom:6px; margin-bottom:8px;">' +
-                '<div style="color:#6ae3ff; font-size:0.65rem; font-weight:bold;' +
-                ' letter-spacing:1px; margin-bottom:4px;">📖 ' +
+        // ─── ويكيبيديا ───
+        html += '<div style="' + SECTION_STYLE + '">' +
+                '<div style="' + SECTION_TITLE + '">📖 ' +
                 (isArabic ? 'ويكيبيديا' : 'Wikipedia') + '</div>' +
-                '<a href="https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html"' +
-                ' target="_blank" rel="noopener noreferrer" style="color:#6ae3ff;' +
-                ' padding:5px 10px;border-radius:6px;text-decoration:none;display:flex;' +
-                ' align-items:center;gap:8px;font-size:0.82rem;' +
-                ' border-bottom:1px solid rgba(106,227,255,0.03);">' +
-                '<span>📖</span> ' +
-                (isArabic ? 'عربي - ويكيبيديا' : 'English - Wikipedia') + '</a>' +
+                buildLink({
+                    name: '📖 عربي - ويكيبيديا',
+                    nameEn: '📖 English - Wikipedia',
+                    href: 'https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html',
+                    icon: '📖',
+                    isWiki: true,
+                    external: true
+                }) +
                 '</div>';
 
+        // ─── المحادثات ───
         html += '<div style="border-bottom:2px solid rgba(255,106,106,0.15);' +
                 ' padding-bottom:6px; margin-bottom:8px;">' +
-                '<div style="color:#ff6a6a; font-size:0.65rem; font-weight:bold;' +
+                '<div style="color:#ff6a6a; font-size:0.68rem; font-weight:bold;' +
                 ' letter-spacing:1px; margin-bottom:4px;">💬 ' +
                 (isArabic ? 'آخر المحادثات' : 'Recent Chats') +
                 ' <span style="font-size:0.6rem; opacity:0.6;">(' + MENU_BOTTOM.length + ')</span>' +
@@ -440,9 +318,9 @@
                     '</div>';
         } else {
             MENU_BOTTOM.forEach(function(item) {
-                const chat = item.chatData || {};
-                const msgText = String(chat.message || '');
-                const timeText = String(chat.time || '');
+                var chat = item.chatData || {};
+                var msgText = String(chat.message || '');
+                var timeText = String(chat.time || '');
                 html += '<div onclick="window.openChatPrompt()" style="padding:4px 10px;' +
                         ' border-radius:6px; font-size:0.75rem; color:#ccc; display:flex;' +
                         ' justify-content:space-between; cursor:pointer;' +
@@ -455,155 +333,88 @@
         }
         html += '</div>';
 
+        // ─── الروابط الخارجية ───
         html +=
             '<div style="border-top:1px solid rgba(255,215,0,0.08); margin:6px 0 4px 0;' +
             ' padding-top:6px;"></div>' +
             '<a href="https://en.wikipedia.org/wiki/User:Jabri2026" target="_blank"' +
-            ' rel="noopener noreferrer" style="color:#fff;padding:6px 10px;border-radius:6px;' +
-            ' text-decoration:none;display:flex;align-items:center;gap:8px;' +
-            ' border-bottom:1px solid rgba(255,215,0,0.03);font-size:0.82rem;">' +
+            ' rel="noopener noreferrer" style="' + LINK_STYLE + '">' +
             '<span style="font-size:0.9rem;">🌐</span> Wikipedia</a>' +
             '<a href="https://github.com/jabri-com" target="_blank"' +
-            ' rel="noopener noreferrer" style="color:#fff;padding:6px 10px;border-radius:6px;' +
-            ' text-decoration:none;display:flex;align-items:center;gap:8px;' +
-            ' border-bottom:1px solid rgba(255,215,0,0.03);font-size:0.82rem;">' +
+            ' rel="noopener noreferrer" style="' + LINK_STYLE + '">' +
             '<span style="font-size:0.9rem;">🐙</span> GitHub</a>' +
             '<a href="https://orcid.org/0009-0003-3319-3822" target="_blank"' +
-            ' rel="noopener noreferrer" style="color:#fff;padding:6px 10px;border-radius:6px;' +
-            ' text-decoration:none;display:flex;align-items:center;gap:8px;font-size:0.82rem;">' +
+            ' rel="noopener noreferrer" style="' + LINK_STYLE + '">' +
             '<span style="font-size:0.9rem;">🆔</span> ORCID</a>';
 
         dropdown.innerHTML = html;
     }
 
     // ============================================================
-    //   ☰ قائمة الهامبرغر (الإصلاح الجذري)
+    //   ☰ بناء نظام القائمة
     // ============================================================
-    function buildHamburgerMenu() {
-        // ✅ ① لا تحذف الزر — فقط ابحث عنه
-        const headerBtn = document.querySelector('.top-btn.menu');
-        if (headerBtn) {
-            console.log('✅ [menu] وجدنا زر القائمة في الهيدر');
-        } else {
-            console.warn('⚠️ [menu] زر القائمة غير موجود في الهيدر بعد');
-        }
-
-        // ✅ ② أنشئ القائمة المنسدلة فقط إذا لم تكن موجودة
-        let dropdown = document.getElementById('menu-dropdown');
+    function buildMenuSystem() {
+        // ① إنشاء القائمة المنسدلة مرة واحدة
+        var dropdown = document.getElementById('menu-dropdown');
         if (!dropdown) {
             dropdown = document.createElement('div');
             dropdown.id = 'menu-dropdown';
             dropdown.style.cssText =
-                'display: none !important;' +
-                'position: fixed !important;' +
-                'top: 75px !important;' +
-                (isArabic ? 'right: 20px' : 'left: 20px') + ' !important;' +
-                'background: rgba(10, 10, 20, 0.97) !important;' +
-                'border: 2px solid #ffd700 !important;' +
-                'border-radius: 16px !important;' +
-                'padding: 18px 16px !important;' +
-                'min-width: 300px !important;' +
-                'max-width: 90vw !important;' +
-                'max-height: 70vh !important;' +
-                'overflow-y: auto !important;' +
-                'z-index: 9998 !important;' +
-                'flex-direction: column !important;' +
-                'direction: ' + (isArabic ? 'rtl' : 'ltr') + ' !important;' +
-                "font-family: 'Cairo', 'Tahoma', sans-serif !important;" +
-                'backdrop-filter: blur(16px) !important;' +
-                'box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9) !important;';
+                'display: none;' +
+                'position: fixed;' +
+                'top: 75px;' +
+                (isArabic ? 'right: 20px;' : 'left: 20px;') +
+                'background: rgba(10, 10, 20, 0.97);' +
+                'border: 2px solid #ffd700;' +
+                'border-radius: 16px;' +
+                'padding: 18px 16px;' +
+                'min-width: 300px;' +
+                'max-width: 90vw;' +
+                'max-height: 70vh;' +
+                'overflow-y: auto;' +
+                'z-index: 9998;' +
+                'flex-direction: column;' +
+                'direction: ' + (isArabic ? 'rtl' : 'ltr') + ';' +
+                "font-family: 'Cairo', 'Tahoma', sans-serif;" +
+                'backdrop-filter: blur(16px);' +
+                'box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9);';
             document.body.appendChild(dropdown);
         }
 
-        // ✅ ③ ابنِ محتوى القائمة المنسدلة
-        buildDropdownMenu();
+        // ② بناء محتوى القائمة
+        renderDropdown();
 
-        let isOpen = false;
-
-        function toggleDropdown(e) {
-            if (e) {
+        // ③ ربط زر القائمة (☰) — مرة واحدة بس
+        var btn = document.querySelector('.top-btn.menu');
+        if (btn && btn.dataset.wahaBound !== '1') {
+            btn.dataset.wahaBound = '1';
+            btn.removeAttribute('onclick');
+            btn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
-            }
-            isOpen = !isOpen;
-            dropdown.style.display = isOpen ? 'flex' : 'none';
+                var isOpen = dropdown.style.display === 'flex';
+                dropdown.style.display = isOpen ? 'none' : 'flex';
+            });
+            console.log('✅ [menu] زر ☰ مربوط');
+        } else if (!btn) {
+            console.warn('⚠️ [menu] زر .top-btn.menu غير موجود في الهيدر');
         }
 
-        function closeDropdown() {
-            isOpen = false;
-            dropdown.style.display = 'none';
-        }
-
-        // ✅ ④ نظام مراقبة ذكي — يبحث عن الزر حتى يجده
-        function bindHeaderMenuBtn() {
-            const btn = document.querySelector('.top-btn.menu');
-            if (!btn) return false;
-            if (btn.dataset.wahaBound === '1') return true;
-
-            btn.removeAttribute('onclick');
-            btn.dataset.wahaBound = '1';
-            btn.addEventListener('click', toggleDropdown);
-            console.log('✅ [menu] زر ☰ مربوط بنجاح');
-            return true;
-        }
-
-        // 🆕 نظام مراقبة ذكي
-        let attempts = 0;
-        const maxAttempts = 20; // 10 ثوانٍ كحد أقصى
-
-        function waitForHeaderBtn() {
-            attempts++;
-            const found = bindHeaderMenuBtn();
-
-            if (found) {
-                console.log('✅ [menu] تم العثور على الزر بعد ' + attempts + ' محاولة');
-                return;
-            }
-
-            if (attempts < maxAttempts) {
-                setTimeout(waitForHeaderBtn, 500);
-            } else {
-                console.warn('⚠️ [menu] لم يتم العثور على زر القائمة بعد ' + maxAttempts + ' محاولة');
-            }
-        }
-
-        // ابدأ البحث فوراً
-        waitForHeaderBtn();
-
-        // ✅ ⑤ خط دفاع إضافي: استمع لحدث headerLoaded
-        document.addEventListener('headerLoaded', function() {
-            console.log('🎯 [menu] حدث headerLoaded — إعادة المحاولة');
-            setTimeout(bindHeaderMenuBtn, 100);
-            setTimeout(bindHeaderMenuBtn, 500);
-        });
-
-        window.toggleMenu = toggleDropdown;
-
+        // ④ إغلاق القائمة عند الضغط خارجها
         document.addEventListener('click', function(e) {
-            if (!dropdown.contains(e.target) && !e.target.closest('.top-btn.menu')) {
-                closeDropdown();
+            if (dropdown.style.display === 'flex' &&
+                !dropdown.contains(e.target) &&
+                !e.target.closest('.top-btn.menu')) {
+                dropdown.style.display = 'none';
             }
         });
 
-        console.log('🌴 [menu] buildHamburgerMenu v6.6');
-    }
-
-    // ============================================================
-    //   🔧 دوال مساعدة
-    // ============================================================
-    function highlightActiveLink() {
-        const links = document.querySelectorAll('#main-menu a');
-        const current = location.pathname.split('/').pop() || 'index.html';
-        links.forEach(function(link) {
-            const hrefAttr = link.getAttribute('href');
-            if (!hrefAttr) return;
-            const href = hrefAttr.split('/').pop();
-            if (href === current || (current === '' && href === 'index.html')) {
-                link.style.background = 'rgba(255, 215, 0, 0.08)';
-                link.style.borderRight = '3px solid #ffd700';
-                link.style.color = '#ffd700';
-            }
+        // ⑤ إغلاق بمفتاح Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') dropdown.style.display = 'none';
         });
+
+        console.log('🌴 [menu.js v7.1] تم بناء نظام القائمة بنجاح');
     }
 
     // ============================================================
@@ -611,7 +422,7 @@
     // ============================================================
     window.openChatPrompt = function() {
         if (IS_BOT) return;
-        const message = prompt(isArabic ? '💬 اكتب رسالتك:' : '💬 Write your message:');
+        var message = prompt(isArabic ? '💬 اكتب رسالتك:' : '💬 Write your message:');
         if (message && message.trim()) {
             window.saveChatMessage(message.trim());
             alert(isArabic ? '✅ تم إرسال رسالتك بنجاح!' : '✅ Message sent successfully!');
@@ -626,56 +437,20 @@
         );
     };
 
+    window.updateChatMenu = updateBottomMenu;
+    window.saveChat = window.saveChatMessage;
+
     // ============================================================
-    //   🚀 التهيئة (محصّنة ضد الأخطاء)
+    //   🚀 التهيئة — مرة واحدة فقط
     // ============================================================
     function init() {
         try {
-            console.log('🌴 [menu] بدء التهيئة...');
+            console.log('🌴 [menu] بدء التهيئة v7.1...');
 
-            // ① بناء القائمة المنسدلة أولاً (لا تعتمد على الهيدر)
-            buildHamburgerMenu();
+            updateBottomMenu();
+            buildMenuSystem();
 
-            // ② محاولة بناء القائمة الرئيسية (تعتمد على الهيدر)
-            let attempts = 0;
-            const maxAttempts = 30; // 15 ثانية
-
-            function tryBuildMainMenu() {
-                attempts++;
-                const mainMenu = document.querySelector('#main-menu');
-
-                if (mainMenu) {
-                    console.log('✅ [menu] تم العثور على #main-menu بعد ' + attempts + ' محاولة');
-                    buildMainMenu();
-                    updateBottomMenu();
-                    highlightActiveLink();
-                    return;
-                }
-
-                if (attempts < maxAttempts) {
-                    setTimeout(tryBuildMainMenu, 500);
-                } else {
-                    console.warn('⚠️ [menu] لم يتم العثور على #main-menu بعد ' + maxAttempts + ' محاولة');
-                    buildDropdownMenu();
-                }
-            }
-
-            tryBuildMainMenu();
-
-            // ③ خط دفاع إضافي: استمع لحدث headerLoaded
-            document.addEventListener('headerLoaded', function() {
-                console.log('🎯 [menu] حدث headerLoaded — إعادة بناء القائمة');
-                setTimeout(function() {
-                    const mainMenu = document.querySelector('#main-menu');
-                    if (mainMenu && !mainMenu.dataset.built) {
-                        buildMainMenu();
-                        mainMenu.dataset.built = 'true';
-                    }
-                }, 200);
-            });
-
-            console.log('🌴 menu.js v6.6 — Web Only' +
-                        (IS_BOT ? ' | 🤖 BOT detected' : ''));
+            console.log('✅ [menu] التهيئة اكتملت');
         } catch (e) {
             console.error('❌ [menu] خطأ في التشغيل:', e);
         }
@@ -686,9 +461,5 @@
     } else {
         init();
     }
-
-    // تصدير عام
-    window.updateChatMenu = updateBottomMenu;
-    window.saveChat = window.saveChatMessage;
 
 })();
