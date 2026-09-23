@@ -182,13 +182,13 @@ _______files_______
 90-ar/about.html
 91-ar/contact.html
 92-ar/journal.html
-93-ar/profile.html ⭐ NEW (2026-09-20)
-94-ar/project.html ⭐ NEW (2026-09-20)
-95-ar/Router-all.html ⭐ NEW (2026-09-20)
-96-ar/Page4.html ⭐ NEW (2026-09-20)
-97-ar/Page10.html ⭐ NEW (2026-09-20)
-98-ar/Page11.html ⭐ NEW (2026-09-20)
-99-ar/Page12.html ⭐ NEW (2026-09-20)
+93-ar/profile.html ⭐NEW(2026-9-20)
+94-ar/project.html ⭐NEW(2026-9-20)
+95-ar/Router-all.html ⭐(2026-9-20)
+96-ar/Page4.html ⭐(2026-09-20)
+97-ar/Page10.html ⭐(2026-09-20)
+98-ar/Page11.html ⭐(2026-09-20)
+99-ar/Page12.html ⭐(2026-09-20)
 
 # ────────────────────────────
 # 16. مجلد /en/ (النسخة الإنجليزية) - محدّث
@@ -197,13 +197,13 @@ _______files_______
 101-en/about.html
 102-en/contact.html
 103-en/journal.html
-104-en/profile.html ⭐ NEW (2026-09-20)
-105-en/project.html ⭐ NEW (2026-09-20)
-106-en/Router-all.html ⭐ NEW (2026-09-20)
-107-en/Page4.html ⭐ NEW (2026-09-20)
-108-en/Page10.html ⭐ NEW (2026-09-20)
-109-en/Page11.html ⭐ NEW (2026-09-20)
-110-en/Page12.html ⭐ NEW (2026-09-20)
+104-en/profile.html ⭐(2026-09-20)
+105-en/project.html ⭐(2026-09-20)
+106-en/Router-all.html⭐(2026-9-20)
+107-en/Page4.html ⭐(2026-09-20)
+108-en/Page10.html ⭐(2026-09-20)
+109-en/Page11.html ⭐(2026-09-20)
+110-en/Page12.html ⭐(2026-09-20)
 
 # ────────────────────────────
 # 17. مجلد /game/ (الألعاب)
