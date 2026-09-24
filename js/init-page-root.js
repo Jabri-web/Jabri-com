@@ -1,7 +1,7 @@
-// init-page-root.js — v7.3.1 (No White Screen)
+// init-page-root.js — v7.3.2 (No White Screen + Safe 404)
 (function(){
   'use strict';
-  console.log('🛡️ [init] v7.3.1...');
+  console.log('🛡️ [init] v7.3.2...');
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
@@ -18,7 +18,7 @@
     if(m) return m;
     if(s?.hasAttribute('data-no-splash')) return 'safe';
     if(location.pathname.toLowerCase().startsWith('/app/catalog')) return 'safe';
-    return 'full'; // ✅ رجعها full افتراضياً
+    return 'full'; // ✅ full افتراضياً
   }
 
   let PAGE_MODE = detectPageMode();
@@ -77,29 +77,55 @@
      .catch(()=>{ onOk?.(); });
   }
 
-  // 404 لا يوقف الصفحة أبداً
+  // ✅ v7.3.2: لا يتدخل إذا المسار .html
   function handle404NonBlocking(){
-    const path=location.pathname;
-    if(['/','/ar','/ar/','/en','/en/'].includes(path)) return;
-    const clean=path.replace(/^\/(ar|en)(\/|$)/i,'/');
-    if(clean==='/'||clean==='') return;
+    const path = location.pathname;
 
+    // ✅ ① إذا المسار ينتهي بـ .html → تخطي (الصفحة موجودة)
+    if (path.endsWith('.html')) {
+      console.log('ℹ️ [404] مسار .html — تخطي');
+      return;
+    }
+
+    // ✅ ② روابط خاصة
+    if(['/','/ar','/ar/','/en','/en/'].includes(path)) return;
+
+    // ✅ ③ استخرج المسار النظيف
+    const clean = path.replace(/^\/(ar|en)(\/|$)/i,'/');
+    if(clean==='/' || clean==='') return;
+
+    // ✅ ④ حماية ضد loop
     const key='waha_404_'+path;
     try{ if(sessionStorage.getItem(key)) return; sessionStorage.setItem(key,'1'); }catch(e){}
 
-    const candidates=[`/ar${clean}`, `/en${clean}`, clean].filter((c,i,a)=>c!==path && a.indexOf(c)===i);
+    // ✅ ⑤ المرشحات في الثلاثي (مع + بدون .html)
+    const bases = [`/ar${clean}`, `/en${clean}`, clean];
+    let candidates = [];
+    bases.forEach(b=>{
+      if(b===path) return;
+      candidates.push(b);                    // /about-waha
+      candidates.push(b + '.html');          // /about-waha.html
+      candidates.push(b + '/index.html');    // /about-waha/index.html
+    });
+    candidates = [...new Set(candidates)].slice(0,8);
 
-    // شغلها بعد ما الصفحة تظهر، ليس قبل
+    console.log('🔍 [404] تجرب:', candidates);
+
     setTimeout(()=>{
       let i=0;
       const tryNext=()=>{
         if(i>=candidates.length) return;
         fetch(asset(candidates[i]), {method:'HEAD', cache:'no-store'})
-         .then(r=>{ if(r.ok){ location.replace(candidates[i]+location.search+location.hash); } else { i++; tryNext(); } })
-         .catch(()=>{ i++; tryNext(); });
+        .then(r=>{
+           if(r.ok){
+             console.log('✅ وجدتها:', candidates[i]);
+             location.replace(candidates[i]+location.search+location.hash);
+           }else{ i++; tryNext(); }
+         })
+        .catch(()=>{ i++; tryNext(); });
       };
       tryNext();
-    }, 1200);
+    }, 700);
   }
 
   // اللغة - تحافظ على المسار الفرعي
