@@ -1,9 +1,10 @@
-// init-page-root.js — v8.3.1 "المرعبة النهائية" (Final Locked Edition)
+// init-page-root.js — v8.3.2 "المرعبة المصححة" (Final Locked + .html Fix)
 // Smart 404 + Sequential Boot + Tri-Lang Toggle + Network Notifications
 // + Static File Guard + HEAD→GET Fallback + all-links.html Fallback
+// + 🆕 Fix: لا يضيف .html مرتين
 (function(){
   'use strict';
-  console.log('👁️ [init] v8.3.1 — المرعبة النهائية... locked & unstoppable');
+  console.log('👁️ [init] v8.3.2 — المرعبة المصححة... locked & fixed');
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
@@ -110,7 +111,6 @@
   async function fileExists(url){
     try{
       let r = await fetch(asset(url), {method:'HEAD', cache:'no-store'});
-      // Fallback للخوادم اللي ما تدعم HEAD (SPCK/Python)
       if(!r.ok && [400, 405, 501].includes(r.status)){
         r = await fetch(asset(url), {method:'GET', cache:'no-store'});
       }
@@ -127,7 +127,7 @@
     /* 🛡️ حماية الملفات الثابتة */
     if(/\.(js|css|png|jpg|jpeg|gif|svg|webp|avif|ico|woff2?|map|json|txt|xml|pdf|mp3|mp4|webm)$/i.test(path)) return;
 
-    // منع التكرار في نفس الجلسة
+    // منع التكرار
     const key = 'waha_404_' + path;
     try{
       if(sessionStorage.getItem(key)) return;
@@ -136,6 +136,9 @@
 
     const clean = path.replace(/^\/(ar|en)(\/|$)/i, '/') || '/';
     if(clean === '/' || clean === '') return;
+
+    /* 🆕 إزالة .html إذا موجود قبل إضافته (منع .html.html) */
+    const cleanNoExt = clean.replace(/\.html$/i, '');
 
     /* هل الصفحة فيها محتوى حقيقي؟ */
     const mainHTML = document.body.innerHTML.trim();
@@ -146,14 +149,14 @@
 
     setSplashMsg('🔍 جارٍ البحث عن الصفحة...');
 
-    /* === التسلسل الكامل: الروت → ar → en (مع وبعد .html) === */
+    /* === التسلسل: الروت → ar → en (بدون تكرار .html) === */
     const candidates = [
-      clean + '.html',            // ① /about.html         ← الروت مع امتداد
-      '/ar' + clean + '.html',    // ② /ar/about.html      ← عربي خالص
-      '/en' + clean + '.html',    // ③ /en/about.html      ← إنجليزي خالص
-      clean,                      // ④ /about              ← بدون امتداد
-      '/ar' + clean,              // ⑤ /ar/about
-      '/en' + clean,              // ⑥ /en/about
+      cleanNoExt + '.html',              // ① /all-links.html
+      '/ar' + cleanNoExt + '.html',      // ② /ar/all-links.html
+      '/en' + cleanNoExt + '.html',      // ③ /en/all-links.html
+      cleanNoExt,                        // ④ /all-links
+      '/ar' + cleanNoExt,                // ⑤ /ar/all-links
+      '/en' + cleanNoExt,                // ⑥ /en/all-links
     ].filter((c,i,a)=> c !== path && a.indexOf(c) === i);
 
     for(const c of candidates){
@@ -164,13 +167,13 @@
       }
     }
 
-    /* === آخر مرشح: all-links.html (خريطة الموقع) === */
+    /* === آخر مرشح: all-links.html === */
     setSplashMsg('🗺️ فتح خريطة الموقع...');
 
     const linksFallback = [
-      '/all-links.html',          // ⑦ خريطة الموقع (الروت)
-      '/ar/all-links.html',       // احتياطي عربي
-      '/en/all-links.html',       // احتياطي إنجليزي
+      '/all-links.html',
+      '/ar/all-links.html',
+      '/en/all-links.html',
     ];
 
     for(const c of linksFallback){
@@ -195,11 +198,11 @@
 
     let newPath;
     if(/^\/ar(\/|$)/i.test(path)){
-      newPath = '/en' + (clean === '/' ? '/' : clean);   // ar → en
+      newPath = '/en' + (clean === '/' ? '/' : clean);
     } else if(/^\/en(\/|$)/i.test(path)){
-      newPath = clean;                                    // en → / (root)
+      newPath = clean;
     } else {
-      newPath = '/ar' + (clean === '/' ? '/' : clean);   // / → ar
+      newPath = '/ar' + (clean === '/' ? '/' : clean);
     }
     location.href = newPath + location.search + location.hash;
   };
@@ -292,7 +295,7 @@
       document.dispatchEvent(new CustomEvent('headerLoaded', {detail:{ok:headerOK}}));
       console.log(headerOK ? '✅ الهيدر تحمّل' : '⚠️ فشل تحميل الهيدر');
 
-      /* --- 2) الفوتر بعد الهيدر مباشرة --- */
+      /* --- 2) الفوتر بعد الهيدر --- */
       setSplashMsg('📥 تحميل الفوتر...');
       const footerOK = await loadHTMLFile('footer-placeholder', 'footer.html');
       console.log(footerOK ? '✅ الفوتر تحمّل' : '⚠️ فشل تحميل الفوتر');
@@ -306,7 +309,7 @@
         setTimeout(hideSplash, 250);
       }
 
-      /* --- 4) فحص 404 بعد ظهور الصفحة --- */
+      /* --- 4) فحص 404 --- */
       await smart404();
 
     }catch(e){
