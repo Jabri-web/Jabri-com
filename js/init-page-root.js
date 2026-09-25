@@ -1,10 +1,10 @@
-// init-page-root.js — v8.3.2 "المرعبة المصححة" (Final Locked + .html Fix)
+// init-page-root.js — v8.3.4 "المرعبة الصادقة" (Final Honest Edition)
 // Smart 404 + Sequential Boot + Tri-Lang Toggle + Network Notifications
 // + Static File Guard + HEAD→GET Fallback + all-links.html Fallback
-// + 🆕 Fix: لا يضيف .html مرتين
+// + .html Fix (only add if missing) + Real Internet Check
 (function(){
   'use strict';
-  console.log('👁️ [init] v8.3.2 — المرعبة المصححة... locked & fixed');
+  console.log('👁️ [init] v8.3.4 — المرعبة الصادقة... locked & honest');
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
@@ -107,7 +107,7 @@
     });
   }
 
-  /* ============ 5) اكتشاف 404 — تسلسل ذكي ============ */
+  /* ============ 5) اكتشاف 404 — مصلح 100% ============ */
   async function fileExists(url){
     try{
       let r = await fetch(asset(url), {method:'HEAD', cache:'no-store'});
@@ -120,61 +120,88 @@
 
   async function smart404(){
     const path = location.pathname;
+    const pathClean = path.replace(/\/+$/, '') || '/';  // إزالة السلاش الأخير
 
     // تجاهل الصفحات الرئيسية
-    if(['/','/ar','/ar/','/en','/en/','/index.html'].includes(path)) return;
+    if(['/','/ar','/ar/','/en','/en/','/index.html',
+        '/index','/ar/index','/en/index'].includes(pathClean)) return;
 
     /* 🛡️ حماية الملفات الثابتة */
-    if(/\.(js|css|png|jpg|jpeg|gif|svg|webp|avif|ico|woff2?|map|json|txt|xml|pdf|mp3|mp4|webm)$/i.test(path)) return;
+    if(/\.(js|css|png|jpg|jpeg|gif|svg|webp|avif|ico|woff2?|map|json|txt|xml|pdf|mp3|mp4|webm|php|asp|aspx|jsp)$/i.test(path)) return;
 
     // منع التكرار
-    const key = 'waha_404_' + path;
+    const key = 'waha_404_' + pathClean;
     try{
       if(sessionStorage.getItem(key)) return;
       sessionStorage.setItem(key,'1');
     }catch(e){}
 
-    const clean = path.replace(/^\/(ar|en)(\/|$)/i, '/') || '/';
+    /* استخرج المسار بدون بادئة اللغة */
+    const clean = pathClean.replace(/^\/(ar|en)(\/|$)/i, '/') || '/';
     if(clean === '/' || clean === '') return;
 
-    /* 🆕 إزالة .html إذا موجود قبل إضافته (منع .html.html) */
-    const cleanNoExt = clean.replace(/\.html$/i, '');
-
     /* هل الصفحة فيها محتوى حقيقي؟ */
-    const mainHTML = document.body.innerHTML.trim();
-    const hasRealContent = mainHTML.length > 500 &&
-                           !mainHTML.includes('404') &&
-                           !mainHTML.includes('Not Found');
-    if(hasRealContent) return;
+    const hasHeader = document.getElementById('header-placeholder')?.dataset?.loaded === 'true';
+    const hasFooter = document.getElementById('footer-placeholder')?.dataset?.loaded === 'true';
+    const mainEl = document.querySelector('main');
+    const hasMain = mainEl && mainEl.children.length >= 3;
+    const hasRealContent = hasHeader || hasFooter || hasMain;
+
+    if(hasRealContent) return;  // الصفحة سليمة → لا تلمسها
 
     setSplashMsg('🔍 جارٍ البحث عن الصفحة...');
 
-    /* === التسلسل: الروت → ar → en (بدون تكرار .html) === */
-    const candidates = [
-      cleanNoExt + '.html',              // ① /all-links.html
-      '/ar' + cleanNoExt + '.html',      // ② /ar/all-links.html
-      '/en' + cleanNoExt + '.html',      // ③ /en/all-links.html
-      cleanNoExt,                        // ④ /all-links
-      '/ar' + cleanNoExt,                // ⑤ /ar/all-links
-      '/en' + cleanNoExt,                // ⑥ /en/all-links
-    ].filter((c,i,a)=> c !== path && a.indexOf(c) === i);
+    /* ✅ المنطق الصحيح: أضف .html فقط إذا ما فيه .html */
+    const hasHtml = clean.toLowerCase().endsWith('.html');
+    const basePath = hasHtml ? clean : clean.replace(/\.html$/i, '');
+
+    let candidates;
+    if(hasHtml){
+      // عنده .html — لا تضيف مرة ثانية
+      candidates = [
+        '/ar' + basePath,          // /ar/all-links.html
+        '/en' + basePath,          // /en/all-links.html
+        basePath,                  // /all-links.html  (احتياطي — لكن قد يكون نفس الصفحة)
+      ];
+    } else {
+      // ما عنده — أضف .html
+      candidates = [
+        basePath + '.html',        // /all-links.html
+        '/ar' + basePath + '.html',// /ar/all-links.html
+        '/en' + basePath + '.html',// /en/all-links.html
+        basePath,                  // /all-links (احتياطي بدون امتداد)
+        '/ar' + basePath,
+        '/en' + basePath,
+      ];
+    }
+
+    // 🆕 استبعد أي مرشح = الصفحة الحالية (منع حلقة إعادة التحميل)
+    candidates = candidates.filter(c => {
+      const cClean = c.replace(/\/+$/, '');
+      return cClean !== pathClean && cClean !== path;
+    });
 
     for(const c of candidates){
       if(await fileExists(c)){
         setSplashMsg('✅ وجدناها! جارٍ الفتح...');
+        console.log('🔄 [404] تحويل إلى:', c);
         location.replace(c + location.search + location.hash);
         return;
       }
     }
 
-    /* === آخر مرشح: all-links.html === */
+    /* === آخر مرشح: all-links.html (خريطة الموقع) === */
     setSplashMsg('🗺️ فتح خريطة الموقع...');
+    console.log('🗺️ [404] تحويل إلى خريطة الموقع');
 
     const linksFallback = [
       '/all-links.html',
       '/ar/all-links.html',
       '/en/all-links.html',
-    ];
+    ].filter(c => {
+      const cClean = c.replace(/\/+$/, '');
+      return cClean !== pathClean;
+    });
 
     for(const c of linksFallback){
       if(await fileExists(c)){
@@ -209,7 +236,7 @@
   window.toggleLang = window.switchLanguage;
   window.toggleLanguage = window.switchLanguage;
 
-  /* ============ 7) إشعارات الشبكة ============ */
+  /* ============ 7) إشعارات الشبكة — محسّنة بفحص فعلي ============ */
   (function networkNotifier(){
     if(!('onLine' in navigator)) return;
     if(document.getElementById('netBar')) return;
@@ -249,34 +276,73 @@
     }
     function hide(){ bar.classList.remove('show'); }
 
-    window.addEventListener('online', ()=>{
-      show('✅ عاد الاتصال بالإنترنت', 'linear-gradient(90deg,#059669,#10b981)', 2500);
-    });
-    window.addEventListener('offline', ()=>{
-      show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0);
-    });
-
-    if(!navigator.onLine){
-      show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0);
+    /* 🆕 فحص فعلي للإنترنت بدل navigator.onLine الكذاب */
+    async function checkRealInternet(){
+      // استخدم fetch على ملف صغير من نفس الأصل
+      try{
+        const ctrl = new AbortController();
+        const timer = setTimeout(()=> ctrl.abort(), 3000);
+        const testUrl = asset('favicon.ico') + '?_=' + Date.now();
+        await fetch(testUrl, {
+          method: 'HEAD',
+          cache: 'no-store',
+          signal: ctrl.signal
+        });
+        clearTimeout(timer);
+        return true;
+      }catch(e){
+        return false;
+      }
     }
 
-    try{
-      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-      if(conn?.effectiveType){
-        const t = conn.effectiveType;
-        if(t === '2g' || t === 'slow-2g'){
-          setTimeout(()=>{
-            show('🐌 الاتصال بطيء — قد يتأخر التحميل', 'linear-gradient(90deg,#b45309,#f59e0b)', 3500);
-          }, 800);
-        }
-      }
-    }catch(e){}
+    let lastState = null;  // null = لم يُفحص بعد
+    let checking = false;
 
+    async function updateStatus(){
+      if(checking) return;
+      checking = true;
+
+      const online = await checkRealInternet();
+      checking = false;
+
+      // أول فحص — لا تظهر إشعار
+      if(lastState === null){
+        lastState = online;
+        if(!online){
+          show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0);
+        }
+        return;
+      }
+
+      // نفس الحالة → لا تفعل شيء
+      if(online === lastState) return;
+
+      lastState = online;
+
+      if(online){
+        show('✅ عاد الاتصال بالإنترنت', 'linear-gradient(90deg,#059669,#10b981)', 2500);
+      } else {
+        show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0);
+      }
+    }
+
+    /* استمع للأحداث كتسريع */
+    window.addEventListener('online', ()=> setTimeout(updateStatus, 300));
+    window.addEventListener('offline', ()=> setTimeout(updateStatus, 300));
+
+    /* فحص دوري كل 20 ثانية */
+    setInterval(updateStatus, 20000);
+
+    /* فحص أولي بعد 2 ثانية (بعد ما الصفحة تستقر) */
+    setTimeout(updateStatus, 2000);
+
+    /* أداة اختبار يدوية */
     window.__testNetBar = {
       offline: ()=> show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0),
       online:  ()=> show('✅ عاد الاتصال بالإنترنت', 'linear-gradient(90deg,#059669,#10b981)', 2500),
       slow:    ()=> show('🐌 الاتصال بطيء — قد يتأخر التحميل', 'linear-gradient(90deg,#b45309,#f59e0b)', 3500),
-      hide:    ()=> hide()
+      hide:    ()=> hide(),
+      check:   ()=> updateStatus()
     };
   })();
 
