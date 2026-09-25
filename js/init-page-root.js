@@ -1,7 +1,7 @@
-// init-page-root.js — v7.3.2 (No White Screen + Safe 404 + Clean URLs)
+// init-page-root.js — v7.3.3 (No White Screen + Safe 404 + Clean URLs)
 (function(){
   'use strict';
-  console.log('🛡️ [init] v7.3.2 (المرعبة المصححة)...');
+  console.log('🛡️ [init] v7.3.3 (المرعبة النهائية)...');
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
@@ -85,36 +85,29 @@
   function handle404NonBlocking(){
     const path = location.pathname;
     
-    // 1. إذا كان الرابط ينتهي بـ .html أو صفحة رئيسية، لا تتدخل
     if (path.endsWith('.html') || ['/', '/ar','/ar/','/en','/en/'].includes(path)) {
       return;
     }
 
-    // 2. استخرج المسار النظيف (بدون /ar أو /en)
     let clean = path.replace(/^\/(ar|en)(\/|$)/i,'/');
     if(clean==='/' || clean==='') return;
-
-    // 3. تنظيف المسار من أي سلاش مزدوج
     clean = clean.replace(/\/+/g, '/');
 
     const key='waha_404_'+path;
     try{ if(sessionStorage.getItem(key)) return; sessionStorage.setItem(key,'1'); }catch(e){}
 
-    // 4. بناء المرشحات بشكل ذكي
     let candidates = [];
     
     const addCandidate = (c) => {
-        let safe = c.replace(/\/+/g, '/'); // إزالة أي سلاش مزدوج
+        let safe = c.replace(/\/+/g, '/'); 
         if (!safe.startsWith('/')) safe = '/' + safe;
         if (safe !== path) candidates.push(safe);
     };
 
-    // إضافة المرشحات: كما هو، مع .html، مع index.html
     addCandidate(clean);
     addCandidate(clean + '.html');
     addCandidate(clean + '/index.html');
 
-    // إضافة مرشحات اللغات فقط إذا لم تكن موجودة في الرابط الأصلي
     if (!path.startsWith('/ar/') && !path.startsWith('/en/')) {
         addCandidate('/ar' + clean);
         addCandidate('/ar' + clean + '.html');
@@ -122,7 +115,6 @@
         addCandidate('/en' + clean + '.html');
     }
 
-    // إزالة التكرارات وأي رابط يحتوي على //
     candidates = [...new Set(candidates)]
         .filter(c => !c.includes('//'))
         .slice(0, 8);
@@ -137,7 +129,6 @@
         .then(r=>{
            if(r.ok){
              console.log('✅ وجدتها:', candidates[i]);
-             // تأكد من نظافة الرابط النهائي قبل الانتقال
              const finalUrl = candidates[i].replace(/\/+/g, '/');
              location.replace(finalUrl + location.search + location.hash);
            }else{ i++; tryNext(); }
