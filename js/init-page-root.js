@@ -1,29 +1,21 @@
-// init-page-root.js — v7.3.4 (No White Screen + Safe 404 + Auto .html)
+// init-page-root.js — v7.3.5 (No White Screen + Safe 404 + Auto .html)
 (function(){
   'use strict';
-  console.log('🛡️ [init] v7.3.4 (المرعبة الكاملة)...');
+
+  // ⬇️⬇️⬇️⬇️⬇️ غيّر هذا السطر فقط عند كل تحديث ⬇️⬇️⬇️⬇️⬇️
+  const VERSION = 'v7.3.5';
+  // ⬆️⬆️⬆️⬆️⬆️ غيّر هذا السطر فقط عند كل تحديث ⬆️⬆️⬆️⬆️⬆️
+
+  console.log(`🛡️ [init] ${VERSION} (المرعبة الكاملة)...`);
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
-  // 🛡️ حماية فورية: تنظيف الرابط من أي سلاش مزدوج (//)
+  // 🛡️ تنظيف الرابط من أي سلاش مزدوج (//)
   if (location.pathname.includes('//')) {
       const cleanUrl = location.pathname.replace(/\/+/g, '/');
       window.history.replaceState(null, '', cleanUrl + location.search + location.hash);
       console.log('🧹 [المرعبة] تم تنظيف الرابط المزدوج:', cleanUrl);
   }
-
-  // ✅✅✅ هذا هو السطر الذي كنت تطلبه من البداية ✅✅✅
-  // يضيف .html تلقائياً إذا لم تكن موجودة في الرابط
-  (function() {
-      const path = location.pathname;
-      // إذا لم يكن الرابط ينتهي بـ .html وليس الصفحة الرئيسية
-      if (!path.endsWith('.html') && path !== '/' && !path.endsWith('/')) {
-          const newPath = path + '.html' + location.search + location.hash;
-          console.log('🔄 [المرعبة] تحويل الرابط إلى:', newPath);
-          window.location.replace(newPath);
-          return; 
-      }
-  })();
 
   function asset(path){
     const clean = path.replace(/^\//,'');
@@ -44,6 +36,26 @@
   window.__WAHA_PAGE_MODE = PAGE_MODE;
   let splashHidden = true;
 
+  // 📱 دالة إظهار النسخة على الشاشة (للهاتف بدون Console)
+  function showVersionToast(){
+    if (PAGE_MODE === 'safe') return;
+    const t = document.createElement('div');
+    t.textContent = `✅ ${VERSION}`;
+    t.style.cssText = `
+      position:fixed; top:10px; left:50%; transform:translateX(-50%);
+      background:#0a0a0f; color:#6ae3ff; padding:8px 18px;
+      border:2px solid #c9a84c; border-radius:20px;
+      font-weight:900; font-size:14px; z-index:9999999;
+      font-family:system-ui,sans-serif; box-shadow:0 4px 20px rgba(0,0,0,.5);
+      transition:opacity .5s; direction:ltr; pointer-events:none;
+    `;
+    document.body?.prepend(t);
+    setTimeout(()=>{ 
+      t.style.opacity='0'; 
+      setTimeout(()=>t.remove(), 500); 
+    }, 3000);
+  }
+
   function hideSplash(){
     if(splashHidden) return;
     splashHidden = true;
@@ -63,7 +75,11 @@
     document.head.appendChild(st);
     const d=document.createElement('div');
     d.id='splashScreen';
-    d.innerHTML=`<img src="${asset('icon-192.png')}" style="width:90px;height:90px;border-radius:50%;border:3px solid #c9a84c"><div style="color:#6ae3ff;font-weight:900;margin-top:15px">واحة الجبري</div>`;
+    d.innerHTML=`
+      <img src="${asset('icon-192.png')}" style="width:90px;height:90px;border-radius:50%;border:3px solid #c9a84c">
+      <div style="color:#6ae3ff;font-weight:900;margin-top:15px">واحة الجبري</div>
+      <div style="color:#c9a84c;font-size:11px;margin-top:8px;font-family:monospace;direction:ltr">${VERSION}</div>
+    `;
     document.body.prepend(d);
   }
 
@@ -93,7 +109,25 @@
      .catch(()=>{ onOk?.(); });
   }
 
-  // ✅ دالة 404 الأصلية (المرعبة) - احتفظنا بها كما هي
+  // ✅ إضافة .html تلقائياً (بعد التحقق من وجودها)
+  function autoAddHtml(){
+    const path = location.pathname;
+    if (path.endsWith('.html') || path === '/' || path.endsWith('/')) return;
+    if (['/ar','/ar/','/en','/en/'].includes(path)) return;
+
+    const newPath = path + '.html';
+    fetch(asset(newPath), {method:'HEAD', cache:'no-store'})
+      .then(r => {
+        if (r.ok) {
+          console.log('🔄 [المرعبة] تحويل تلقائي إلى:', newPath);
+          location.replace(newPath + location.search + location.hash);
+        }
+        // إذا فشل → نترك handle404NonBlocking يتصرف
+      })
+      .catch(()=>{ /* لا شيء */ });
+  }
+
+  // ✅ دالة 404 (المرعبة)
   function handle404NonBlocking(){
     const path = location.pathname;
     
@@ -165,12 +199,26 @@
   };
   window.toggleLang = window.switchLanguage;
 
+  // 🔍 فحص سريع من الكونسول (اختياري)
+  window.__WAHA_CHECK__ = function(){
+    return {
+      version: VERSION,
+      mode: window.__WAHA_PAGE_MODE,
+      apk: IS_APK,
+      url: location.href,
+      time: new Date().toISOString()
+    };
+  };
+
   function init(){
     try{
       document.documentElement.lang = location.pathname.toLowerCase().startsWith('/en')?'en':'ar';
       document.documentElement.dir = document.documentElement.lang==='ar'?'rtl':'ltr';
 
       if(PAGE_MODE==='full') createSplash();
+
+      // 📱 إظهار النسخة على الشاشة بعد 500ms
+      setTimeout(showVersionToast, 500);
 
       loadHTMLFile('header-placeholder','header.html',()=>{
         document.dispatchEvent(new CustomEvent('headerLoaded'));
@@ -182,7 +230,9 @@
 
       if(!document.getElementById('header-placeholder')) hideSplash();
 
-      handle404NonBlocking(); 
+      // ✅ ترتيب صحيح: أولاً .html ثم 404
+      autoAddHtml();
+      setTimeout(handle404NonBlocking, 1000);
 
     }catch(e){ console.error(e); hideSplash(); }
   }
