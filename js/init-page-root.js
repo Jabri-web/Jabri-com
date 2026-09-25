@@ -1,10 +1,10 @@
-// init-page-root.js — v8.3.4 "المرعبة الصادقة" (Final Honest Edition)
-// Smart 404 + Sequential Boot + Tri-Lang Toggle + Network Notifications
+// init-page-root.js — v8.3.5 "المرعبة — نسخة IT Analyst" (Final Locked)
+// Smart 404 + Sequential Boot + Tri-Lang Toggle + Network Diagnostics
 // + Static File Guard + HEAD→GET Fallback + all-links.html Fallback
-// + .html Fix (only add if missing) + Real Internet Check
+// + .html Fix + Real Internet Check + Event Log
 (function(){
   'use strict';
-  console.log('👁️ [init] v8.3.4 — المرعبة الصادقة... locked & honest');
+  console.log('👁️ [init] v8.3.5 — المرعبة (IT Analyst Edition)... locked & logging');
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
@@ -120,23 +120,19 @@
 
   async function smart404(){
     const path = location.pathname;
-    const pathClean = path.replace(/\/+$/, '') || '/';  // إزالة السلاش الأخير
+    const pathClean = path.replace(/\/+$/, '') || '/';
 
-    // تجاهل الصفحات الرئيسية
     if(['/','/ar','/ar/','/en','/en/','/index.html',
         '/index','/ar/index','/en/index'].includes(pathClean)) return;
 
-    /* 🛡️ حماية الملفات الثابتة */
     if(/\.(js|css|png|jpg|jpeg|gif|svg|webp|avif|ico|woff2?|map|json|txt|xml|pdf|mp3|mp4|webm|php|asp|aspx|jsp)$/i.test(path)) return;
 
-    // منع التكرار
     const key = 'waha_404_' + pathClean;
     try{
       if(sessionStorage.getItem(key)) return;
       sessionStorage.setItem(key,'1');
     }catch(e){}
 
-    /* استخرج المسار بدون بادئة اللغة */
     const clean = pathClean.replace(/^\/(ar|en)(\/|$)/i, '/') || '/';
     if(clean === '/' || clean === '') return;
 
@@ -147,35 +143,31 @@
     const hasMain = mainEl && mainEl.children.length >= 3;
     const hasRealContent = hasHeader || hasFooter || hasMain;
 
-    if(hasRealContent) return;  // الصفحة سليمة → لا تلمسها
+    if(hasRealContent) return;
 
     setSplashMsg('🔍 جارٍ البحث عن الصفحة...');
 
-    /* ✅ المنطق الصحيح: أضف .html فقط إذا ما فيه .html */
     const hasHtml = clean.toLowerCase().endsWith('.html');
     const basePath = hasHtml ? clean : clean.replace(/\.html$/i, '');
 
     let candidates;
     if(hasHtml){
-      // عنده .html — لا تضيف مرة ثانية
       candidates = [
-        '/ar' + basePath,          // /ar/all-links.html
-        '/en' + basePath,          // /en/all-links.html
-        basePath,                  // /all-links.html  (احتياطي — لكن قد يكون نفس الصفحة)
+        '/ar' + basePath,
+        '/en' + basePath,
+        basePath,
       ];
     } else {
-      // ما عنده — أضف .html
       candidates = [
-        basePath + '.html',        // /all-links.html
-        '/ar' + basePath + '.html',// /ar/all-links.html
-        '/en' + basePath + '.html',// /en/all-links.html
-        basePath,                  // /all-links (احتياطي بدون امتداد)
+        basePath + '.html',
+        '/ar' + basePath + '.html',
+        '/en' + basePath + '.html',
+        basePath,
         '/ar' + basePath,
         '/en' + basePath,
       ];
     }
 
-    // 🆕 استبعد أي مرشح = الصفحة الحالية (منع حلقة إعادة التحميل)
     candidates = candidates.filter(c => {
       const cClean = c.replace(/\/+$/, '');
       return cClean !== pathClean && cClean !== path;
@@ -190,7 +182,6 @@
       }
     }
 
-    /* === آخر مرشح: all-links.html (خريطة الموقع) === */
     setSplashMsg('🗺️ فتح خريطة الموقع...');
     console.log('🗺️ [404] تحويل إلى خريطة الموقع');
 
@@ -210,7 +201,6 @@
       }
     }
 
-    /* === آخر آخر خيار: الأندكس === */
     setSplashMsg('🏠 العودة للرئيسية...');
     setTimeout(()=>{
       const lang = path.toLowerCase().startsWith('/en') ? 'en' : 'ar';
@@ -236,11 +226,12 @@
   window.toggleLang = window.switchLanguage;
   window.toggleLanguage = window.switchLanguage;
 
-  /* ============ 7) إشعارات الشبكة — محسّنة بفحص فعلي ============ */
+  /* ============ 7) أدوات تشخيص الشبكة — IT Analyst Edition ============ */
   (function networkNotifier(){
     if(!('onLine' in navigator)) return;
     if(document.getElementById('netBar')) return;
 
+    /* ---------- CSS ---------- */
     const st = document.createElement('style');
     st.id = 'netBar-style';
     st.textContent = `
@@ -273,12 +264,39 @@
           bar.classList.remove('show');
         }, autoHide);
       }
+      /* 🆕 تسجيل الحدث */
+      logEvent(msg);
     }
     function hide(){ bar.classList.remove('show'); }
 
-    /* 🆕 فحص فعلي للإنترنت بدل navigator.onLine الكذاب */
+    /* ---------- 🆕 سجل الأحداث (sessionStorage) ---------- */
+    const LOG_KEY = 'waha_net_log';
+    const MAX_LOG = 100;
+
+    function logEvent(msg){
+      try{
+        const log = JSON.parse(sessionStorage.getItem(LOG_KEY) || '[]');
+        log.push({
+          t: new Date().toISOString(),
+          m: msg
+        });
+        if(log.length > MAX_LOG) log.shift();
+        sessionStorage.setItem(LOG_KEY, JSON.stringify(log));
+      }catch(e){}
+    }
+
+    function getLog(){
+      try{
+        return JSON.parse(sessionStorage.getItem(LOG_KEY) || '[]');
+      }catch(e){ return []; }
+    }
+
+    function clearLog(){
+      try{ sessionStorage.removeItem(LOG_KEY); }catch(e){}
+    }
+
+    /* ---------- 🆕 فحص فعلي للإنترنت ---------- */
     async function checkRealInternet(){
-      // استخدم fetch على ملف صغير من نفس الأصل
       try{
         const ctrl = new AbortController();
         const timer = setTimeout(()=> ctrl.abort(), 3000);
@@ -295,7 +313,24 @@
       }
     }
 
-    let lastState = null;  // null = لم يُفحص بعد
+    /* ---------- 🆕 قياس سرعة التحميل ---------- */
+    async function measureSpeed(){
+      try{
+        const ctrl = new AbortController();
+        const timer = setTimeout(()=> ctrl.abort(), 5000);
+        const testUrl = asset('favicon.ico') + '?_=' + Date.now();
+        const t0 = performance.now();
+        await fetch(testUrl, {cache:'no-store', signal: ctrl.signal});
+        clearTimeout(timer);
+        const ms = Math.round(performance.now() - t0);
+        return ms;
+      }catch(e){
+        return -1;
+      }
+    }
+
+    /* ---------- الحالة ---------- */
+    let lastState = null;
     let checking = false;
 
     async function updateStatus(){
@@ -305,7 +340,6 @@
       const online = await checkRealInternet();
       checking = false;
 
-      // أول فحص — لا تظهر إشعار
       if(lastState === null){
         lastState = online;
         if(!online){
@@ -314,9 +348,7 @@
         return;
       }
 
-      // نفس الحالة → لا تفعل شيء
       if(online === lastState) return;
-
       lastState = online;
 
       if(online){
@@ -326,24 +358,90 @@
       }
     }
 
-    /* استمع للأحداث كتسريع */
     window.addEventListener('online', ()=> setTimeout(updateStatus, 300));
     window.addEventListener('offline', ()=> setTimeout(updateStatus, 300));
-
-    /* فحص دوري كل 20 ثانية */
     setInterval(updateStatus, 20000);
-
-    /* فحص أولي بعد 2 ثانية (بعد ما الصفحة تستقر) */
     setTimeout(updateStatus, 2000);
 
-    /* أداة اختبار يدوية */
+    /* ---------- 🆕 أداة التشخيص الكاملة ---------- */
     window.__testNetBar = {
+      /* الإشعارات الثلاثة الأساسية */
       offline: ()=> show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0),
       online:  ()=> show('✅ عاد الاتصال بالإنترنت', 'linear-gradient(90deg,#059669,#10b981)', 2500),
       slow:    ()=> show('🐌 الاتصال بطيء — قد يتأخر التحميل', 'linear-gradient(90deg,#b45309,#f59e0b)', 3500),
+
+      /* أدوات مساعدة */
       hide:    ()=> hide(),
-      check:   ()=> updateStatus()
+      check:   ()=> updateStatus(),
+      speed:   async ()=>{
+        const ms = await measureSpeed();
+        if(ms < 0){
+          show('❌ فشل قياس السرعة', 'linear-gradient(90deg,#b91c1c,#dc2626)', 2500);
+          return -1;
+        }
+        const label = ms < 200 ? '⚡ سريع' : ms < 800 ? '👍 جيد' : '🐌 بطيء';
+        show(`${label} — ${ms}ms`, 'linear-gradient(90deg,#0369a1,#0ea5e9)', 3000);
+        return ms;
+      },
+
+      /* 📋 سجل الأحداث */
+      log: ()=>{
+        const log = getLog();
+        if(log.length === 0){
+          console.log('📋 السجل فارغ');
+          return [];
+        }
+        console.log('📋 سجل أحداث الشبكة (' + log.length + '):');
+        console.log('─────────────────────────────────────');
+        log.forEach((e,i)=>{
+          const time = new Date(e.t).toLocaleTimeString('ar-YE', {hour12:false});
+          console.log(`  ${String(i+1).padStart(3)}  ${time}  ${e.m}`);
+        });
+        console.log('─────────────────────────────────────');
+        return log;
+      },
+
+      /* 🗑️ مسح السجل */
+      clear: ()=>{
+        clearLog();
+        console.log('🗑️ تم مسح سجل أحداث الشبكة');
+      },
+
+      /* 📊 الحالة الحالية */
+      status: async ()=>{
+        const online = await checkRealInternet();
+        const ms = online ? await measureSpeed() : -1;
+        const log = getLog();
+        const info = {
+          online,
+          latency_ms: ms,
+          effectiveType: navigator.connection?.effectiveType || 'unknown',
+          downlink: navigator.connection?.downlink || 'unknown',
+          rtt: navigator.connection?.rtt || 'unknown',
+          log_count: log.length,
+          userAgent: navigator.userAgent.slice(0, 60) + '...',
+          protocol: location.protocol,
+          host: location.host
+        };
+        console.log('📊 حالة الشبكة:');
+        console.table(info);
+        return info;
+      }
     };
+
+    /* 🆕 التقاط أخطاء الشبكة تلقائياً (لمعرفة سبب Hangup) */
+    window.addEventListener('error', (e)=>{
+      if(e.message && /network|fetch|hangup|failed/i.test(e.message)){
+        logEvent('❌ ' + e.message.slice(0, 100));
+      }
+    }, true);
+
+    window.addEventListener('unhandledrejection', (e)=>{
+      const msg = String(e.reason || '');
+      if(/network|fetch|hangup|failed|abort/i.test(msg)){
+        logEvent('❌ ' + msg.slice(0, 100));
+      }
+    });
   })();
 
   /* ============ 8) التهيئة — تسلسل صارم ============ */
@@ -355,18 +453,15 @@
 
       if(PAGE_MODE === 'full') createSplash('جارٍ التحميل...');
 
-      /* --- 1) الهيدر أولاً --- */
       setSplashMsg('📥 تحميل الهيدر...');
       const headerOK = await loadHTMLFile('header-placeholder', 'header.html');
       document.dispatchEvent(new CustomEvent('headerLoaded', {detail:{ok:headerOK}}));
       console.log(headerOK ? '✅ الهيدر تحمّل' : '⚠️ فشل تحميل الهيدر');
 
-      /* --- 2) الفوتر بعد الهيدر --- */
       setSplashMsg('📥 تحميل الفوتر...');
       const footerOK = await loadHTMLFile('footer-placeholder', 'footer.html');
       console.log(footerOK ? '✅ الفوتر تحمّل' : '⚠️ فشل تحميل الفوتر');
 
-      /* --- 3) إخفاء شاشة الانتظار --- */
       if(!document.getElementById('header-placeholder') &&
          !document.getElementById('footer-placeholder')){
         hideSplash();
@@ -375,7 +470,6 @@
         setTimeout(hideSplash, 250);
       }
 
-      /* --- 4) فحص 404 --- */
       await smart404();
 
     }catch(e){
