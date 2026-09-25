@@ -1,10 +1,10 @@
-// init-page-root.js — v8.3.5 "المرعبة — نسخة IT Analyst" (Final Locked)
+// init-page-root.js — v8.3.6 "المرعبة FBI — Splash Recovery Edition"
 // Smart 404 + Sequential Boot + Tri-Lang Toggle + Network Diagnostics
 // + Static File Guard + HEAD→GET Fallback + all-links.html Fallback
-// + .html Fix + Real Internet Check + Event Log
+// + .html Fix + Real Internet Check + Event Log + 🆕 Splash Recovery
 (function(){
   'use strict';
-  console.log('👁️ [init] v8.3.5 — المرعبة (IT Analyst Edition)... locked & logging');
+  console.log('👁️ [init] v8.3.6 — المرعبة FBI (Splash Recovery)... locked & armed');
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
@@ -107,7 +107,7 @@
     });
   }
 
-  /* ============ 5) اكتشاف 404 — مصلح 100% ============ */
+  /* ============ 5) اكتشاف 404 — FBI Edition ============ */
   async function fileExists(url){
     try{
       let r = await fetch(asset(url), {method:'HEAD', cache:'no-store'});
@@ -122,11 +122,14 @@
     const path = location.pathname;
     const pathClean = path.replace(/\/+$/, '') || '/';
 
+    // تجاهل الصفحات الرئيسية
     if(['/','/ar','/ar/','/en','/en/','/index.html',
         '/index','/ar/index','/en/index'].includes(pathClean)) return;
 
+    // 🛡️ حماية الملفات الثابتة
     if(/\.(js|css|png|jpg|jpeg|gif|svg|webp|avif|ico|woff2?|map|json|txt|xml|pdf|mp3|mp4|webm|php|asp|aspx|jsp)$/i.test(path)) return;
 
+    // منع التكرار
     const key = 'waha_404_' + pathClean;
     try{
       if(sessionStorage.getItem(key)) return;
@@ -136,17 +139,21 @@
     const clean = pathClean.replace(/^\/(ar|en)(\/|$)/i, '/') || '/';
     if(clean === '/' || clean === '') return;
 
-    /* هل الصفحة فيها محتوى حقيقي؟ */
+    // هل الصفحة فيها محتوى حقيقي؟
     const hasHeader = document.getElementById('header-placeholder')?.dataset?.loaded === 'true';
     const hasFooter = document.getElementById('footer-placeholder')?.dataset?.loaded === 'true';
-    const mainEl = document.querySelector('main');
-    const hasMain = mainEl && mainEl.children.length >= 3;
-    const hasRealContent = hasHeader || hasFooter || hasMain;
+    const hasMain = document.querySelector('main')?.children.length >= 3;
+    if(hasHeader || hasFooter || hasMain) return;
 
-    if(hasRealContent) return;
-
+    /* 🆕 إعادة إظهار splash لو اختفى */
+    if(splashHidden){
+      createSplash('🔍 جارٍ البحث عن الصفحة...');
+      splashHidden = false;
+      document.getElementById('splashScreen')?.classList.remove('hidden');
+    }
     setSplashMsg('🔍 جارٍ البحث عن الصفحة...');
 
+    // منطق .html
     const hasHtml = clean.toLowerCase().endsWith('.html');
     const basePath = hasHtml ? clean : clean.replace(/\.html$/i, '');
 
@@ -182,6 +189,7 @@
       }
     }
 
+    // آخر مرشح: all-links.html
     setSplashMsg('🗺️ فتح خريطة الموقع...');
     console.log('🗺️ [404] تحويل إلى خريطة الموقع');
 
@@ -201,6 +209,7 @@
       }
     }
 
+    // آخر آخر خيار: الأندكس
     setSplashMsg('🏠 العودة للرئيسية...');
     setTimeout(()=>{
       const lang = path.toLowerCase().startsWith('/en') ? 'en' : 'ar';
@@ -208,7 +217,7 @@
     }, 600);
   }
 
-  /* ============ 6) toggleLanguage — ثلاثي ar ⇄ en ⇄ / ============ */
+  /* ============ 6) toggleLanguage ============ */
   window.switchLanguage = function(){
     const path = location.pathname;
     const clean = path.replace(/^\/(ar|en)(\/|$)/i, '/') || '/';
@@ -226,12 +235,11 @@
   window.toggleLang = window.switchLanguage;
   window.toggleLanguage = window.switchLanguage;
 
-  /* ============ 7) أدوات تشخيص الشبكة — IT Analyst Edition ============ */
+  /* ============ 7) أدوات تشخيص الشبكة — IT Analyst ============ */
   (function networkNotifier(){
     if(!('onLine' in navigator)) return;
     if(document.getElementById('netBar')) return;
 
-    /* ---------- CSS ---------- */
     const st = document.createElement('style');
     st.id = 'netBar-style';
     st.textContent = `
@@ -264,38 +272,31 @@
           bar.classList.remove('show');
         }, autoHide);
       }
-      /* 🆕 تسجيل الحدث */
       logEvent(msg);
     }
     function hide(){ bar.classList.remove('show'); }
 
-    /* ---------- 🆕 سجل الأحداث (sessionStorage) ---------- */
+    /* سجل الأحداث */
     const LOG_KEY = 'waha_net_log';
     const MAX_LOG = 100;
 
     function logEvent(msg){
       try{
         const log = JSON.parse(sessionStorage.getItem(LOG_KEY) || '[]');
-        log.push({
-          t: new Date().toISOString(),
-          m: msg
-        });
+        log.push({t: new Date().toISOString(), m: msg});
         if(log.length > MAX_LOG) log.shift();
         sessionStorage.setItem(LOG_KEY, JSON.stringify(log));
       }catch(e){}
     }
-
     function getLog(){
-      try{
-        return JSON.parse(sessionStorage.getItem(LOG_KEY) || '[]');
-      }catch(e){ return []; }
+      try{ return JSON.parse(sessionStorage.getItem(LOG_KEY) || '[]'); }
+      catch(e){ return []; }
     }
-
     function clearLog(){
       try{ sessionStorage.removeItem(LOG_KEY); }catch(e){}
     }
 
-    /* ---------- 🆕 فحص فعلي للإنترنت ---------- */
+    /* فحص فعلي للإنترنت */
     async function checkRealInternet(){
       try{
         const ctrl = new AbortController();
@@ -308,12 +309,10 @@
         });
         clearTimeout(timer);
         return true;
-      }catch(e){
-        return false;
-      }
+      }catch(e){ return false; }
     }
 
-    /* ---------- 🆕 قياس سرعة التحميل ---------- */
+    /* قياس السرعة */
     async function measureSpeed(){
       try{
         const ctrl = new AbortController();
@@ -322,21 +321,16 @@
         const t0 = performance.now();
         await fetch(testUrl, {cache:'no-store', signal: ctrl.signal});
         clearTimeout(timer);
-        const ms = Math.round(performance.now() - t0);
-        return ms;
-      }catch(e){
-        return -1;
-      }
+        return Math.round(performance.now() - t0);
+      }catch(e){ return -1; }
     }
 
-    /* ---------- الحالة ---------- */
     let lastState = null;
     let checking = false;
 
     async function updateStatus(){
       if(checking) return;
       checking = true;
-
       const online = await checkRealInternet();
       checking = false;
 
@@ -363,14 +357,11 @@
     setInterval(updateStatus, 20000);
     setTimeout(updateStatus, 2000);
 
-    /* ---------- 🆕 أداة التشخيص الكاملة ---------- */
+    /* أداة IT Analyst */
     window.__testNetBar = {
-      /* الإشعارات الثلاثة الأساسية */
       offline: ()=> show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0),
       online:  ()=> show('✅ عاد الاتصال بالإنترنت', 'linear-gradient(90deg,#059669,#10b981)', 2500),
       slow:    ()=> show('🐌 الاتصال بطيء — قد يتأخر التحميل', 'linear-gradient(90deg,#b45309,#f59e0b)', 3500),
-
-      /* أدوات مساعدة */
       hide:    ()=> hide(),
       check:   ()=> updateStatus(),
       speed:   async ()=>{
@@ -383,8 +374,6 @@
         show(`${label} — ${ms}ms`, 'linear-gradient(90deg,#0369a1,#0ea5e9)', 3000);
         return ms;
       },
-
-      /* 📋 سجل الأحداث */
       log: ()=>{
         const log = getLog();
         if(log.length === 0){
@@ -400,14 +389,10 @@
         console.log('─────────────────────────────────────');
         return log;
       },
-
-      /* 🗑️ مسح السجل */
       clear: ()=>{
         clearLog();
         console.log('🗑️ تم مسح سجل أحداث الشبكة');
       },
-
-      /* 📊 الحالة الحالية */
       status: async ()=>{
         const online = await checkRealInternet();
         const ms = online ? await measureSpeed() : -1;
@@ -419,7 +404,6 @@
           downlink: navigator.connection?.downlink || 'unknown',
           rtt: navigator.connection?.rtt || 'unknown',
           log_count: log.length,
-          userAgent: navigator.userAgent.slice(0, 60) + '...',
           protocol: location.protocol,
           host: location.host
         };
@@ -429,7 +413,6 @@
       }
     };
 
-    /* 🆕 التقاط أخطاء الشبكة تلقائياً (لمعرفة سبب Hangup) */
     window.addEventListener('error', (e)=>{
       if(e.message && /network|fetch|hangup|failed/i.test(e.message)){
         logEvent('❌ ' + e.message.slice(0, 100));
@@ -444,7 +427,7 @@
     });
   })();
 
-  /* ============ 8) التهيئة — تسلسل صارم ============ */
+  /* ============ 8) التهيئة ============ */
   async function init(){
     try{
       const lang = location.pathname.toLowerCase().startsWith('/en') ? 'en' : 'ar';
