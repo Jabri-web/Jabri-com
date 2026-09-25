@@ -1,7 +1,7 @@
-// init-page-root.js — v8.0.1 (Smart 404 + Sequential Boot + Tri-Lang Toggle)
+// init-page-root.js — v8.0.2 (Smart 404 + Sequential Boot + Tri-Lang + Network Notifications)
 (function(){
   'use strict';
-  console.log('🛡️ [init] v8.0.1 — locked & loaded...');
+  console.log('🛡️ [init] v8.0.2 — locked, loaded & connected...');
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
@@ -41,7 +41,6 @@
       }, 700);
     }
   }
-  // fail-safe: لا شاشة بيضاء أبداً
   window.addEventListener('load', ()=> setTimeout(hideSplash, 1000));
   setTimeout(hideSplash, 5000);
 
@@ -90,7 +89,6 @@
           ph.innerHTML = html;
           ph.dataset.loaded = 'true';
 
-          // تنفيذ السكربتات — مع تجاهل menu.js (شرط #1)
           const scripts = [...ph.querySelectorAll('script')];
           scripts.forEach(old=>{
             if(old.src && old.src.includes('menu.js')){ old.remove(); return; }
@@ -116,22 +114,17 @@
 
   async function smart404(){
     const path = location.pathname;
-
-    // تجاهل الصفحات الرئيسية
     if(['/','/ar','/ar/','/en','/en/','/index.html'].includes(path)) return;
 
-    // منع التكرار في نفس الجلسة
     const key = 'waha_404_' + path;
     try{
       if(sessionStorage.getItem(key)) return;
       sessionStorage.setItem(key,'1');
     }catch(e){}
 
-    // استخرج الجزء النظيف بدون ar/en
     const clean = path.replace(/^\/(ar|en)(\/|$)/i, '/') || '/';
     if(clean === '/' || clean === '') return;
 
-    /* === التعديل #1: توليد المرشحين مع .html (شرط v7.4 المرحلة 1) === */
     const base = [`/ar${clean}`, `/en${clean}`, clean]
       .filter((c,i,a)=> c !== path && a.indexOf(c) === i);
 
@@ -141,7 +134,6 @@
       if(!c.toLowerCase().endsWith('.html')) candidates.push(c + '.html');
     });
 
-    /* === الخطوة 1: هل الصفحة الحالية فيها HTML حقيقي؟ === */
     const mainHTML = document.body.innerHTML.trim();
     const hasRealContent = mainHTML.length > 500 &&
                            !mainHTML.includes('404') &&
@@ -158,7 +150,6 @@
         }
       }
 
-      /* === الخيار الأخير: الأندكس === */
       setSplashMsg('🏠 العودة للرئيسية...');
       setTimeout(()=>{
         const lang = path.toLowerCase().startsWith('/en') ? 'en' : 'ar';
@@ -167,28 +158,104 @@
     }
   }
 
-  /* ============ 6) toggleLanguage — ثلاثي ar ⇄ en ⇄ / (شرط #2) ============ */
+  /* ============ 6) toggleLanguage — ثلاثي ar ⇄ en ⇄ / ============ */
   window.switchLanguage = function(){
     const path = location.pathname;
-
-    /* استخرج المسار النظيف بدون ar/en prefix */
     const clean = path.replace(/^\/(ar|en)(\/|$)/i, '/') || '/';
 
     let newPath;
     if(/^\/ar(\/|$)/i.test(path)){
-      newPath = '/en' + (clean === '/' ? '/' : clean);   // ar → en
+      newPath = '/en' + (clean === '/' ? '/' : clean);
     } else if(/^\/en(\/|$)/i.test(path)){
-      newPath = clean;                                    // en → / (root)
+      newPath = clean;
     } else {
-      newPath = '/ar' + (clean === '/' ? '/' : clean);   // / → ar
+      newPath = '/ar' + (clean === '/' ? '/' : clean);
     }
-
     location.href = newPath + location.search + location.hash;
   };
   window.toggleLang = window.switchLanguage;
   window.toggleLanguage = window.switchLanguage;
 
-  /* ============ 7) التهيئة — تسلسل صارم (شرط #2) ============ */
+  /* ============ 7) إشعارات الشبكة (v8.0.2 جديد) ============ */
+  (function networkNotifier(){
+    if(!('onLine' in navigator)) return;
+    if(document.getElementById('netBar')) return;
+
+    const st = document.createElement('style');
+    st.id = 'netBar-style';
+    st.textContent = `
+      #netBar{
+        position:fixed;top:0;left:0;right:0;z-index:999998;
+        padding:9px 14px;text-align:center;
+        font-weight:900;font-size:13px;color:#fff;
+        font-family:system-ui,-apple-system,sans-serif;
+        transform:translateY(-100%);
+        transition:transform .35s cubic-bezier(.4,0,.2,1);
+        box-shadow:0 2px 12px rgba(0,0,0,.35);
+        pointer-events:none;
+      }
+      #netBar.show{transform:translateY(0)}
+    `;
+    document.head.appendChild(st);
+
+    const bar = document.createElement('div');
+    bar.id = 'netBar';
+    document.body.appendChild(bar);
+
+    let hideTimer = null;
+    function show(msg, bg, autoHide){
+      bar.textContent = msg;
+      bar.style.background = bg;
+      bar.classList.add('show');
+      clearTimeout(hideTimer);
+      if(autoHide){
+        hideTimer = setTimeout(()=>{
+          bar.classList.remove('show');
+        }, autoHide);
+      }
+    }
+    function hide(){
+      bar.classList.remove('show');
+    }
+
+    // ✅ عاد الاتصال
+    window.addEventListener('online', ()=>{
+      show('✅ عاد الاتصال بالإنترنت', 'linear-gradient(90deg,#059669,#10b981)', 2500);
+    });
+
+    // ❌ انقطع الاتصال
+    window.addEventListener('offline', ()=>{
+      show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0);
+    });
+
+    // فحص أولي
+    if(!navigator.onLine){
+      show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0);
+    }
+
+    // 🐌 اتصال بطيء
+    try{
+      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if(conn?.effectiveType){
+        const t = conn.effectiveType;
+        if(t === '2g' || t === 'slow-2g'){
+          setTimeout(()=>{
+            show('🐌 الاتصال بطيء — قد يتأخر التحميل', 'linear-gradient(90deg,#b45309,#f59e0b)', 3500);
+          }, 800);
+        }
+      }
+    }catch(e){}
+
+    // إتاحة يدوية للتجربة
+    window.__testNetBar = {
+      offline: ()=> show('⚠️ لا يوجد اتصال بالإنترنت', 'linear-gradient(90deg,#b91c1c,#dc2626)', 0),
+      online:  ()=> show('✅ عاد الاتصال بالإنترنت', 'linear-gradient(90deg,#059669,#10b981)', 2500),
+      slow:    ()=> show('🐌 الاتصال بطيء — قد يتأخر التحميل', 'linear-gradient(90deg,#b45309,#f59e0b)', 3500),
+      hide:    ()=> hide()
+    };
+  })();
+
+  /* ============ 8) التهيئة — تسلسل صارم ============ */
   async function init(){
     try{
       const lang = location.pathname.toLowerCase().startsWith('/en') ? 'en' : 'ar';
@@ -203,12 +270,12 @@
       document.dispatchEvent(new CustomEvent('headerLoaded', {detail:{ok:headerOK}}));
       console.log(headerOK ? '✅ الهيدر تحمّل' : '⚠️ فشل تحميل الهيدر');
 
-      /* --- 2) الفوتر بعد الهيدر مباشرة --- */
+      /* --- 2) الفوتر بعد الهيدر --- */
       setSplashMsg('📥 تحميل الفوتر...');
       const footerOK = await loadHTMLFile('footer-placeholder', 'footer.html');
       console.log(footerOK ? '✅ الفوتر تحمّل' : '⚠️ فشل تحميل الفوتر');
 
-      /* --- 3) إخفاء شاشة الانتظار بعد اكتمال التسلسل --- */
+      /* --- 3) إخفاء شاشة الانتظار --- */
       if(!document.getElementById('header-placeholder') &&
          !document.getElementById('footer-placeholder')){
         hideSplash();
@@ -217,7 +284,7 @@
         setTimeout(hideSplash, 250);
       }
 
-      /* --- 4) فحص 404 بعد ظهور الصفحة --- */
+      /* --- 4) فحص 404 --- */
       await smart404();
 
     }catch(e){
