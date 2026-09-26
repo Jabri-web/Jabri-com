@@ -1,0 +1,7 @@
+Well,x_min,gamma_n,Z_value,Physics,Prediction
+1,14.134725,14.134725,2.4064,Inflation_end,t=10^-36s
+2,21.02204,21.02204,2.8337,Electroweak,v=246GeV
+3,25.010858,25.010858,0.3848,Higgs,m=125GeV
+4,30.424876,30.424876,-3.1931,QCD,Lambda_QCD=200MeV
+5,32.935062,32.935062,2.4262,Dark_Energy,w=-1.03
+6,37.586178,37.586178,0.0196,Planck,M_pl=10^19GeV
