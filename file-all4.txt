@@ -1,6 +1,6 @@
 # ═══════════════════════════════════════════════════════════════
 #  واحة الجبري | Heaven Al-Jabri — file-all3.txt
-#  الفهرس الشامل للملفات - الإصدار 4.0 (النهائي المحدث)
+#  الفهرس الشامل للملفات - الإصدار 4.1 (النهائي المحدث)
 #  التاريخ: 2026-09-27
 #  الموقع: https://jabri-com.vercel.app/
 #  المؤلف: م/ عبدالله محمد ناصر الجبري (صنعاء - اليمن)
@@ -275,62 +275,60 @@
 145. python/Jabri_all.ipynb
 146. python/Jabri_derivation.ipynb
 147. python/Jabri_derivation3.ipynb
-148. python/Test2.txt
-149. python/Universe_now.ipynb
-150. python/V0_v1_unified.ipynb
-151. python/Zx_28.ipynb
-152. python/Zx_Hubble.ipynb
-153. python/Zx_Jabri.ipynb
-154. python/Zx_Planck_Epoch.ipynb
-155. python/Zx_RieOS_v1.2.ipynb
-156. python/Zx_all(1).ipynb
-157. python/Zx_all-n.ipynb
-158. python/Zx_all.ipynb
-159. python/Zx_all2.ipynb
-160. python/Zx_all3.ipynb
-161. python/Zx_all4.ipynb
-162. python/Zx_all_ipynb2.ipynb
+148. python/Universe_now.ipynb
+149. python/V0_v1_unified.ipynb
+150. python/Zx_28.ipynb
+151. python/Zx_Hubble.ipynb
+152. python/Zx_Jabri.ipynb
+153. python/Zx_Planck_Epoch.ipynb
+154. python/Zx_RieOS_v1.2.ipynb
+155. python/Zx_all(1).ipynb
+156. python/Zx_all-n.ipynb
+157. python/Zx_all.ipynb
+158. python/Zx_all2.ipynb
+159. python/Zx_all3.ipynb
+160. python/Zx_all4.ipynb
+161. python/Zx_all_ipynb2.ipynb
 
 # ───────────────────────────────────────────────────────────────
 # 22. مجلد /tex/ (ملفات LaTeX) — 7 ملفات
 # ───────────────────────────────────────────────────────────────
-163. tex/Jabri_overview_z_v3.0.1.tex
-164. tex/Test
-165. tex/Z_total_v1.tex
-166. tex/Zx_RieOS_v1.1.tex
-167. tex/Zx_RieOS_v1.2.tex
-168. tex/Zx_all_tex.tex
+162. tex/Jabri_overview_z_v3.0.1.tex
+163. tex/Z_total_v1.tex
+164. tex/Zx_RieOS_v1.1.tex
+165. tex/Zx_RieOS_v1.2.tex
+166. tex/Zx_all_tex.tex
 
 # ───────────────────────────────────────────────────────────────
 # 23. مجلد /data/ (البيانات) — ~25 ملف
 # ───────────────────────────────────────────────────────────────
-169. data/Author_cv_tex.pdf
-170. data/Author_cv_tex.zip
-171. data/Jabri_28_table.csv
-172. data/Jabri_5_table.csv
-173. data/Jabri_Darkenergy_table.csv
-174. data/Jabri_Hubble_table.csv
-175. data/Jabri_Periodic_table.csv
-176. data/Jabri_Planck_table.csv
-177. data/Jabri_Spacetime_table.csv
-178. data/Zx_Island_Z119.csv
-179. data/Zx_Periodic_Hierarchy.csv
-180. data/Zx_Periodic_Hierarchy3.csv
-181. data/Zx_Planck_Epochs.csv
-182. data/Zx_Planck_Epochs2.csv
-183. data/Zx_RieOS_v1.1.csv
+167. data/Author_cv_tex.pdf
+168. data/Author_cv_tex.zip
+169. data/Jabri_28_table.csv
+170. data/Jabri_5_table.csv
+171. data/Jabri_Darkenergy_table.csv
+172. data/Jabri_Hubble_table.csv
+173. data/Jabri_Periodic_table.csv
+174. data/Jabri_Planck_table.csv
+175. data/Jabri_Spacetime_table.csv
+176. data/Zx_Island_Z119.csv
+177. data/Zx_Periodic_Hierarchy.csv
+178. data/Zx_Periodic_Hierarchy3.csv
+179. data/Zx_Planck_Epochs.csv
+180. data/Zx_Planck_Epochs2.csv
+181. data/Zx_RieOS_v1.1.csv
+182. data/Zx_RieOS_v1.1.zip
+183. data/Zx_RieOS_v1.1-2.zip
 184. data/Zx_RieOS_v1.1.zip
-185. data/Zx_RieOS_v1.1-2.zip
-186. data/Zx_RieOS_v1.1.zip
-187. data/Zx_Spacetime_Wells.csv
-188. data/Zx_Spacetime_Wells2.csv
-189. data/Zx_Spacetime_Wells3.csv
-190. data/Zx_movie.mp4
-191. data/Zx_t12.csv
-192. data/cv-ar.txt
-193. data/cv-en.txt
-194. data/table.txt
-195. data/table2.txt
+185. data/Zx_Spacetime_Wells.csv
+186. data/Zx_Spacetime_Wells2.csv
+187. data/Zx_Spacetime_Wells3.csv
+188. data/Zx_movie.mp4
+189. data/Zx_t12.csv
+190. data/cv-ar.txt
+191. data/cv-en.txt
+192. data/table.txt
+193. data/table2.txt
 
 # ═══════════════════════════════════════════════════════════════
 #  🚫 الملفات المستبعدة من الفهرسة (NO INDEXING)
