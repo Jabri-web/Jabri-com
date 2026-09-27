@@ -181,7 +181,7 @@
     const pathClean = path.replace(/\/+$/, '') || '/';
 
     if(['/','/ar','/en','/index.html','/index','/ar/index','/en/index'].includes(pathClean.toLowerCase())) return;
-    if(/\.(js|css|png|jpg|jpeg|gif|svg|webp|avif|ico|woff2?|map|json|txt|xml|pdf|mp3|mp4|webm|php)$/i.test(path)) return;
+    if(/\.(js|css|png|jpg|jpeg|gif|svg|webp|avif|ico|woff2?|map|json|txt|xml|pdf|https://jabri-com.vercel.app/image/hadrami.mp3|mp4|webm|php)$/i.test(path)) return;
     if(/^\/(image|images|assets|css|js|fonts|uploads|media)\//i.test(pathClean) && !pathClean.includes('.')) return;
 
     if(document.getElementById('header-placeholder')?.dataset?.loaded === 'true') return;
