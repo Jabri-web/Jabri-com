@@ -220,9 +220,10 @@ body:not(.en) .en { display: none; }
 
     <div class="card">
       <div class="card-icon">👤</div>
-      <h3><span class="ar">عن المؤلف</span><span class="en">About Author</span></h3>
-      <p><span class="ar">المؤلف في سطور</span><span class="en">Author Brief</span></p>
-      <a href="identity.html" class="btn-local"><span class="ar">عرض الملف</span><span class="en">View File</span></a>
+      <h3><span class="ar"
+      >عن الواحة</span><span class="en">About Waha</span></h3>
+      <p><span class="ar">عن الواحة</span><span class="en">About waha</span></p>
+      <a href="about-waha.html" class="btn-local"><span class="ar">عرض الملف</span><span class="en">View File</span></a>
     </div>
   </div>
 
@@ -257,6 +258,39 @@ function toggleLang() {
 }
 </script>
 
+    <!-- ═══ زر لوحة التحكم الاحترافية ═══ -->
+<div style="text-align: center; margin: 25px 0;">
+  <a href="/Sindbad-theory.html" 
+     style="display: inline-flex; align-items: center; gap: 10px; 
+            background: linear-gradient(135deg, #d4af37, #f4e5a1); 
+            color: #0a0a0f; padding: 14px 30px; border-radius: 50px; 
+            font-family: 'Tajawal', sans-serif; font-weight: 700; 
+            font-size: 1rem; text-decoration: none; 
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); 
+            transition: transform 0.3s, box-shadow 0.3s;"
+     onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(212, 175, 55, 0.55)';"
+     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(212, 175, 55, 0.35)';">
+    📊 نظرية السندباد| Sindbad theory
+  </a>
+</div>
+
+
+    <!-- ═══ زر لوحة التحكم الاحترافية ═══ -->
+<div style="text-align: center; margin: 25px 0;">
+  <a href="/dashboard.html" 
+     style="display: inline-flex; align-items: center; gap: 10px; 
+            background: linear-gradient(135deg, #d4af37, #f4e5a1); 
+            color: #0a0a0f; padding: 14px 30px; border-radius: 50px; 
+            font-family: 'Tajawal', sans-serif; font-weight: 700; 
+            font-size: 1rem; text-decoration: none; 
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); 
+            transition: transform 0.3s, box-shadow 0.3s;"
+     onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(212, 175, 55, 0.55)';"
+     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(212, 175, 55, 0.35)';">
+    📊 لوحة التحكم الاحترافية | Dashboard
+  </a>
+</div>
+
 
 <!-- محتوى الصفحة -->
 <main>...</main>
@@ -264,8 +298,7 @@ function toggleLang() {
 <!-- ✅ السطور الأربعة (فقط في الصفحات الكاملة) -->
 <div id="header-placeholder"></div>   <!-- ← المهم: يُحمَّل الهيدر هنا -->
 <div id="footer-placeholder"></div>
-<script src="js/init-page-root.js"></script>
-<script src="js/menu.js"></script>
+<script src="/js/menu.js"></script>
 
 </body>
 </html>
