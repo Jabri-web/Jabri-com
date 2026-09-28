@@ -1,6 +1,6 @@
 // ================================================================
 //  🛡️ init-page-root.js
-//  Version: 6.9.0 — "404 Screen + User Options + Real Network Logs"
+//  Version: 7.0.0 — "Core Only" (404 logic moved to 404.html)
 //  Build:   2025-01-XX
 //  Author:  Jabri-Com
 // ================================================================
@@ -8,7 +8,7 @@
 (function() {
   'use strict';
 
-  const VERSION      = '6.9.0';
+  const VERSION      = '7.0.0';
   const BUILD_DATE   = '2025-01-XX';
   const BASE_URL     = 'https://jabri-com.vercel.app';
   const VERSION_FILE = '/version.json';
@@ -20,15 +20,10 @@
     splash:       true,
     header:       true,
     footer:       true,
-    detect404:    true,
     version:      true,
     music:        true,
     autoFixLinks: true,
-    autoHideSplashAfter: 5000,
-    auto404TryAfter: 3000,
-    allLinksPath: '/all-links.html',
-    indexPath:    '/index.html',
-    wahaPath:     '/Page11.html'
+    autoHideSplashAfter: 5000
   };
   const CONFIG = Object.assign({}, DEFAULT_CONFIG, window.JABRI_CONFIG || {});
 
@@ -192,354 +187,7 @@
   }
 
   // ================================================================
-  //  🚨 show404Overlay — الشاشة الكاملة مع الخيارات
-  // ================================================================
-  function show404Overlay() {
-    if (sessionStorage.getItem('jabri404Handled')) return;
-    sessionStorage.setItem('jabri404Handled', 'true');
-
-    hideSplash();
-
-    try {
-      const audio = new Audio(BASE_URL + '/image/music1.mp3');
-      audio.volume = 0.15;
-      audio.loop = true;
-      audio.play().catch(() => {});
-    } catch (e) {}
-
-    let count = localStorage.getItem('jabriVisitorCount');
-    if (count === null) count = Math.floor(Math.random() * 80) + 20;
-
-    const currentPath = location.pathname;
-    const hasHtml = currentPath.toLowerCase().endsWith('.html');
-
-    // حساب Target Path
-    let targetPath;
-    if (!hasHtml) {
-      targetPath = currentPath + '.html';
-    } else {
-      const file = currentPath.split('/').filter(Boolean).pop();
-      targetPath = '/' + file;
-    }
-
-    const div = document.createElement('div');
-    div.id = 'jabri-404-overlay';
-    div.style.cssText = `
-      position:fixed;inset:0;
-      background: #0a1628;
-      color:#e0dcc8;
-      z-index:999999;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-start;
-      font-family:'Cairo',sans-serif;
-      direction:rtl;
-      padding:20px;
-      overflow-y:auto;
-    `;
-
-    div.innerHTML = `
-      <style>
-        #jabri-404-overlay .ov-container {
-          max-width: 520px;
-          width: 100%;
-          padding: 20px 0;
-          text-align: center;
-        }
-        #jabri-404-overlay .ov-404-num {
-          font-size: 6rem;
-          font-weight: 900;
-          color: #b48b5a;
-          text-shadow: 0 0 60px rgba(180,139,90,0.5);
-          line-height: 1;
-          margin-bottom: 15px;
-        }
-        #jabri-404-overlay .ov-title {
-          font-size: 1.4rem;
-          color: #f0e6d3;
-          margin-bottom: 25px;
-          line-height: 1.6;
-        }
-        #jabri-404-overlay .ov-box {
-          background: #0b1a2e;
-          border: 1px solid #b48b5a;
-          border-radius: 16px;
-          padding: 14px 20px;
-          margin: 10px 0;
-          width: 100%;
-          text-align: right;
-        }
-        #jabri-404-overlay .ov-label {
-          font-size: 0.75rem;
-          color: #b48b5a;
-          margin-bottom: 6px;
-          font-weight: 700;
-        }
-        #jabri-404-overlay .ov-value {
-          font-family: 'Courier New', monospace;
-          font-size: 0.9rem;
-          color: #6ae3ff;
-          direction: ltr;
-          text-align: left;
-          word-break: break-all;
-          padding: 8px 12px;
-          background: rgba(106,227,255,0.05);
-          border-radius: 8px;
-          border: 1px solid rgba(106,227,255,0.2);
-        }
-        #jabri-404-overlay .ov-result {
-          font-size: 0.95rem;
-          color: #ffd166;
-          padding: 10px;
-          text-align: center;
-          font-weight: 700;
-          font-family: 'Courier New', monospace;
-          direction: ltr;
-        }
-        #jabri-404-overlay .ov-result .ok   { color: #06d6a0; }
-        #jabri-404-overlay .ov-result .err  { color: #ff6b6b; }
-        #jabri-404-overlay .ov-result .warn { color: #ffd166; }
-        #jabri-404-overlay .ov-visitors {
-          background: linear-gradient(135deg, #b48b5a, #8b6a3f);
-          color: #0a0a0f;
-          padding: 12px 25px;
-          border-radius: 40px;
-          font-weight: 700;
-          font-size: 1.05rem;
-          margin: 18px auto;
-          display: inline-block;
-        }
-        #jabri-404-overlay .ov-countdown {
-          font-size: 1.1rem;
-          color: #6ae3ff;
-          margin: 12px 0;
-          font-weight: 700;
-          font-family: monospace;
-        }
-        #jabri-404-overlay .ov-options {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 10px;
-          margin-top: 20px;
-          width: 100%;
-        }
-        #jabri-404-overlay .ov-btn {
-          padding: 14px 10px;
-          border: none;
-          border-radius: 14px;
-          font-size: 0.85rem;
-          font-weight: 900;
-          font-family: 'Cairo', sans-serif;
-          cursor: pointer;
-          text-decoration: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-          transition: transform 0.2s ease;
-        }
-        #jabri-404-overlay .ov-btn:hover { transform: scale(1.03); }
-        #jabri-404-overlay .ov-btn-map  { background: linear-gradient(135deg, #6ae3ff, #3aa0c4); color: #0a0a0f; }
-        #jabri-404-overlay .ov-btn-home { background: linear-gradient(135deg, #ffd700, #f0a500); color: #0a0a0f; }
-        #jabri-404-overlay .ov-btn-waha { background: linear-gradient(135deg, #06d6a0, #05b98a); color: #0a0a0f; }
-        #jabri-404-overlay .ov-btn-exit { background: linear-gradient(135deg, #ff6b6b, #e85555); color: #fff; }
-        #jabri-404-overlay .ov-music {
-          color: #bbaa88;
-          font-size: 0.85rem;
-          margin-top: 20px;
-        }
-        #jabri-404-overlay .ov-version {
-          color: #444;
-          font-size: 11px;
-          font-family: monospace;
-          margin-top: 8px;
-        }
-        @media (max-width: 500px) {
-          #jabri-404-overlay .ov-404-num { font-size: 4rem; }
-          #jabri-404-overlay .ov-title { font-size: 1.15rem; }
-          #jabri-404-overlay .ov-btn { font-size: 0.75rem; padding: 12px 8px; }
-        }
-      </style>
-
-      <div class="ov-container">
-        <div class="ov-404-num">404</div>
-        <div class="ov-title">🏝️ عذرًا، هذا الدرب غير موجود</div>
-
-        <div class="ov-box">
-          <div class="ov-label">🔍 Current Path</div>
-          <div class="ov-value">${currentPath}</div>
-        </div>
-
-        <div class="ov-box">
-          <div class="ov-label">➡️ Target Path</div>
-          <div class="ov-value" id="ovTarget">${targetPath}</div>
-        </div>
-
-        <div class="ov-box">
-          <div class="ov-label">📊 Result</div>
-          <div class="ov-result" id="ovResult">🔍 Searching...</div>
-        </div>
-
-        <div class="ov-visitors">👥 عدد الزوار: ${count}</div>
-
-        <div class="ov-countdown" id="ovCountdown">⏱️ 7s</div>
-
-        <div class="ov-options">
-          <a href="${CONFIG.allLinksPath}" class="ov-btn ov-btn-map">🗺️ خريطة</a>
-          <a href="${CONFIG.indexPath}" class="ov-btn ov-btn-home">🏠 افتتاح</a>
-          <a href="${CONFIG.wahaPath}" class="ov-btn ov-btn-waha">🏝️ الواحة</a>
-          <button onclick="exitPage()" class="ov-btn ov-btn-exit">🚪 خروج</button>
-        </div>
-
-        <div class="ov-music">🎵 نغمات السندباد تعزف لك...</div>
-        <div class="ov-version">v${VERSION}</div>
-      </div>
-    `;
-    document.body.prepend(div);
-
-    if (window.gtag) {
-      window.gtag('event', 'page_not_found', {
-        page_path: location.pathname,
-        page_location: location.href
-      });
-    }
-
-    // ⏰ عدّاد تنازلي
-    let seconds = 7;
-    const countdownEl = document.getElementById('ovCountdown');
-    const countdownInterval = setInterval(() => {
-      seconds--;
-      if (countdownEl) countdownEl.textContent = `⏱️ ${seconds}s`;
-      if (seconds <= 0) clearInterval(countdownInterval);
-    }, 1000);
-
-    // ⏰ بعد 3 ثوانٍ → ابدأ المحاولة
-    setTimeout(() => {
-      handle404Redirect();
-    }, CONFIG.auto404TryAfter);
-  }
-
-  // ================================================================
-  //  🚪 exitPage
-  // ================================================================
-  function exitPage() {
-    console.log('🚪 [exit] quitting...');
-    try { window.close(); } catch (e) {}
-    setTimeout(() => {
-      if (document.getElementById('jabri-404-overlay')) {
-        try { window.history.back(); } catch (e) {}
-      }
-    }, 200);
-    setTimeout(() => {
-      if (document.getElementById('jabri-404-overlay')) {
-        window.location.href = 'about:blank';
-      }
-    }, 600);
-    setTimeout(() => {
-      if (document.getElementById('jabri-404-overlay')) {
-        window.location.href = '/';
-      }
-    }, 1200);
-  }
-  window.exitPage = exitPage;
-
-  // ================================================================
-  //  🎯 handle404Redirect — if/else + Real Result
-  // ================================================================
-  async function handle404Redirect() {
-    const currentPath = location.pathname;
-    const hasHtml = currentPath.toLowerCase().endsWith('.html');
-    const resultEl = document.getElementById('ovResult');
-    const targetEl = document.getElementById('ovTarget');
-
-    console.log('🔧 [404] handling:', currentPath);
-
-    const updateResult = (text, cls = '') => {
-      if (resultEl) {
-        resultEl.innerHTML = text;
-        resultEl.className = 'ov-result';
-      }
-    };
-
-    // ═══════════════════════════════════════════════════════════
-    //  IF: بدون .html
-    // ═══════════════════════════════════════════════════════════
-    if (!hasHtml) {
-      const newPath = currentPath + '.html';
-      if (targetEl) targetEl.textContent = newPath;
-      updateResult(`🔍 GET ${newPath} ...`);
-
-      const exists = await fileExists(newPath);
-
-      if (exists) {
-        updateResult(`<span class="ok">✅ 200 OK</span> → Redirecting`);
-        setTimeout(() => { window.location.href = newPath; }, 1200);
-      } else {
-        updateResult(`<span class="err">❌ 404</span> → /all-links.html`);
-        setTimeout(() => { window.location.href = CONFIG.allLinksPath; }, 1500);
-      }
-      return;
-    }
-
-    // ═══════════════════════════════════════════════════════════
-    //  ELSE: ينتهي بـ .html
-    // ═══════════════════════════════════════════════════════════
-    const file = currentPath.split('/').filter(Boolean).pop();
-    const newPath = '/' + file;
-    if (targetEl) targetEl.textContent = newPath;
-    updateResult(`🔍 GET ${newPath} ...`);
-
-    const existsInRoot = await fileExists(newPath);
-
-    if (existsInRoot) {
-      updateResult(`<span class="ok">✅ 200 OK (root)</span> → Redirecting`);
-      setTimeout(() => { window.location.href = newPath; }, 1200);
-      return;
-    }
-
-    updateResult(`<span class="err">❌ 404 (root)</span> → /all-links.html`);
-    setTimeout(() => { window.location.href = CONFIG.allLinksPath; }, 1500);
-  }
-
-  // ================================================================
-  //  🎯 detect404 — HTTP status فقط
-  // ================================================================
-  function detect404() {
-    if (!CONFIG.detect404) return;
-
-    let pageStatus = 0;
-    let status404 = false;
-
-    if (window.performance && window.performance.getEntriesByType) {
-      const navEntries = window.performance.getEntriesByType('navigation');
-      if (navEntries.length > 0) {
-        pageStatus = navEntries[0].responseStatus || 0;
-        console.log(`📡 [404] nav status: ${pageStatus}`);
-        if (pageStatus === 404) status404 = true;
-      }
-    }
-
-    if (!status404 && window.performance && window.performance.getEntries) {
-      for (const e of window.performance.getEntries()) {
-        if (e.name === location.href && e.responseStatus === 404) {
-          status404 = true;
-          console.log(`🚨 [404] found in resource entry`);
-          break;
-        }
-      }
-    }
-
-    if (status404) {
-      console.warn('🚨 [404] REAL 404 detected → showing overlay');
-      show404Overlay();
-    } else {
-      console.log(`✅ [404] page OK (status: ${pageStatus || 'unknown'})`);
-    }
-  }
-
-  // ================================================================
-  //  🌐 toggleLang
+  //  🌐 Language Switcher
   // ================================================================
   async function toggleLang() {
     const path = location.pathname;
@@ -754,7 +402,6 @@
   function init() {
     console.log('⚙️ [init] running with config:', CONFIG);
     if (CONFIG.splash) createSplash();
-    if (CONFIG.detect404) detect404();
     if (CONFIG.music) initMusic();
 
     if (CONFIG.header) loadPartial('header-placeholder', 'header.html', 'headerLoaded', true);
@@ -769,7 +416,7 @@
       addDynamicLinks();
     });
 
-    window.addEventListener('error', (e) => hideSplash());
+    window.addEventListener('error', () => hideSplash());
     window.addEventListener('load', () => setTimeout(hideSplash, 1000));
     document.addEventListener('click', () => { if (!splashHidden) hideSplash(); }, { once: true });
   }
@@ -791,13 +438,12 @@
     toggleLang: toggleLang,
     toggleMusic: toggleMusic,
     autoFixLinks: autoFixLinks,
-    exitPage: exitPage,
-    show404Overlay: show404Overlay,
-    handle404Redirect: handle404Redirect
+    hideSplash: hideSplash,
+    forceReload: forceReload
   };
 
   window.switchLanguage = toggleLang;
   window.toggleLanguage = toggleLang;
 
-  console.log(`✅ الدرع المطلق v${VERSION} ready`);
+  console.log(`✅ الدرع المطلق v${VERSION} (Core) ready`);
 })();
