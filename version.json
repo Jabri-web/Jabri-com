@@ -1,5 +1,5 @@
 {
-  "version": "6.9.0",
+  "version": "7.2.0",
   "buildDate": "2025-01-XX",
-  "notes": "404 screen with user options + real network logs"
+  "notes": "404.html standalone + Core init-page-root.js"
 }
