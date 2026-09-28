@@ -1,6 +1,6 @@
 // ================================================================
 //  🛡️ init-page-root.js
-//  Version: 6.7.0 — "الدرع المطلق - 404 مع خيارات المستخدم"
+//  Version: 6.9.0 — "404 Screen + User Options + Real Network Logs"
 //  Build:   2025-01-XX
 //  Author:  Jabri-Com
 // ================================================================
@@ -8,7 +8,7 @@
 (function() {
   'use strict';
 
-  const VERSION      = '6.7.0';
+  const VERSION      = '6.9.0';
   const BUILD_DATE   = '2025-01-XX';
   const BASE_URL     = 'https://jabri-com.vercel.app';
   const VERSION_FILE = '/version.json';
@@ -103,7 +103,6 @@
       if (!original) return;
 
       const trimmed = original.trim();
-
       if (/^(https?:|\/\/|mailto:|tel:|javascript:|#)/i.test(trimmed)) return;
       if (/\.[a-z0-9]{2,5}([?#]|$)/i.test(trimmed)) return;
       if (trimmed.endsWith('/')) return;
@@ -123,12 +122,11 @@
   }
 
   // ================================================================
-  //  🎬 Splash Screen
+  //  🎬 Splash
   // ================================================================
 
   function createSplash() {
     if (!CONFIG.splash) return;
-
     if (!document.body) {
       document.addEventListener('DOMContentLoaded', createSplash, { once: true });
       return;
@@ -175,7 +173,7 @@
   }
 
   // ================================================================
-  //  🌐 Helpers للغة
+  //  🌐 Helpers
   // ================================================================
 
   function getBasePath() {
@@ -194,7 +192,7 @@
   }
 
   // ================================================================
-  //  🚨 show404Overlay — صفحة 404 كاملة مع خيارات
+  //  🚨 show404Overlay — الشاشة الكاملة مع الخيارات
   // ================================================================
   function show404Overlay() {
     if (sessionStorage.getItem('jabri404Handled')) return;
@@ -224,18 +222,17 @@
       targetPath = '/' + file;
     }
 
-    // بناء الشاشة
     const div = document.createElement('div');
     div.id = 'jabri-404-overlay';
     div.style.cssText = `
       position:fixed;inset:0;
-      background:#0a0a0f;
+      background: #0a1628;
       color:#e0dcc8;
       z-index:999999;
       display:flex;
       flex-direction:column;
       align-items:center;
-      justify-content:center;
+      justify-content:flex-start;
       font-family:'Cairo',sans-serif;
       direction:rtl;
       padding:20px;
@@ -244,34 +241,39 @@
 
     div.innerHTML = `
       <style>
+        #jabri-404-overlay .ov-container {
+          max-width: 520px;
+          width: 100%;
+          padding: 20px 0;
+          text-align: center;
+        }
         #jabri-404-overlay .ov-404-num {
-          font-size: 5rem;
+          font-size: 6rem;
           font-weight: 900;
           color: #b48b5a;
           text-shadow: 0 0 60px rgba(180,139,90,0.5);
           line-height: 1;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
         }
         #jabri-404-overlay .ov-title {
-          font-size: 1.3rem;
+          font-size: 1.4rem;
           color: #f0e6d3;
           margin-bottom: 25px;
-          text-align: center;
+          line-height: 1.6;
         }
         #jabri-404-overlay .ov-box {
           background: #0b1a2e;
           border: 1px solid #b48b5a;
           border-radius: 16px;
           padding: 14px 20px;
-          margin: 8px 0;
-          max-width: 500px;
+          margin: 10px 0;
           width: 100%;
           text-align: right;
         }
         #jabri-404-overlay .ov-label {
           font-size: 0.75rem;
           color: #b48b5a;
-          margin-bottom: 4px;
+          margin-bottom: 6px;
           font-weight: 700;
         }
         #jabri-404-overlay .ov-value {
@@ -281,7 +283,7 @@
           direction: ltr;
           text-align: left;
           word-break: break-all;
-          padding: 6px 10px;
+          padding: 8px 12px;
           background: rgba(106,227,255,0.05);
           border-radius: 8px;
           border: 1px solid rgba(106,227,255,0.2);
@@ -289,79 +291,63 @@
         #jabri-404-overlay .ov-result {
           font-size: 0.95rem;
           color: #ffd166;
-          padding: 8px;
+          padding: 10px;
           text-align: center;
           font-weight: 700;
+          font-family: 'Courier New', monospace;
+          direction: ltr;
         }
+        #jabri-404-overlay .ov-result .ok   { color: #06d6a0; }
+        #jabri-404-overlay .ov-result .err  { color: #ff6b6b; }
+        #jabri-404-overlay .ov-result .warn { color: #ffd166; }
         #jabri-404-overlay .ov-visitors {
           background: linear-gradient(135deg, #b48b5a, #8b6a3f);
           color: #0a0a0f;
-          padding: 10px 20px;
+          padding: 12px 25px;
           border-radius: 40px;
           font-weight: 700;
-          font-size: 1rem;
-          margin: 15px 0;
+          font-size: 1.05rem;
+          margin: 18px auto;
           display: inline-block;
         }
         #jabri-404-overlay .ov-countdown {
-          font-size: 1.3rem;
+          font-size: 1.1rem;
           color: #6ae3ff;
-          margin: 10px 0;
-          font-weight: 900;
+          margin: 12px 0;
+          font-weight: 700;
           font-family: monospace;
         }
         #jabri-404-overlay .ov-options {
-          display: flex;
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
           gap: 10px;
-          justify-content: center;
           margin-top: 20px;
-          max-width: 700px;
           width: 100%;
         }
         #jabri-404-overlay .ov-btn {
-          flex: 1;
-          min-width: 140px;
-          padding: 14px 18px;
+          padding: 14px 10px;
           border: none;
-          border-radius: 40px;
-          font-size: 0.9rem;
+          border-radius: 14px;
+          font-size: 0.85rem;
           font-weight: 900;
           font-family: 'Cairo', sans-serif;
           cursor: pointer;
           text-decoration: none;
-          display: inline-block;
-          text-align: center;
-          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          transition: transform 0.2s ease;
         }
-        #jabri-404-overlay .ov-btn-map {
-          background: linear-gradient(135deg, #6ae3ff, #3aa0c4);
-          color: #0a0a0f;
-          box-shadow: 0 0 20px rgba(106,227,255,0.4);
-        }
-        #jabri-404-overlay .ov-btn-home {
-          background: linear-gradient(135deg, #ffd700, #f0a500);
-          color: #0a0a0f;
-          box-shadow: 0 0 20px rgba(255,215,0,0.4);
-        }
-        #jabri-404-overlay .ov-btn-waha {
-          background: linear-gradient(135deg, #06d6a0, #05b98a);
-          color: #0a0a0f;
-          box-shadow: 0 0 20px rgba(6,214,160,0.4);
-        }
-        #jabri-404-overlay .ov-btn-exit {
-          background: linear-gradient(135deg, #ff6b6b, #e85555);
-          color: #fff;
-          box-shadow: 0 0 20px rgba(255,107,107,0.4);
-        }
-        #jabri-404-overlay .ov-btn:hover {
-          transform: scale(1.05);
-        }
+        #jabri-404-overlay .ov-btn:hover { transform: scale(1.03); }
+        #jabri-404-overlay .ov-btn-map  { background: linear-gradient(135deg, #6ae3ff, #3aa0c4); color: #0a0a0f; }
+        #jabri-404-overlay .ov-btn-home { background: linear-gradient(135deg, #ffd700, #f0a500); color: #0a0a0f; }
+        #jabri-404-overlay .ov-btn-waha { background: linear-gradient(135deg, #06d6a0, #05b98a); color: #0a0a0f; }
+        #jabri-404-overlay .ov-btn-exit { background: linear-gradient(135deg, #ff6b6b, #e85555); color: #fff; }
         #jabri-404-overlay .ov-music {
           color: #bbaa88;
-          font-size: 0.8rem;
+          font-size: 0.85rem;
           margin-top: 20px;
-          text-align: center;
         }
         #jabri-404-overlay .ov-version {
           color: #444;
@@ -370,43 +356,45 @@
           margin-top: 8px;
         }
         @media (max-width: 500px) {
-          #jabri-404-overlay .ov-404-num { font-size: 3.5rem; }
-          #jabri-404-overlay .ov-title { font-size: 1.1rem; }
-          #jabri-404-overlay .ov-btn { min-width: 120px; font-size: 0.8rem; padding: 12px 14px; }
+          #jabri-404-overlay .ov-404-num { font-size: 4rem; }
+          #jabri-404-overlay .ov-title { font-size: 1.15rem; }
+          #jabri-404-overlay .ov-btn { font-size: 0.75rem; padding: 12px 8px; }
         }
       </style>
 
-      <div class="ov-404-num">404</div>
-      <div class="ov-title">🏝️ عذرًا، هذا الدرب غير موجود في واحة الجبري</div>
+      <div class="ov-container">
+        <div class="ov-404-num">404</div>
+        <div class="ov-title">🏝️ عذرًا، هذا الدرب غير موجود</div>
 
-      <div class="ov-box">
-        <div class="ov-label">🔍 Current Path</div>
-        <div class="ov-value">${currentPath}</div>
+        <div class="ov-box">
+          <div class="ov-label">🔍 Current Path</div>
+          <div class="ov-value">${currentPath}</div>
+        </div>
+
+        <div class="ov-box">
+          <div class="ov-label">➡️ Target Path</div>
+          <div class="ov-value" id="ovTarget">${targetPath}</div>
+        </div>
+
+        <div class="ov-box">
+          <div class="ov-label">📊 Result</div>
+          <div class="ov-result" id="ovResult">🔍 Searching...</div>
+        </div>
+
+        <div class="ov-visitors">👥 عدد الزوار: ${count}</div>
+
+        <div class="ov-countdown" id="ovCountdown">⏱️ 7s</div>
+
+        <div class="ov-options">
+          <a href="${CONFIG.allLinksPath}" class="ov-btn ov-btn-map">🗺️ خريطة</a>
+          <a href="${CONFIG.indexPath}" class="ov-btn ov-btn-home">🏠 افتتاح</a>
+          <a href="${CONFIG.wahaPath}" class="ov-btn ov-btn-waha">🏝️ الواحة</a>
+          <button onclick="exitPage()" class="ov-btn ov-btn-exit">🚪 خروج</button>
+        </div>
+
+        <div class="ov-music">🎵 نغمات السندباد تعزف لك...</div>
+        <div class="ov-version">v${VERSION}</div>
       </div>
-
-      <div class="ov-box">
-        <div class="ov-label">➡️ Target Path</div>
-        <div class="ov-value" id="ovTarget">${targetPath}</div>
-      </div>
-
-      <div class="ov-box">
-        <div class="ov-label">📊 Result</div>
-        <div class="ov-result" id="ovResult">🔍 Searching...</div>
-      </div>
-
-      <div class="ov-visitors">👥 عدد الزوار: ${count}</div>
-
-      <div class="ov-countdown" id="ovCountdown">⏱️ 7s</div>
-
-      <div class="ov-options">
-        <a href="${CONFIG.allLinksPath}" class="ov-btn ov-btn-map">🗺️ خريطة المسارات</a>
-        <a href="${CONFIG.indexPath}" class="ov-btn ov-btn-home">🏠 الصفحة الافتتاحية</a>
-        <a href="${CONFIG.wahaPath}" class="ov-btn ov-btn-waha">🏝️ دخول الواحة</a>
-        <button onclick="exitPage()" class="ov-btn ov-btn-exit">🚪 خروج</button>
-      </div>
-
-      <div class="ov-music">🎵 نغمات السندباد تعزف لك...</div>
-      <div class="ov-version">v${VERSION}</div>
     `;
     document.body.prepend(div);
 
@@ -426,40 +414,28 @@
       if (seconds <= 0) clearInterval(countdownInterval);
     }, 1000);
 
-    // ⏰ بعد 3 ثوانٍ → ابدأ المحاولة التلقائية
+    // ⏰ بعد 3 ثوانٍ → ابدأ المحاولة
     setTimeout(() => {
       handle404Redirect();
     }, CONFIG.auto404TryAfter);
   }
 
   // ================================================================
-  //  🚪 exitPage — خروج = exit = quit
+  //  🚪 exitPage
   // ================================================================
   function exitPage() {
     console.log('🚪 [exit] quitting...');
-
-    // 1) جرّب إغلاق التبويب فوراً
-    try {
-      window.close();
-    } catch (e) {}
-
-    // 2) إذا لم يُغلق → ارجع للخلف
+    try { window.close(); } catch (e) {}
     setTimeout(() => {
       if (document.getElementById('jabri-404-overlay')) {
-        try {
-          window.history.back();
-        } catch (e) {}
+        try { window.history.back(); } catch (e) {}
       }
     }, 200);
-
-    // 3) إذا لم يعمل → about:blank
     setTimeout(() => {
       if (document.getElementById('jabri-404-overlay')) {
         window.location.href = 'about:blank';
       }
     }, 600);
-
-    // 4) آخر خيار → الرئيسية
     setTimeout(() => {
       if (document.getElementById('jabri-404-overlay')) {
         window.location.href = '/';
@@ -469,7 +445,7 @@
   window.exitPage = exitPage;
 
   // ================================================================
-  //  🎯 handle404Redirect — if / else
+  //  🎯 handle404Redirect — if/else + Real Result
   // ================================================================
   async function handle404Redirect() {
     const currentPath = location.pathname;
@@ -477,52 +453,52 @@
     const resultEl = document.getElementById('ovResult');
     const targetEl = document.getElementById('ovTarget');
 
-    console.log('🔧 [404] handling:', currentPath, '| hasHtml:', hasHtml);
+    console.log('🔧 [404] handling:', currentPath);
 
-    const updateResult = (text, color) => {
+    const updateResult = (text, cls = '') => {
       if (resultEl) {
-        resultEl.textContent = text;
-        resultEl.style.color = color || '#ffd166';
+        resultEl.innerHTML = text;
+        resultEl.className = 'ov-result';
       }
     };
 
     // ═══════════════════════════════════════════════════════════
-    //  IF: المسار بدون .html
+    //  IF: بدون .html
     // ═══════════════════════════════════════════════════════════
     if (!hasHtml) {
       const newPath = currentPath + '.html';
       if (targetEl) targetEl.textContent = newPath;
+      updateResult(`🔍 GET ${newPath} ...`);
 
-      updateResult('🔍 Checking...', '#ffd166');
       const exists = await fileExists(newPath);
 
       if (exists) {
-        updateResult('✅ Found! Redirecting...', '#06d6a0');
-        setTimeout(() => { window.location.href = newPath; }, 1000);
+        updateResult(`<span class="ok">✅ 200 OK</span> → Redirecting`);
+        setTimeout(() => { window.location.href = newPath; }, 1200);
       } else {
-        updateResult('❌ Not found → /all-links.html', '#ff6b6b');
+        updateResult(`<span class="err">❌ 404</span> → /all-links.html`);
         setTimeout(() => { window.location.href = CONFIG.allLinksPath; }, 1500);
       }
       return;
     }
 
     // ═══════════════════════════════════════════════════════════
-    //  ELSE: المسار ينتهي بـ .html
+    //  ELSE: ينتهي بـ .html
     // ═══════════════════════════════════════════════════════════
     const file = currentPath.split('/').filter(Boolean).pop();
     const newPath = '/' + file;
     if (targetEl) targetEl.textContent = newPath;
+    updateResult(`🔍 GET ${newPath} ...`);
 
-    updateResult('🔍 Checking root...', '#ffd166');
     const existsInRoot = await fileExists(newPath);
 
     if (existsInRoot) {
-      updateResult('✅ Found in root! Redirecting...', '#06d6a0');
-      setTimeout(() => { window.location.href = newPath; }, 1000);
+      updateResult(`<span class="ok">✅ 200 OK (root)</span> → Redirecting`);
+      setTimeout(() => { window.location.href = newPath; }, 1200);
       return;
     }
 
-    updateResult('❌ Not in root → /all-links.html', '#ff6b6b');
+    updateResult(`<span class="err">❌ 404 (root)</span> → /all-links.html`);
     setTimeout(() => { window.location.href = CONFIG.allLinksPath; }, 1500);
   }
 
@@ -563,18 +539,14 @@
   }
 
   // ================================================================
-  //  🌐 Language Switcher
+  //  🌐 toggleLang
   // ================================================================
-
   async function toggleLang() {
     const path = location.pathname;
     const qs   = location.search + location.hash;
     const lang = document.documentElement.lang;
-
     const base = getBasePath();
     const file = getFileName();
-
-    console.log('🌐 [lang] path:', path, '| file:', file, '| lang:', lang);
 
     const lower = path.toLowerCase();
     let targetLang;
@@ -582,17 +554,12 @@
     else if (lower.includes('/ar/')) targetLang = 'en';
     else targetLang = (lang === 'ar') ? 'en' : 'ar';
 
-    const targetPath = base + '/' + targetLang + '/' + file;
-    const fullTarget = location.origin + targetPath + qs;
-
-    console.log('🌐 [lang] redirecting →', fullTarget);
-    window.location.href = targetPath + qs;
+    window.location.href = base + '/' + targetLang + '/' + file + qs;
   }
 
   // ================================================================
-  //  📥 Header / Footer Loader
+  //  📥 Load Partial
   // ================================================================
-
   function safelyExecuteScripts(container) {
     container.querySelectorAll('script').forEach(oldScript => {
       try {
@@ -622,39 +589,26 @@
       if (isHeader) setTimeout(hideSplash, 500);
       return;
     }
-
     const fallbackHTML = el.innerHTML.trim();
     const resolved = await resolveFile(fileName);
 
     if (!resolved) {
-      if (fallbackHTML) {
-        console.log(`ℹ️ ${fileName} not found — keeping inline fallback`);
-        el.dataset.loaded = 'true';
-      } else {
-        el.style.display = 'none';
-        console.warn(`⚠️ ${fileName} missing → hidden`);
-      }
+      if (fallbackHTML) el.dataset.loaded = 'true';
+      else el.style.display = 'none';
       if (isHeader) setTimeout(hideSplash, 500);
       return;
     }
 
-    console.log(`📄 [${fileName}] loading: ${resolved}`);
-
     try {
       const res = await fetch(bustCache(resolved), {
-        cache: 'no-store',
-        headers: { 'Cache-Control': 'no-cache' }
+        cache: 'no-store', headers: { 'Cache-Control': 'no-cache' }
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
-
       el.innerHTML = await res.text();
       el.dataset.loaded = 'true';
       el.dataset.version = VERSION;
       safelyExecuteScripts(el);
-
       if (CONFIG.autoFixLinks) autoFixLinks();
-
-      console.log(`✅ [${fileName}] loaded (v${VERSION})`);
       document.dispatchEvent(new CustomEvent(evt, { detail: { version: VERSION } }));
       if (isHeader) setTimeout(hideSplash, 300);
     } catch (e) {
@@ -667,7 +621,6 @@
   // ================================================================
   //  🔗 Dynamic Links + Canonical
   // ================================================================
-
   const PAGE_LINKS = {
     '/Page1.html':  { prev: null,           next: '/Page2.html',  up: '/research.html' },
     '/Page2.html':  { prev: '/Page1.html',  next: '/Page3.html',  up: '/research.html' },
@@ -700,7 +653,6 @@
       }
       link.href = BASE_URL + withVersion(url);
     });
-    console.log('🔗 dynamic links added (v' + VERSION + ')');
   }
 
   function setCanonical() {
@@ -712,13 +664,11 @@
       document.head.appendChild(link);
     }
     link.href = url;
-    console.log('🔗 canonical: ' + url);
   }
 
   // ================================================================
-  //  🎵 Music Player
+  //  🎵 Music
   // ================================================================
-
   const MUSIC_FILES = ['music1.mp3', 'music2.mp3', 'music3.mp3', 'music4.mp3', 'music5.mp3'];
   const MUSIC_NAMES = ['🎵 تراث اليمن', '🎵 سندباد', '🎵 صنعاء', '🎵 شبام', '🎵 سقطرى'];
   let musicIndex = 0;
@@ -729,17 +679,10 @@
 
   function initMusic() {
     if (!CONFIG.music) return;
-
     musicAudio = document.getElementById('bgMusic');
     musicBtn   = document.getElementById('musicBtn');
     musicTrack = document.getElementById('trackName');
-
-    if (!musicAudio || !musicBtn) {
-      console.log('ℹ️ [music] no player on this page');
-      return;
-    }
-
-    console.log('🎵 [music] initializing');
+    if (!musicAudio || !musicBtn) return;
 
     musicAudio.src = '/image/' + MUSIC_FILES[0];
     if (musicTrack) musicTrack.textContent = MUSIC_NAMES[0];
@@ -750,15 +693,8 @@
       if (musicTrack) musicTrack.textContent = MUSIC_NAMES[musicIndex];
       musicAudio.play().catch(() => {});
     });
-
-    musicAudio.addEventListener('play',  () => {
-      musicBtn.textContent = '🔊';
-      isMusicPlaying = true;
-    });
-    musicAudio.addEventListener('pause', () => {
-      musicBtn.textContent = '🔇';
-      isMusicPlaying = false;
-    });
+    musicAudio.addEventListener('play',  () => { musicBtn.textContent = '🔊'; isMusicPlaying = true; });
+    musicAudio.addEventListener('pause', () => { musicBtn.textContent = '🔇'; isMusicPlaying = false; });
 
     const startOnInteraction = () => {
       if (isMusicPlaying) return;
@@ -775,19 +711,14 @@
   function toggleMusic() {
     if (!musicAudio) musicAudio = document.getElementById('bgMusic');
     if (!musicAudio) return;
-    if (isMusicPlaying) {
-      musicAudio.pause();
-    } else {
-      musicAudio.play().catch(err => console.warn('⚠️ audio:', err));
-    }
+    if (isMusicPlaying) musicAudio.pause();
+    else musicAudio.play().catch(() => {});
   }
-
   window.toggleMusic = toggleMusic;
 
   // ================================================================
-  //  🔄 Auto Version Check
+  //  🔄 Version Check
   // ================================================================
-
   async function checkForNewVersion() {
     if (!CONFIG.version) return;
     try {
@@ -795,7 +726,6 @@
       if (!res.ok) return;
       const data = await res.json();
       if (data.version && data.version !== VERSION) {
-        console.warn(`🔄 [update] ${VERSION} → ${data.version}`);
         const toast = document.createElement('div');
         toast.style.cssText = `
           position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
@@ -812,9 +742,7 @@
   }
 
   function forceReload() {
-    if ('caches' in window) {
-      caches.keys().then(names => names.forEach(n => caches.delete(n)));
-    }
+    if ('caches' in window) caches.keys().then(names => names.forEach(n => caches.delete(n)));
     const url = new URL(location.href);
     url.searchParams.set('_v', Date.now());
     location.href = url.toString();
@@ -823,26 +751,17 @@
   // ================================================================
   //  🚀 init
   // ================================================================
-
   function init() {
     console.log('⚙️ [init] running with config:', CONFIG);
-
     if (CONFIG.splash) createSplash();
     if (CONFIG.detect404) detect404();
     if (CONFIG.music) initMusic();
 
-    if (CONFIG.header) {
-      loadPartial('header-placeholder', 'header.html', 'headerLoaded', true);
-    } else {
-      setTimeout(hideSplash, 300);
-    }
+    if (CONFIG.header) loadPartial('header-placeholder', 'header.html', 'headerLoaded', true);
+    else setTimeout(hideSplash, 300);
 
-    if (CONFIG.footer) {
-      loadPartial('footer-placeholder', 'footer.html', 'footerLoaded', false);
-    }
-
+    if (CONFIG.footer) loadPartial('footer-placeholder', 'footer.html', 'footerLoaded', false);
     if (CONFIG.version) checkForNewVersion();
-
     if (CONFIG.autoFixLinks) autoFixLinks();
 
     document.addEventListener('headerLoaded', () => {
@@ -850,18 +769,9 @@
       addDynamicLinks();
     });
 
-    window.addEventListener('error', (e) => {
-      console.error('🚨 [safety] uncaught:', e.message);
-      hideSplash();
-    });
-
-    window.addEventListener('load', () => {
-      setTimeout(hideSplash, 1000);
-    });
-
-    document.addEventListener('click', () => {
-      if (!splashHidden) hideSplash();
-    }, { once: true });
+    window.addEventListener('error', (e) => hideSplash());
+    window.addEventListener('load', () => setTimeout(hideSplash, 1000));
+    document.addEventListener('click', () => { if (!splashHidden) hideSplash(); }, { once: true });
   }
 
   if (document.readyState === 'loading') {
@@ -871,25 +781,19 @@
   }
 
   // ================================================================
-  //  🌍 API عالمي
+  //  🌍 API
   // ================================================================
   window.Jabri = {
     version: VERSION,
-    buildDate: BUILD_DATE,
     config: CONFIG,
     resolveFile: resolveFile,
     fileExists: fileExists,
     toggleLang: toggleLang,
     toggleMusic: toggleMusic,
     autoFixLinks: autoFixLinks,
-    withVersion: withVersion,
-    bustCache: bustCache,
-    forceReload: forceReload,
-    hideSplash: hideSplash,
-    detect404: detect404,
+    exitPage: exitPage,
     show404Overlay: show404Overlay,
-    handle404Redirect: handle404Redirect,
-    exitPage: exitPage
+    handle404Redirect: handle404Redirect
   };
 
   window.switchLanguage = toggleLang;
