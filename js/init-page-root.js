@@ -1,6 +1,6 @@
 // ================================================================
 //  🛡️ init-page-root.js
-//  Version: 6.4.0 — "الدرع المطلق - 404 حقيقي فقط"
+//  Version: 6.6.1 — "الدرع المطلق - 404 if/else + all-links"
 //  Build:   2025-01-XX
 //  Author:  Jabri-Com
 // ================================================================
@@ -8,7 +8,7 @@
 (function() {
   'use strict';
 
-  const VERSION      = '6.4.0';
+  const VERSION      = '6.6.1';
   const BUILD_DATE   = '2025-01-XX';
   const BASE_URL     = 'https://jabri-com.vercel.app';
   const VERSION_FILE = '/version.json';
@@ -25,7 +25,8 @@
     music:        true,
     autoFixLinks: true,
     autoHideSplashAfter: 5000,
-    auto404RedirectAfter: 7000
+    auto404TryAfter: 3000,
+    allLinksPath: '/all-links.html'
   };
   const CONFIG = Object.assign({}, DEFAULT_CONFIG, window.JABRI_CONFIG || {});
 
@@ -172,7 +173,26 @@
   }
 
   // ================================================================
-  //  🚨 404 Handler — يعتمد على HTTP status فقط
+  //  🌐 Helpers
+  // ================================================================
+
+  function getBasePath() {
+    const path = location.pathname;
+    const m = path.match(/^(.*?)\/(ar|en)(\/|$)/i);
+    if (m) return m[1];
+    return path.substring(0, path.lastIndexOf('/'));
+  }
+
+  function getFileName() {
+    const path = location.pathname;
+    const base = getBasePath();
+    const without = path.substring(base.length);
+    const pure = without.replace(/^\/(ar|en)(\/|$)/i, '/').replace(/^\/+/, '');
+    return pure || 'all-links.html';
+  }
+
+  // ================================================================
+  //  🚨 404 Handler
   // ================================================================
 
   function show404Overlay() {
@@ -191,6 +211,18 @@
     let count = localStorage.getItem('jabriVisitorCount');
     if (count === null) count = Math.floor(Math.random() * 80) + 20;
 
+    const currentPath = location.pathname;
+    const hasHtml = currentPath.toLowerCase().endsWith('.html');
+
+    // 📍 المسار المتوقع
+    let nextStep;
+    if (!hasHtml) {
+      nextStep = currentPath + '.html';
+    } else {
+      const file = currentPath.split('/').filter(Boolean).pop();
+      nextStep = '/' + file + ' ← أو all-links';
+    }
+
     const div = document.createElement('div');
     div.id = 'jabri-404-overlay';
     div.style.cssText = `
@@ -203,7 +235,9 @@
       backdrop-filter:blur(12px);direction:rtl;max-width:90%`;
     div.innerHTML = `
       🏝️ عذرًا، هذا الدرب غير موجود في واحة الجبري.<br>
-      🌊 سيتم تحويلك إلى <strong>الواحة الرئيسية</strong> بعد ${Math.round(CONFIG.auto404RedirectAfter/1000)} ثوانٍ<br>
+      🌊 جاري البحث عن المسار الصحيح...<br>
+      🔍 <code style="color:#6ae3ff;font-size:13px;direction:ltr;display:inline-block">${currentPath}</code><br>
+      ➡️ <code style="color:#06d6a0;font-size:13px;direction:ltr;display:inline-block">${nextStep}</code><br>
       👥 عدد الزوار: <strong>${count}</strong>
       <div style="margin-top:12px;font-size:14px;color:#bbaa88">
         🎵 نغمات السندباد تعزف لك... · v${VERSION}
@@ -217,20 +251,65 @@
       });
     }
 
-    setTimeout(() => { window.location.href = '/'; }, CONFIG.auto404RedirectAfter);
+    setTimeout(() => {
+      handle404Redirect();
+    }, CONFIG.auto404TryAfter);
   }
 
-  /**
-   * 🎯 detect404 — يكتشف 404 من HTTP status الحقيقي فقط
-   * لا يبحث عن كلمة "404" في النص (لأنها قد توجد في مكان آخر)
-   */
+  // ================================================================
+  //  🎯 handle404Redirect — if / else + all-links fallback
+  // ================================================================
+  async function handle404Redirect() {
+    const currentPath = location.pathname;
+    const hasHtml = currentPath.toLowerCase().endsWith('.html');
+
+    console.log('🔧 [404] handling:', currentPath, '| hasHtml:', hasHtml);
+
+    // ═══════════════════════════════════════════════════════════
+    //  IF: المسار بدون .html
+    //      → Path = Path + ".html"
+    //      → ثم exit
+    // ═══════════════════════════════════════════════════════════
+    if (!hasHtml) {
+      const newPath = currentPath + '.html';
+      console.log('✅ [404-IF] →', newPath);
+      window.location.href = newPath;
+      return;   // ← exit
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    //  ELSE: المسار ينتهي بـ .html
+    //      → File = trim(Path)
+    //      → Path = "/" + File
+    //      → إذا لم يوجد → all-links.html
+    // ═══════════════════════════════════════════════════════════
+    const file = currentPath.split('/').filter(Boolean).pop();
+    const newPath = '/' + file;
+    console.log('✅ [404-ELSE] file:', file, '→ root path:', newPath);
+
+    // افحص إذا الملف موجود في الروت
+    const existsInRoot = await fileExists(newPath);
+    if (existsInRoot) {
+      console.log('✅ [404-ELSE] found in root → redirect');
+      window.location.href = newPath;
+      return;
+    }
+
+    // غير موجود → خريطة المسارات
+    console.log('⚠️ [404-ELSE] not in root → all-links');
+    window.location.href = CONFIG.allLinksPath;
+  }
+
+  // ================================================================
+  //  🎯 detect404 — HTTP status فقط
+  // ================================================================
   function detect404() {
     if (!CONFIG.detect404) return;
 
     let pageStatus = 0;
     let status404 = false;
 
-    // 1) Navigation entry (الأكثر دقة)
+    // 1) Navigation entry
     if (window.performance && window.performance.getEntriesByType) {
       const navEntries = window.performance.getEntriesByType('navigation');
       if (navEntries.length > 0) {
@@ -240,7 +319,7 @@
       }
     }
 
-    // 2) Resource entries (احتياطي)
+    // 2) Resource entries
     if (!status404 && window.performance && window.performance.getEntries) {
       for (const e of window.performance.getEntries()) {
         if (e.name === location.href && e.responseStatus === 404) {
@@ -263,26 +342,6 @@
   //  🌐 Language Switcher
   // ================================================================
 
-  function getBasePath() {
-    const path = location.pathname;
-    const m = path.match(/^(.*?)\/(ar|en)(\/|$)/i);
-    if (m) return m[1];
-    return path.substring(0, path.lastIndexOf('/'));
-  }
-
-  function getFileName() {
-    const path = location.pathname;
-    const base = getBasePath();
-    const without = path.substring(base.length);
-    const pure = without.replace(/^\/(ar|en)(\/|$)/i, '/').replace(/^\/+/, '');
-    return pure || 'all-links.html';
-  }
-
-  /**
-   * 🌐 toggleLang — ينتقل للغة الأخرى
-   * إذا الملف موجود → انتقال مباشر
-   * إذا غير موجود → انتقال أيضاً (الصفحة الجديدة ستكتشف 404 وتظهر الشاشة)
-   */
   async function toggleLang() {
     const path = location.pathname;
     const qs   = location.search + location.hash;
@@ -303,10 +362,6 @@
     const fullTarget = location.origin + targetPath + qs;
 
     console.log('🌐 [lang] redirecting →', fullTarget);
-
-    // 🚀 انتقال مباشر — لا فحص مسبق
-    // إذا الملف موجود، يفتح. إذا غير موجود، الصفحة الجديدة سترجع 404
-    // والمرعبة على الصفحة الجديدة ستكتشف 404 وتظهر الشاشة تلقائياً
     window.location.href = targetPath + qs;
   }
 
@@ -608,7 +663,8 @@
     forceReload: forceReload,
     hideSplash: hideSplash,
     detect404: detect404,
-    show404Overlay: show404Overlay
+    show404Overlay: show404Overlay,
+    handle404Redirect: handle404Redirect
   };
 
   window.switchLanguage = toggleLang;
