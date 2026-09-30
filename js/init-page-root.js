@@ -1,15 +1,26 @@
 // ================================================================
 //  🛡️ init-page-root.js
-//  Version: 7.0.0 — "Full Process + Smart Redirect"
-//  Build:   2025-01-XX
+//  Version: 7.3.0 — "The Complete Beast"
+//  Build:   2026-09-30
 //  Author:  Jabri-Com
+//  Features:
+//    ✅ Header + Footer loader (surgical fix, never disabled)
+//    ✅ Splash screen with auto-hide
+//    ✅ 404 detection (4 layers) + Arabic overlay + process log
+//    ✅ Music player (5 tracks, auto-next)
+//    ✅ AR/EN language toggle
+//    ✅ autoFixLinks (adds .html)
+//    ✅ Version check (no reload loop)
+//    ✅ Canonical URL
+//    ✅ Network notifications (online/offline/slow/load)
+//    ✅ Safe fetch wrapper
 // ================================================================
 
 (function() {
   'use strict';
 
-  const VERSION      = '7.0.0';
-  const BUILD_DATE   = '2025-01-XX';
+  const VERSION      = '7.3.0';
+  const BUILD_DATE   = '2026-09-30';
   const BASE_URL     = 'https://jabri-com.vercel.app';
   const VERSION_FILE = '/version.json';
 
@@ -24,6 +35,7 @@
     version:      true,
     music:        true,
     autoFixLinks: true,
+    netToasts:    true,
     autoHideSplashAfter: 5000,
     auto404TryAfter: 2000,
     allLinksPath: '/all-links.html',
@@ -50,33 +62,56 @@
     return url + sep + 'v=' + VERSION;
   }
 
+  // ────────────────────────────────────────────────────────────────
+  //  ✅ FIX #1: fileExists بدون redirect:'manual'
+  // ────────────────────────────────────────────────────────────────
   async function fileExists(url) {
     try {
       const res = await fetch(url, {
-        method: 'GET',
-        cache: 'no-store',
-        redirect: 'manual'
+        method: 'HEAD',
+        cache: 'no-store'
       });
-      return res.status >= 200 && res.status < 300;
+      if (res.status === 405 || res.status === 501) {
+        const res2 = await fetch(url, { cache: 'no-store' });
+        return res2.ok;
+      }
+      return res.ok;
     } catch (e) {
       return false;
     }
   }
 
+  // ────────────────────────────────────────────────────────────────
+  //  ✅ FIX #4: resolveFile multi-path fallback
+  // ────────────────────────────────────────────────────────────────
   async function resolveFile(rawPath) {
     let clean = (rawPath || '').trim();
     if (!clean) return null;
 
-    if (await fileExists(clean)) return clean;
+    const candidates = [clean];
+    if (!clean.startsWith('/')) candidates.push('/' + clean);
 
     if (!clean.endsWith('.html')) {
-      const withHtml = clean + '.html';
-      if (await fileExists(withHtml)) return withHtml;
+      candidates.push(clean + '.html');
+      if (!clean.startsWith('/')) candidates.push('/' + clean + '.html');
+    }
+
+    const basePath = getBasePath();
+    if (basePath && !clean.startsWith('/')) {
+      candidates.push(basePath + '/' + clean);
+      if (!clean.endsWith('.html')) {
+        candidates.push(basePath + '/' + clean + '.html');
+      }
+    }
+
+    for (const c of candidates) {
+      if (await fileExists(c)) return c;
     }
 
     const dir = clean.substring(0, clean.lastIndexOf('/') + 1);
     const fallback = dir + 'all-links.html';
     if (await fileExists(fallback)) return fallback;
+    if (await fileExists('/all-links.html')) return '/all-links.html';
 
     return null;
   }
@@ -99,6 +134,199 @@
       fixed++;
     });
     if (fixed > 0) console.log(`✅ [links] fixed ${fixed}`);
+  }
+
+  // ================================================================
+  //  📡 Network Notifications
+  // ================================================================
+  const NET = {
+    container: null,
+    toastTimeout: 4000,
+    slowThreshold: 5000,
+    offlineShown: false,
+    slowTimer: null,
+    loadStart: {}
+  };
+
+  function ensureNetContainer() {
+    if (NET.container && document.body.contains(NET.container)) return NET.container;
+    const c = document.createElement('div');
+    c.id = 'jabri-net-toasts';
+    c.style.cssText = `
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999998;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+      font-family: 'Cairo', system-ui, sans-serif;
+      direction: rtl;
+      max-width: 90vw;
+    `;
+    document.body.appendChild(c);
+    NET.container = c;
+    return c;
+  }
+
+  function showNetToast(message, type, duration) {
+    if (!CONFIG.netToasts) return null;
+    type = type || 'info';
+    duration = duration === undefined ? NET.toastTimeout : duration;
+
+    const colors = {
+      info:    { bg: 'linear-gradient(135deg,#6ae3ff,#3aa0c4)', fg: '#0a0a0f' },
+      ok:      { bg: 'linear-gradient(135deg,#06d6a0,#05b98a)', fg: '#0a0a0f' },
+      warn:    { bg: 'linear-gradient(135deg,#ffd166,#f0a500)', fg: '#0a0a0f' },
+      err:     { bg: 'linear-gradient(135deg,#ff6b6b,#e85555)', fg: '#fff'    },
+      offline: { bg: 'linear-gradient(135deg,#8b0000,#5c0000)', fg: '#fff'    }
+    };
+    const c = colors[type] || colors.info;
+
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+      background: ${c.bg};
+      color: ${c.fg};
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+      max-width: 90vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    `;
+
+    const text = document.createElement('span');
+    text.textContent = message;
+    text.style.cssText = 'flex:1;text-align:right';
+    toast.appendChild(text);
+
+    const close = document.createElement('span');
+    close.textContent = '✕';
+    close.style.cssText = 'cursor:pointer;opacity:0.7;font-size:16px;padding-right:6px';
+    close.onclick = () => removeToast(toast);
+    toast.appendChild(close);
+
+    ensureNetContainer().appendChild(toast);
+
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    });
+
+    if (duration > 0) {
+      setTimeout(() => removeToast(toast), duration);
+    }
+    return toast;
+  }
+
+  function removeToast(toast) {
+    if (!toast || !toast.parentNode) return;
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-20px)';
+    setTimeout(() => { try { toast.remove(); } catch (e) {} }, 300);
+  }
+
+  function initNetworkWatcher() {
+    if (!CONFIG.netToasts) return;
+
+    if (!navigator.onLine) {
+      showNetToast('🔴 لا يوجد اتصال بالإنترنت', 'offline', 0);
+      NET.offlineShown = true;
+    }
+
+    window.addEventListener('online', () => {
+      console.log('🟢 [net] online');
+      showNetToast('🟢 تم استعادة الاتصال', 'ok', 3000);
+      NET.offlineShown = false;
+      if (NET.container) {
+        NET.container.querySelectorAll('div').forEach(t => {
+          if (t.textContent && t.textContent.includes('لا يوجد اتصال')) removeToast(t);
+        });
+      }
+    });
+
+    window.addEventListener('offline', () => {
+      console.log('🔴 [net] offline');
+      showNetToast('🔴 انقطع الاتصال بالإنترنت', 'offline', 0);
+      NET.offlineShown = true;
+    });
+
+    if (window.fetch && !window.__jabriFetchWrapped) {
+      const origFetch = window.fetch.bind(window);
+      window.fetch = async function(...args) {
+        const url = (args[0] && args[0].url) || args[0] || '';
+        const start = Date.now();
+        try {
+          const res = await origFetch(...args);
+          const dur = Date.now() - start;
+          if (dur > NET.slowThreshold) {
+            console.warn(`🐢 [net] slow: ${url} (${dur}ms)`);
+            showNetToast(`🐢 اتصال بطيء (${(dur/1000).toFixed(1)}s)`, 'warn', 3000);
+          }
+          return res;
+        } catch (e) {
+          console.error(`❌ [net] failed: ${url}`, e.message);
+          if (!navigator.onLine) {
+            showNetToast('🔴 فشل الاتصال — تحقق من الشبكة', 'offline', 4000);
+          } else {
+            const name = String(url).split('/').pop().split('?')[0];
+            showNetToast(`⚠️ فشل تحميل: ${name}`, 'err', 4000);
+          }
+          throw e;
+        }
+      };
+      window.__jabriFetchWrapped = true;
+    }
+  }
+
+  function notifyLoadStart(name) {
+    if (!CONFIG.netToasts) return;
+    NET.loadStart[name] = Date.now();
+    clearTimeout(NET.slowTimer);
+    NET.slowTimer = setTimeout(() => {
+      showNetToast(`⏳ جاري تحميل ${name}...`, 'info', 0);
+    }, 1500);
+  }
+
+  function notifyLoadEnd(name, success) {
+    if (!CONFIG.netToasts) return;
+    clearTimeout(NET.slowTimer);
+    const dur = NET.loadStart[name] ? Date.now() - NET.loadStart[name] : 0;
+    if (success) {
+      console.log(`✅ [net] ${name} loaded in ${dur}ms`);
+      if (dur > 3000) {
+        showNetToast(`✅ تم تحميل ${name} (${(dur/1000).toFixed(1)}s)`, 'ok', 2000);
+      }
+    } else {
+      console.warn(`⚠️ [net] ${name} failed after ${dur}ms`);
+      showNetToast(`⚠️ تعذّر تحميل ${name}`, 'err', 4000);
+    }
+  }
+
+  function reportConnectionType() {
+    if (!CONFIG.netToasts) return;
+    try {
+      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (!conn) return;
+      const type = conn.effectiveType || 'unknown';
+      const down = conn.downlink ? `${conn.downlink} Mb/s` : '';
+      console.log(`📶 [net] connection: ${type} ${down}`);
+      if (type === 'slow-2g' || type === '2g') {
+        showNetToast(`🐢 اتصال ${type.toUpperCase()} — قد يكون التحميل بطيئاً`, 'warn', 5000);
+      }
+    } catch (e) {}
   }
 
   // ================================================================
@@ -161,7 +389,7 @@
   }
 
   // ================================================================
-  //  🚨 show404Overlay — الشاشة الكاملة مع Process
+  //  🚨 show404Overlay
   // ================================================================
   function show404Overlay() {
     if (document.getElementById('jabri-404-overlay')) return;
@@ -219,77 +447,50 @@
           text-align: center;
         }
         #jabri-404-overlay .ov-404-num {
-          font-size: 5.5rem;
-          font-weight: 900;
-          color: #b48b5a;
+          font-size: 5.5rem; font-weight: 900; color: #b48b5a;
           text-shadow: 0 0 60px rgba(180,139,90,0.5);
-          line-height: 1;
-          margin-bottom: 8px;
+          line-height: 1; margin-bottom: 8px;
         }
         #jabri-404-overlay .ov-title {
-          font-size: 1.3rem;
-          color: #f0e6d3;
-          margin-bottom: 22px;
-          line-height: 1.6;
+          font-size: 1.3rem; color: #f0e6d3;
+          margin-bottom: 22px; line-height: 1.6;
         }
         #jabri-404-overlay .ov-box {
-          background: #0b1a2e;
-          border: 1px solid #b48b5a;
-          border-radius: 14px;
-          padding: 10px 14px;
-          margin: 8px 0;
-          text-align: right;
+          background: #0b1a2e; border: 1px solid #b48b5a;
+          border-radius: 14px; padding: 10px 14px;
+          margin: 8px 0; text-align: right;
         }
         #jabri-404-overlay .ov-label {
-          font-size: 0.72rem;
-          color: #b48b5a;
-          margin-bottom: 5px;
-          font-weight: 700;
-          letter-spacing: 1px;
+          font-size: 0.72rem; color: #b48b5a;
+          margin-bottom: 5px; font-weight: 700; letter-spacing: 1px;
         }
         #jabri-404-overlay .ov-value {
-          font-family: 'Courier New', monospace;
-          font-size: 0.82rem;
-          color: #6ae3ff;
-          direction: ltr;
-          text-align: left;
-          word-break: break-all;
-          padding: 6px 10px;
+          font-family: 'Courier New', monospace; font-size: 0.82rem;
+          color: #6ae3ff; direction: ltr; text-align: left;
+          word-break: break-all; padding: 6px 10px;
           background: rgba(106,227,255,0.05);
-          border-radius: 6px;
-          border: 1px solid rgba(106,227,255,0.2);
+          border-radius: 6px; border: 1px solid rgba(106,227,255,0.2);
           min-height: 28px;
         }
         #jabri-404-overlay #ovResult { color: #ffd166; }
         #jabri-404-overlay #ovResult.ok  { color: #06d6a0; }
         #jabri-404-overlay #ovResult.err { color: #ff6b6b; }
         #jabri-404-overlay .network-log {
-          background: #000;
-          border: 1px solid #6ae3ff;
-          border-radius: 12px;
-          padding: 10px 14px;
-          margin: 12px 0;
-          max-height: 160px;
-          overflow-y: auto;
-          font-family: 'Courier New', monospace;
-          font-size: 11px;
-          text-align: left;
-          direction: ltr;
+          background: #000; border: 1px solid #6ae3ff;
+          border-radius: 12px; padding: 10px 14px;
+          margin: 12px 0; max-height: 160px; overflow-y: auto;
+          font-family: 'Courier New', monospace; font-size: 11px;
+          text-align: left; direction: ltr;
         }
         #jabri-404-overlay .network-log-title {
-          color: #6ae3ff;
-          font-size: 10px;
-          margin-bottom: 6px;
+          color: #6ae3ff; font-size: 10px; margin-bottom: 6px;
           padding-bottom: 5px;
           border-bottom: 1px solid rgba(106,227,255,0.3);
-          font-weight: 700;
-          letter-spacing: 1px;
+          font-weight: 700; letter-spacing: 1px;
         }
         #jabri-404-overlay .log-line {
-          padding: 3px 0;
-          color: #8aa5b5;
-          line-height: 1.5;
-          word-break: break-all;
+          padding: 3px 0; color: #8aa5b5;
+          line-height: 1.5; word-break: break-all;
         }
         #jabri-404-overlay .log-line.info { color: #6ae3ff; }
         #jabri-404-overlay .log-line.ok   { color: #06d6a0; }
@@ -299,52 +500,33 @@
         #jabri-404-overlay .ov-visitors {
           margin: 14px auto;
           background: linear-gradient(135deg, #b48b5a, #8b6a3f);
-          color: #0a0a0f;
-          border-radius: 40px;
-          padding: 9px 20px;
-          font-weight: 700;
-          font-size: 0.95rem;
-          display: inline-block;
+          color: #0a0a0f; border-radius: 40px;
+          padding: 9px 20px; font-weight: 700;
+          font-size: 0.95rem; display: inline-block;
         }
         #jabri-404-overlay .ov-visitors span {
           color: #0a0a0f; font-weight: 900; font-size: 1.15rem;
         }
         #jabri-404-overlay .loader {
-          margin: 12px auto;
-          width: 38px; height: 38px;
-          border: 4px solid #b48b5a;
-          border-top-color: transparent;
-          border-radius: 50%;
-          animation: spin404 0.9s linear infinite;
+          margin: 12px auto; width: 38px; height: 38px;
+          border: 4px solid #b48b5a; border-top-color: transparent;
+          border-radius: 50%; animation: spin404 0.9s linear infinite;
         }
         @keyframes spin404 { to { transform: rotate(360deg); } }
         #jabri-404-overlay .ov-countdown {
-          margin: 8px 0;
-          font-size: 0.95rem;
-          color: #6ae3ff;
-          font-family: monospace;
-          font-weight: 700;
+          margin: 8px 0; font-size: 0.95rem; color: #6ae3ff;
+          font-family: monospace; font-weight: 700;
         }
         #jabri-404-overlay .ov-options {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 8px;
-          margin-top: 18px;
+          display: grid; grid-template-columns: 1fr 1fr;
+          gap: 8px; margin-top: 18px;
         }
         #jabri-404-overlay .ov-btn {
-          padding: 12px 10px;
-          border: none;
-          border-radius: 14px;
-          font-size: 0.82rem;
-          font-weight: 900;
-          font-family: inherit;
-          cursor: pointer;
-          text-decoration: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-          transition: transform 0.2s ease;
+          padding: 12px 10px; border: none; border-radius: 14px;
+          font-size: 0.82rem; font-weight: 900; font-family: inherit;
+          cursor: pointer; text-decoration: none;
+          display: flex; align-items: center; justify-content: center;
+          gap: 6px; transition: transform 0.2s ease;
         }
         #jabri-404-overlay .ov-btn:hover { transform: scale(1.05); }
         #jabri-404-overlay .ov-btn-map  { background: linear-gradient(135deg, #6ae3ff, #3aa0c4); color: #0a0a0f; }
@@ -416,7 +598,6 @@
       });
     }
 
-    // ⏰ عدّاد تنازلي
     let seconds = 7;
     const countdownEl = document.getElementById('ovCountdown');
     const countdownInterval = setInterval(() => {
@@ -425,14 +606,13 @@
       if (seconds <= 0) clearInterval(countdownInterval);
     }, 1000);
 
-    // ⏰ بدء المنطق بعد ثانيتين
     setTimeout(() => {
       handle404Redirect();
     }, CONFIG.auto404TryAfter);
   }
 
   // ================================================================
-  //  📊 logStep — يُسجّل خطوة في Process Log
+  //  📊 logStep
   // ================================================================
   function logStep(step, message, type) {
     type = type || 'info';
@@ -468,7 +648,7 @@
   window.exitPage = exitPage;
 
   // ================================================================
-  //  🎯 handle404Redirect — IF / ELSE مع Process Log
+  //  🎯 handle404Redirect
   // ================================================================
   async function handle404Redirect() {
     const path = location.pathname;
@@ -479,9 +659,6 @@
     logStep('1/4', 'Path: ' + path, 'info');
     logStep('1/4', 'Has .html: ' + hasHtml, 'info');
 
-    // ═══════════════════════════════════════════════════════
-    //  IF: بدون .html
-    // ═══════════════════════════════════════════════════════
     if (!hasHtml) {
       const newPath = path + '.html';
       if (targetEl) targetEl.textContent = newPath;
@@ -506,9 +683,6 @@
       return;
     }
 
-    // ═══════════════════════════════════════════════════════
-    //  ELSE: ينتهي بـ .html
-    // ═══════════════════════════════════════════════════════
     const file = path.split('/').filter(Boolean).pop();
     const rootPath = '/' + file;
     if (targetEl) targetEl.textContent = rootPath;
@@ -535,7 +709,7 @@
   }
 
   // ================================================================
-  //  🎯 detect404 — متعدد الطبقات
+  //  🎯 detect404
   // ================================================================
   async function detect404() {
     if (!CONFIG.detect404) return;
@@ -543,13 +717,11 @@
     let isReal404 = false;
     let reason = '';
 
-    // 1) data-waha-404
     if (document.body && document.body.dataset.waha404 === 'true') {
       isReal404 = true;
       reason = 'data-waha-404';
     }
 
-    // 2) Navigation API
     if (!isReal404 && window.performance && window.performance.getEntriesByType) {
       try {
         const nav = window.performance.getEntriesByType('navigation');
@@ -560,13 +732,11 @@
       } catch (e) {}
     }
 
-    // 3) HEAD request
     if (!isReal404) {
       try {
         const res = await fetch(location.href, {
           method: 'HEAD',
-          cache: 'no-store',
-          redirect: 'manual'
+          cache: 'no-store'
         });
         console.log(`📡 [404] HEAD status: ${res.status}`);
         if (res.status === 404) {
@@ -576,7 +746,6 @@
       } catch (e) {}
     }
 
-    // 4) title
     if (!isReal404) {
       const t = (document.title || '').toLowerCase();
       if (t.includes('404') || t.includes('not found')) {
@@ -639,36 +808,65 @@
 
   async function loadPartial(id, fileName, evt, isHeader) {
     const el = document.getElementById(id);
-    if (!el) return;
+    if (!el) {
+      console.warn(`⚠️ [${fileName}] placeholder #${id} not found`);
+      if (isHeader) setTimeout(hideSplash, 500);
+      return;
+    }
     if (el.dataset.loaded === 'true') {
       if (isHeader) setTimeout(hideSplash, 500);
       return;
     }
+
     const fallbackHTML = el.innerHTML.trim();
+    const label = fileName.replace(/^\//, '').replace('.html', '');
+
+    notifyLoadStart(label);
+
     const resolved = await resolveFile(fileName);
 
     if (!resolved) {
-      if (fallbackHTML) el.dataset.loaded = 'true';
-      else el.style.display = 'none';
+      notifyLoadEnd(label, false);
+      if (fallbackHTML) {
+        el.dataset.loaded = 'true';
+      } else {
+        el.innerHTML = `<div style="text-align:center;padding:15px;color:#888;font-size:12px">
+          ⚠️ ${fileName} غير متاح حالياً
+        </div>`;
+      }
+      el.style.display = '';
       if (isHeader) setTimeout(hideSplash, 500);
       return;
     }
 
     try {
       const res = await fetch(bustCache(resolved), {
-        cache: 'no-store', headers: { 'Cache-Control': 'no-cache' }
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' }
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       el.innerHTML = await res.text();
       el.dataset.loaded = 'true';
       el.dataset.version = VERSION;
+      el.dataset.source = resolved;
+      el.style.display = '';
       safelyExecuteScripts(el);
       if (CONFIG.autoFixLinks) autoFixLinks();
       document.dispatchEvent(new CustomEvent(evt, { detail: { version: VERSION } }));
+      notifyLoadEnd(label, true);
+      console.log(`✅ [${fileName}] loaded from ${resolved}`);
       if (isHeader) setTimeout(hideSplash, 300);
     } catch (e) {
       console.error(`❌ [${fileName}] failed:`, e);
-      if (!fallbackHTML) el.style.display = 'none';
+      notifyLoadEnd(label, false);
+      if (fallbackHTML) {
+        el.dataset.loaded = 'true';
+      } else {
+        el.innerHTML = `<div style="text-align:center;padding:15px;color:#888;font-size:12px">
+          ⚠️ خطأ في تحميل ${fileName}
+        </div>`;
+      }
+      el.style.display = '';
       if (isHeader) setTimeout(hideSplash, 500);
     }
   }
@@ -736,27 +934,48 @@
   window.toggleMusic = toggleMusic;
 
   // ================================================================
-  //  🔄 Version Check
+  //  ✅ Version Check — بلا لوب
   // ================================================================
   async function checkForNewVersion() {
     if (!CONFIG.version) return;
+
+    const sessionKey = 'jabriVersionChecked_' + VERSION;
+    if (sessionStorage.getItem(sessionKey) === 'done') {
+      return;
+    }
+    sessionStorage.setItem(sessionKey, 'done');
+
     try {
       const res = await fetch(VERSION_FILE + '?_t=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) return;
       const data = await res.json();
-      if (data.version && data.version !== VERSION) {
-        const toast = document.createElement('div');
-        toast.style.cssText = `
-          position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
-          background:#06d6a0;color:#0a0a0f;padding:12px 24px;
-          border-radius:30px;font-weight:700;font-size:14px;
-          z-index:999999;box-shadow:0 8px 24px rgba(6,214,160,.4);
-          font-family:'Cairo',sans-serif;direction:rtl;cursor:pointer`;
-        toast.textContent = `🔄 نسخة جديدة (v${data.version}) — اضغط للتحديث`;
-        toast.onclick = forceReload;
-        document.body.appendChild(toast);
-        setTimeout(forceReload, 3000);
+
+      if (!data.version || data.version === VERSION) return;
+
+      const cur = VERSION.split('.').map(Number);
+      const nw  = data.version.split('.').map(Number);
+      let isNewer = false;
+      for (let i = 0; i < Math.max(cur.length, nw.length); i++) {
+        const a = cur[i] || 0, b = nw[i] || 0;
+        if (b > a) { isNewer = true; break; }
+        if (b < a) { break; }
       }
+      if (!isNewer) {
+        console.log(`ℹ️ [version] server=${data.version}, local=${VERSION} → no update`);
+        return;
+      }
+
+      console.log(`🔄 [version] new: v${data.version}`);
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+        background:#06d6a0;color:#0a0a0f;padding:12px 24px;
+        border-radius:30px;font-weight:700;font-size:14px;
+        z-index:999999;box-shadow:0 8px 24px rgba(6,214,160,.4);
+        font-family:'Cairo',sans-serif;direction:rtl;cursor:pointer`;
+      toast.textContent = `🔄 نسخة جديدة (v${data.version}) — اضغط للتحديث`;
+      toast.onclick = forceReload;
+      document.body.appendChild(toast);
     } catch (e) {}
   }
 
@@ -772,14 +991,19 @@
   // ================================================================
   function init() {
     console.log('⚙️ [init] running with config:', CONFIG);
+
+    initNetworkWatcher();
+    reportConnectionType();
+
     if (CONFIG.splash) createSplash();
     if (CONFIG.detect404) detect404();
     if (CONFIG.music) initMusic();
 
-    if (CONFIG.header) loadPartial('header-placeholder', 'header.html', 'headerLoaded', true);
+    if (CONFIG.header) loadPartial('header-placeholder', '/header.html', 'headerLoaded', true);
     else setTimeout(hideSplash, 300);
 
-    if (CONFIG.footer) loadPartial('footer-placeholder', 'footer.html', 'footerLoaded', false);
+    if (CONFIG.footer) loadPartial('footer-placeholder', '/footer.html', 'footerLoaded', false);
+
     if (CONFIG.version) checkForNewVersion();
     if (CONFIG.autoFixLinks) autoFixLinks();
 
@@ -811,7 +1035,10 @@
     forceReload: forceReload,
     show404Overlay: show404Overlay,
     handle404Redirect: handle404Redirect,
-    exitPage: exitPage
+    exitPage: exitPage,
+    showNetToast: showNetToast,
+    removeToast: removeToast,
+    network: NET
   };
 
   window.switchLanguage = toggleLang;
