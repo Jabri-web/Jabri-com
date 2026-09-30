@@ -855,27 +855,46 @@ async function toggleLang() {
   // ═══════════════════════════════════════════════════
   //  📥 safelyExecuteScripts
   // ═══════════════════════════════════════════════════
-  function safelyExecuteScripts(container) {
-    container.querySelectorAll('script').forEach(oldScript => {
-      try {
-        const src = oldScript.src || '';
-        const content = oldScript.textContent || '';
-        if (src) {
-          const vsrc = withVersion(src);
-          if (!document.querySelector(`script[src="${vsrc}"]`)) {
-            const s = document.createElement('script');
-            s.src = vsrc;
-            s.async = false;
-            document.head.appendChild(s);
-          }
-        } else if (content.trim()) {
-          const s = document.createElement('script');
-          s.textContent = content;
-          document.head.appendChild(s);
+
+function safelyExecuteScripts(container) {
+  var scripts = container.querySelectorAll('script');
+  for (var i = 0; i < scripts.length; i++) {
+    var oldScript = scripts[i];
+    try {
+      var src = oldScript.src || '';
+      var content = oldScript.textContent || '';
+      
+      if (src) {
+        // ✅ سكربت خارجي
+        var vsrc = withVersion(src);
+        if (!document.querySelector('script[src="' + vsrc + '"]')) {
+          var s1 = document.createElement('script');
+          s1.src = vsrc;
+          s1.async = false;
+          document.head.appendChild(s1);
         }
-      } catch (e) {}
-    });
+      } else if (content.trim()) {
+        // ✅ سكربت inline — نفّذ عبر Function لتجاوز CSP
+        try {
+          var fn = new Function(content);
+          fn.call(window);
+          console.log('✅ executed inline script from partial');
+        } catch (e) {
+          console.warn('⚠️ Function failed, fallback to script tag:', e);
+          // fallback
+          var s2 = document.createElement('script');
+          s2.textContent = content;
+          document.head.appendChild(s2);
+        }
+      }
+    } catch (err) {
+      console.warn('⚠️ script skip:', err);
+    }
   }
+}
+
+
+
 
   // ═══════════════════════════════════════════════════
   //  📥 loadPartial — النسخة النهائية
@@ -1124,39 +1143,48 @@ async function toggleLang() {
   // ═══════════════════════════════════════════════════
   //  🚀 init
   // ═══════════════════════════════════════════════════
-  function init() {
-    console.log('⚙️ [init] running with config:', CONFIG);
 
-    initNetworkWatcher();
-    reportConnectionType();
 
-    if (CONFIG.splash) createSplash();
+function init() {
+  console.log('⚙️ [init] running with config:', CONFIG);
+  
+  initNetworkWatcher();
+  reportConnectionType();
+  
+  if (CONFIG.splash) createSplash();
+  if (CONFIG.music) initMusic();
+  
+  // ✅ حمّل header و footer أولاً
+  var headerPromise = CONFIG.header ?
+    loadPartial('header-placeholder', '/header.html', 'headerLoaded', true) :
+    Promise.resolve();
+  
+  var footerPromise = CONFIG.footer ?
+    loadPartial('footer-placeholder', '/footer.html', 'footerLoaded', false) :
+    Promise.resolve();
+  
+  // ✅ بعد ما يخلصوا، افحص 404 و شغّل الباقي
+  Promise.all([headerPromise, footerPromise]).then(function() {
+    console.log('✅ [init] header + footer loaded');
     if (CONFIG.detect404) detect404();
-    if (CONFIG.music) initMusic();
-
-    if (CONFIG.header) loadPartial('header-placeholder', '/header.html', 'headerLoaded', true);
-    else setTimeout(hideSplash, 300);
-
-    if (CONFIG.footer) loadPartial('footer-placeholder', '/footer.html', 'footerLoaded', false);
-
     if (CONFIG.version) checkForNewVersion();
-    if (CONFIG.autoFixLinks) autoFixLinks();
+  });
+  
+  if (CONFIG.autoFixLinks) autoFixLinks();
+  
+  document.addEventListener('headerLoaded', function() {
+    setCanonical();
+    addDynamicLinks();
+  });
+  
+  window.addEventListener('error', function() { hideSplash(); });
+  window.addEventListener('load', function() { setTimeout(hideSplash, 1000); });
+  document.addEventListener('click', function() {
+    if (!splashHidden) hideSplash();
+  }, { once: true });
+}
 
-    document.addEventListener('headerLoaded', () => {
-      setCanonical();
-      addDynamicLinks();
-    });
 
-    window.addEventListener('error', () => hideSplash());
-    window.addEventListener('load', () => setTimeout(hideSplash, 1000));
-    document.addEventListener('click', () => { if (!splashHidden) hideSplash(); }, { once: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
 
   // ═══════════════════════════════════════════════════
   //  🌍 API — موسّع
