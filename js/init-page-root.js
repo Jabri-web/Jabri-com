@@ -827,9 +827,14 @@
 
 
 // ═══════════════════════════════════════════════════
-//  🌐 toggleLang — النسخة الأصلية v7.0.0 (تعمل 200%)
-//  ✅ تعتمد على getBasePath + getFileName
-//  ✅ تحوّل: base + /targetLang/ + file + qs
+//  🌐 toggleLang — النسخة v8.2.0 (الذكية)
+//  ✅ تفحص وجود الملف في اللغة المستهدفة قبل التحويل
+//  ✅ 4 مستويات fallback:
+//     1. الملف نفسه في اللغة المستهدفة
+//     2. الصفحة الرئيسية للغة (/ar/ أو /en/)
+//     3. الصفحة الرئيسية العامة (/index.html)
+//     4. خريطة المسارات (/all-links.html) — آخر حل
+//  ✅ ما تحوّل على all-links إلا في حالة عدم وجود كل البدائل
 // ═══════════════════════════════════════════════════
 async function toggleLang() {
   const path = location.pathname;
@@ -844,13 +849,87 @@ async function toggleLang() {
   else if (lower.includes('/ar/')) targetLang = 'en';
   else targetLang = (lang === 'ar') ? 'en' : 'ar';
   
-  const targetUrl = base + '/' + targetLang + '/' + file + qs;
+  // ✅ المسار المستهدف الأساسي
+  const targetPath = base + '/' + targetLang + '/' + file;
+  const targetUrl = targetPath + qs;
+  
   console.log(`🌐 [lang] ${path} → ${targetUrl}`);
-  window.location.href = targetUrl;
+  
+  // 🔍 المستوى 1: الملف نفسه في اللغة المستهدفة
+  try {
+    const fileExists = await checkFileExists(targetPath);
+    if (fileExists) {
+      console.log(`✅ [lang] L1: file exists → ${targetUrl}`);
+      window.location.href = targetUrl;
+      return;
+    }
+    console.log(`⚠️ [lang] L1 failed: ${targetPath} not found`);
+  } catch (e) {
+    console.warn(`⚠️ [lang] L1 error:`, e.message);
+  }
+  
+  // 🔍 المستوى 2: الصفحة الرئيسية للغة المستهدفة
+  const langHome = base + '/' + targetLang + '/index.html';
+  try {
+    const homeExists = await checkFileExists(langHome);
+    if (homeExists) {
+      console.log(`✅ [lang] L2: ${targetLang} home exists → ${langHome}`);
+      window.location.href = langHome + qs;
+      return;
+    }
+    console.log(`⚠️ [lang] L2 failed: ${langHome} not found`);
+  } catch (e) {
+    console.warn(`⚠️ [lang] L2 error:`, e.message);
+  }
+  
+  // 🔍 المستوى 3: الرئيسية العامة
+  const rootHome = '/index.html';
+  try {
+    const rootExists = await checkFileExists(rootHome);
+    if (rootExists) {
+      console.log(`✅ [lang] L3: root home exists → ${rootHome}`);
+      window.location.href = rootHome + qs;
+      return;
+    }
+    console.log(`⚠️ [lang] L3 failed: ${rootHome} not found`);
+  } catch (e) {
+    console.warn(`⚠️ [lang] L3 error:`, e.message);
+  }
+  
+  // 🔍 المستوى 4: خريطة المسارات (آخر حل)
+  console.log(`🗺️ [lang] L4: all fallbacks failed → /all-links.html`);
+  window.location.href = (CONFIG.allLinksPath || '/all-links.html') + qs;
 }
 
-
-
+// ═══════════════════════════════════════════════════
+//  🔍 checkFileExists — دالة فحص محلية (Range: bytes=0-0)
+//  ✅ أسرع من HEAD — مدعومة على Vercel
+//  ✅ timeout 3s
+// ═══════════════════════════════════════════════════
+async function checkFileExists(url) {
+  try {
+    const controller = new AbortController();
+    const tid = setTimeout(() => controller.abort(), 3000);
+    
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: { 'Range': 'bytes=0-0' },
+      signal: controller.signal,
+      cache: 'no-store',
+      redirect: 'manual'
+    });
+    
+    clearTimeout(tid);
+    controller.abort();
+    
+    // 200 = موجود كامل
+    // 206 = Range محترم
+    // 0 = opaque (cross-origin)
+    return res.ok || res.status === 206 || res.status === 0;
+  } catch (e) {
+    return false;
+  }
+}
 
   // ═══════════════════════════════════════════════════
   //  📥 safelyExecuteScripts
