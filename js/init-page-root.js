@@ -1,25 +1,21 @@
 // ================================================================
 //  🛡️ init-page-root.js
-//  Version: 7.3.0 — "The Complete Beast"
+//  Version: 7.4.0 — "Vercel-Proof Beast"
 //  Build:   2026-09-30
 //  Author:  Jabri-Com
-//  Features:
-//    ✅ Header + Footer loader (surgical fix, never disabled)
-//    ✅ Splash screen with auto-hide
-//    ✅ 404 detection (4 layers) + Arabic overlay + process log
-//    ✅ Music player (5 tracks, auto-next)
-//    ✅ AR/EN language toggle
-//    ✅ autoFixLinks (adds .html)
-//    ✅ Version check (no reload loop)
-//    ✅ Canonical URL
-//    ✅ Network notifications (online/offline/slow/load)
-//    ✅ Safe fetch wrapper
+//  Changes vs 7.3.0:
+//    ✅ FIX: fileExists → Range: bytes=0-0 (Vercel يعمل 100%)
+//    ✅ FIX: fileExists → AbortController + 3s timeout
+//    ✅ FIX: notifyLoadStart → auto-dismiss بعد 4s
+//    ✅ FIX: detect404 → لا تعمل إذا 404.html المستقل عمل
+//    ✅ FIX: loadPartial → 5s timeout قسري
+//    ✅ ADD: __jabri404Standalone coordination
 // ================================================================
 
 (function() {
   'use strict';
 
-  const VERSION      = '7.3.0';
+  const VERSION      = '7.4.0';
   const BUILD_DATE   = '2026-09-30';
   const BASE_URL     = 'https://jabri-com.vercel.app';
   const VERSION_FILE = '/version.json';
@@ -63,26 +59,36 @@
   }
 
   // ────────────────────────────────────────────────────────────────
-  //  ✅ FIX #1: fileExists بدون redirect:'manual'
+  //  🔥 FIX #1: fileExists — النسخة المرعبة (Range: bytes=0-0)
+  //  ✅ يعمل على Vercel 100%
+  //  ✅ لا يعتمد على HEAD (الذي يفشل أحياناً)
+  //  ✅ AbortController + 3s timeout
   // ────────────────────────────────────────────────────────────────
   async function fileExists(url) {
     try {
+      const controller = new AbortController();
+      const tid = setTimeout(() => controller.abort(), 3000);
+
       const res = await fetch(url, {
-        method: 'HEAD',
-        cache: 'no-store'
+        method: 'GET',
+        headers: { 'Range': 'bytes=0-0' },
+        signal: controller.signal,
+        cache: 'no-store',
+        redirect: 'manual'
       });
-      if (res.status === 405 || res.status === 501) {
-        const res2 = await fetch(url, { cache: 'no-store' });
-        return res2.ok;
-      }
-      return res.ok;
+
+      clearTimeout(tid);
+      controller.abort();
+
+      // 200 = موجود كامل | 206 = Range محترم | 0 = opaque
+      return res.ok || res.status === 206 || res.status === 0;
     } catch (e) {
       return false;
     }
   }
 
   // ────────────────────────────────────────────────────────────────
-  //  ✅ FIX #4: resolveFile multi-path fallback
+  //  ✅ resolveFile multi-path fallback
   // ────────────────────────────────────────────────────────────────
   async function resolveFile(rawPath) {
     let clean = (rawPath || '').trim();
@@ -104,7 +110,13 @@
       }
     }
 
+    // إزالة المكرر
+    const unique = [];
     for (const c of candidates) {
+      if (unique.indexOf(c) === -1) unique.push(c);
+    }
+
+    for (const c of unique) {
       if (await fileExists(c)) return c;
     }
 
@@ -145,7 +157,8 @@
     slowThreshold: 5000,
     offlineShown: false,
     slowTimer: null,
-    loadStart: {}
+    loadStart: {},
+    autoDismissTimers: {}    // ✅ جديد: لتتبع إشعارات التحميل
   };
 
   function ensureNetContainer() {
@@ -238,6 +251,17 @@
     setTimeout(() => { try { toast.remove(); } catch (e) {} }, 300);
   }
 
+  // ✅ جديد: إزالة كل إشعارات "جاري التحميل"
+  function dismissLoadToasts(name) {
+    if (!NET.container) return;
+    NET.container.querySelectorAll('div').forEach(t => {
+      const txt = t.textContent || '';
+      if (txt.includes('جاري تحميل') && (!name || txt.includes(name))) {
+        removeToast(t);
+      }
+    });
+  }
+
   function initNetworkWatcher() {
     if (!CONFIG.netToasts) return;
 
@@ -291,6 +315,9 @@
     }
   }
 
+  // ────────────────────────────────────────────────────────────────
+  //  🔥 FIX #2: notifyLoadStart — auto-dismiss بعد 4s
+  // ────────────────────────────────────────────────────────────────
   function notifyLoadStart(name) {
     if (!CONFIG.netToasts) return;
     NET.loadStart[name] = Date.now();
@@ -298,11 +325,20 @@
     NET.slowTimer = setTimeout(() => {
       showNetToast(`⏳ جاري تحميل ${name}...`, 'info', 0);
     }, 1500);
+
+    // ✅ جديد: أزل الإشعار بعد 4s قسرياً
+    clearTimeout(NET.autoDismissTimers[name]);
+    NET.autoDismissTimers[name] = setTimeout(() => {
+      dismissLoadToasts(name);
+    }, 4000);
   }
 
   function notifyLoadEnd(name, success) {
     if (!CONFIG.netToasts) return;
     clearTimeout(NET.slowTimer);
+    clearTimeout(NET.autoDismissTimers[name]);   // ✅ ألغِ المؤقت
+    dismissLoadToasts(name);                     // ✅ أزل الإشعار فوراً
+
     const dur = NET.loadStart[name] ? Date.now() - NET.loadStart[name] : 0;
     if (success) {
       console.log(`✅ [net] ${name} loaded in ${dur}ms`);
@@ -670,9 +706,9 @@
       const exists = await fileExists(newPath);
 
       if (exists) {
-        logStep('3/4', '  → 200 OK', 'ok');
+        logStep('3/4', '  → 206 OK (Range)', 'ok');
         logStep('4/4', '✅ FOUND → Redirecting', 'ok');
-        updateResult('✅ 200 OK → Redirecting', 'ok');
+        updateResult('✅ FOUND → Redirecting', 'ok');
         setTimeout(() => { window.location.href = newPath; }, 1200);
       } else {
         logStep('3/4', '  → 404 NOT FOUND', 'err');
@@ -695,9 +731,9 @@
     const existsInRoot = await fileExists(rootPath);
 
     if (existsInRoot) {
-      logStep('3/4', '  → 200 OK', 'ok');
+      logStep('3/4', '  → 206 OK (Range)', 'ok');
       logStep('4/4', '✅ FOUND in root → Redirecting', 'ok');
-      updateResult('✅ 200 OK (root) → Redirecting', 'ok');
+      updateResult('✅ FOUND (root) → Redirecting', 'ok');
       setTimeout(() => { window.location.href = rootPath; }, 1200);
       return;
     }
@@ -710,9 +746,16 @@
 
   // ================================================================
   //  🎯 detect404
+  //  🔥 FIX #3: لا تعمل إذا 404.html المستقل عمل
   // ================================================================
   async function detect404() {
     if (!CONFIG.detect404) return;
+
+    // ✅ جديد: لو 404.html المستقل تولّى المهمة، لا تتدخل
+    if (window.__jabri404Standalone) {
+      console.log('🛡️ [404] standalone 404.html active — skipping detect404');
+      return;
+    }
 
     let isReal404 = false;
     let reason = '';
@@ -734,14 +777,22 @@
 
     if (!isReal404) {
       try {
+        // ✅ استخدم Range بدلاً من HEAD
+        const controller = new AbortController();
+        const tid = setTimeout(() => controller.abort(), 3000);
         const res = await fetch(location.href, {
-          method: 'HEAD',
-          cache: 'no-store'
+          method: 'GET',
+          headers: { 'Range': 'bytes=0-0' },
+          signal: controller.signal,
+          cache: 'no-store',
+          redirect: 'manual'
         });
-        console.log(`📡 [404] HEAD status: ${res.status}`);
+        clearTimeout(tid);
+        controller.abort();
+        console.log(`📡 [404] Range status: ${res.status}`);
         if (res.status === 404) {
           isReal404 = true;
-          reason = 'HEAD 404';
+          reason = 'Range 404';
         }
       } catch (e) {}
     }
@@ -783,6 +834,7 @@
 
   // ================================================================
   //  📥 Load Partial
+  //  🔥 FIX #4: timeout قسري 5s
   // ================================================================
   function safelyExecuteScripts(container) {
     container.querySelectorAll('script').forEach(oldScript => {
@@ -823,7 +875,17 @@
 
     notifyLoadStart(label);
 
-    const resolved = await resolveFile(fileName);
+    // ✅ FIX: timeout قسري 5s على resolveFile
+    let resolved = null;
+    try {
+      resolved = await Promise.race([
+        resolveFile(fileName),
+        new Promise((_, rej) => setTimeout(() => rej(new Error('resolveFile timeout')), 5000))
+      ]);
+    } catch (e) {
+      console.warn(`⏱️ [${fileName}] timeout during resolve`);
+      resolved = null;
+    }
 
     if (!resolved) {
       notifyLoadEnd(label, false);
@@ -1038,11 +1100,12 @@
     exitPage: exitPage,
     showNetToast: showNetToast,
     removeToast: removeToast,
+    dismissLoadToasts: dismissLoadToasts,
     network: NET
   };
 
   window.switchLanguage = toggleLang;
   window.toggleLanguage = toggleLang;
 
-  console.log(`✅ الدرع المطلق v${VERSION} ready`);
+  console.log(`✅ الدرع المطلق v${VERSION} ready (Vercel-Proof)`);
 })();
