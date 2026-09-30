@@ -834,7 +834,14 @@
 //  الحالة 2: /en/X.html  → /X.html    (عربي في الجذر)
 //  الحالة 3: /X.html     → /en/X.html
 // ═══════════════════════════════════════════════════
-function toggleLang() {
+
+// ═══════════════════════════════════════════════════
+//  🌐 toggleLang — الحل النهائي الذكي
+//  ✅ الحالة 1: الملف موجود في الوجهة → يحوّل إليه
+//  ✅ الحالة 2: الملف غير موجود → يحوّل إلى /index.html
+//  ✅ لا Routes، لا 404، لا انتظار
+// ═══════════════════════════════════════════════════
+async function toggleLang() {
   const path = location.pathname;
   const qs = location.search + location.hash;
   const lower = path.toLowerCase();
@@ -843,26 +850,44 @@ function toggleLang() {
   let file = path.split('/').filter(Boolean).pop() || 'index.html';
   if (!file.includes('.')) file += '.html';
   
-  let targetUrl = '';
+  console.log(`🌐 [lang] Current: ${path} → file: ${file}`);
   
-  // الحالة 1: /ar/X.html → /en/X.html
-  if (lower.startsWith('/ar/')) {
-    targetUrl = '/en/' + file + qs;
-    console.log('🌐 [lang] /ar/ → /en/');
-  }
-  // الحالة 2: /en/X.html → /X.html (العربية في الجذر)
-  else if (lower.startsWith('/en/')) {
-    targetUrl = '/' + file + qs;
-    console.log('🌐 [lang] /en/ → /');
-  }
-  // الحالة 3: /X.html (الجذر = عربي) → /en/X.html
-  else {
-    targetUrl = '/en/' + file + qs;
-    console.log('🌐 [lang] / → /en/');
+  // ────────────────────────────────────────────────
+  //  الحالة 1: نحن في /en/X.html  → عربي
+  // ────────────────────────────────────────────────
+  if (lower.startsWith('/en/')) {
+    const targetUrl = '/' + file + qs;
+    console.log(`🌐 [lang] /en/ → target: ${targetUrl}`);
+    
+    const exists = await fileExists('/' + file);
+    
+    if (exists) {
+      console.log(`✅ [lang] وجد → ${targetUrl}`);
+      window.location.href = targetUrl;
+    } else {
+      console.warn(`⚠️ [lang] /${file} غير موجود → /index.html`);
+      window.location.href = '/index.html' + qs;
+    }
+    return;
   }
   
-  window.location.href = targetUrl;
+  // ────────────────────────────────────────────────
+  //  الحالة 2: نحن في الجذر → إنجليزي في /en/
+  // ────────────────────────────────────────────────
+  const targetUrl = '/en/' + file + qs;
+  console.log(`🌐 [lang] / → target: ${targetUrl}`);
+  
+  const exists = await fileExists('/en/' + file);
+  
+  if (exists) {
+    console.log(`✅ [lang] وجد → ${targetUrl}`);
+    window.location.href = targetUrl;
+  } else {
+    console.warn(`⚠️ [lang] /en/${file} غير موجود → /index.html`);
+    window.location.href = '/index.html' + qs;
+  }
 }
+
 
   // ═══════════════════════════════════════════════════
   //  📥 safelyExecuteScripts
