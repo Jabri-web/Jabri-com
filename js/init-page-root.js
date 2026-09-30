@@ -828,21 +828,41 @@
   // ═══════════════════════════════════════════════════
   //  🌐 toggleLang
   // ═══════════════════════════════════════════════════
-  async function toggleLang() {
-    const path = location.pathname;
-    const qs   = location.search + location.hash;
-    const lang = document.documentElement.lang;
-    const base = getBasePath();
-    const file = getFileName();
-
-    const lower = path.toLowerCase();
-    let targetLang;
-    if (lower.includes('/en/')) targetLang = 'ar';
-    else if (lower.includes('/ar/')) targetLang = 'en';
-    else targetLang = (lang === 'ar') ? 'en' : 'ar';
-
-    window.location.href = base + '/' + targetLang + '/' + file + qs;
+  // ═══════════════════════════════════════════════════
+//  🌐 toggleLang — ذكية (متوافقة مع /ar/ و /en/ والجذر)
+//  الحالة 1: /ar/X.html  → /en/X.html
+//  الحالة 2: /en/X.html  → /X.html    (عربي في الجذر)
+//  الحالة 3: /X.html     → /en/X.html
+// ═══════════════════════════════════════════════════
+function toggleLang() {
+  const path = location.pathname;
+  const qs = location.search + location.hash;
+  const lower = path.toLowerCase();
+  
+  // استخرج اسم الملف من أي مسار
+  let file = path.split('/').filter(Boolean).pop() || 'index.html';
+  if (!file.includes('.')) file += '.html';
+  
+  let targetUrl = '';
+  
+  // الحالة 1: /ar/X.html → /en/X.html
+  if (lower.startsWith('/ar/')) {
+    targetUrl = '/en/' + file + qs;
+    console.log('🌐 [lang] /ar/ → /en/');
   }
+  // الحالة 2: /en/X.html → /X.html (العربية في الجذر)
+  else if (lower.startsWith('/en/')) {
+    targetUrl = '/' + file + qs;
+    console.log('🌐 [lang] /en/ → /');
+  }
+  // الحالة 3: /X.html (الجذر = عربي) → /en/X.html
+  else {
+    targetUrl = '/en/' + file + qs;
+    console.log('🌐 [lang] / → /en/');
+  }
+  
+  window.location.href = targetUrl;
+}
 
   // ═══════════════════════════════════════════════════
   //  📥 safelyExecuteScripts
