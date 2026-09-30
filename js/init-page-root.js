@@ -841,16 +841,32 @@
 //  ✅ الحالة 2: الملف غير موجود → يحوّل إلى /index.html
 //  ✅ لا Routes، لا 404، لا انتظار
 // ═══════════════════════════════════════════════════
+
+
+// ═══════════════════════════════════════════════════
+//  🌐 toggleLang — النسخة الأصلية v7.0.0 (تعمل 200%)
+//  ✅ تعتمد على getBasePath + getFileName
+//  ✅ تحوّل: base + /targetLang/ + file + qs
+// ═══════════════════════════════════════════════════
 async function toggleLang() {
   const path = location.pathname;
   const qs = location.search + location.hash;
+  const lang = document.documentElement.lang;
+  const base = getBasePath();
+  const file = getFileName();
+  
   const lower = path.toLowerCase();
+  let targetLang;
+  if (lower.includes('/en/')) targetLang = 'ar';
+  else if (lower.includes('/ar/')) targetLang = 'en';
+  else targetLang = (lang === 'ar') ? 'en' : 'ar';
   
-  // استخرج اسم الملف من أي مسار
-  let file = path.split('/').filter(Boolean).pop() || 'index.html';
-  if (!file.includes('.')) file += '.html';
-  
-  console.log(`🌐 [lang] Current: ${path} → file: ${file}`);
+  const targetUrl = base + '/' + targetLang + '/' + file + qs;
+  console.log(`🌐 [lang] ${path} → ${targetUrl}`);
+  window.location.href = targetUrl;
+}
+
+
   
   // ────────────────────────────────────────────────
   //  الحالة 1: نحن في /en/X.html  → عربي
