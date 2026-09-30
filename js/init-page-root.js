@@ -1,28 +1,41 @@
 // ================================================================
 //  🛡️ init-page-root.js
-//  Version: 7.4.0 — "Vercel-Proof Beast"
+//  Version: 8.1.0 — "The Complete Beast"
 //  Build:   2026-09-30
 //  Author:  Jabri-Com
-//  Changes vs 7.3.0:
-//    ✅ FIX: fileExists → Range: bytes=0-0 (Vercel يعمل 100%)
-//    ✅ FIX: fileExists → AbortController + 3s timeout
-//    ✅ FIX: notifyLoadStart → auto-dismiss بعد 4s
-//    ✅ FIX: detect404 → لا تعمل إذا 404.html المستقل عمل
-//    ✅ FIX: loadPartial → 5s timeout قسري
-//    ✅ ADD: __jabri404Standalone coordination
+//  
+//  FEATURES (كل الميزات):
+//    ✅ Splash screen with auto-hide
+//    ✅ Header + Footer loader (Vercel-proof)
+//    ✅ fileExists (Range: bytes=0-0) — لا يعتمد على HEAD
+//    ✅ resolveFile (multi-path fallback)
+//    ✅ 404 detection (4 layers) + overlay كامل
+//    ✅ Coordination with standalone 404.html
+//    ✅ Music player (5 tracks, auto-next)
+//    ✅ AR/EN language toggle
+//    ✅ autoFixLinks
+//    ✅ Version check (no reload loop)
+//    ✅ Canonical URL
+//    ✅ prev/next/up dynamic links
+//    ✅ Network toasts (online/offline/slow/load/fail)
+//    ✅ reportConnectionType (2G/3G/4G detection)
+//    ✅ Auto-dismiss load toasts (لا إشعارات عالقة)
+//    ✅ AbortController + timeouts (لا تجمد)
+//    ✅ Safe fetch wrapper
+//    ✅ Window.Jabri API موسّع
 // ================================================================
 
 (function() {
   'use strict';
 
-  const VERSION      = '7.4.0';
+  const VERSION      = '8.1.0';
   const BUILD_DATE   = '2026-09-30';
   const BASE_URL     = 'https://jabri-com.vercel.app';
   const VERSION_FILE = '/version.json';
 
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   //  ⚙️ CONFIG
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   const DEFAULT_CONFIG = {
     splash:       true,
     header:       true,
@@ -44,10 +57,9 @@
 
   let splashHidden = false;
 
-  // ================================================================
-  //  🔧 أدوات
-  // ================================================================
-
+  // ═══════════════════════════════════════════════════
+  //  🔧 أدوات عامة
+  // ═══════════════════════════════════════════════════
   function bustCache(url) {
     const sep = url.includes('?') ? '&' : '?';
     return url + sep + 'v=' + VERSION + '&_t=' + Date.now();
@@ -58,17 +70,15 @@
     return url + sep + 'v=' + VERSION;
   }
 
-  // ────────────────────────────────────────────────────────────────
-  //  🔥 FIX #1: fileExists — النسخة المرعبة (Range: bytes=0-0)
+  // ────────────────────────────────────────────────────
+  //  🔥 fileExists — المرعبة (Range: bytes=0-0)
   //  ✅ يعمل على Vercel 100%
-  //  ✅ لا يعتمد على HEAD (الذي يفشل أحياناً)
   //  ✅ AbortController + 3s timeout
-  // ────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────
   async function fileExists(url) {
     try {
       const controller = new AbortController();
       const tid = setTimeout(() => controller.abort(), 3000);
-
       const res = await fetch(url, {
         method: 'GET',
         headers: { 'Range': 'bytes=0-0' },
@@ -76,10 +86,8 @@
         cache: 'no-store',
         redirect: 'manual'
       });
-
       clearTimeout(tid);
       controller.abort();
-
       // 200 = موجود كامل | 206 = Range محترم | 0 = opaque
       return res.ok || res.status === 206 || res.status === 0;
     } catch (e) {
@@ -87,9 +95,9 @@
     }
   }
 
-  // ────────────────────────────────────────────────────────────────
-  //  ✅ resolveFile multi-path fallback
-  // ────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────
+  //  🎯 resolveFile — multi-path fallback
+  // ────────────────────────────────────────────────────
   async function resolveFile(rawPath) {
     let clean = (rawPath || '').trim();
     if (!clean) return null;
@@ -128,6 +136,9 @@
     return null;
   }
 
+  // ────────────────────────────────────────────────────
+  //  🔗 autoFixLinks
+  // ────────────────────────────────────────────────────
   function autoFixLinks() {
     if (!CONFIG.autoFixLinks) return;
     let fixed = 0;
@@ -148,9 +159,9 @@
     if (fixed > 0) console.log(`✅ [links] fixed ${fixed}`);
   }
 
-  // ================================================================
-  //  📡 Network Notifications
-  // ================================================================
+  // ═══════════════════════════════════════════════════
+  //  📡 Network Notifications — الكاملة
+  // ═══════════════════════════════════════════════════
   const NET = {
     container: null,
     toastTimeout: 4000,
@@ -158,7 +169,7 @@
     offlineShown: false,
     slowTimer: null,
     loadStart: {},
-    autoDismissTimers: {}    // ✅ جديد: لتتبع إشعارات التحميل
+    autoDismissTimers: {}
   };
 
   function ensureNetContainer() {
@@ -251,7 +262,6 @@
     setTimeout(() => { try { toast.remove(); } catch (e) {} }, 300);
   }
 
-  // ✅ جديد: إزالة كل إشعارات "جاري التحميل"
   function dismissLoadToasts(name) {
     if (!NET.container) return;
     NET.container.querySelectorAll('div').forEach(t => {
@@ -287,6 +297,7 @@
       NET.offlineShown = true;
     });
 
+    // اعتراض fetch — للمراقبة
     if (window.fetch && !window.__jabriFetchWrapped) {
       const origFetch = window.fetch.bind(window);
       window.fetch = async function(...args) {
@@ -312,12 +323,10 @@
         }
       };
       window.__jabriFetchWrapped = true;
+      console.log('🌐 [net] fetch wrapped');
     }
   }
 
-  // ────────────────────────────────────────────────────────────────
-  //  🔥 FIX #2: notifyLoadStart — auto-dismiss بعد 4s
-  // ────────────────────────────────────────────────────────────────
   function notifyLoadStart(name) {
     if (!CONFIG.netToasts) return;
     NET.loadStart[name] = Date.now();
@@ -326,7 +335,6 @@
       showNetToast(`⏳ جاري تحميل ${name}...`, 'info', 0);
     }, 1500);
 
-    // ✅ جديد: أزل الإشعار بعد 4s قسرياً
     clearTimeout(NET.autoDismissTimers[name]);
     NET.autoDismissTimers[name] = setTimeout(() => {
       dismissLoadToasts(name);
@@ -336,8 +344,8 @@
   function notifyLoadEnd(name, success) {
     if (!CONFIG.netToasts) return;
     clearTimeout(NET.slowTimer);
-    clearTimeout(NET.autoDismissTimers[name]);   // ✅ ألغِ المؤقت
-    dismissLoadToasts(name);                     // ✅ أزل الإشعار فوراً
+    clearTimeout(NET.autoDismissTimers[name]);
+    dismissLoadToasts(name);
 
     const dur = NET.loadStart[name] ? Date.now() - NET.loadStart[name] : 0;
     if (success) {
@@ -365,9 +373,9 @@
     } catch (e) {}
   }
 
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   //  🎬 Splash
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   function createSplash() {
     if (!CONFIG.splash) return;
     if (!document.body) {
@@ -403,12 +411,15 @@
     if (splashHidden) return;
     splashHidden = true;
     const el = document.getElementById('splashScreen');
-    if (el) el.remove();
+    if (el) {
+      el.classList.add('hidden');
+      setTimeout(() => { try { el.remove(); } catch (e) {} }, 800);
+    }
   }
 
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   //  🌐 Helpers
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   function getBasePath() {
     const path = location.pathname;
     const m = path.match(/^(.*?)\/(ar|en)(\/|$)/i);
@@ -424,9 +435,9 @@
     return pure || 'all-links.html';
   }
 
-  // ================================================================
-  //  🚨 show404Overlay
-  // ================================================================
+  // ═══════════════════════════════════════════════════
+  //  🚨 show404Overlay — كامل
+  // ═══════════════════════════════════════════════════
   function show404Overlay() {
     if (document.getElementById('jabri-404-overlay')) return;
     if (sessionStorage.getItem('jabri404Handled')) return;
@@ -647,9 +658,9 @@
     }, CONFIG.auto404TryAfter);
   }
 
-  // ================================================================
-  //  📊 logStep
-  // ================================================================
+  // ═══════════════════════════════════════════════════
+  //  📊 logStep + updateResult
+  // ═══════════════════════════════════════════════════
   function logStep(step, message, type) {
     type = type || 'info';
     const logEl = document.getElementById('networkLog');
@@ -671,9 +682,9 @@
     if (cls) resultEl.classList.add(cls);
   }
 
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   //  🚪 exitPage
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   function exitPage() {
     logStep('EXIT', 'User chose to exit', 'warn');
     try { window.close(); } catch (e) {}
@@ -683,9 +694,9 @@
   }
   window.exitPage = exitPage;
 
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   //  🎯 handle404Redirect
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   async function handle404Redirect() {
     const path = location.pathname;
     const hasHtml = path.toLowerCase().endsWith('.html');
@@ -744,27 +755,27 @@
     setTimeout(() => { window.location.href = CONFIG.allLinksPath; }, 1500);
   }
 
-  // ================================================================
-  //  🎯 detect404
-  //  🔥 FIX #3: لا تعمل إذا 404.html المستقل عمل
-  // ================================================================
+  // ═══════════════════════════════════════════════════
+  //  🎯 detect404 — 4 طبقات
+  // ═══════════════════════════════════════════════════
   async function detect404() {
     if (!CONFIG.detect404) return;
 
-    // ✅ جديد: لو 404.html المستقل تولّى المهمة، لا تتدخل
     if (window.__jabri404Standalone) {
-      console.log('🛡️ [404] standalone 404.html active — skipping detect404');
+      console.log('🛡️ [404] standalone active — skipping detect404');
       return;
     }
 
     let isReal404 = false;
     let reason = '';
 
+    // ① data-waha-404 attribute
     if (document.body && document.body.dataset.waha404 === 'true') {
       isReal404 = true;
       reason = 'data-waha-404';
     }
 
+    // ② Navigation API
     if (!isReal404 && window.performance && window.performance.getEntriesByType) {
       try {
         const nav = window.performance.getEntriesByType('navigation');
@@ -775,9 +786,9 @@
       } catch (e) {}
     }
 
+    // ③ Range check
     if (!isReal404) {
       try {
-        // ✅ استخدم Range بدلاً من HEAD
         const controller = new AbortController();
         const tid = setTimeout(() => controller.abort(), 3000);
         const res = await fetch(location.href, {
@@ -797,6 +808,7 @@
       } catch (e) {}
     }
 
+    // ④ Title check
     if (!isReal404) {
       const t = (document.title || '').toLowerCase();
       if (t.includes('404') || t.includes('not found')) {
@@ -813,9 +825,9 @@
     }
   }
 
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   //  🌐 toggleLang
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   async function toggleLang() {
     const path = location.pathname;
     const qs   = location.search + location.hash;
@@ -832,10 +844,9 @@
     window.location.href = base + '/' + targetLang + '/' + file + qs;
   }
 
-  // ================================================================
-  //  📥 Load Partial
-  //  🔥 FIX #4: timeout قسري 5s
-  // ================================================================
+  // ═══════════════════════════════════════════════════
+  //  📥 safelyExecuteScripts
+  // ═══════════════════════════════════════════════════
   function safelyExecuteScripts(container) {
     container.querySelectorAll('script').forEach(oldScript => {
       try {
@@ -858,6 +869,14 @@
     });
   }
 
+  // ═══════════════════════════════════════════════════
+  //  📥 loadPartial — النسخة النهائية
+  //  ✅ KNOWN_PARTIALS — تخطّي fileExists لـ header/footer
+  //  ✅ auto-dismiss للـ toast بعد 4s
+  //  ✅ timeout قسري 5s
+  // ═══════════════════════════════════════════════════
+  const KNOWN_PARTIALS = ['/header.html', '/footer.html'];
+
   async function loadPartial(id, fileName, evt, isHeader) {
     const el = document.getElementById(id);
     if (!el) {
@@ -875,16 +894,23 @@
 
     notifyLoadStart(label);
 
-    // ✅ FIX: timeout قسري 5s على resolveFile
+    // ✅ تخطّى resolveFile للـ partials المعروفة
+    const isKnown = KNOWN_PARTIALS.indexOf(fileName) !== -1;
     let resolved = null;
-    try {
-      resolved = await Promise.race([
-        resolveFile(fileName),
-        new Promise((_, rej) => setTimeout(() => rej(new Error('resolveFile timeout')), 5000))
-      ]);
-    } catch (e) {
-      console.warn(`⏱️ [${fileName}] timeout during resolve`);
-      resolved = null;
+
+    if (isKnown) {
+      console.log(`⚡ [${fileName}] known partial — direct load`);
+      resolved = fileName;
+    } else {
+      try {
+        resolved = await Promise.race([
+          resolveFile(fileName),
+          new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 5000))
+        ]);
+      } catch (e) {
+        console.warn(`⏱️ [${fileName}] resolve timeout`);
+        resolved = null;
+      }
     }
 
     if (!resolved) {
@@ -933,9 +959,9 @@
     }
   }
 
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   //  🔗 Canonical
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   function setCanonical() {
     const url = location.href.split('?')[0].split('#')[0];
     let link = document.querySelector('link[rel="canonical"]');
@@ -947,9 +973,50 @@
     link.href = url;
   }
 
-  // ================================================================
-  //  🎵 Music
-  // ================================================================
+  // ═══════════════════════════════════════════════════
+  //  🔗 prev/next/up dynamic links
+  // ═══════════════════════════════════════════════════
+  function addDynamicLinks() {
+    const currentPath = location.pathname;
+    const pageLinks = {
+      '/Page1.html':   { prev: null,          next: '/Page2.html',  up: '/research.html' },
+      '/Page2.html':   { prev: '/Page1.html', next: '/Page3.html',  up: '/research.html' },
+      '/Page3.html':   { prev: '/Page2.html', next: '/Page4.html',  up: '/research.html' },
+      '/Page4.html':   { prev: '/Page3.html', next: '/Page5.html',  up: '/research.html' },
+      '/Page5.html':   { prev: '/Page4.html', next: '/Page6.html',  up: '/research.html' },
+      '/Page6.html':   { prev: '/Page5.html', next: '/Page7.html',  up: '/research.html' },
+      '/Page7.html':   { prev: '/Page6.html', next: '/Page8.html',  up: '/research.html' },
+      '/Page8.html':   { prev: '/Page7.html', next: '/Page9.html',  up: '/research.html' },
+      '/Page9.html':   { prev: '/Page8.html', next: '/Page10.html', up: '/research.html' },
+      '/Page10.html':  { prev: '/Page9.html', next: '/Page11.html', up: '/research.html' },
+      '/Page11.html':  { prev: '/Page10.html',next: '/Page12.html', up: '/research.html' },
+      '/Page12.html':  { prev: '/Page11.html',next: null,           up: '/research.html' },
+      '/Sanaa.html':   { prev: null,          next: '/Shibam.html', up: '/yemen-photo.html' },
+      '/Shibam.html':  { prev: '/Sanaa.html', next: '/Soqatra.html',up: '/yemen-photo.html' },
+      '/Soqatra.html': { prev: '/Shibam.html',next: null,           up: '/yemen-photo.html' }
+    };
+    const links = pageLinks[currentPath];
+    if (!links) return;
+
+    const set = (rel, href) => {
+      if (!href) return;
+      let el = document.querySelector(`link[rel="${rel}"]`);
+      if (!el) {
+        el = document.createElement('link');
+        el.rel = rel;
+        document.head.appendChild(el);
+      }
+      el.href = BASE_URL + href;
+    };
+    set('prev', links.prev);
+    set('next', links.next);
+    set('up', links.up);
+    console.log('🔗 dynamic links added for ' + currentPath);
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  🎵 Music Player (5 tracks)
+  // ═══════════════════════════════════════════════════
   const MUSIC_FILES = ['music1.mp3', 'music2.mp3', 'music3.mp3', 'music4.mp3', 'music5.mp3'];
   const MUSIC_NAMES = ['🎵 تراث اليمن', '🎵 سندباد', '🎵 صنعاء', '🎵 شبام', '🎵 سقطرى'];
   let musicIndex = 0;
@@ -995,16 +1062,14 @@
   }
   window.toggleMusic = toggleMusic;
 
-  // ================================================================
-  //  ✅ Version Check — بلا لوب
-  // ================================================================
+  // ═══════════════════════════════════════════════════
+  //  ✅ Version Check (no reload loop)
+  // ═══════════════════════════════════════════════════
   async function checkForNewVersion() {
     if (!CONFIG.version) return;
 
     const sessionKey = 'jabriVersionChecked_' + VERSION;
-    if (sessionStorage.getItem(sessionKey) === 'done') {
-      return;
-    }
+    if (sessionStorage.getItem(sessionKey) === 'done') return;
     sessionStorage.setItem(sessionKey, 'done');
 
     try {
@@ -1048,9 +1113,9 @@
     location.href = url.toString();
   }
 
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   //  🚀 init
-  // ================================================================
+  // ═══════════════════════════════════════════════════
   function init() {
     console.log('⚙️ [init] running with config:', CONFIG);
 
@@ -1069,7 +1134,10 @@
     if (CONFIG.version) checkForNewVersion();
     if (CONFIG.autoFixLinks) autoFixLinks();
 
-    document.addEventListener('headerLoaded', () => setCanonical());
+    document.addEventListener('headerLoaded', () => {
+      setCanonical();
+      addDynamicLinks();
+    });
 
     window.addEventListener('error', () => hideSplash());
     window.addEventListener('load', () => setTimeout(hideSplash, 1000));
@@ -1082,22 +1150,31 @@
     init();
   }
 
-  // ================================================================
-  //  🌍 API
-  // ================================================================
+  // ═══════════════════════════════════════════════════
+  //  🌍 API — موسّع
+  // ═══════════════════════════════════════════════════
   window.Jabri = {
     version: VERSION,
     config: CONFIG,
-    resolveFile: resolveFile,
+    // Core
     fileExists: fileExists,
-    toggleLang: toggleLang,
-    toggleMusic: toggleMusic,
-    autoFixLinks: autoFixLinks,
+    resolveFile: resolveFile,
+    loadPartial: loadPartial,
+    // UI
     hideSplash: hideSplash,
-    forceReload: forceReload,
     show404Overlay: show404Overlay,
     handle404Redirect: handle404Redirect,
     exitPage: exitPage,
+    // Music
+    toggleMusic: toggleMusic,
+    // Language
+    toggleLang: toggleLang,
+    // Links
+    autoFixLinks: autoFixLinks,
+    // Version
+    forceReload: forceReload,
+    checkForNewVersion: checkForNewVersion,
+    // Network
     showNetToast: showNetToast,
     removeToast: removeToast,
     dismissLoadToasts: dismissLoadToasts,
@@ -1107,5 +1184,5 @@
   window.switchLanguage = toggleLang;
   window.toggleLanguage = toggleLang;
 
-  console.log(`✅ الدرع المطلق v${VERSION} ready (Vercel-Proof)`);
+  console.log(`✅ الدرع المطلق v${VERSION} ready — Complete Beast`);
 })();
