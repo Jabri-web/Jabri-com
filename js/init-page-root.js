@@ -1,35 +1,32 @@
 // ================================================================
 //  🛡️ init-page-root.js
-//  Version: 8.1.0 — "The Complete Beast"
-//  Build:   2026-09-30
+//  Version: 8.2.0 — "المرعبة الكاملة"
+//  Build:   2026-10-01
 //  Author:  Jabri-Com
 //  
-//  FEATURES (كل الميزات):
+//  FEATURES:
 //    ✅ Splash screen with auto-hide
 //    ✅ Header + Footer loader (Vercel-proof)
-//    ✅ fileExists (Range: bytes=0-0) — لا يعتمد على HEAD
+//    ✅ fileExists (Range: bytes=0-0)
 //    ✅ resolveFile (multi-path fallback)
-//    ✅ 404 detection (4 layers) + overlay كامل
-//    ✅ Coordination with standalone 404.html
+//    ✅ 404 detection (4 layers) + overlay
+//    ✅ Coordination with 404.html
 //    ✅ Music player (5 tracks, auto-next)
-//    ✅ AR/EN language toggle
+//    ✅ AR/EN toggleLang — 4 مستويات (file.js powered)
 //    ✅ autoFixLinks
 //    ✅ Version check (no reload loop)
 //    ✅ Canonical URL
 //    ✅ prev/next/up dynamic links
-//    ✅ Network toasts (online/offline/slow/load/fail)
-//    ✅ reportConnectionType (2G/3G/4G detection)
-//    ✅ Auto-dismiss load toasts (لا إشعارات عالقة)
-//    ✅ AbortController + timeouts (لا تجمد)
+//    ✅ Network toasts
 //    ✅ Safe fetch wrapper
-//    ✅ Window.Jabri API موسّع
+//    ✅ File List integration (file.js)
 // ================================================================
 
 (function() {
   'use strict';
 
-  const VERSION      = '8.1.0';
-  const BUILD_DATE   = '2026-09-30';
+  const VERSION      = '8.2.0';
+  const BUILD_DATE   = '2026-10-01';
   const BASE_URL     = 'https://jabri-com.vercel.app';
   const VERSION_FILE = '/version.json';
 
@@ -53,7 +50,7 @@
   };
   const CONFIG = Object.assign({}, DEFAULT_CONFIG, window.JABRI_CONFIG || {});
 
-  console.log(`🛡️ [init] v${VERSION} — config:`, CONFIG);
+  console.log(`🛡️ [init] v${VERSION} — المرعبة الكاملة`, CONFIG);
 
   let splashHidden = false;
 
@@ -71,9 +68,7 @@
   }
 
   // ────────────────────────────────────────────────────
-  //  🔥 fileExists — المرعبة (Range: bytes=0-0)
-  //  ✅ يعمل على Vercel 100%
-  //  ✅ AbortController + 3s timeout
+  //  🔥 fileExists
   // ────────────────────────────────────────────────────
   async function fileExists(url) {
     try {
@@ -88,7 +83,6 @@
       });
       clearTimeout(tid);
       controller.abort();
-      // 200 = موجود كامل | 206 = Range محترم | 0 = opaque
       return res.ok || res.status === 206 || res.status === 0;
     } catch (e) {
       return false;
@@ -96,7 +90,7 @@
   }
 
   // ────────────────────────────────────────────────────
-  //  🎯 resolveFile — multi-path fallback
+  //  🎯 resolveFile
   // ────────────────────────────────────────────────────
   async function resolveFile(rawPath) {
     let clean = (rawPath || '').trim();
@@ -118,7 +112,6 @@
       }
     }
 
-    // إزالة المكرر
     const unique = [];
     for (const c of candidates) {
       if (unique.indexOf(c) === -1) unique.push(c);
@@ -160,7 +153,80 @@
   }
 
   // ═══════════════════════════════════════════════════
-  //  📡 Network Notifications — الكاملة
+  //  📂 FILE_LIST — يعتمد على /js/file.js
+  // ═══════════════════════════════════════════════════
+  const FILE_LIST = {
+    files: new Set(),
+    loaded: false,
+    loading: null
+  };
+
+  async function loadFileList() {
+    if (FILE_LIST.loaded) return FILE_LIST.files;
+    if (FILE_LIST.loading) return FILE_LIST.loading;
+
+    FILE_LIST.loading = (async function() {
+      try {
+        // ✅ استخدم file.js إذا موجود
+        if (typeof window.WAHA_FILE_LOADER === 'function') {
+          const arr = await window.WAHA_FILE_LOADER();
+          if (Array.isArray(arr) && arr.length) {
+            arr.forEach(function(p) {
+              if (!p) return;
+              const fullPath = p.startsWith('/') ? p : '/' + p;
+              FILE_LIST.files.add(fullPath);
+            });
+            FILE_LIST.loaded = true;
+            console.log(`📂 [files] loaded ${FILE_LIST.files.size} files via file.js`);
+            return FILE_LIST.files;
+          }
+        }
+
+        // ⚠️ fallback: file-all4.txt
+        console.log('⚠️ [files] file.js not available — trying file-all4.txt');
+        const res = await fetch(bustCache('/file-all4.txt'), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const text = await res.text();
+        const lines = text.split(/\r?\n/);
+
+        for (let i = 0; i < lines.length; i++) {
+          let line = lines[i].trim();
+          if (!line) continue;
+          if (line.startsWith('#')) continue;
+          if (line.indexOf('⛔') !== -1) continue;
+          if (line.indexOf('...') !== -1) continue;
+
+          line = line.replace(/^[A-Z]?\d+\.\s+/, '');
+          line = line.replace(/\s*⭐.*$/, '');
+          line = line.split(/\s+/)[0];
+          line = line.replace(/["']/g, '');
+          if (!/\.\w{2,5}$/.test(line)) continue;
+
+          const fullPath = line.startsWith('/') ? line : '/' + line;
+          FILE_LIST.files.add(fullPath);
+        }
+
+        FILE_LIST.loaded = true;
+        console.log(`📂 [files] loaded ${FILE_LIST.files.size} files from file-all4.txt`);
+        return FILE_LIST.files;
+
+      } catch (e) {
+        console.warn('⚠️ [files] failed:', e.message);
+        FILE_LIST.loaded = true;
+        return FILE_LIST.files;
+      }
+    })();
+
+    return FILE_LIST.loading;
+  }
+
+  function fileInList(path) {
+    if (!FILE_LIST.loaded || FILE_LIST.files.size === 0) return null;
+    return FILE_LIST.files.has(path);
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  📡 Network Notifications
   // ═══════════════════════════════════════════════════
   const NET = {
     container: null,
@@ -176,20 +242,7 @@
     if (NET.container && document.body.contains(NET.container)) return NET.container;
     const c = document.createElement('div');
     c.id = 'jabri-net-toasts';
-    c.style.cssText = `
-      position: fixed;
-      top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 999998;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      pointer-events: none;
-      font-family: 'Cairo', system-ui, sans-serif;
-      direction: rtl;
-      max-width: 90vw;
-    `;
+    c.style.cssText = 'position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:999998;display:flex;flex-direction:column;gap:8px;pointer-events:none;font-family:Cairo,system-ui,sans-serif;direction:rtl;max-width:90vw;';
     document.body.appendChild(c);
     NET.container = c;
     return c;
@@ -204,32 +257,13 @@
       info:    { bg: 'linear-gradient(135deg,#6ae3ff,#3aa0c4)', fg: '#0a0a0f' },
       ok:      { bg: 'linear-gradient(135deg,#06d6a0,#05b98a)', fg: '#0a0a0f' },
       warn:    { bg: 'linear-gradient(135deg,#ffd166,#f0a500)', fg: '#0a0a0f' },
-      err:     { bg: 'linear-gradient(135deg,#ff6b6b,#e85555)', fg: '#fff'    },
-      offline: { bg: 'linear-gradient(135deg,#8b0000,#5c0000)', fg: '#fff'    }
+      err:     { bg: 'linear-gradient(135deg,#ff6b6b,#e85555)', fg: '#fff' },
+      offline: { bg: 'linear-gradient(135deg,#8b0000,#5c0000)', fg: '#fff' }
     };
     const c = colors[type] || colors.info;
 
     const toast = document.createElement('div');
-    toast.style.cssText = `
-      background: ${c.bg};
-      color: ${c.fg};
-      padding: 12px 22px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-      pointer-events: auto;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      white-space: nowrap;
-      max-width: 90vw;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    `;
+    toast.style.cssText = `background:${c.bg};color:${c.fg};padding:12px 22px;border-radius:30px;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);pointer-events:auto;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(-20px);transition:opacity .3s,transform .3s;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;`;
 
     const text = document.createElement('span');
     text.textContent = message;
@@ -238,7 +272,7 @@
 
     const close = document.createElement('span');
     close.textContent = '✕';
-    close.style.cssText = 'cursor:pointer;opacity:0.7;font-size:16px;padding-right:6px';
+    close.style.cssText = 'cursor:pointer;opacity:.7;font-size:16px;padding-right:6px';
     close.onclick = () => removeToast(toast);
     toast.appendChild(close);
 
@@ -249,9 +283,7 @@
       toast.style.transform = 'translateY(0)';
     });
 
-    if (duration > 0) {
-      setTimeout(() => removeToast(toast), duration);
-    }
+    if (duration > 0) setTimeout(() => removeToast(toast), duration);
     return toast;
   }
 
@@ -297,7 +329,6 @@
       NET.offlineShown = true;
     });
 
-    // اعتراض fetch — للمراقبة
     if (window.fetch && !window.__jabriFetchWrapped) {
       const origFetch = window.fetch.bind(window);
       window.fetch = async function(...args) {
@@ -384,22 +415,7 @@
     }
     if (document.getElementById('splashScreen')) return;
     try {
-      const html = `
-        <div id="splashScreen">
-          <div class="splash-title">واحة الجبري</div>
-          <div class="splash-sub">تراث اليمن العريق · نظرية السندباد الموحدة</div>
-          <div class="spinner"></div>
-          <div class="splash-version">v${VERSION}</div>
-          <style>
-            #splashScreen{position:fixed;inset:0;background:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999999;transition:opacity .6s ease;font-family:'Cairo',sans-serif}
-            #splashScreen.hidden{opacity:0;pointer-events:none}
-            .splash-title{color:#6ae3ff;font-size:2.5rem;font-weight:900}
-            .splash-sub{color:#888;font-size:1.1rem;margin-top:8px}
-            .spinner{width:40px;height:40px;margin-top:30px;border:3px solid rgba(106,227,255,.1);border-top:3px solid #6ae3ff;border-radius:50%;animation:spin 1s linear infinite}
-            .splash-version{position:absolute;bottom:20px;color:#444;font-size:12px;font-family:monospace}
-            @keyframes spin{to{transform:rotate(360deg)}}
-          </style>
-        </div>`;
+      const html = `<div id="splashScreen"><div class="splash-title">واحة الجبري</div><div class="splash-sub">تراث اليمن العريق · نظرية السندباد الموحدة</div><div class="spinner"></div><div class="splash-version">v${VERSION}</div><style>#splashScreen{position:fixed;inset:0;background:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999999;transition:opacity .6s ease;font-family:'Cairo',sans-serif}#splashScreen.hidden{opacity:0;pointer-events:none}.splash-title{color:#6ae3ff;font-size:2.5rem;font-weight:900}.splash-sub{color:#888;font-size:1.1rem;margin-top:8px}.spinner{width:40px;height:40px;margin-top:30px;border:3px solid rgba(106,227,255,.1);border-top:3px solid #6ae3ff;border-radius:50%;animation:spin 1s linear infinite}.splash-version{position:absolute;bottom:20px;color:#444;font-size:12px;font-family:monospace}@keyframes spin{to{transform:rotate(360deg)}}</style></div>`;
       const div = document.createElement('div');
       div.innerHTML = html;
       document.body.prepend(div.firstElementChild);
@@ -436,7 +452,223 @@
   }
 
   // ═══════════════════════════════════════════════════
-  //  🚨 show404Overlay — كامل
+  //  🌐 toggleLang — v8.2.0 (file.js powered)
+  //  ═══════════════════════════════════════════════════
+  async function toggleLang() {
+    const path = location.pathname;
+    const qs = location.search + location.hash;
+    const lang = document.documentElement.lang;
+    const base = getBasePath();
+    const file = getFileName();
+
+    const lower = path.toLowerCase();
+    let targetLang;
+    if (lower.includes('/en/')) targetLang = 'ar';
+    else if (lower.includes('/ar/')) targetLang = 'en';
+    else targetLang = (lang === 'ar') ? 'en' : 'ar';
+
+    // ✅ حمّل القائمة (سريع — من file.js)
+    await loadFileList();
+    console.log(`📂 [lang] file list: ${FILE_LIST.files.size} files`);
+
+    // ═══════════════════════════════════════════════════
+    // L1: الملف في مجلد اللغة المستهدفة
+    // ═══════════════════════════════════════════════════
+    const langFile = base + '/' + targetLang + '/' + file;
+    const inList1 = fileInList(langFile);
+
+    if (inList1 === true) {
+      console.log(`✅ [lang] L1 HIT (list) → ${langFile}`);
+      window.location.href = langFile + qs;
+      return;
+    }
+
+    if (inList1 === null) {
+      console.log(`🌐 [lang] L1: list empty — fetch check`);
+      if (await checkFileExists(langFile)) {
+        window.location.href = langFile + qs;
+        return;
+      }
+    } else {
+      console.log(`⚠️ [lang] L1 MISS (list): ${langFile}`);
+    }
+
+    // ═══════════════════════════════════════════════════
+    // L2: الملف في الروت
+    // ═══════════════════════════════════════════════════
+    const rootFile = '/' + file;
+    const inList2 = fileInList(rootFile);
+
+    if (inList2 === true) {
+      console.log(`✅ [lang] L2 HIT (list) → ${rootFile}`);
+      window.location.href = rootFile + qs;
+      return;
+    }
+
+    if (inList2 === null) {
+      console.log(`🌐 [lang] L2: list empty — fetch check`);
+      if (await checkFileExists(rootFile)) {
+        window.location.href = rootFile + qs;
+        return;
+      }
+    } else {
+      console.log(`⚠️ [lang] L2 MISS (list): ${rootFile}`);
+    }
+
+    // ═══════════════════════════════════════════════════
+    // L3: آخر حل — all-links
+    // ═══════════════════════════════════════════════════
+    console.warn(`⚠️ [lang] L3: not found anywhere → ${CONFIG.allLinksPath}`);
+    window.location.href = CONFIG.allLinksPath;
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  🔍 checkFileExists — احتياطي
+  // ═══════════════════════════════════════════════════
+  async function checkFileExists(url) {
+    try {
+      const controller = new AbortController();
+      const tid = setTimeout(() => controller.abort(), 3000);
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: { 'Range': 'bytes=0-0' },
+        signal: controller.signal,
+        cache: 'no-store',
+        redirect: 'manual'
+      });
+      clearTimeout(tid);
+      controller.abort();
+      return res.ok || res.status === 206 || res.status === 0;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  📥 safelyExecuteScripts
+  // ═══════════════════════════════════════════════════
+  function safelyExecuteScripts(container) {
+    var scripts = container.querySelectorAll('script');
+    for (var i = 0; i < scripts.length; i++) {
+      var oldScript = scripts[i];
+      try {
+        var src = oldScript.src || '';
+        var content = oldScript.textContent || '';
+
+        if (src) {
+          var vsrc = withVersion(src);
+          if (!document.querySelector('script[src="' + vsrc + '"]')) {
+            var s1 = document.createElement('script');
+            s1.src = vsrc;
+            s1.async = false;
+            document.head.appendChild(s1);
+          }
+        } else if (content.trim()) {
+          try {
+            var fn = new Function(content);
+            fn.call(window);
+            console.log('✅ executed inline script from partial');
+          } catch (e) {
+            console.warn('⚠️ Function failed, fallback:', e);
+            var s2 = document.createElement('script');
+            s2.textContent = content;
+            document.head.appendChild(s2);
+          }
+        }
+      } catch (err) {
+        console.warn('⚠️ script skip:', err);
+      }
+    }
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  📥 loadPartial
+  // ═══════════════════════════════════════════════════
+  const KNOWN_PARTIALS = ['/header.html', '/footer.html'];
+
+  async function loadPartial(id, fileName, evt, isHeader) {
+    const el = document.getElementById(id);
+    if (!el) {
+      console.warn(`⚠️ [${fileName}] placeholder #${id} not found`);
+      if (isHeader) setTimeout(hideSplash, 500);
+      return;
+    }
+    if (el.dataset.loaded === 'true') {
+      if (isHeader) setTimeout(hideSplash, 500);
+      return;
+    }
+
+    const fallbackHTML = el.innerHTML.trim();
+    const label = fileName.replace(/^\//, '').replace('.html', '');
+
+    notifyLoadStart(label);
+
+    const isKnown = KNOWN_PARTIALS.indexOf(fileName) !== -1;
+    let resolved = null;
+
+    if (isKnown) {
+      console.log(`⚡ [${fileName}] known partial — direct load`);
+      resolved = fileName;
+    } else {
+      try {
+        resolved = await Promise.race([
+          resolveFile(fileName),
+          new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 5000))
+        ]);
+      } catch (e) {
+        console.warn(`⏱️ [${fileName}] resolve timeout`);
+        resolved = null;
+      }
+    }
+
+    if (!resolved) {
+      notifyLoadEnd(label, false);
+      if (fallbackHTML) {
+        el.dataset.loaded = 'true';
+      } else {
+        el.innerHTML = `<div style="text-align:center;padding:15px;color:#888;font-size:12px">⚠️ ${fileName} غير متاح حالياً</div>`;
+      }
+      el.style.display = '';
+      if (isHeader) setTimeout(hideSplash, 500);
+      return;
+    }
+
+    try {
+      const res = await fetch(bustCache(resolved), {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' }
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      el.innerHTML = await res.text();
+      el.dataset.loaded = 'true';
+      el.dataset.version = VERSION;
+      el.dataset.source = resolved;
+      el.style.display = '';
+
+      safelyExecuteScripts(el);
+
+      if (CONFIG.autoFixLinks) autoFixLinks();
+
+      document.dispatchEvent(new CustomEvent(evt, { detail: { version: VERSION } }));
+
+      notifyLoadEnd(label, true);
+      console.log(`✅ [${fileName}] loaded from ${resolved}`);
+      if (isHeader) setTimeout(hideSplash, 300);
+    } catch (e) {
+      console.error(`❌ [${fileName}] failed:`, e);
+      notifyLoadEnd(label, false);
+      if (fallbackHTML) {
+        el.dataset.loaded = 'true';
+      } else {
+        el.innerHTML = `<div style="text-align:center;padding:15px;color:#888;font-size:12px">⚠️ خطأ في تحميل ${fileName}</div>`;
+      }
+      el.style.display = '';
+      if (isHeader) setTimeout(hideSplash, 500);
+    }
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  🚨 show404Overlay
   // ═══════════════════════════════════════════════════
   function show404Overlay() {
     if (document.getElementById('jabri-404-overlay')) return;
@@ -470,168 +702,64 @@
 
     const div = document.createElement('div');
     div.id = 'jabri-404-overlay';
-    div.style.cssText = `
-      position:fixed;inset:0;
-      background: linear-gradient(145deg, #0b1a2e, #1a2f44);
-      color:#f0e6d3;
-      z-index:999999;
-      display:flex;justify-content:center;align-items:center;
-      font-family:'Cairo',sans-serif;
-      direction:rtl;padding:20px;overflow-y:auto;
-    `;
+    div.style.cssText = `position:fixed;inset:0;background:linear-gradient(145deg,#0b1a2e,#1a2f44);color:#f0e6d3;z-index:999999;display:flex;justify-content:center;align-items:center;font-family:'Cairo',sans-serif;direction:rtl;padding:20px;overflow-y:auto;`;
 
     div.innerHTML = `
       <style>
-        #jabri-404-overlay .ov-container {
-          background: rgba(255,255,255,0.05);
-          backdrop-filter: blur(10px);
-          padding: 30px 22px;
-          border-radius: 30px;
-          border: 1px solid rgba(255,215,150,0.2);
-          max-width: 540px;
-          width: 100%;
-          box-shadow: 0 30px 50px rgba(0,0,0,0.6);
-          text-align: center;
-        }
-        #jabri-404-overlay .ov-404-num {
-          font-size: 5.5rem; font-weight: 900; color: #b48b5a;
-          text-shadow: 0 0 60px rgba(180,139,90,0.5);
-          line-height: 1; margin-bottom: 8px;
-        }
-        #jabri-404-overlay .ov-title {
-          font-size: 1.3rem; color: #f0e6d3;
-          margin-bottom: 22px; line-height: 1.6;
-        }
-        #jabri-404-overlay .ov-box {
-          background: #0b1a2e; border: 1px solid #b48b5a;
-          border-radius: 14px; padding: 10px 14px;
-          margin: 8px 0; text-align: right;
-        }
-        #jabri-404-overlay .ov-label {
-          font-size: 0.72rem; color: #b48b5a;
-          margin-bottom: 5px; font-weight: 700; letter-spacing: 1px;
-        }
-        #jabri-404-overlay .ov-value {
-          font-family: 'Courier New', monospace; font-size: 0.82rem;
-          color: #6ae3ff; direction: ltr; text-align: left;
-          word-break: break-all; padding: 6px 10px;
-          background: rgba(106,227,255,0.05);
-          border-radius: 6px; border: 1px solid rgba(106,227,255,0.2);
-          min-height: 28px;
-        }
-        #jabri-404-overlay #ovResult { color: #ffd166; }
-        #jabri-404-overlay #ovResult.ok  { color: #06d6a0; }
-        #jabri-404-overlay #ovResult.err { color: #ff6b6b; }
-        #jabri-404-overlay .network-log {
-          background: #000; border: 1px solid #6ae3ff;
-          border-radius: 12px; padding: 10px 14px;
-          margin: 12px 0; max-height: 160px; overflow-y: auto;
-          font-family: 'Courier New', monospace; font-size: 11px;
-          text-align: left; direction: ltr;
-        }
-        #jabri-404-overlay .network-log-title {
-          color: #6ae3ff; font-size: 10px; margin-bottom: 6px;
-          padding-bottom: 5px;
-          border-bottom: 1px solid rgba(106,227,255,0.3);
-          font-weight: 700; letter-spacing: 1px;
-        }
-        #jabri-404-overlay .log-line {
-          padding: 3px 0; color: #8aa5b5;
-          line-height: 1.5; word-break: break-all;
-        }
-        #jabri-404-overlay .log-line.info { color: #6ae3ff; }
-        #jabri-404-overlay .log-line.ok   { color: #06d6a0; }
-        #jabri-404-overlay .log-line.err  { color: #ff6b6b; }
-        #jabri-404-overlay .log-line.warn { color: #ffd166; }
-        #jabri-404-overlay .log-line.step { color: #b48b5a; font-weight: 700; }
-        #jabri-404-overlay .ov-visitors {
-          margin: 14px auto;
-          background: linear-gradient(135deg, #b48b5a, #8b6a3f);
-          color: #0a0a0f; border-radius: 40px;
-          padding: 9px 20px; font-weight: 700;
-          font-size: 0.95rem; display: inline-block;
-        }
-        #jabri-404-overlay .ov-visitors span {
-          color: #0a0a0f; font-weight: 900; font-size: 1.15rem;
-        }
-        #jabri-404-overlay .loader {
-          margin: 12px auto; width: 38px; height: 38px;
-          border: 4px solid #b48b5a; border-top-color: transparent;
-          border-radius: 50%; animation: spin404 0.9s linear infinite;
-        }
-        @keyframes spin404 { to { transform: rotate(360deg); } }
-        #jabri-404-overlay .ov-countdown {
-          margin: 8px 0; font-size: 0.95rem; color: #6ae3ff;
-          font-family: monospace; font-weight: 700;
-        }
-        #jabri-404-overlay .ov-options {
-          display: grid; grid-template-columns: 1fr 1fr;
-          gap: 8px; margin-top: 18px;
-        }
-        #jabri-404-overlay .ov-btn {
-          padding: 12px 10px; border: none; border-radius: 14px;
-          font-size: 0.82rem; font-weight: 900; font-family: inherit;
-          cursor: pointer; text-decoration: none;
-          display: flex; align-items: center; justify-content: center;
-          gap: 6px; transition: transform 0.2s ease;
-        }
-        #jabri-404-overlay .ov-btn:hover { transform: scale(1.05); }
-        #jabri-404-overlay .ov-btn-map  { background: linear-gradient(135deg, #6ae3ff, #3aa0c4); color: #0a0a0f; }
-        #jabri-404-overlay .ov-btn-home { background: linear-gradient(135deg, #ffd700, #f0a500); color: #0a0a0f; }
-        #jabri-404-overlay .ov-btn-waha { background: linear-gradient(135deg, #06d6a0, #05b98a); color: #0a0a0f; }
-        #jabri-404-overlay .ov-btn-exit { background: linear-gradient(135deg, #ff6b6b, #e85555); color: #fff; }
-        #jabri-404-overlay .ov-footer {
-          margin-top: 16px; font-size: 0.82rem; color: #b48b5a;
-        }
-        #jabri-404-overlay .ov-version {
-          margin-top: 6px; font-size: 11px; color: #444;
-          font-family: monospace;
-        }
-        @media (max-width: 500px) {
-          #jabri-404-overlay .ov-404-num { font-size: 4rem; }
-          #jabri-404-overlay .ov-title { font-size: 1.1rem; }
-          #jabri-404-overlay .ov-btn { font-size: 0.72rem; padding: 11px 6px; }
+        #jabri-404-overlay .ov-container{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);padding:30px 22px;border-radius:30px;border:1px solid rgba(255,215,150,0.2);max-width:540px;width:100%;box-shadow:0 30px 50px rgba(0,0,0,0.6);text-align:center}
+        #jabri-404-overlay .ov-404-num{font-size:5.5rem;font-weight:900;color:#b48b5a;text-shadow:0 0 60px rgba(180,139,90,0.5);line-height:1;margin-bottom:8px}
+        #jabri-404-overlay .ov-title{font-size:1.3rem;color:#f0e6d3;margin-bottom:22px;line-height:1.6}
+        #jabri-404-overlay .ov-box{background:#0b1a2e;border:1px solid #b48b5a;border-radius:14px;padding:10px 14px;margin:8px 0;text-align:right}
+        #jabri-404-overlay .ov-label{font-size:0.72rem;color:#b48b5a;margin-bottom:5px;font-weight:700;letter-spacing:1px}
+        #jabri-404-overlay .ov-value{font-family:'Courier New',monospace;font-size:0.82rem;color:#6ae3ff;direction:ltr;text-align:left;word-break:break-all;padding:6px 10px;background:rgba(106,227,255,0.05);border-radius:6px;border:1px solid rgba(106,227,255,0.2);min-height:28px}
+        #jabri-404-overlay #ovResult{color:#ffd166}
+        #jabri-404-overlay #ovResult.ok{color:#06d6a0}
+        #jabri-404-overlay #ovResult.err{color:#ff6b6b}
+        #jabri-404-overlay .network-log{background:#000;border:1px solid #6ae3ff;border-radius:12px;padding:10px 14px;margin:12px 0;max-height:160px;overflow-y:auto;font-family:'Courier New',monospace;font-size:11px;text-align:left;direction:ltr}
+        #jabri-404-overlay .network-log-title{color:#6ae3ff;font-size:10px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid rgba(106,227,255,0.3);font-weight:700;letter-spacing:1px}
+        #jabri-404-overlay .log-line{padding:3px 0;color:#8aa5b5;line-height:1.5;word-break:break-all}
+        #jabri-404-overlay .log-line.info{color:#6ae3ff}
+        #jabri-404-overlay .log-line.ok{color:#06d6a0}
+        #jabri-404-overlay .log-line.err{color:#ff6b6b}
+        #jabri-404-overlay .log-line.warn{color:#ffd166}
+        #jabri-404-overlay .log-line.step{color:#b48b5a;font-weight:700}
+        #jabri-404-overlay .ov-visitors{margin:14px auto;background:linear-gradient(135deg,#b48b5a,#8b6a3f);color:#0a0a0f;border-radius:40px;padding:9px 20px;font-weight:700;font-size:0.95rem;display:inline-block}
+        #jabri-404-overlay .ov-visitors span{color:#0a0a0f;font-weight:900;font-size:1.15rem}
+        #jabri-404-overlay .loader{margin:12px auto;width:38px;height:38px;border:4px solid #b48b5a;border-top-color:transparent;border-radius:50%;animation:spin404 0.9s linear infinite}
+        @keyframes spin404{to{transform:rotate(360deg)}}
+        #jabri-404-overlay .ov-countdown{margin:8px 0;font-size:0.95rem;color:#6ae3ff;font-family:monospace;font-weight:700}
+        #jabri-404-overlay .ov-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+        #jabri-404-overlay .ov-btn{padding:12px 10px;border:none;border-radius:14px;font-size:0.82rem;font-weight:900;font-family:inherit;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:transform 0.2s ease}
+        #jabri-404-overlay .ov-btn:hover{transform:scale(1.05)}
+        #jabri-404-overlay .ov-btn-map{background:linear-gradient(135deg,#6ae3ff,#3aa0c4);color:#0a0a0f}
+        #jabri-404-overlay .ov-btn-home{background:linear-gradient(135deg,#ffd700,#f0a500);color:#0a0a0f}
+        #jabri-404-overlay .ov-btn-waha{background:linear-gradient(135deg,#06d6a0,#05b98a);color:#0a0a0f}
+        #jabri-404-overlay .ov-btn-exit{background:linear-gradient(135deg,#ff6b6b,#e85555);color:#fff}
+        #jabri-404-overlay .ov-footer{margin-top:16px;font-size:0.82rem;color:#b48b5a}
+        #jabri-404-overlay .ov-version{margin-top:6px;font-size:11px;color:#444;font-family:monospace}
+        @media (max-width:500px){
+          #jabri-404-overlay .ov-404-num{font-size:4rem}
+          #jabri-404-overlay .ov-title{font-size:1.1rem}
+          #jabri-404-overlay .ov-btn{font-size:0.72rem;padding:11px 6px}
         }
       </style>
 
       <div class="ov-container">
         <div class="ov-404-num">404</div>
         <div class="ov-title">🏝️ عذرًا، هذا الدرب غير موجود</div>
-
-        <div class="ov-box">
-          <div class="ov-label">🔍 CURRENT PATH</div>
-          <div class="ov-value" id="ovCurrent">${currentPath}</div>
-        </div>
-
-        <div class="ov-box">
-          <div class="ov-label">➡️ TARGET PATH</div>
-          <div class="ov-value" id="ovTarget">${targetPath}</div>
-        </div>
-
-        <div class="ov-box">
-          <div class="ov-label">📊 RESULT</div>
-          <div class="ov-value" id="ovResult">⏳ Initializing...</div>
-        </div>
-
-        <div class="network-log" id="networkLog">
-          <div class="network-log-title">🌐 PROCESS LOG</div>
-        </div>
-
-        <div class="ov-visitors">
-          👥 عدد الزوار: <span>${count}</span>
-        </div>
-
+        <div class="ov-box"><div class="ov-label">🔍 CURRENT PATH</div><div class="ov-value" id="ovCurrent">${currentPath}</div></div>
+        <div class="ov-box"><div class="ov-label">➡️ TARGET PATH</div><div class="ov-value" id="ovTarget">${targetPath}</div></div>
+        <div class="ov-box"><div class="ov-label">📊 RESULT</div><div class="ov-value" id="ovResult">⏳ Initializing...</div></div>
+        <div class="network-log" id="networkLog"><div class="network-log-title">🌐 PROCESS LOG</div></div>
+        <div class="ov-visitors">👥 عدد الزوار: <span>${count}</span></div>
         <div class="loader"></div>
-
         <div class="ov-countdown" id="ovCountdown">⏱️ 7s</div>
-
         <div class="ov-options">
           <a href="${CONFIG.allLinksPath}" class="ov-btn ov-btn-map">🗺️ خريطة</a>
           <a href="${CONFIG.indexPath}" class="ov-btn ov-btn-home">🏠 افتتاح</a>
           <a href="${CONFIG.wahaPath}" class="ov-btn ov-btn-waha">🏝️ الواحة</a>
           <button onclick="exitPage()" class="ov-btn ov-btn-exit">🚪 خروج</button>
         </div>
-
         <div class="ov-footer">🏛️ من صنعاء إلى الكون 🇾🇪</div>
         <div class="ov-version">v${VERSION}</div>
       </div>
@@ -658,9 +786,6 @@
     }, CONFIG.auto404TryAfter);
   }
 
-  // ═══════════════════════════════════════════════════
-  //  📊 logStep + updateResult
-  // ═══════════════════════════════════════════════════
   function logStep(step, message, type) {
     type = type || 'info';
     const logEl = document.getElementById('networkLog');
@@ -682,9 +807,6 @@
     if (cls) resultEl.classList.add(cls);
   }
 
-  // ═══════════════════════════════════════════════════
-  //  🚪 exitPage
-  // ═══════════════════════════════════════════════════
   function exitPage() {
     logStep('EXIT', 'User chose to exit', 'warn');
     try { window.close(); } catch (e) {}
@@ -694,9 +816,6 @@
   }
   window.exitPage = exitPage;
 
-  // ═══════════════════════════════════════════════════
-  //  🎯 handle404Redirect
-  // ═══════════════════════════════════════════════════
   async function handle404Redirect() {
     const path = location.pathname;
     const hasHtml = path.toLowerCase().endsWith('.html');
@@ -755,9 +874,6 @@
     setTimeout(() => { window.location.href = CONFIG.allLinksPath; }, 1500);
   }
 
-  // ═══════════════════════════════════════════════════
-  //  🎯 detect404 — 4 طبقات
-  // ═══════════════════════════════════════════════════
   async function detect404() {
     if (!CONFIG.detect404) return;
 
@@ -769,13 +885,11 @@
     let isReal404 = false;
     let reason = '';
 
-    // ① data-waha-404 attribute
     if (document.body && document.body.dataset.waha404 === 'true') {
       isReal404 = true;
       reason = 'data-waha-404';
     }
 
-    // ② Navigation API
     if (!isReal404 && window.performance && window.performance.getEntriesByType) {
       try {
         const nav = window.performance.getEntriesByType('navigation');
@@ -786,7 +900,6 @@
       } catch (e) {}
     }
 
-    // ③ Range check
     if (!isReal404) {
       try {
         const controller = new AbortController();
@@ -808,7 +921,6 @@
       } catch (e) {}
     }
 
-    // ④ Title check
     if (!isReal404) {
       const t = (document.title || '').toLowerCase();
       if (t.includes('404') || t.includes('not found')) {
@@ -822,246 +934,6 @@
       show404Overlay();
     } else {
       console.log('✅ [404] page OK');
-    }
-  }
-
-
-// ═══════════════════════════════════════════════════
-//  🌐 toggleLang — النسخة v8.2.0 (الذكية)
-//  ✅ تفحص وجود الملف في اللغة المستهدفة قبل التحويل
-//  ✅ 4 مستويات fallback:
-//     1. الملف نفسه في اللغة المستهدفة
-//     2. الصفحة الرئيسية للغة (/ar/ أو /en/)
-//     3. الصفحة الرئيسية العامة (/index.html)
-//     4. خريطة المسارات (/all-links.html) — آخر حل
-//  ✅ ما تحوّل على all-links إلا في حالة عدم وجود كل البدائل
-// ═══════════════════════════════════════════════════
-async function toggleLang() {
-  const path = location.pathname;
-  const qs = location.search + location.hash;
-  const lang = document.documentElement.lang;
-  const base = getBasePath();
-  const file = getFileName();
-  
-  const lower = path.toLowerCase();
-  let targetLang;
-  if (lower.includes('/en/')) targetLang = 'ar';
-  else if (lower.includes('/ar/')) targetLang = 'en';
-  else targetLang = (lang === 'ar') ? 'en' : 'ar';
-  
-  // ✅ المسار المستهدف الأساسي
-  const targetPath = base + '/' + targetLang + '/' + file;
-  const targetUrl = targetPath + qs;
-  
-  console.log(`🌐 [lang] ${path} → ${targetUrl}`);
-  
-  // 🔍 المستوى 1: الملف نفسه في اللغة المستهدفة
-  try {
-    const fileExists = await checkFileExists(targetPath);
-    if (fileExists) {
-      console.log(`✅ [lang] L1: file exists → ${targetUrl}`);
-      window.location.href = targetUrl;
-      return;
-    }
-    console.log(`⚠️ [lang] L1 failed: ${targetPath} not found`);
-  } catch (e) {
-    console.warn(`⚠️ [lang] L1 error:`, e.message);
-  }
-  
-  // 🔍 المستوى 2: الصفحة الرئيسية للغة المستهدفة
-  const langHome = base + '/' + targetLang + '/index.html';
-  try {
-    const homeExists = await checkFileExists(langHome);
-    if (homeExists) {
-      console.log(`✅ [lang] L2: ${targetLang} home exists → ${langHome}`);
-      window.location.href = langHome + qs;
-      return;
-    }
-    console.log(`⚠️ [lang] L2 failed: ${langHome} not found`);
-  } catch (e) {
-    console.warn(`⚠️ [lang] L2 error:`, e.message);
-  }
-  
-  // 🔍 المستوى 3: الرئيسية العامة
-  const rootHome = '/index.html';
-  try {
-    const rootExists = await checkFileExists(rootHome);
-    if (rootExists) {
-      console.log(`✅ [lang] L3: root home exists → ${rootHome}`);
-      window.location.href = rootHome + qs;
-      return;
-    }
-    console.log(`⚠️ [lang] L3 failed: ${rootHome} not found`);
-  } catch (e) {
-    console.warn(`⚠️ [lang] L3 error:`, e.message);
-  }
-  
-  // 🔍 المستوى 4: خريطة المسارات (آخر حل)
-  console.log(`🗺️ [lang] L4: all fallbacks failed → /all-links.html`);
-  window.location.href = (CONFIG.allLinksPath || '/all-links.html') + qs;
-}
-
-// ═══════════════════════════════════════════════════
-//  🔍 checkFileExists — دالة فحص محلية (Range: bytes=0-0)
-//  ✅ أسرع من HEAD — مدعومة على Vercel
-//  ✅ timeout 3s
-// ═══════════════════════════════════════════════════
-async function checkFileExists(url) {
-  try {
-    const controller = new AbortController();
-    const tid = setTimeout(() => controller.abort(), 3000);
-    
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: { 'Range': 'bytes=0-0' },
-      signal: controller.signal,
-      cache: 'no-store',
-      redirect: 'manual'
-    });
-    
-    clearTimeout(tid);
-    controller.abort();
-    
-    // 200 = موجود كامل
-    // 206 = Range محترم
-    // 0 = opaque (cross-origin)
-    return res.ok || res.status === 206 || res.status === 0;
-  } catch (e) {
-    return false;
-  }
-}
-
-  // ═══════════════════════════════════════════════════
-  //  📥 safelyExecuteScripts
-  // ═══════════════════════════════════════════════════
-
-function safelyExecuteScripts(container) {
-  var scripts = container.querySelectorAll('script');
-  for (var i = 0; i < scripts.length; i++) {
-    var oldScript = scripts[i];
-    try {
-      var src = oldScript.src || '';
-      var content = oldScript.textContent || '';
-      
-      if (src) {
-        // ✅ سكربت خارجي
-        var vsrc = withVersion(src);
-        if (!document.querySelector('script[src="' + vsrc + '"]')) {
-          var s1 = document.createElement('script');
-          s1.src = vsrc;
-          s1.async = false;
-          document.head.appendChild(s1);
-        }
-      } else if (content.trim()) {
-        // ✅ سكربت inline — نفّذ عبر Function لتجاوز CSP
-        try {
-          var fn = new Function(content);
-          fn.call(window);
-          console.log('✅ executed inline script from partial');
-        } catch (e) {
-          console.warn('⚠️ Function failed, fallback to script tag:', e);
-          // fallback
-          var s2 = document.createElement('script');
-          s2.textContent = content;
-          document.head.appendChild(s2);
-        }
-      }
-    } catch (err) {
-      console.warn('⚠️ script skip:', err);
-    }
-  }
-}
-
-
-
-
-  // ═══════════════════════════════════════════════════
-  //  📥 loadPartial — النسخة النهائية
-  //  ✅ KNOWN_PARTIALS — تخطّي fileExists لـ header/footer
-  //  ✅ auto-dismiss للـ toast بعد 4s
-  //  ✅ timeout قسري 5s
-  // ═══════════════════════════════════════════════════
-  const KNOWN_PARTIALS = ['/header.html', '/footer.html'];
-
-  async function loadPartial(id, fileName, evt, isHeader) {
-    const el = document.getElementById(id);
-    if (!el) {
-      console.warn(`⚠️ [${fileName}] placeholder #${id} not found`);
-      if (isHeader) setTimeout(hideSplash, 500);
-      return;
-    }
-    if (el.dataset.loaded === 'true') {
-      if (isHeader) setTimeout(hideSplash, 500);
-      return;
-    }
-
-    const fallbackHTML = el.innerHTML.trim();
-    const label = fileName.replace(/^\//, '').replace('.html', '');
-
-    notifyLoadStart(label);
-
-    // ✅ تخطّى resolveFile للـ partials المعروفة
-    const isKnown = KNOWN_PARTIALS.indexOf(fileName) !== -1;
-    let resolved = null;
-
-    if (isKnown) {
-      console.log(`⚡ [${fileName}] known partial — direct load`);
-      resolved = fileName;
-    } else {
-      try {
-        resolved = await Promise.race([
-          resolveFile(fileName),
-          new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 5000))
-        ]);
-      } catch (e) {
-        console.warn(`⏱️ [${fileName}] resolve timeout`);
-        resolved = null;
-      }
-    }
-
-    if (!resolved) {
-      notifyLoadEnd(label, false);
-      if (fallbackHTML) {
-        el.dataset.loaded = 'true';
-      } else {
-        el.innerHTML = `<div style="text-align:center;padding:15px;color:#888;font-size:12px">
-          ⚠️ ${fileName} غير متاح حالياً
-        </div>`;
-      }
-      el.style.display = '';
-      if (isHeader) setTimeout(hideSplash, 500);
-      return;
-    }
-
-    try {
-      const res = await fetch(bustCache(resolved), {
-        cache: 'no-store',
-        headers: { 'Cache-Control': 'no-cache' }
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      el.innerHTML = await res.text();
-      el.dataset.loaded = 'true';
-      el.dataset.version = VERSION;
-      el.dataset.source = resolved;
-      el.style.display = '';
-      safelyExecuteScripts(el);
-      if (CONFIG.autoFixLinks) autoFixLinks();
-      document.dispatchEvent(new CustomEvent(evt, { detail: { version: VERSION } }));
-      notifyLoadEnd(label, true);
-      console.log(`✅ [${fileName}] loaded from ${resolved}`);
-      if (isHeader) setTimeout(hideSplash, 300);
-    } catch (e) {
-      console.error(`❌ [${fileName}] failed:`, e);
-      notifyLoadEnd(label, false);
-      if (fallbackHTML) {
-        el.dataset.loaded = 'true';
-      } else {
-        el.innerHTML = `<div style="text-align:center;padding:15px;color:#888;font-size:12px">
-          ⚠️ خطأ في تحميل ${fileName}
-        </div>`;
-      }
-      el.style.display = '';
-      if (isHeader) setTimeout(hideSplash, 500);
     }
   }
 
@@ -1121,7 +993,7 @@ function safelyExecuteScripts(container) {
   }
 
   // ═══════════════════════════════════════════════════
-  //  🎵 Music Player (5 tracks)
+  //  🎵 Music Player
   // ═══════════════════════════════════════════════════
   const MUSIC_FILES = ['music1.mp3', 'music2.mp3', 'music3.mp3', 'music4.mp3', 'music5.mp3'];
   const MUSIC_NAMES = ['🎵 تراث اليمن', '🎵 سندباد', '🎵 صنعاء', '🎵 شبام', '🎵 سقطرى'];
@@ -1169,7 +1041,7 @@ function safelyExecuteScripts(container) {
   window.toggleMusic = toggleMusic;
 
   // ═══════════════════════════════════════════════════
-  //  ✅ Version Check (no reload loop)
+  //  ✅ Version Check
   // ═══════════════════════════════════════════════════
   async function checkForNewVersion() {
     if (!CONFIG.version) return;
@@ -1200,12 +1072,7 @@ function safelyExecuteScripts(container) {
 
       console.log(`🔄 [version] new: v${data.version}`);
       const toast = document.createElement('div');
-      toast.style.cssText = `
-        position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
-        background:#06d6a0;color:#0a0a0f;padding:12px 24px;
-        border-radius:30px;font-weight:700;font-size:14px;
-        z-index:999999;box-shadow:0 8px 24px rgba(6,214,160,.4);
-        font-family:'Cairo',sans-serif;direction:rtl;cursor:pointer`;
+      toast.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#06d6a0;color:#0a0a0f;padding:12px 24px;border-radius:30px;font-weight:700;font-size:14px;z-index:999999;box-shadow:0 8px 24px rgba(6,214,160,.4);font-family:'Cairo',sans-serif;direction:rtl;cursor:pointer`;
       toast.textContent = `🔄 نسخة جديدة (v${data.version}) — اضغط للتحديث`;
       toast.onclick = forceReload;
       document.body.appendChild(toast);
@@ -1222,51 +1089,56 @@ function safelyExecuteScripts(container) {
   // ═══════════════════════════════════════════════════
   //  🚀 init
   // ═══════════════════════════════════════════════════
+  function init() {
+    console.log('⚙️ [init] running with config:', CONFIG);
 
+    // ✅ حمّل قائمة الملفات فوراً (في الخلفية)
+    loadFileList().then(function() {
+      console.log(`📂 [init] file list ready (${FILE_LIST.files.size} files)`);
+    });
 
-function init() {
-  console.log('⚙️ [init] running with config:', CONFIG);
-  
-  initNetworkWatcher();
-  reportConnectionType();
-  
-  if (CONFIG.splash) createSplash();
-  if (CONFIG.music) initMusic();
-  
-  // ✅ حمّل header و footer أولاً
-  var headerPromise = CONFIG.header ?
-    loadPartial('header-placeholder', '/header.html', 'headerLoaded', true) :
-    Promise.resolve();
-  
-  var footerPromise = CONFIG.footer ?
-    loadPartial('footer-placeholder', '/footer.html', 'footerLoaded', false) :
-    Promise.resolve();
-  
-  // ✅ بعد ما يخلصوا، افحص 404 و شغّل الباقي
-  Promise.all([headerPromise, footerPromise]).then(function() {
-    console.log('✅ [init] header + footer loaded');
-    if (CONFIG.detect404) detect404();
-    if (CONFIG.version) checkForNewVersion();
-  });
-  
-  if (CONFIG.autoFixLinks) autoFixLinks();
-  
-  document.addEventListener('headerLoaded', function() {
-    setCanonical();
-    addDynamicLinks();
-  });
-  
-  window.addEventListener('error', function() { hideSplash(); });
-  window.addEventListener('load', function() { setTimeout(hideSplash, 1000); });
-  document.addEventListener('click', function() {
-    if (!splashHidden) hideSplash();
-  }, { once: true });
-}
+    initNetworkWatcher();
+    reportConnectionType();
 
+    if (CONFIG.splash) createSplash();
+    if (CONFIG.music) initMusic();
 
+    var headerPromise = CONFIG.header ?
+      loadPartial('header-placeholder', '/header.html', 'headerLoaded', true) :
+      Promise.resolve();
+
+    var footerPromise = CONFIG.footer ?
+      loadPartial('footer-placeholder', '/footer.html', 'footerLoaded', false) :
+      Promise.resolve();
+
+    Promise.all([headerPromise, footerPromise]).then(function() {
+      console.log('✅ [init] header + footer loaded');
+      if (CONFIG.detect404) detect404();
+      if (CONFIG.version) checkForNewVersion();
+    });
+
+    if (CONFIG.autoFixLinks) autoFixLinks();
+
+    document.addEventListener('headerLoaded', function() {
+      setCanonical();
+      addDynamicLinks();
+    });
+
+    window.addEventListener('error', function() { hideSplash(); });
+    window.addEventListener('load', function() { setTimeout(hideSplash, 1000); });
+    document.addEventListener('click', function() {
+      if (!splashHidden) hideSplash();
+    }, { once: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
   // ═══════════════════════════════════════════════════
-  //  🌍 API — موسّع
+  //  🌍 API
   // ═══════════════════════════════════════════════════
   window.Jabri = {
     version: VERSION,
@@ -1275,6 +1147,8 @@ function init() {
     fileExists: fileExists,
     resolveFile: resolveFile,
     loadPartial: loadPartial,
+    loadFileList: loadFileList,
+    fileInList: fileInList,
     // UI
     hideSplash: hideSplash,
     show404Overlay: show404Overlay,
@@ -1293,16 +1167,14 @@ function init() {
     showNetToast: showNetToast,
     removeToast: removeToast,
     dismissLoadToasts: dismissLoadToasts,
-    network: NET
+    network: NET,
+    // File List
+    FILE_LIST: FILE_LIST
   };
 
+  window.toggleLang = toggleLang;
+  window.switchLanguage = toggleLang;
+  window.toggleLanguage = toggleLang;
 
-
-window.toggleLang = toggleLang;
-window.switchLanguage = toggleLang;
-window.toggleLanguage = toggleLang;
-
-
-
-  console.log(`✅ الدرع المطلق v${VERSION} ready — Complete Beast`);
+  console.log(`✅ المرعبة الكاملة v${VERSION} ready`);
 })();
