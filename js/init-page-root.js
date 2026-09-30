@@ -825,23 +825,6 @@
     }
   }
 
-  // ═══════════════════════════════════════════════════
-  //  🌐 toggleLang
-  // ═══════════════════════════════════════════════════
-  // ═══════════════════════════════════════════════════
-//  🌐 toggleLang — ذكية (متوافقة مع /ar/ و /en/ والجذر)
-//  الحالة 1: /ar/X.html  → /en/X.html
-//  الحالة 2: /en/X.html  → /X.html    (عربي في الجذر)
-//  الحالة 3: /X.html     → /en/X.html
-// ═══════════════════════════════════════════════════
-
-// ═══════════════════════════════════════════════════
-//  🌐 toggleLang — الحل النهائي الذكي
-//  ✅ الحالة 1: الملف موجود في الوجهة → يحوّل إليه
-//  ✅ الحالة 2: الملف غير موجود → يحوّل إلى /index.html
-//  ✅ لا Routes، لا 404، لا انتظار
-// ═══════════════════════════════════════════════════
-
 
 // ═══════════════════════════════════════════════════
 //  🌐 toggleLang — النسخة الأصلية v7.0.0 (تعمل 200%)
@@ -867,42 +850,6 @@ async function toggleLang() {
 }
 
 
-  
-  // ────────────────────────────────────────────────
-  //  الحالة 1: نحن في /en/X.html  → عربي
-  // ────────────────────────────────────────────────
-  if (lower.startsWith('/en/')) {
-    const targetUrl = '/' + file + qs;
-    console.log(`🌐 [lang] /en/ → target: ${targetUrl}`);
-    
-    const exists = await fileExists('/' + file);
-    
-    if (exists) {
-      console.log(`✅ [lang] وجد → ${targetUrl}`);
-      window.location.href = targetUrl;
-    } else {
-      console.warn(`⚠️ [lang] /${file} غير موجود → /index.html`);
-      window.location.href = '/index.html' + qs;
-    }
-    return;
-  }
-  
-  // ────────────────────────────────────────────────
-  //  الحالة 2: نحن في الجذر → إنجليزي في /en/
-  // ────────────────────────────────────────────────
-  const targetUrl = '/en/' + file + qs;
-  console.log(`🌐 [lang] / → target: ${targetUrl}`);
-  
-  const exists = await fileExists('/en/' + file);
-  
-  if (exists) {
-    console.log(`✅ [lang] وجد → ${targetUrl}`);
-    window.location.href = targetUrl;
-  } else {
-    console.warn(`⚠️ [lang] /en/${file} غير موجود → /index.html`);
-    window.location.href = '/index.html' + qs;
-  }
-}
 
 
   // ═══════════════════════════════════════════════════
@@ -1242,8 +1189,13 @@ async function toggleLang() {
     network: NET
   };
 
-  window.switchLanguage = toggleLang;
-  window.toggleLanguage = toggleLang;
+
+
+window.toggleLang = toggleLang;
+window.switchLanguage = toggleLang;
+window.toggleLanguage = toggleLang;
+
+
 
   console.log(`✅ الدرع المطلق v${VERSION} ready — Complete Beast`);
 })();
