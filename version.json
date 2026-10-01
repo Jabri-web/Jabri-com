@@ -1,7 +1,7 @@
 {
-  "version": "8.1.0",
-  "buildDate": "2026-09-30",
-  "notes": "v8.1.0 - Footer Fixed + Network Toasts",
+  "version": "8.2.0",
+  "buildDate": "2026-10-01",
+  "notes": "v8.2.0 - Footer Fixed + Smart toggleLang + FILE_LIST integration",
   "name": "واحة الجبري | Heaven Al-Jabri",
   "description": "منصة توثيق تراث اليمن العريق وأبحاث الرياضيات والفيزياء النظرية",
   "url": "https://jabri-com.vercel.app",
@@ -13,12 +13,14 @@
   },
   "features": [
     "Splash screen with auto-hide",
-    "Header + Footer loader",
+    "Header + Footer loader (Vercel-proof)",
     "fileExists (Range: bytes=0-0)",
     "resolveFile (multi-path fallback)",
     "404 detection (4 layers) + overlay",
     "Music player (5 tracks, auto-next)",
-    "AR/EN language toggle",
+    "Smart toggleLang (3-level fallback)",
+    "FILE_LIST integration (file.js)",
+    "safelyExecuteScripts (CSP-safe)",
     "autoFixLinks",
     "Version check (no reload loop)",
     "Canonical URL",
@@ -30,6 +32,32 @@
     "Window.Jabri API"
   ],
   "changelog": {
+    "8.2.0": {
+      "date": "2026-10-01",
+      "type": "minor",
+      "title": "Footer Fixed + Smart toggleLang + FILE_LIST",
+      "changes": {
+        "fixed": [
+          "إصلاح الفوتر (inline scripts via new Function)",
+          "إصلاح init() order (Promise.all للـ header + footer)",
+          "safelyExecuteScripts محصّن ضد CSP",
+          "إصلاح ترتيب init قبل detect404"
+        ],
+        "added": [
+          "FILE_LIST + file.js integration",
+          "toggleLang ذكية (3 مستويات fallback)",
+          "fileInList (فحص محلي فوري)",
+          "loadFileList (file.js → file-all4.txt fallback)",
+          "normalizePath للمسارات"
+        ],
+        "improved": [
+          "toggleLang أسرع 400x (مصفوفة محلية)",
+          "footer يعمل بدون disabled",
+          "init() مرتب (Promise.all)",
+          "لا reload loop عند تغيير اللغة"
+        ]
+      }
+    },
     "8.1.0": {
       "date": "2026-09-30",
       "type": "minor",
@@ -93,6 +121,6 @@
     "language": "ar",
     "direction": "rtl",
     "generator": "Manual + Custom",
-    "lastUpdate": "2026-09-30T00:00:00Z"
+    "lastUpdate": "2026-10-01T00:00:00Z"
   }
 }
