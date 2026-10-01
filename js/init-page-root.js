@@ -44,7 +44,7 @@
     netToasts:    true,
     autoHideSplashAfter: 5000,
     auto404TryAfter: 2000,
-    allLinksPath: '/404.html',
+    allLinksPath: '/all-links.html',
     indexPath:    '/index.html',
     wahaPath:     '/Page11.html'
   };
