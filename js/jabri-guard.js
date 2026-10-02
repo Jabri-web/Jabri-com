@@ -1,31 +1,38 @@
 /* ═══════════════════════════════════════════════════════════════
-   🛡️ jabri-guard.js — v1.0.0
+   🛡️ jabri-guard.js — v1.1.0
    "الجابري الحارس"
    ─────────────────────────────────────────────────────────────
-   📌 الوظيفة:
-      - منع الشاشة البيضاء في كل الصفحات
-      - إزالة Splash العالق
-      - إزالة 404 overlay الكاذب
-      - ضمان ظهور body دائماً
-      - يعمل في APK + WebView + Chrome + Safari
+   📌 الوظائف:
+      1. منع الشاشة البيضاء (Splash عالق / body مخفي)
+      2. إزالة 404 overlay الكاذب
+      3. ضمان ظهور كل شيء دائماً
+   ─────────────────────────────────────────────────────────────
+   📌 يعمل في:
+      ✅ Chrome / Safari / Firefox
+      ✅ APK (TWA / WebView)
+      ✅ PWA / Home Screen
+      ✅ bfcache (Back/Forward)
    ─────────────────────────────────────────────────────────────
    📌 الاستخدام:
-      ضعه في نهاية كل صفحة HTML بعد السكربتات الأخرى
+      <script src="/js/jabri-guard.js" defer></script>
+      ضعه بعد menu.js
    ═══════════════════════════════════════════════════════════════ */
 
 (function() {
   'use strict';
   
-  // ✅ منع التشغيل المتكرر
+  // ═══════════════════════════════════════════════════
+  //  🛡️ once-guard — منع التشغيل المزدوج
+  // ═══════════════════════════════════════════════════
   if (window.__jabriGuardActive) {
-    console.log('⏩ [guard] يعمل مسبقاً');
+    console.warn('⏩ [guard] محمّل مسبقاً — تجاهل');
     return;
   }
   window.__jabriGuardActive = true;
   
-  var VERSION = '1.0.0';
-  var attempts = 0;
-  var MAX_ATTEMPTS = 20;
+  var VERSION = '1.1.0';
+  
+  console.log('🛡️ [guard v' + VERSION + '] booting...');
   
   // ═══════════════════════════════════════════════════
   //  🎯 الدالة الرئيسية
@@ -39,10 +46,9 @@
       if (splash) {
         var cs = getComputedStyle(splash);
         var opacity = parseFloat(cs.opacity);
-        var pointerEvents = cs.pointerEvents;
+        var pe = cs.pointerEvents;
         
-        // إذا ظهر بأي شكل (شفاف أو مرئي)
-        if (opacity > 0.01 && pointerEvents !== 'none') {
+        if (opacity > 0.05 && pe !== 'none') {
           console.warn('🛡️ [guard] إزالة Splash العالق');
           splash.style.transition = 'none';
           splash.style.opacity = '0';
@@ -53,7 +59,7 @@
             try { splash.remove(); } catch (e) {}
           }, 150);
           
-          // إذا كانت المرعبة تُعرّف hideSplash
+          // إذا المرعبة عرّفت hideSplash
           if (typeof window.hideSplash === 'function') {
             try { window.hideSplash(); } catch (e) {}
           }
@@ -78,38 +84,38 @@
       }
       
       // ─────────────────────────────────────────────
-      // 3) ضمان ظهور body
+      // 3) body ظاهر
       // ─────────────────────────────────────────────
       if (document.body) {
-        var bodyCs = getComputedStyle(document.body);
+        var bcs = getComputedStyle(document.body);
         
-        if (bodyCs.visibility === 'hidden') {
+        if (bcs.visibility === 'hidden') {
           document.body.style.visibility = 'visible';
           console.log('🛡️ [guard] body كان hidden — أُصلح');
         }
         
-        if (parseFloat(bodyCs.opacity) < 0.01) {
+        if (parseFloat(bcs.opacity) < 0.01) {
           document.body.style.opacity = '1';
           console.log('🛡️ [guard] body كان شفافاً — أُصلح');
         }
         
-        if (bodyCs.display === 'none') {
+        if (bcs.display === 'none') {
           document.body.style.display = '';
           console.log('🛡️ [guard] body كان مخفياً — أُصلح');
         }
       }
       
       // ─────────────────────────────────────────────
-      // 4) ضمان ظهور html
+      // 4) html ظاهر
       // ─────────────────────────────────────────────
       if (document.documentElement) {
-        var htmlCs = getComputedStyle(document.documentElement);
+        var hcs = getComputedStyle(document.documentElement);
         
-        if (htmlCs.visibility === 'hidden') {
+        if (hcs.visibility === 'hidden') {
           document.documentElement.style.visibility = 'visible';
         }
         
-        if (parseFloat(htmlCs.opacity) < 0.01) {
+        if (parseFloat(hcs.opacity) < 0.01) {
           document.documentElement.style.opacity = '1';
         }
       }
@@ -119,7 +125,7 @@
       // ─────────────────────────────────────────────
       var toasts = document.getElementById('jabri-net-toasts');
       if (toasts && toasts.children.length > 5) {
-        console.warn('🛡️ [guard] عدد كبير من الإشعارات — تقليص');
+        console.warn('🛡️ [guard] تقليص الإشعارات');
         while (toasts.children.length > 2) {
           toasts.firstChild.remove();
         }
@@ -131,14 +137,15 @@
   }
   
   // ═══════════════════════════════════════════════════
-  //  🚀 التشغيل — 6 نقاط
+  //  🚀 نقاط التشغيل
   // ═══════════════════════════════════════════════════
   
-  // 1️⃣ فوراً — حتى قبل DOM كامل
+  // ─────────────────────────────────────────────
+  //  ① فوراً (حتى قبل DOM كامل)
+  // ─────────────────────────────────────────────
   if (document.body) {
     ensureVisible();
   } else {
-    // body لم يجهز بعد — انتظر
     var earlyTimer = setInterval(function() {
       if (document.body) {
         ensureVisible();
@@ -148,79 +155,69 @@
     setTimeout(function() { clearInterval(earlyTimer); }, 2000);
   }
   
-  // 2️⃣ عند DOMContentLoaded
+  // ─────────────────────────────────────────────
+  //  ② عند DOMContentLoaded
+  // ─────────────────────────────────────────────
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', ensureVisible);
   }
   
-  // 3️⃣ دورياً — 20 محاولة × 350ms = 7 ثوان
+  // ─────────────────────────────────────────────
+  //  ③ دورياً — 15 محاولة × 400ms = 6 ثوان
+  // ─────────────────────────────────────────────
+  var attempts = 0;
+  var MAX_ATTEMPTS = 15;
   var timer = setInterval(function() {
     ensureVisible();
     attempts++;
     if (attempts >= MAX_ATTEMPTS) {
       clearInterval(timer);
-      console.log('🛡️ [guard] انتهى (' + MAX_ATTEMPTS + ' محاولة)');
+      console.log('🛡️ [guard] ✅ انتهى الفحص الدوري');
     }
-  }, 350);
+  }, 400);
   
-  // 4️⃣ عند load الكامل
+  // ─────────────────────────────────────────────
+  //  ④ عند load الكامل
+  // ─────────────────────────────────────────────
   window.addEventListener('load', function() {
     ensureVisible();
     setTimeout(ensureVisible, 500);
     setTimeout(ensureVisible, 1500);
-    setTimeout(ensureVisible, 3500);
-    setTimeout(ensureVisible, 6000);
+    setTimeout(ensureVisible, 3000);
   });
   
-  // 5️⃣ عند pageshow (Back/Forward cache + Refresh)
+  // ─────────────────────────────────────────────
+  //  ⑤ عند pageshow (Back/Forward + bfcache)
+  // ─────────────────────────────────────────────
   window.addEventListener('pageshow', function(e) {
     console.log('🛡️ [guard] pageshow — persisted:', e.persisted);
     ensureVisible();
     setTimeout(ensureVisible, 200);
     setTimeout(ensureVisible, 800);
-    setTimeout(ensureVisible, 2000);
   });
   
-  // 6️⃣ عند visibilitychange (الرجوع للتطبيق من الخلفية)
+  // ─────────────────────────────────────────────
+  //  ⑥ عند visibilitychange (رجوع من الخلفية)
+  // ─────────────────────────────────────────────
   document.addEventListener('visibilitychange', function() {
     if (!document.hidden) {
-      console.log('🛡️ [guard] visibilitychange — الصفحة ظاهرة');
+      console.log('🛡️ [guard] visibilitychange');
       ensureVisible();
     }
   });
   
-  // 7️⃣ عند bfcache restore
+  // ─────────────────────────────────────────────
+  //  ⑦ عند focus
+  // ─────────────────────────────────────────────
   window.addEventListener('focus', function() {
     ensureVisible();
   });
   
-  // 8️⃣ MutationObserver — يراقب إضافة Splash جديد
-  if (window.MutationObserver && document.body) {
-    try {
-      new MutationObserver(function(mutations) {
-        for (var i = 0; i < mutations.length; i++) {
-          var m = mutations[i];
-          if (m.addedNodes && m.addedNodes.length > 0) {
-            for (var j = 0; j < m.addedNodes.length; j++) {
-              var node = m.addedNodes[j];
-              if (node.id === 'splashScreen' ||
-                node.id === 'jabri-404-overlay') {
-                console.warn('🛡️ [guard] عنصر محجوب ظهر — إزالته:', node.id);
-                setTimeout(ensureVisible, 300);
-                break;
-              }
-            }
-          }
-        }
-      }).observe(document.body, {
-        childList: true,
-        subtree: false
-      });
-    } catch (e) {}
-  }
-  
-  // ✅ اجعلها متاحة يدوياً
+  // ═══════════════════════════════════════════════════
+  //  ✅ API عام
+  // ═══════════════════════════════════════════════════
   window.jabriEnsureVisible = ensureVisible;
   
-  console.log('🛡️ [jabri-guard v' + VERSION + '] ready');
+  console.log('✅ [jabri-guard v' + VERSION + '] ready');
+  
 })();
