@@ -1,9 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════
    /js/file.js — واحة الجبري (Heaven Al-Jabri)
-   محمّل القائمة الاحتياطية — v2.1
+   محمّل القائمة الاحتياطية — v2.2
    ✅ يعمل على الويب + APK (file://)
    ✅ يستعمل XHR كاحتياط لو fetch ممنوع
    ✅ قائمة ثابتة مدمجة (تعمل دائماً بدون شبكة)
+   ✅ 🆕 v2.2: استبدال all-links.json بـ file-all4.txt (لتحسين الأرشفة)
    ✅ 🆕 يرجع STATIC فوراً + يحدّث في الخلفية
    ✅ 🆕 إشعار عند تحديث القائمة الديناميكية
 
@@ -20,7 +21,7 @@
     var IS_WV   = (navigator.userAgent || '').indexOf('wv') !== -1;
     var IS_APK  = IS_FILE || IS_WV;
 
-    console.log('%c📂 /js/file.js — v2.1 (' + (IS_APK ? 'APK' : 'Web') + ')',
+    console.log('%c📂 /js/file.js — v2.2 (' + (IS_APK ? 'APK' : 'Web') + ')',
                 'color:#ffd700;font-weight:700');
 
     /* ─── ① القائمة الثابتة (تعمل دائماً بدون شبكة) ─── */
@@ -72,12 +73,15 @@
         'en/contact.html'
     ];
 
-    /* ─── ② المصادر الديناميكية ─── */
+    /* ─── ② المصادر الديناميكية (مُحدّثة في v2.2) ───
+       ⚠️ تم استبدال /all-links.json (غير موجود → 404) 
+       بـ /file-all4.txt (موجود فعلاً ويحتوي على قائمة كاملة)
+       هذا يحسّن الأرشفة ويمنع إرباك زاحف Google.
+    ─── */
     var DYNAMIC_SOURCES = [
-        { url: '/all-links.json',    type: 'json' },
+        { url: '/file-all4.txt',     type: 'text' },  // ✅ الملف الفعلي الموجود
         { url: '/sitemap.xml',       type: 'xml'  },
         { url: '/sitemap_index.xml', type: 'xml'  },
-        { url: '/links.json',        type: 'json' },
         { url: '/all-links.txt',     type: 'text' },
         { url: '/sitemap.txt',       type: 'text' }
     ];
@@ -113,6 +117,7 @@
         if (/^robots\.txt$/i.test(p)) return false;
         if (/^all-links\./i.test(p)) return false;
         if (/^links\.json$/i.test(p)) return false;
+        if (/^file-all\d*\.txt$/i.test(p)) return false;  // ✅ نستبعد ملفات الفهرس
         return true;
     }
 
@@ -206,7 +211,7 @@
         return await xhrGet(url);
     }
 
-    /* ─── ⑤ المحمّل الرئيسي (v2.1 — STATIC فوراً + تحديث في الخلفية) ─── */
+    /* ─── ⑤ المحمّل الرئيسي (v2.2 — STATIC فوراً + تحديث في الخلفية) ─── */
     window.WAHA_FILE_LOADER = async function () {
 
         /* ① الكاش المحلي أولاً (سريع + بدون شبكة) */
@@ -289,7 +294,7 @@
         } catch (e) { return false; }
     };
 
-    console.log('%c✅ /js/file.js v2.1 جاهز — WAHA_FILE_LOADER()',
+    console.log('%c✅ /js/file.js v2.2 جاهز — WAHA_FILE_LOADER()',
                 'color:#ffd700;font-weight:700;background:#0d1117;padding:2px 6px;border-radius:4px');
 
 })();
