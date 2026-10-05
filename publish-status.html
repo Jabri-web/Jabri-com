@@ -109,6 +109,58 @@
             transition: transform 0.3s ease;
         }
         .back-btn:hover { transform: scale(1.05); }
+
+        /* ═══════════════════════════════════════════ */
+        /* إضافات قسم الوصية والصورة */
+        /* ═══════════════════════════════════════════ */
+        .will-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(201, 168, 76, 0.3);
+            text-align: center;
+        }
+        .heritage-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            border: 2px solid rgba(201, 168, 76, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+            object-fit: cover;
+        }
+        .will-title {
+            color: #c9a84c;
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        .will-text {
+            color: #e8c96e;
+            font-size: 1.1rem;
+            line-height: 2.2;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .will-text p {
+            margin: 5px 0;
+        }
+        .will-signature {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .will-signature a {
+            color: #c9a84c;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .will-signature a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 480px) {
+            .container { padding: 20px; }
+            .will-text { font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -150,6 +202,34 @@
                 <p>المستودع: <a href="https://github.com/Jabri-web" style="color:#c9a84c;" target="_blank">GitHub/Jabri-web</a></p>
             </div>
         </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- قسم الوصية والصورة المضافة -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="will-section">
+            <!-- الصورة -->
+            <img src="/image/heritage.jpg" alt="تراث اليمن - واحة الجبري" class="heritage-img" onerror="this.src='/image/Jabri-photo.webp'">
+            
+            <!-- الوصية -->
+            <h2 class="will-title">📜 وصية الجبري</h2>
+            <div class="will-text">
+                <p>ولدت فقيرا...</p>
+                <p>ومت فقيرا...</p>
+                <p>وعشت سعيدا...</p>
+                <p>بقول الله احد...</p>
+                <br>
+                <p>ارثي لكم العلم وواحة الجبري...</p>
+                <br>
+                <p>اتمنى للجميع: حياة دافئة سعيدة.</p>
+            </div>
+            
+            <div class="will-signature">
+                <p><strong>#عبدالله_الجبري (صنعاء-اليمن)</strong></p>
+                <p>الاثنين ...5 اكتوبر 2026م</p>
+                <p><a href="https://jabri-com.vercel.app/" target="_blank">https://jabri-com.vercel.app/</a></p>
+            </div>
+        </div>
+        <!-- ═══════════════════════════════════════════ -->
 
         <div class="footer-note">
             <strong>ملاحظة هامة:</strong> الأبحاث العلمية لا تحتاج إلى بريد مؤسسي لتكون صحيحة أو منشورة. <br>
