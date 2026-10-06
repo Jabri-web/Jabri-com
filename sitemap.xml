@@ -141,4 +141,18 @@
     <priority>0.5</priority>
   </url>
   
+  
+  <url>
+  <loc>https://jabri-com.vercel.app/news-01.html</loc>
+  <lastmod>2026-10-06</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://jabri-com.vercel.app/brand-identity.html</loc>
+  <lastmod>2026-10-06</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+</url>
+  
 </urlset>
