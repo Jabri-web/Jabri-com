@@ -1,5 +1,6 @@
 <!-- footer.html - الفوتر العام للموقع - النسخة النهائية -->
-  <footer id="site-footer" style="background:#0a0a0f !important;color:#e8e8f0 !important;padding:30px 15px !important;border-top:1px solid #2a2a3e !important;font-family:'Cairo','Tajawal',Arial,sans-serif !important;display:block !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;position:relative !important;z-index:10 !important;">
+<footer id="site-footer" style="background:#0a0a0f !important;color:#e8e8f0 !important;padding:30px 15px !important;border-top:1px solid #2a2a3e !important;font-family:'Cairo','Tajawal',Arial,sans-serif !important;display:block !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;position:relative !important;z-index:10 !important;">
+  
   <!-- البحث عن الباحث -->
   <section aria-labelledby="searchTitle" style="text-align:center;margin:20px 0;border-top:1px solid #2a2a3e;padding-top:20px;">
     <p id="searchTitle"><strong>🔍 البحث عن الباحث:آليا-</strong></p>
@@ -26,6 +27,9 @@
       
       <!-- تطوير -->
       <li><a href="https://github.com/Jabri-web" rel="me" target="_blank" style="color:#6ae3ff;text-decoration:none;display:flex;align-items:center;gap:5px;">🐙 <span class="txt" data-ar="جيتهاب" data-en="GitHub">GitHub</span></a></li>
+      <!-- ✅ رابط الويكي الجديد -->
+      <li><a href="https://github.com/Jabri-web/Jabri-com/wiki" target="_blank" rel="noopener" style="color:#6ae3ff;text-decoration:none;display:flex;align-items:center;gap:5px;">📖 <span class="txt" data-ar="الويكي (التوثيق)" data-en="Wiki (Documentation)">الويكي</span></a></li>
+      <!-- ✅ نهاية رابط الويكي -->
       <li><a href="https://en.wikipedia.org/wiki/User:Jabri2026" target="_blank" rel="noopener" style="color:#6ae3ff;text-decoration:none;display:flex;align-items:center;gap:5px;">📖 <span class="txt" data-ar="ويكيبيديا" data-en="Wikipedia">Wikipedia</span></a></li>
       <li><a href="https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html" target="_blank" rel="noopener" style="color:#6ae3ff;text-decoration:none;display:flex;align-items:center;gap:5px;">📖 <span class="txt" data-ar="عربي-ويكيبيديا" data-en="ar.Wikibin">ar.Wikibin</span></a></li>
       
@@ -67,6 +71,9 @@
       <a href="/about-ar.html" style="color:#00ff88;text-decoration:none;">🇾🇪 عبدالله الجبري (عربي)</a>
       <a href="/about-en.html" style="color:#00ff88;text-decoration:none;">🇬🇧 Abdulla Al-Jabri (English)</a>
       <a href="https://github.com/Jabri-web" rel="me" style="color:#00ff88;text-decoration:none;">🐙 GitHub</a>
+      <!-- ✅ رابط الويكي الجديد في الأسفل أيضاً -->
+      <a href="https://github.com/Jabri-web/Jabri-com/wiki" target="_blank" rel="noopener" style="color:#00ff88;text-decoration:none;">📖 الويكي (التوثيق الكامل)</a>
+      <!-- ✅ نهاية رابط الويكي -->
     </div>
   </div>
   
@@ -76,77 +83,3 @@
   </p>
   
 </footer>
-
-<!-- ====== سكريبت تحديث الفوتر ====== -->
-
-
-<script>
-(function() {
-  'use strict';
-
-  function updateFooterLang() {
-    try {
-      var isEnglish = document.documentElement.lang === 'en';
-      var footer = document.getElementById('site-footer');
-      if (footer) footer.dir = isEnglish ? "ltr" : "rtl";
-
-      var searchTitle = document.getElementById('searchTitle');
-      if (searchTitle) {
-        searchTitle.innerHTML = isEnglish
-          ? "<strong>🔍 Search for Researcher-auto:</strong>"
-          : "<strong>🔍 البحث عن الباحث-اليا:</strong>";
-      }
-
-      var copyright = document.getElementById('copyright');
-      if (copyright) {
-        copyright.innerHTML = isEnglish
-          ? "© 2026 Eng. Abdulla Mohammed Nasser Al-Jabri - All Rights Reserved"
-          : "© 2026 م/ عبدالله محمد ناصر الجبري - جميع الحقوق محفوظة";
-      }
-
-      var items = document.querySelectorAll('#site-footer .txt');
-      for (var i = 0; i < items.length; i++) {
-        var el = items[i];
-        var newText = isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-ar');
-        if (newText) el.textContent = newText;
-      }
-    } catch (e) {
-      console.error('❌ updateFooterLang:', e);
-    }
-  }
-
-  window.updateFooterLang = updateFooterLang;
-
-  // ✅ نفّذ فوراً
-  updateFooterLang();
-
-  // ✅ 5 محاولات إضافية (ضمان لو DOM تأخر)
-  var tries = 0;
-  var timer = setInterval(function() {
-    updateFooterLang();
-    tries++;
-    if (tries >= 5) clearInterval(timer);
-  }, 300);
-
-  // ✅ listeners احتياطية
-  document.addEventListener('footerLoaded', updateFooterLang);
-  document.addEventListener('headerLoaded', updateFooterLang);
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateFooterLang);
-  }
-
-  // ✅ عند تغيير اللغة
-  if (window.MutationObserver) {
-    new MutationObserver(updateFooterLang).observe(
-      document.documentElement,
-      { attributes: true, attributeFilter: ['lang'] }
-    );
-  }
-
-  console.log('✅ footer.html v8.2.0 — ready');
-})();
-</script>
-
-
-
-
