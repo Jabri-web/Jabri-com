@@ -1,1 +1,135 @@
-test
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+
+\geometry{margin=2.5cm}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+% ==== الفوتر بالإيميل ====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\small Abdulla Al-Jabri — \href{mailto:jabri62018@gmail.com}{jabri62018@gmail.com} — \href{https://osf.io/yc9mb}{osf.io/yc9mb}}
+\fancyhead[C]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{
+    On the Impossibility of Reproducing Quantum Correlations \\
+    with a Real-Valued Mother Function $Z(x)$: \\
+    A Constraint on Future Extensions
+}
+\author{
+    Abdulla Mohammed Nasser Al-Jabri\thanks{Independent Researcher, Sana'a, Yemen.
+    ORCID: \href{https://orcid.org/0009-0003-3319-3822}{0009-0003-3319-3822}.
+    Email: \href{mailto:jabri62018@gmail.com}{jabri62018@gmail.com}.
+    Project repository: \href{https://osf.io/yc9mb/}{osf.io/yc9mb}}
+}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{abstract}
+\noindent
+This short note reports a negative but informative result concerning the
+so-called \emph{Mother Function} $Z(x) = x^5 \ln(x) \sin(2\pi/x) e^{-x/x_p}$,
+proposed as part of the Sundus Unified Theory ($Z + C + A = 1$).
+We construct a local hidden-variable model directly from $Z(x)$ and test
+it against the CHSH inequality. The model yields $S = 1.82$, respecting
+Bell's local bound $S \leq 2$. We prove that this is not a numerical
+accident: any model in which the measurement outcome depends only on a
+shared real variable $x$ and a real phase $\sin(2\pi/x)$ is necessarily
+local, and therefore cannot reproduce the quantum value $S = 2\sqrt{2}$
+observed in Aspect-type experiments. This establishes a rigorous
+constraint: any future extension of $Z(x)$ aiming to capture quantum
+entanglement must possess (i) a complex-valued structure that enters the
+probability density and (ii) a non-factorizable bilinear form
+$Z(x_1, x_2) \neq Z(x_1) Z(x_2)$.
+
+The numerical value $S_Z = 1.82$ is not a discovery; it is the expected
+consequence of Bell's theorem applied to a local hidden-variable model.
+\end{abstract}
+
+\vspace{1em}
+\noindent\textbf{Keywords:} Bell's theorem, CHSH inequality, quantum entanglement,
+local hidden variables, Mother Function, Sundus Theory.
+
+\section{Introduction}
+The \emph{Sundus Unified Theory} proposes $Z + C + A = 1$, in which $Z(x)$
+plays the role of structural generator. We ask whether $Z(x)$ can encode
+quantum entanglement without non-local signalling. This note answers in
+the negative for the real-valued form and shows it is a necessary consequence
+of Bell's theorem.
+
+\section{Preliminaries}
+\begin{equation}
+    Z(x) = x^5 \ln(x) \sin\!\left(\frac{2\pi}{x}\right) e^{-x/x_p},\quad x>0
+\end{equation}
+$x$ is dimensionless (in units of $l_p$). $x_p=1.22$ was used for this numerical
+evaluation only, as a dimensionless scale parameter; no physical unit is claimed.
+\begin{equation}
+    \phi(x):=2\pi/x,\quad m_a(x)=\mathrm{sign}[\sin(\phi(x)+a)],\quad
+    p(x)=\frac{|Z(x)|^2}{\int |Z|^2 dx}
+\end{equation}
+
+\section{Construction}
+\begin{equation}
+    E_Z(a,b)=\int_0^\infty p(x) m_a(x) m_b(x) dx
+\end{equation}
+This is a local hidden-variable model: outcome depends only on shared $x$ and local setting.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+\toprule
+$\theta$ (deg) & $E_{\mathrm{QM}}=-\cos\theta$ & $E_Z$ (this work) & $|diff|$ \\
+\midrule
+0 & $-1.0000$ & $+1.0000$ & $2.0000$ \\
+22.5 & $-0.9239$ & $+1.0000$ & $1.9239$ \\
+45 & $-0.7071$ & $+0.9989$ & $1.7060$ \\
+67.5 & $-0.3827$ & $+0.9882$ & $1.3709$ \\
+90 & $0.0000$ & $+0.9104$ & $0.9104$ \\
+112.5 & $+0.3827$ & $+0.5055$ & $0.1228$ \\
+135 & $+0.7071$ & $-0.5674$ & $1.2745$ \\
+157.5 & $+0.9239$ & $-0.9997$ & $1.9236$ \\
+180 & $+1.0000$ & $-1.0000$ & $2.0000$ \\
+\bottomrule
+\end{tabular}
+\caption{Non-circular test: $x\in[0.05,30]$, $2\times10^5$ points, $S_Z=1.82$}
+\end{table}
+
+\section{Main Result}
+$S=E(a,b)-E(a,b')+E(a',b)+E(a',b')$, $a=0,a'=\pi/2,b=\pi/4,b'=-\pi/4$.
+$S_Z=1.82<2$. Any model $E(a,b)=\int p(x)m_a(x)m_b(x)dx$ satisfies $|S|\le2$ (Bell-CHSH).
+
+The numerical value $S_Z = 1.82$ is not a discovery; it is the expected
+consequence of Bell's theorem applied to a local hidden-variable model.
+
+\section{Why it fails}
+(i) No antisymmetry: singlet needs $E=-\cos(a-b)$. Real $Z(x)$ symmetric.
+$Z_{new}=x^5\ln(x)e^{i\phi}e^{-x/x_p}$ still gives $|Z_{new}|^2=|Z|^2$ → local.
+(ii) Factorizability: $Z(x)$ is single-variable, entanglement needs $Z(x_1,x_2)\neq Z(x_1)Z(x_2)$.
+
+\section{Necessary conditions}
+(i) Complex structure entering $p(x)$, not only amplitude.
+(ii) Non-factorizable: $Z(x_1,x_2)=Z(x_1)Z(x_2)e^{i\Phi(x_1,x_2)}$, $\Phi\neq\Phi_1+\Phi_2$.
+
+\section{Conclusion}
+Real-valued $Z(x)$ cannot reproduce quantum correlations. $S_Z=1.82$ is Bell's bound, not failure. This constrains future extensions.
+
+\begin{thebibliography}{9}
+\bibitem{Bell1964} J.~S.~Bell, Physics \textbf{1}, 195 (1964).
+\bibitem{CHSH1969} J.~F.~Clauser, M.~A.~Horne, A.~Shimony, and R.~A.~Holt, Phys. Rev. Lett. \textbf{23}, 880 (1969).
+\bibitem{Aspect1982} A.~Aspect et al., Phys. Rev. Lett. \textbf{49}, 1804 (1982).
+\bibitem{Nobel2022} Nobel Prize in Physics 2022.
+\end{thebibliography}
+\end{document}
