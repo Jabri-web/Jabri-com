@@ -1,9 +1,9 @@
-cff-version: 1.1.0
-message: "If you use this software, please cite it as below."
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
 authors:
-- family-names: Al-Jabri
-given-names: Abdulla
-affiliation: Yemen
+  - family-names: Al-Jabri
+    given-names: Abdulla
+    affiliation: Yemen
 title: "Jabri-web/Jabri-com: v2.0.0 -constraint"
 version: v2.0.0
 doi: 10.5281/zenodo.23241084
