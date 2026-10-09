@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this code or note, please cite it as below."
+authors:
+- family-names: Al-Jabri
+given-names: Abdulla
+orcid: "https://orcid.org/0009-0003-3319-3822"
+title: "Jabri-RiemannOS v3.2.2: Self-Correction and Retraction of v3.2.1"
+version: 3.2.2
+date-released: 2026-05-09
+license: MIT
+repository-code: "https://github.com/jabri62018/Jabri-RiemannOS"
+keywords:
+- Riemann zeta zeros
+- explicit formula
+- Riemann-Weil kernel
+- self-correction
+- retraction
+- numerical verification

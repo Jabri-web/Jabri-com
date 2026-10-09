@@ -1,1 +1,10 @@
-test
+jabri-zx-v3.2.2.zip
+├── jabri-zx-v3.2.2.tex
+├── jabri-zx-v3.2.2.py
+├── make_figure.py
+├── figure1.png
+├── Z_values.csv
+├── README.md
+├── RETRACTIONS.md
+├── CITATION.cff
+└── LICENSE
