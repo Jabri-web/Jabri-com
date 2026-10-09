@@ -1,1 +1,6 @@
-test
+jabri-zx-v3.4.0.zip
+├── jabri-zx-v3.4.0.tex
+├── jabri-zx-v3.4.0.pdf (تولده من Overleaf)
+├── jabri-zx-v3.4.0.py
+├── README.md
+└── LICENSE
