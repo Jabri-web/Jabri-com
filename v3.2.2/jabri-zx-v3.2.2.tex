@@ -1,11 +1,20 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[a4paper,margin=1in,bottom=3cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{fancyhdr}
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\footnotesize Jabri-RiemannOS v3.2.2}
+\fancyfoot[C]{\footnotesize DOI: 10.5281/zenodo.23266061}
+\fancyfoot[R]{\footnotesize \thepage}
 
 \title{\Huge Jabri-RiemannOS v3.2.2 \\[0.3em]
 \Large A Technical Note on a Standard Kernel \\ and Its Retracted Physical Claims \\[0.5em]
@@ -53,7 +62,7 @@ probe of the zero spectrum. It is not a new mathematical object.
 \item At $x = t_5 = 32.935062$: $Z = -0.30648$, $Z' = 1.144\times10^{-3}$,
       $Z'' = 1.67\times10^{-4}$
 \end{itemize}
-Code: \texttt{jabri-zx-v3.2.2.py}. Figure~\ref{fig:Z} shows $Z$ and $Z'$.
+Code: \texttt{jabri\_zx\_v3.2.2.py}. Figure~\ref{fig:Z} shows $Z$ and $Z'$.
 
 \begin{figure}[H]
     \centering
@@ -81,7 +90,7 @@ Element 119 half-life $=10^5$ yr & Retracted. Not derived from $Z$. \\
 \bottomrule
 \end{tabular}
 \caption{All numerical values in the right column are outputs of
-\texttt{jabri-zx-v3.2.2.py}, not inputs.}
+\texttt{jabri\_zx\_v3.2.2.py}, not inputs.}
 \end{table}
 
 \paragraph{Note on $w$.}
@@ -111,9 +120,19 @@ This is not a failure; it is the honest starting point.
 
 \section{Data and Code Availability}
 Reproducible verification script, figure generator, and tabulated values are
-included in this archive: \texttt{jabri-zx-v3.2.2.py},
+included in this archive: \texttt{jabri\_zx\_v3.2.2.py},
 \texttt{make\_figure.py}, \texttt{Z\_values.csv}.
 Repository: \url{https://github.com/jabri62018/Jabri-RiemannOS}.
+
+\medskip
+\noindent
+\textbf{DOI (this version, v3.2.2):}\\
+\url{https://doi.org/10.5281/zenodo.23266061}
+
+\medskip
+\noindent
+\textbf{Successor (v3.4.0, numerical convergence study):}\\
+\url{https://doi.org/10.5281/zenodo.23271140}
 
 \begin{thebibliography}{9}
 \bibitem{Weil1952} A.~Weil, \emph{Sur les ``formules explicites'' de la
