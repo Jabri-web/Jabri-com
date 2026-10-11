@@ -1,1 +1,16 @@
-test
+jabri_5/
+│
+├── jabri_5.tex ← الورقة الرئيسية
+├── jabri_5.pdf
+├── jabri_5.ipynb
+├── jabri_5.png ← 🖼️ مطلوبة في \includegraphics
+├── jabri_appendix_D.png ← 🖼️ مطلوبة في \includegraphics
+│
+└── wells/ ← الملحق
+├── Wells.ipynb ← Appendix C (حالة حروف!)
+├── jabri_v2_appendix.png ← شكل C
+├── appendix-d.ipynb ← Appendix D
+├── appendix-d_full.csv
+├── appendix-d_summary.csv
+├── README.md
+└── CITATION.cff
