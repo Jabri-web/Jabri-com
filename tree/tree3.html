@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>بروتوكول القياس الميداني — ZX · v2</title>
+<style>
+  :root{
+    --gold:#f4c430; --green:#7fb08a; --dark:#0a1a12;
+    --border:#1f3a2b; --dim:#8aa892; --warn:#e57373;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh; background:#0a1410; color:#e8f5e9;
+    font-family:'Segoe UI',Tahoma,sans-serif;
+    padding:14px; padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));
+    line-height:1.6;
+  }
+  h1{color:var(--gold);font-size:1.15rem;margin:0 0 6px;text-align:center}
+  h2{color:var(--green);font-size:0.85rem;margin:0 0 14px;text-align:center;font-weight:400}
+  h3{color:var(--gold);font-size:1rem;margin:18px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+  .panel{
+    background:var(--dark);border:1px solid var(--border);
+    border-radius:10px;padding:14px;margin-bottom:12px;
+  }
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+  .row.full{grid-template-columns:1fr}
+  label{display:block;color:var(--dim);font-size:0.78rem;margin-bottom:4px}
+  label b{color:var(--gold)}
+  input,select,textarea{
+    width:100%;background:#08140d;color:#e8f5e9;
+    border:1px solid var(--border);border-radius:7px;
+    padding:9px 10px;font-size:0.95rem;font-family:inherit;
+    direction:ltr;text-align:left;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+  input[readonly]{background:#0e1a12;color:var(--gold);font-weight:700}
+  select{cursor:pointer;direction:rtl;text-align:right}
+  button{
+    background:#1a4d2e;color:#e8f5e9;border:1px solid #2e6b45;
+    padding:11px 16px;border-radius:8px;cursor:pointer;
+    font-family:inherit;font-size:0.9rem;transition:.15s;
+    user-select:none;width:100%;
+  }
+  button:active{transform:scale(0.98)}
+  button.primary{background:var(--gold);color:#0a1a12;border-color:var(--gold);font-weight:700}
+  button.danger{background:#5a1a1a;border-color:#8a2020}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .btn-row button{width:auto;flex:1;min-width:130px}
+  .ratio-card{
+    background:#08140d;border:1px solid var(--border);
+    border-radius:8px;padding:10px;margin-bottom:6px;
+    display:flex;justify-content:space-between;align-items:center;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .ratio-card .name{color:var(--dim);font-size:0.82rem}
+  .ratio-card .val{
+    color:var(--gold);font-family:'Courier New',monospace;
+    font-weight:700;font-size:0.95rem;direction:ltr;
+  }
+  .ratio-card.gold{border-color:var(--gold);box-shadow:0 0 20px -6px var(--gold)}
+  .ratio-card.excluded{opacity:0.55}
+  .ratio-card.excluded .name::after{content:" (مستبعد)";color:#c8a840;font-size:0.7rem}
+  .tree-item{
+    background:#08140d;border:1px solid var(--border);
+    border-radius:7px;padding:9px 12px;margin-bottom:6px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:0.85rem;
+  }
+  .tree-item .id{color:var(--gold);font-weight:700;font-family:'Courier New',monospace}
+  .tree-item .info{color:var(--dim);font-size:0.75rem}
+  .tree-item button{
+    width:auto;padding:4px 10px;font-size:0.75rem;
+    background:#5a1a1a;border-color:#8a2020;
+  }
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
+  .stat{
+    background:#08140d;border:1px solid var(--border);
+    border-radius:7px;padding:8px;text-align:center;
+  }
+  .stat .lbl{color:var(--dim);font-size:0.7rem;display:block;margin-bottom:4px}
+  .stat .val{
+    color:var(--gold);font-family:'Courier New',monospace;
+    font-weight:700;font-size:0.9rem;direction:ltr;
+  }
+  .hint{
+    color:var(--dim);font-size:0.75rem;line-height:1.7;
+    background:#08140d;border-right:3px solid var(--gold);
+    padding:8px 12px;border-radius:5px;margin-top:8px;
+  }
+  .hint.warn{border-right-color:var(--warn);color:#ffbaba}
+  .count{
+    display:inline-block;background:var(--gold);color:#0a1a12;
+    padding:2px 10px;border-radius:20px;font-weight:700;
+    font-size:0.8rem;margin-inline-start:6px;
+  }
+  .empty{color:var(--dim);font-size:0.82rem;text-align:center;padding:14px}
+  .verdict{
+    border-radius:10px;padding:14px;margin-top:14px;
+    text-align:center;font-size:0.9rem;line-height:1.7;
+  }
+  .verdict.hit{background:#1a3a1a;border:1px solid var(--gold);color:var(--gold)}
+  .verdict.miss{background:#1a1a0a;border:1px solid #8a7020;color:#c8a840}
+  .verdict.wait{background:#0a1a12;border:1px solid var(--border);color:var(--dim)}
+  .verdict .big{font-size:1.05rem;font-weight:700;display:block;margin-bottom:6px}
+  .verdict .detail{color:#c8e6c9;font-size:0.82rem;line-height:1.8;margin-top:8px}
+  .verdict code{
+    background:#132a1d;padding:2px 6px;border-radius:4px;
+    color:var(--gold);font-family:'Courier New',monospace;
+    direction:ltr;display:inline-block;
+  }
+
+  /* ═══ شريط الفلتر ═══ */
+  .filter-bar{
+    display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+    background:#08140d;border:1px solid var(--border);
+    border-radius:8px;padding:10px 12px;margin-bottom:10px;
+  }
+  .filter-bar label{
+    color:var(--dim);font-size:0.82rem;margin:0;flex-shrink:0;
+  }
+  .chip{
+    background:#132a1d;color:#a5d6a7;border:1px solid var(--border);
+    padding:5px 12px;border-radius:20px;cursor:pointer;
+    font-size:0.8rem;transition:.15s;user-select:none;
+  }
+  .chip:hover{background:#1f3a2b}
+  .chip.active{
+    background:var(--gold);color:#0a1a12;
+    border-color:var(--gold);font-weight:700;
+  }
+  .chip .cnt{
+    opacity:0.7;font-size:0.7rem;margin-inline-start:4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🌳 بروتوكول القياس الميداني</h1>
+<h2>اختبار الفرضية: هل توجد نسبة في الشجرة ≈ √2 − 1 ≈ 0.414 ؟</h2>
+
+<!-- ═══════ إدخال بيانات شجرة ═══════ -->
+<div class="panel">
+  <h3>📝 شجرة جديدة</h3>
+
+  <div class="row">
+    <div>
+      <label>الموقع / الحي</label>
+      <input id="site" type="text" placeholder="مثال: صنعاء القديمة" dir="auto">
+    </div>
+    <div>
+      <label>نوع الشجرة</label>
+      <input id="species" type="text" placeholder="نخيل / سمر / ..." dir="auto">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>H</b> — الارتفاع الكلي (م)</label>
+      <input id="H" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label><b>h</b> — ارتفاع أول تفرع (م)</label>
+      <input id="h" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>r</b> — نصف قطر التاج (م)</label>
+      <input id="r" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label><b>d</b> — قطر الجذع @ 1.3م (م)</label>
+      <input id="d" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>L</b> — طول الظل (م)</label>
+      <input id="L" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label>الوقت (ساعة:دقيقة)</label>
+      <input id="time" type="time">
+    </div>
+  </div>
+
+  <div class="row full">
+    <div>
+      <label>ملاحظات (اختياري)</label>
+      <input id="notes" type="text" placeholder="شجرة صحية، قرب بئر..." dir="auto">
+    </div>
+  </div>
+
+  <!-- ═══ النسب المحسوبة ═══ -->
+  <h3>📐 النسب المحسوبة</h3>
+  <div id="ratios">
+    <div class="ratio-card" data-ratio="hH"><span class="name">h / H (الجذع ÷ الكل)</span><span class="val" id="r_hH">—</span></div>
+    <div class="ratio-card" data-ratio="rH"><span class="name">r / H (نصف التاج ÷ الكل)</span><span class="val" id="r_rH">—</span></div>
+    <div class="ratio-card" data-ratio="2rH"><span class="name">2r / H (التاج كامل)</span><span class="val" id="r_2rH">—</span></div>
+    <div class="ratio-card" data-ratio="dH"><span class="name">d / H (السماكة ÷ الكل)</span><span class="val" id="r_dH">—</span></div>
+    <div class="ratio-card" data-ratio="crownH"><span class="name">(H−h) / H (التاج ÷ الكل)</span><span class="val" id="r_crownH">—</span></div>
+    <div class="ratio-card" data-ratio="hCrown"><span class="name">h / (H−h) (الجذع ÷ التاج)</span><span class="val" id="r_hCrown">—</span></div>
+    <div class="ratio-card excluded" data-ratio="LH"><span class="name">L / H (الظل ÷ الارتفاع)</span><span class="val" id="r_LH">—</span></div>
+  </div>
+
+  <div class="hint">
+    💡 البطاقة الذهبية = نسبة اقتربت من <b>0.414</b> (بهامش ±0.03)
+  </div>
+  <div class="hint warn">
+    ⚠️ <b>L/H مستبعدة</b> من فحص الفرضية: تعتمد على <b>زاوية الشمس</b>، لا على شكل الشجرة.
+    أي شجرة عمودية في نفس الزاوية ستعطي نفس القيمة — هذا ليس اختبارًا للبنية.
+  </div>
+
+  <div class="btn-row">
+    <button class="primary" id="saveBtn">💾 حفظ الشجرة</button>
+    <button id="clearBtn">⟲ تفريغ الحقول</button>
+  </div>
+</div>
+
+<!-- ═══════ قائمة الأشجار ═══════ -->
+<div class="panel">
+  <h3>📋 الأشجار المسجّلة<span class="count" id="treeCount">0</span></h3>
+  <div id="treeList">
+    <div class="empty">لا توجد أشجار بعد. ابدأ بإضافة شجرة.</div>
+  </div>
+</div>
+
+<!-- ═══════ التحليل الإحصائي ═══════ -->
+<div class="panel">
+  <h3>📊 التحليل الإحصائي</h3>
+
+  <!-- شريط الفلتر -->
+  <div class="filter-bar" id="filterBar">
+    <label>النوع:</label>
+    <!-- الشرائح تُبنى تلقائيًا -->
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">عدد الأشجار (في الفلتر)</span>
+      <span class="val" id="statN">0</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">متوسط h/H</span>
+      <span class="val" id="statMean_hH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">الانحراف</span>
+      <span class="val" id="statSD_hH">—</span>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">متوسط r/H</span>
+      <span class="val" id="statMean_rH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">الانحراف</span>
+      <span class="val" id="statSD_rH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">√2−1 (المرجع)</span>
+      <span class="val">0.4142</span>
+    </div>
+  </div>
+
+  <div id="verdict" class="verdict wait">
+    ⏳ بانتظار بيانات كافية (10 أشجار على الأقل للتحليل الأولي)
+  </div>
+</div>
+
+<!-- ═══════ التصدير ═══════ -->
+<div class="panel">
+  <h3>📤 التصدير</h3>
+  <div class="btn-row">
+    <button id="exportBtn">⬇ تصدير CSV</button>
+    <button id="importBtn">⬆ استيراد CSV</button>
+    <button class="danger" id="wipeBtn">🗑️ حذف كل البيانات</button>
+  </div>
+  <input id="importFile" type="file" accept=".csv" style="display:none">
+</div>
+
+<div class="hint" style="margin-bottom:30px">
+  🔒 <b>كل البيانات تُحفظ على جهازك فقط</b> — لا يُرسل شيء لأي خادم. آمن تمامًا.
+</div>
+
+<script>
+'use strict';
+
+// ═══════════════════════════════════════════════════════
+//  ثوابت
+// ═══════════════════════════════════════════════════════
+const TARGET = Math.sqrt(2) - 1;      // 0.41421356...
+const TOL    = 0.03;
+const STORAGE_KEY = 'zx_trees_v1';
+
+// النسب المُستبعدة من فحص الفرضية (تعتمد على الشمس لا على الشجرة)
+const EXCLUDED = ['LH'];
+
+// النسب المُدرَجة في فحص الفرضية
+const CHECK_KEYS = ['hH','rH','2rH','dH','crownH','hCrown'];
+
+// التسميات العربية
+const KEY_NAMES = {
+  hH:      'h/H (الجذع ÷ الكل)',
+  rH:      'r/H (نصف التاج ÷ الكل)',
+  '2rH':   '2r/H (التاج كامل ÷ الكل)',
+  dH:      'd/H (السماكة ÷ الكل)',
+  crownH:  '(H−h)/H (التاج ÷ الكل)',
+  hCrown:  'h/(H−h) (الجذع ÷ التاج)',
+  LH:      'L/H (الظل ÷ الارتفاع)',
+};
+
+// ═══════════════════════════════════════════════════════
+//  الحالة
+// ═══════════════════════════════════════════════════════
+let trees = loadTrees();
+let activeFilter = '__all__';   // '__all__' أو اسم نوع
+
+// ═══════════════════════════════════════════════════════
+//  التخزين
+// ═══════════════════════════════════════════════════════
+function loadTrees(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ return []; }
+}
+function saveTrees(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(trees)); }catch(e){}
+}
+
+// ═══════════════════════════════════════════════════════
+//  قراءة الحقول
+// ═══════════════════════════════════════════════════════
+function num(id){
+  const v = parseFloat(document.getElementById(id).value);
+  return isNaN(v) ? null : v;
+}
+function str(id){
+  return document.getElementById(id).value.trim();
+}
+
+// ═══════════════════════════════════════════════════════
+//  حساب النسب
+// ═══════════════════════════════════════════════════════
+function computeRatios(H, h, r, d, L){
+  const out = {};
+  if (H && H > 0){
+    out.hH     = h != null ? h / H : null;
+    out.rH     = r != null ? r / H : null;
+    out['2rH'] = r != null ? (2*r) / H : null;
+    out.dH     = d != null ? d / H : null;
+    out.LH     = L != null ? L / H : null;
+    out.crownH = h != null ? (H - h) / H : null;
+    out.hCrown = (h != null && H - h > 0) ? h / (H - h) : null;
+  }
+  return out;
+}
+
+// ═══════════════════════════════════════════════════════
+//  تحديث النسب الحية في النموذج
+// ═══════════════════════════════════════════════════════
+function updateLiveRatios(){
+  const H = num('H'), h = num('h'), r = num('r'), d = num('d'), L = num('L');
+  const ratios = computeRatios(H, h, r, d, L);
+
+  const map = {
+    'r_hH':     ['hH',     ratios.hH],
+    'r_rH':     ['rH',     ratios.rH],
+    'r_2rH':    ['2rH',    ratios['2rH']],
+    'r_dH':     ['dH',     ratios.dH],
+    'r_LH':     ['LH',     ratios.LH],
+    'r_hCrown': ['hCrown', ratios.hCrown],
+    'r_crownH': ['crownH', ratios.crownH],
+  };
+
+  for (const [id, [key, val]] of Object.entries(map)){
+    const el = document.getElementById(id);
+    const card = el.closest('.ratio-card');
+    if (val == null){
+      el.textContent = '—';
+      card.classList.remove('gold');
+    } else {
+      el.textContent = val.toFixed(6);
+      const isExcluded = EXCLUDED.includes(key);
+      if (!isExcluded && Math.abs(val - TARGET) < TOL){
+        card.classList.add('gold');
+      } else {
+        card.classList.remove('gold');
+      }
+    }
+  }
+}
+
+['H','h','r','d','L'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateLiveRatios);
+});
+
+// ═══════════════════════════════════════════════════════
+//  حفظ شجرة
+// ═══════════════════════════════════════════════════════
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const H = num('H');
+  if (!H || H <= 0){
+    alert('⚠️ يجب إدخال الارتفاع الكلي H على الأقل');
+    return;
+  }
+
+  const tree = {
+    id:        Date.now(),
+    site:      str('site'),
+    species:   str('species') || 'غير محدد',
+    H:         H,
+    h:         num('h'),
+    r:         num('r'),
+    d:         num('d'),
+    L:         num('L'),
+    time:      str('time'),
+    notes:     str('notes'),
+    timestamp: new Date().toISOString(),
+    ratios:    computeRatios(H, num('h'), num('r'), num('d'), num('L')),
+  };
+
+  trees.push(tree);
+  saveTrees();
+  renderTreeList();
+  renderFilterBar();
+  renderStats();
+  clearForm();
+  flash(document.getElementById('saveBtn'), '✅ تم الحفظ');
+});
+
+function clearForm(){
+  ['site','species','H','h','r','d','L','time','notes'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  updateLiveRatios();
+}
+document.getElementById('clearBtn').addEventListener('click', clearForm);
+
+function flash(btn, text){
+  const old = btn.textContent;
+  btn.textContent = text;
+  setTimeout(() => { btn.textContent = old; }, 1200);
+}
+
+// ═══════════════════════════════════════════════════════
+//  عرض قائمة الأشجار
+// ═══════════════════════════════════════════════════════
+function renderTreeList(){
+  const list  = document.getElementById('treeList');
+  const count = document.getElementById('treeCount');
+  count.textContent = trees.length;
+
+  if (trees.length === 0){
+    list.innerHTML = '<div class="empty">لا توجد أشجار بعد. ابدأ بإضافة شجرة.</div>';
+    return;
+  }
+
+  list.innerHTML = '';
+  [...trees].reverse().forEach(t => {
+    const div = document.createElement('div');
+    div.className = 'tree-item';
+
+    // نجم فقط إذا كانت النسب المُدرَجة (لا L/H) اقتربت
+    const goldMark = CHECK_KEYS.some(k => {
+      const v = t.ratios[k];
+      return v != null && Math.abs(v - TARGET) < TOL;
+    }) ? ' ⭐' : '';
+
+    div.innerHTML = `
+      <div>
+        <span class="id">#${String(t.id).slice(-4)}${goldMark}</span>
+        <span class="info"> · ${t.species || '—'} · H=${t.H}م</span>
+      </div>
+      <button data-id="${t.id}">حذف</button>
+    `;
+    list.appendChild(div);
+  });
+
+  list.querySelectorAll('button[data-id]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = Number(btn.dataset.id);
+      if (confirm('حذف هذه الشجرة؟')){
+        trees = trees.filter(t => t.id !== id);
+        saveTrees();
+        renderTreeList();
+        renderFilterBar();
+        renderStats();
+      }
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+//  شريط الفلتر (الأنواع)
+// ═══════════════════════════════════════════════════════
+function renderFilterBar(){
+  const bar = document.getElementById('filterBar');
+  const speciesCounts = {};
+  trees.forEach(t => {
+    const sp = (t.species || 'غير محدد').trim();
+    speciesCounts[sp] = (speciesCounts[sp] || 0) + 1;
+  });
+
+  // إعادة بناء الشريط
+  bar.innerHTML = '<label>النوع:</label>';
+
+  // شريحة "الكل"
+  const allChip = document.createElement('span');
+  allChip.className = 'chip' + (activeFilter === '__all__' ? ' active' : '');
+  allChip.innerHTML = `الكل<span class="cnt">${trees.length}</span>`;
+  allChip.addEventListener('click', () => {
+    activeFilter = '__all__';
+    renderFilterBar();
+    renderStats();
+  });
+  bar.appendChild(allChip);
+
+  // شرائح الأنواع
+  Object.keys(speciesCounts).sort().forEach(sp => {
+    const chip = document.createElement('span');
+    chip.className = 'chip' + (activeFilter === sp ? ' active' : '');
+    chip.innerHTML = `${sp}<span class="cnt">${speciesCounts[sp]}</span>`;
+    chip.addEventListener('click', () => {
+      activeFilter = sp;
+      renderFilterBar();
+      renderStats();
+    });
+    bar.appendChild(chip);
+  });
+
+  // لو الفلتر الحالي لنوع لم يبق موجودًا، أعده للكل
+  if (activeFilter !== '__all__' && !speciesCounts[activeFilter]){
+    activeFilter = '__all__';
+    renderFilterBar();
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  الأشجار المرشّحة
+// ═══════════════════════════════════════════════════════
+function filteredTrees(){
+  if (activeFilter === '__all__') return trees;
+  return trees.filter(t => (t.species || 'غير محدد').trim() === activeFilter);
+}
+
+// ═══════════════════════════════════════════════════════
+//  إحصاء
+// ═══════════════════════════════════════════════════════
+function mean(arr){
+  if (arr.length === 0) return null;
+  return arr.reduce((s,v) => s + v, 0) / arr.length;
+}
+function stdDev(arr){
+  if (arr.length < 2) return null;
+  const m = mean(arr);
+  const variance = arr.reduce((s,v) => s + (v-m)**2, 0) / (arr.length - 1);
+  return Math.sqrt(variance);
+}
+function collectRatio(key, list){
+  return list.map(t => t.ratios[key]).filter(v => v != null && !isNaN(v));
+}
+
+// ═══════════════════════════════════════════════════════
+//  التحليل الإحصائي
+// ═══════════════════════════════════════════════════════
+function renderStats(){
+  const list = filteredTrees();
+  const hH = collectRatio('hH', list);
+  const rH = collectRatio('rH', list);
+
+  document.getElementById('statN').textContent = list.length;
+  document.getElementById('statMean_hH').textContent = hH.length ? mean(hH).toFixed(4) : '—';
+  document.getElementById('statSD_hH').textContent   = hH.length > 1 ? stdDev(hH).toFixed(4) : '—';
+  document.getElementById('statMean_rH').textContent = rH.length ? mean(rH).toFixed(4) : '—';
+  document.getElementById('statSD_rH').textContent   = rH.length > 1 ? stdDev(rH).toFixed(4) : '—';
+
+  const verdict = document.getElementById('verdict');
+
+  const filterLabel = activeFilter === '__all__'
+    ? 'الكل'
+    : `النوع: ${activeFilter}`;
+
+  if (list.length < 5){
+    verdict.className = 'verdict wait';
+    verdict.innerHTML = `⏳ بانتظار بيانات كافية — ${list.length}/5 شجرة (${filterLabel})`;
+    return;
+  }
+
+  // فحص النسب المُدرَجة فقط
+  const hits = [];
+  const nearest = [];
+
+  for (const k of CHECK_KEYS){
+    const arr = collectRatio(k, list);
+    if (arr.length < 3) continue;
+    const m  = mean(arr);
+    const sd = stdDev(arr);
+    const dist = Math.abs(m - TARGET);
+    nearest.push({ key: k, mean: m, sd: sd, n: arr.length, dist: dist });
+    if (dist < TOL){
+      hits.push({ key: k, mean: m, sd: sd, n: arr.length });
+    }
+  }
+
+  nearest.sort((a,b) => a.dist - b.dist);
+
+  if (hits.length > 0){
+    verdict.className = 'verdict hit';
+    const lines = hits.map(h =>
+      `✅ <b>${KEY_NAMES[h.key]}</b><br>
+       متوسط = <code>${h.mean.toFixed(4)}</code> · n=${h.n} · SD=<code>${h.sd.toFixed(4)}</code>`
+    ).join('<hr style="border:none;border-top:1px solid #2e6b45;margin:8px 0">');
+
+    verdict.innerHTML = `
+      <span class="big">🎯 إشارة أولية! (${filterLabel})</span>
+      ${lines}
+      <div class="detail">يحتاج تأكيد بعينة أكبر + اختبار t مقابل 0.4142</div>
+    `;
+  } else {
+    const top = nearest[0];
+    verdict.className = 'verdict miss';
+    verdict.innerHTML = `
+      <span class="big">❌ لا نسبة اقتربت من 0.4142 (${filterLabel})</span>
+      <div class="detail">
+        أقرب نسبة: <b>${KEY_NAMES[top.key]}</b><br>
+        متوسط = <code>${top.mean.toFixed(4)}</code> · بعيد بـ <code>${top.dist.toFixed(4)}</code>
+        ${top.sd ? ` · SD=<code>${top.sd.toFixed(4)}</code>` : ''}
+      </div>
+      <div class="detail" style="color:#a5d6a7;margin-top:10px">
+        هذا ليس فشلًا — هذا نتيجة.<br>
+        الفرضية تحتاج مراجعة، أو عينة أكبر، أو تفسير مختلف.
+      </div>
+    `;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  تصدير / استيراد CSV
+// ═══════════════════════════════════════════════════════
+document.getElementById('exportBtn').addEventListener('click', () => {
+  if (trees.length === 0){
+    alert('لا توجد بيانات للتصدير');
+    return;
+  }
+
+  const headers = [
+    'id','site','species','H','h','r','d','L','time','notes','timestamp',
+    'hH','rH','2rH','dH','LH','hCrown','crownH'
+  ];
+
+  const rows = trees.map(t => {
+    const r = t.ratios;
+    return [
+      t.id, t.site, t.species,
+      t.H, t.h ?? '', t.r ?? '', t.d ?? '', t.L ?? '',
+      t.time, t.notes, t.timestamp,
+      r.hH?.toFixed(6) ?? '',
+      r.rH?.toFixed(6) ?? '',
+      r['2rH']?.toFixed(6) ?? '',
+      r.dH?.toFixed(6) ?? '',
+      r.LH?.toFixed(6) ?? '',
+      r.hCrown?.toFixed(6) ?? '',
+      r.crownH?.toFixed(6) ?? '',
+    ].map(v => {
+      const s = String(v);
+      return s.includes(',') ? '"' + s.replace(/"/g,'""') + '"' : s;
+    }).join(',');
+  });
+
+  const csv = '\uFEFF' + headers.join(',') + '\n' + rows.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `zx-trees-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importBtn').addEventListener('click', () => {
+  document.getElementById('importFile').click();
+});
+
+document.getElementById('importFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try{
+      const text = ev.target.result.replace(/^\uFEFF/, '');
+      const lines = text.trim().split('\n');
+      const headers = lines[0].split(',').map(h => h.trim());
+
+      const imported = [];
+      for (let i = 1; i < lines.length; i++){
+        const cells = lines[i].split(',');
+        const obj = {};
+        headers.forEach((h, j) => obj[h] = cells[j]?.trim() ?? '');
+
+        const H = parseFloat(obj.H);
+        if (!H) continue;
+
+        imported.push({
+          id: parseInt(obj.id) || Date.now() + i,
+          site: obj.site || '',
+          species: (obj.species || 'غير محدد').trim(),
+          H,
+          h: parseFloat(obj.h) || null,
+          r: parseFloat(obj.r) || null,
+          d: parseFloat(obj.d) || null,
+          L: parseFloat(obj.L) || null,
+          time: obj.time || '',
+          notes: obj.notes || '',
+          timestamp: obj.timestamp || new Date().toISOString(),
+          ratios: computeRatios(
+            H,
+            parseFloat(obj.h) || null,
+            parseFloat(obj.r) || null,
+            parseFloat(obj.d) || null,
+            parseFloat(obj.L) || null
+          ),
+        });
+      }
+
+      if (imported.length === 0){
+        alert('لم يتم العثور على بيانات صالحة');
+        return;
+      }
+
+      if (confirm(`استيراد ${imported.length} شجرة؟ (سيتم إضافتها للبيانات الحالية)`)){
+        trees = trees.concat(imported);
+        saveTrees();
+        renderTreeList();
+        renderFilterBar();
+        renderStats();
+        alert('تم الاستيراد بنجاح');
+      }
+    }catch(err){
+      alert('خطأ في قراءة الملف: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+document.getElementById('wipeBtn').addEventListener('click', () => {
+  if (trees.length === 0) return;
+  if (confirm(`حذف ${trees.length} شجرة نهائيًا؟ لا يمكن التراجع.`)){
+    trees = [];
+    activeFilter = '__all__';
+    saveTrees();
+    renderTreeList();
+    renderFilterBar();
+    renderStats();
+  }
+});
+
+// ═══════════════════════════════════════════════════════
+//  الإقلاع
+// ═══════════════════════════════════════════════════════
+renderTreeList();
+renderFilterBar();
+renderStats();
+updateLiveRatios();
+</script>
+
+</body>
+</html>

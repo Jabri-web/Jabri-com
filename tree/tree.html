@@ -70,9 +70,108 @@
   footer{ width:min(760px,96vw); text-align:center; color:#8aa892; font-size:0.85rem;
     border-top:1px solid #1f3a2b; padding-top:16px; margin-top:16px; }
   footer a{color:var(--noor);text-decoration:none}
+
+  /* ═══════════ شريط التنقل بين الملفات ═══════════ */
+  .tree-nav{
+    width:min(760px,96vw);
+    background:#0a1a12;
+    border:1px solid #1f3a2b;
+    border-radius:14px;
+    padding:12px 16px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    box-shadow:0 10px 30px -15px #000;
+  }
+  .nav-brand{
+    color:var(--noor);
+    font-weight:700;
+    font-size:0.95rem;
+    letter-spacing:1px;
+    white-space:nowrap;
+  }
+  .nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    justify-content:flex-end;
+    flex:1;
+  }
+  .nav-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:#132a1d;
+    color:#a5d6a7;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    border:1px solid #1f3a2b;
+    font-size:0.85rem;
+    transition:.2s;
+    white-space:nowrap;
+  }
+  .nav-link:hover{
+    background:#1f3a2b;
+    color:#e8f5e9;
+    border-color:#2e6b45;
+  }
+  .nav-link.active{
+    background:var(--noor);
+    color:#0a1a12;
+    border-color:var(--noor);
+    font-weight:700;
+    cursor:default;
+  }
+  .nav-link.active:hover{
+    background:var(--noor);
+    color:#0a1a12;
+  }
+  .nav-icon{
+    font-size:1rem;
+    line-height:1;
+  }
+  @media (max-width:600px){
+    .tree-nav{
+      flex-direction:column;
+      align-items:stretch;
+      text-align:center;
+    }
+    .nav-brand{
+      text-align:center;
+    }
+    .nav-links{
+      justify-content:center;
+    }
+    .nav-link{
+      font-size:0.8rem;
+      padding:7px 10px;
+    }
+    .nav-link .nav-icon{
+      display:none;
+    }
+  }
 </style>
 </head>
 <body>
+
+<!-- ═══════════ شريط التنقل بين الملفات ═══════════ -->
+<nav class="tree-nav" aria-label="التنقل بين ملفات المشروع">
+  <span class="nav-brand">🌳 مشروع الشجرة</span>
+  <div class="nav-links">
+    <a href="./tree.html" class="nav-link active" aria-current="page">
+      <span class="nav-icon">📖</span> الإطار الكامل
+    </a>
+    <a href="./tree2.html" class="nav-link">
+      <span class="nav-icon">🌀</span> المحاكاة
+    </a>
+    <a href="./tree3.html" class="nav-link">
+      <span class="nav-icon">📏</span> القياس الميداني
+    </a>
+  </div>
+</nav>
 
 <h1>🌳 الشجرة والظل — الإطار الكامل</h1>
 <h2>Z + C + A = 1 · الهندرة = (هند)سة+إدا(رة) · hyperd</h2>
@@ -293,9 +392,6 @@ Z + C + A = (√2 − 1) + (√2 − 1) + (3 − 2√2)<br>
 </div>
 <p class="qed">∴ Z + C + A = 1 بالضبط — متطابقة جبرية، لا تقريب □</p>
 
-
-
-
 <h4>٥. لماذا 22.5°؟</h4>
 <p>لأن <code>π/8</code> هي <b>الزاوية الحرجة</b> التي:</p>
 <ul style="color:#c8e6c9">
@@ -327,10 +423,6 @@ Z + C + A = (√2 − 1) + (√2 − 1) + (3 − 2√2)<br>
 <p>إذن: الزاوية 22.5° <b>ليست معطى</b> — بل <b>نتيجة</b> مشتقة من الافتراضات الجبرية، ومُثبتة بقانون نصف الزاوية.</p>
 
 <div class="caveat">
-
-
-
-
 <b>⚠️ تنبيه منهجي:</b>
 هذه <b>متطابقة جبرية داخلية</b> للإطار المفاهيمي — وليست برهانًا تجريبيًا على صحته في الواقع.
 القيمة <code>√2−1</code> مشتقة من الافتراضات الثلاثة أعلاه، ولا تُعدّ دليلًا ميدانيًا.
@@ -429,10 +521,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeCode();
 });
 </script>
-
-
-
-
 
 <!-- ═══════════ زر: هل البرهان رياضي أم فيزيائي؟ ═══════════ -->
 <button onclick="showQ()" style="background:#7fb08a;color:#0a1a12;border-color:#7fb08a;">
@@ -568,9 +656,6 @@ function closeQ(){ document.getElementById('qModal').style.display = 'none'; }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQ(); });
 </script>
 
-
-
-
 <!-- ═══════════ زر: كم إطارًا لـ ZX؟ ═══════════ -->
 <button onclick="showFrames()" style="background:#ba68c8;color:#0a1a12;border-color:#ba68c8;">
   🌀 كم إطارًا لـ ZX؟
@@ -592,7 +677,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQ(); })
       <p style="margin:10px 0 0;color:#f4c430;font-size:1.6rem;font-weight:700;">إطاران — لا أكثر</p>
     </div>
 
-    <!-- ═══ الإطار الأول — إطار الدوال ═══ -->
     <div style="background:#08140d;border:1px solid #1f3a2b;border-radius:8px;
          padding:16px 20px;margin-bottom:16px;">
       <h4 style="color:#7fb08a;margin:0 0 10px;font-size:1rem;">
@@ -638,7 +722,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQ(); })
       </p>
     </div>
 
-    <!-- ═══ الإطار الثاني — إطار الشجرة ═══ -->
     <div style="background:#08140d;border:1px solid #1f3a2b;border-radius:8px;
          padding:16px 20px;margin-bottom:16px;">
       <h4 style="color:#7fb08a;margin:0 0 10px;font-size:1rem;">
@@ -679,7 +762,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQ(); })
       </p>
     </div>
 
-    <!-- ═══ الفرق بين الإطارين ═══ -->
     <h4 style="color:#f4c430;margin:18px 0 10px;">🔍 الفرق الجوهري</h4>
     <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
       <tr style="background:#132a1d;">
@@ -709,7 +791,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQ(); })
       </tr>
     </table>
 
-    <!-- ═══ من أين تأتي الدوخة؟ ═══ -->
     <h4 style="color:#f4c430;margin:18px 0 10px;">🧭 من أين تأتي الدوخة؟</h4>
     <p style="color:#c8e6c9;">من <b>خلط الإطارين</b>:</p>
     <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
@@ -735,7 +816,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQ(); })
       الشجرة توضيح — لا برهان. الظل رمز — لا قياس. الانقلاب استعارة — لا تجربة.
     </p>
 
-    <!-- ═══ الجواب في جملة ═══ -->
     <div style="background:#1a0a24;border-right:4px solid #ba68c8;padding:16px 20px;
          border-radius:6px;margin-top:18px;">
       <p style="margin:0;color:#ba68c8;font-weight:700;font-size:1rem;">🎯 الجواب في جملة</p>
@@ -748,7 +828,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQ(); })
       </p>
     </div>
 
-    <!-- ═══ خاتمة ═══ -->
     <div style="background:#1a1208;border-right:4px solid #f4c430;padding:14px 18px;
          border-radius:6px;margin-top:16px;color:#ffe082;font-size:0.92rem;">
       <b>🌹 وهذا ليس ضعفًا — هذا علم.</b><br>
@@ -767,10 +846,7 @@ function closeFrames(){ document.getElementById('framesModal').style.display = '
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFrames(); });
 </script>
 
-
-
 <!-- في كل صفحة HTML -->
-
 <div id="header-placeholder"></div>
 <div id="footer-placeholder"></div>
 <script src="/js/file.js" defer></script>
