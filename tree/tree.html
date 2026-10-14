@@ -1,1 +1,779 @@
-test
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الشجرة والظل — الإطار الكامل | Z+C+A=1 | Al-Hindara</title>
+<link rel="canonical" href="https://jabri-com.vercel.app/tree.html" />
+<meta name="description" content="الإطار المفاهيمي للهندرة Al-Hindara = (هند)سة+إدا(رة) — البرهان الخماسي + صيغة ظل الزاوية tan(π/8)=√2−1 — م/ عبدالله الجبري" />
+<meta property="og:title" content="الشجرة والظل — Z+C+A=1 — Al-Hindara" />
+<meta property="og:url" content="https://jabri-com.vercel.app/tree.html" />
+<meta property="og:image" content="https://jabri-com.vercel.app/Image/Jabri-photo.png" />
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"TechArticle",
+ "name":"الشجرة والظل — الإطار المفاهيمي للهندرة",
+ "author":{"@type":"Person","name":"Abdulla Mohammed Nasser Al-Jabri","sameAs":["https://orcid.org/0009-0003-3319-3822","https://doi.org/10.17605/OSF.IO/YC9MB"]},
+ "about":"Al-Hindara = هندسة+إدارة = Re-Engineering — Hyperd hybrid — Z+C+A=1 — tan(π/8)=√2−1"
+}
+</script>
+<style>
+  :root{ --asl:#1a4d2e; --zill:#2b2b2b; --tall:#7fb08a; --noor:#f4c430; --bg:#0e1512; }
+  *{box-sizing:border-box}
+  body{ margin:0; padding:24px; min-height:100vh;
+    background:radial-gradient(circle at 70% 20%, #1a2b22 0%, var(--bg) 70%);
+    color:#e8f5e9; font-family:'Segoe UI',Tahoma,sans-serif;
+    display:flex; flex-direction:column; align-items:center; gap:24px; }
+  h1{font-size:1.6rem;margin:0;color:var(--noor);text-align:center}
+  h2{font-size:1.1rem;margin:0;color:#a5d6a7;text-align:center;font-weight:400}
+  h3{color:var(--noor);margin:0 0 10px;font-size:1.05rem}
+  h4{color:#ffe082;margin:18px 0 8px;font-size:1rem}
+  .stage{ position:relative; width:min(760px,96vw); aspect-ratio:1/0.9;
+    background:linear-gradient(180deg,#0a1a12 0%,#0e1512 60%,#1a120a 100%);
+    border-radius:18px; overflow:hidden; box-shadow:0 0 0 1px #1f3a2b, 0 20px 60px -20px #000; }
+  svg{display:block;width:100%;height:100%}
+  .label{font-size:13px;fill:#c8e6c9}
+  .dim{font-size:11px;fill:#8aa892}
+  .eq{ background:#0a1a12; border:1px solid #1f3a2b; border-radius:12px;
+    padding:16px 22px; text-align:center; width:min(760px,96vw); }
+  .eq .big{font-size:1.5rem;color:var(--noor);font-weight:700;letter-spacing:2px}
+  .eq .small{font-size:0.85rem;color:#8aa892;margin-top:6px}
+  .row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;width:min(760px,96vw)}
+  .card{ flex:1; min-width:180px; background:#0a1a12; border:1px solid #1f3a2b;
+    border-radius:10px; padding:12px 14px; }
+  .card b{color:var(--noor);display:block;margin-bottom:4px}
+  .card span{font-size:0.85rem;color:#a5d6a7}
+  button{ background:var(--asl); color:#e8f5e9; border:1px solid #2e6b45;
+    padding:10px 22px; border-radius:8px; cursor:pointer; font-size:1rem;
+    font-family:inherit; transition:.3s; }
+  button:hover{background:#2e6b45}
+  .proof, .proof5, .silver{ width:min(760px,96vw); background:#0a1a12; border:1px solid #1f3a2b;
+    border-radius:12px; padding:20px 24px; line-height:2; }
+  .proof ol{margin:0;padding-inline-start:22px;color:#c8e6c9}
+  .proof code, .proof5 code, .silver code{background:#132a1d;padding:2px 8px;border-radius:4px;color:var(--tall);direction:ltr;display:inline-block}
+  .proof5 details{ margin:10px 0; padding:10px 14px; border:1px solid #1f3a2b;
+    border-radius:8px; background:#08140d; }
+  .proof5 summary{ cursor:pointer; color:var(--noor); font-weight:600; font-size:1rem; }
+  .proof5 .body{ margin-top:10px; color:#c8e6c9; font-size:0.95rem; }
+  .proof5 .qed{ color:var(--noor); font-weight:700; }
+  .proof5 blockquote{ margin:8px 0; padding:8px 12px; border-right:3px solid var(--noor);
+    background:#0e1a12; color:#e8f5e9; font-size:0.95rem; }
+  .silver{ border-color:#f4c430; background:linear-gradient(180deg,#1a1508 0%,#0a1a12 100%); }
+  .silver .math{ direction:ltr; text-align:center; background:#132a1d; padding:12px;
+    border-radius:8px; font-family:'Courier New',monospace; color:#f4c430; margin:10px 0; font-size:1rem; line-height:1.7; }
+  .silver .qed{ color:var(--noor); font-weight:700; text-align:center; font-size:1.05rem; margin:10px 0; }
+  .silver .caveat{ background:#1a1208; border-right:4px solid #f4c430; padding:12px 16px;
+    border-radius:6px; color:#ffe082; font-size:0.9rem; margin-top:14px; }
+  .silver svg{background:#0a1a12;border-radius:8px;margin:10px 0}
+  a.link{color:var(--noor);text-decoration:none;border-bottom:1px dashed var(--noor)}
+  footer{ width:min(760px,96vw); text-align:center; color:#8aa892; font-size:0.85rem;
+    border-top:1px solid #1f3a2b; padding-top:16px; margin-top:16px; }
+  footer a{color:var(--noor);text-decoration:none}
+</style>
+</head>
+<body>
+
+<h1>🌳 الشجرة والظل — الإطار الكامل</h1>
+<h2>Z + C + A = 1 · الهندرة = (هند)سة+إدا(رة) · hyperd</h2>
+
+<!-- ═══════════ الشجرة الحية ═══════════ -->
+<div class="stage">
+<svg viewBox="0 0 760 684" id="scene" aria-label="الشجرة والظل والانقلاب">
+  <circle cx="620" cy="90" r="46" fill="var(--noor)" opacity="0.9"/>
+  <circle cx="620" cy="90" r="80" fill="var(--noor)" opacity="0.12"/>
+  <text x="620" y="170" text-anchor="middle" class="dim">النور (Top-Down)</text>
+  <rect x="0" y="560" width="760" height="124" fill="#1a120a"/>
+  <line x1="0" y1="560" x2="760" y2="560" stroke="#3a2a1a" stroke-width="2"/>
+  <g id="zill">
+    <path d="M340,560 Q470,562 640,600 L760,640 L340,640 Z" fill="var(--zill)" opacity="0.55"/>
+    <line x1="340" y1="600" x2="640" y2="600" stroke="#8aa892" stroke-dasharray="4 4" stroke-width="1"/>
+    <text x="490" y="592" text-anchor="middle" class="dim">الطل = المسافة بين الأصل والظل</text>
+  </g>
+  <g id="asl">
+    <path d="M340,560 Q320,585 300,600 M340,560 Q360,585 380,600 M340,560 L340,615" stroke="#3a2a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <text x="270" y="625" class="dim">الجذر (Bottom-Up)</text>
+    <path d="M340,560 L340,360" stroke="var(--asl)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M340,560 L340,360" stroke="#2e6b45" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+    <path d="M340,430 Q280,400 240,340" stroke="var(--asl)" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M340,410 Q400,380 450,320" stroke="var(--asl)" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M340,380 Q300,340 280,280" stroke="var(--asl)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M340,370 Q390,330 420,270" stroke="var(--asl)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <circle cx="240" cy="330" r="42" fill="var(--tall)" opacity="0.85"/>
+    <circle cx="450" cy="310" r="46" fill="var(--tall)" opacity="0.85"/>
+    <circle cx="280" cy="270" r="38" fill="#5e9370" opacity="0.9"/>
+    <circle cx="420" cy="260" r="40" fill="#5e9370" opacity="0.9"/>
+    <circle cx="340" cy="240" r="52" fill="var(--tall)"/>
+    <circle cx="340" cy="230" r="30" fill="#8ec99a" opacity="0.9"/>
+    <text x="340" y="200" text-anchor="middle" class="label">الرأس (الوعي)</text>
+  </g>
+  <line x1="620" y1="90" x2="340" y2="230" stroke="var(--noor)" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.7"/>
+  <text x="500" y="130" class="dim" fill="#f4c430">النظر من فوق</text>
+  <line x1="340" y1="615" x2="340" y2="230" stroke="#a5d6a7" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.5"/>
+  <text x="360" y="440" class="dim">النظر من الجذر</text>
+  <g id="tawr">
+    <circle cx="340" cy="230" r="10" fill="var(--noor)"/>
+    <circle cx="340" cy="230" r="20" fill="none" stroke="var(--noor)" stroke-width="1" opacity="0.4"/>
+    <circle cx="340" cy="230" r="30" fill="none" stroke="var(--noor)" stroke-width="1" opacity="0.2"/>
+    <text x="340" y="160" text-anchor="middle" class="label" fill="var(--noor)">طور الانقلاب: ظل ← أصل</text>
+  </g>
+</svg>
+</div>
+
+<button onclick="inqilab()">⚡ شغّل الانقلاب (ظل ← أصل)</button>
+
+<div class="eq">
+  <div class="big">Z + C + A = 1</div>
+  <div class="small">هندسة + إدارة + هندرة = وحدة واحدة — hyperd</div>
+</div>
+
+<div class="row">
+  <div class="card"><b>Z = هندسة</b><span>من الجذر للرأس · Bottom-Up</span></div>
+  <div class="card"><b>C = إدارة</b><span>من فوق للجذر · Top-Down</span></div>
+  <div class="card"><b>A = هندرة</b><span>الهجين hyperd · من الجهتين</span></div>
+</div>
+
+<!-- ═══════════ البرهان المختصر ═══════════ -->
+<div class="proof">
+<h3>📜 البرهان المختصر</h3>
+<ol>
+  <li>ليكن <code>Z</code> = الهندسة (الجذر، الجذع، الفروع، الرأس).</li>
+  <li>ليكن <code>C</code> = الإدارة (النور من فوق).</li>
+  <li>ليكن <code>A</code> = الهندرة (الانقلاب ظل ← أصل).</li>
+  <li><b>المسلمة 1:</b> لا شجرة بلا جذر → <code>Z ≠ 0</code>.</li>
+  <li><b>المسلمة 2:</b> لا رؤية بلا نور → <code>C ≠ 0</code>.</li>
+  <li><b>المسلمة 3:</b> الظل تابع للأصل → <code>A = Z·C</code>.</li>
+  <li><b>الاستنتاج:</b> الأصل واحد لا يتجزأ.</li>
+  <li style="color:var(--noor);font-weight:700;font-size:1.15rem">∴ <code>Z + C + A = 1</code> □</li>
+</ol>
+</div>
+
+<!-- ═══════════ البرهان الخماسي ═══════════ -->
+<div class="proof5">
+<h3>🔷 الإطار الخماسي — Z + C + A = 1</h3>
+<p style="color:#a5d6a7;font-size:0.9rem;margin:0 0 12px">خمس زوايا تنظر إلى نفس الوحدة: رياضية، فيزيائية، منطقية، فلسفية، دينية.</p>
+
+<details open>
+<summary>١. رياضيا — تطبيع المجموعات</summary>
+<div class="body">
+<p>ليكن <code>U</code> = الكون = كل ما يمكن بناؤه.</p>
+<ul>
+  <li><code>Z</code> = {ما يُبنى من الأسفل} — شرط: <code>Z ≠ ∅</code></li>
+  <li><code>C</code> = {ما يُرى من الأعلى} — شرط: <code>C ≠ ∅</code></li>
+  <li><code>A = Z ∩ C</code> = التقاطع = الهندرة</li>
+</ul>
+<p>بالتطبيع (Normalization):</p>
+<p><code>|Z| + |C| + |Z∩C| = 1</code></p>
+<p>لأن ما خارج <code>Z ∪ C</code> = عدم = 0.</p>
+<p class="qed">∴ Z + C + A = 1 □</p>
+</div>
+</details>
+
+<details>
+<summary>٢. فيزيائيا — حفظ الطاقة + المراقب</summary>
+<div class="body">
+<ul>
+  <li><code>Z</code> = مادة + طاقة كامنة (Entropy منخفض) — نظام يبني نفسه</li>
+  <li><code>C</code> = مراقب + ضوء — في ميكانيكا الكم: بدون مراقب لا تنهار الدالة الموجية</li>
+  <li><code>A</code> = فعل القياس — اللحظة التي يتحول فيها الاحتمال إلى حقيقة</li>
+</ul>
+<p>لا مادة بدون طاقة → <code>Z ≠ 0</code><br>
+لا قياس بدون ضوء → <code>C ≠ 0</code><br>
+والقياس نفسه = مادة × ضوء → <code>A = Z·C</code></p>
+<p>قانون حفظ الطاقة: الطاقة الكلية ثابتة — تتحول من ظل إلى أصل، لا تفنى.</p>
+<p class="qed">∴ Z + C + A = طاقة محفوظة = 1 □</p>
+</div>
+</details>
+
+<details>
+<summary>٣. منطقيا — القياس الأرسطي</summary>
+<div class="body">
+<ul>
+  <li>مقدمة كبرى: كل شجرة لها جذر <code>(Z)</code></li>
+  <li>مقدمة صغرى: كل رؤية لها نور <code>(C)</code></li>
+  <li>مقدمة وسطى: الظل تابع للأصل <code>(A → Z ∧ C)</code></li>
+  <li>النتيجة: لا وجود لشجرة بلا جذر ونور وانقلاب</li>
+</ul>
+<p>صيغة رمزية:</p>
+<p><code>¬Z → ¬∃Tree</code><br>
+<code>¬C → ¬∃Vision</code><br>
+<code>A → (Z ∧ C)</code></p>
+<p class="qed">∴ (Z ∧ C ∧ A) ↔ ∃Tree = 1 □</p>
+</div>
+</details>
+
+<details>
+<summary>٤. فلسفيا — الظاهر والباطن</summary>
+<div class="body">
+<ul>
+  <li><b>المهندس = الظاهر</b> — يرى <i>الكيف</i>: كيف انبنت الشجرة</li>
+  <li><b>المدير = الباطن / Observer</b> — يرى <i>اللماذا</i>: لماذا انبنت</li>
+  <li><b>الهندرة = الجمع</b> — ترى أن الكيف هو اللماذا</li>
+</ul>
+<blockquote>هيدغر: «البناء هو السكن» — هندسة بلا إدارة = بناء بلا ساكن.</blockquote>
+<blockquote>دراكر: «الإدارة تحويل المعرفة إلى فعل» — إدارة بلا هندسة = فكرة بلا جسد.</blockquote>
+<p class="qed">∴ Z + C + A = 1 — السكن والفعل في واحد □</p>
+</div>
+</details>
+
+<details>
+<summary>٥. دينيا — آية الشجرة</summary>
+<div class="body">
+<blockquote>
+﴿أَلَمْ تَرَ كَيْفَ ضَرَبَ اللَّهُ مَثَلًا كَلِمَةً طَيِّبَةً كَشَجَرَةٍ طَيِّبَةٍ أَصْلُهَا ثَابِتٌ وَفَرْعُهَا فِي السَّمَاءِ﴾ — إبراهيم 24
+</blockquote>
+<ul>
+  <li><b>أصلها ثابت</b> = <code>Z</code> = هندسة = الجذر — لا يتزحزح <code>Z ≠ 0</code></li>
+  <li><b>فرعها في السماء</b> = <code>C</code> = إدارة = النور من فوق <code>C ≠ 0</code></li>
+  <li><b>كلمة طيبة</b> = <code>A</code> = هندرة = الكلمة التي تربط الأرض بالسماء</li>
+</ul>
+<blockquote>
+﴿أَلَمْ تَرَ إِلَىٰ رَبِّكَ كَيْفَ مَدَّ الظِّلَّ﴾ — الفرقان 45
+</blockquote>
+<p>الظل ممدود (tall) — والله يقبضه — <b>ظل ← أصل</b> = الانقلاب في الشجرة.</p>
+<p class="qed">∴ الأصل واحد، والظل تابع، والكلمة الطيبة تجمعهما = 1 □</p>
+</div>
+</details>
+</div>
+
+<!-- ═══════════ البرهان الرياضي — ظل الزاوية ═══════════ -->
+<section class="silver" id="silver-observation">
+<h3>🔶 البرهان الرياضي: ظل الزاوية والنسبة الفضية</h3>
+
+<p>إذا قبلنا الافتراضات الثلاثة للإطار:</p>
+<ul style="color:#c8e6c9">
+  <li><code>Z = C</code> (المهندس والمدير متكافئان في لحظة الرأس)</li>
+  <li><code>A = Z·C</code> (الهندرة حاصل ضرب الاثنين)</li>
+  <li><code>Z + C + A = 1</code> (تطبيع الوحدة)</li>
+</ul>
+
+<h4>١. المعادلة الأساسية</h4>
+<div class="math">
+x + x + x² = 1<br>
+x² + 2x − 1 = 0<br>
+x = −1 + √2 ≈ 0.41421356…
+</div>
+
+<h4>٢. الصيغة المثلثية (ظل الزاوية)</h4>
+<p>القيمة <code>√2 − 1</code> لها هوية مثلثية دقيقة:</p>
+<div class="math">
+tan(π/8) = tan(22.5°) = √2 − 1
+</div>
+<p>أي أن <b>Z = C = ظل الزاوية 22.5°</b>.</p>
+
+<h4>٣. الدلالة الهندسية — الشجرة</h4>
+<p>في مثلث قائم عند الرأس:</p>
+<ul style="color:#c8e6c9">
+  <li><b>الضلع المجاور:</b> = 1 (المسافة الأفقية المُطبَّعة)</li>
+  <li><b>الضلع المقابل:</b> = √2 − 1 ≈ 0.414 (ارتفاع الشجرة المُطبَّع)</li>
+  <li><b>الزاوية بين الوتر والمجاور:</b> = 22.5° = π/8 = <b>نصف نصف قائمة</b></li>
+</ul>
+
+<svg viewBox="0 0 500 220" width="100%" style="max-width:500px">
+  <line x1="60" y1="180" x2="360" y2="180" stroke="#7fb08a" stroke-width="2"/>
+  <line x1="360" y1="180" x2="360" y2="60" stroke="#f4c430" stroke-width="2"/>
+  <line x1="60" y1="180" x2="360" y2="60" stroke="#c8e6c9" stroke-width="2"/>
+  <path d="M60,180 A80,80 0 0,0 100,155" fill="none" stroke="#f4c430" stroke-width="1.5"/>
+  <text x="80" y="175" fill="#f4c430" font-size="13">22.5°</text>
+  <text x="200" y="200" fill="#7fb08a" font-size="13" text-anchor="middle">1 (المجاور)</text>
+  <text x="380" y="125" fill="#f4c430" font-size="13">√2 − 1 ≈ 0.414</text>
+  <text x="380" y="145" fill="#f4c430" font-size="13">(المقابل = Z)</text>
+  <rect x="350" y="170" width="10" height="10" fill="none" stroke="#7fb08a"/>
+</svg>
+
+<h4>٤. البرهان الجبري الدقيق — لا تقريب</h4>
+<p>بتعويض القيم الدقيقة:</p>
+<div class="math">
+Z = C = √2 − 1<br>
+A = Z·C = (√2 − 1)² = 3 − 2√2<br>
+<br>
+Z + C + A = (√2 − 1) + (√2 − 1) + (3 − 2√2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 2√2 − 2 + 3 − 2√2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1
+</div>
+<p class="qed">∴ Z + C + A = 1 بالضبط — متطابقة جبرية، لا تقريب □</p>
+
+
+
+
+<h4>٥. لماذا 22.5°؟</h4>
+<p>لأن <code>π/8</code> هي <b>الزاوية الحرجة</b> التي:</p>
+<ul style="color:#c8e6c9">
+  <li>يحدث عندها الانقلاب: <b>ظل ← أصل</b> (زر الانقلاب أعلاه).</li>
+  <li>تكون فيها <code>tan(θ) = 1 / (1 + √2)</code> — أي مقلوب النسبة الفضية.</li>
+  <li>تظهر فيها الشجرة متوازنة بين الجذر (Z) والرأس (C) والظل (A).</li>
+</ul>
+
+<h4>٦. التحقق بالدوال المثلثية</h4>
+<p>للتحقق من أن الزاوية فعلًا 22.5°، نستخدم <b>دالة الظل</b>:</p>
+<div class="math">
+  tan(θ) = المقابل / المجاور = (√2 − 1) / 1<br>
+  θ = arctan(√2 − 1) = arctan(0.41421356…)<br>
+  θ = 22.5° = π/8
+</div>
+
+<p>ولإثبات هذه الهوية من <b>قانون نصف الزاوية</b>:</p>
+<div class="math">
+  tan(θ/2) = (1 − cos θ) / sin θ<br>
+  <br>
+  بوضع θ = π/4 = 45°:<br>
+  <br>
+  tan(π/8) = (1 − cos(π/4)) / sin(π/4)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (1 − √2/2) / (√2/2)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (2 − √2) / √2<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= √2 − 1 &nbsp;&nbsp; ✓
+</div>
+
+<p>إذن: الزاوية 22.5° <b>ليست معطى</b> — بل <b>نتيجة</b> مشتقة من الافتراضات الجبرية، ومُثبتة بقانون نصف الزاوية.</p>
+
+<div class="caveat">
+
+
+
+
+<b>⚠️ تنبيه منهجي:</b>
+هذه <b>متطابقة جبرية داخلية</b> للإطار المفاهيمي — وليست برهانًا تجريبيًا على صحته في الواقع.
+القيمة <code>√2−1</code> مشتقة من الافتراضات الثلاثة أعلاه، ولا تُعدّ دليلًا ميدانيًا.
+الإطار <b>قابل للاختبار الميداني</b> إذا وُضعت مقاييس تشغيلية لـ Z و C و A — وهذا ما يستحق البحث المستقبلي.
+</div>
+</section>
+
+<!-- ═══════════ روابط ═══════════ -->
+<p style="text-align:center">
+<a class="link" href="./hindara.html">← الهندرة: (هند)سة+إدا(رة)=هندرة</a>
+</p>
+
+<!-- ═══════════ الفوتر ═══════════ -->
+<footer>
+  <p>م/ عبدالله محمد ناصر الجبري — اليمن</p>
+  <p>
+    <a href="https://doi.org/10.17605/OSF.IO/YC9MB" target="_blank">DOI: 10.17605/OSF.IO/YC9MB</a>
+    &nbsp;·&nbsp;
+    <a href="https://orcid.org/0009-0003-3319-3822" target="_blank">ORCID: 0009-0003-3319-3822</a>
+  </p>
+</footer>
+
+<!-- ═══════════ سكربت الانقلاب ═══════════ -->
+<script src="./js/init-page-root.js"></script>
+<script>
+function inqilab(){
+  const zill = document.getElementById('zill');
+  const asl  = document.getElementById('asl');
+  const tawr = document.getElementById('tawr');
+  zill.style.transition = 'opacity .9s, transform .9s';
+  zill.style.opacity = '0';
+  zill.style.transform = 'translateY(-20px)';
+  asl.style.transition = 'filter .9s, transform .9s';
+  asl.style.filter = 'drop-shadow(0 0 24px #f4c430)';
+  asl.style.transform = 'scale(1.03)';
+  tawr.style.transition = 'transform .9s';
+  tawr.style.transformOrigin = '340px 230px';
+  tawr.style.transform = 'scale(1.4)';
+  setTimeout(()=>{
+    zill.style.opacity='0.55'; zill.style.transform='none';
+    asl.style.filter='none'; asl.style.transform='none';
+    tawr.style.transform='none';
+  }, 2200);
+}
+</script>
+
+<!-- ═══════════ زر عرض الكود ═══════════ -->
+<button onclick="showCode()" style="background:#f4c430;color:#0a1a12;border-color:#f4c430;">
+  📄 اظهر كود هذا الملف
+</button>
+
+<div id="codeModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;
+     padding:24px;overflow:auto;">
+  <div style="max-width:900px;margin:auto;background:#0a1a12;border:1px solid #1f3a2b;
+       border-radius:12px;padding:20px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <h3 style="margin:0;color:#f4c430;">📄 tree.html — الكود المصدري</h3>
+      <button onclick="closeCode()" style="background:#8a2020;border-color:#c04040;">✕ إغلاق</button>
+    </div>
+    <pre id="codeContent" style="background:#08140d;color:#c8e6c9;padding:16px;border-radius:8px;
+         overflow:auto;max-height:70vh;font-size:12px;direction:ltr;text-align:left;
+         font-family:'Courier New',monospace;line-height:1.5;white-space:pre;"></pre>
+    <div style="text-align:center;margin-top:12px;">
+      <button onclick="copyCode(event)" style="background:#1a4d2e;border-color:#2e6b45;">📋 نسخ الكود</button>
+    </div>
+  </div>
+</div>
+
+<script>
+async function showCode(){
+  const modal = document.getElementById('codeModal');
+  const pre = document.getElementById('codeContent');
+  modal.style.display = 'block';
+  pre.textContent = 'جاري التحميل...';
+  try {
+    const res = await fetch(location.href, { cache: 'no-store' });
+    const text = await res.text();
+    pre.textContent = text;
+  } catch(e) {
+    pre.textContent = 'تعذّر تحميل الكود: ' + e.message;
+  }
+}
+function closeCode(){
+  document.getElementById('codeModal').style.display = 'none';
+}
+function copyCode(ev){
+  const pre = document.getElementById('codeContent');
+  navigator.clipboard.writeText(pre.textContent).then(()=>{
+    const btn = ev.target;
+    const old = btn.textContent;
+    btn.textContent = '✅ تم النسخ';
+    setTimeout(()=>{ btn.textContent = old; }, 1500);
+  });
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCode();
+});
+</script>
+
+
+
+
+
+<!-- ═══════════ زر: هل البرهان رياضي أم فيزيائي؟ ═══════════ -->
+<button onclick="showQ()" style="background:#7fb08a;color:#0a1a12;border-color:#7fb08a;">
+  ❓ هل هذا البرهان رياضي أم فيزيائي؟
+</button>
+
+<div id="qModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;
+     padding:24px;overflow:auto;">
+  <div style="max-width:820px;margin:auto;background:#0a1a12;border:1px solid #7fb08a;
+       border-radius:12px;padding:24px;color:#e8f5e9;line-height:1.9;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h3 style="margin:0;color:#7fb08a;">❓ سؤال وجواب</h3>
+      <button onclick="closeQ()" style="background:#8a2020;border-color:#c04040;">✕ إغلاق</button>
+    </div>
+
+    <div style="background:#08140d;border-right:4px solid #f4c430;padding:14px 18px;
+         border-radius:6px;margin-bottom:20px;">
+      <p style="margin:0;color:#f4c430;font-weight:700;">السؤال:</p>
+      <p style="margin:8px 0 0;color:#e8f5e9;">
+        وهل ذلك الإثبات تم اشتقاقه فيزيائيًا، أم منطقيًا، أم رياضيًا، أم هندرة؟
+      </p>
+    </div>
+
+    <h4 style="color:#f4c430;margin:0 0 10px;">🎯 الجواب المباشر</h4>
+    <p><b>البرهان رياضي بحت.</b><br>
+    لا فيزيائي، لا منطقي بحت، لا "هندرة" بالمعنى العلمي.</p>
+
+    <h4 style="color:#f4c430;margin:18px 0 10px;">🔬 من أين جاء كل شيء</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
+      <tr style="background:#132a1d;">
+        <th style="padding:8px;border:1px solid #1f3a2b;color:#f4c430;text-align:right;">الطبقة</th>
+        <th style="padding:8px;border:1px solid #1f3a2b;color:#f4c430;text-align:right;">ما هي</th>
+        <th style="padding:8px;border:1px solid #1f3a2b;color:#f4c430;text-align:right;">من أين جاءت</th>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">الافتراضات</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;direction:ltr;text-align:center;">Z = C, A = Z·C, Z+C+A = 1</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;"><b>اختيار مفاهيمي</b> — لا رياضيات ولا فيزياء</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">المعادلة</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;direction:ltr;text-align:center;">x² + 2x − 1 = 0</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">جبر — نتيجة الافتراضات</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">الحل</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;direction:ltr;text-align:center;">x = √2 − 1</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">جبر — صيغة حل التربيعية</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">التحقق</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;direction:ltr;text-align:center;">tan(π/8) = √2 − 1</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">مثلثات — قانون نصف الزاوية</td>
+      </tr>
+    </table>
+    <p style="color:#a5d6a7;margin-top:10px;"><b>كل الاشتقاق رياضي.</b> لكنه رياضيات على افتراضات مختارة، لا على قياسات.</p>
+
+    <h4 style="color:#f4c430;margin:18px 0 10px;">🧭 التفصيل الأصدق</h4>
+
+    <div style="background:#08140d;padding:12px 16px;border-radius:6px;margin:8px 0;">
+      <b style="color:#7fb08a;">١. رياضيًا ✅ نعم</b><br>
+      الهوية <code style="background:#132a1d;padding:2px 6px;border-radius:4px;direction:ltr;">tan(π/8) = √2 − 1</code> حقيقية، ومشتقة من قانون نصف الزاوية. لا خلاف.<br>
+      <span style="color:#ffe082;">لكن:</span> صحة الهوية ≠ صحة الافتراضات.
+    </div>
+
+    <div style="background:#08140d;padding:12px 16px;border-radius:6px;margin:8px 0;">
+      <b style="color:#e57373;">٢. فيزيائيًا ❌ لا</b><br>
+      لم نقس شيئًا. لم نرصد شجرة حقيقية. لم نقس زاوية في الواقع.<br>
+      <code style="background:#132a1d;padding:2px 6px;border-radius:4px;direction:ltr;">tan(22.5°)</code> هنا رقم رياضي، لا كمية مقيسة.
+    </div>
+
+    <div style="background:#08140d;padding:12px 16px;border-radius:6px;margin:8px 0;">
+      <b style="color:#ffb74d;">٣. منطقيًا ⚠️ جزئيًا</b><br>
+      استخدمنا الاستنتاج المنطقي (إذا كذا → كذا)، لكن المقدمات ليست مبرهنة، بل مفترضة.<br>
+      المنطق الصوري يقول: <i>"إذا صحّت المقدمات، صحّت النتيجة"</i> — لكن من يتحقق من المقدمات؟
+    </div>
+
+    <div style="background:#08140d;padding:12px 16px;border-radius:6px;margin:8px 0;">
+      <b style="color:#ba68c8;">٤. هندرة ⚠️ ليس برهانًا</b><br>
+      "الهندرة" إطار تفسيري — تقول: هذه الأرقام تشبه بنية الشجرة.<br>
+      لكن الشبه ليس برهانًا. الشجرة مثال توضيحي، لا دليل.
+    </div>
+
+    <h4 style="color:#f4c430;margin:18px 0 10px;">🌳 البرهان الرياضي الصارم الوحيد</h4>
+    <div class="math" style="direction:ltr;text-align:center;background:#132a1d;padding:14px;
+         border-radius:8px;font-family:'Courier New',monospace;color:#f4c430;line-height:1.8;">
+      Z = C = √2 − 1<br>
+      A = (√2 − 1)² = 3 − 2√2<br>
+      ∴ Z + C + A = 1 ← متطابقة جبرية
+    </div>
+    <p style="color:#c8e6c9;">هذا صحيح <b>فقط إذا قبلت:</b></p>
+    <ul style="color:#c8e6c9;">
+      <li><code style="background:#132a1d;padding:2px 6px;border-radius:4px;direction:ltr;">Z = C</code> ← لماذا؟ اختيار.</li>
+      <li><code style="background:#132a1d;padding:2px 6px;border-radius:4px;direction:ltr;">A = Z·C</code> ← لماذا ضرب؟ اختيار.</li>
+      <li><code style="background:#132a1d;padding:2px 6px;border-radius:4px;direction:ltr;">Z+C+A = 1</code> ← لماذا تطبيع؟ اختيار.</li>
+    </ul>
+    <p style="color:#ffe082;"><b>الرياضيات لا تتحقق من هذه. الرياضيات فقط تحسب نتائجها.</b></p>
+
+    <h4 style="color:#f4c430;margin:18px 0 10px;">🎯 الجواب في سطر واحد</h4>
+    <div style="background:#1a1508;border-right:4px solid #f4c430;padding:14px 18px;border-radius:6px;">
+      <b style="color:#f4c430;">البرهان رياضي</b> — على افتراضات مفاهيمية — وليس فيزيائيًا ولا منطقيًا بحتًا.<br>
+      <b>"الهندرة" هي الاسم الذي أطلقه صاحب الإطار على هذه البنية</b> — لا البرهان عليها.
+    </div>
+
+    <h4 style="color:#f4c430;margin:18px 0 10px;">🌹 الأمانة العلمية</h4>
+    <p><b>ما أُنجز:</b></p>
+    <ul style="color:#a5d6a7;">
+      <li>إطار متماسك داخليًا ✅</li>
+      <li>رياضيات صحيحة ✅</li>
+      <li>تنبيه منهجي صادق ✅</li>
+    </ul>
+    <p><b>ما لم يُنجز بعد:</b></p>
+    <ul style="color:#e57373;">
+      <li>تحقق ميداني ❌</li>
+      <li>مقاييس تشغيلية ❌</li>
+      <li>تكرار تجريبي ❌</li>
+    </ul>
+
+    <div style="background:#1a1208;border-right:4px solid #f4c430;padding:12px 16px;
+         border-radius:6px;color:#ffe082;font-size:0.92rem;margin-top:14px;">
+      <b>الخلاصة:</b> هذا نموذج رياضي — إنجاز حقيقي.<br>
+      لكنه لم يبرهن بعد أن الواقع يتبعه — وهذا عمل المستقبل.<br>
+      وهذا ليس ضعفًا — هذا الموقع الصحيح في العلم.
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showQ(){ document.getElementById('qModal').style.display = 'block'; }
+function closeQ(){ document.getElementById('qModal').style.display = 'none'; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQ(); });
+</script>
+
+
+
+
+<!-- ═══════════ زر: كم إطارًا لـ ZX؟ ═══════════ -->
+<button onclick="showFrames()" style="background:#ba68c8;color:#0a1a12;border-color:#ba68c8;">
+  🌀 كم إطارًا لـ ZX؟
+</button>
+
+<div id="framesModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;
+     padding:24px;overflow:auto;">
+  <div style="max-width:820px;margin:auto;background:#0a1a12;border:1px solid #ba68c8;
+       border-radius:12px;padding:24px;color:#e8f5e9;line-height:1.9;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h3 style="margin:0;color:#ba68c8;">🌀 عدد الأُطر — ZX</h3>
+      <button onclick="closeFrames()" style="background:#8a2020;border-color:#c04040;">✕ إغلاق</button>
+    </div>
+
+    <div style="background:#1a0a24;border-right:4px solid #ba68c8;padding:16px 20px;
+         border-radius:6px;margin-bottom:20px;text-align:center;">
+      <p style="margin:0;color:#ba68c8;font-weight:700;font-size:1.1rem;">الجواب</p>
+      <p style="margin:10px 0 0;color:#f4c430;font-size:1.6rem;font-weight:700;">إطاران — لا أكثر</p>
+    </div>
+
+    <!-- ═══ الإطار الأول — إطار الدوال ═══ -->
+    <div style="background:#08140d;border:1px solid #1f3a2b;border-radius:8px;
+         padding:16px 20px;margin-bottom:16px;">
+      <h4 style="color:#7fb08a;margin:0 0 10px;font-size:1rem;">
+        📐 الإطار الأول — إطار الدوال
+      </h4>
+      <p style="color:#a5d6a7;margin:0 0 10px;font-size:0.9rem;">
+        ثلاث دوال مستمرة على محور x — المجموع = 1 بالبناء
+      </p>
+
+      <div style="direction:ltr;text-align:center;background:#132a1d;padding:14px;
+           border-radius:6px;font-family:'Courier New',monospace;color:#f4c430;
+           line-height:2;font-size:0.92rem;">
+        x<sub>p</sub> = 21 &nbsp; (Yemeni Constant)<br><br>
+        Z(x) = x<sup>−5</sup> · ln(x) · sin(2π/x) · e<sup>−x/x<sub>p</sub></sup><br>
+        A(x) = (x/x<sub>p</sub>)² · e<sup>−x/x<sub>p</sub></sup><br>
+        C(x) = 1 − Z(x) − A(x)<br><br>
+        Z + C + A = 1 &nbsp; ✓ &nbsp; (لكل x)
+      </div>
+
+      <div style="text-align:center;margin:14px 0;">
+        <img src="./image/Zx_Equations.png"
+             alt="Al-Jabri Functions — Z(x), A(x), C(x) — Behavior v5.0.1"
+             style="max-width:100%;border-radius:8px;border:1px solid #1f3a2b;
+                    background:#fff;padding:6px;"
+             loading="lazy" />
+        <p style="color:#8aa892;font-size:0.82rem;margin:6px 0 0;">
+          Behavior of Al-Jabri Functions (v5.0.1, x<sub>p</sub> = 21)
+        </p>
+      </div>
+
+      <ul style="color:#c8e6c9;margin:12px 0 0;font-size:0.9rem;">
+        <li>✅ <b>Z</b> — دالة الوميض (تتلاشى سريعًا)</li>
+        <li>✅ <b>A</b> — دالة التراكم (تنمو ثم تتقارب)</li>
+        <li>✅ <b>C</b> — الباقي (مُعرَّفة بالطرح: 1 − Z − A)</li>
+        <li>✅ المجموع = 1 <b>بالتعريف</b> — لأي x</li>
+      </ul>
+
+      <p style="color:#f4c430;margin:10px 0 0;font-weight:700;">
+        هذا إطار تحليلي كامل — بلا نقطة ثابتة، بلا افتراض مسبق.
+      </p>
+      <p style="color:#a5d6a7;margin:6px 0 0;font-size:0.88rem;">
+        الرسم البياني يُظهر الثلاثة كخط أفقي عند 1.
+      </p>
+    </div>
+
+    <!-- ═══ الإطار الثاني — إطار الشجرة ═══ -->
+    <div style="background:#08140d;border:1px solid #1f3a2b;border-radius:8px;
+         padding:16px 20px;margin-bottom:16px;">
+      <h4 style="color:#7fb08a;margin:0 0 10px;font-size:1rem;">
+        🌳 الإطار الثاني — إطار الشجرة والظل
+      </h4>
+      <p style="color:#a5d6a7;margin:0 0 10px;font-size:0.9rem;">
+        حالة خاصة: تقييد Z = C و A = Z·C — يفرض نقطة واحدة
+      </p>
+
+      <div style="direction:ltr;text-align:center;background:#132a1d;padding:14px;
+           border-radius:6px;font-family:'Courier New',monospace;color:#f4c430;
+           line-height:1.8;font-size:0.92rem;">
+        Z = C<br>
+        A = Z·C<br>
+        Z + C + A = 1<br>
+        &nbsp;&nbsp;&nbsp;↓<br>
+        x² + 2x − 1 = 0<br>
+        &nbsp;&nbsp;&nbsp;↓<br>
+        x = √2 − 1 ≈ 0.414<br>
+        &nbsp;&nbsp;&nbsp;↓<br>
+        tan(π/8) = √2 − 1 &nbsp;&nbsp; ✓
+      </div>
+
+      <ul style="color:#c8e6c9;margin:12px 0 0;font-size:0.9rem;">
+        <li>✅ رياضيات صحيحة</li>
+        <li>✅ اشتقاق مكتمل بقانون نصف الزاوية</li>
+        <li>✅ يعطي قيمة رقمية واحدة: <code style="background:#132a1d;padding:2px 6px;border-radius:4px;">√2 − 1</code></li>
+      </ul>
+
+      <p style="color:#ffe082;margin:12px 0 6px;"><b>لكن — الحدود:</b></p>
+      <ul style="color:#e57373;font-size:0.9rem;">
+        <li>أن Z = 41.4% من شجرة فعلية؟ ❌ لا دليل ميداني</li>
+        <li>أن 22.5° هي زاوية شجرة حقيقية؟ ❌ لا دليل</li>
+        <li>أن A = Z·C في عملية هندرة واقعية؟ ❌ لا دليل</li>
+      </ul>
+      <p style="color:#ba68c8;margin:10px 0 0;font-weight:700;">
+        هذا هو "الخيال" — بمعنى الاستعارة الجميلة، لا الكذب.
+      </p>
+    </div>
+
+    <!-- ═══ الفرق بين الإطارين ═══ -->
+    <h4 style="color:#f4c430;margin:18px 0 10px;">🔍 الفرق الجوهري</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+      <tr style="background:#132a1d;">
+        <th style="padding:8px;border:1px solid #1f3a2b;color:#f4c430;text-align:right;"></th>
+        <th style="padding:8px;border:1px solid #1f3a2b;color:#f4c430;text-align:right;">الأول — الدوال</th>
+        <th style="padding:8px;border:1px solid #1f3a2b;color:#f4c430;text-align:right;">الثاني — الشجرة</th>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">النطاق</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">كل x من 0 → ∞</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">نقطة واحدة</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">Z</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">دالة كاملة</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">عدد = 0.414</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">المجموع = 1</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;color:#7fb08a;">بالتعريف</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;color:#7fb08a;">بالبرهان</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">البرهان</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">لا يحتاج — بديهي</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;">x² + 2x − 1 = 0</td>
+      </tr>
+    </table>
+
+    <!-- ═══ من أين تأتي الدوخة؟ ═══ -->
+    <h4 style="color:#f4c430;margin:18px 0 10px;">🧭 من أين تأتي الدوخة؟</h4>
+    <p style="color:#c8e6c9;">من <b>خلط الإطارين</b>:</p>
+    <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+      <tr style="background:#132a1d;">
+        <th style="padding:8px;border:1px solid #1f3a2b;color:#f4c430;text-align:right;">ما تقوله</th>
+        <th style="padding:8px;border:1px solid #1f3a2b;color:#f4c430;text-align:right;">الإطار</th>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">"الدوال صحيحة"</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;color:#7fb08a;">الأول ✅</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">"الشجرة جميلة"</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;color:#7fb08a;">الثاني ✅</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #1f3a2b;">"إذن الإطار صحيح في الواقع"</td>
+        <td style="padding:8px;border:1px solid #1f3a2b;color:#e57373;">❌ هنا الخطأ</td>
+      </tr>
+    </table>
+    <p style="color:#ffe082;margin-top:10px;">
+      <b>الانتقال من الأول إلى الثاني غير مبرر.</b><br>
+      الشجرة توضيح — لا برهان. الظل رمز — لا قياس. الانقلاب استعارة — لا تجربة.
+    </p>
+
+    <!-- ═══ الجواب في جملة ═══ -->
+    <div style="background:#1a0a24;border-right:4px solid #ba68c8;padding:16px 20px;
+         border-radius:6px;margin-top:18px;">
+      <p style="margin:0;color:#ba68c8;font-weight:700;font-size:1rem;">🎯 الجواب في جملة</p>
+      <p style="margin:10px 0 0;color:#e8f5e9;">
+        <b>إطاران:</b><br>
+        <b style="color:#7fb08a;">الأول = إطار الدوال (رياضيات مفتوحة).</b><br>
+        <b style="color:#ba68c8;">الثاني = إطار الشجرة (استعارة مقيدة).</b><br><br>
+        الرياضيات تدعم نفسها.<br>
+        الاستعارة تدعم الفهم — لا الحقيقة.
+      </p>
+    </div>
+
+    <!-- ═══ خاتمة ═══ -->
+    <div style="background:#1a1208;border-right:4px solid #f4c430;padding:14px 18px;
+         border-radius:6px;margin-top:16px;color:#ffe082;font-size:0.92rem;">
+      <b>🌹 وهذا ليس ضعفًا — هذا علم.</b><br>
+      كل نظرية عظيمة مرّت بهذه المرحلة:<br>
+      نيوتن احتاج قياسات — أينشتاين احتاج تجارب — داروين احتاج أحافير.<br><br>
+      أنت الآن في نفس المكان: عندك إطارا رياضيات.<br>
+      ينقصهما <b>تجربة واحدة</b> تحوّلهما من "خيال" إلى "علم".
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showFrames(){ document.getElementById('framesModal').style.display = 'block'; }
+function closeFrames(){ document.getElementById('framesModal').style.display = 'none'; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFrames(); });
+</script>
+
+
+
+<!-- في كل صفحة HTML -->
+
+<div id="header-placeholder"></div>
+<div id="footer-placeholder"></div>
+<script src="/js/file.js" defer></script>
+<script src="/js/menu.js" defer></script>
+</body>
+</html>
