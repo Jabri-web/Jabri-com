@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>الشجرة فوق · المثلث تحت · v4</title>
+<title>شجرة التوحيد · Tree of Unification · v4</title>
 <style>
   :root{
     --noor:#f4c430; --asl:#1a4d2e; --tall:#7fb08a;
@@ -50,6 +50,11 @@
   button:active{transform:scale(0.97)}
   button.active{background:var(--noor); color:#0a1a12;
     border-color:var(--noor); font-weight:600;}
+  button.lang-btn{background:#3a2e15; border-color:#7a5a1a;}
+  button.lang-btn:hover{background:#5a441a;}
+  button.nav-btn{background:#1a3a5a; border-color:#2e5a7a;
+    text-decoration:none; display:inline-flex; align-items:center;}
+  button.nav-btn:hover{background:#2e5a7a;}
   .stats{display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
     gap:8px; width:min(940px,100%);}
   .stat{background:var(--panel); border:1px solid var(--border);
@@ -76,45 +81,101 @@
 </head>
 <body>
 
-<h1>🌳 الشجرة فوق · المثلث تحت · v4</h1>
-<h2>قوس θ مطابق فوق وتحت — من العمودي لا من الأفقي</h2>
+<h1 id="titleTxt">🌳 شجرة التوحيد · الشجرة فوق · المثلث تحت</h1>
+<h2 id="subTxt">قوس θ مطابق فوق وتحت — من العمودي لا من الأفقي</h2>
 
 <div class="canvas-wrap">
   <canvas id="sim"></canvas>
 </div>
 
 <div class="controls">
+  <button id="langBtn" class="lang-btn" type="button">🌐 English</button>
   <button id="measureBtn" type="button">📏 قياس</button>
   <button id="sunBtn" type="button">🌞 حركة الشمس</button>
   <button id="resetBtn" type="button">⟲ العودة إلى 22.5°</button>
+  <a href="/tree/tree.html" class="nav-btn" id="navTree1">🌳 الشجرة</a>
+  <a href="/tree/tree3.html" class="nav-btn" id="navTree3">🌲 الشجرة 3</a>
+  <a href="/tree/hindara.html" class="nav-btn" id="navHindara">🏛️ هندسة</a>
 </div>
 
 <div class="stats">
   <div class="stat" id="statTheta">
-    <span class="lbl">زاوية θ (من العمودي)</span>
+    <span class="lbl" id="lblTheta">زاوية θ (من العمودي)</span>
     <span class="val" id="valTheta">22.5°</span>
   </div>
   <div class="stat" id="statRatio">
-    <span class="lbl">L / H (الظل ÷ الارتفاع)</span>
+    <span class="lbl" id="lblRatio">L / H (الظل ÷ الارتفاع)</span>
     <span class="val" id="valRatio">0.41421356</span>
   </div>
   <div class="stat" id="statTan">
-    <span class="lbl">tan(θ)</span>
+    <span class="lbl" id="lblTan">tan(θ)</span>
     <span class="val" id="valTan">0.41421356</span>
   </div>
   <div class="stat">
-    <span class="lbl">√2 − 1 (المرجع)</span>
+    <span class="lbl" id="lblRef">√2 − 1 (المرجع)</span>
     <span class="val">0.41421356</span>
   </div>
 </div>
 
-<div class="note">
+<div class="note" id="noteTxt">
   <b>الجديد في v4:</b> التاج والتسميات نسبية — لا تتضخم على أي شاشة. الشمس مثبّتة على خط الشعاع، فوق الشجرة بمسافة آمنة.<br>
   عند <b>θ = 22.5°</b> فقط: <code>L/H = √2 − 1</code>
 </div>
 
 <script>
 'use strict';
+
+// ═══════════════════════════════════════════════════════
+//  🌐 الترجمات
+// ═══════════════════════════════════════════════════════
+const STRINGS = {
+  ar: {
+    title:      '🌳 شجرة التوحيد · الشجرة فوق · المثلث تحت',
+    sub:        'قوس θ مطابق فوق وتحت — من العمودي لا من الأفقي',
+    langBtn:    '🌐 English',
+    measure:    '📏 قياس',
+    sunOn:      '🌞 إيقاف الحركة',
+    sunOff:     '🌞 حركة الشمس',
+    reset:      '⟲ العودة إلى 22.5°',
+    navTree1:   '🌳 الشجرة',
+    navTree3:   '🌲 الشجرة 3',
+    navHindara: '🏛️ هندسة',
+    lblTheta:   'زاوية θ (من العمودي)',
+    lblRatio:   'L / H (الظل ÷ الارتفاع)',
+    lblTan:     'tan(θ)',
+    lblRef:     '√2 − 1 (المرجع)',
+    noteHTML:   '<b>الجديد في v4:</b> التاج والتسميات نسبية — لا تتضخم على أي شاشة. الشمس مثبّتة على خط الشعاع، فوق الشجرة بمسافة آمنة.<br>عند <b>θ = 22.5°</b> فقط: <code>L/H = √2 − 1</code>',
+    canvasLight:'النور',
+    canvasTree: 'الشجرة',
+    canvasShadow:'الظل',
+    golden:     'اللحظة الذهبية',
+    bottomNote: 'Z + C + A = 1  ·  الشجرة فوق والمثلث تحت — نفس الهندسة، نفس الزاوية من العمودي',
+  },
+  en: {
+    title:      '🌳 Tree of Unification · Tree above · Triangle below',
+    sub:        'The θ arc matches above and below — measured from the vertical, not the horizontal',
+    langBtn:    '🌐 عربي',
+    measure:    '📏 Measure',
+    sunOn:      '🌞 Stop motion',
+    sunOff:     '🌞 Sun motion',
+    reset:      '⟲ Back to 22.5°',
+    navTree1:   '🌳 Tree',
+    navTree3:   '🌲 Tree 3',
+    navHindara: '🏛️ Geometry',
+    lblTheta:   'Angle θ (from vertical)',
+    lblRatio:   'L / H (shadow ÷ height)',
+    lblTan:     'tan(θ)',
+    lblRef:     '√2 − 1 (reference)',
+    noteHTML:   '<b>New in v4:</b> crown and labels are relative — they never overflow on any screen. The sun is pinned on the ray line, safely above the tree.<br>Only at <b>θ = 22.5°</b>: <code>L/H = √2 − 1</code>',
+    canvasLight:'Light',
+    canvasTree: 'Tree',
+    canvasShadow:'Shadow',
+    golden:     'Golden moment',
+    bottomNote: 'Z + C + A = 1  ·  Tree above and triangle below — same geometry, same angle from the vertical',
+  }
+};
+
+let LANG = 'ar';
 
 // ═══════════════════════════════════════════════════════
 //  إعدادات ثابتة
@@ -227,23 +288,21 @@ function stepSun(dt){
 //  الرسم
 // ═══════════════════════════════════════════════════════
 function draw(){
-  // ═══ أبعاد نسبية — لا ثوابت ═══
+  const S = STRINGS[LANG];
   const groundY  = H * 0.48;
   const px       = W * 0.42;
-  const treeH    = H * 0.26;              // ارتفاع الشجرة
+  const treeH    = H * 0.26;
   const sunR     = Math.min(W, H) * 0.028;
-  const TRI_GAP  = H * 0.11;              // فاصل بين الأرض والمثلث
+  const TRI_GAP  = H * 0.11;
 
   const theta       = state.theta;
   const L           = treeH * Math.tan(theta);
-  const tipY        = groundY - treeH;    // رأس الشجرة
+  const tipY        = groundY - treeH;
   const shadowTipX  = px + L;
 
-  // ═══ موقع الشمس — على امتداد شعاع يمر من رأس الشجرة ═══
   const sunY = Math.max(H * 0.06, tipY - H * 0.38);
   const sunX = px - (tipY - sunY) * Math.tan(theta);
 
-  // ═══ خلفية السماء ═══
   const sky = ctx.createLinearGradient(0,0,0,H);
   sky.addColorStop(0,   COLORS.sky1);
   sky.addColorStop(0.48,COLORS.sky2);
@@ -252,7 +311,6 @@ function draw(){
   ctx.fillStyle = sky;
   ctx.fillRect(0,0,W,H);
 
-  // ═══ نجوم ═══
   ctx.fillStyle = 'rgba(200,230,201,0.3)';
   for (let i = 0; i < 70; i++){
     const sx = (i * 137.5) % W;
@@ -260,14 +318,12 @@ function draw(){
     ctx.beginPath(); ctx.arc(sx, sy, 1, 0, Math.PI*2); ctx.fill();
   }
 
-  // ═══ الأرض ═══
   ctx.fillStyle = COLORS.earth1;
   ctx.fillRect(0, groundY, W, H - groundY);
   ctx.fillStyle = COLORS.earth2;
   ctx.fillRect(0, groundY + TRI_GAP * 0.7, W, H - groundY - TRI_GAP * 0.7);
   line(0, groundY, W, groundY, '#3a2a1a', 2);
 
-  // ═══ الشمس ═══
   const halo = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunR * 5);
   halo.addColorStop(0,   'rgba(244,196,48,0.9)');
   halo.addColorStop(0.35,'rgba(244,196,48,0.18)');
@@ -283,7 +339,6 @@ function draw(){
   ctx.arc(sunX - sunR*0.3, sunY - sunR*0.3, sunR*0.45, 0, Math.PI*2);
   ctx.fill();
 
-  // ═══ أشعة متوازية ═══
   const dirX = Math.sin(theta), dirY = Math.cos(theta);
   for (let i = -2; i <= 2; i++){
     const offX = i * (W * 0.09);
@@ -292,11 +347,8 @@ function draw(){
          'rgba(244,196,48,0.08)', 1);
   }
 
-  // ═══ شعاع الظل الرئيسي ═══
   line(px, tipY, shadowTipX, groundY, 'rgba(244,196,48,0.45)', 2, [6,6]);
 
-  // ═══ ظل الشجرة على الأرض ═══
-  // ظل الجذع
   ctx.fillStyle = 'rgba(0,0,0,0.7)';
   ctx.beginPath();
   ctx.moveTo(px - treeH*0.05, groundY);
@@ -305,25 +357,19 @@ function draw(){
   ctx.lineTo(shadowTipX - treeH*0.05, groundY + treeH*0.06);
   ctx.closePath();
   ctx.fill();
-  // ظل التاج
   ctx.fillStyle = 'rgba(0,0,0,0.5)';
   ctx.beginPath();
   ctx.ellipse(px + L * 0.55, groundY + treeH*0.045,
               L * 0.68, treeH*0.045, 0, 0, Math.PI*2);
   ctx.fill();
-  // نقطة نهاية ظل الرأس
   dot(shadowTipX, groundY, COLORS.gold, 6);
 
-  // ═══════════════════════════════════════════════════
-  //  الشجرة — كل شيء نسبي إلى treeH
-  // ═══════════════════════════════════════════════════
-  const trunkW    = treeH * 0.075;        // عرض الجذع
-  const trunkH    = treeH * 0.55;         // ارتفاع الجذع
+  const trunkW    = treeH * 0.075;
+  const trunkH    = treeH * 0.55;
   const trunkTopY = groundY - trunkH;
-  const crownR    = treeH * 0.20;         // نصف قطر التاج
-  const crownCY   = tipY + crownR * 1.15; // مركز التاج
+  const crownR    = treeH * 0.20;
+  const crownCY   = tipY + crownR * 1.15;
 
-  // الجذع
   ctx.fillStyle = COLORS.wood;
   ctx.beginPath();
   ctx.moveTo(px - trunkW, groundY);
@@ -333,7 +379,6 @@ function draw(){
   ctx.closePath();
   ctx.fill();
 
-  // تجاعيد الجذع
   ctx.strokeStyle = 'rgba(30,15,5,0.5)';
   ctx.lineWidth = 1;
   ctx.beginPath();
@@ -345,7 +390,6 @@ function draw(){
   ctx.lineTo(px + trunkW*0.45, groundY - trunkH*0.80);
   ctx.stroke();
 
-  // الفروع
   ctx.strokeStyle = COLORS.wood;
   ctx.lineWidth   = Math.max(4, treeH * 0.028);
   ctx.lineCap     = 'round';
@@ -358,7 +402,6 @@ function draw(){
                        px + crownR*1.1, crownCY + crownR*0.25);
   ctx.stroke();
 
-  // التاج — طبقة الظل الخلفية
   ctx.fillStyle = COLORS.leafDark;
   ctx.beginPath();
   ctx.arc(px, crownCY + 4, crownR + 2, 0, Math.PI*2);
@@ -366,7 +409,6 @@ function draw(){
   ctx.arc(px + crownR*0.65, crownCY + crownR*0.15, crownR*0.78, 0, Math.PI*2);
   ctx.fill();
 
-  // التاج الرئيسي
   ctx.fillStyle = COLORS.leaf;
   ctx.beginPath();
   ctx.arc(px, crownCY, crownR, 0, Math.PI*2);
@@ -375,7 +417,6 @@ function draw(){
   ctx.arc(px, crownCY - crownR*0.35, crownR*0.82, 0, Math.PI*2);
   ctx.fill();
 
-  // لمعات التاج
   ctx.fillStyle = COLORS.leafHi;
   ctx.beginPath();
   ctx.arc(px - crownR*0.25, crownCY - crownR*0.35, crownR*0.5, 0, Math.PI*2);
@@ -386,7 +427,6 @@ function draw(){
   ctx.arc(px + crownR*0.15, crownCY - crownR*0.65, crownR*0.12, 0, Math.PI*2);
   ctx.fill();
 
-  // ═══ قوس θ في الشجرة — من العمودي إلى الشعاع ═══
   const sunDirFromTip = Math.atan2(sunY - tipY, sunX - px);
   const arcR = treeH * 0.20;
   ctx.save();
@@ -402,16 +442,13 @@ function draw(){
   const tly = tipY + Math.sin(treeArcMid) * (arcR + treeH*0.13);
   mono(`θ=${(theta*180/Math.PI).toFixed(1)}°`, tlx, tly, COLORS.gold, 12, 'center', 'bold');
 
-  // ═══ التسميات — مواقع آمنة بعيدًا عن التاج ═══
-  txt('النور', sunX, sunY - sunR - 20, COLORS.gold, 12);
-  txt('الشجرة', px - crownR*2.0, crownCY, COLORS.mist, 12);
-  txt('الظل', px + L * 0.55, groundY - 16, '#ffe082', 12);
+  txt(S.canvasLight, sunX, sunY - sunR - 20, COLORS.gold, 12);
+  txt(S.canvasTree, px - crownR*2.0, crownCY, COLORS.mist, 12);
+  txt(S.canvasShadow, px + L * 0.55, groundY - 16, '#ffe082', 12);
 
-  // خط رأسي باهت — يربط الشجرة بالمثلث
   line(px, tipY, px, groundY + TRI_GAP + treeH,
        'rgba(127,176,138,0.12)', 1, [4,9]);
 
-  // ═══ المثلث تحت الأرض ═══
   const triTopY   = groundY + TRI_GAP;
   const triBotY   = triTopY + treeH;
   const triRightX = px + L;
@@ -420,7 +457,6 @@ function draw(){
   line(px, triTopY, triRightX, triTopY, COLORS.tall, 3);
   line(px, triBotY, triRightX, triTopY, COLORS.gold, 3.5);
 
-  // علامة الزاوية القائمة
   const mSize = Math.max(10, treeH * 0.07);
   ctx.strokeStyle = COLORS.gold;
   ctx.lineWidth = 1.8;
@@ -430,7 +466,6 @@ function draw(){
   ctx.lineTo(px + mSize, triTopY);
   ctx.stroke();
 
-  // قوس θ في المثلث
   const hypDir = Math.atan2(triTopY - triBotY, triRightX - px);
   const arcR2  = treeH * 0.22;
   ctx.save();
@@ -446,12 +481,10 @@ function draw(){
   const trly = triBotY + Math.sin(triArcMid) * (arcR2 + treeH*0.16);
   mono(`θ=${(theta*180/Math.PI).toFixed(1)}°`, trlx, trly, COLORS.gold, 12, 'center', 'bold');
 
-  // نقاط رؤوس المثلث
   dot(px, triTopY, COLORS.gold, 7);
   dot(px, triBotY, COLORS.mist, 6);
   dot(triRightX, triTopY, COLORS.mist, 6);
 
-  // تسميات المثلث
   txt('Z', px - treeH*0.13, (triTopY + triBotY)/2, COLORS.tall, 18, 'center', 'bold');
   mono(treeH.toFixed(0), px - treeH*0.30, (triTopY + triBotY)/2 + 22, COLORS.dim, 11);
 
@@ -461,19 +494,16 @@ function draw(){
   txt('A', (px + triRightX)/2 + treeH*0.10,
       (triTopY + triBotY)/2 - 14, COLORS.gold, 18, 'center', 'bold');
 
-  // ═══ أداة القياس ═══
   if (state.showMeasure){
     const cM = COLORS.measure;
     const offX = treeH * 0.16;
 
-    // H (رأسي)
     line(px - offX, tipY, px - offX, groundY, cM, 1.5, [5,4]);
     line(px - offX*1.2, tipY,    px - offX*0.8, tipY,    cM, 1.5);
     line(px - offX*1.2, groundY, px - offX*0.8, groundY, cM, 1.5);
     mono(`H=${treeH.toFixed(0)}px`, px - offX*2, (tipY + groundY)/2,
          cM, 11, 'center', 'bold');
 
-    // L (أفقي)
     const yL = groundY + treeH*0.16;
     line(px, yL, shadowTipX, yL, cM, 1.5, [5,4]);
     line(px,         yL - treeH*0.03, px,         yL + treeH*0.03, cM, 1.5);
@@ -481,12 +511,10 @@ function draw(){
     mono(`L=${L.toFixed(2)}px`, (px + shadowTipX)/2, yL + treeH*0.07,
          cM, 11, 'center', 'bold');
 
-    // النسبة
     mono(`L/H = ${(L/treeH).toFixed(6)}`, (px + shadowTipX)/2,
          yL + treeH*0.17, cM, 12, 'center', 'bold');
   }
 
-  // ═══ الشريط السفلي ═══
   const ratio    = L / treeH;
   const isGolden = Math.abs(theta - ANGLE_REF) < 0.005;
 
@@ -496,14 +524,13 @@ function draw(){
   ctx.textBaseline = 'middle';
 
   const mainText = isGolden
-    ? `tan(θ) = ${ratio.toFixed(8)} = √2 − 1  ✓  اللحظة الذهبية`
+    ? `tan(θ) = ${ratio.toFixed(8)} = √2 − 1  ✓  ${S.golden}`
     : `tan(θ) = ${ratio.toFixed(6)}  ·  √2 − 1 = 0.41421356`;
   ctx.fillText(mainText, W/2, H - 42);
 
   ctx.fillStyle = COLORS.dim;
   ctx.font = "12px 'Segoe UI', Tahoma, sans-serif";
-  ctx.fillText('Z + C + A = 1  ·  الشجرة فوق والمثلث تحت — نفس الهندسة، نفس الزاوية من العمودي',
-               W/2, H - 16);
+  ctx.fillText(S.bottomNote, W/2, H - 16);
 
   updateStats(theta, ratio, isGolden);
 }
@@ -539,11 +566,49 @@ function loop(t){
 }
 
 // ═══════════════════════════════════════════════════════
+//  🌐 تبديل اللغة
+// ═══════════════════════════════════════════════════════
+function setLang(lang){
+  LANG = lang;
+  const S = STRINGS[lang];
+  const isAr = lang === 'ar';
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir  = isAr ? 'rtl' : 'ltr';
+  document.title = isAr ? 'شجرة التوحيد · Tree of Unification' : 'Tree of Unification · شجرة التوحيد';
+
+  document.getElementById('titleTxt').textContent = S.title;
+  document.getElementById('subTxt').textContent   = S.sub;
+  document.getElementById('langBtn').textContent  = S.langBtn;
+  document.getElementById('lblTheta').textContent = S.lblTheta;
+  document.getElementById('lblRatio').textContent = S.lblRatio;
+  document.getElementById('lblTan').textContent   = S.lblTan;
+  document.getElementById('lblRef').textContent   = S.lblRef;
+  document.getElementById('noteTxt').innerHTML    = S.noteHTML;
+
+  // روابط التنقل
+  document.getElementById('navTree1').textContent   = S.navTree1;
+  document.getElementById('navTree3').textContent   = S.navTree3;
+  document.getElementById('navHindara').textContent = S.navHindara;
+
+  // زر الشمس
+  const sunBtn = document.getElementById('sunBtn');
+  sunBtn.textContent = state.sunAnimating ? S.sunOn : S.sunOff;
+
+  // زر القياس
+  document.getElementById('measureBtn').textContent = S.measure;
+
+  // زر العودة
+  document.getElementById('resetBtn').textContent = S.reset;
+}
+
+// ═══════════════════════════════════════════════════════
 //  الأزرار
 // ═══════════════════════════════════════════════════════
 const measureBtn = document.getElementById('measureBtn');
 const sunBtn     = document.getElementById('sunBtn');
 const resetBtn   = document.getElementById('resetBtn');
+const langBtn    = document.getElementById('langBtn');
 
 measureBtn.addEventListener('click', () => {
   state.showMeasure = !state.showMeasure;
@@ -553,7 +618,7 @@ measureBtn.addEventListener('click', () => {
 sunBtn.addEventListener('click', () => {
   state.sunAnimating = !state.sunAnimating;
   sunBtn.classList.toggle('active', state.sunAnimating);
-  sunBtn.textContent = state.sunAnimating ? '🌞 إيقاف الحركة' : '🌞 حركة الشمس';
+  sunBtn.textContent = state.sunAnimating ? STRINGS[LANG].sunOn : STRINGS[LANG].sunOff;
   if (!state.sunAnimating) state.theta = ANGLE_REF;
 });
 
@@ -562,13 +627,18 @@ resetBtn.addEventListener('click', () => {
   state.sunPhase     = 0;
   state.theta        = ANGLE_REF;
   sunBtn.classList.remove('active');
-  sunBtn.textContent = '🌞 حركة الشمس';
+  sunBtn.textContent = STRINGS[LANG].sunOff;
+});
+
+langBtn.addEventListener('click', () => {
+  setLang(LANG === 'ar' ? 'en' : 'ar');
 });
 
 // ═══════════════════════════════════════════════════════
 //  الإقلاع
 // ═══════════════════════════════════════════════════════
 resize();
+setLang('ar');
 requestAnimationFrame(loop);
 </script>
 
