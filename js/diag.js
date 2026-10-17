@@ -1,38 +1,47 @@
 /* ============================================================
-   /js/diag.js — أداة التشخيص v1.1
-   - يُحمَّل فقط في index.html
-   - البوابة مغلقة افتراضياً (5 أسطر فقط)
+   /js/diag.js — أداة التشخيص v1.2 (محصنة للـ SEO)
+   - تعمل فقط في الصفحة الرئيسية (index.html أو /)
+   - لا تُنشئ أي طلبات شبكة إذا كانت معطلة
    - تفعيل بـ ?diag=1 أو DIAG.show()
-   - إيقاف بـ DIAG.off() أو زر "إيقاف" في اللوحة
    ============================================================ */
 (function () {
   'use strict';
 
-  // ✅ إصلاح: === '1' بدل truthy
-  const shouldRun = new URLSearchParams(location.search).has('diag') 
-                 || localStorage.getItem('jabri_diag_on') === '1';
+  // 1. التحقق من أننا في الصفحة الرئيسية فقط (لمنع جوجل من فحصها في صفحات أخرى)
+  const isHomePage = location.pathname === '/' || location.pathname.endsWith('/index.html') || location.pathname.endsWith('/index');
+  
+  // 2. التحقق من وجود طلب التشخيص
+  const hasDiagParam = new URLSearchParams(location.search).has('diag');
+  const isDiagEnabled = localStorage.getItem('jabri_diag_on') === '1';
+  
+  // شرط التشغيل: يجب أن نكون في الرئيسية + (المتغير موجود أو التفعيل محفوظ)
+  const shouldRun = isHomePage && (hasDiagParam || isDiagEnabled);
 
+  // إذا لم تتحقق الشروط، نترك أدوات بسيطة للتحكم ونخرج فوراً (بدون أي استهلاك للموارد)
   if (!shouldRun) {
     window.DIAG = {
       show: function() {
         try { localStorage.setItem('jabri_diag_on', '1'); } catch(e){}
-        location.reload();
+        if (location.pathname !== '/' && !location.pathname.includes('index.html')) {
+          alert('التشخيص يعمل فقط في الصفحة الرئيسية (index.html)');
+        } else {
+          location.reload();
+        }
       },
       off: function() {
         try { localStorage.removeItem('jabri_diag_on'); } catch(e){}
         location.reload();
       },
-      version: '1.1-off'
+      version: '1.2-off'
     };
-    console.log('🔍 للتشخيص: أضف ?diag=1 أو نفّذ DIAG.show()');
-    return;
+    return; // الخروج المبكر يمنع أي تداخل مع الصفحة
   }
 
   if (window.__DIAG_LOADED) return;
   window.__DIAG_LOADED = true;
 
   const DIAG = {
-    version: '1.1',
+    version: '1.2',
     net: { online: navigator.onLine, type: 'unknown', downlink: null, rtt: null, events: [] },
     requests: [],
     errors: [],
@@ -64,6 +73,7 @@
     updateBadge();
   });
 
+  // اعتراض طلبات الشبكة (Fetch)
   if (window.fetch && !window.__DIAG_FETCH_WRAPPED) {
     const origFetch = window.fetch.bind(window);
     window.fetch = async function (...args) {
@@ -84,6 +94,7 @@
     window.__DIAG_FETCH_WRAPPED = true;
   }
 
+  // اعتراض الأخطاء
   window.addEventListener('error', (e) => {
     if (e.target && ['IMG','VIDEO','AUDIO'].indexOf(e.target.tagName) !== -1) return;
     DIAG.errors.push({ msg: e.message || 'Unknown error', src: shortUrl(e.filename || ''), line: e.lineno || 0, col: e.colno || 0, time: Date.now() });
@@ -96,6 +107,7 @@
     updateBadge();
   });
 
+  // توقيتات التحميل
   document.addEventListener('DOMContentLoaded', () => { DIAG.timings.dcl = Math.round(performance.now()); });
   window.addEventListener('load', () => { DIAG.timings.load = Math.round(performance.now()); updateBadge(); });
   document.addEventListener('headerLoaded', () => { DIAG.timings.headerLoaded = Math.round(performance.now()); updateBadge(); });
@@ -119,6 +131,7 @@
     updateBadge();
     return badge;
   }
+
   function updateBadge() {
     if (!badge) return;
     const netIcon = DIAG.net.online ? '🟢' : '🔴';
@@ -195,7 +208,7 @@
   function start() {
     ensureBadge();
     if (new URLSearchParams(location.search).get('diag') === '1') setTimeout(openPanel, 800);
-    console.log('%c🔍 DIAG v1.1 جاهز','color:#6ae3ff;font-weight:700');
+    console.log('%c🔍 DIAG v1.2 جاهز','color:#6ae3ff;font-weight:700');
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
