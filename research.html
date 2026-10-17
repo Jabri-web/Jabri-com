@@ -6,10 +6,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&amp;display=swap" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- ===== Canonical + hreflang ===== -->
-<link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/research.html" />
-<link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/research.html" />
+<!-- ===== Canonical + hreflang (Self-Referencing Fix) ===== -->
 <link rel="canonical" href="https://jabri-com.vercel.app/research.html" />
+<link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/research.html" />
+<link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/research.html" />
+<link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/research.html" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
 
 <title>بحوث الجبري | 13 مشروع | نظرية السندباد Z+C+A=1 | روابط و DOIs محدثة 2026</title>
@@ -555,7 +557,7 @@ body.en .table-wrapper .sub{padding-left:25px;padding-right:0}
     if (localStorage.getItem('lang') === 'en') toggleLang();
   });
 
-  console.log('✅ research.html v5.0.1-ready — 13 projects with DOIs + visuals');
+  console.log('✅ research.html v5.5.1 — 13 projects with DOIs + visuals + SEO Fix');
 </script>
 
 <!-- ===== القائمة العلوية ===== -->
@@ -627,13 +629,6 @@ body.en .table-wrapper .sub{padding-left:25px;padding-right:0}
         <span style="font-size:0.9rem;">🆔</span> ORCID
     </a>
 </div>
-
-
-
-
-
-
-
 
 <!-- TRUTH ABOUT XP=21 - FINAL v5.0.2 - REAL DATA 42/44 INCLUDED -->
 <div style="margin:25px 12px; padding:18px; background:#FFFFFF; border:3px solid #2E7D32; border-radius:10px; color:#111111; font-family: 'Cairo', Tahoma, sans-serif; line-height:1.7; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
@@ -722,10 +717,6 @@ for xp in [5,10,18,21,42,44,50]:
 </p>
 
 </div>
-
-
-
-
 
 </body>
 </html>
