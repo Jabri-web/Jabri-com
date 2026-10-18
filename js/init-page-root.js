@@ -1,12 +1,12 @@
 // ================================================================
 // 🛡️ init-page-root.js
-// Version: 8.4.0 — "المدير الواحد" (The Master Loader)
+// Version: 8.4.1 — "المدير الواحد" (The Master Loader) + diag.js
 // Build:   2026-10-17
 // IDEA:    Single Entry Point — Z + C + A = 1
 // ================================================================
 (function() {
   'use strict';
-  const VERSION    = '8.4.0';
+  const VERSION    = '8.4.1';
   const BUILD_DATE = '2026-10-17';
   const BASE_URL   = 'https://jabri-com.vercel.app';
 
@@ -15,6 +15,7 @@
     '/js/config.js',      // 1. المرعبة: إصلاح المسارات المطلقة (image, publish, game)
     '/js/file.js'         // 2. فهرس الملفات
     // ملاحظة: menu.js تأجل إلى ما بعد تحميل الهيدر
+    // ملاحظة: diag.js يتم استدعاؤه شرطياً في دالة init()
   ];
 
   const DEFAULT_CONFIG = {
@@ -41,7 +42,6 @@
   // ============================================================
   function loadScript(src) {
     return new Promise(resolve => {
-      // منع التكرار إذا كان محملاً مسبقاً
       if (document.querySelector(`script[src^="${src}"]`)) return resolve();
       
       const s = document.createElement('script');
@@ -53,7 +53,7 @@
       };
       s.onerror = () => {
         console.warn(`⚠️ فشل تحميل: ${src}`);
-        resolve(); // نكمل حتى لو فشل أحد الملفات
+        resolve();
       };
       document.head.appendChild(s);
     });
@@ -88,8 +88,8 @@
     FILE_LIST.loading = (async () => {
       try{
         try{
-          const cached     = localStorage.getItem('jabri_filelist_v840');
-          const cachedTime = parseInt(localStorage.getItem('jabri_filelist_time_v840') || '0', 10);
+          const cached     = localStorage.getItem('jabri_filelist_v841');
+          const cachedTime = parseInt(localStorage.getItem('jabri_filelist_time_v841') || '0', 10);
           if(cached && (Date.now() - cachedTime < CONFIG.fileListTTL)){
             JSON.parse(cached).forEach(p => {
               const full = p.startsWith('/') ? p : '/' + p;
@@ -125,8 +125,8 @@
         });
 
         try{
-          localStorage.setItem('jabri_filelist_v840', JSON.stringify([...FILE_LIST.files]));
-          localStorage.setItem('jabri_filelist_time_v840', String(Date.now()));
+          localStorage.setItem('jabri_filelist_v841', JSON.stringify([...FILE_LIST.files]));
+          localStorage.setItem('jabri_filelist_time_v841', String(Date.now()));
         }catch(e){}
 
         FILE_LIST.loaded = true;
@@ -217,7 +217,7 @@
 
   function injectBarFix(){
     const style = document.createElement('style');
-    style.id = 'jabri-bar-fix-v840';
+    style.id = 'jabri-bar-fix-v841';
     style.textContent = `
       #header-placeholder{
         position:fixed!important; top:0!important; left:0!important; right:0!important;
@@ -365,7 +365,7 @@
       '/image/jabri.mp4', '/image/sindbad-brdoni.mp4', '/image/zamel2.mp4',
       '/image/heaven3.mp4', '/image/zaml.mp4', '/hadrami.mp3'
     ],
-    mode: 'rotate', sessionKey: 'jabri_audio_idx_v840', played: false, userDisabled: false, currentEl: null,
+    mode: 'rotate', sessionKey: 'jabri_audio_idx_v841', played: false, userDisabled: false, currentEl: null,
     getFileForNow(){
       if(this.mode === 'hourly'){ return this.files[Math.min(Math.floor(new Date().getHours() / 4), this.files.length - 1)]; }
       if(this.mode === 'random'){ return this.files[Math.floor(Math.random() * this.files.length)]; }
@@ -402,7 +402,7 @@
         events.forEach(ev => window.removeEventListener(ev, handler, false));
       };
       events.forEach(ev => window.addEventListener(ev, handler, { capture:false, passive:true }));
-      console.log(`🎵 HOURLY_AUDIO v840 — ${this.mode} — بانتظار تفاعل`);
+      console.log(`🎵 HOURLY_AUDIO v841 — ${this.mode} — بانتظار تفاعل`);
     },
     stop(){ if(this.currentEl){ try{ this.currentEl.pause(); this.currentEl.remove(); }catch(e){} } this.currentEl = null; this.played = true; this.userDisabled = true; try{ localStorage.setItem('jabri_sound_off', '1'); }catch(e){} },
     enable(){ try{ localStorage.removeItem('jabri_sound_off'); }catch(e){} this.played = false; this.userDisabled = false; this.arm(); },
@@ -417,25 +417,35 @@
     createSplash();
     injectBarFix();
     
-    // 2. تحميل "المرعبة" (config.js + file.js) بالترتيب
+    // 2. تحميل "المرعبة" الأساسية (config.js + file.js)
     for (const script of CORE_SCRIPTS) {
       await loadScript(script);
     }
 
-    // 3. تحميل الهيدر (يجب أن يسبق menu.js)
+    // 3. تحميل أداة التشخيص شرطياً (قبل تحميل الهيدر لاصطياد طلباته)
+    const isHomePage = location.pathname === '/' || location.pathname.endsWith('/index.html') || location.pathname.endsWith('/index');
+    let isDiagEnabled = false;
+    try { isDiagEnabled = localStorage.getItem('jabri_diag_on') === '1'; } catch(e) {}
+    const hasDiagParam = new URLSearchParams(location.search).has('diag');
+    
+    if (isHomePage && (hasDiagParam || isDiagEnabled)) {
+      await loadScript('/js/diag.js');
+    }
+
+    // 4. تحميل الهيدر (يجب أن يسبق menu.js)
     if(CONFIG.header) {
       await loadPartial('header-placeholder', '/header.html', 'headerLoaded', true);
     }
 
-    // 4. تحميل القائمة (بعد أن أصبح الهيدر جاهزاً في الـ DOM)
+    // 5. تحميل القائمة (بعد أن أصبح الهيدر جاهزاً في الـ DOM)
     await loadScript('/js/menu.js');
 
-    // 5. تحميل الفوتر
+    // 6. تحميل الفوتر
     if(CONFIG.footer) {
       await loadPartial('footer-placeholder', '/footer.html', 'footerLoaded', false);
     }
 
-    // 6. باقي العمليات
+    // 7. باقي العمليات
     if(CONFIG.music) HOURLY_AUDIO.arm();
     if(CONFIG.autoFixLinks) autoFixLinks();
     setTimeout(() => detect404(), 800);
@@ -461,5 +471,5 @@
   window.switchLanguage = toggleLang;
   window.toggleLanguage = toggleLang;
 
-  console.log(`✅ v${VERSION} — "المدير الواحد" جاهز — ${BUILD_DATE}`);
+  console.log(`✅ v${VERSION} — "المدير الواحد" + diag جاهز — ${BUILD_DATE}`);
 })();
