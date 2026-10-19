@@ -2,8 +2,70 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+
+<!-- ═══════════════════════════════════════════════════════
+     ⓪ القالب الذهبي (الأيقونات - مسارات مطلقة)
+     ═══════════════════════════════════════════════════════ -->
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="shortcut icon" href="/icon-192.png">
+<link rel="icon" href="/image/icon-192.png" type="image/png">
+<link rel="manifest" href="/manifest.json">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>بروتوكول القياس الميداني — ZX · v2</title>
+<meta name="theme-color" content="#0a1410">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U">
+
+<!-- ═══════════════════════════════════════════════════════
+     ① SEO & Canonical
+     ═══════════════════════════════════════════════════════ -->
+<title>بروتوكول القياس الميداني — ZX | واحة الجبري</title>
+<meta name="description" content="أداة القياس الميداني لنظرية ZX. أدخل بيانات الأشجار (H, h, r, d, L) لفحص الفرضية: هل توجد نسبة في الشجرة ≈ √2 − 1 ≈ 0.414؟" />
+<meta name="author" content="م/ عبدالله محمد ناصر الجبري">
+
+<link rel="canonical" href="https://jabri-com.vercel.app/tree/tree3.html" />
+<link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree3.html" />
+<link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/tree3.html" />
+
+<!-- ═══════════════════════════════════════════════════════
+     ② Open Graph & Twitter
+     ═══════════════════════════════════════════════════════ -->
+<meta property="og:locale" content="ar_YE">
+<meta property="og:type" content="website">
+<meta property="og:title" content="بروتوكول القياس الميداني — ZX | واحة الجبري">
+<meta property="og:description" content="أداة القياس الميداني لنظرية ZX. اختبر فرضية النسبة الفضية √2 − 1 في الأشجار الحقيقية.">
+<meta property="og:url" content="https://jabri-com.vercel.app/tree/tree3.html">
+<meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
+<meta property="og:site_name" content="واحة الجبري">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@JabriAbdulla1">
+<meta name="twitter:title" content="بروتوكول القياس الميداني — ZX">
+<meta name="twitter:description" content="أداة لتحليل النسب الهندسية للأشجار ومقارنتها بنظرية Z+C+A=1.">
+<meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
+
+<!-- ═══════════════════════════════════════════════════════
+     ③ Schema.org (تطبيق ويب تفاعلي)
+     ═══════════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "بروتوكول القياس الميداني — ZX",
+  "url": "https://jabri-com.vercel.app/tree/tree3.html",
+  "description": "أداة لتحليل النسب الهندسية للأشجار ومقارنتها بالنظرية (√2 - 1).",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "All",
+  "author": {
+    "@type": "Person",
+    "name": "م/ عبدالله محمد ناصر الجبري",
+    "url": "https://jabri-com.vercel.app/"
+  }
+}
+</script>
+
 <style>
   :root{
     --gold:#f4c430; --green:#7fb08a; --dark:#0a1a12;
@@ -133,9 +195,52 @@
   .chip .cnt{
     opacity:0.7;font-size:0.7rem;margin-inline-start:4px;
   }
+
+  /* ═══ شريط التنقل بين صفحات الشجرة ═══ */
+  .tree-nav{
+    width:100%; max-width: 600px; margin: 0 auto 20px auto;
+    background:#0a1a12; border:1px solid var(--border);
+    border-radius:14px; padding:12px 16px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;
+    box-shadow:0 10px 30px -15px #000;
+  }
+  .nav-brand{ color:var(--gold); font-weight:700; font-size:0.95rem; letter-spacing:1px; white-space:nowrap; }
+  .nav-links{ display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; flex:1; }
+  .nav-link{
+    display:inline-flex; align-items:center; gap:6px;
+    background:#132a1d; color:#a5d6a7; text-decoration:none;
+    padding:8px 14px; border-radius:8px; border:1px solid var(--border);
+    font-size:0.85rem; transition:.2s; white-space:nowrap;
+  }
+  .nav-link:hover{ background:#1f3a2b; color:#e8f5e9; border-color:#2e6b45; }
+  .nav-link.active{ background:var(--gold); color:#0a1a12; border-color:var(--gold); font-weight:700; cursor:default; }
+  .nav-link.active:hover{ background:var(--gold); color:#0a1a12; }
+  
+  @media (max-width:600px){
+    .tree-nav{ flex-direction:column; align-items:stretch; text-align:center; }
+    .nav-brand{ text-align:center; }
+    .nav-links{ justify-content:center; }
+    .nav-link{ font-size:0.8rem; padding:7px 10px; }
+  }
 </style>
 </head>
 <body>
+
+<!-- ═══════════ شريط التنقل بين الملفات ═══════════ -->
+<nav class="tree-nav" aria-label="التنقل بين ملفات المشروع">
+  <span class="nav-brand">🌳 مشروع الشجرة</span>
+  <div class="nav-links">
+    <a href="/tree/tree.html" class="nav-link">
+      <span class="nav-icon">📖</span> الإطار الكامل
+    </a>
+    <a href="/tree/tree2.html" class="nav-link">
+      <span class="nav-icon">🌀</span> المحاكاة
+    </a>
+    <a href="/tree/tree3.html" class="nav-link active" aria-current="page">
+      <span class="nav-icon">📏</span> القياس الميداني
+    </a>
+  </div>
+</nav>
 
 <h1>🌳 بروتوكول القياس الميداني</h1>
 <h2>اختبار الفرضية: هل توجد نسبة في الشجرة ≈ √2 − 1 ≈ 0.414 ؟</h2>
@@ -771,5 +876,11 @@ renderStats();
 updateLiveRatios();
 </script>
 
+<!-- في كل صفحة HTML -->
+<div id="header-placeholder"></div>
+<div id="footer-placeholder"></div>
+<script src="/js/file.js" defer></script>
+<script src="/js/init-page-root.js" defer></script>
+<script src="/js/menu.js" defer></script>
 </body>
 </html>
