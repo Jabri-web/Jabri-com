@@ -2,10 +2,22 @@
 <html lang="ar" dir="rtl">
 <head>
   
+  <meta charset="UTF-8" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⓪ حل مشكلة الأيقونة (يظهر icon-192.png في قوقل)
+       ═══════════════════════════════════════════════════════ -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+  <link rel="shortcut icon" href="/icon-192.png">
+  <!-- احتفظ بنسختين - في الروت وفي image عشان قوقل ما يضيع -->
+  <link rel="icon" href="/image/icon-192.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
+
   <!-- ═══════════════════════════════════════════════════════
          ① أساسيات — ثابتة
          ═══════════════════════════════════════════════════════ -->
-  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0a0a0f">
   <meta name="mobile-web-app-capable" content="yes">
@@ -61,7 +73,7 @@
   <meta property="og:image:alt" content="واحة الجبري — Heaven Al-Jabri" />
 
   <!-- ═══════════════════════════════════════════════════════
-         ⑤ Twitter Card — مع site & creator (من قالب journal)
+         ⑤ Twitter Card
          ═══════════════════════════════════════════════════════ -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@JabriAbdulla1" />
@@ -71,7 +83,7 @@
   <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
 
   <!-- ═══════════════════════════════════════════════════════
-         ⑥ Google News + Article Meta (من قالب journal)
+         ⑥ Google News + Article Meta
          ═══════════════════════════════════════════════════════ -->
   <meta name="news_keywords" content="واحة الجبري, تراث اليمن, Z(x), نظرية السندباد, عبدالله الجبري" />
   <meta property="article:publisher" content="https://jabri-com.vercel.app/" />
@@ -81,12 +93,11 @@
   <meta property="article:section" content="علوم وتكنولوجيا" />
   
   <!-- ═══════════════════════════════════════════════════════
-         ⑦ الأيقونات
+         ⑦ الأيقونات (تم التحديث)
          ═══════════════════════════════════════════════════════ -->
-  <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/image/Yemen2026.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/image/Yemen2026.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/image/Yemen2026.png">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   
   <!-- ═══════════════════════════════════════════════════════
@@ -98,7 +109,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   
   <!-- ═══════════════════════════════════════════════════════
-         ⑨ Schema.org — @graph موحد (قالب journal)
+         ⑨ Schema.org — @graph موحد
          ═══════════════════════════════════════════════════════ -->
   <script type="application/ld+json">
     {
@@ -128,7 +139,7 @@
         "alternateName": ["Heaven Al-Jabri","Jabri Oasis"],
         "legalName": "واحة الجبري",
         "url": "https://jabri-com.vercel.app/",
-        "logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/image/Jabri-photo.webp","width": 1200,"height": 630},
+        "logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/icon-192.png","width": 192,"height": 192},
         "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
         "description": "واحة الجبري — منصة علمية وثقافية لتوثيق تراث اليمن العريق وأبحاث الرياضيات والفيزياء النظرية (نظرية السندباد الموحدة Z+C+A=1).",
         "foundingDate": "2026",
@@ -212,7 +223,7 @@
   </script>
 
   <!-- ═══════════════════════════════════════════════════════
-         ⑪ FAQPage — من قالب journal (أسئلة شائعة)
+         ⑪ FAQPage
          ═══════════════════════════════════════════════════════ -->
   <script type="application/ld+json">
   {
