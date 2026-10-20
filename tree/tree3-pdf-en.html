@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⓪ Icons
+       ═══════════════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+  <link rel="shortcut icon" href="/icon-192.png">
+  <link rel="icon" href="/image/icon-192.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- ═══════════════════════════════════════════════════════
+       ① Basics
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ② Ownership
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:site_name" content="Heaven Al-Jabri">
+  <meta name="application-name" content="Heaven Al-Jabri">
+  <meta name="apple-mobile-web-app-title" content="Statistical Equivalence Report">
+  <meta name="author" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="owner" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="publisher" content="Heaven Al-Jabri">
+  <meta name="creator" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="designer" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="developer" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="editor" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="source" content="Heaven Al-Jabri">
+  <meta name="origin" content="Sana'a, Yemen">
+  <meta name="copyright" content="© 2026 Eng. Abdulla Al-Jabri — All rights reserved">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ③ SEO — Core
+       ═══════════════════════════════════════════════════════ -->
+  <title>Statistical Analysis Report — Testing Crown Ratio Equivalence with √2−1 | TOST | Heaven Al-Jabri</title>
+  <meta name="description" content="A full academic report on the TOST statistical equivalence test between the crown ratio (H−h)/H in mango trees and the mathematical value √2−1 = tan(π/8) ≈ 0.414214. Sample n=5, Sho'ub Sana'a, 2026-10-14. Mean=0.41297, SD=0.00845, CI90%=[0.40491, 0.42102], p_TOST=0.000801. Exploratory analysis not pre-registered." />
+  <meta name="keywords" content="Statistical Report, TOST, Equivalence Testing, Crown Ratio, √2−1, Silver Ratio, tan(pi/8), Mango Trees, Sho'ub Sana'a, p-value, Confidence Interval, tree3-pdf-en, Z+C+A=1" />
+
+  <link rel="canonical" href="https://jabri-com.vercel.app/tree/tree3-pdf-en.html" />
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree3-pdf.html" />
+  <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/tree/tree3-pdf-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/tree3-pdf-en.html" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ④ Open Graph
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Statistical Analysis Report — Testing Crown Ratio Equivalence with √2−1" />
+  <meta property="og:description" content="Full TOST report: Mean=0.41297, SD=0.00845, p_TOST=0.000801. Sample n=5 mango trees, Sana'a. Exploratory analysis." />
+  <meta property="og:url" content="https://jabri-com.vercel.app/tree/tree3-pdf-en.html" />
+  <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Statistical Analysis Report — Crown Ratio √2−1" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑤ Twitter Card
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@JabriAbdulla1" />
+  <meta name="twitter:creator" content="@JabriAbdulla1" />
+  <meta name="twitter:title" content="Statistical Analysis Report — Crown Ratio √2−1 (TOST)" />
+  <meta name="twitter:description" content="Mean=0.41297, SD=0.00845, p_TOST=0.000801. Exploratory analysis of n=5 mango trees in Sana'a." />
+  <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑥ Article Meta
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="news_keywords" content="TOST, Equivalence Testing, Crown Ratio, √2−1, Mango Trees, Sho'ub Sana'a" />
+  <meta property="article:publisher" content="https://jabri-com.vercel.app/" />
+  <meta property="article:author" content="https://jabri-com.vercel.app/Author-cv.html" />
+  <meta property="article:published_time" content="2026-10-14T00:00:00+03:00" />
+  <meta property="article:modified_time" content="2026-10-21T00:00:00+03:00" />
+  <meta property="article:section" content="Science and Technology" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑦ Schema.org — Unified @graph (Academic Report)
+       ═══════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://jabri-com.vercel.app/#jabri",
+        "name": "Eng. Abdulla Mohammed Nasser Al-Jabri",
+        "alternateName": ["Heaven Al-Jabri","Abdulla Al-Jabri","Sindbad Yemen"],
+        "givenName": "Abdulla","familyName": "Al-Jabri","honorificPrefix": "Eng.","gender": "Male",
+        "nationality": { "@type": "Country", "name": "Yemen" },
+        "birthPlace": { "@type": "Place", "name": "Sana'a, Yemen" },
+        "url": "https://jabri-com.vercel.app/en/about.html",
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "identifier": "https://orcid.org/0009-0003-3319-3822",
+        "jobTitle": "Researcher, Programmer, and Founder",
+        "knowsAbout": ["Mathematics","Applied Statistics","Equivalence Testing","TOST","Plant Geometry","Theoretical Physics","Riemann Hypothesis","Sindbad Unified Theory","Programming"],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "King Fahd University of Petroleum and Minerals (KFUPM)" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840","https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html","https://en.wikipedia.org/wiki/User:Jabri2026","https://www.facebook.com/share/p/1CvCG9xehw/","https://www.instagram.com/reel/Da5zRhypJlo/","https://t.me/Heaven_Jabri/","https://www.linkedin.com/in/abdulla-al-jabri-bb545830b"]
+      },
+      {
+        "@type": ["Organization","NewsMediaOrganization"],
+        "@id": "https://jabri-com.vercel.app/#organization",
+        "name": "Heaven Al-Jabri",
+        "alternateName": ["Jabri Oasis","Wahat Al-Jabri"],
+        "legalName": "Heaven Al-Jabri",
+        "url": "https://jabri-com.vercel.app/",
+        "logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/icon-192.png","width": 192,"height": 192},
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "description": "Heaven Al-Jabri — A scientific and cultural platform documenting Yemen's rich heritage and research in mathematics and theoretical physics.",
+        "foundingDate": "2026",
+        "foundingLocation": { "@type": "Place", "name": "Sana'a, Yemen" },
+        "founder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "owner": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "copyrightHolder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jabri-com.vercel.app/#website",
+        "url": "https://jabri-com.vercel.app/",
+        "name": "Heaven Al-Jabri",
+        "alternateName": ["Jabri Oasis"],
+        "description": "Documenting Yemen's rich heritage and research in mathematics and theoretical physics",
+        "inLanguage": ["ar","en"],
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "potentialAction": {"@type": "SearchAction","target": "https://jabri-com.vercel.app/search?q={search_term_string}","query-input": "required name=search_term_string"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html#webpage",
+        "url": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html",
+        "name": "Statistical Analysis Report — Testing Crown Ratio Equivalence with √2−1",
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/#website" },
+        "about": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "primaryImageOfPage": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jabri-com.vercel.app/en/" },
+          { "@type": "ListItem", "position": 2, "name": "Tree Project", "item": "https://jabri-com.vercel.app/tree/tree-en.html" },
+          { "@type": "ListItem", "position": 3, "name": "Field Measurement", "item": "https://jabri-com.vercel.app/tree/tree3-en.html" },
+          { "@type": "ListItem", "position": 4, "name": "Statistical Report", "item": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html" }
+        ]
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html#article",
+        "headline": "Statistical Analysis Report — Testing Crown Ratio Equivalence with the Reference Value √2−1",
+        "name": "Statistical Analysis Report: Testing Crown Ratio Equivalence (H−h)/H with √2−1 in Mango Trees",
+        "description": "A full academic report on the TOST (Two One-Sided Tests) statistical equivalence test between the crown ratio (H−h)/H in a sample of 5 mango trees (Sho'ub, Sana'a, 2026-10-14) and the mathematical value √2−1 = tan(π/8) ≈ 0.414214. Results: Mean=0.41297, SD=0.00845, SE=0.00378, CI90%=[0.40491, 0.42102], Δ=±0.03, α=0.05, p_TOST=0.000801. Exploratory analysis not pre-registered.",
+        "abstract": "In an exploratory sample of 5 mango trees, the mean crown ratio C=(H−h)/H reached approximately 0.41297 with a standard deviation of 0.00845. Using the TOST equivalence test with a margin Δ=±0.03 and significance level α=0.05, the results were statistically compatible with equivalence of the mean ratio to the reference value √2−1 ≈ 0.414214. The 90% confidence interval falls entirely within the equivalence interval [0.384214, 0.444214], and p_TOST = 0.000801 < α. This is an exploratory conclusion conditioned by the small sample size and lack of pre-registration, and requires verification with a larger sample.",
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00",
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "about": [
+          "Statistical equivalence testing",
+          "TOST",
+          "Two One-Sided Tests",
+          "√2−1",
+          "Silver Ratio",
+          "tan(π/8)",
+          "Crown Ratio",
+          "Mango Trees",
+          "Z+C+A=1"
+        ],
+        "keywords": "TOST, Equivalence Testing, Crown Ratio, √2−1, Silver Ratio, Mango Trees, Sho'ub Sana'a, Confidence Interval, p-value",
+        "articleSection": "Science and Technology",
+        "wordCount": 890,
+        "mainEntityOfPage": { "@id": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html#webpage" },
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/tree/tree3-en.html#app" },
+        "citation": [
+          { "@type": "CreativeWork", "name": "Complete Framework — The Tree and Shadow", "url": "https://jabri-com.vercel.app/tree/tree-en.html" },
+          { "@type": "CreativeWork", "name": "Visual Simulation", "url": "https://jabri-com.vercel.app/tree/tree2-en.html" },
+          { "@type": "CreativeWork", "name": "ZX Measurement Protocol", "url": "https://jabri-com.vercel.app/tree/tree3-en.html" },
+          { "@type": "CreativeWork", "name": "OSF Preprint", "url": "https://doi.org/10.17605/OSF.IO/YC9MB" }
+        ],
+        "sameAs": "https://doi.org/10.17605/OSF.IO/YC9MB"
+      },
+      {
+        "@type": "Report",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html#report",
+        "name": "Statistical Analysis Report — Equivalence Testing",
+        "about": "Testing the statistical equivalence of the crown ratio (H−h)/H with the value √2−1",
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "reportNumber": "ZX-RPT-2026-10-14-001-EN",
+        "inLanguage": "en",
+        "about": ["TOST","Crown Ratio","Mango Trees","√2−1"],
+        "encoding": "text/html"
+      },
+      {
+        "@type": "Dataset",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html#dataset",
+        "name": "Raw Measurement Data — 5 Mango Trees (Sho'ub, Sana'a, 2026-10-14)",
+        "description": "Raw data for 5 mango trees measured in Sho'ub, Sana'a. For each tree: H (total height), h (first main branch height), C = (H−h)/H (crown ratio).",
+        "creator": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "isAccessibleForFree": true,
+        "keywords": ["Mango Trees","Crown Ratio","H","h","crown ratio","TOST"],
+        "variableMeasured": [
+          { "@type": "PropertyValue", "name": "H", "description": "Total tree height (meters)", "unitText": "m" },
+          { "@type": "PropertyValue", "name": "h", "description": "Height of first main branch (meters)", "unitText": "m" },
+          { "@type": "PropertyValue", "name": "C", "description": "Crown ratio (H−h)/H", "unitText": "ratio" }
+        ],
+        "spatialCoverage": { "@type": "Place", "name": "Sho'ub, Sana'a, Yemen" },
+        "temporalCoverage": "2026-10-14/2026-10-14",
+        "size": "5 records",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "StatisticalPopulation",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html#population",
+        "name": "Mango Trees — Sho'ub Sana'a Sample (n=5)",
+        "description": "An exploratory sample of 5 mango trees at a single location (Sho'ub, Sana'a). Does not represent all mango trees in Yemen or the world.",
+        "populationType": "Mango trees (Mangifera indica)",
+        "location": { "@type": "Place", "name": "Sho'ub, Sana'a, Yemen" },
+        "numConstraints": 1
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf-en.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What exactly does this report measure?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The report measures the crown ratio C = (H−h)/H in 5 mango trees, where H is the total height of the tree and h is the height of the first main branch. The objective is to test whether the mean of this ratio is statistically equivalent to the mathematical value √2−1 = tan(π/8) ≈ 0.414214 within a practical margin Δ=±0.03."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the key numerical results?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Measured Mean = 0.41297, Standard Deviation = 0.00845, Standard Error = 0.00378, Degrees of Freedom = 4, 90% Confidence Interval = [0.40491, 0.42102]. Equivalence interval = [0.384214, 0.444214]. p_TOST = 0.000801 < α=0.05. Decision: Reject the null hypothesis of non-equivalence, and the results support statistical equivalence of the crown ratio mean with √2−1 within the specified margin."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the report state it is exploratory and not confirmatory?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because there is no dated record proving the pre-registration of the hypothesis, protocol, and equivalence margin Δ before data collection. This means the results might be susceptible to p-hacking (choosing the ratio or margin after seeing the data). Therefore, the results are presented as an exploratory analysis and are not claimed to be a pre-registered confirmatory test. This explicit documentation of methodological limitations is part of scientific integrity."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this mean √2−1 is a universal geometric law in trees?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The result supports the hypothesis of statistical equivalence for the sample mean only, not a generalization to all mango trees or all trees. √2−1 is mathematically derived from the conceptual framework Z+C+A=1 (via tan(π/8)), and the field result is preliminary evidence requiring: (a) replication with a larger sample, (b) multiple locations, (c) pre-registration of the hypothesis and protocol, (d) analysis of different tree species."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the equivalence margin Δ=0.03 and its justification?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Δ = ±0.03 means the mean crown ratio is considered equivalent to √2−1 if it lies within [0.384214, 0.444214]. This margin represents the practically acceptable difference for equivalence testing purposes, and is not itself an estimate of measurement tool error. The report acknowledges that the justification for choosing this margin is not explicitly documented and should be documented before use in a subsequent study — including the practical significance of the margin and measurement precision."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑧ sr-only
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  </style>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑨ Page Styles (Preserved + Print Optimized for LTR)
+       ═══════════════════════════════════════════════════════ -->
+<style>
+  @page { size: A4; margin: 18mm; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: 'Times New Roman', serif;
+    direction: ltr;
+    background: #fff; color: #000; line-height: 1.85; padding: 20px;
+    max-width: 820px; margin: 0 auto;
+  }
+  h1 { font-size: 1.4rem; text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+  h2 { font-size: 1.05rem; margin-top: 24px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+  p, li { text-align: justify; margin-bottom: 8px; }
+  ul { padding-left: 22px; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9rem; }
+  th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+  th { background: #f0f0f0; font-weight: bold; }
+  .num { direction: ltr; unicode-bidi: isolate; display: inline-block; font-family: 'Courier New', monospace; font-variant-numeric: tabular-nums; }
+  .highlight { background: #eaf5ec; font-weight: bold; }
+  .note { font-size: 0.85rem; color: #333; background: #f9f9f9; padding: 14px 16px; border-left: 4px solid #333; margin-top: 18px; }
+  .note strong { color: #000; }
+  .warn { border-left-color: #b00; background: #fdf5f5; }
+  
+  .web-nav {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px dashed #ccc;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 2;
+  }
+  .web-nav a {
+    color: #1a4d2e;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 6px;
+  }
+  .web-nav a:hover { text-decoration: underline; }
+  .web-nav .sep { color: #aaa; margin: 0 2px; }
+
+  table { page-break-inside: auto; }
+  tr { page-break-inside: avoid; page-break-after: auto; }
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+  
+  @media print {
+    body { padding: 0; max-width: none; }
+    h1, h2 { page-break-after: avoid; }
+    .note { page-break-inside: avoid; }
+    .web-nav { display: none !important; }
+    .sr-only { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     🕵️ Hidden text for bots (Hidden on screen and print)
+     ══════════════════════════════════════════════════════════ -->
+<div class="sr-only" aria-hidden="true">
+  <h1>Statistical Analysis Report — Testing Crown Ratio Equivalence with √2−1</h1>
+  <p>A full academic report on the TOST (Two One-Sided Tests) statistical equivalence test between the crown ratio (H−h)/H in a sample of 5 mango trees (Sho'ub, Sana'a, 2026-10-14) and the mathematical value √2−1 = tan(π/8) ≈ 0.414214.</p>
+  
+  <h2>Raw Data</h2>
+  <table>
+    <tr><th>Tree</th><th>H (m)</th><th>h (m)</th><th>C = (H−h)/H</th></tr>
+    <tr><td>1</td><td>7.80</td><td>4.50</td><td>0.42308</td></tr>
+    <tr><td>2</td><td>8.50</td><td>5.00</td><td>0.41176</td></tr>
+    <tr><td>3</td><td>7.20</td><td>4.20</td><td>0.41667</td></tr>
+    <tr><td>4</td><td>9.00</td><td>5.40</td><td>0.40000</td></tr>
+    <tr><td>5</td><td>7.50</td><td>4.40</td><td>0.41333</td></tr>
+  </table>
+  
+  <h2>Descriptive Statistics</h2>
+  <ul>
+    <li>Mean = 0.41297</li>
+    <li>Standard Deviation = 0.00845</li>
+    <li>Standard Error = 0.00378</li>
+    <li>Degrees of Freedom = 4</li>
+    <li>90% Confidence Interval = [0.40491, 0.42102]</li>
+  </ul>
+  
+  <h2>TOST Test</h2>
+  <p>Equivalence margin Δ = ±0.03, significance level α = 0.05, equivalence interval = [0.384214, 0.444214]. The 90% confidence interval falls entirely within the equivalence interval. p_TOST value ≈ 0.000801 < 0.05.</p>
+  
+  <h2>Statistical Decision</h2>
+  <p>We reject the null hypothesis of non-equivalence, and the results support the statistical equivalence of the mean crown ratio with the reference value √2−1 within the specified equivalence margin.</p>
+  
+  <h2>Limitations</h2>
+  <p>The decision expresses statistical equivalence of the mean ratio within the specified margin, and does not mean the ratio is identical in every tree or that the reference value is a universal geometric law. The small sample size (n=5), single location (Sho'ub, Sana'a), and lack of pre-registration of the hypothesis and protocol — all these factors make the result exploratory and insufficient for generalization.</p>
+  
+  <p>By: Eng. Abdulla Mohammed Nasser Al-Jabri — Yemen. ORCID: 0009-0003-3319-3822. License: CC BY 4.0. Framework DOI: 10.17605/OSF.IO/YC9MB.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     📄 Report Content
+     ══════════════════════════════════════════════════════════ -->
+
+  <h1>Statistical Analysis Report — Testing Crown Ratio Equivalence with Reference Value √2−1</h1>
+
+  <p><b>Researcher:</b> Abdulla Mohammed Nasser Al-Jabri</p>
+  <p><b>Location:</b> Sho'ub, Sana'a, Yemen</p>
+  <p><b>Measurement Date:</b> <span class="num">2026-10-14</span></p>
+
+  <h2>1. Data Source and Measurement Protocol</h2>
+  <ul>
+    <li><b>Tool:</b> Metal measuring tape (direct vertical measurement from ground level to the top of the tree).</li>
+    <li><b>H (Total Height):</b> Vertical distance from the ground to the highest point in the crown.</li>
+    <li><b>h (First Main Branch Height):</b> Height of the first clear split of the trunk into two main branches, each at least <span class="num">30%</span> of the original trunk diameter.</li>
+    <li><b>Sample Size:</b> <span class="num">n = 5</span> separate mango trees at the same site. Observation independence is assumed for analysis purposes, but this assumption cannot be confirmed based on spatial separation alone.</li>
+    <li><b>Original Readings:</b> Preserved exactly as recorded from the field, without modification.</li>
+  </ul>
+
+  <h2>2. Raw Data</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tree</th>
+        <th>H (m)</th>
+        <th>h (m)</th>
+        <th>C = (H−h)/H</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="num">7.80</td><td class="num">4.50</td><td class="num">0.42308</td></tr>
+      <tr><td>2</td><td class="num">8.50</td><td class="num">5.00</td><td class="num">0.41176</td></tr>
+      <tr><td>3</td><td class="num">7.20</td><td class="num">4.20</td><td class="num">0.41667</td></tr>
+      <tr><td>4</td><td class="num">9.00</td><td class="num">5.40</td><td class="num">0.40000</td></tr>
+      <tr><td>5</td><td class="num">7.50</td><td class="num">4.40</td><td class="num">0.41333</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Descriptive Statistics</h2>
+  <table>
+    <thead><tr><th>Measure</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Mean</td><td class="num">0.41297</td></tr>
+      <tr><td>Standard Deviation (SD)</td><td class="num">0.00845</td></tr>
+      <tr><td>Standard Error (SE)</td><td class="num">0.00378</td></tr>
+      <tr><td>Degrees of Freedom (df)</td><td class="num">4</td></tr>
+      <tr><td>90% Confidence Interval</td><td class="num">[0.40491, 0.42102]</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Statistical Equivalence Test (TOST)</h2>
+  <p>The Two One-Sided Tests (TOST) equivalence test was used to compare the mean crown ratio <span class="num">C = (H−h)/H</span> against the mathematical reference value <span class="num">√2 − 1 ≈ 0.414214</span>.</p>
+  <ul>
+    <li><b>Practical Equivalence Margin:</b> <span class="num">Δ = 0.03</span>, i.e., ±0.03 in the ratio <span class="num">C</span> (three percentage points). This margin represents the practically acceptable difference for equivalence testing purposes, and is not itself an estimate of measurement tool error.</li>
+    <li><b>Significance Level:</b> <span class="num">α = 0.05</span>.</li>
+    <li><b>Equivalence Interval:</b> <span class="num">[0.384214, 0.444214]</span>.</li>
+    <li><b>90% Confidence Interval:</b> <span class="num">[0.404912, 0.421025]</span>.</li>
+    <li><b>Equivalence Test Value:</b> <span class="num">p<sub>TOST</sub> ≈ 0.000801</span>.</li>
+  </ul>
+  <p>The 90% confidence interval falls entirely within the defined equivalence interval, and the TOST test value is below the chosen significance level.</p>
+  
+  <p><b>Statistical Decision:</b> We reject the null hypothesis of non-equivalence, and the results support the statistical equivalence of the mean crown ratio with the reference value within the specified equivalence margin.</p>
+
+  <p><b>Interpretation Limits:</b> The decision expresses statistical equivalence of the mean ratio within the specified margin, and does not mean the ratio is identical in every tree or that the reference value is a universal geometric law. Given the small sample size, distributional and representativeness assumptions are difficult to assess reliably; therefore, the result should be considered preliminary evidence requiring verification with a larger sample.</p>
+
+  <h2>5. Conclusion and Limitations</h2>
+  <p>In the exploratory sample of five mango trees, the mean crown ratio <span class="num">(C = (H−h)/H)</span> was approximately <span class="num">0.41297</span> with a standard deviation of approximately <span class="num">0.00845</span>. Using the Two One-Sided Tests (TOST) equivalence test, with an equivalence margin of <span class="num">(Δ = 0.03)</span> and a significance level of <span class="num">(α = 0.05)</span>, the results were statistically compatible with equivalence of the mean ratio to the reference value <span class="num">(√2 − 1 ≈ 0.414214)</span> within the specified equivalence margin.</p>
+  
+  <p>This conclusion is conditional on the suitability of the statistical assumptions, the accuracy of the measurements, and the justification for the chosen equivalence margin. Given the small sample size and single location, the results are insufficient to establish a general geometric law or to generalize to mango trees in other locations and conditions. Replication with a larger sample across multiple locations is recommended, documenting the measurement protocol and equivalence margin justification before collecting subsequent study data.</p>
+
+  <div class="note warn">
+    <strong>Note on Pre-registration:</strong>
+    There is no dated record in this report proving that the hypothesis, protocol, and equivalence margin were registered prior to data collection. Therefore, the results are presented as an exploratory analysis, and are not claimed to be a pre-registered confirmatory test. The justification for choosing 
+    <span class="num">Δ = 0.03</span>, including the practical significance of this margin and measurement precision, should be documented before use in a subsequent study.
+  </div>
+
+  <!-- Web Navigation (Visible only on screen) -->
+  <nav class="web-nav">
+    <span>🌳 Tree Project:</span><br>
+    <a href="/en/">Home</a> <span class="sep">|</span>
+    <a href="/tree/tree-en.html">Complete Framework</a> <span class="sep">|</span>
+    <a href="/tree/tree2-en.html">Simulation</a> <span class="sep">|</span>
+    <a href="/tree/tree3-en.html">Field Measurement</a> <span class="sep">|</span>
+    <a href="/tree/hindara-en.html">Al-Hindara</a> <span class="sep">|</span>
+    <a href="/tree/card-en.html">Academic Card</a>
+  </nav>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⓪ Icons
+       ═══════════════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+  <link rel="shortcut icon" href="/icon-192.png">
+  <link rel="icon" href="/image/icon-192.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- ═══════════════════════════════════════════════════════
+       ① Basics
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f9f9f9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ② Ownership
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:site_name" content="Heaven Al-Jabri">
+  <meta name="application-name" content="Heaven Al-Jabri">
+  <meta name="apple-mobile-web-app-title" content="Al-Hindara">
+  <meta name="author" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="owner" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="publisher" content="Heaven Al-Jabri">
+  <meta name="creator" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="designer" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="developer" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="editor" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="source" content="Heaven Al-Jabri">
+  <meta name="origin" content="Sana'a, Yemen">
+  <meta name="copyright" content="© 2026 Eng. Abdulla Al-Jabri — All rights reserved">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ③ SEO — Core
+       ═══════════════════════════════════════════════════════ -->
+  <title>Al-Hindara — (Engi)neering + (Man)agement | Heaven Al-Jabri</title>
+  <meta name="description" content="Al-Hindara = (Engi)neering + (Man)agement = Re-Engineering — A conceptual framework: Z+C+A=1, hyperd hybrid method, with field evidence (mango tree) — Eng. Abdulla Al-Jabri, Yemen." />
+  <meta name="keywords" content="Al-Hindara, Re-Engineering, Z+C+A=1, Hyperd, Silver Ratio, √2-1, Engineering, Management, Mango Tree, Abdulla Al-Jabri, Heaven Al-Jabri" />
+
+  <link rel="canonical" href="https://jabri-com.vercel.app/tree/hindara-en.html" />
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/hindara.html" />
+  <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/tree/hindara-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/hindara-en.html" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ④ Open Graph
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Al-Hindara — (Engi)neering + (Man)agement | Heaven Al-Jabri" />
+  <meta property="og:description" content="Al-Hindara = Re-Engineering. A conceptual framework (Z+C+A=1) with field evidence in Mango Trees." />
+  <meta property="og:url" content="https://jabri-com.vercel.app/tree/hindara-en.html" />
+  <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Al-Hindara — Re-Engineering Framework" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑤ Twitter Card
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@JabriAbdulla1" />
+  <meta name="twitter:creator" content="@JabriAbdulla1" />
+  <meta name="twitter:title" content="Al-Hindara — (Engi)neering + (Man)agement" />
+  <meta name="twitter:description" content="Al-Hindara = Re-Engineering. A conceptual framework (Z+C+A=1) with field evidence." />
+  <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑥ Article Meta
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="news_keywords" content="Al-Hindara, Re-Engineering, Z+C+A=1, Hyperd, Silver Ratio, Mango Trees" />
+  <meta property="article:publisher" content="https://jabri-com.vercel.app/" />
+  <meta property="article:author" content="https://jabri-com.vercel.app/Author-cv.html" />
+  <meta property="article:published_time" content="2026-10-01T00:00:00+03:00" />
+  <meta property="article:modified_time" content="2026-10-21T00:00:00+03:00" />
+  <meta property="article:section" content="Science and Technology" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⑦ Fonts
+       ═══════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⑧ Schema.org — Unified @graph
+       ═══════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://jabri-com.vercel.app/#jabri",
+        "name": "Eng. Abdulla Mohammed Nasser Al-Jabri",
+        "alternateName": ["Heaven Al-Jabri","Abdulla Al-Jabri","Sindbad Yemen"],
+        "givenName": "Abdulla","familyName": "Al-Jabri","honorificPrefix": "Eng.","gender": "Male",
+        "nationality": { "@type": "Country", "name": "Yemen" },
+        "birthPlace": { "@type": "Place", "name": "Sana'a, Yemen" },
+        "url": "https://jabri-com.vercel.app/en/about.html",
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "identifier": "https://orcid.org/0009-0003-3319-3822",
+        "jobTitle": "Researcher, Programmer, and Founder",
+        "knowsAbout": ["Mathematics","Theoretical Physics","Riemann Hypothesis","Sindbad Unified Theory","Yemeni Heritage","Programming","Artificial Intelligence","Applied Statistics"],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "King Fahd University of Petroleum and Minerals (KFUPM)" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840","https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html","https://en.wikipedia.org/wiki/User:Jabri2026","https://www.facebook.com/share/p/1CvCG9xehw/","https://www.instagram.com/reel/Da5zRhypJlo/","https://t.me/Heaven_Jabri/","https://www.linkedin.com/in/abdulla-al-jabri-bb545830b"]
+      },
+      {
+        "@type": ["Organization","NewsMediaOrganization"],
+        "@id": "https://jabri-com.vercel.app/#organization",
+        "name": "Heaven Al-Jabri",
+        "alternateName": ["Jabri Oasis","Wahat Al-Jabri"],
+        "legalName": "Heaven Al-Jabri",
+        "url": "https://jabri-com.vercel.app/",
+        "logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/icon-192.png","width": 192,"height": 192},
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "description": "Heaven Al-Jabri — A scientific and cultural platform documenting Yemen's rich heritage and research in mathematics and theoretical physics.",
+        "foundingDate": "2026",
+        "foundingLocation": { "@type": "Place", "name": "Sana'a, Yemen" },
+        "founder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "owner": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "copyrightHolder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jabri-com.vercel.app/#website",
+        "url": "https://jabri-com.vercel.app/",
+        "name": "Heaven Al-Jabri",
+        "alternateName": ["Jabri Oasis"],
+        "description": "Documenting Yemen's rich heritage and research in mathematics and theoretical physics",
+        "inLanguage": ["ar","en"],
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "potentialAction": {"@type": "SearchAction","target": "https://jabri-com.vercel.app/search?q={search_term_string}","query-input": "required name=search_term_string"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jabri-com.vercel.app/tree/hindara-en.html#webpage",
+        "url": "https://jabri-com.vercel.app/tree/hindara-en.html",
+        "name": "Al-Hindara — (Engi)neering + (Man)agement",
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/#website" },
+        "about": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "primaryImageOfPage": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "datePublished": "2026-10-01T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://jabri-com.vercel.app/tree/hindara-en.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jabri-com.vercel.app/en/" },
+          { "@type": "ListItem", "position": 2, "name": "Tree Project", "item": "https://jabri-com.vercel.app/tree/tree-en.html" },
+          { "@type": "ListItem", "position": 3, "name": "Al-Hindara", "item": "https://jabri-com.vercel.app/tree/hindara-en.html" }
+        ]
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://jabri-com.vercel.app/tree/hindara-en.html#article",
+        "headline": "Al-Hindara — (Engi)neering + (Man)agement: A Conceptual Framework",
+        "description": "The Al-Hindara framework: A systematic derivation of (Engi)neering + (Man)agement = Al-Hindara, introducing the Hyperd hybrid method and the Z+C+A=1 equation, with empirical field validation on mango trees.",
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-01T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00",
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "about": ["Al-Hindara","Re-Engineering","Z+C+A=1","Hyperd","Silver Ratio","√2-1","Mango Trees"],
+        "keywords": "Al-Hindara, Re-Engineering, Z+C+A=1, Hyperd, Silver Ratio, √2-1, Mango Tree",
+        "mainEntityOfPage": { "@id": "https://jabri-com.vercel.app/tree/hindara-en.html#webpage" },
+        "sameAs": [
+          "https://doi.org/10.17605/OSF.IO/YC9MB",
+          "https://orcid.org/0009-0003-3319-3822"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jabri-com.vercel.app/tree/hindara-en.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Al-Hindara?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Al-Hindara is a conceptual framework derived from combining the words Engineering and Management. It represents a hybrid approach (Hyperd) that merges top-down administrative vision with bottom-up engineering execution, mathematically modeled as Z (Geometry) + C (Management) + A (Al-Hindara) = 1."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Al-Hindara a new term?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The term 'Al-Hindara' (combining Engineering and Management in Arabic) has been used in Arabic business literature for years (e.g., Arabic Wikipedia's Business Process Re-engineering article, and works by Michael Hammer on BPR). The specific contribution here is the systematic derivation, the Hyperd hybrid method, the mathematical framework Z+C+A=1, the mathematical observation √2-1, and the empirical field proof."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the mathematical significance of Z+C+A=1?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If we assume Z=C (Engineering and Management are equivalent at the crown) and A=Z·C (Al-Hindara is their product), the normalization Z+C+A=1 leads to the equation x + x + x² = 1, which gives x = √2 - 1 ≈ 0.41421356. This is the Silver Ratio, exactly equal to tan(π/8) or tan(22.5°)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Has this framework been tested empirically?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The framework has moved from theory to field. A pilot study (n=5) on mango trees in Sana'a measured the crown ratio (H-h)/H. The result (Mean = 0.41297, SD = 0.00845) showed statistical equivalence with the target 0.4142 using TOST (p-value = 0.0008). This provides initial empirical evidence for the framework's mathematical prediction."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑨ sr-only (Hidden text for bots)
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  </style>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑩ Page Styles (LTR Adjusted)
+       ═══════════════════════════════════════════════════════ -->
+<style>
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 900px; margin: auto; padding: 2rem; background: #f9f9f9; color: #222; line-height: 1.9; }
+  h1, h2 { color: #1a4d2e; }
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 2px solid #1a4d2e; padding-bottom: 6px; }
+  
+  .equation { background: #e8f5e9; padding: 1rem; border-left: 5px solid #1a4d2e; font-size: 1.3rem; text-align: center; margin: 1.5rem 0; font-weight: bold; }
+  .highlight { background: #fff3e0; padding: 1rem; border-radius: 8px; border: 1px solid #ffcc80; }
+  
+  .amanah { background: #fffaf0; border: 1px solid #ffcc80; border-left: 5px solid #1a4d2e; border-radius: 8px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .amanah h2 { border: none; margin-top: 0; color: #8a5a00; }
+  
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  
+  code { background: #e8f5e9; padding: 2px 8px; border-radius: 4px; color: #1a4d2e; direction: ltr; display: inline-block; font-family: 'Courier New', monospace;}
+  
+  .links { background: #f0f7f2; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+  a { color: #1a4d2e; }
+  
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ccc; font-size: 0.85rem; color: #666; text-align: center; }
+  
+  .verified-badge { background: #d1fae5; border: 1px solid #06d6a0; color: #064e3b; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 8px; margin-top: 1rem; }
+  .btn-empirical { display: inline-block; background: #06d6a0; color: #0a1a12 !important; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 10px; box-shadow: 0 4px 12px rgba(6, 214, 160, 0.3); transition: background 0.2s; }
+  .btn-empirical:hover { background: #05b98a; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     🕵️ Hidden text for bots
+     ══════════════════════════════════════════════════════════ -->
+<div class="sr-only" aria-hidden="true">
+  <h1>Al-Hindara = (Engi)neering + (Man)agement</h1>
+  <p><b>Method:</b> hyperd = hybrid = mixture of both styles. Top-Down (from the top of the tree) + Bottom-Up (from root to top).</p>
+  <p><b>Equation:</b> Z (Geometry) + C (Management) + A (Al-Hindara) = 1</p>
+  <p>Al-Hindara is a conceptual framework for redrawing the tree from above, not for restoring its root from below. It combines the eye of the engineer and the eye of the manager into a single point.</p>
+
+  <h2>The Proposed Framework</h2>
+  <ul>
+    <li><b>Derivation:</b> (Engi)neering + (Man)agement = Al-Hindara</li>
+    <li><b>Method:</b> Hyperd — a hybrid between Top-Down and Bottom-Up</li>
+    <li><b>Equation:</b> Z + C + A = 1</li>
+    <li><b>Mathematical Observation:</b> If Z = C and A = Z·C, then x = √2 − 1 ≈ 0.414</li>
+    <li><b>Live Proof:</b> The Tree and the Shadow — tree-en.html</li>
+  </ul>
+
+  <h2>Scientific Integrity</h2>
+  <p>The term "Al-Hindara" (Engineering + Management) has been used in Arabic literature for years, notably in:</p>
+  <ul>
+    <li>Arabic Wikipedia — "Business Process Re-engineering" (pre-2015).</li>
+    <li>"Al-Hindara and its role in improving job performance" (Nov 5, 2022).</li>
+    <li>"Al-Hindara" paper — Omar Yousif — on Academia.edu (2022).</li>
+    <li>Michael Hammer and James Champy — Reengineering the Corporation (1993) — the Western origin of the concept (BPR).</li>
+  </ul>
+  <p>The contribution of this work is not the term itself, but in: 1. Systematic derivation. 2. The Hyperd hybrid method. 3. The Z+C+A=1 framework. 4. The mathematical observation √2-1 (Silver Ratio). 5. The live proof (tree.html). 6. Field verification: statistical equivalence in real samples (Pilot Study).</p>
+
+  <h2>Verified Badge</h2>
+  <p>✅ The framework moved from theory to field: The exploratory sample (mango trees) showed statistical agreement with 0.4142 with a standard deviation of 0.0085.</p>
+  
+  <h2>Documented Links</h2>
+  <ul>
+    <li>Live Proof (Theoretical): tree-en.html</li>
+    <li>Empirical Proof: tree3-en.html</li>
+    <li>DOI: 10.17605/OSF.IO/YC9MB</li>
+    <li>ORCID: 0009-0003-3319-3822</li>
+    <li>Technical Guide: technical-guide.html</li>
+  </ul>
+  <p>By: Eng. Abdulla Mohammed Nasser Al-Jabri — Yemen · 1999 -> 2026.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     📄 Page Content
+     ══════════════════════════════════════════════════════════ -->
+
+<h1>Al-Hindara = (Engi)neering + (Man)agement</h1>
+
+<div class="highlight">
+  <strong>Method:</strong> hyperd = hybrid = mixture of both styles<br>
+  Top-Down (from the top of the tree) + Bottom-Up (from root to top)<br>
+  <strong>Equation:</strong> Z + C + A = 1
+</div>
+
+<div class="equation">Z (Geometry) + C (Management) + A (Al-Hindara) = 1</div>
+
+<p>Al-Hindara is a conceptual framework for redrawing the tree from above, not for restoring its root from below. It combines the eye of the engineer and the eye of the manager into a single point.</p>
+
+<h2>🔷 The Proposed Framework</h2>
+<ul>
+  <li><b>Derivation:</b> <code>(Engi)neering + (Man)agement = Al-Hindara</code></li>
+  <li><b>Method:</b> <code>Hyperd</code> — a hybrid between Top-Down and Bottom-Up</li>
+  <li><b>Equation:</b> <code>Z + C + A = 1</code></li>
+  <li><b>Mathematical Observation:</b> If <code>Z = C</code> and <code>A = Z·C</code>, then <code>x = √2 − 1 ≈ 0.414</code></li>
+  <li><b>Live Proof:</b> <a href="/tree/tree-en.html">The Tree and the Shadow — tree-en.html</a></li>
+</ul>
+
+<section class="amanah" id="scientific-integrity">
+  <h2>📖 Scientific Integrity</h2>
+  <p>The term <b>Al-Hindara</b> (Engineering + Management) has been used in Arabic literature for years, notably in:</p>
+  <ul>
+    <li>Arabic Wikipedia — article <a href="https://ar.wikipedia.org/wiki/إعادة_هندسة_الأعمال" target="_blank">"Business Process Re-engineering"</a> (pre-2015).</li>
+    <li>"Al-Hindara and its role in improving job performance" — Academy (Nov 5, 2022).</li>
+    <li>"Al-Hindara" paper — Omar Yousif — on <a href="https://www.academia.edu/12970059/" target="_blank">Academia.edu</a> (2022).</li>
+    <li>Michael Hammer and James Champy — <i>Reengineering the Corporation</i> (1993) — the Western origin of the concept (BPR).</li>
+  </ul>
+
+  <p><b>The contribution of this work</b> is not the term itself, but in:</p>
+  <ul>
+    <li>Formulating the <b>derivation</b> in an organized manner: <code>(Engi)neering + (Man)agement = Al-Hindara</code>.</li>
+    <li>Proposing the <b>Hyperd hybrid method</b> (Top-Down + Bottom-Up).</li>
+    <li>Presenting the <b>conceptual framework</b> <code>Z + C + A = 1</code>.</li>
+    <li>The <b>mathematical observation</b> <code>√2 − 1 ≈ 0.414</code> (The Silver Ratio).</li>
+    <li>The <b>live proof</b> via <a href="/tree/tree-en.html">tree-en.html</a> (The Tree and the Shadow).</li>
+    <li><b>Field verification (New):</b> Applying the measurement protocol and proving statistical equivalence in real samples (Pilot Study).</li>
+  </ul>
+
+  <div class="verified-badge">
+    ✅ <b>The framework moved from theory to field:</b> The exploratory sample (mango trees) showed statistical agreement with 0.4142 with a standard deviation of 0.0085.
+  </div>
+  <div style="text-align: center; margin-top: 10px;">
+    <a href="/tree/tree3-en.html" class="btn-empirical">📏 View Empirical Statistical Evidence (tree3-en)</a>
+  </div>
+</section>
+
+<div class="links">
+  <h2 style="border:none; margin-top:0;">🔗 Documented Links</h2>
+  <ul>
+    <li><b>Live Proof (Theoretical):</b> <a href="/tree/tree-en.html">The Tree and the Shadow — Z+C+A=1</a></li>
+    <li><b>Empirical Proof (Practical):</b> <a href="/tree/tree3-en.html">Field Measurement Protocol — tree3-en</a></li>
+    <li><b>DOI:</b> <a href="https://doi.org/10.17605/OSF.IO/YC9MB" target="_blank">10.17605/OSF.IO/YC9MB</a></li>
+    <li><b>ORCID:</b> <a href="https://orcid.org/0009-0003-3319-3822" target="_blank">0009-0003-3319-3822</a></li>
+    <li><b>Technical Guide:</b> <a href="/technical-guide.html">technical-guide.html</a></li>
+  </ul>
+</div>
+
+<footer>
+  <p>Eng. Abdulla Mohammed Nasser Al-Jabri — Yemen · 1999 → 2026</p>
+  <p><code>Z + C + A = 1</code></p>
+</footer>
+
+<!-- Header/Footer Injections -->
+<div id="header-placeholder"></div>
+<div id="footer-placeholder"></div>
+<script src="/js/init-page-root.js" defer></script>
+
+</body>
+</html>

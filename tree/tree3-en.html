@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⓪ Icons
+       ═══════════════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+  <link rel="shortcut icon" href="/icon-192.png">
+  <link rel="icon" href="/image/icon-192.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- ═══════════════════════════════════════════════════════
+       ① Basics
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a1410">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ② Ownership
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:site_name" content="Heaven Al-Jabri">
+  <meta name="application-name" content="Heaven Al-Jabri">
+  <meta name="apple-mobile-web-app-title" content="Measurement Protocol ZX">
+  <meta name="author" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="owner" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="publisher" content="Heaven Al-Jabri">
+  <meta name="creator" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="designer" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="developer" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="editor" content="Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <meta name="source" content="Heaven Al-Jabri">
+  <meta name="origin" content="Sana'a, Yemen">
+  <meta name="copyright" content="© 2026 Eng. Abdulla Al-Jabri — All rights reserved">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ③ SEO — Core
+       ═══════════════════════════════════════════════════════ -->
+  <title>Field Measurement Protocol ZX — TOST Tool for Testing √2−1 in Trees | Heaven Al-Jabri</title>
+  <meta name="description" content="Interactive statistical tool for testing the Silver Ratio hypothesis √2−1 ≈ 0.414 in trees. Input H, h, r, d, L — automatic calculation of six geometric ratios — TOST equivalence testing with CI, p-value, and suggested sample size. Pre-registration lock to prevent p-hacking. CSV export. By Eng. Abdulla Al-Jabri." />
+  <meta name="keywords" content="Field Measurement, ZX Protocol, TOST, Equivalence Testing, √2−1, Silver Ratio, Crown Ratio, Mango Trees, tree3-en, Applied Statistics, Pre-registration, p-hacking, Abdulla Al-Jabri, Z+C+A=1" />
+
+  <link rel="canonical" href="https://jabri-com.vercel.app/tree/tree3-en.html" />
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree3.html" />
+  <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/tree/tree3-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/tree3-en.html" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ④ Open Graph
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Field Measurement Protocol ZX — TOST Tool for Testing √2−1" />
+  <meta property="og:description" content="Interactive statistical tool testing √2−1 in trees: TOST + CI + p-value + sample size. Pre-registration lock + CSV export." />
+  <meta property="og:url" content="https://jabri-com.vercel.app/tree/tree3-en.html" />
+  <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Measurement Protocol ZX — TOST Tool for Testing √2−1" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑤ Twitter Card
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@JabriAbdulla1" />
+  <meta name="twitter:creator" content="@JabriAbdulla1" />
+  <meta name="twitter:title" content="Measurement Protocol ZX — TOST Tool for Testing √2−1" />
+  <meta name="twitter:description" content="Interactive statistical tool: TOST + CI + p-value + sample size. Pre-registration lock + CSV export." />
+  <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑥ Article Meta
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="news_keywords" content="Measurement Protocol, TOST, √2−1, Crown Ratio, Mango Trees, tree3-en" />
+  <meta property="article:publisher" content="https://jabri-com.vercel.app/" />
+  <meta property="article:author" content="https://jabri-com.vercel.app/Author-cv.html" />
+  <meta property="article:published_time" content="2026-10-14T00:00:00+03:00" />
+  <meta property="article:modified_time" content="2026-10-21T00:00:00+03:00" />
+  <meta property="article:section" content="Science and Technology" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⑦ Fonts
+       ═══════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⑧ Schema.org — Unified @graph
+       ═══════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://jabri-com.vercel.app/#jabri",
+        "name": "Eng. Abdulla Mohammed Nasser Al-Jabri",
+        "alternateName": ["Heaven Al-Jabri","Abdulla Al-Jabri","Sindbad Yemen"],
+        "givenName": "Abdulla","familyName": "Al-Jabri","honorificPrefix": "Eng.","gender": "Male",
+        "nationality": { "@type": "Country", "name": "Yemen" },
+        "birthPlace": { "@type": "Place", "name": "Sana'a, Yemen" },
+        "url": "https://jabri-com.vercel.app/en/about.html",
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "identifier": "https://orcid.org/0009-0003-3319-3822",
+        "jobTitle": "Researcher, Programmer, and Founder",
+        "knowsAbout": ["Mathematics","Applied Statistics","Equivalence Testing","TOST","Theoretical Physics","Riemann Hypothesis","Sindbad Unified Theory","Programming"],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "King Fahd University of Petroleum and Minerals (KFUPM)" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840","https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html","https://en.wikipedia.org/wiki/User:Jabri2026","https://www.facebook.com/share/p/1CvCG9xehw/","https://www.instagram.com/reel/Da5zRhypJlo/","https://t.me/Heaven_Jabri/","https://www.linkedin.com/in/abdulla-al-jabri-bb545830b"]
+      },
+      {
+        "@type": ["Organization","NewsMediaOrganization"],
+        "@id": "https://jabri-com.vercel.app/#organization",
+        "name": "Heaven Al-Jabri",
+        "alternateName": ["Jabri Oasis","Wahat Al-Jabri"],
+        "legalName": "Heaven Al-Jabri",
+        "url": "https://jabri-com.vercel.app/",
+        "logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/icon-192.png","width": 192,"height": 192},
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "description": "Heaven Al-Jabri — A scientific and cultural platform documenting Yemen's rich heritage and research in mathematics and theoretical physics.",
+        "foundingDate": "2026",
+        "foundingLocation": { "@type": "Place", "name": "Sana'a, Yemen" },
+        "founder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "owner": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "copyrightHolder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jabri-com.vercel.app/#website",
+        "url": "https://jabri-com.vercel.app/",
+        "name": "Heaven Al-Jabri",
+        "alternateName": ["Jabri Oasis"],
+        "description": "Documenting Yemen's rich heritage and research in mathematics and theoretical physics",
+        "inLanguage": ["ar","en"],
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "potentialAction": {"@type": "SearchAction","target": "https://jabri-com.vercel.app/search?q={search_term_string}","query-input": "required name=search_term_string"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-en.html#webpage",
+        "url": "https://jabri-com.vercel.app/tree/tree3-en.html",
+        "name": "Field Measurement Protocol ZX — TOST Tool for Testing √2−1",
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/#website" },
+        "about": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "primaryImageOfPage": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-en.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jabri-com.vercel.app/en/" },
+          { "@type": "ListItem", "position": 2, "name": "Tree Project", "item": "https://jabri-com.vercel.app/tree/tree-en.html" },
+          { "@type": "ListItem", "position": 3, "name": "Field Measurement", "item": "https://jabri-com.vercel.app/tree/tree3-en.html" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-en.html#app",
+        "name": "Field Measurement Protocol ZX — TOST Tool",
+        "url": "https://jabri-com.vercel.app/tree/tree3-en.html",
+        "description": "An interactive statistical tool for testing the Silver Ratio hypothesis √2−1 ≈ 0.4142 in trees. Input field measurements (H, h, r, d, L), automatic calculation of six geometric ratios, TOST equivalence testing with CI, p-value, and suggested sample size, pre-registration lock to prevent p-hacking, and CSV export.",
+        "applicationCategory": "EducationalApplication",
+        "applicationSubCategory": "StatisticalAnalysisTool",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "inLanguage": ["ar","en"],
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00",
+        "screenshot": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "featureList": [
+          "Pre-registration lock to prevent p-hacking",
+          "Automatic calculation of six geometric ratios from tree measurements",
+          "TOST (Two One-Sided Tests) equivalence testing with α=0.05",
+          "Bonferroni correction when no pre-specified ratio is chosen",
+          "Accurate t-distribution Confidence Intervals (CI)",
+          "Approximate statistical power calculation",
+          "Suggested sample size for 80% power",
+          "Automatic exclusion of L/H ratio (depends on sun angle)",
+          "Filtering by tree species",
+          "CSV export/import with pre-registration header",
+          "All data saved locally in localStorage (no server)",
+          "Full English UI (LTR) + touch support"
+        ],
+        "about": ["TOST","Statistical Equivalence","√2−1","Silver Ratio","Crown Ratio","Pre-registration","p-hacking","Bonferroni"],
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/tree/tree-en.html#article" }
+      },
+      {
+        "@type": "Dataset",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-en.html#dataset",
+        "name": "Field Tree Measurement Data — ZX Protocol",
+        "description": "Geometric field data for Yemeni trees (palm, acacia, sidr, mango) within the ZX protocol. Each record contains: Site, Species, H (Total Height), h (First branch height), r (Crown radius), d (Trunk diameter), L (Shadow length), and Time — in addition to calculated ratios.",
+        "creator": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "isAccessibleForFree": true,
+        "keywords": ["Yemeni Trees","Crown Ratio","Total Height","Crown Radius","TOST","√2−1"],
+        "variableMeasured": [
+          { "@type": "PropertyValue", "name": "H", "description": "Total tree height (meters)" },
+          { "@type": "PropertyValue", "name": "h", "description": "Height of first main branch (meters)" },
+          { "@type": "PropertyValue", "name": "r", "description": "Crown radius (meters)" },
+          { "@type": "PropertyValue", "name": "d", "description": "Trunk diameter at 1.3 meters (meters)" },
+          { "@type": "PropertyValue", "name": "L", "description": "Shadow length (meters)" },
+          { "@type": "PropertyValue", "name": "crownH", "description": "Crown ratio (H−h)/H — The primary target for testing" }
+        ],
+        "spatialCoverage": { "@type": "Place", "name": "Sana'a, Yemen" },
+        "temporalCoverage": "2026-10-14/2026-10-21",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-en.html#method",
+        "headline": "ZX Protocol: Statistical Equivalence Testing of the Silver Ratio √2−1 in Plant Geometry",
+        "description": "A statistical methodology to test whether a specific ratio in a tree (such as (H−h)/H) is equivalent to the Silver Ratio √2−1 = tan(π/8) ≈ 0.41421356, using TOST with a practical margin Δ, and protection against p-hacking via pre-registration locking.",
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00",
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "about": ["TOST","Equivalence Testing","p-hacking","Pre-registration","Plant Geometry"],
+        "keywords": "TOST, Statistical Equivalence, √2−1, Silver Ratio, Crown Ratio, Mango Trees",
+        "mainEntityOfPage": { "@id": "https://jabri-com.vercel.app/tree/tree3-en.html#webpage" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-en.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What exactly is the ZX protocol?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The ZX protocol is a statistical methodology to test whether a specific geometric ratio in a tree (such as the crown ratio (H−h)/H) is equivalent to the Silver Ratio √2−1 = tan(π/8) ≈ 0.41421356. It uses the TOST (Two One-Sided Tests) equivalence test instead of a traditional difference test, because it asks: Is the mean close enough to the target within a practical margin Δ? Not just: Is it significantly different?"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is the pre-registration lock important?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If you choose the ratio or the equivalence margin Δ after seeing the data, you open the door to p-hacking — picking the ratio that looks closest to inflate the result. Locking at the first tree makes the test honest: the pre-chosen ratio is tested at α=0.05 (no correction), and the rest are treated as exploratory (corrected by Bonferroni, α/6 = 0.0083). This is a fundamental difference between a confirmatory analysis and an exploratory one."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is TOST and how does it differ from a regular t-test?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A regular t-test examines the null hypothesis H₀: μ = μ₀ vs H₁: μ ≠ μ₀, rejecting the null only if the mean is significantly different. TOST tests two one-sided hypotheses: H₀₁: μ ≤ μ₀−Δ and H₀₂: μ ≥ μ₀+Δ. It rejects the null (i.e., proves equivalence) only if the 90% confidence interval is entirely within [μ₀−Δ, μ₀+Δ]. The key difference: TOST can prove equivalence, whereas a regular t-test cannot — because failing to reject the null ≠ proving equivalence."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is the L/H ratio excluded from testing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The L/H ratio (shadow length ÷ height) depends on the sun's angle, not on the tree's shape. Any vertical tree at the same angle will yield the same value — thus it is not a test of plant structure. Only L/H is excluded from statistical analysis, while its calculation and display are kept in the application for reference purposes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the results scientifically generalizable?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The current exploratory sample (n=5 mango trees) supports the hypothesis statistically within the margin Δ=±0.03, but is insufficient for generalization into a general law. The study was not pre-registered in a public registry, the sample is small, and the location is single (Sho'ub, Sana'a). The app clearly presents the results with their limitations, suggests a required sample size (usually n ≈ 15–25 to reach 80% power at Δ=0.03), and encourages replication with independent samples before any generalization."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑨ Hidden text for bots (Critical — UI relies on JS)
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  </style>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑩ Page Styles (Mirrored for LTR)
+       ═══════════════════════════════════════════════════════ -->
+<style>
+  :root{
+    --gold:#f4c430; --green:#7fb08a; --dark:#0a1a12;
+    --border:#1f3a2b; --dim:#8aa892; --warn:#e57373;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh; background:#0a1410; color:#e8f5e9;
+    font-family:'Segoe UI',Tahoma,sans-serif;
+    padding:14px; padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));
+    line-height:1.6;
+  }
+  h1{color:var(--gold);font-size:1.15rem;margin:0 0 6px;text-align:center}
+  h2{color:var(--green);font-size:0.85rem;margin:0 0 14px;text-align:center;font-weight:400}
+  h3{color:var(--gold);font-size:1rem;margin:18px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+  .panel{
+    background:var(--dark);border:1px solid var(--border);
+    border-radius:10px;padding:14px;margin-bottom:12px;
+  }
+  .panel.hypo{border-color:var(--gold);background:#0f1d15}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+  .row.full{grid-template-columns:1fr}
+  label{display:block;color:var(--dim);font-size:0.78rem;margin-bottom:4px}
+  label b{color:var(--gold)}
+  input,select,textarea{
+    width:100%;background:#08140d;color:#e8f5e9;
+    border:1px solid var(--border);border-radius:7px;
+    padding:9px 10px;font-size:0.95rem;font-family:inherit;
+    direction:ltr;text-align:left;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+  input[disabled],select[disabled],textarea[disabled]{opacity:0.6;cursor:not-allowed;background:#061009}
+  input[readonly]{background:#0e1a12;color:var(--gold);font-weight:700}
+  textarea{resize:vertical;min-height:60px;text-align:left}
+  select{cursor:pointer;text-align:left}
+  button{
+    background:#1a4d2e;color:#e8f5e9;border:1px solid #2e6b45;
+    padding:11px 16px;border-radius:8px;cursor:pointer;
+    font-family:inherit;font-size:0.9rem;transition:.15s;
+    user-select:none;width:100%;
+  }
+  button:active{transform:scale(0.98)}
+  button.primary{background:var(--gold);color:#0a1a12;border-color:var(--gold);font-weight:700}
+  button.danger{background:#5a1a1a;border-color:#8a2020}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .btn-row button{width:auto;flex:1;min-width:130px}
+  .ratio-card{
+    background:#08140d;border:1px solid var(--border);
+    border-radius:8px;padding:10px;margin-bottom:6px;
+    display:flex;justify-content:space-between;align-items:center;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .ratio-card .name{color:var(--dim);font-size:0.82rem}
+  .ratio-card .val{
+    color:var(--gold);font-family:'Courier New',monospace;
+    font-weight:700;font-size:0.95rem;direction:ltr;
+  }
+  .ratio-card.gold{border-color:var(--gold);box-shadow:0 0 20px -6px var(--gold)}
+  .ratio-card.excluded{opacity:0.55}
+  .ratio-card.excluded .name::after{content:" (Excluded)";color:#c8a840;font-size:0.7rem}
+  .tree-item{
+    background:#08140d;border:1px solid var(--border);
+    border-radius:7px;padding:9px 12px;margin-bottom:6px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:0.85rem;
+  }
+  .tree-item .id{color:var(--gold);font-weight:700;font-family:'Courier New',monospace}
+  .tree-item .info{color:var(--dim);font-size:0.75rem}
+  .tree-item button{
+    width:auto;padding:4px 10px;font-size:0.75rem;
+    background:#5a1a1a;border-color:#8a2020;
+  }
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
+  .stat{
+    background:#08140d;border:1px solid var(--border);
+    border-radius:7px;padding:8px;text-align:center;
+  }
+  .stat .lbl{color:var(--dim);font-size:0.7rem;display:block;margin-bottom:4px}
+  .stat .val{
+    color:var(--gold);font-family:'Courier New',monospace;
+    font-weight:700;font-size:0.9rem;direction:ltr;
+  }
+  .hint{
+    color:var(--dim);font-size:0.75rem;line-height:1.7;
+    background:#08140d;border-left:3px solid var(--gold);
+    padding:8px 12px;border-radius:5px;margin-top:8px;
+  }
+  .hint.warn{border-left-color:var(--warn);color:#ffbaba}
+  .hint.info{border-left-color:#6ae3ff;color:#b0e5ff}
+  .count{
+    display:inline-block;background:var(--gold);color:#0a1a12;
+    padding:2px 10px;border-radius:20px;font-weight:700;
+    font-size:0.8rem;margin-left:6px;
+  }
+  .empty{color:var(--dim);font-size:0.82rem;text-align:center;padding:14px}
+  .verdict{
+    border-radius:10px;padding:14px;margin-top:14px;
+    text-align:center;font-size:0.9rem;line-height:1.7;
+  }
+  .verdict.hit{background:#1a3a1a;border:1px solid var(--gold);color:var(--gold)}
+  .verdict.miss{background:#1a1a0a;border:1px solid #8a7020;color:#c8a840}
+  .verdict.pending{background:#1a1a2a;border:1px solid #6ae3ff;color:#6ae3ff}
+  .verdict.wait{background:#0a1a12;border:1px solid var(--border);color:var(--dim)}
+  .verdict .big{font-size:1.05rem;font-weight:700;display:block;margin-bottom:6px}
+  .verdict .detail{color:#c8e6c9;font-size:0.82rem;line-height:1.8;margin-top:8px}
+  .verdict code{
+    background:#132a1d;padding:2px 6px;border-radius:4px;
+    color:var(--gold);font-family:'Courier New',monospace;
+    direction:ltr;display:inline-block;
+  }
+
+  .filter-bar{
+    display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+    background:#08140d;border:1px solid var(--border);
+    border-radius:8px;padding:10px 12px;margin-bottom:10px;
+  }
+  .filter-bar label{
+    color:var(--dim);font-size:0.82rem;margin:0;flex-shrink:0;
+  }
+  .chip{
+    background:#132a1d;color:#a5d6a7;border:1px solid var(--border);
+    padding:5px 12px;border-radius:20px;cursor:pointer;
+    font-size:0.8rem;transition:.15s;user-select:none;
+  }
+  .chip:hover{background:#1f3a2b}
+  .chip.active{
+    background:var(--gold);color:#0a1a12;
+    border-color:var(--gold);font-weight:700;
+  }
+  .chip .cnt{
+    opacity:0.7;font-size:0.7rem;margin-left:4px;
+  }
+
+  .tree-nav{
+    width:100%; max-width: 600px; margin: 0 auto 20px auto;
+    background:#0a1a12; border:1px solid var(--border);
+    border-radius:14px; padding:12px 16px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;
+    box-shadow:0 10px 30px -15px #000;
+  }
+  .nav-brand{ color:var(--gold); font-weight:700; font-size:0.95rem; letter-spacing:1px; white-space:nowrap; }
+  .nav-links{ display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; flex:1; }
+  .nav-link{
+    display:inline-flex; align-items:center; gap:6px;
+    background:#132a1d; color:#a5d6a7; text-decoration:none;
+    padding:8px 14px; border-radius:8px; border:1px solid var(--border);
+    font-size:0.85rem; transition:.2s; white-space:nowrap;
+  }
+  .nav-link:hover{ background:#1f3a2b; color:#e8f5e9; border-color:#2e6b45; }
+  .nav-link.active{ background:var(--gold); color:#0a1a12; border-color:var(--gold); font-weight:700; cursor:default; }
+  .nav-link.active:hover{ background:var(--gold); color:#0a1a12; }
+  
+  .lock-banner{background:#1a3a1a;border:1px solid var(--gold);color:var(--gold);padding:8px 12px;border-radius:8px;margin-bottom:10px;font-size:0.82rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .lock-banner button{width:auto;padding:5px 10px;font-size:0.75rem;background:transparent;border-color:var(--gold);color:var(--gold);}
+  .lock-banner.hidden{display:none;}
+
+  @media (max-width:600px){
+    .tree-nav{ flex-direction:column; align-items:stretch; text-align:center; }
+    .nav-brand{ text-align:center; }
+    .nav-links{ justify-content:center; }
+    .nav-link{ font-size:0.8rem; padding:7px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     🕵️ Hidden text for bots
+     ══════════════════════════════════════════════════════════ -->
+<div class="sr-only" aria-hidden="true">
+  <h1>Field Measurement Protocol ZX — TOST Tool for Testing √2−1</h1>
+  <p>An interactive statistical tool running entirely in the browser to test whether a specific geometric ratio in trees (such as the crown ratio (H−h)/H) is equivalent to the Silver Ratio √2−1 = tan(π/8) ≈ 0.41421356.</p>
+  
+  <h2>Statistical Methodology</h2>
+  <ul>
+    <li><b>TOST (Two One-Sided Tests)</b>: To test equivalence against a practical margin Δ instead of a traditional difference test.</li>
+    <li><b>Pre-registration Lock</b>: Locking the hypothesis at the first tree to prevent p-hacking.</li>
+    <li><b>Bonferroni Correction</b>: Correcting α/6 when no ratio is pre-specified.</li>
+    <li><b>Accurate t-distribution</b>: Via logGamma + betacf to calculate CI and p-value accurately.</li>
+    <li><b>Power Approximation</b>: Estimating the current statistical power and the required sample size.</li>
+  </ul>
+  
+  <h2>Calculated Ratios</h2>
+  <ul>
+    <li><b>h/H</b> — Trunk ÷ Total Height</li>
+    <li><b>r/H</b> — Crown radius ÷ Height</li>
+    <li><b>2r/H</b> — Full crown diameter ÷ Height</li>
+    <li><b>d/H</b> — Trunk diameter ÷ Height</li>
+    <li><b>(H−h)/H</b> — Crown ÷ Height (Primary target)</li>
+    <li><b>h/(H−h)</b> — Trunk ÷ Crown</li>
+    <li><b>L/H</b> — Shadow ÷ Height (Excluded from testing, as it depends on sun angle)</li>
+  </ul>
+  
+  <h2>Reference Mango Sample Values</h2>
+  <p>Exploratory sample n=5 mango trees (Sho'ub, Sana'a, 2026-10-14): Mean (H−h)/H = 0.41297, SD = 0.00845, SE = 0.00378, 90% CI = [0.40491, 0.42102], TOST p = 0.000801 with Δ = ±0.03. Result: Equivalence confirmed within margin, but analysis is exploratory (not pre-registered) and not generalizable as a law.</p>
+  
+  <h2>Tool Features</h2>
+  <ul>
+    <li>Input tree measurements (H, h, r, d, L) with site, species, and time.</li>
+    <li>Automatic real-time calculation of ratios.</li>
+    <li>Pre-registration lock with the ability to unlock (recording the change in history).</li>
+    <li>Filtering by tree species.</li>
+    <li>Full statistical analysis with verdict (Equivalent / Different / Inconclusive).</li>
+    <li>CSV export with pre-registration header + CSV import.</li>
+    <li>All data saved locally (localStorage) — nothing is sent to a server.</li>
+  </ul>
+  
+  <p>By: Eng. Abdulla Mohammed Nasser Al-Jabri — Yemen. ORCID: 0009-0003-3319-3822. License: CC BY 4.0.</p>
+</div>
+
+<!-- ═══════════ Navigation ═══════════ -->
+<nav class="tree-nav" aria-label="Project Navigation">
+  <span class="nav-brand">🌳 Tree Project</span>
+  <div class="nav-links">
+    <a href="/tree/tree-en.html" class="nav-link">
+      <span class="nav-icon">📖</span> Complete Framework
+    </a>
+    <a href="/tree/tree2-en.html" class="nav-link">
+      <span class="nav-icon">🌀</span> Simulation
+    </a>
+    <a href="/tree/tree3-en.html" class="nav-link active" aria-current="page">
+      <span class="nav-icon">📏</span> Field Measurement
+    </a>
+    <a href="/tree/tree3-pdf-en.html" class="nav-link"><span class="nav-icon">📏</span> Field Report</a>
+  </div>
+</nav>
+
+<h1>🌳 Field Measurement Protocol</h1>
+<h2>Hypothesis Testing: Is there a ratio in the tree ≈ √2 − 1 ≈ 0.414 ?</h2>
+
+<!-- ═══════════ Pre-registration Hypothesis ═══════════ -->
+<div class="panel hypo" id="preHypoPanel">
+  <div class="lock-banner hidden" id="lockBanner">
+    <span>🔒 <b>Hypothesis Locked</b> since <span id="lockTime"></span></span>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button id="unlockBtn">🔓 Unlock</button>
+    </div>
+  </div>
+
+  <h3>🎯 Pre-registration Hypothesis <span style="font-size:0.75rem;color:var(--dim);font-weight:400">(Before data collection)</span></h3>
+  <div class="hint info" style="margin-top:0;margin-bottom:10px">
+    <b>Why lock?</b> Choosing the ratio or margin <b>after</b> seeing the data opens the door to
+    <b>p-hacking</b>. Locking at the first tree makes the test honest: the chosen ratio
+    is tested at α=0.05 (no correction), and the rest are exploratory.
+  </div>
+
+  <div class="row full">
+    <div>
+      <label><b>Which ratio do you expect to be close to 0.4142?</b></label>
+      <select id="preHypo">
+        <option value="">— Not specified yet (Bonferroni will be applied to 6 ratios) —</option>
+        <option value="hH">h/H — Trunk ÷ Total Height</option>
+        <option value="rH">r/H — Crown radius ÷ Height</option>
+        <option value="2rH">2r/H — Full crown diameter ÷ Height</option>
+        <option value="dH">d/H — Trunk diameter ÷ Height</option>
+        <option value="crownH">(H−h)/H — Crown ÷ Height</option>
+        <option value="hCrown">h/(H−h) — Trunk ÷ Crown</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row full">
+    <div>
+      <label>Geometric / Biological Reason for Expectation</label>
+      <textarea id="preReason" placeholder="E.g., The Z+C+A theory suggests that the mass division between trunk and crown follows the Silver Ratio..."></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>Equivalence Margin Δ</b> (Required)</label>
+      <input id="preDelta" type="number" step="0.005" min="0.005" max="0.2" value="0.03" placeholder="0.03">
+    </div>
+    <div>
+      <label>Margin Justification (Required)</label>
+      <input id="preDeltaReason" type="text" placeholder="E.g., Twice the field measurement uncertainty" dir="auto">
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ New Tree Data Entry ═══════════ -->
+<div class="panel">
+  <h3>📝 New Tree</h3>
+
+  <div class="row">
+    <div>
+      <label>Site / Neighborhood</label>
+      <input id="site" type="text" placeholder="E.g., Old Sana'a" dir="auto">
+    </div>
+    <div>
+      <label>Tree Species</label>
+      <input id="species" type="text" placeholder="Palm / Acacia / ..." dir="auto">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>H</b> — Total Height (m)</label>
+      <input id="H" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label><b>h</b> — First Branch Height (m)</label>
+      <input id="h" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>r</b> — Crown Radius (m)</label>
+      <input id="r" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label><b>d</b> — Trunk Diameter @ 1.3m (m)</label>
+      <input id="d" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>L</b> — Shadow Length (m)</label>
+      <input id="L" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label>Time (HH:MM)</label>
+      <input id="time" type="time">
+    </div>
+  </div>
+
+  <div class="row full">
+    <div>
+      <label>Notes (Optional)</label>
+      <input id="notes" type="text" placeholder="Healthy tree, near a well..." dir="auto">
+    </div>
+  </div>
+
+  <h3>📐 Calculated Ratios</h3>
+  <div id="ratios">
+    <div class="ratio-card" data-ratio="hH"><span class="name">h / H (Trunk ÷ Total)</span><span class="val" id="r_hH">—</span></div>
+    <div class="ratio-card" data-ratio="rH"><span class="name">r / H (Crown Radius ÷ Total)</span><span class="val" id="r_rH">—</span></div>
+    <div class="ratio-card" data-ratio="2rH"><span class="name">2r / H (Full Crown)</span><span class="val" id="r_2rH">—</span></div>
+    <div class="ratio-card" data-ratio="dH"><span class="name">d / H (Thickness ÷ Total)</span><span class="val" id="r_dH">—</span></div>
+    <div class="ratio-card" data-ratio="crownH"><span class="name">(H−h) / H (Crown ÷ Total)</span><span class="val" id="r_crownH">—</span></div>
+    <div class="ratio-card" data-ratio="hCrown"><span class="name">h / (H−h) (Trunk ÷ Crown)</span><span class="val" id="r_hCrown">—</span></div>
+    <div class="ratio-card excluded" data-ratio="LH"><span class="name">L / H (Shadow ÷ Height)</span><span class="val" id="r_LH">—</span></div>
+  </div>
+
+  <div class="hint">
+    💡 The gold card = a ratio close to <b>0.414</b> (within ±Δ of the pre-registered hypothesis)
+  </div>
+  <div class="hint warn">
+    ⚠️ <b>L/H is excluded</b> from hypothesis testing: it depends on the <b>sun angle</b>, not the tree's shape.
+    Any vertical tree at the same angle will yield the same value — this is not a test of structure.
+  </div>
+
+  <div class="btn-row">
+    <button class="primary" id="saveBtn">💾 Save Tree</button>
+    <button id="clearBtn">⟲ Clear Fields</button>
+  </div>
+</div>
+
+<!-- ═══════════ Registered Trees ═══════════ -->
+<div class="panel">
+  <h3>📋 Registered Trees<span class="count" id="treeCount">0</span></h3>
+  <div id="treeList">
+    <div class="empty">No trees yet. Start by adding a tree.</div>
+  </div>
+</div>
+
+<!-- ═══════════ Statistical Analysis ═══════════ -->
+<div class="panel">
+  <h3>📊 Statistical Analysis</h3>
+
+  <div class="filter-bar" id="filterBar">
+    <label>Species:</label>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">Trees (in filter)</span>
+      <span class="val" id="statN">0</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">Mean h/H</span>
+      <span class="val" id="statMean_hH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">SD</span>
+      <span class="val" id="statSD_hH">—</span>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">Mean r/H</span>
+      <span class="val" id="statMean_rH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">SD</span>
+      <span class="val" id="statSD_rH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">√2−1 (Reference)</span>
+      <span class="val">0.4142</span>
+    </div>
+  </div>
+
+  <div id="verdict" class="verdict wait">
+    ⏳ Waiting for sufficient data (at least 5 trees for initial analysis)
+  </div>
+</div>
+
+<!-- ═══════════ Export ═══════════ -->
+<div class="panel">
+  <h3>📤 Export</h3>
+  <div class="btn-row">
+    <button id="exportBtn">⬇ Export CSV</button>
+    <button id="importBtn">⬆ Import CSV</button>
+    <button class="danger" id="wipeBtn">🗑️ Delete All Data</button>
+  </div>
+  <input id="importFile" type="file" accept=".csv" style="display:none">
+</div>
+
+<div class="hint" style="margin-bottom:30px">
+  🔒 <b>All data is saved on your device only</b> — nothing is sent to any server. Completely safe.
+</div>
+
+<script>
+'use strict';
+
+// ═══════════════════════════════════════════════════════
+//  Constants
+// ═══════════════════════════════════════════════════════
+const TARGET = Math.sqrt(2) - 1;      // 0.41421356...
+const TOL    = 0.03;
+const STORAGE_KEY = 'zx_trees_v1';
+const PRIOR_KEY   = 'zx_prior_v2';
+
+const EXCLUDED = ['LH'];
+const CHECK_KEYS = ['hH','rH','2rH','dH','crownH','hCrown'];
+
+const KEY_NAMES = {
+  hH:      'h/H (Trunk ÷ Total)',
+  rH:      'r/H (Crown Radius ÷ Total)',
+  '2rH':   '2r/H (Full Crown ÷ Total)',
+  dH:      'd/H (Thickness ÷ Total)',
+  crownH:  '(H−h)/H (Crown ÷ Total)',
+  hCrown:  'h/(H−h) (Trunk ÷ Crown)',
+  LH:      'L/H (Shadow ÷ Height)',
+};
+
+// ═══════════════════════════════════════════════════════
+//  t-distribution + normal distribution (for equivalence testing)
+// ═══════════════════════════════════════════════════════
+function logGamma(x){
+  const c = [76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];
+  let y = x, tmp = x + 5.5; tmp -= (x + 0.5) * Math.log(tmp); let s = 1.000000000190015;
+  for (let j = 0; j < 6; j++) s += c[j] / ++y;
+  return -tmp + Math.log(2.5066282746310005 * s / x);
+}
+function betacf(a, b, x){
+  const EPS = 3e-7, FP = 1e-30; const qab = a + b, qap = a + 1, qam = a - 1;
+  let c = 1, d = 1 - qab * x / qap; if (Math.abs(d) < FP) d = FP; d = 1 / d; let h = d;
+  for (let m = 1; m <= 200; m++){
+    const m2 = 2 * m; let aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+    d = 1 + aa * d; if (Math.abs(d) < FP) d = FP; c = 1 + aa / c; if (Math.abs(c) < FP) c = FP;
+    d = 1 / d; h *= d * c; aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+    d = 1 + aa * d; if (Math.abs(d) < FP) d = FP; c = 1 + aa / c; if (Math.abs(c) < FP) c = FP;
+    d = 1 / d; const del = d * c; h *= del; if (Math.abs(del - 1) < EPS) break;
+  }
+  return h;
+}
+function betai(a, b, x){
+  if (x <= 0) return 0; if (x >= 1) return 1;
+  const bt = Math.exp(logGamma(a+b) - logGamma(a) - logGamma(b) + a*Math.log(x) + b*Math.log(1-x));
+  return x < (a+1)/(a+b+2) ? bt * betacf(a,b,x) / a : 1 - bt * betacf(b,a,1-x) / b;
+}
+function tCDF(t, df){ const x = df / (df + t*t); const p = 0.5 * betai(df/2, 0.5, x); return t > 0 ? 1 - p : p; }
+function tCrit(df, alpha=0.05){ let lo = 0, hi = 50; for (let i = 0; i < 60; i++){ const mid = (lo+hi)/2; if (2*(1 - tCDF(mid, df)) > alpha) lo = mid; else hi = mid; } return (lo+hi)/2; }
+function normCDF(x){ const t = 1/(1 + 0.2316419*Math.abs(x)); const d = 0.3989423*Math.exp(-x*x/2); const p = d*t*(0.3193815 + t*(-0.3565638 + t*(1.781478 + t*(-1.821256 + t*1.330274)))); return x > 0 ? 1-p : p; }
+function normInv(p){
+  if (p <= 0) return -Infinity; if (p >= 1) return Infinity;
+  const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+  const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+  const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+  const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+  const plow = 0.02425, phigh = 1 - plow; let q, r;
+  if (p < plow){ q=Math.sqrt(-2*Math.log(p)); return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+  if (p > phigh){ q=Math.sqrt(-2*Math.log(1-p)); return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+  q = p - 0.5; r = q*q;
+  return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q / (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+}
+
+function decide(ratios, target, delta, alpha){
+  const n = ratios.length; if (n < 2) return { status: 'NO_DATA', n };
+  const m = mean(ratios), sd = stdDev(ratios);
+  const se = sd / Math.sqrt(n), df = n - 1;
+  const tc = tCrit(df, alpha);
+  const ciLow = m - tc * se, ciHigh = m + tc * se;
+  const t1 = (m - (target - delta)) / se; const t2 = (m - (target + delta)) / se;
+  const p1 = 1 - tCDF(t1, df); const p2 = tCDF(t2, df); const pTOST = Math.max(p1, p2);
+  const tDiff = (m - target) / se; const pDiff = 2 * (1 - tCDF(Math.abs(tDiff), df));
+  const eqLow = target - delta, eqHigh = target + delta;
+  let status;
+  if (ciLow >= eqLow && ciHigh <= eqHigh) status = 'EQUIVALENT';
+  else if (ciHigh < eqLow || ciLow > eqHigh) status = 'DIFFERENT';
+  else status = 'INCONCLUSIVE';
+  return { status, n, m, sd, se, df, ciLow, ciHigh, pTOST, pDiff, tDiff, eqLow, eqHigh };
+}
+
+function tostPowerApprox(n, sd, delta, alpha=0.05){
+  if (sd <= 0 || n < 2 || delta <= 0) return 0;
+  const tc = tCrit(n-1, alpha);
+  const z = delta * Math.sqrt(n) / sd - tc;
+  return Math.max(0, 2 * normCDF(z) - 1);
+}
+
+function tostSampleSizeApprox(sd, delta, power=0.8, alpha=0.05){
+  if (sd <= 0 || delta <= 0) return null;
+  const zTarget = normInv((1 + power) / 2);
+  let n = Math.max(2, Math.ceil(Math.pow((1.96 + zTarget) * sd / delta, 2)));
+  for (let i = 0; i < 30; i++){
+    const tc = tCrit(n-1, alpha);
+    const nNew = Math.max(2, Math.ceil(Math.pow((tc + zTarget) * sd / delta, 2)));
+    if (nNew === n) break; n = nNew;
+  }
+  return n;
+}
+
+// ═══════════════════════════════════════════════════════
+//  State
+// ═══════════════════════════════════════════════════════
+let trees = loadTrees();
+let activeFilter = '__all__';
+
+// ═══════════════════════════════════════════════════════
+//  Storage
+// ═══════════════════════════════════════════════════════
+function loadTrees(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map(t => {
+      if (!t.ratios) t.ratios = computeRatios(t.H, t.h, t.r, t.d, t.L);
+      return t;
+    });
+  }catch(e){ return []; }
+}
+function saveTrees(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(trees)); }catch(e){}
+}
+
+// ═══════════════════════════════════════════════════════
+//  Pre-registration
+// ═══════════════════════════════════════════════════════
+function getPrior(){ 
+  try { 
+    const raw = localStorage.getItem(PRIOR_KEY); 
+    if (!raw) return { history: [] }; 
+    const p = JSON.parse(raw); 
+    if (!p || typeof p !== 'object') return { history: [] };
+    p.history = Array.isArray(p.history) ? p.history : []; 
+    return p; 
+  } catch(e){ return { history: [] }; } 
+}
+function setPrior(p){ try { localStorage.setItem(PRIOR_KEY, JSON.stringify(p)); }catch(e){} }
+function isLocked(){ return !!getPrior().lockedAt; }
+
+function lockPrior(){
+  const p = getPrior(); if (p.lockedAt) return p;
+  p.key = document.getElementById('preHypo').value; p.reason = document.getElementById('preReason').value.trim();
+  p.delta = parseFloat(document.getElementById('preDelta').value) || TOL; p.deltaReason = document.getElementById('preDeltaReason').value.trim();
+  p.lockedAt = Date.now(); setPrior(p); return p;
+}
+
+function applyPriorToForm(){
+  const p = getPrior();
+  if (p.key != null) document.getElementById('preHypo').value = p.key;
+  if (p.reason) document.getElementById('preReason').value = p.reason;
+  if (p.delta) document.getElementById('preDelta').value = p.delta;
+  if (p.deltaReason) document.getElementById('preDeltaReason').value = p.deltaReason;
+  updateLockUI();
+}
+
+function updateLockUI(){
+  const p = getPrior(); const banner = document.getElementById('lockBanner'); const fields = ['preHypo','preReason','preDelta','preDeltaReason'];
+  if (p.lockedAt){
+    banner.classList.remove('hidden');
+    document.getElementById('lockTime').textContent = new Date(p.lockedAt).toLocaleString('en-US');
+    fields.forEach(id => document.getElementById(id).disabled = true);
+  } else {
+    banner.classList.add('hidden'); fields.forEach(id => document.getElementById(id).disabled = false);
+  }
+}
+
+function saveDraftPrior(){
+  if (isLocked()) return; const p = getPrior();
+  p.key = document.getElementById('preHypo').value; p.reason = document.getElementById('preReason').value.trim();
+  p.delta = parseFloat(document.getElementById('preDelta').value) || TOL; p.deltaReason = document.getElementById('preDeltaReason').value.trim();
+  setPrior(p);
+}
+
+document.getElementById('unlockBtn').addEventListener('click', () => {
+  const p = getPrior(); if (!p.lockedAt) return;
+  if (!confirm('⚠️ The hypothesis has been locked since ' + new Date(p.lockedAt).toLocaleString('en-US') + '.\n\nAre you sure you want to unlock? This change will be recorded.')) return;
+  p.history.push({ key: p.key, delta: p.delta, reason: p.reason, deltaReason: p.deltaReason, ts: p.lockedAt, unlockedAt: Date.now() });
+  p.lockedAt = null; setPrior(p); updateLockUI(); renderStats();
+});
+
+['preHypo','preReason','preDelta','preDeltaReason'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => { saveDraftPrior(); renderStats(); });
+  document.getElementById(id).addEventListener('input', saveDraftPrior);
+});
+
+// ═══════════════════════════════════════════════════════
+//  Field readers
+// ═══════════════════════════════════════════════════════
+function num(id){
+  const v = parseFloat(document.getElementById(id).value);
+  return isNaN(v) ? null : v;
+}
+function str(id){
+  return document.getElementById(id).value.trim();
+}
+
+// ═══════════════════════════════════════════════════════
+//  Ratio calculation
+// ═══════════════════════════════════════════════════════
+function computeRatios(H, h, r, d, L){
+  const out = {};
+  if (H && H > 0){
+    out.hH     = h != null ? h / H : null;
+    out.rH     = r != null ? r / H : null;
+    out['2rH'] = r != null ? (2*r) / H : null;
+    out.dH     = d != null ? d / H : null;
+    out.LH     = L != null ? L / H : null;
+    out.crownH = h != null ? (H - h) / H : null;
+    out.hCrown = (h != null && H - h > 0) ? h / (H - h) : null;
+  }
+  return out;
+}
+
+// ═══════════════════════════════════════════════════════
+//  Live ratio update in the form
+// ═══════════════════════════════════════════════════════
+function updateLiveRatios(){
+  const H = num('H'), h = num('h'), r = num('r'), d = num('d'), L = num('L');
+  const ratios = computeRatios(H, h, r, d, L);
+  const delta = parseFloat(getPrior().delta) || TOL;
+
+  const map = {
+    'r_hH':     ['hH',     ratios.hH],
+    'r_rH':     ['rH',     ratios.rH],
+    'r_2rH':    ['2rH',    ratios['2rH']],
+    'r_dH':     ['dH',     ratios.dH],
+    'r_LH':     ['LH',     ratios.LH],
+    'r_hCrown': ['hCrown', ratios.hCrown],
+    'r_crownH': ['crownH', ratios.crownH],
+  };
+
+  for (const [id, [key, val]] of Object.entries(map)){
+    const el = document.getElementById(id);
+    const card = el.closest('.ratio-card');
+    if (val == null){
+      el.textContent = '—';
+      card.classList.remove('gold');
+    } else {
+      el.textContent = val.toFixed(6);
+      const isExcluded = EXCLUDED.includes(key);
+      if (!isExcluded && Math.abs(val - TARGET) < delta){
+        card.classList.add('gold');
+      } else {
+        card.classList.remove('gold');
+      }
+    }
+  }
+}
+
+['H','h','r','d','L'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateLiveRatios);
+});
+
+// ═══════════════════════════════════════════════════════
+//  Save Tree
+// ═══════════════════════════════════════════════════════
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const H = num('H');
+  if (!H || H <= 0){
+    alert('⚠️ You must enter the total height H at least');
+    return;
+  }
+
+  const wasEmpty = trees.length === 0;
+
+  if (wasEmpty && !isLocked()){
+    const key = document.getElementById('preHypo').value;
+    const deltaReason = document.getElementById('preDeltaReason').value.trim();
+    if (!key && !confirm('You did not select a pre-registered ratio. Bonferroni will be applied to 6 ratios.\n\nContinue?')) return;
+    if (!deltaReason && !confirm('You did not justify the equivalence margin Δ.\n\nContinue at your own risk?')) return;
+  }
+
+  const tree = {
+    id:        Date.now(),
+    site:      str('site'),
+    species:   str('species') || 'Unspecified',
+    H:         H,
+    h:         num('h'),
+    r:         num('r'),
+    d:         num('d'),
+    L:         num('L'),
+    time:      str('time'),
+    notes:     str('notes'),
+    timestamp: new Date().toISOString(),
+    ratios:    computeRatios(H, num('h'), num('r'), num('d'), num('L')),
+  };
+
+  trees.push(tree);
+  saveTrees();
+
+  if (wasEmpty && !isLocked()){
+    lockPrior();
+    updateLockUI();
+  }
+
+  renderTreeList();
+  renderFilterBar();
+  renderStats();
+  clearForm();
+  flash(document.getElementById('saveBtn'), '✅ Saved');
+});
+
+function clearForm(){
+  ['site','species','H','h','r','d','L','time','notes'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  updateLiveRatios();
+}
+document.getElementById('clearBtn').addEventListener('click', clearForm);
+
+function flash(btn, text){
+  const old = btn.textContent;
+  btn.textContent = text;
+  setTimeout(() => { btn.textContent = old; }, 1200);
+}
+
+// ═══════════════════════════════════════════════════════
+//  Render Tree List
+// ═══════════════════════════════════════════════════════
+function renderTreeList(){
+  const list  = document.getElementById('treeList');
+  const count = document.getElementById('treeCount');
+  count.textContent = trees.length;
+
+  if (trees.length === 0){
+    list.innerHTML = '<div class="empty">No trees yet. Start by adding a tree.</div>';
+    return;
+  }
+
+  const delta = parseFloat(getPrior().delta) || TOL;
+  list.innerHTML = '';
+  [...trees].reverse().forEach(t => {
+    const div = document.createElement('div');
+    div.className = 'tree-item';
+
+    const goldMark = CHECK_KEYS.some(k => {
+      const v = t.ratios ? t.ratios[k] : null;
+      return v != null && Math.abs(v - TARGET) < delta;
+    }) ? ' ⭐' : '';
+
+    div.innerHTML = `
+      <div>
+        <span class="id">#${String(t.id).slice(-4)}${goldMark}</span>
+        <span class="info"> · ${t.species || '—'} · H=${t.H}m</span>
+      </div>
+      <button data-id="${t.id}">Delete</button>
+    `;
+    list.appendChild(div);
+  });
+
+  list.querySelectorAll('button[data-id]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = Number(btn.dataset.id);
+      if (confirm('Delete this tree?')){
+        trees = trees.filter(t => t.id !== id);
+        saveTrees();
+        renderTreeList();
+        renderFilterBar();
+        renderStats();
+      }
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+//  Filter Bar (Species)
+// ═══════════════════════════════════════════════════════
+function renderFilterBar(){
+  const bar = document.getElementById('filterBar');
+  const speciesCounts = {};
+  trees.forEach(t => {
+    const sp = (t.species || 'Unspecified').trim();
+    speciesCounts[sp] = (speciesCounts[sp] || 0) + 1;
+  });
+
+  bar.innerHTML = '<label>Species:</label>';
+
+  const allChip = document.createElement('span');
+  allChip.className = 'chip' + (activeFilter === '__all__' ? ' active' : '');
+  allChip.innerHTML = `All<span class="cnt">${trees.length}</span>`;
+  allChip.addEventListener('click', () => {
+    activeFilter = '__all__';
+    renderFilterBar();
+    renderStats();
+  });
+  bar.appendChild(allChip);
+
+  Object.keys(speciesCounts).sort().forEach(sp => {
+    const chip = document.createElement('span');
+    chip.className = 'chip' + (activeFilter === sp ? ' active' : '');
+    chip.innerHTML = `${sp}<span class="cnt">${speciesCounts[sp]}</span>`;
+    chip.addEventListener('click', () => {
+      activeFilter = sp;
+      renderFilterBar();
+      renderStats();
+    });
+    bar.appendChild(chip);
+  });
+
+  if (activeFilter !== '__all__' && !speciesCounts[activeFilter]){
+    activeFilter = '__all__';
+    renderFilterBar();
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  Filtered Trees
+// ═══════════════════════════════════════════════════════
+function filteredTrees(){
+  if (activeFilter === '__all__') return trees;
+  return trees.filter(t => (t.species || 'Unspecified').trim() === activeFilter);
+}
+
+// ═══════════════════════════════════════════════════════
+//  Statistics
+// ═══════════════════════════════════════════════════════
+function mean(arr){
+  if (arr.length === 0) return null;
+  return arr.reduce((s,v) => s + v, 0) / arr.length;
+}
+function stdDev(arr){
+  if (arr.length < 2) return null;
+  const m = mean(arr);
+  const variance = arr.reduce((s,v) => s + (v-m)**2, 0) / (arr.length - 1);
+  return Math.sqrt(variance);
+}
+function collectRatio(key, list){
+  return list.map(t => t.ratios ? t.ratios[key] : null).filter(v => v != null && !isNaN(v));
+}
+
+// ═══════════════════════════════════════════════════════
+//  Statistical Analysis
+// ═══════════════════════════════════════════════════════
+function renderStats(){
+  const list = filteredTrees();
+  const hH = collectRatio('hH', list);
+  const rH = collectRatio('rH', list);
+
+  document.getElementById('statN').textContent = list.length;
+  document.getElementById('statMean_hH').textContent = hH.length ? mean(hH).toFixed(4) : '—';
+  document.getElementById('statSD_hH').textContent   = hH.length > 1 ? stdDev(hH).toFixed(4) : '—';
+  document.getElementById('statMean_rH').textContent = rH.length ? mean(rH).toFixed(4) : '—';
+  document.getElementById('statSD_rH').textContent   = rH.length > 1 ? stdDev(rH).toFixed(4) : '—';
+
+  const verdict = document.getElementById('verdict');
+  const filterLabel = activeFilter === '__all__' ? 'All' : `Species: ${activeFilter}`;
+
+  const prior = getPrior();
+  const delta = parseFloat(prior.delta) || TOL;
+  const preKey = prior.key || '';
+  const locked = isLocked();
+
+  if (list.length < 5){
+    verdict.className = 'verdict wait';
+    verdict.innerHTML = `⏳ Waiting for sufficient data — ${list.length}/5 trees (${filterLabel})`;
+    return;
+  }
+
+  const keysToDecide = preKey ? [preKey] : CHECK_KEYS;
+  const alpha = preKey ? 0.05 : 0.05 / CHECK_KEYS.length;
+
+  const results = [];
+  for (const k of CHECK_KEYS){
+    const arr = collectRatio(k, list);
+    if (arr.length < 3) continue;
+    const r = decide(arr, TARGET, delta, alpha);
+    if (!r || r.status === 'NO_DATA') continue;
+    r.key = k;
+    r.inDecision = keysToDecide.includes(k);
+    results.push(r);
+  }
+
+  if (!results.length){
+    verdict.className = 'verdict wait';
+    verdict.innerHTML = '⏳ Insufficient ratios for calculation';
+    return;
+  }
+
+  const eq = results.filter(r => r.inDecision && r.status === 'EQUIVALENT');
+  const diff = results.filter(r => r.inDecision && r.status === 'DIFFERENT');
+  const inc = results.filter(r => r.inDecision && r.status === 'INCONCLUSIVE');
+
+  const lockNote = !locked
+    ? '<div style="color:#ffbaba;font-size:0.78rem;margin-top:8px">⚠️ Hypothesis is <b>not locked</b> — result is exploratory.</div>'
+    : '<div style="color:#7fb08a;font-size:0.78rem;margin-top:8px">✓ Hypothesis locked since ' + new Date(prior.lockedAt).toLocaleDateString('en-US') + '.</div>';
+
+  if (eq.length > 0){
+    const r = eq[0];
+    verdict.className = 'verdict hit';
+    verdict.innerHTML =
+      '<span class="big">🎯 Equivalence Confirmed — ' + KEY_NAMES[r.key] + '</span>' +
+      '<div class="detail">' +
+        'Mean = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n +
+        ' · SD=<code>' + r.sd.toFixed(4) + '</code><br>' +
+        'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
+        'Interval is <b>inside</b> [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']<br>' +
+        'TOST p = <code>' + r.pTOST.toFixed(4) + '</code> · α = ' + alpha.toFixed(4) +
+      '</div>' +
+      '<div class="detail" style="color:#a5d6a7;margin-top:8px">' +
+        'Statistical equivalence <b>within Δ=' + delta + '</b> for sample n=' + r.n + '. ' +
+        '<b>Not a universal law</b>. Requires independent verification before generalization.' +
+      '</div>' + lockNote;
+  } else if (diff.length > 0){
+    const r = diff[0];
+    verdict.className = 'verdict miss';
+    verdict.innerHTML =
+      '<span class="big">❌ Different from 0.4142 — ' + KEY_NAMES[r.key] + '</span>' +
+      '<div class="detail">' +
+        'Mean = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n + '<br>' +
+        'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
+        'Does not intersect with [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']<br>' +
+        't = <code>' + r.tDiff.toFixed(3) + '</code> · p = <code>' + r.pDiff.toFixed(4) + '</code>' +
+      '</div>' +
+      '<div class="detail" style="color:#a5d6a7;margin-top:8px">This is <b>not a failure — it is a result</b>.</div>' + lockNote;
+  } else {
+    const r = inc[0] || results[0];
+    const powerApprox = r.sd > 0 ? tostPowerApprox(r.n, r.sd, delta, alpha) : 0;
+    const neededN = r.sd > 0 ? tostSampleSizeApprox(r.sd, delta, 0.8, alpha) : '—';
+
+    verdict.className = 'verdict pending';
+    verdict.innerHTML =
+      '<span class="big">⏳ Inconclusive — ' + KEY_NAMES[r.key] + '</span>' +
+      '<div class="detail">' +
+        'Mean = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n +
+        ' · SD=<code>' + r.sd.toFixed(4) + '</code><br>' +
+        'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
+        'Partially outside [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']' +
+      '</div>' +
+      '<div class="detail" style="color:#c8e6c9;margin-top:8px">' +
+        '<b>Current approximate power:</b> ≈ ' + Math.round(powerApprox * 100) + '% (Requires 80%)<br>' +
+        '<b>Suggested sample size:</b> ≈ ' + neededN + ' trees<br>' +
+        '<i style="opacity:0.7;font-size:0.75rem">Estimates assume σ≈SD(sample). ' +
+        'Actual power via non-central t may be lower, especially at small n.</i>' +
+      '</div>' +
+      '<div class="detail" style="color:#a5d6a7;margin-top:8px">⚠️ This is <b>not a failure</b> — the data is insufficient yet.</div>' + lockNote;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  Export / Import CSV
+// ═══════════════════════════════════════════════════════
+document.getElementById('exportBtn').addEventListener('click', () => {
+  if (trees.length === 0){
+    alert('No data to export');
+    return;
+  }
+
+  const prior = getPrior();
+  const headers = [
+    'id','site','species','H','h','r','d','L','time','notes','timestamp',
+    'hH','rH','2rH','dH','LH','hCrown','crownH'
+  ];
+
+  const rows = trees.map(t => {
+    const r = t.ratios || {};
+    return [
+      t.id, t.site, t.species,
+      t.H, t.h ?? '', t.r ?? '', t.d ?? '', t.L ?? '',
+      t.time, t.notes, t.timestamp,
+      r.hH?.toFixed(6) ?? '',
+      r.rH?.toFixed(6) ?? '',
+      r['2rH']?.toFixed(6) ?? '',
+      r.dH?.toFixed(6) ?? '',
+      r.LH?.toFixed(6) ?? '',
+      r.hCrown?.toFixed(6) ?? '',
+      r.crownH?.toFixed(6) ?? '',
+    ].map(v => {
+      const s = String(v);
+      return s.includes(',') ? '"' + s.replace(/"/g,'""') + '"' : s;
+    }).join(',');
+  });
+
+  const priorLines = '# ZX Pre-registration\n# Key: ' + (prior.key || '(none)') + '\n# Delta: ' + (prior.delta || TOL) + '\n# Reason: ' + (prior.reason || '(none)') + '\n# Delta reason: ' + (prior.deltaReason || '(none)') + '\n# Locked at: ' + (prior.lockedAt ? new Date(prior.lockedAt).toISOString() : '(not locked)') + '\n';
+  const csv = '\uFEFF' + priorLines + headers.join(',') + '\n' + rows.join('\n');
+  
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `zx-trees-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importBtn').addEventListener('click', () => {
+  document.getElementById('importFile').click();
+});
+
+document.getElementById('importFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try{
+      const text = ev.target.result.replace(/^\uFEFF/, '');
+      const lines = text.split(/\r?\n/).filter(l => !l.trim().startsWith('#') && l.trim() !== '');
+      if (lines.length < 2) return;
+      
+      const headers = lines[0].split(',').map(h => h.trim());
+
+      const imported = [];
+      for (let i = 1; i < lines.length; i++){
+        const cells = lines[i].split(',');
+        const obj = {};
+        headers.forEach((h, j) => obj[h] = cells[j]?.trim() ?? '');
+
+        const H = parseFloat(obj.H);
+        if (!H) continue;
+
+        imported.push({
+          id: parseInt(obj.id) || Date.now() + i,
+          site: obj.site || '',
+          species: (obj.species || 'Unspecified').trim(),
+          H,
+          h: parseFloat(obj.h) || null,
+          r: parseFloat(obj.r) || null,
+          d: parseFloat(obj.d) || null,
+          L: parseFloat(obj.L) || null,
+          time: obj.time || '',
+          notes: obj.notes || '',
+          timestamp: obj.timestamp || new Date().toISOString(),
+          ratios: computeRatios(
+            H,
+            parseFloat(obj.h) || null,
+            parseFloat(obj.r) || null,
+            parseFloat(obj.d) || null,
+            parseFloat(obj.L) || null
+          ),
+        });
+      }
+
+      if (imported.length === 0){
+        alert('No valid data found');
+        return;
+      }
+
+      if (confirm(`Import ${imported.length} trees? (They will be added to the current data)`)){
+        trees = trees.concat(imported);
+        saveTrees();
+        renderTreeList();
+        renderFilterBar();
+        renderStats();
+        alert('Imported successfully');
+      }
+    }catch(err){
+      alert('File read error: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+document.getElementById('wipeBtn').addEventListener('click', () => {
+  if (trees.length === 0) return;
+  if (confirm(`Permanently delete ${trees.length} trees? This cannot be undone.`)){
+    trees = [];
+    activeFilter = '__all__';
+    saveTrees();
+    renderTreeList();
+    renderFilterBar();
+    renderStats();
+  }
+});
+
+// ═══════════════════════════════════════════════════════
+//  Boot
+// ═══════════════════════════════════════════════════════
+applyPriorToForm();
+renderTreeList();
+renderFilterBar();
+renderStats();
+updateLiveRatios();
+</script>
+
+<!-- Header/Footer Injections -->
+<div id="header-placeholder"></div>
+<div id="footer-placeholder"></div>
+<script src="/js/init-page-root.js" defer></script>
+
+</body>
+</html>
