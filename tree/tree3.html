@@ -1,71 +1,309 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
 
-<!-- ═══════════════════════════════════════════════════════
-     ⓪ القالب الذهبي (الأيقونات - مسارات مطلقة)
-     ═══════════════════════════════════════════════════════ -->
-<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
-<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
-<link rel="shortcut icon" href="/icon-192.png">
-<link rel="icon" href="/image/icon-192.png" type="image/png">
-<link rel="manifest" href="/manifest.json">
+  <!-- ═══════════════════════════════════════════════════════
+       ⓪ الأيقونات
+       ═══════════════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+  <link rel="shortcut icon" href="/icon-192.png">
+  <link rel="icon" href="/image/icon-192.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0a1410">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U">
+  <!-- ═══════════════════════════════════════════════════════
+       ① أساسيات
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a1410">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ② الملكية
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:site_name" content="واحة الجبري">
+  <meta name="application-name" content="واحة الجبري">
+  <meta name="apple-mobile-web-app-title" content="بروتوكول القياس ZX">
+  <meta name="author" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="owner" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="publisher" content="واحة الجبري">
+  <meta name="creator" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="designer" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="developer" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="editor" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="source" content="واحة الجبري">
+  <meta name="origin" content="صنعاء، اليمن">
+  <meta name="copyright" content="© 2026 م/ عبدالله محمد ناصر الجبري — جميع الحقوق محفوظة">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ③ SEO — أساسي
+       ═══════════════════════════════════════════════════════ -->
+  <title>بروتوكول القياس الميداني ZX — أداة TOST لفحص √2−1 في الأشجار | واحة الجبري</title>
+  <meta name="description" content="أداة إحصائية تفاعلية لفحص فرضية النسبة الفضية √2−1 ≈ 0.414 في الأشجار. إدخال H, h, r, d, L — حساب تلقائي لست نسب هندسية — اختبار تكافؤ TOST مع CI و p-value وحجم عينة مقترح. قفل الفرضية المسبقة لمنع p-hacking. تصدير CSV. م/ عبدالله الجبري." />
+  <meta name="keywords" content="بروتوكول القياس, ZX, TOST, اختبار التكافؤ, √2−1, النسبة الفضية, نسبة التاج, أشجار المانجو, tree3, إحصاء تطبيقي, قفل الفرضية, p-hacking, عبدالله الجبري, Z+C+A=1" />
 
-<!-- ═══════════════════════════════════════════════════════
-     ① SEO & Canonical
-     ═══════════════════════════════════════════════════════ -->
-<title>بروتوكول القياس الميداني — ZX | واحة الجبري</title>
-<meta name="description" content="أداة القياس الميداني لنظرية ZX. أدخل بيانات الأشجار (H, h, r, d, L) لفحص الفرضية: هل توجد نسبة في الشجرة ≈ √2 − 1 ≈ 0.414؟" />
-<meta name="author" content="م/ عبدالله محمد ناصر الجبري">
+  <link rel="canonical" href="https://jabri-com.vercel.app/tree/tree3.html" />
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree3.html" />
+  <link rel="alternate" hreflang="ar-YE" href="https://jabri-com.vercel.app/tree/tree3.html" />
+  <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/tree3.html" />
 
-<link rel="canonical" href="https://jabri-com.vercel.app/tree/tree3.html" />
-<link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree3.html" />
-<link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/tree3.html" />
+  <!-- ═══════════════════════════════════════════════════════
+       ④ Open Graph
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:locale" content="ar_YE" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="بروتوكول القياس الميداني ZX — أداة TOST لفحص √2−1" />
+  <meta property="og:description" content="أداة إحصائية تفاعلية لفحص √2−1 في الأشجار: TOST + CI + p-value + حجم عينة. قفل الفرضية المسبقة + تصدير CSV." />
+  <meta property="og:url" content="https://jabri-com.vercel.app/tree/tree3.html" />
+  <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="بروتوكول القياس ZX — أداة TOST لفحص √2−1" />
 
-<!-- ═══════════════════════════════════════════════════════
-     ② Open Graph & Twitter
-     ═══════════════════════════════════════════════════════ -->
-<meta property="og:locale" content="ar_YE">
-<meta property="og:type" content="website">
-<meta property="og:title" content="بروتوكول القياس الميداني — ZX | واحة الجبري">
-<meta property="og:description" content="أداة القياس الميداني لنظرية ZX. اختبر فرضية النسبة الفضية √2 − 1 في الأشجار الحقيقية.">
-<meta property="og:url" content="https://jabri-com.vercel.app/tree/tree3.html">
-<meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
-<meta property="og:site_name" content="واحة الجبري">
+  <!-- ═══════════════════════════════════════════════════════
+       ⑤ Twitter Card
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@JabriAbdulla1" />
+  <meta name="twitter:creator" content="@JabriAbdulla1" />
+  <meta name="twitter:title" content="بروتوكول القياس ZX — أداة TOST لفحص √2−1" />
+  <meta name="twitter:description" content="أداة إحصائية تفاعلية: TOST + CI + p-value + حجم عينة. قفل الفرضية المسبقة + تصدير CSV." />
+  <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@JabriAbdulla1">
-<meta name="twitter:title" content="بروتوكول القياس الميداني — ZX">
-<meta name="twitter:description" content="أداة لتحليل النسب الهندسية للأشجار ومقارنتها بنظرية Z+C+A=1.">
-<meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
-
-<!-- ═══════════════════════════════════════════════════════
-     ③ Schema.org (تطبيق ويب تفاعلي)
-     ═══════════════════════════════════════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "بروتوكول القياس الميداني — ZX",
-  "url": "https://jabri-com.vercel.app/tree/tree3.html",
-  "description": "أداة لتحليل النسب الهندسية للأشجار ومقارنتها بالنظرية (√2 - 1).",
-  "applicationCategory": "EducationalApplication",
-  "operatingSystem": "All",
-  "author": {
-    "@type": "Person",
-    "name": "م/ عبدالله محمد ناصر الجبري",
-    "url": "https://jabri-com.vercel.app/"
+  <!-- ═══════════════════════════════════════════════════════
+       ⑥ Article Meta
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="news_keywords" content="بروتوكول القياس, TOST, √2−1, نسبة التاج, أشجار المانجو, tree3" />
+  <meta property="article:publisher" content="https://jabri-com.vercel.app/" />
+  <meta property="article:author" content="https://jabri-com.vercel.app/Author-cv.html" />
+  <meta property="article:published_time" content="2026-10-14T00:00:00+03:00" />
+  <meta property="article:modified_time" content="2026-10-21T00:00:00+03:00" />
+  <meta property="article:section" content="علوم وتكنولوجيا" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⑦ الخطوط
+       ═══════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⑧ Schema.org — @graph موحد
+       ═══════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://jabri-com.vercel.app/#jabri",
+        "name": "م/ عبدالله محمد ناصر الجبري",
+        "alternateName": ["Heaven Al-Jabri","Eng. Abdulla Mohammed Nasser Al-Jabri","واحة الجبري","سندباد اليمن"],
+        "givenName": "عبدالله","familyName": "الجبري","honorificPrefix": "م/","gender": "Male",
+        "nationality": { "@type": "Country", "name": "اليمن" },
+        "birthPlace": { "@type": "Place", "name": "صنعاء، اليمن" },
+        "url": "https://jabri-com.vercel.app/about.html",
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "identifier": "https://orcid.org/0009-0003-3319-3822",
+        "jobTitle": "باحث ومبرمج ومؤسس",
+        "knowsAbout": ["الرياضيات","الإحصاء التطبيقي","اختبارات التكافؤ","TOST","الفيزياء النظرية","فرضية ريمان","نظرية السندباد الموحدة","البرمجة"],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "جامعة الملك فهد للبترول والمعادن (KFUPM)" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840","https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html","https://en.wikipedia.org/wiki/User:Jabri2026","https://www.facebook.com/share/p/1CvCG9xehw/","https://www.instagram.com/reel/Da5zRhypJlo/","https://t.me/Heaven_Jabri/","https://www.linkedin.com/in/abdulla-al-jabri-bb545830b"]
+      },
+      {
+        "@type": ["Organization","NewsMediaOrganization"],
+        "@id": "https://jabri-com.vercel.app/#organization",
+        "name": "واحة الجبري",
+        "alternateName": ["Heaven Al-Jabri","Jabri Oasis"],
+        "legalName": "واحة الجبري",
+        "url": "https://jabri-com.vercel.app/",
+        "logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/icon-192.png","width": 192,"height": 192},
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "description": "واحة الجبري — منصة علمية وثقافية لتوثيق تراث اليمن العريق وأبحاث الرياضيات والفيزياء النظرية.",
+        "foundingDate": "2026",
+        "foundingLocation": { "@type": "Place", "name": "صنعاء، اليمن" },
+        "founder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "owner": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "copyrightHolder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jabri-com.vercel.app/#website",
+        "url": "https://jabri-com.vercel.app/",
+        "name": "واحة الجبري",
+        "alternateName": ["Heaven Al-Jabri","Jabri Oasis"],
+        "description": "توثيق تراث اليمن العريق وأبحاث الرياضيات والفيزياء النظرية",
+        "inLanguage": ["ar","en"],
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "potentialAction": {"@type": "SearchAction","target": "https://jabri-com.vercel.app/search?q={search_term_string}","query-input": "required name=search_term_string"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree3.html#webpage",
+        "url": "https://jabri-com.vercel.app/tree/tree3.html",
+        "name": "بروتوكول القياس الميداني ZX — أداة TOST لفحص √2−1",
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/#website" },
+        "about": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "primaryImageOfPage": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "inLanguage": "ar",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://jabri-com.vercel.app/tree/tree3.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://jabri-com.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "مشروع الشجرة", "item": "https://jabri-com.vercel.app/tree/tree.html" },
+          { "@type": "ListItem", "position": 3, "name": "القياس الميداني", "item": "https://jabri-com.vercel.app/tree/tree3.html" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://jabri-com.vercel.app/tree/tree3.html#app",
+        "name": "بروتوكول القياس الميداني ZX — أداة TOST",
+        "url": "https://jabri-com.vercel.app/tree/tree3.html",
+        "description": "أداة إحصائية تفاعلية لفحص فرضية النسبة الفضية √2−1 ≈ 0.4142 في الأشجار. إدخال قياسات ميدانية (H, h, r, d, L)، حساب تلقائي لست نسب هندسية، اختبار تكافؤ TOST مع CI و p-value وحجم عينة مقترح، قفل الفرضية المسبقة لمنع p-hacking، وتصدير CSV.",
+        "applicationCategory": "EducationalApplication",
+        "applicationSubCategory": "StatisticalAnalysisTool",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "inLanguage": ["ar","en"],
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00",
+        "screenshot": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "featureList": [
+          "قفل الفرضية المسبقة (Pre-registration lock) لمنع p-hacking",
+          "حساب تلقائي لست نسب هندسية من قياسات الشجرة",
+          "اختبار التكافؤ TOST (Two One-Sided Tests) مع α=0.05",
+          "تصحيح Bonferroni عند عدم تحديد نسبة مسبقة",
+          "فاصل الثقة (CI) مع t-distribution دقيق",
+          "حساب القدرة الإحصائية التقريبية (Power)",
+          "اقتراح حجم العينة المطلوب للوصول إلى قدرة 80%",
+          "استبعاد نسبة L/H تلقائياً (تعتمد على زاوية الشمس)",
+          "فلترة حسب نوع الشجرة (species filter)",
+          "تصدير / استيراد CSV مع رأس الفرضية المسبقة",
+          "حفظ كل البيانات محلياً في localStorage (بدون خادم)",
+          "واجهة عربية كاملة (RTL) + دعم لمسي"
+        ],
+        "about": ["TOST","التكافؤ الإحصائي","√2−1","النسبة الفضية","نسبة التاج","قفل الفرضية","p-hacking","Bonferroni"],
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/tree/tree.html#article" }
+      },
+      {
+        "@type": "Dataset",
+        "@id": "https://jabri-com.vercel.app/tree/tree3.html#dataset",
+        "name": "بيانات قياس الأشجار الميدانية — ZX Protocol",
+        "description": "بيانات هندسية ميدانية لأشجار يمنية (نخيل، سمر، سدر، مانجو) ضمن بروتوكول ZX. كل سجل يحتوي: الموقع، النوع، H (الارتفاع الكلي)، h (ارتفاع أول تفرع)، r (نصف قطر التاج)، d (قطر الجذع)، L (طول الظل)، والوقت — بالإضافة إلى النسب المحسوبة.",
+        "creator": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "isAccessibleForFree": true,
+        "keywords": ["أشجار يمنية","نسبة التاج","الارتفاع الكلي","نصف قطر التاج","TOST","√2−1"],
+        "variableMeasured": [
+          { "@type": "PropertyValue", "name": "H", "description": "الارتفاع الكلي للشجرة (متر)" },
+          { "@type": "PropertyValue", "name": "h", "description": "ارتفاع أول تفرع رئيسي (متر)" },
+          { "@type": "PropertyValue", "name": "r", "description": "نصف قطر التاج (متر)" },
+          { "@type": "PropertyValue", "name": "d", "description": "قطر الجذع على ارتفاع 1.3 متر (متر)" },
+          { "@type": "PropertyValue", "name": "L", "description": "طول الظل (متر)" },
+          { "@type": "PropertyValue", "name": "crownH", "description": "نسبة التاج (H−h)/H — الهدف الأساسي للفحص" }
+        ],
+        "spatialCoverage": { "@type": "Place", "name": "صنعاء، اليمن" },
+        "temporalCoverage": "2026-10-14/2026-10-21",
+        "inLanguage": "ar"
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://jabri-com.vercel.app/tree/tree3.html#method",
+        "headline": "بروتوكول ZX: اختبار التكافؤ الإحصائي للنسبة الفضية √2−1 في الهندسة النباتية",
+        "description": "منهجية إحصائية لفحص ما إذا كانت نسبة معينة في الشجرة (مثل (H−h)/H) تكافئ النسبة الفضية √2−1 = tan(π/8) ≈ 0.41421356، باستخدام اختبار TOST مع هامش عملي Δ، وحماية من p-hacking عبر قفل الفرضية المسبقة.",
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00",
+        "inLanguage": "ar",
+        "isAccessibleForFree": true,
+        "about": ["TOST","اختبار التكافؤ","p-hacking","قفل الفرضية","هندسة نباتية"],
+        "keywords": "TOST, التكافؤ الإحصائي, √2−1, النسبة الفضية, نسبة التاج, أشجار المانجو",
+        "mainEntityOfPage": { "@id": "https://jabri-com.vercel.app/tree/tree3.html#webpage" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree3.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ما هو بروتوكول ZX بالضبط؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "بروتوكول ZX هو منهجية إحصائية لفحص ما إذا كانت نسبة هندسية محددة في الشجرة (مثل نسبة التاج (H−h)/H) تكافئ النسبة الفضية √2−1 = tan(π/8) ≈ 0.41421356. يستخدم اختبار التكافؤ TOST (Two One-Sided Tests) بدلاً من اختبار الفرق التقليدي، لأنه يسأل: هل المتوسط قريب بما يكفي من الهدف ضمن هامش عملي Δ؟ وليس فقط: هل يختلف معنوياً؟"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "لماذا قفل الفرضية المسبقة (Pre-registration Lock) مهم؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "لو اخترت النسبة أو هامش التكافؤ Δ بعد رؤية البيانات، فأنت تفتح الباب لـ p-hacking — اختيار النسبة التي تبدو الأقرب لتضخيم النتيجة. القفل عند أول شجرة يجعل الاختبار صادقاً: النسبة المختارة مسبقاً تُختبر عند α=0.05 (دون تصحيح)، والباقي يُعدّ استكشافياً (يُصحَّح بـ Bonferroni، α/6 = 0.0083). هذا فرق جوهري بين تحليل تأكيدي (Confirmatory) وتحليل استكشافي (Exploratory)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ما هو TOST وكيف يختلف عن اختبار t العادي؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "اختبار t العادي يفحص فرضية العدم H₀: μ = μ₀ مقابل H₁: μ ≠ μ₀، فيرفض العدم فقط إذا اختلف المتوسط معنوياً. TOST يفحص فرضيتين أحاديتين: H₀₁: μ ≤ μ₀−Δ و H₀₂: μ ≥ μ₀+Δ. يرفض العدم (أي يُثبت التكافؤ) فقط إذا كان فاصل الثقة 90% بالكامل داخل [μ₀−Δ, μ₀+Δ]. الفرق الأساسي: TOST يستطيع إثبات التكافؤ، بينما اختبار t العادي لا يستطيع — لأن عدم رفض العدم ≠ إثبات التكافؤ."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "لماذا نسبة L/H مستبعدة من الفحص؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "نسبة L/H (طول الظل ÷ الارتفاع) تعتمد على زاوية الشمس، لا على شكل الشجرة نفسه. أي شجرة عمودية في نفس الزاوية ستعطي نفس القيمة — لذا فهي ليست اختباراً للبنية النباتية. المستبعد من التحليل الإحصائي هو L/H فقط، مع الإبقاء على حسابها وعرضها في التطبيق للأغراض المرجعية."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل النتائج تعميمية علمياً؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "لا. العينة الاستكشافية الحالية (n=5 أشجار مانجو) تدعم الفرضية إحصائياً ضمن الهامش Δ=±0.03، لكنها لا تكفي للتعميم كقانون عام. الدراسة لم تُسجَّل مسبقاً في سجل عام، والعينة صغيرة، والموقع واحد (شعوب، صنعاء). التطبيق يعرض النتائج بوضوح مع حدودها، ويقترح حجم عينة مطلوب (عادة n ≈ 15–25 للوصول إلى قدرة 80% عند Δ=0.03)، ويشجع على تكرار الدراسة بعينات مستقلة قبل أي تعميم."
+            }
+          }
+        ]
+      }
+    ]
   }
-}
-</script>
+  </script>
 
+  <!-- ═══════════════════════════════════════════════════════
+       ⑨ نص مخفي للروبوتات (حاسم — الواجهة JS)
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  </style>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑩ أنماط الصفحة
+       ═══════════════════════════════════════════════════════ -->
 <style>
   :root{
     --gold:#f4c430; --green:#7fb08a; --dark:#0a1a12;
@@ -178,7 +416,6 @@
     direction:ltr;display:inline-block;
   }
 
-  /* ═══ شريط الفلتر ═══ */
   .filter-bar{
     display:flex;flex-wrap:wrap;gap:6px;align-items:center;
     background:#08140d;border:1px solid var(--border);
@@ -201,7 +438,6 @@
     opacity:0.7;font-size:0.7rem;margin-inline-start:4px;
   }
 
-  /* ═══ شريط التنقل بين صفحات الشجرة ═══ */
   .tree-nav{
     width:100%; max-width: 600px; margin: 0 auto 20px auto;
     background:#0a1a12; border:1px solid var(--border);
@@ -221,7 +457,6 @@
   .nav-link.active{ background:var(--gold); color:#0a1a12; border-color:var(--gold); font-weight:700; cursor:default; }
   .nav-link.active:hover{ background:var(--gold); color:#0a1a12; }
   
-  /* ═══ شريط القفل ═══ */
   .lock-banner{background:#1a3a1a;border:1px solid var(--gold);color:var(--gold);padding:8px 12px;border-radius:8px;margin-bottom:10px;font-size:0.82rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
   .lock-banner button{width:auto;padding:5px 10px;font-size:0.75rem;background:transparent;border-color:var(--gold);color:var(--gold);}
   .lock-banner.hidden{display:none;}
@@ -236,6 +471,50 @@
 </head>
 <body>
 
+<!-- ══════════════════════════════════════════════════════════
+     🕵️ نص مخفي للروبوتات — حاسم لأن الواجهة تعتمد على JS
+     ══════════════════════════════════════════════════════════ -->
+<div class="sr-only" aria-hidden="true">
+  <h1>بروتوكول القياس الميداني ZX — أداة TOST لفحص √2−1</h1>
+  <p>أداة إحصائية تفاعلية تعمل بالكامل في المتصفح لفحص ما إذا كانت نسبة هندسية محددة في الأشجار (مثل نسبة التاج (H−h)/H) تكافئ النسبة الفضية √2−1 = tan(π/8) ≈ 0.41421356.</p>
+  
+  <h2>المنهجية الإحصائية</h2>
+  <ul>
+    <li><b>TOST (Two One-Sided Tests)</b>: لاختبار التكافؤ ضد هامش عملي Δ بدلاً من اختبار الفرق التقليدي.</li>
+    <li><b>Pre-registration Lock</b>: قفل الفرضية المسبقة عند أول شجرة لمنع p-hacking.</li>
+    <li><b>Bonferroni Correction</b>: تصحيح α/6 عند عدم تحديد نسبة مسبقة.</li>
+    <li><b>t-distribution دقيق</b>: عبر logGamma + betacf لحساب CI و p-value بدقة.</li>
+    <li><b>Power Approximation</b>: تقدير القدرة الإحصائية الحالية وحجم العينة المطلوب.</li>
+  </ul>
+  
+  <h2>النسب المحسوبة</h2>
+  <ul>
+    <li><b>h/H</b> — الجذع ÷ الارتفاع الكلي</li>
+    <li><b>r/H</b> — نصف قطر التاج ÷ الارتفاع</li>
+    <li><b>2r/H</b> — قطر التاج كامل ÷ الارتفاع</li>
+    <li><b>d/H</b> — قطر الجذع ÷ الارتفاع</li>
+    <li><b>(H−h)/H</b> — التاج ÷ الارتفاع (الهدف الأساسي)</li>
+    <li><b>h/(H−h)</b> — الجذع ÷ التاج</li>
+    <li><b>L/H</b> — الظل ÷ الارتفاع (مستبعد من الفحص، لأنه يعتمد على زاوية الشمس)</li>
+  </ul>
+  
+  <h2>قيم عينة المانجو المرجعية</h2>
+  <p>عينة استكشافية n=5 أشجار مانجو (شعوب، صنعاء، 2026-10-14): متوسط (H−h)/H = 0.41297، SD = 0.00845، SE = 0.00378، فاصل ثقة 90% = [0.40491, 0.42102]، TOST p = 0.000801 مع Δ = ±0.03. النتيجة: تكافؤ إحصائي مؤكد ضمن الهامش، لكن التحليل استكشافي (لم يُسجَّل مسبقاً) ولا يُعمَّم كقانون.</p>
+  
+  <h2>ميزات الأداة</h2>
+  <ul>
+    <li>إدخال قياسات الأشجار (H, h, r, d, L) مع الموقع والنوع والوقت.</li>
+    <li>حساب تلقائي لحظي للنسب.</li>
+    <li>قفل الفرضية المسبقة مع قابلية إلغاء القفل (مع تسجيل التعديل في سجل).</li>
+    <li>فلترة حسب نوع الشجرة.</li>
+    <li>تحليل إحصائي كامل مع verdict (تكافؤ / مختلف / غير حاسم).</li>
+    <li>تصدير CSV مع رأس الفرضية المسبقة + استيراد CSV.</li>
+    <li>كل البيانات محفوظة محلياً (localStorage) — لا شيء يُرسل لخادم.</li>
+  </ul>
+  
+  <p>بقلم: م/ عبدالله محمد ناصر الجبري — اليمن. ORCID: 0009-0003-3319-3822. رخصة: CC BY 4.0.</p>
+</div>
+
 <!-- ═══════════ شريط التنقل بين الملفات ═══════════ -->
 <nav class="tree-nav" aria-label="التنقل بين ملفات المشروع">
   <span class="nav-brand">🌳 مشروع الشجرة</span>
@@ -249,10 +528,7 @@
     <a href="/tree/tree3.html" class="nav-link active" aria-current="page">
       <span class="nav-icon">📏</span> القياس الميداني
     </a>
-    
-    
     <a href="/tree/tree3-pdf.html" class="nav-link"><span class="nav-icon">📏</span> التقرير الميداني</a>
-
   </div>
 </nav>
 
@@ -364,7 +640,6 @@
     </div>
   </div>
 
-  <!-- ═══ النسب المحسوبة ═══ -->
   <h3>📐 النسب المحسوبة</h3>
   <div id="ratios">
     <div class="ratio-card" data-ratio="hH"><span class="name">h / H (الجذع ÷ الكل)</span><span class="val" id="r_hH">—</span></div>
@@ -401,13 +676,9 @@
 <!-- ═══════ التحليل الإحصائي ═══════ -->
 <div class="panel">
   <h3>📊 التحليل الإحصائي</h3>
-
-  <!-- شريط الفلتر -->
   <div class="filter-bar" id="filterBar">
     <label>النوع:</label>
-    <!-- الشرائح تُبنى تلقائيًا -->
   </div>
-
   <div class="stats">
     <div class="stat">
       <span class="lbl">عدد الأشجار (في الفلتر)</span>
@@ -436,7 +707,6 @@
       <span class="val">0.4142</span>
     </div>
   </div>
-
   <div id="verdict" class="verdict wait">
     ⏳ بانتظار بيانات كافية (5 أشجار على الأقل للتحليل الأولي)
   </div>
@@ -460,10 +730,7 @@
 <script>
 'use strict';
 
-// ═══════════════════════════════════════════════════════
-//  ثوابت
-// ═══════════════════════════════════════════════════════
-const TARGET = Math.sqrt(2) - 1;      // 0.41421356...
+const TARGET = Math.sqrt(2) - 1;
 const TOL    = 0.03;
 const STORAGE_KEY = 'zx_trees_v1';
 const PRIOR_KEY   = 'zx_prior_v2';
@@ -481,9 +748,6 @@ const KEY_NAMES = {
   LH:      'L/H (الظل ÷ الارتفاع)',
 };
 
-// ═══════════════════════════════════════════════════════
-//  توزيع t + normal (لاختبار التكافؤ)
-// ═══════════════════════════════════════════════════════
 function logGamma(x){
   const c = [76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];
   let y = x, tmp = x + 5.5; tmp -= (x + 0.5) * Math.log(tmp); let s = 1.000000000190015;
@@ -559,15 +823,9 @@ function tostSampleSizeApprox(sd, delta, power=0.8, alpha=0.05){
   return n;
 }
 
-// ═══════════════════════════════════════════════════════
-//  الحالة
-// ═══════════════════════════════════════════════════════
 let trees = loadTrees();
 let activeFilter = '__all__';
 
-// ═══════════════════════════════════════════════════════
-//  التخزين
-// ═══════════════════════════════════════════════════════
 function loadTrees(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -584,9 +842,6 @@ function saveTrees(){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(trees)); }catch(e){}
 }
 
-// ═══════════════════════════════════════════════════════
-//  الفرضية المسبقة
-// ═══════════════════════════════════════════════════════
 function getPrior(){ 
   try { 
     const raw = localStorage.getItem(PRIOR_KEY); 
@@ -646,9 +901,6 @@ document.getElementById('unlockBtn').addEventListener('click', () => {
   document.getElementById(id).addEventListener('input', saveDraftPrior);
 });
 
-// ═══════════════════════════════════════════════════════
-//  قراءة الحقول
-// ═══════════════════════════════════════════════════════
 function num(id){
   const v = parseFloat(document.getElementById(id).value);
   return isNaN(v) ? null : v;
@@ -657,9 +909,6 @@ function str(id){
   return document.getElementById(id).value.trim();
 }
 
-// ═══════════════════════════════════════════════════════
-//  حساب النسب
-// ═══════════════════════════════════════════════════════
 function computeRatios(H, h, r, d, L){
   const out = {};
   if (H && H > 0){
@@ -674,9 +923,6 @@ function computeRatios(H, h, r, d, L){
   return out;
 }
 
-// ═══════════════════════════════════════════════════════
-//  تحديث النسب الحية في النموذج
-// ═══════════════════════════════════════════════════════
 function updateLiveRatios(){
   const H = num('H'), h = num('h'), r = num('r'), d = num('d'), L = num('L');
   const ratios = computeRatios(H, h, r, d, L);
@@ -714,9 +960,6 @@ function updateLiveRatios(){
   document.getElementById(id).addEventListener('input', updateLiveRatios);
 });
 
-// ═══════════════════════════════════════════════════════
-//  حفظ شجرة
-// ═══════════════════════════════════════════════════════
 document.getElementById('saveBtn').addEventListener('click', () => {
   const H = num('H');
   if (!H || H <= 0){
@@ -777,9 +1020,6 @@ function flash(btn, text){
   setTimeout(() => { btn.textContent = old; }, 1200);
 }
 
-// ═══════════════════════════════════════════════════════
-//  عرض قائمة الأشجار
-// ═══════════════════════════════════════════════════════
 function renderTreeList(){
   const list  = document.getElementById('treeList');
   const count = document.getElementById('treeCount');
@@ -825,9 +1065,6 @@ function renderTreeList(){
   });
 }
 
-// ═══════════════════════════════════════════════════════
-//  شريط الفلتر (الأنواع)
-// ═══════════════════════════════════════════════════════
 function renderFilterBar(){
   const bar = document.getElementById('filterBar');
   const speciesCounts = {};
@@ -866,17 +1103,11 @@ function renderFilterBar(){
   }
 }
 
-// ═══════════════════════════════════════════════════════
-//  الأشجار المرشّحة
-// ═══════════════════════════════════════════════════════
 function filteredTrees(){
   if (activeFilter === '__all__') return trees;
   return trees.filter(t => (t.species || 'غير محدد').trim() === activeFilter);
 }
 
-// ═══════════════════════════════════════════════════════
-//  إحصاء
-// ═══════════════════════════════════════════════════════
 function mean(arr){
   if (arr.length === 0) return null;
   return arr.reduce((s,v) => s + v, 0) / arr.length;
@@ -891,9 +1122,6 @@ function collectRatio(key, list){
   return list.map(t => t.ratios ? t.ratios[key] : null).filter(v => v != null && !isNaN(v));
 }
 
-// ═══════════════════════════════════════════════════════
-//  التحليل الإحصائي
-// ═══════════════════════════════════════════════════════
 function renderStats(){
   const list = filteredTrees();
   const hH = collectRatio('hH', list);
@@ -999,9 +1227,6 @@ function renderStats(){
   }
 }
 
-// ═══════════════════════════════════════════════════════
-//  تصدير / استيراد CSV (كودك الأصلي الذي يعمل)
-// ═══════════════════════════════════════════════════════
 document.getElementById('exportBtn').addEventListener('click', () => {
   if (trees.length === 0){
     alert('لا توجد بيانات للتصدير');
@@ -1056,7 +1281,6 @@ document.getElementById('importFile').addEventListener('change', (e) => {
   reader.onload = (ev) => {
     try{
       const text = ev.target.result.replace(/^\uFEFF/, '');
-      // تخطي أسطر التعليقات التي تمت إضافتها في التصدير
       const lines = text.split(/\r?\n/).filter(l => !l.trim().startsWith('#') && l.trim() !== '');
       if (lines.length < 2) return;
       
@@ -1126,9 +1350,6 @@ document.getElementById('wipeBtn').addEventListener('click', () => {
   }
 });
 
-// ═══════════════════════════════════════════════════════
-//  الإقلاع
-// ═══════════════════════════════════════════════════════
 applyPriorToForm();
 renderTreeList();
 renderFilterBar();

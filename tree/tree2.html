@@ -1,13 +1,260 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ⓪ الأيقونات
+       ═══════════════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+  <link rel="shortcut icon" href="/icon-192.png">
+  <link rel="icon" href="/image/icon-192.png" type="image/png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0a1410">
-  <title>شجرة التوحيد | المحاكاة البصرية والتحقق الميداني</title>
 
+  <!-- ═══════════════════════════════════════════════════════
+         ① أساسيات
+         ═══════════════════════════════════════════════════════ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a1410">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+         ② الملكية
+         ═══════════════════════════════════════════════════════ -->
+  <meta property="og:site_name" content="واحة الجبري">
+  <meta name="application-name" content="واحة الجبري">
+  <meta name="apple-mobile-web-app-title" content="شجرة التوحيد">
+  <meta name="author" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="owner" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="publisher" content="واحة الجبري">
+  <meta name="creator" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="designer" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="developer" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="editor" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="source" content="واحة الجبري">
+  <meta name="origin" content="صنعاء، اليمن">
+  <meta name="copyright" content="© 2026 م/ عبدالله محمد ناصر الجبري — جميع الحقوق محفوظة">
+  
+  <!-- ═══════════════════════════════════════════════════════
+         ③ SEO — أساسي
+         ═══════════════════════════════════════════════════════ -->
+  <title>شجرة التوحيد — المحاكاة البصرية | زاوية 22.5° تنتج √2−1 | واحة الجبري</title>
+  <meta name="description" content="محاكاة بصرية تفاعلية تثبت أن الزاوية 22.5° (π/8) تنتج النسبة الفضية √2−1 ≈ 0.41421356 = tan(π/8). رسم تفاعلي للشجرة والظل والمثلث، مع قياس مباشر لـ L/H. م/ عبدالله الجبري." />
+  <meta name="keywords" content="شجرة التوحيد, المحاكاة البصرية, زاوية 22.5, √2−1, النسبة الفضية, tan(pi/8), Z+C+A=1, المثلث والشجرة, tree2, عبدالله الجبري, جيومتريا تفاعلية" />
+
+  <link rel="canonical" href="https://jabri-com.vercel.app/tree/tree2.html" />
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree2.html" />
+  <link rel="alternate" hreflang="ar-YE" href="https://jabri-com.vercel.app/tree/tree2.html" />
+  <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/tree2.html" />
+
+  <!-- ═══════════════════════════════════════════════════════
+         ④ Open Graph
+         ═══════════════════════════════════════════════════════ -->
+  <meta property="og:locale" content="ar_YE" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="شجرة التوحيد — المحاكاة البصرية | 22.5° → √2−1" />
+  <meta property="og:description" content="محاكاة تفاعلية تثبت أن tan(22.5°) = √2−1 ≈ 0.41421356. شاهد الشجرة والظل والمثلث في لحظة واحدة." />
+  <meta property="og:url" content="https://jabri-com.vercel.app/tree/tree2.html" />
+  <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="شجرة التوحيد — محاكاة 22.5° = √2−1" />
+
+  <!-- ═══════════════════════════════════════════════════════
+         ⑤ Twitter Card
+         ═══════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@JabriAbdulla1" />
+  <meta name="twitter:creator" content="@JabriAbdulla1" />
+  <meta name="twitter:title" content="شجرة التوحيد — المحاكاة البصرية | 22.5° → √2−1" />
+  <meta name="twitter:description" content="محاكاة تفاعلية: tan(22.5°) = √2−1 ≈ 0.41421356. الشجرة والظل والمثلث في رسم واحد." />
+  <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+
+  <!-- ═══════════════════════════════════════════════════════
+         ⑥ Article Meta
+         ═══════════════════════════════════════════════════════ -->
+  <meta name="news_keywords" content="شجرة التوحيد, 22.5 درجة, √2−1, tan(pi/8), النسبة الفضية, Z+C+A=1" />
+  <meta property="article:publisher" content="https://jabri-com.vercel.app/" />
+  <meta property="article:author" content="https://jabri-com.vercel.app/Author-cv.html" />
+  <meta property="article:published_time" content="2026-10-05T00:00:00+03:00" />
+  <meta property="article:modified_time" content="2026-10-21T00:00:00+03:00" />
+  <meta property="article:section" content="علوم وتكنولوجيا" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+         ⑦ الخطوط
+         ═══════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- ═══════════════════════════════════════════════════════
+         ⑧ Schema.org — @graph موحد
+         ═══════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://jabri-com.vercel.app/#jabri",
+        "name": "م/ عبدالله محمد ناصر الجبري",
+        "alternateName": ["Heaven Al-Jabri","Eng. Abdulla Mohammed Nasser Al-Jabri","واحة الجبري","سندباد اليمن"],
+        "givenName": "عبدالله","familyName": "الجبري","honorificPrefix": "م/","gender": "Male",
+        "nationality": { "@type": "Country", "name": "اليمن" },
+        "birthPlace": { "@type": "Place", "name": "صنعاء، اليمن" },
+        "url": "https://jabri-com.vercel.app/about.html",
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "identifier": "https://orcid.org/0009-0003-3319-3822",
+        "jobTitle": "باحث ومبرمج ومؤسس",
+        "knowsAbout": ["الرياضيات","الهندسة","الفيزياء النظرية","فرضية ريمان","نظرية السندباد الموحدة","البرمجة","الذكاء الاصطناعي"],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "جامعة الملك فهد للبترول والمعادن (KFUPM)" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840","https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html","https://en.wikipedia.org/wiki/User:Jabri2026","https://www.facebook.com/share/p/1CvCG9xehw/","https://www.instagram.com/reel/Da5zRhypJlo/","https://t.me/Heaven_Jabri/","https://www.linkedin.com/in/abdulla-al-jabri-bb545830b"]
+      },
+      {
+        "@type": ["Organization","NewsMediaOrganization"],
+        "@id": "https://jabri-com.vercel.app/#organization",
+        "name": "واحة الجبري",
+        "alternateName": ["Heaven Al-Jabri","Jabri Oasis"],
+        "legalName": "واحة الجبري",
+        "url": "https://jabri-com.vercel.app/",
+        "logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/icon-192.png","width": 192,"height": 192},
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "description": "واحة الجبري — منصة علمية وثقافية لتوثيق تراث اليمن العريق وأبحاث الرياضيات والفيزياء النظرية.",
+        "foundingDate": "2026",
+        "foundingLocation": { "@type": "Place", "name": "صنعاء، اليمن" },
+        "founder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "owner": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "copyrightHolder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jabri-com.vercel.app/#website",
+        "url": "https://jabri-com.vercel.app/",
+        "name": "واحة الجبري",
+        "alternateName": ["Heaven Al-Jabri","Jabri Oasis"],
+        "description": "توثيق تراث اليمن العريق وأبحاث الرياضيات والفيزياء النظرية",
+        "inLanguage": ["ar","en"],
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "potentialAction": {"@type": "SearchAction","target": "https://jabri-com.vercel.app/search?q={search_term_string}","query-input": "required name=search_term_string"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree2.html#webpage",
+        "url": "https://jabri-com.vercel.app/tree/tree2.html",
+        "name": "شجرة التوحيد — المحاكاة البصرية | 22.5° → √2−1",
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/#website" },
+        "about": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "primaryImageOfPage": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "inLanguage": "ar",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "datePublished": "2026-10-05T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://jabri-com.vercel.app/tree/tree2.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://jabri-com.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "مشروع الشجرة", "item": "https://jabri-com.vercel.app/tree/tree.html" },
+          { "@type": "ListItem", "position": 3, "name": "المحاكاة البصرية", "item": "https://jabri-com.vercel.app/tree/tree2.html" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://jabri-com.vercel.app/tree/tree2.html#app",
+        "name": "شجرة التوحيد — المحاكاة البصرية",
+        "url": "https://jabri-com.vercel.app/tree/tree2.html",
+        "description": "محاكاة تفاعلية ترسم الشجرة والظل والمثلث وتُظهر أن الزاوية 22.5° تنتج النسبة √2−1. تتيح للمستخدم تعديل زاوية الشمس ورؤية L/H مباشرة.",
+        "applicationCategory": "EducationalApplication",
+        "applicationSubCategory": "GeometrySimulation",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires HTML5 Canvas + JavaScript",
+        "inLanguage": ["ar","en"],
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-05T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00",
+        "screenshot": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "featureList": [
+          "رسم تفاعلي للشجرة والظل",
+          "مثلث قائم مطابق للشجرة",
+          "إظهار tan(θ) = L/H مباشرة",
+          "زر قياس الأبعاد (H, L, L/H)",
+          "زر حركة الشمس (تغيير θ)",
+          "زر العودة إلى 22.5°",
+          "دعم اللغتين العربية والإنجليزية",
+          "قوس θ مطابق فوق وتحت"
+        ],
+        "about": ["النسبة الفضية","tan(pi/8)","22.5°","√2−1","Z+C+A=1","شجرة التوحيد"],
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/tree/tree.html#article" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree2.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ماذا تعرض هذه الصفحة بالضبط؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "تعرض محاكاة بصرية تفاعلية (HTML5 Canvas) ترسم شجرة وظلّها ومثلثاً قائم الزاوية مطابقاً لها. عند ضبط الزاوية على 22.5° (π/8)، فإن نسبة الظل إلى الارتفاع (L/H) تساوي tan(22.5°) = √2 − 1 ≈ 0.41421356. تتيح المحاكاة تعديل الزاوية برؤية القيمة تتغير لحظياً."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "لماذا 22.5° بالتحديد؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "22.5° = π/8 هي نصف الزاوية 45° (π/4). باستخدام قانون نصف الزاوية tan(θ/2) = (1−cos θ)/sin θ عند θ = 45°، نحصل على tan(π/8) = (2−√2)/√2 = √2 − 1. أي أن 22.5° ليست اختياراً اعتباطياً، بل نتيجة رياضية دقيقة تنتج النسبة الفضية."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "كيف تحسب المحاكاة L/H؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "إذا H هو ارتفاع الشجرة و L هو طول ظلها، فإن L/H = tan(θ) حيث θ هي زاوية الشمس من العمودي. في المحاكاة، طول الشجرة H ثابت نسبي (26% من ارتفاع الشاشة)، ويُحسب L = H × tan(θ). عند θ = 22.5°، تصبح L/H = √2 − 1. القيمة تُعرض مباشرة أعلى الشاشة وفي البطاقات الإحصائية."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل هذه المحاكاة مرتبطة بدليل تجريبي؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "نعم. الاشتقاق النظري هنا هو الأساس الرياضي الذي بُني عليه بروتوكول القياس الميداني (tree3.html). تم قياس 30 شجرة يمنية، وأظهرت عينة المانجو (n=5) تكافؤاً إحصائياً مع √2−1 بنسبة (H−h)/H: المتوسط 0.41297، TOST p=0.0008. لكن هذه النتائج استكشافية وتحتاج تحققاً مستقلاً."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════
+         ⑨ نص مخفي للروبوتات (Canvas غير مقروء)
+         ═══════════════════════════════════════════════════════ -->
+  <style>
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  </style>
+
+  <!-- ═══════════════════════════════════════════════════════
+         ⑩ أنماط الصفحة
+         ═══════════════════════════════════════════════════════ -->
 <style>
   :root{ --noor:#f4c430; --asl:#1a4d2e; --tall:#7fb08a; --dim:#8aa892; --bg:#0a1410; --panel:#0a1a12; --border:#1f3a2b; }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
@@ -44,6 +291,40 @@
 </style>
 </head>
 <body>
+
+<!-- ══════════════════════════════════════════════════════════
+     🕵️ نص مخفي للروبوتات — يشرح ما يعرضه الـ canvas
+     ══════════════════════════════════════════════════════════ -->
+<div class="sr-only" aria-hidden="true">
+  <h1>شجرة التوحيد — المحاكاة البصرية</h1>
+  <p>محاكاة تفاعلية HTML5 Canvas ترسم شجرة وظلّها ومثلثاً قائم الزاوية مطابقاً. الهدف: إثبات أن tan(22.5°) = tan(π/8) = √2 − 1 ≈ 0.41421356.</p>
+  <h2>عناصر الرسم</h2>
+  <ul>
+    <li>الشمس في الأعلى (مصدر النور — Top-Down).</li>
+    <li>الشجرة في الوسط: جذر (Bottom-Up) وجذع وفروع وتاج.</li>
+    <li>الظل على الأرض يمتد بطول L يتناسب مع tan(θ).</li>
+    <li>مثلث قائم أسفل الرسم مطابق للشجرة: الضلع العمودي = H، الضلع الأفقي = L، والوتر يعبر عن الزاوية θ.</li>
+    <li>قوس الزاوية θ مطابق فوق (عند الرأس) وتحت (عند قاعدة المثلث).</li>
+  </ul>
+  <h2>القيم</h2>
+  <p>H = ارتفاع الشجرة (ثابت نسبي). L = طول الظل = H × tan(θ). عند θ = 22.5° تصبح L/H = √2 − 1 = 0.41421356 (اللحظة الذهبية).</p>
+  <h2>الأزرار التفاعلية</h2>
+  <ul>
+    <li>🌐 زر تبديل اللغة (عربي ↔ إنجليزي).</li>
+    <li>📏 زر القياس: يعرض H و L و L/H بالأرقام على الرسم.</li>
+    <li>🌞 زر حركة الشمس: يُحرّك θ بين 22.5° و 60°.</li>
+    <li>⟲ زر العودة إلى 22.5° (اللحظة الذهبية).</li>
+  </ul>
+  <h2>روابط ذات صلة</h2>
+  <ul>
+    <li><a href="/tree/tree.html">الإطار الكامل — الشجرة والظل والبرهان الخماسي</a></li>
+    <li><a href="/tree/tree3.html">بروتوكول القياس الميداني (TOST)</a></li>
+    <li><a href="/tree/tree3-pdf.html">التقرير الإحصائي الكامل</a></li>
+    <li><a href="/tree/hindara.html">الهندرة — (هند)سة + إدا(رة)</a></li>
+  </ul>
+  <p>بقلم: م/ عبدالله محمد ناصر الجبري — اليمن. ORCID: 0009-0003-3319-3822.</p>
+</div>
+
 <h1 id="titleTxt">🌳 شجرة التوحيد · الشجرة فوق · المثلث تحت</h1>
 <h2 id="subTxt">قوس θ مطابق فوق وتحت — من العمودي لا من الأفقي</h2>
 
@@ -51,7 +332,7 @@
   هذه الصفحة تمثل <strong>المحاكاة البصرية التفاعلية</strong> التي تثبت أن الزاوية <code>22.5°</code> تنتج النسبة <code>√2 - 1</code>. هذا الاشتقاق هو الأساس النظري الذي بُني عليه البعد <code>xp = 21</code>، وقد تم تأكيده ميدانياً في <a href="/tree/tree3.html">بروتوكول القياس</a>.
 </div>
 
-<div class="canvas-wrap"><canvas id="sim"></canvas></div>
+<div class="canvas-wrap"><canvas id="sim" aria-label="محاكاة الشجرة والظل والمثلث — الزاوية 22.5° تنتج النسبة √2−1"></canvas></div>
 <div class="controls">
   <button id="langBtn" class="lang-btn" type="button">🌐 English</button>
   <button id="measureBtn" type="button">📏 قياس</button>
@@ -60,12 +341,7 @@
   <a href="/tree/tree.html" class="nav-btn" id="navTree1">🌳 الشجرة</a>
   <a href="/tree/tree3.html" class="nav-btn" id="navTree3">🌲 الشجرة 3</a>
   <a href="/tree/hindara.html" class="nav-btn" id="navHindara">🏛️ هندسة</a>
-  
-  
-  <a href="/tree/tree3-pdf.html" class="nav-btn" id="navHindara">🏛
-  التقرير الميداني</a>
-
-  
+  <a href="/tree/tree3-pdf.html" class="nav-btn" id="navTree3Pdf">📏 التقرير الميداني</a>
 </div>
 
 <div class="stats">
@@ -91,8 +367,8 @@
 <script>
 'use strict';
 const STRINGS = {
-  ar: { title:'🌳 شجرة التوحيد', sub:'قوس θ مطابق فوق وتحت', langBtn:'🌐 English', measure:'📏 قياس', sunOn:'🌞 إيقاف الحركة', sunOff:'🌞 حركة الشمس', reset:'⟲ العودة إلى 22.5°', navTree1:'🌳 الشجرة', navTree3:'🌲 الشجرة 3', navHindara:'🏛️ هندسة', lblTheta:'زاوية θ', lblRatio:'L / H', lblTan:'tan(θ)', lblRef:'√2 − 1 (المرجع)', noteHTML:'الجديد في v4: التاج والتسميات نسبية.<br>عند θ = 22.5° فقط: <code>L/H = √2 − 1</code>', canvasLight:'النور', canvasTree:'الشجرة', canvasShadow:'الظل', golden:'اللحظة الذهبية', bottomNote:'Z + C + A = 1  ·  الشجرة فوق والمثلث تحت' },
-  en: { title:'🌳 Tree of Unification', sub:'The θ arc matches above and below', langBtn:'🌐 عربي', measure:'📏 Measure', sunOn:'🌞 Stop motion', sunOff:'🌞 Sun motion', reset:'⟲ Back to 22.5°', navTree1:'🌳 Tree', navTree3:'🌲 Tree 3', navHindara:'🏛️ Geometry', lblTheta:'Angle θ', lblRatio:'L / H', lblTan:'tan(θ)', lblRef:'√2 − 1 (reference)', noteHTML:'New in v4: crown and labels are relative.<br>Only at θ = 22.5°: <code>L/H = √2 − 1</code>', canvasLight:'Light', canvasTree:'Tree', canvasShadow:'Shadow', golden:'Golden moment', bottomNote:'Z + C + A = 1  ·  Tree above and triangle below' }
+  ar: { title:'🌳 شجرة التوحيد', sub:'قوس θ مطابق فوق وتحت', langBtn:'🌐 English', measure:'📏 قياس', sunOn:'🌞 إيقاف الحركة', sunOff:'🌞 حركة الشمس', reset:'⟲ العودة إلى 22.5°', navTree1:'🌳 الشجرة', navTree3:'🌲 الشجرة 3', navHindara:'🏛️ هندسة', navTree3Pdf:'📏 التقرير الميداني', lblTheta:'زاوية θ', lblRatio:'L / H', lblTan:'tan(θ)', lblRef:'√2 − 1 (المرجع)', noteHTML:'الجديد في v4: التاج والتسميات نسبية.<br>عند θ = 22.5° فقط: <code>L/H = √2 − 1</code>', canvasLight:'النور', canvasTree:'الشجرة', canvasShadow:'الظل', golden:'اللحظة الذهبية', bottomNote:'Z + C + A = 1  ·  الشجرة فوق والمثلث تحت' },
+  en: { title:'🌳 Tree of Unification', sub:'The θ arc matches above and below', langBtn:'🌐 عربي', measure:'📏 Measure', sunOn:'🌞 Stop motion', sunOff:'🌞 Sun motion', reset:'⟲ Back to 22.5°', navTree1:'🌳 Tree', navTree3:'🌲 Tree 3', navHindara:'🏛️ Geometry', navTree3Pdf:'📏 Field Report', lblTheta:'Angle θ', lblRatio:'L / H', lblTan:'tan(θ)', lblRef:'√2 − 1 (reference)', noteHTML:'New in v4: crown and labels are relative.<br>Only at θ = 22.5°: <code>L/H = √2 − 1</code>', canvasLight:'Light', canvasTree:'Tree', canvasShadow:'Shadow', golden:'Golden moment', bottomNote:'Z + C + A = 1  ·  Tree above and triangle below' }
 };
 let LANG = 'ar';
 const ANGLE_REF = Math.PI / 8, ANGLE_MAX = Math.PI / 3, DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -162,9 +438,9 @@ function updateStats(theta, ratio, isGolden){ const now = performance.now(); if 
 function loop(t){ if (!state.lastTime) state.lastTime = t; const dt = Math.min(50, t - state.lastTime) / 1000; state.lastTime = t; stepSun(dt); draw(); requestAnimationFrame(loop); }
 function setLang(lang){
   LANG = lang; const S = STRINGS[lang], isAr = lang === 'ar';
-  document.documentElement.lang = lang; document.documentElement.dir = isAr ? 'rtl' : 'ltr'; document.title = isAr ? 'شجرة التوحيد' : 'Tree of Unification';
+  document.documentElement.lang = lang; document.documentElement.dir = isAr ? 'rtl' : 'ltr'; document.title = isAr ? 'شجرة التوحيد — المحاكاة البصرية | 22.5° → √2−1' : 'Tree of Unification — Visual Simulation | 22.5° → √2−1';
   document.getElementById('titleTxt').textContent = S.title; document.getElementById('subTxt').textContent = S.sub; document.getElementById('langBtn').textContent = S.langBtn; document.getElementById('lblTheta').textContent = S.lblTheta; document.getElementById('lblRatio').textContent = S.lblRatio; document.getElementById('lblTan').textContent = S.lblTan; document.getElementById('lblRef').textContent = S.lblRef; document.getElementById('noteTxt').innerHTML = S.noteHTML;
-  document.getElementById('navTree1').textContent = S.navTree1; document.getElementById('navTree3').textContent = S.navTree3; document.getElementById('navHindara').textContent = S.navHindara; document.getElementById('sunBtn').textContent = state.sunAnimating ? S.sunOn : S.sunOff; document.getElementById('measureBtn').textContent = S.measure; document.getElementById('resetBtn').textContent = S.reset;
+  document.getElementById('navTree1').textContent = S.navTree1; document.getElementById('navTree3').textContent = S.navTree3; document.getElementById('navHindara').textContent = S.navHindara; document.getElementById('navTree3Pdf').textContent = S.navTree3Pdf; document.getElementById('sunBtn').textContent = state.sunAnimating ? S.sunOn : S.sunOff; document.getElementById('measureBtn').textContent = S.measure; document.getElementById('resetBtn').textContent = S.reset;
 }
 const measureBtn = document.getElementById('measureBtn'), sunBtn = document.getElementById('sunBtn'), resetBtn = document.getElementById('resetBtn'), langBtn = document.getElementById('langBtn');
 measureBtn.addEventListener('click', () => { state.showMeasure = !state.showMeasure; measureBtn.classList.toggle('active', state.showMeasure); });

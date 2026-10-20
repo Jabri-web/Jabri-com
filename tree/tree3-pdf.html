@@ -1,9 +1,313 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تقرير التحليل الإحصائي | فحص فرضية √2−1</title>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⓪ الأيقونات
+       ═══════════════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+  <link rel="shortcut icon" href="/icon-192.png">
+  <link rel="icon" href="/image/icon-192.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- ═══════════════════════════════════════════════════════
+       ① أساسيات
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ② الملكية
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:site_name" content="واحة الجبري">
+  <meta name="application-name" content="واحة الجبري">
+  <meta name="apple-mobile-web-app-title" content="تقرير التكافؤ الإحصائي">
+  <meta name="author" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="owner" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="publisher" content="واحة الجبري">
+  <meta name="creator" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="designer" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="developer" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="editor" content="م/ عبدالله محمد ناصر الجبري">
+  <meta name="source" content="واحة الجبري">
+  <meta name="origin" content="صنعاء، اليمن">
+  <meta name="copyright" content="© 2026 م/ عبدالله محمد ناصر الجبري — جميع الحقوق محفوظة">
+  
+  <!-- ═══════════════════════════════════════════════════════
+       ③ SEO — أساسي
+       ═══════════════════════════════════════════════════════ -->
+  <title>تقرير التحليل الإحصائي — فحص تكافؤ نسبة التاج مع √2−1 | TOST | واحة الجبري</title>
+  <meta name="description" content="تقرير أكاديمي كامل لاختبار التكافؤ الإحصائي (TOST) بين نسبة التاج (H−h)/H في أشجار المانجو والقيمة الرياضية √2−1 = tan(π/8) ≈ 0.414214. عينة n=5، شعوب صنعاء، 2026-10-14. Mean=0.41297, SD=0.00845, CI90%=[0.40491, 0.42102], p_TOST=0.000801. تحليل استكشافي لم يُسجَّل مسبقاً." />
+  <meta name="keywords" content="تقرير إحصائي, TOST, اختبار التكافؤ, نسبة التاج, √2−1, النسبة الفضية, tan(pi/8), أشجار المانجو, شعوب صنعاء, Equivalence Testing, p-value, فاصل الثقة, tree3-pdf, Z+C+A=1" />
+
+  <link rel="canonical" href="https://jabri-com.vercel.app/tree/tree3-pdf.html" />
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree3-pdf.html" />
+  <link rel="alternate" hreflang="ar-YE" href="https://jabri-com.vercel.app/tree/tree3-pdf.html" />
+  <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/tree3-pdf.html" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ④ Open Graph
+       ═══════════════════════════════════════════════════════ -->
+  <meta property="og:locale" content="ar_YE" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="تقرير التحليل الإحصائي — فحص تكافؤ نسبة التاج مع √2−1" />
+  <meta property="og:description" content="تقرير TOST كامل: Mean=0.41297, SD=0.00845, p_TOST=0.000801. عينة n=5 أشجار مانجو، صنعاء. تحليل استكشافي." />
+  <meta property="og:url" content="https://jabri-com.vercel.app/tree/tree3-pdf.html" />
+  <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="تقرير التحليل الإحصائي — نسبة التاج √2−1" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑤ Twitter Card
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@JabriAbdulla1" />
+  <meta name="twitter:creator" content="@JabriAbdulla1" />
+  <meta name="twitter:title" content="تقرير التحليل الإحصائي — نسبة التاج √2−1 (TOST)" />
+  <meta name="twitter:description" content="Mean=0.41297, SD=0.00845, p_TOST=0.000801. تحليل استكشافي لـ n=5 أشجار مانجو في صنعاء." />
+  <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑥ Article Meta
+       ═══════════════════════════════════════════════════════ -->
+  <meta name="news_keywords" content="TOST, اختبار التكافؤ, نسبة التاج, √2−1, أشجار المانجو, شعوب صنعاء" />
+  <meta property="article:publisher" content="https://jabri-com.vercel.app/" />
+  <meta property="article:author" content="https://jabri-com.vercel.app/Author-cv.html" />
+  <meta property="article:published_time" content="2026-10-14T00:00:00+03:00" />
+  <meta property="article:modified_time" content="2026-10-21T00:00:00+03:00" />
+  <meta property="article:section" content="علوم وتكنولوجيا" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑦ Schema.org — @graph موحد (تقرير أكاديمي)
+       ═══════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://jabri-com.vercel.app/#jabri",
+        "name": "م/ عبدالله محمد ناصر الجبري",
+        "alternateName": ["Heaven Al-Jabri","Eng. Abdulla Mohammed Nasser Al-Jabri","واحة الجبري","سندباد اليمن"],
+        "givenName": "عبدالله","familyName": "الجبري","honorificPrefix": "م/","gender": "Male",
+        "nationality": { "@type": "Country", "name": "اليمن" },
+        "birthPlace": { "@type": "Place", "name": "صنعاء، اليمن" },
+        "url": "https://jabri-com.vercel.app/about.html",
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "identifier": "https://orcid.org/0009-0003-3319-3822",
+        "jobTitle": "باحث ومبرمج ومؤسس",
+        "knowsAbout": ["الرياضيات","الإحصاء التطبيقي","اختبارات التكافؤ","TOST","الهندسة النباتية","الفيزياء النظرية","فرضية ريمان","نظرية السندباد الموحدة","البرمجة"],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "جامعة الملك فهد للبترول والمعادن (KFUPM)" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840","https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html","https://en.wikipedia.org/wiki/User:Jabri2026","https://www.facebook.com/share/p/1CvCG9xehw/","https://www.instagram.com/reel/Da5zRhypJlo/","https://t.me/Heaven_Jabri/","https://www.linkedin.com/in/abdulla-al-jabri-bb545830b"]
+      },
+      {
+        "@type": ["Organization","NewsMediaOrganization"],
+        "@id": "https://jabri-com.vercel.app/#organization",
+        "name": "واحة الجبري",
+        "alternateName": ["Heaven Al-Jabri","Jabri Oasis"],
+        "legalName": "واحة الجبري",
+        "url": "https://jabri-com.vercel.app/",
+        "logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/icon-192.png","width": 192,"height": 192},
+        "image": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "description": "واحة الجبري — منصة علمية وثقافية لتوثيق تراث اليمن العريق وأبحاث الرياضيات والفيزياء النظرية.",
+        "foundingDate": "2026",
+        "foundingLocation": { "@type": "Place", "name": "صنعاء، اليمن" },
+        "founder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "owner": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "copyrightHolder": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/Jabri-web","https://zenodo.org/records/20513840"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jabri-com.vercel.app/#website",
+        "url": "https://jabri-com.vercel.app/",
+        "name": "واحة الجبري",
+        "alternateName": ["Heaven Al-Jabri","Jabri Oasis"],
+        "description": "توثيق تراث اليمن العريق وأبحاث الرياضيات والفيزياء النظرية",
+        "inLanguage": ["ar","en"],
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "potentialAction": {"@type": "SearchAction","target": "https://jabri-com.vercel.app/search?q={search_term_string}","query-input": "required name=search_term_string"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf.html#webpage",
+        "url": "https://jabri-com.vercel.app/tree/tree3-pdf.html",
+        "name": "تقرير التحليل الإحصائي — فحص تكافؤ نسبة التاج مع √2−1",
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/#website" },
+        "about": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "primaryImageOfPage": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "inLanguage": "ar",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://jabri-com.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "مشروع الشجرة", "item": "https://jabri-com.vercel.app/tree/tree.html" },
+          { "@type": "ListItem", "position": 3, "name": "القياس الميداني", "item": "https://jabri-com.vercel.app/tree/tree3.html" },
+          { "@type": "ListItem", "position": 4, "name": "التقرير الإحصائي", "item": "https://jabri-com.vercel.app/tree/tree3-pdf.html" }
+        ]
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf.html#article",
+        "headline": "تقرير التحليل الإحصائي — فحص تكافؤ نسبة التاج مع القيمة المرجعية √2−1",
+        "name": "تقرير التحليل الإحصائي: فحص تكافؤ نسبة التاج (H−h)/H مع √2−1 في أشجار المانجو",
+        "alternateName": "Statistical Analysis Report: Crown Ratio Equivalence with √2−1",
+        "description": "تقرير أكاديمي كامل لاختبار التكافؤ الإحصائي TOST (Two One-Sided Tests) بين نسبة التاج (H−h)/H في عينة من 5 أشجار مانجو (شعوب، صنعاء، 2026-10-14) والقيمة الرياضية √2−1 = tan(π/8) ≈ 0.414214. النتائج: Mean=0.41297, SD=0.00845, SE=0.00378, CI90%=[0.40491, 0.42102], Δ=±0.03, α=0.05, p_TOST=0.000801. تحليل استكشافي لم يُسجَّل مسبقاً.",
+        "abstract": "في عينة استكشافية من 5 أشجار مانجو، بلغ متوسط نسبة التاج C=(H−h)/H نحو 0.41297 بانحراف معياري 0.00845. باستخدام اختبار التكافؤ TOST بهامش Δ=±0.03 ومستوى دلالة α=0.05، جاءت النتائج متوافقة إحصائياً مع تكافؤ متوسط النسبة مع القيمة المرجعية √2−1 ≈ 0.414214. يقع فاصل الثقة 90% بالكامل داخل مجال التكافؤ [0.384214, 0.444214]، وقيمة p_TOST = 0.000801 < α. هذا استنتاج استكشافي مشروط بصغر العينة وغياب التسجيل المسبق، ويحتاج إلى تحقق بعينة أكبر.",
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "dateModified": "2026-10-21T00:00:00+03:00",
+        "inLanguage": "ar",
+        "isAccessibleForFree": true,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "about": [
+          "Statistical equivalence testing",
+          "TOST",
+          "Two One-Sided Tests",
+          "√2−1",
+          "النسبة الفضية",
+          "tan(π/8)",
+          "نسبة التاج",
+          "أشجار المانجو",
+          "Z+C+A=1"
+        ],
+        "keywords": "TOST, اختبار التكافؤ, نسبة التاج, √2−1, النسبة الفضية, أشجار المانجو, شعوب صنعاء, فاصل الثقة, p-value",
+        "articleSection": "علوم وتكنولوجيا",
+        "wordCount": 890,
+        "mainEntityOfPage": { "@id": "https://jabri-com.vercel.app/tree/tree3-pdf.html#webpage" },
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/tree/tree3.html#app" },
+        "citation": [
+          { "@type": "CreativeWork", "name": "الإطار الكامل — الشجرة والظل", "url": "https://jabri-com.vercel.app/tree/tree.html" },
+          { "@type": "CreativeWork", "name": "المحاكاة البصرية", "url": "https://jabri-com.vercel.app/tree/tree2.html" },
+          { "@type": "CreativeWork", "name": "بروتوكول القياس ZX", "url": "https://jabri-com.vercel.app/tree/tree3.html" },
+          { "@type": "CreativeWork", "name": "OSF Preprint", "url": "https://doi.org/10.17605/OSF.IO/YC9MB" }
+        ],
+        "sameAs": "https://doi.org/10.17605/OSF.IO/YC9MB"
+      },
+      {
+        "@type": "Report",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf.html#report",
+        "name": "تقرير التحليل الإحصائي — فحص التكافؤ الإحصائي",
+        "about": "فحص التكافؤ الإحصائي لنسبة التاج (H−h)/H مع القيمة √2−1",
+        "author": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "reportNumber": "ZX-RPT-2026-10-14-001",
+        "inLanguage": "ar",
+        "about": ["TOST","نسبة التاج","أشجار المانجو","√2−1"],
+        "encoding": "text/html"
+      },
+      {
+        "@type": "Dataset",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf.html#dataset",
+        "name": "بيانات القياس الخام — 5 أشجار مانجو (شعوب، صنعاء، 2026-10-14)",
+        "description": "البيانات الخام لـ 5 أشجار مانجو مقاسة في شعوب، صنعاء. لكل شجرة: H (الارتفاع الكلي)، h (ارتفاع أول تفرع رئيسي)، C = (H−h)/H (نسبة التاج).",
+        "creator": { "@id": "https://jabri-com.vercel.app/#jabri" },
+        "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+        "datePublished": "2026-10-14T00:00:00+03:00",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "isAccessibleForFree": true,
+        "keywords": ["أشجار المانجو","نسبة التاج","H","h","crown ratio","TOST"],
+        "variableMeasured": [
+          { "@type": "PropertyValue", "name": "H", "description": "الارتفاع الكلي للشجرة (متر)", "unitText": "m" },
+          { "@type": "PropertyValue", "name": "h", "description": "ارتفاع أول تفرع رئيسي (متر)", "unitText": "m" },
+          { "@type": "PropertyValue", "name": "C", "description": "نسبة التاج (H−h)/H", "unitText": "ratio" }
+        ],
+        "spatialCoverage": { "@type": "Place", "name": "شعوب، صنعاء، اليمن" },
+        "temporalCoverage": "2026-10-14/2026-10-14",
+        "size": "5 records",
+        "inLanguage": "ar"
+      },
+      {
+        "@type": "StatisticalPopulation",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf.html#population",
+        "name": "أشجار المانجو — عينة شعوب صنعاء (n=5)",
+        "description": "عينة استكشافية من 5 أشجار مانجو في موقع واحد (شعوب، صنعاء). لا تمثل جميع أشجار المانجو في اليمن أو العالم.",
+        "populationType": "أشجار مانجو (Mangifera indica)",
+        "location": { "@type": "Place", "name": "شعوب، صنعاء، اليمن" },
+        "numConstraints": 1
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jabri-com.vercel.app/tree/tree3-pdf.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ما الذي يقيسه هذا التقرير بالضبط؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "يقيس التقرير نسبة التاج C = (H−h)/H في 5 أشجار مانجو، حيث H هو الارتفاع الكلي للشجرة وh هو ارتفاع أول تفرع رئيسي. الهدف هو فحص ما إذا كان متوسط هذه النسبة يكافئ إحصائياً القيمة الرياضية √2−1 = tan(π/8) ≈ 0.414214 ضمن هامش عملي Δ=±0.03."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ما هي النتائج الرقمية الرئيسية؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "المتوسط المقاس = 0.41297، الانحراف المعياري = 0.00845، الخطأ المعياري = 0.00378، درجة الحرية = 4، فاصل الثقة 90% = [0.40491, 0.42102]. مجال التكافؤ = [0.384214, 0.444214]. قيمة p_TOST = 0.000801 < α=0.05. القرار: نرفض فرضية العدم بعدم التكافؤ، وتدعم النتائج التكافؤ الإحصائي لمتوسط نسبة التاج مع √2−1 ضمن الهامش المحدد."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "لماذا التقرير يقول إنه استكشافي وليس تأكيدياً؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "لأنه لا يوجد سجل مؤرخ يثبت تسجيل الفرضية والبروتوكول وهامش التكافؤ Δ قبل جمع البيانات. هذا يعني أن النتائج قد تكون عرضة لـ p-hacking (اختيار النسبة أو الهامش بعد رؤية البيانات). لذلك تُعرض النتائج بوصفها تحليلاً استكشافياً، ولا يُدَّعى أنها اختبار تأكيدي مسجل مسبقاً. هذا التوثيق الصريح للحدود المنهجية جزء من الأمانة العلمية."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل هذا يعني أن √2−1 قانون هندسي عام في الأشجار؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "لا. النتيجة تدعم فرضية التكافؤ الإحصائي لمتوسط العينة فقط، وليس تعميماً على كل أشجار المانجو أو كل الأشجار. √2−1 مشتقة رياضياً من الإطار المفاهيمي Z+C+A=1 (عبر tan(π/8))، والنتيجة الميدانية دليل أولي يحتاج إلى: (أ) تكرار بعينة أكبر، (ب) مواقع متعددة، (ج) تسجيل مسبق للفرضية والبروتوكول، (د) تحليل أنواع مختلفة من الأشجار."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ما هو هامش التكافؤ Δ=0.03 ومبرره؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Δ = ±0.03 يعني أن متوسط نسبة التاج يُعدّ مكافئاً لـ √2−1 إذا كان داخل [0.384214, 0.444214]. يمثل هذا الهامش الفرق المقبول عملياً لأغراض اختبار التكافؤ، ولا يُعدّ بحد ذاته تقديراً لخطأ أداة القياس. التقرير يعترف بأن مبررات اختيار هذا الهامش غير موثقة بصراحة وينبغي توثيقها قبل استخدامه في دراسة لاحقة — بما في ذلك الدلالة العملية للهامش ودقة القياس."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑧ نص مخفي للروبوتات
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  </style>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ⑨ أنماط الصفحة (الحالية — محفوظة 100%)
+       ═══════════════════════════════════════════════════════ -->
 <style>
   @page { size: A4; margin: 18mm; }
   *, *::before, *::after { box-sizing: border-box; }
@@ -26,7 +330,6 @@
   .note strong { color: #000; }
   .warn { border-right-color: #b00; background: #fdf5f5; }
   
-  /* شريط التنقل (يختفي عند الطباعة) */
   .web-nav {
     margin-top: 40px;
     padding-top: 20px;
@@ -55,11 +358,54 @@
     body { padding: 0; max-width: none; }
     h1, h2 { page-break-after: avoid; }
     .note { page-break-inside: avoid; }
-    .web-nav { display: none !important; } /* إخفاء التنقل عند الطباعة */
+    .web-nav { display: none !important; }
+    .sr-only { display: none !important; }
   }
 </style>
 </head>
 <body>
+
+<!-- ══════════════════════════════════════════════════════════
+     🕵️ نص مخفي للروبوتات (لا يظهر على الشاشة ولا عند الطباعة)
+     ══════════════════════════════════════════════════════════ -->
+<div class="sr-only" aria-hidden="true">
+  <h1>تقرير التحليل الإحصائي — فحص تكافؤ نسبة التاج مع √2−1</h1>
+  <p>تقرير أكاديمي كامل لاختبار التكافؤ الإحصائي TOST (Two One-Sided Tests) بين نسبة التاج (H−h)/H في عينة من 5 أشجار مانجو (شعوب، صنعاء، 2026-10-14) والقيمة الرياضية √2−1 = tan(π/8) ≈ 0.414214.</p>
+  
+  <h2>البيانات الخام</h2>
+  <table>
+    <tr><th>الشجرة</th><th>H (م)</th><th>h (م)</th><th>C = (H−h)/H</th></tr>
+    <tr><td>1</td><td>7.80</td><td>4.50</td><td>0.42308</td></tr>
+    <tr><td>2</td><td>8.50</td><td>5.00</td><td>0.41176</td></tr>
+    <tr><td>3</td><td>7.20</td><td>4.20</td><td>0.41667</td></tr>
+    <tr><td>4</td><td>9.00</td><td>5.40</td><td>0.40000</td></tr>
+    <tr><td>5</td><td>7.50</td><td>4.40</td><td>0.41333</td></tr>
+  </table>
+  
+  <h2>الحسابات الوصفية</h2>
+  <ul>
+    <li>المتوسط = 0.41297</li>
+    <li>الانحراف المعياري = 0.00845</li>
+    <li>الخطأ المعياري = 0.00378</li>
+    <li>درجة الحرية = 4</li>
+    <li>فاصل الثقة 90% = [0.40491, 0.42102]</li>
+  </ul>
+  
+  <h2>اختبار TOST</h2>
+  <p>هامش التكافؤ Δ = ±0.03، مستوى الدلالة α = 0.05، مجال التكافؤ = [0.384214, 0.444214]. يقع فاصل الثقة 90% بالكامل داخل مجال التكافؤ. قيمة p_TOST ≈ 0.000801 < 0.05.</p>
+  
+  <h2>القرار الإحصائي</h2>
+  <p>نرفض فرضية العدم التي تفترض عدم تحقق التكافؤ، وتدعم النتائج التكافؤ الإحصائي لمتوسط نسبة التاج مع القيمة المرجعية √2−1، ضمن هامش التكافؤ المحدد.</p>
+  
+  <h2>حدود التفسير</h2>
+  <p>يعبّر القرار عن التكافؤ الإحصائي لمتوسط النسبة ضمن الهامش المحدد، ولا يعني أن النسبة متطابقة في كل شجرة أو أن القيمة المرجعية قانون هندسي عام. صغر العينة (n=5) والموقع الواحد (شعوب، صنعاء) وعدم وجود تسجيل مسبق للفرضية والبروتوكول — كل هذه عوامل تجعل النتيجة استكشافية ولا تكفي للتعميم.</p>
+  
+  <p>بقلم: م/ عبدالله محمد ناصر الجبري — اليمن. ORCID: 0009-0003-3319-3822. رخصة: CC BY 4.0. DOI الإطار: 10.17605/OSF.IO/YC9MB.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     📄 محتوى التقرير (محفوظ 100%)
+     ══════════════════════════════════════════════════════════ -->
 
   <h1>تقرير التحليل الإحصائي — فحص تكافؤ نسبة التاج مع القيمة المرجعية √2−1</h1>
 
