@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="بطاقة أكاديمية: فحص فرضية التكافؤ الإحصائي لنسبة التاج في أشجار المانجو مع القيمة √2−1 (تحليل استكشافي).">
+  <title>بطاقة أكاديمية | تحليل التكافؤ الإحصائي</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: "Amiri", "Traditional Arabic", "Times New Roman", serif;
+      color: #111; background: #fff; margin: 0; padding: 20px;
+      min-height: 100vh; display: flex; justify-content: center;
+      align-items: center; line-height: 1.8;
+    }
+    .card {
+      width: 100%; max-width: 680px; padding: 34px 38px;
+      border: 1.5px solid #222; background: #fff;
+    }
+    .name { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; text-align: center; }
+    .degree { color: #444; font-size: 0.9rem; margin-bottom: 22px; text-align: center; }
+    .section-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; text-align: right; }
+    .hypothesis {
+      padding: 10px 14px; border-right: 3px solid #222;
+      background: #f7f7f7; text-align: right; font-size: 0.9rem; margin-bottom: 16px;
+    }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.82rem; margin: 12px 0;
+      font-family: "Courier New", monospace; direction: ltr;
+    }
+    th, td { border: 1px solid #333; padding: 7px 5px; text-align: center; vertical-align: middle; }
+    th { background: #f0f0f0; font-family: "Amiri", serif; font-weight: 700; }
+    .stats-box {
+      background: #fafafa; border: 1px solid #ddd; padding: 12px 15px; margin: 12px 0;
+      font-family: "Courier New", monospace; font-size: 0.85rem; direction: ltr; text-align: left;
+      line-height: 1.6;
+    }
+    .note {
+      border-top: 1px solid #ddd; padding-top: 12px; margin-top: 14px;
+      text-align: justify; font-size: 0.85rem; color: #333;
+    }
+    .note strong { color: #111; }
+    .warn-note { border-right: 3px solid #b00; background: #fdf5f5; padding: 10px 14px; margin-top: 14px; font-size: 0.82rem; }
+    .link {
+      border-top: 1.5px solid #222; margin-top: 18px; padding-top: 14px;
+      direction: ltr; overflow-wrap: anywhere;
+      font-family: "Courier New", monospace; font-size: 0.85rem; text-align: center;
+    }
+    .link a { color: #111; text-decoration: none; border-bottom: 1px solid #111; }
+    @media (max-width: 600px) {
+      body { padding: 12px; align-items: flex-start; }
+      .card { padding: 22px 16px; }
+      .name { font-size: 1.25rem; }
+      table { font-size: 0.75rem; }
+      th, td { padding: 5px 3px; }
+      .stats-box { font-size: 0.8rem; }
+    }
+    @media print {
+      body { min-height: auto; padding: 0; display: block; }
+      .card { max-width: none; margin: 0 auto; break-inside: avoid; }
+      a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <header>
+      <div class="name">عبدالله محمد ناصر الجبري</div>
+      <div class="degree">بكالوريوس علوم الحاسب — KFUPM — الظهران</div>
+    </header>
+
+    <section class="hypothesis">
+      <div class="section-title">فرضية قيد الاختبار</div>
+      هل تقترب النسبة التكميلية <span dir="ltr" style="font-family:'Courier New',monospace">C = (H−h)/H</span> في أشجار المانجو من القيمة المرجعية الرياضية <span dir="ltr" style="font-family:'Courier New',monospace">√2−1 ≈ 0.41421</span>؟
+    </section>
+
+    <section aria-label="جدول النتائج">
+      <div class="section-title">نتائج العينة الاستكشافية (n = 5 أشجار مانجو، شعوب - صنعاء)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>المقياس</th>
+            <th>القيمة المحسوبة</th>
+            <th>القيمة المرجعية</th>
+            <th>الوصف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>C = (H − h) / H</td>
+            <td><b>0.41297</b></td>
+            <td>0.41421</td>
+            <td>قريب عدديًا، ومتوافق إحصائياً</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="stats-box">
+      n = 5<br>
+      Mean = 0.41297<br>
+      SD = 0.00845<br>
+      SE = 0.00378<br>
+      90% CI = [0.40491, 0.42102]<br>
+      TOST p = 0.000801 (Pragmatic margin Δ = ±0.03)
+    </div>
+
+    <section class="note">
+      <strong>التحليل الإحصائي:</strong>
+      تم استخدام اختبار تكافؤ أحادي العينة (TOST). يقع فاصل الثقة 90% بالكامل داخل مجال التكافؤ، وقيمة TOST أقل من <span dir="ltr">α = 0.05</span>. تدعم النتيجة التكافؤ الإحصائي لمتوسط النسبة، <b>بافتراض صحة القياسات وملاءمة الافتراضات</b>.
+    </section>
+
+    <div class="warn-note">
+      <strong>حدود التفسير:</strong>
+      هذا تحليل <b>استكشافي</b> (لم يسجل مسبقاً). التكافؤ يخص المتوسط، ولا يعني تطابق كل شجرة. صغر العينة (n=5) في موقع واحد لا يتيح التعميم كقانون هندسي عام، ويوصى بتكرار الدراسة.
+    </div>
+
+    <footer class="link">
+      <a href="https://jabri-com.vercel.app/tree/tree3.html" target="_blank" rel="noopener noreferrer">
+        jabri-com.vercel.app/tree/tree3.html — التقرير الكامل
+      </a>
+    </footer>
+  </main>
+</body>
+</html>

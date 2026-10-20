@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير التحليل الإحصائي | فحص فرضية √2−1</title>
+<style>
+  @page { size: A4; margin: 18mm; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: 'Times New Roman', 'Amiri', serif;
+    direction: rtl;
+    background: #fff; color: #000; line-height: 1.85; padding: 20px;
+    max-width: 820px; margin: 0 auto;
+  }
+  h1 { font-size: 1.4rem; text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+  h2 { font-size: 1.05rem; margin-top: 24px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+  p, li { text-align: justify; margin-bottom: 8px; }
+  ul { padding-inline-start: 22px; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9rem; }
+  th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+  th { background: #f0f0f0; font-family: 'Times New Roman', serif; font-weight: bold; }
+  .num { direction: ltr; unicode-bidi: isolate; display: inline-block; font-family: 'Courier New', monospace; font-variant-numeric: tabular-nums; }
+  .highlight { background: #eaf5ec; font-weight: bold; }
+  .note { font-size: 0.85rem; color: #333; background: #f9f9f9; padding: 14px 16px; border-right: 4px solid #333; margin-top: 18px; }
+  .note strong { color: #000; }
+  .warn { border-right-color: #b00; background: #fdf5f5; }
+  
+  /* شريط التنقل (يختفي عند الطباعة) */
+  .web-nav {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px dashed #ccc;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 2;
+  }
+  .web-nav a {
+    color: #1a4d2e;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 6px;
+  }
+  .web-nav a:hover { text-decoration: underline; }
+  .web-nav .sep { color: #aaa; margin: 0 2px; }
+
+  table { page-break-inside: auto; }
+  tr { page-break-inside: avoid; page-break-after: auto; }
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+  
+  @media print {
+    body { padding: 0; max-width: none; }
+    h1, h2 { page-break-after: avoid; }
+    .note { page-break-inside: avoid; }
+    .web-nav { display: none !important; } /* إخفاء التنقل عند الطباعة */
+  }
+</style>
+</head>
+<body>
+
+  <h1>تقرير التحليل الإحصائي — فحص تكافؤ نسبة التاج مع القيمة المرجعية √2−1</h1>
+
+  <p><b>الباحث:</b> عبدالله محمد ناصر الجبري</p>
+  <p><b>الموقع:</b> شعوب، صنعاء، اليمن</p>
+  <p><b>تاريخ القياس:</b> <span class="num">2026-10-14</span></p>
+
+  <h2>1. مصدر البيانات وبروتوكول القياس</h2>
+  <ul>
+    <li><b>الأداة:</b> شريط قياس معدني (قياس رأسي مباشر من مستوى الأرض إلى قمة الشجرة).</li>
+    <li><b>H (الارتفاع الكلي):</b> المسافة الرأسية من الأرض إلى أعلى نقطة في التاج.</li>
+    <li><b>h (ارتفاع أول تفرع رئيسي):</b> ارتفاع أول انشقاق واضح للجذع إلى فرعين رئيسيين يبلغ كل منهما على الأقل <span class="num">30%</span> من قطر الجذع الأصلي.</li>
+    <li><b>عدد المشاهدات:</b> <span class="num">n = 5</span> أشجار مانجو منفصلة في الموقع نفسه. ويُفترض استقلال المشاهدات لأغراض التحليل، لكن لا يمكن تأكيد هذا الافتراض اعتمادًا على انفصال الأشجار مكانيًا وحده.</li>
+    <li><b>القراءات الأصلية:</b> محفوظة كما وردت من الميدان، بدون تعديل.</li>
+  </ul>
+
+  <h2>2. البيانات الخام</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>الشجرة</th>
+        <th>H (م)</th>
+        <th>h (م)</th>
+        <th>C = (H−h)/H</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="num">7.80</td><td class="num">4.50</td><td class="num">0.42308</td></tr>
+      <tr><td>2</td><td class="num">8.50</td><td class="num">5.00</td><td class="num">0.41176</td></tr>
+      <tr><td>3</td><td class="num">7.20</td><td class="num">4.20</td><td class="num">0.41667</td></tr>
+      <tr><td>4</td><td class="num">9.00</td><td class="num">5.40</td><td class="num">0.40000</td></tr>
+      <tr><td>5</td><td class="num">7.50</td><td class="num">4.40</td><td class="num">0.41333</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. الحسابات الوصفية</h2>
+  <table>
+    <thead><tr><th>المقياس</th><th>القيمة</th></tr></thead>
+    <tbody>
+      <tr><td>المتوسط (Mean)</td><td class="num">0.41297</td></tr>
+      <tr><td>الانحراف المعياري (SD)</td><td class="num">0.00845</td></tr>
+      <tr><td>الخطأ المعياري (SE)</td><td class="num">0.00378</td></tr>
+      <tr><td>درجات الحرية (df)</td><td class="num">4</td></tr>
+      <tr><td>فاصل الثقة 90%</td><td class="num">[0.40491, 0.42102]</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. اختبار التكافؤ الإحصائي (TOST)</h2>
+  <p>تم استخدام اختبار التكافؤ ذي الاختبارين أحاديي الطرف (TOST) لمقارنة متوسط نسبة التاج <span class="num">C = (H−h)/H</span> بالقيمة المرجعية الرياضية <span class="num">√2 − 1 ≈ 0.414214</span>.</p>
+  <ul>
+    <li><b>هامش التكافؤ العملي:</b> <span class="num">Δ = 0.03</span>، أي ±0.03 في قيمة النسبة <span class="num">C</span> (ثلاث نقاط مئوية). ويمثل هذا الهامش الفرق المقبول عمليًا لأغراض اختبار التكافؤ، ولا يُعدّ بحد ذاته تقديرًا لخطأ أداة القياس.</li>
+    <li><b>مستوى الدلالة:</b> <span class="num">α = 0.05</span>.</li>
+    <li><b>مجال التكافؤ:</b> <span class="num">[0.384214, 0.444214]</span>.</li>
+    <li><b>فاصل الثقة 90% للمتوسط:</b> <span class="num">[0.404912, 0.421025]</span>.</li>
+    <li><b>قيمة اختبار التكافؤ:</b> <span class="num">p<sub>TOST</sub> ≈ 0.000801</span>.</li>
+  </ul>
+  <p>يقع فاصل الثقة 90% بالكامل داخل مجال التكافؤ المحدد، كما أن قيمة اختبار TOST أقل من مستوى الدلالة المعتمد.</p>
+  
+  <p><b>القرار الإحصائي:</b> نرفض فرضية العدم التي تفترض عدم تحقق التكافؤ، وتدعم النتائج التكافؤ الإحصائي لمتوسط نسبة التاج مع القيمة المرجعية، ضمن هامش التكافؤ المحدد.</p>
+
+  <p><b>حدود التفسير:</b> يعبّر القرار عن التكافؤ الإحصائي لمتوسط النسبة ضمن الهامش المحدد، ولا يعني أن النسبة متطابقة في كل شجرة أو أن القيمة المرجعية قانون هندسي عام. ونظرًا إلى صغر العينة، يصعب تقييم افتراضات التوزيع والتمثيل الإحصائي بصورة موثوقة؛ لذا ينبغي اعتبار النتيجة دليلًا أوليًا يحتاج إلى التحقق بعينة أكبر.</p>
+
+  <h2>5. الاستنتاج والحدود</h2>
+  <p>في العينة الاستكشافية المكونة من خمس أشجار مانجو، بلغ متوسط نسبة التاج <span class="num">(C = (H−h)/H)</span> نحو <span class="num">0.41297</span>، بانحراف معياري يقارب <span class="num">0.00845</span>. وباستخدام اختبار التكافؤ ذي الاختبارين أحاديي الطرف (TOST)، مع هامش تكافؤ مقداره <span class="num">(Δ = 0.03)</span> ومستوى دلالة <span class="num">(α = 0.05)</span>، جاءت النتائج متوافقة إحصائيًا مع تكافؤ متوسط النسبة مع القيمة المرجعية <span class="num">(√2 − 1 ≈ 0.414214)</span>، ضمن هامش التكافؤ المحدد.</p>
+  
+  <p>هذا الاستنتاج مشروط بملاءمة الافتراضات الإحصائية وصحة القياسات ومبررات اختيار هامش التكافؤ. ونظرًا إلى صغر العينة واقتصارها على موقع واحد، فلا تكفي النتائج لإثبات قانون هندسي عام أو تعميمه على أشجار المانجو في مواقع وظروف أخرى. ويوصى بتكرار الدراسة على عينة أكبر، وفي مواقع متعددة، مع توثيق بروتوكول القياس ومبررات هامش التكافؤ قبل جمع بيانات الدراسة اللاحقة.</p>
+
+  <div class="note warn">
+    <strong>تنبيه بشأن التسجيل المسبق:</strong>
+    لا يتوافر في هذا التقرير سجل مؤرخ يثبت تسجيل الفرضية
+    والبروتوكول وهامش التكافؤ قبل جمع البيانات. لذلك تُعرض
+    النتائج بوصفها تحليلًا استكشافيًا، ولا يُدّعى أنها اختبار
+    تأكيدي مسجل مسبقًا. وينبغي توثيق مبررات اختيار
+    <span class="num">Δ = 0.03</span>، بما في ذلك الدلالة
+    العملية لهذا الهامش ودقة القياس، قبل استخدامه في دراسة لاحقة.
+  </div>
+
+  <!-- شريط التنقل (يظهر على الشاشة فقط) -->
+  <nav class="web-nav">
+    <span>🌳 مشروع الشجرة:</span><br>
+    <a href="/">الرئيسية</a> <span class="sep">|</span>
+    <a href="/tree/tree.html">الإطار الكامل</a> <span class="sep">|</span>
+    <a href="/tree/tree2.html">المحاكاة</a> <span class="sep">|</span>
+    <a href="/tree/tree3.html">القياس الميداني</a> <span class="sep">|</span>
+    <a href="/tree/hindara.html">الهندرة</a> <span class="sep">|</span>
+    <a href="/tree/card.html">البطاقة الأكاديمية</a>
+  </nav>
+
+</body>
+</html>
