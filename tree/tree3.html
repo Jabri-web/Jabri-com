@@ -2,15 +2,69 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+
+<!-- ═══════════════════════════════════════════════════════
+     ⓪ القالب الذهبي (الأيقونات - مسارات مطلقة)
+     ═══════════════════════════════════════════════════════ -->
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png">
 <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
 <link rel="shortcut icon" href="/icon-192.png">
 <link rel="icon" href="/image/icon-192.png" type="image/png">
 <link rel="manifest" href="/manifest.json">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a1410">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U">
+
+<!-- ═══════════════════════════════════════════════════════
+     ① SEO & Canonical
+     ═══════════════════════════════════════════════════════ -->
 <title>بروتوكول القياس الميداني — ZX | واحة الجبري</title>
+<meta name="description" content="أداة القياس الميداني لنظرية ZX. أدخل بيانات الأشجار (H, h, r, d, L) لفحص الفرضية: هل توجد نسبة في الشجرة ≈ √2 − 1 ≈ 0.414؟" />
+<meta name="author" content="م/ عبدالله محمد ناصر الجبري">
+
+<link rel="canonical" href="https://jabri-com.vercel.app/tree/tree3.html" />
+<link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree3.html" />
+<link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/tree3.html" />
+
+<!-- ═══════════════════════════════════════════════════════
+     ② Open Graph & Twitter
+     ═══════════════════════════════════════════════════════ -->
+<meta property="og:locale" content="ar_YE">
+<meta property="og:type" content="website">
+<meta property="og:title" content="بروتوكول القياس الميداني — ZX | واحة الجبري">
+<meta property="og:description" content="أداة القياس الميداني لنظرية ZX. اختبر فرضية النسبة الفضية √2 − 1 في الأشجار الحقيقية.">
+<meta property="og:url" content="https://jabri-com.vercel.app/tree/tree3.html">
+<meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
+<meta property="og:site_name" content="واحة الجبري">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@JabriAbdulla1">
+<meta name="twitter:title" content="بروتوكول القياس الميداني — ZX">
+<meta name="twitter:description" content="أداة لتحليل النسب الهندسية للأشجار ومقارنتها بنظرية Z+C+A=1.">
+<meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
+
+<!-- ═══════════════════════════════════════════════════════
+     ③ Schema.org (تطبيق ويب تفاعلي)
+     ═══════════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "بروتوكول القياس الميداني — ZX",
+  "url": "https://jabri-com.vercel.app/tree/tree3.html",
+  "description": "أداة لتحليل النسب الهندسية للأشجار ومقارنتها بالنظرية (√2 - 1).",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "All",
+  "author": {
+    "@type": "Person",
+    "name": "م/ عبدالله محمد ناصر الجبري",
+    "url": "https://jabri-com.vercel.app/"
+  }
+}
+</script>
 
 <style>
   :root{
@@ -28,7 +82,10 @@
   h1{color:var(--gold);font-size:1.15rem;margin:0 0 6px;text-align:center}
   h2{color:var(--green);font-size:0.85rem;margin:0 0 14px;text-align:center;font-weight:400}
   h3{color:var(--gold);font-size:1rem;margin:18px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px}
-  .panel{background:var(--dark);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px;}
+  .panel{
+    background:var(--dark);border:1px solid var(--border);
+    border-radius:10px;padding:14px;margin-bottom:12px;
+  }
   .panel.hypo{border-color:var(--gold);background:#0f1d15}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
   .row.full{grid-template-columns:1fr}
@@ -41,7 +98,8 @@
     direction:ltr;text-align:left;
   }
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
-  input:disabled,select:disabled,textarea:disabled{opacity:0.6;cursor:not-allowed;background:#061009}
+  input[disabled],select[disabled],textarea[disabled]{opacity:0.6;cursor:not-allowed;background:#061009}
+  input[readonly]{background:#0e1a12;color:var(--gold);font-weight:700}
   textarea{resize:vertical;min-height:60px;direction:rtl;text-align:right}
   select{cursor:pointer;direction:rtl;text-align:right}
   button{
@@ -62,7 +120,10 @@
     transition:border-color .2s, box-shadow .2s;
   }
   .ratio-card .name{color:var(--dim);font-size:0.82rem}
-  .ratio-card .val{color:var(--gold);font-family:'Courier New',monospace;font-weight:700;font-size:0.95rem;direction:ltr;}
+  .ratio-card .val{
+    color:var(--gold);font-family:'Courier New',monospace;
+    font-weight:700;font-size:0.95rem;direction:ltr;
+  }
   .ratio-card.gold{border-color:var(--gold);box-shadow:0 0 20px -6px var(--gold)}
   .ratio-card.excluded{opacity:0.55}
   .ratio-card.excluded .name::after{content:" (مستبعد)";color:#c8a840;font-size:0.7rem}
@@ -74,81 +135,131 @@
   }
   .tree-item .id{color:var(--gold);font-weight:700;font-family:'Courier New',monospace}
   .tree-item .info{color:var(--dim);font-size:0.75rem}
-  .tree-item button{width:auto;padding:4px 10px;font-size:0.75rem;background:#5a1a1a;border-color:#8a2020;}
+  .tree-item button{
+    width:auto;padding:4px 10px;font-size:0.75rem;
+    background:#5a1a1a;border-color:#8a2020;
+  }
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
-  .stat{background:#08140d;border:1px solid var(--border);border-radius:7px;padding:8px;text-align:center;}
+  .stat{
+    background:#08140d;border:1px solid var(--border);
+    border-radius:7px;padding:8px;text-align:center;
+  }
   .stat .lbl{color:var(--dim);font-size:0.7rem;display:block;margin-bottom:4px}
-  .stat .val{color:var(--gold);font-family:'Courier New',monospace;font-weight:700;font-size:0.9rem;direction:ltr;}
-  .hint{color:var(--dim);font-size:0.75rem;line-height:1.7;background:#08140d;border-right:3px solid var(--gold);padding:8px 12px;border-radius:5px;margin-top:8px;}
+  .stat .val{
+    color:var(--gold);font-family:'Courier New',monospace;
+    font-weight:700;font-size:0.9rem;direction:ltr;
+  }
+  .hint{
+    color:var(--dim);font-size:0.75rem;line-height:1.7;
+    background:#08140d;border-right:3px solid var(--gold);
+    padding:8px 12px;border-radius:5px;margin-top:8px;
+  }
   .hint.warn{border-right-color:var(--warn);color:#ffbaba}
   .hint.info{border-right-color:#6ae3ff;color:#b0e5ff}
-  .count{display:inline-block;background:var(--gold);color:#0a1a12;padding:2px 10px;border-radius:20px;font-weight:700;font-size:0.8rem;margin-inline-start:6px;}
+  .count{
+    display:inline-block;background:var(--gold);color:#0a1a12;
+    padding:2px 10px;border-radius:20px;font-weight:700;
+    font-size:0.8rem;margin-inline-start:6px;
+  }
   .empty{color:var(--dim);font-size:0.82rem;text-align:center;padding:14px}
-  .verdict{border-radius:10px;padding:14px;margin-top:14px;text-align:center;font-size:0.9rem;line-height:1.7;}
+  .verdict{
+    border-radius:10px;padding:14px;margin-top:14px;
+    text-align:center;font-size:0.9rem;line-height:1.7;
+  }
   .verdict.hit{background:#1a3a1a;border:1px solid var(--gold);color:var(--gold)}
   .verdict.miss{background:#1a1a0a;border:1px solid #8a7020;color:#c8a840}
   .verdict.pending{background:#1a1a2a;border:1px solid #6ae3ff;color:#6ae3ff}
   .verdict.wait{background:#0a1a12;border:1px solid var(--border);color:var(--dim)}
   .verdict .big{font-size:1.05rem;font-weight:700;display:block;margin-bottom:6px}
   .verdict .detail{color:#c8e6c9;font-size:0.82rem;line-height:1.8;margin-top:8px}
-  .verdict code{background:#132a1d;padding:2px 6px;border-radius:4px;color:var(--gold);font-family:'Courier New',monospace;direction:ltr;display:inline-block;}
-  .filter-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:#08140d;border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:10px;}
-  .filter-bar label{color:var(--dim);font-size:0.82rem;margin:0;flex-shrink:0;}
-  .chip{background:#132a1d;color:#a5d6a7;border:1px solid var(--border);padding:5px 12px;border-radius:20px;cursor:pointer;font-size:0.8rem;transition:.15s;user-select:none;}
+  .verdict code{
+    background:#132a1d;padding:2px 6px;border-radius:4px;
+    color:var(--gold);font-family:'Courier New',monospace;
+    direction:ltr;display:inline-block;
+  }
+
+  /* ═══ شريط الفلتر ═══ */
+  .filter-bar{
+    display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+    background:#08140d;border:1px solid var(--border);
+    border-radius:8px;padding:10px 12px;margin-bottom:10px;
+  }
+  .filter-bar label{
+    color:var(--dim);font-size:0.82rem;margin:0;flex-shrink:0;
+  }
+  .chip{
+    background:#132a1d;color:#a5d6a7;border:1px solid var(--border);
+    padding:5px 12px;border-radius:20px;cursor:pointer;
+    font-size:0.8rem;transition:.15s;user-select:none;
+  }
   .chip:hover{background:#1f3a2b}
-  .chip.active{background:var(--gold);color:#0a1a12;border-color:var(--gold);font-weight:700;}
-  .chip .cnt{opacity:0.7;font-size:0.7rem;margin-inline-start:4px;}
-  .tree-nav{width:100%;max-width:600px;margin:0 auto 20px auto;background:#0a1a12;border:1px solid var(--border);border-radius:14px;padding:12px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 10px 30px -15px #000;}
-  .nav-brand{color:var(--gold);font-weight:700;font-size:0.95rem;letter-spacing:1px;white-space:nowrap;}
-  .nav-links{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;flex:1;}
-  .nav-link{display:inline-flex;align-items:center;gap:6px;background:#132a1d;color:#a5d6a7;text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;transition:.2s;white-space:nowrap;}
-  .nav-link:hover{background:#1f3a2b;color:#e8f5e9;border-color:#2e6b45;}
-  .nav-link.active{background:var(--gold);color:#0a1a12;border-color:var(--gold);font-weight:700;cursor:default;}
+  .chip.active{
+    background:var(--gold);color:#0a1a12;
+    border-color:var(--gold);font-weight:700;
+  }
+  .chip .cnt{
+    opacity:0.7;font-size:0.7rem;margin-inline-start:4px;
+  }
+
+  /* ═══ شريط التنقل بين صفحات الشجرة ═══ */
+  .tree-nav{
+    width:100%; max-width: 600px; margin: 0 auto 20px auto;
+    background:#0a1a12; border:1px solid var(--border);
+    border-radius:14px; padding:12px 16px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;
+    box-shadow:0 10px 30px -15px #000;
+  }
+  .nav-brand{ color:var(--gold); font-weight:700; font-size:0.95rem; letter-spacing:1px; white-space:nowrap; }
+  .nav-links{ display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; flex:1; }
+  .nav-link{
+    display:inline-flex; align-items:center; gap:6px;
+    background:#132a1d; color:#a5d6a7; text-decoration:none;
+    padding:8px 14px; border-radius:8px; border:1px solid var(--border);
+    font-size:0.85rem; transition:.2s; white-space:nowrap;
+  }
+  .nav-link:hover{ background:#1f3a2b; color:#e8f5e9; border-color:#2e6b45; }
+  .nav-link.active{ background:var(--gold); color:#0a1a12; border-color:var(--gold); font-weight:700; cursor:default; }
+  .nav-link.active:hover{ background:var(--gold); color:#0a1a12; }
+  
+  /* ═══ شريط القفل ═══ */
   .lock-banner{background:#1a3a1a;border:1px solid var(--gold);color:var(--gold);padding:8px 12px;border-radius:8px;margin-bottom:10px;font-size:0.82rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
   .lock-banner button{width:auto;padding:5px 10px;font-size:0.75rem;background:transparent;border-color:var(--gold);color:var(--gold);}
   .lock-banner.hidden{display:none;}
-  .lock-banner.warn{background:#3a2a0a;border-color:var(--warn);color:#ffcaca;}
+
   @media (max-width:600px){
-    .tree-nav{flex-direction:column;align-items:stretch;text-align:center;}
-    .nav-brand{text-align:center;}
-    .nav-links{justify-content:center;}
-    .nav-link{font-size:0.8rem;padding:7px 10px;}
+    .tree-nav{ flex-direction:column; align-items:stretch; text-align:center; }
+    .nav-brand{ text-align:center; }
+    .nav-links{ justify-content:center; }
+    .nav-link{ font-size:0.8rem; padding:7px 10px; }
   }
-  /* إشعارات التوست */
-  #toast-container{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none;}
-  .toast{padding:12px 16px;border-radius:8px;font-weight:700;font-size:0.9rem;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,0.5);animation:slideDown 0.3s ease-out;pointer-events:auto;}
-  .toast.success{background:#06d6a0;color:#0a1a12;border:1px solid #048a68;}
-  .toast.error{background:#ff6b6b;color:#fff;border:1px solid #cc0000;}
-  .toast.info{background:#6ae3ff;color:#0a1a12;border:1px solid #3aa0c4;}
-  @keyframes slideDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
-  
-  /* صندوق الخطأ الثابت */
-  #fatal-error{display:none;background:#5a1a1a;color:#fff;padding:15px;margin:10px;border-radius:8px;border:2px solid #ff6b6b;z-index:10000;position:relative;font-family:monospace;}
-  #fatal-error button{background:#ff6b6b;color:#fff;border:none;padding:8px 16px;margin-top:10px;border-radius:5px;font-weight:bold;cursor:pointer;}
 </style>
 </head>
 <body>
 
-<div id="fatal-error"></div>
-<div id="toast-container"></div>
-
+<!-- ═══════════ شريط التنقل بين الملفات ═══════════ -->
 <nav class="tree-nav" aria-label="التنقل بين ملفات المشروع">
   <span class="nav-brand">🌳 مشروع الشجرة</span>
   <div class="nav-links">
-    <a href="/tree/tree.html" class="nav-link"><span class="nav-icon">📖</span> الإطار الكامل</a>
-    <a href="/tree/tree2.html" class="nav-link"><span class="nav-icon">🌀</span> المحاكاة</a>
-    <a href="/tree/tree3.html" class="nav-link active" aria-current="page"><span class="nav-icon">📏</span> القياس الميداني</a>
+    <a href="/tree/tree.html" class="nav-link">
+      <span class="nav-icon">📖</span> الإطار الكامل
+    </a>
+    <a href="/tree/tree2.html" class="nav-link">
+      <span class="nav-icon">🌀</span> المحاكاة
+    </a>
+    <a href="/tree/tree3.html" class="nav-link active" aria-current="page">
+      <span class="nav-icon">📏</span> القياس الميداني
+    </a>
   </div>
 </nav>
 
 <h1>🌳 بروتوكول القياس الميداني</h1>
-<h2>اختبار التكافؤ: هل متوسط نسبة معينة في الشجرة ≈ √2 − 1 ≈ 0.414 (ضمن هامش Δ) ؟</h2>
+<h2>اختبار الفرضية: هل توجد نسبة في الشجرة ≈ √2 − 1 ≈ 0.414 ؟</h2>
 
+<!-- ═══════════ الفرضية المسبقة ═══════════ -->
 <div class="panel hypo" id="preHypoPanel">
   <div class="lock-banner hidden" id="lockBanner">
     <span>🔒 <b>الفرضية مقفلة</b> منذ <span id="lockTime"></span></span>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <button id="showHistoryBtn">🕘 سجل التغييرات</button>
       <button id="unlockBtn">🔓 إلغاء القفل</button>
     </div>
   </div>
@@ -156,14 +267,15 @@
   <h3>🎯 الفرضية المسبقة <span style="font-size:0.75rem;color:var(--dim);font-weight:400">(قبل جمع البيانات)</span></h3>
   <div class="hint info" style="margin-top:0;margin-bottom:10px">
     <b>لماذا القفل؟</b> اختيار النسبة أو الهامش <b>بعد</b> رؤية البيانات يفتح
-    <b>p-hacking</b>. القفل عند أول شجرة يجعل الاختبار صادقاً.
+    <b>p-hacking</b>. القفل عند أول شجرة يجعل الاختبار صادقاً: النسبة المختارة
+    تُختبر بـ α=0.05 (دون تصحيح)، والباقي استكشافي.
   </div>
 
   <div class="row full">
     <div>
       <label><b>أي نسبة تتوقع أن تقترب من 0.4142؟</b></label>
       <select id="preHypo">
-        <option value="">— لم أحدد بعد (سيُطبَّق Bonferroni) —</option>
+        <option value="">— لم أحدد بعد (سيُطبَّق Bonferroni على 6 نسب) —</option>
         <option value="hH">h/H — الجذع ÷ الارتفاع الكلي</option>
         <option value="rH">r/H — نصف قطر التاج ÷ الارتفاع</option>
         <option value="2rH">2r/H — قطر التاج كامل ÷ الارتفاع</option>
@@ -193,28 +305,62 @@
   </div>
 </div>
 
+<!-- ═══════ إدخال بيانات شجرة ═══════ -->
 <div class="panel">
   <h3>📝 شجرة جديدة</h3>
+
   <div class="row">
-    <div><label>الموقع / الحي</label><input id="site" type="text" placeholder="مثال: صنعاء القديمة" dir="auto"></div>
-    <div><label>نوع الشجرة</label><input id="species" type="text" placeholder="نخيل / سمر / ..." dir="auto"></div>
-  </div>
-  <div class="row">
-    <div><label><b>H</b> — الارتفاع الكلي (م)</label><input id="H" type="number" step="0.01" inputmode="decimal" placeholder="0.00" min="0.1" max="200"></div>
-    <div><label><b>h</b> — ارتفاع أول تفرع (م)</label><input id="h" type="number" step="0.01" inputmode="decimal" placeholder="0.00" min="0"></div>
-  </div>
-  <div class="row">
-    <div><label><b>r</b> — نصف قطر التاج (م)</label><input id="r" type="number" step="0.01" inputmode="decimal" placeholder="0.00" min="0"></div>
-    <div><label><b>d</b> — قطر الجذع @ 1.3م (م)</label><input id="d" type="number" step="0.01" inputmode="decimal" placeholder="0.00" min="0"></div>
-  </div>
-  <div class="row">
-    <div><label><b>L</b> — طول الظل (م)</label><input id="L" type="number" step="0.01" inputmode="decimal" placeholder="0.00" min="0" max="500"></div>
-    <div><label>الوقت (ساعة:دقيقة)</label><input id="time" type="time"></div>
-  </div>
-  <div class="row full">
-    <div><label>ملاحظات (اختياري)</label><input id="notes" type="text" placeholder="شجرة صحية، قرب بئر..." dir="auto"></div>
+    <div>
+      <label>الموقع / الحي</label>
+      <input id="site" type="text" placeholder="مثال: صنعاء القديمة" dir="auto">
+    </div>
+    <div>
+      <label>نوع الشجرة</label>
+      <input id="species" type="text" placeholder="نخيل / سمر / ..." dir="auto">
+    </div>
   </div>
 
+  <div class="row">
+    <div>
+      <label><b>H</b> — الارتفاع الكلي (م)</label>
+      <input id="H" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label><b>h</b> — ارتفاع أول تفرع (م)</label>
+      <input id="h" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>r</b> — نصف قطر التاج (م)</label>
+      <input id="r" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label><b>d</b> — قطر الجذع @ 1.3م (م)</label>
+      <input id="d" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label><b>L</b> — طول الظل (م)</label>
+      <input id="L" type="number" step="0.01" inputmode="decimal" placeholder="0.00">
+    </div>
+    <div>
+      <label>الوقت (ساعة:دقيقة)</label>
+      <input id="time" type="time">
+    </div>
+  </div>
+
+  <div class="row full">
+    <div>
+      <label>ملاحظات (اختياري)</label>
+      <input id="notes" type="text" placeholder="شجرة صحية، قرب بئر..." dir="auto">
+    </div>
+  </div>
+
+  <!-- ═══ النسب المحسوبة ═══ -->
   <h3>📐 النسب المحسوبة</h3>
   <div id="ratios">
     <div class="ratio-card" data-ratio="hH"><span class="name">h / H (الجذع ÷ الكل)</span><span class="val" id="r_hH">—</span></div>
@@ -226,8 +372,13 @@
     <div class="ratio-card excluded" data-ratio="LH"><span class="name">L / H (الظل ÷ الارتفاع)</span><span class="val" id="r_LH">—</span></div>
   </div>
 
-  <div class="hint">💡 البطاقة الذهبية = نسبة اقتربت من <b>0.414</b> (بهامش ±Δ من الفرضية المسبقة)</div>
-  <div class="hint warn">⚠️ <b>L/H مستبعدة</b> من فحص الفرضية: تعتمد على <b>زاوية الشمس</b>، لا على شكل الشجرة.</div>
+  <div class="hint">
+    💡 البطاقة الذهبية = نسبة اقتربت من <b>0.414</b> (بهامش ±Δ من الفرضية المسبقة)
+  </div>
+  <div class="hint warn">
+    ⚠️ <b>L/H مستبعدة</b> من فحص الفرضية: تعتمد على <b>زاوية الشمس</b>، لا على شكل الشجرة.
+    أي شجرة عمودية في نفس الزاوية ستعطي نفس القيمة — هذا ليس اختبارًا للبنية.
+  </div>
 
   <div class="btn-row">
     <button class="primary" id="saveBtn">💾 حفظ الشجرة</button>
@@ -235,27 +386,59 @@
   </div>
 </div>
 
+<!-- ═══════ قائمة الأشجار ═══════ -->
 <div class="panel">
   <h3>📋 الأشجار المسجّلة<span class="count" id="treeCount">0</span></h3>
-  <div id="treeList"><div class="empty">لا توجد أشجار بعد. ابدأ بإضافة شجرة.</div></div>
+  <div id="treeList">
+    <div class="empty">لا توجد أشجار بعد. ابدأ بإضافة شجرة.</div>
+  </div>
 </div>
 
+<!-- ═══════ التحليل الإحصائي ═══════ -->
 <div class="panel">
   <h3>📊 التحليل الإحصائي</h3>
-  <div class="filter-bar" id="filterBar"><label>النوع:</label></div>
+
+  <!-- شريط الفلتر -->
+  <div class="filter-bar" id="filterBar">
+    <label>النوع:</label>
+    <!-- الشرائح تُبنى تلقائيًا -->
+  </div>
+
   <div class="stats">
-    <div class="stat"><span class="lbl">عدد الأشجار (في الفلتر)</span><span class="val" id="statN">0</span></div>
-    <div class="stat"><span class="lbl">متوسط h/H</span><span class="val" id="statMean_hH">—</span></div>
-    <div class="stat"><span class="lbl">الانحراف</span><span class="val" id="statSD_hH">—</span></div>
+    <div class="stat">
+      <span class="lbl">عدد الأشجار (في الفلتر)</span>
+      <span class="val" id="statN">0</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">متوسط h/H</span>
+      <span class="val" id="statMean_hH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">الانحراف</span>
+      <span class="val" id="statSD_hH">—</span>
+    </div>
   </div>
   <div class="stats">
-    <div class="stat"><span class="lbl">متوسط r/H</span><span class="val" id="statMean_rH">—</span></div>
-    <div class="stat"><span class="lbl">الانحراف</span><span class="val" id="statSD_rH">—</span></div>
-    <div class="stat"><span class="lbl">√2−1 (المرجع)</span><span class="val">0.4142</span></div>
+    <div class="stat">
+      <span class="lbl">متوسط r/H</span>
+      <span class="val" id="statMean_rH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">الانحراف</span>
+      <span class="val" id="statSD_rH">—</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">√2−1 (المرجع)</span>
+      <span class="val">0.4142</span>
+    </div>
   </div>
-  <div id="verdict" class="verdict wait">⏳ بانتظار بيانات كافية (5 أشجار على الأقل للتحليل الأولي)</div>
+
+  <div id="verdict" class="verdict wait">
+    ⏳ بانتظار بيانات كافية (5 أشجار على الأقل للتحليل الأولي)
+  </div>
 </div>
 
+<!-- ═══════ التصدير ═══════ -->
 <div class="panel">
   <h3>📤 التصدير</h3>
   <div class="btn-row">
@@ -266,38 +449,37 @@
   <input id="importFile" type="file" accept=".csv" style="display:none">
 </div>
 
-<div class="hint" style="margin-bottom:30px">🔒 <b>كل البيانات تُحفظ على جهازك فقط</b> — لا يُرسل شيء لأي خادم.</div>
+<div class="hint" style="margin-bottom:30px">
+  🔒 <b>كل البيانات تُحفظ على جهازك فقط</b> — لا يُرسل شيء لأي خادم. آمن تمامًا.
+</div>
 
 <script>
 'use strict';
 
-const TARGET = Math.sqrt(2) - 1;
-const DEFAULT_DELTA = 0.03;
+// ═══════════════════════════════════════════════════════
+//  ثوابت
+// ═══════════════════════════════════════════════════════
+const TARGET = Math.sqrt(2) - 1;      // 0.41421356...
+const TOL    = 0.03;
 const STORAGE_KEY = 'zx_trees_v1';
-const PRIOR_KEY = 'zx_prior_v2';
+const PRIOR_KEY   = 'zx_prior_v2';
+
 const EXCLUDED = ['LH'];
 const CHECK_KEYS = ['hH','rH','2rH','dH','crownH','hCrown'];
+
 const KEY_NAMES = {
-  hH: 'h/H (الجذع ÷ الكل)', rH: 'r/H (نصف التاج ÷ الكل)',
-  '2rH': '2r/H (التاج كامل ÷ الكل)', dH: 'd/H (السماكة ÷ الكل)',
-  crownH: '(H−h)/H (التاج ÷ الكل)', hCrown: 'h/(H−h) (الجذع ÷ التاج)',
-  LH: 'L/H (الظل ÷ الارتفاع)',
+  hH:      'h/H (الجذع ÷ الكل)',
+  rH:      'r/H (نصف التاج ÷ الكل)',
+  '2rH':   '2r/H (التاج كامل ÷ الكل)',
+  dH:      'd/H (السماكة ÷ الكل)',
+  crownH:  '(H−h)/H (التاج ÷ الكل)',
+  hCrown:  'h/(H−h) (الجذع ÷ التاج)',
+  LH:      'L/H (الظل ÷ الارتفاع)',
 };
 
-function showToast(msg, type = 'info', duration = 4000) {
-  const container = document.getElementById('toast-container');
-  if (!container) return;
-  const toast = document.createElement('div');
-  toast.className = 'toast ' + type;
-  toast.textContent = msg;
-  container.appendChild(toast);
-  setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(-10px)'; setTimeout(() => toast.remove(), 300); }, duration);
-}
-
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
-}
-
+// ═══════════════════════════════════════════════════════
+//  توزيع t + normal (لاختبار التكافؤ)
+// ═══════════════════════════════════════════════════════
 function logGamma(x){
   const c = [76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];
   let y = x, tmp = x + 5.5; tmp -= (x + 0.5) * Math.log(tmp); let s = 1.000000000190015;
@@ -373,31 +555,34 @@ function tostSampleSizeApprox(sd, delta, power=0.8, alpha=0.05){
   return n;
 }
 
-function mean(arr){ return arr.length ? arr.reduce((s,v)=>s+v,0)/arr.length : null; }
-function stdDev(arr){ if (arr.length < 2) return null; const m = mean(arr); return Math.sqrt(arr.reduce((s,v)=>s+(v-m)**2,0)/(arr.length-1)); }
-function collectRatio(key, list){ return list.map(t => t.ratios ? t.ratios[key] : null).filter(v => v != null && !isNaN(v)); }
+// ═══════════════════════════════════════════════════════
+//  الحالة
+// ═══════════════════════════════════════════════════════
+let trees = loadTrees();
+let activeFilter = '__all__';
 
 // ═══════════════════════════════════════════════════════
-//  الأمان وتنظيف البيانات القديمة
+//  التخزين
 // ═══════════════════════════════════════════════════════
-function loadTrees(){ 
-  try { 
-    const r = localStorage.getItem(STORAGE_KEY); 
-    if (!r) return [];
-    const parsed = JSON.parse(r);
+function loadTrees(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
-    // إصلاح أي شجرة قديمة لا تحتوي على ratios
     return parsed.map(t => {
       if (!t.ratios) t.ratios = computeRatios(t.H, t.h, t.r, t.d, t.L);
       return t;
     });
-  } catch(e){ 
-    console.error('Load trees error', e);
-    return []; 
-  } 
+  }catch(e){ return []; }
 }
-function saveTrees(){ try { localStorage.setItem(STORAGE_KEY, JSON.stringify(trees)); }catch(e){} }
+function saveTrees(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(trees)); }catch(e){}
+}
 
+// ═══════════════════════════════════════════════════════
+//  الفرضية المسبقة
+// ═══════════════════════════════════════════════════════
 function getPrior(){ 
   try { 
     const raw = localStorage.getItem(PRIOR_KEY); 
@@ -406,9 +591,7 @@ function getPrior(){
     if (!p || typeof p !== 'object') return { history: [] };
     p.history = Array.isArray(p.history) ? p.history : []; 
     return p; 
-  } catch(e){ 
-    return { history: [] }; 
-  } 
+  } catch(e){ return { history: [] }; } 
 }
 function setPrior(p){ try { localStorage.setItem(PRIOR_KEY, JSON.stringify(p)); }catch(e){} }
 function isLocked(){ return !!getPrior().lockedAt; }
@@ -416,7 +599,7 @@ function isLocked(){ return !!getPrior().lockedAt; }
 function lockPrior(){
   const p = getPrior(); if (p.lockedAt) return p;
   p.key = document.getElementById('preHypo').value; p.reason = document.getElementById('preReason').value.trim();
-  p.delta = parseFloat(document.getElementById('preDelta').value) || DEFAULT_DELTA; p.deltaReason = document.getElementById('preDeltaReason').value.trim();
+  p.delta = parseFloat(document.getElementById('preDelta').value) || TOL; p.deltaReason = document.getElementById('preDeltaReason').value.trim();
   p.lockedAt = Date.now(); setPrior(p); return p;
 }
 
@@ -432,7 +615,7 @@ function applyPriorToForm(){
 function updateLockUI(){
   const p = getPrior(); const banner = document.getElementById('lockBanner'); const fields = ['preHypo','preReason','preDelta','preDeltaReason'];
   if (p.lockedAt){
-    banner.classList.remove('hidden'); banner.classList.remove('warn');
+    banner.classList.remove('hidden');
     document.getElementById('lockTime').textContent = new Date(p.lockedAt).toLocaleString('ar');
     fields.forEach(id => document.getElementById(id).disabled = true);
   } else {
@@ -443,7 +626,7 @@ function updateLockUI(){
 function saveDraftPrior(){
   if (isLocked()) return; const p = getPrior();
   p.key = document.getElementById('preHypo').value; p.reason = document.getElementById('preReason').value.trim();
-  p.delta = parseFloat(document.getElementById('preDelta').value) || DEFAULT_DELTA; p.deltaReason = document.getElementById('preDeltaReason').value.trim();
+  p.delta = parseFloat(document.getElementById('preDelta').value) || TOL; p.deltaReason = document.getElementById('preDeltaReason').value.trim();
   setPrior(p);
 }
 
@@ -452,13 +635,6 @@ document.getElementById('unlockBtn').addEventListener('click', () => {
   if (!confirm('⚠️ الفرضية مقفلة منذ ' + new Date(p.lockedAt).toLocaleString('ar') + '.\n\nهل أنت متأكد من إلغاء القفل؟ سيُسجَّل هذا التعديل.')) return;
   p.history.push({ key: p.key, delta: p.delta, reason: p.reason, deltaReason: p.deltaReason, ts: p.lockedAt, unlockedAt: Date.now() });
   p.lockedAt = null; setPrior(p); updateLockUI(); renderStats();
-  showToast('تم إلغاء القفل', 'info');
-});
-
-document.getElementById('showHistoryBtn').addEventListener('click', () => {
-  const p = getPrior(); if (!p.history || !p.history.length){ showToast('لا يوجد سجل تغييرات — الفرضية الحالية هي الأولى.', 'info'); return; }
-  showToast('تمت طباعة سجل التغييرات في الـ Console', 'info');
-  console.log('History:', p.history);
 });
 
 ['preHypo','preReason','preDelta','preDeltaReason'].forEach(id => {
@@ -466,272 +642,501 @@ document.getElementById('showHistoryBtn').addEventListener('click', () => {
   document.getElementById(id).addEventListener('input', saveDraftPrior);
 });
 
-function num(id){ const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? null : v; }
-function str(id){ return document.getElementById(id).value.trim(); }
+// ═══════════════════════════════════════════════════════
+//  قراءة الحقول
+// ═══════════════════════════════════════════════════════
+function num(id){
+  const v = parseFloat(document.getElementById(id).value);
+  return isNaN(v) ? null : v;
+}
+function str(id){
+  return document.getElementById(id).value.trim();
+}
 
+// ═══════════════════════════════════════════════════════
+//  حساب النسب
+// ═══════════════════════════════════════════════════════
 function computeRatios(H, h, r, d, L){
   const out = {};
   if (H && H > 0){
-    out.hH = h != null ? h / H : null; out.rH = r != null ? r / H : null;
-    out['2rH'] = r != null ? (2*r) / H : null; out.dH = d != null ? d / H : null;
-    out.LH = L != null ? L / H : null; out.crownH = h != null ? (H - h) / H : null;
+    out.hH     = h != null ? h / H : null;
+    out.rH     = r != null ? r / H : null;
+    out['2rH'] = r != null ? (2*r) / H : null;
+    out.dH     = d != null ? d / H : null;
+    out.LH     = L != null ? L / H : null;
+    out.crownH = h != null ? (H - h) / H : null;
     out.hCrown = (h != null && H - h > 0) ? h / (H - h) : null;
   }
   return out;
 }
 
+// ═══════════════════════════════════════════════════════
+//  تحديث النسب الحية في النموذج
+// ═══════════════════════════════════════════════════════
 function updateLiveRatios(){
   const H = num('H'), h = num('h'), r = num('r'), d = num('d'), L = num('L');
-  const ratios = computeRatios(H, h, r, d, L); const p = getPrior(); const delta = parseFloat(p.delta) || DEFAULT_DELTA;
-  const map = { 'r_hH': ['hH', ratios.hH], 'r_rH': ['rH', ratios.rH], 'r_2rH': ['2rH', ratios['2rH']], 'r_dH': ['dH', ratios.dH], 'r_LH': ['LH', ratios.LH], 'r_hCrown': ['hCrown', ratios.hCrown], 'r_crownH': ['crownH', ratios.crownH] };
+  const ratios = computeRatios(H, h, r, d, L);
+  const delta = parseFloat(getPrior().delta) || TOL;
+
+  const map = {
+    'r_hH':     ['hH',     ratios.hH],
+    'r_rH':     ['rH',     ratios.rH],
+    'r_2rH':    ['2rH',    ratios['2rH']],
+    'r_dH':     ['dH',     ratios.dH],
+    'r_LH':     ['LH',     ratios.LH],
+    'r_hCrown': ['hCrown', ratios.hCrown],
+    'r_crownH': ['crownH', ratios.crownH],
+  };
+
   for (const [id, [key, val]] of Object.entries(map)){
-    const el = document.getElementById(id); if(!el) continue;
+    const el = document.getElementById(id);
     const card = el.closest('.ratio-card');
-    if (val == null){ el.textContent = '—'; card.classList.remove('gold'); continue; }
-    el.textContent = val.toFixed(6);
-    const isExcluded = EXCLUDED.includes(key);
-    if (!isExcluded && Math.abs(val - TARGET) < delta) card.classList.add('gold'); else card.classList.remove('gold');
+    if (val == null){
+      el.textContent = '—';
+      card.classList.remove('gold');
+    } else {
+      el.textContent = val.toFixed(6);
+      const isExcluded = EXCLUDED.includes(key);
+      if (!isExcluded && Math.abs(val - TARGET) < delta){
+        card.classList.add('gold');
+      } else {
+        card.classList.remove('gold');
+      }
+    }
   }
 }
 
-['H','h','r','d','L'].forEach(id => { document.getElementById(id).addEventListener('input', updateLiveRatios); });
+['H','h','r','d','L'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateLiveRatios);
+});
 
+// ═══════════════════════════════════════════════════════
+//  حفظ شجرة
+// ═══════════════════════════════════════════════════════
 document.getElementById('saveBtn').addEventListener('click', () => {
   const H = num('H');
-  if (!H || H <= 0 || H > 200){ showToast('⚠️ يجب إدخال H ضمن النطاق (0, 200]', 'error'); return; }
-  const h = num('h'), r = num('r'), d = num('d'), L = num('L');
-  if (h != null && (h < 0 || h > H)){ showToast('⚠️ h يجب أن يكون بين 0 و H', 'error'); return; }
-  if (r != null && (r < 0 || r > H * 3)){ showToast('⚠️ r خارج النطاق المعقول', 'error'); return; }
-  if (d != null && (d < 0 || d > H)){ showToast('⚠️ d لا يمكن أن يتجاوز H', 'error'); return; }
-  if (L != null && (L < 0 || L > 500)){ showToast('⚠️ L خارج النطاق', 'error'); return; }
+  if (!H || H <= 0){
+    alert('⚠️ يجب إدخال الارتفاع الكلي H على الأقل');
+    return;
+  }
 
-  if (trees.length === 0 && !isLocked()){
-    const key = document.getElementById('preHypo').value; const deltaReason = document.getElementById('preDeltaReason').value.trim();
+  const wasEmpty = trees.length === 0;
+
+  if (wasEmpty && !isLocked()){
+    const key = document.getElementById('preHypo').value;
+    const deltaReason = document.getElementById('preDeltaReason').value.trim();
     if (!key && !confirm('لم تختر نسبة مسبقة. سيُطبَّق Bonferroni على 6 نسب.\n\nمتابعة؟')) return;
     if (!deltaReason && !confirm('لم تبرر هامش التكافؤ Δ.\n\nمتابعة على مسؤوليتك؟')) return;
   }
 
-  const tree = { id: Date.now(), site: str('site'), species: str('species') || 'غير محدد', H, h, r, d, L, time: str('time'), notes: str('notes'), timestamp: new Date().toISOString(), ratios: computeRatios(H, h, r, d, L) };
-  trees.push(tree); saveTrees();
+  const tree = {
+    id:        Date.now(),
+    site:      str('site'),
+    species:   str('species') || 'غير محدد',
+    H:         H,
+    h:         num('h'),
+    r:         num('r'),
+    d:         num('d'),
+    L:         num('L'),
+    time:      str('time'),
+    notes:     str('notes'),
+    timestamp: new Date().toISOString(),
+    ratios:    computeRatios(H, num('h'), num('r'), num('d'), num('L')),
+  };
 
-  if (trees.length === 1 && !isLocked()){ lockPrior(); updateLockUI(); }
-  renderTreeList(); renderFilterBar(); renderStats(); clearForm();
-  showToast('✅ تم حفظ الشجرة بنجاح', 'success');
+  trees.push(tree);
+  saveTrees();
+
+  if (wasEmpty && !isLocked()){
+    lockPrior();
+    updateLockUI();
+  }
+
+  renderTreeList();
+  renderFilterBar();
+  renderStats();
+  clearForm();
+  flash(document.getElementById('saveBtn'), '✅ تم الحفظ');
 });
 
-function clearForm(){ ['site','species','H','h','r','d','L','time','notes'].forEach(id => document.getElementById(id).value = ''); updateLiveRatios(); }
+function clearForm(){
+  ['site','species','H','h','r','d','L','time','notes'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  updateLiveRatios();
+}
 document.getElementById('clearBtn').addEventListener('click', clearForm);
 
+function flash(btn, text){
+  const old = btn.textContent;
+  btn.textContent = text;
+  setTimeout(() => { btn.textContent = old; }, 1200);
+}
+
+// ═══════════════════════════════════════════════════════
+//  عرض قائمة الأشجار
+// ═══════════════════════════════════════════════════════
 function renderTreeList(){
-  const list = document.getElementById('treeList'); const count = document.getElementById('treeCount'); 
-  if(!list || !count) return;
+  const list  = document.getElementById('treeList');
+  const count = document.getElementById('treeCount');
   count.textContent = trees.length;
-  if (trees.length === 0){ list.innerHTML = '<div class="empty">لا توجد أشجار بعد. ابدأ بإضافة شجرة.</div>'; return; }
-  
-  const delta = parseFloat(getPrior().delta) || DEFAULT_DELTA; list.innerHTML = '';
+
+  if (trees.length === 0){
+    list.innerHTML = '<div class="empty">لا توجد أشجار بعد. ابدأ بإضافة شجرة.</div>';
+    return;
+  }
+
+  const delta = parseFloat(getPrior().delta) || TOL;
+  list.innerHTML = '';
   [...trees].reverse().forEach(t => {
-    const div = document.createElement('div'); div.className = 'tree-item';
-    let goldMark = '';
-    if (t.ratios) {
-      const isGold = CHECK_KEYS.some(k => { const v = t.ratios[k]; return v != null && Math.abs(v - TARGET) < delta; });
-      if (isGold) goldMark = ' ⭐';
-    }
-    div.innerHTML = '<div><span class="id">#' + escapeHtml(String(t.id).slice(-4)) + goldMark + '</span><span class="info"> · ' + escapeHtml(t.species || '—') + ' · H=' + escapeHtml(String(t.H)) + 'م</span></div><button data-id="' + escapeHtml(String(t.id)) + '">حذف</button>';
+    const div = document.createElement('div');
+    div.className = 'tree-item';
+
+    const goldMark = CHECK_KEYS.some(k => {
+      const v = t.ratios ? t.ratios[k] : null;
+      return v != null && Math.abs(v - TARGET) < delta;
+    }) ? ' ⭐' : '';
+
+    div.innerHTML = `
+      <div>
+        <span class="id">#${String(t.id).slice(-4)}${goldMark}</span>
+        <span class="info"> · ${t.species || '—'} · H=${t.H}م</span>
+      </div>
+      <button data-id="${t.id}">حذف</button>
+    `;
     list.appendChild(div);
   });
+
   list.querySelectorAll('button[data-id]').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = Number(btn.dataset.id);
-      if (confirm('حذف هذه الشجرة؟')){ trees = trees.filter(t => t.id !== id); saveTrees(); renderTreeList(); renderFilterBar(); renderStats(); }
+      if (confirm('حذف هذه الشجرة؟')){
+        trees = trees.filter(t => t.id !== id);
+        saveTrees();
+        renderTreeList();
+        renderFilterBar();
+        renderStats();
+      }
     });
   });
 }
 
-let activeFilter = '__all__';
-function filteredTrees(){ if (activeFilter === '__all__') return trees; return trees.filter(t => (t.species || 'غير محدد').trim() === activeFilter); }
+// ═══════════════════════════════════════════════════════
+//  شريط الفلتر (الأنواع)
+// ═══════════════════════════════════════════════════════
 function renderFilterBar(){
-  const bar = document.getElementById('filterBar'); if(!bar) return;
-  const counts = {};
-  trees.forEach(t => { const sp = (t.species || 'غير محدد').trim(); counts[sp] = (counts[sp] || 0) + 1; });
-  if (activeFilter !== '__all__' && !counts[activeFilter]) activeFilter = '__all__';
+  const bar = document.getElementById('filterBar');
+  const speciesCounts = {};
+  trees.forEach(t => {
+    const sp = (t.species || 'غير محدد').trim();
+    speciesCounts[sp] = (speciesCounts[sp] || 0) + 1;
+  });
+
   bar.innerHTML = '<label>النوع:</label>';
-  const mkChip = (label, count, isActive, onClick) => { const c = document.createElement('span'); c.className = 'chip' + (isActive ? ' active' : ''); c.innerHTML = escapeHtml(label) + '<span class="cnt">' + count + '</span>'; c.addEventListener('click', onClick); return c; };
-  bar.appendChild(mkChip('الكل', trees.length, activeFilter === '__all__', () => { activeFilter = '__all__'; renderFilterBar(); renderStats(); }));
-  Object.keys(counts).sort().forEach(sp => { bar.appendChild(mkChip(sp, counts[sp], activeFilter === sp, () => { activeFilter = sp; renderFilterBar(); renderStats(); })); });
+
+  const allChip = document.createElement('span');
+  allChip.className = 'chip' + (activeFilter === '__all__' ? ' active' : '');
+  allChip.innerHTML = `الكل<span class="cnt">${trees.length}</span>`;
+  allChip.addEventListener('click', () => {
+    activeFilter = '__all__';
+    renderFilterBar();
+    renderStats();
+  });
+  bar.appendChild(allChip);
+
+  Object.keys(speciesCounts).sort().forEach(sp => {
+    const chip = document.createElement('span');
+    chip.className = 'chip' + (activeFilter === sp ? ' active' : '');
+    chip.innerHTML = `${sp}<span class="cnt">${speciesCounts[sp]}</span>`;
+    chip.addEventListener('click', () => {
+      activeFilter = sp;
+      renderFilterBar();
+      renderStats();
+    });
+    bar.appendChild(chip);
+  });
+
+  if (activeFilter !== '__all__' && !speciesCounts[activeFilter]){
+    activeFilter = '__all__';
+    renderFilterBar();
+  }
 }
 
+// ═══════════════════════════════════════════════════════
+//  الأشجار المرشّحة
+// ═══════════════════════════════════════════════════════
+function filteredTrees(){
+  if (activeFilter === '__all__') return trees;
+  return trees.filter(t => (t.species || 'غير محدد').trim() === activeFilter);
+}
+
+// ═══════════════════════════════════════════════════════
+//  إحصاء
+// ═══════════════════════════════════════════════════════
+function mean(arr){
+  if (arr.length === 0) return null;
+  return arr.reduce((s,v) => s + v, 0) / arr.length;
+}
+function stdDev(arr){
+  if (arr.length < 2) return null;
+  const m = mean(arr);
+  const variance = arr.reduce((s,v) => s + (v-m)**2, 0) / (arr.length - 1);
+  return Math.sqrt(variance);
+}
+function collectRatio(key, list){
+  return list.map(t => t.ratios ? t.ratios[key] : null).filter(v => v != null && !isNaN(v));
+}
+
+// ═══════════════════════════════════════════════════════
+//  التحليل الإحصائي
+// ═══════════════════════════════════════════════════════
 function renderStats(){
-  const list = filteredTrees(); const hH = collectRatio('hH', list); const rH = collectRatio('rH', list);
+  const list = filteredTrees();
+  const hH = collectRatio('hH', list);
+  const rH = collectRatio('rH', list);
+
   document.getElementById('statN').textContent = list.length;
   document.getElementById('statMean_hH').textContent = hH.length ? mean(hH).toFixed(4) : '—';
-  document.getElementById('statSD_hH').textContent = hH.length > 1 ? stdDev(hH).toFixed(4) : '—';
+  document.getElementById('statSD_hH').textContent   = hH.length > 1 ? stdDev(hH).toFixed(4) : '—';
   document.getElementById('statMean_rH').textContent = rH.length ? mean(rH).toFixed(4) : '—';
-  document.getElementById('statSD_rH').textContent = rH.length > 1 ? stdDev(rH).toFixed(4) : '—';
+  document.getElementById('statSD_rH').textContent   = rH.length > 1 ? stdDev(rH).toFixed(4) : '—';
 
-  const verdict = document.getElementById('verdict'); const filterLabel = activeFilter === '__all__' ? 'الكل' : 'النوع: ' + activeFilter;
-  const prior = getPrior(); const delta = parseFloat(prior.delta) || DEFAULT_DELTA; const preKey = prior.key || ''; const locked = isLocked();
+  const verdict = document.getElementById('verdict');
+  const filterLabel = activeFilter === '__all__' ? 'الكل' : `النوع: ${activeFilter}`;
 
-  if (list.length < 5){ verdict.className = 'verdict wait'; verdict.innerHTML = '⏳ بانتظار بيانات كافية — ' + list.length + '/5 شجرة (' + escapeHtml(filterLabel) + ')'; return; }
+  const prior = getPrior();
+  const delta = parseFloat(prior.delta) || TOL;
+  const preKey = prior.key || '';
+  const locked = isLocked();
 
-  const keysToDecide = preKey ? [preKey] : CHECK_KEYS; const alpha = preKey ? 0.05 : 0.05 / CHECK_KEYS.length;
+  if (list.length < 5){
+    verdict.className = 'verdict wait';
+    verdict.innerHTML = `⏳ بانتظار بيانات كافية — ${list.length}/5 شجرة (${filterLabel})`;
+    return;
+  }
+
+  const keysToDecide = preKey ? [preKey] : CHECK_KEYS;
+  const alpha = preKey ? 0.05 : 0.05 / CHECK_KEYS.length;
+
   const results = [];
   for (const k of CHECK_KEYS){
-    const arr = collectRatio(k, list); if (arr.length < 3) continue;
-    const r = decide(arr, TARGET, delta, alpha); if (!r || r.status === 'NO_DATA') continue;
-    r.key = k; r.inDecision = keysToDecide.includes(k); results.push(r);
+    const arr = collectRatio(k, list);
+    if (arr.length < 3) continue;
+    const r = decide(arr, TARGET, delta, alpha);
+    if (!r || r.status === 'NO_DATA') continue;
+    r.key = k;
+    r.inDecision = keysToDecide.includes(k);
+    results.push(r);
   }
-  if (!results.length){ verdict.className = 'verdict wait'; verdict.innerHTML = '⏳ لا نسب كافية للحساب'; return; }
+
+  if (!results.length){
+    verdict.className = 'verdict wait';
+    verdict.innerHTML = '⏳ لا نسب كافية للحساب';
+    return;
+  }
 
   const eq = results.filter(r => r.inDecision && r.status === 'EQUIVALENT');
   const diff = results.filter(r => r.inDecision && r.status === 'DIFFERENT');
   const inc = results.filter(r => r.inDecision && r.status === 'INCONCLUSIVE');
-  const lockNote = !locked ? '<div style="color:#ffbaba;font-size:0.78rem;margin-top:8px">⚠️ الفرضية <b>غير مقفلة</b> — النتيجة استكشافية.</div>' : '<div style="color:#7fb08a;font-size:0.78rem;margin-top:8px">✓ الفرضية مقفلة منذ ' + new Date(prior.lockedAt).toLocaleDateString('ar') + '.</div>';
+
+  const lockNote = !locked
+    ? '<div style="color:#ffbaba;font-size:0.78rem;margin-top:8px">⚠️ الفرضية <b>غير مقفلة</b> — النتيجة استكشافية.</div>'
+    : '<div style="color:#7fb08a;font-size:0.78rem;margin-top:8px">✓ الفرضية مقفلة منذ ' + new Date(prior.lockedAt).toLocaleDateString('ar') + '.</div>';
 
   if (eq.length > 0){
-    const r = eq[0]; verdict.className = 'verdict hit';
-    verdict.innerHTML = '<span class="big">🎯 تكافؤ مؤكد — ' + escapeHtml(KEY_NAMES[r.key]) + '</span><div class="detail">' +
-      'المتوسط = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n + ' · SD=<code>' + r.sd.toFixed(4) + '</code><br>' +
-      'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
-      'الفاصل <b>داخل</b> [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']<br>' +
-      'TOST p = <code>' + r.pTOST.toFixed(4) + '</code> · α = ' + alpha.toFixed(4) + '</div>' +
-      '<div class="detail" style="color:#a5d6a7;margin-top:8px">تكافؤ إحصائي <b>ضمن Δ=' + delta + '</b> لعينة n=' + r.n + '. <b>ليس قانوناً شاملاً</b>. يحتاج تحققاً بعينة مستقلة قبل التعميم.</div>' + lockNote;
+    const r = eq[0];
+    verdict.className = 'verdict hit';
+    verdict.innerHTML =
+      '<span class="big">🎯 تكافؤ مؤكد — ' + KEY_NAMES[r.key] + '</span>' +
+      '<div class="detail">' +
+        'المتوسط = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n +
+        ' · SD=<code>' + r.sd.toFixed(4) + '</code><br>' +
+        'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
+        'الفاصل <b>داخل</b> [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']<br>' +
+        'TOST p = <code>' + r.pTOST.toFixed(4) + '</code> · α = ' + alpha.toFixed(4) +
+      '</div>' +
+      '<div class="detail" style="color:#a5d6a7;margin-top:8px">' +
+        'تكافؤ إحصائي <b>ضمن Δ=' + delta + '</b> لعينة n=' + r.n + '. ' +
+        '<b>ليس قانوناً شاملاً</b>. يحتاج تحققاً بعينة مستقلة قبل التعميم.' +
+      '</div>' + lockNote;
   } else if (diff.length > 0){
-    const r = diff[0]; verdict.className = 'verdict miss';
-    verdict.innerHTML = '<span class="big">❌ مختلف عن 0.4142 — ' + escapeHtml(KEY_NAMES[r.key]) + '</span><div class="detail">' +
-      'المتوسط = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n + '<br>' +
-      'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
-      'لا يتقاطع مع [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']<br>' +
-      't = <code>' + r.tDiff.toFixed(3) + '</code> · p = <code>' + r.pDiff.toFixed(4) + '</code></div>' +
+    const r = diff[0];
+    verdict.className = 'verdict miss';
+    verdict.innerHTML =
+      '<span class="big">❌ مختلف عن 0.4142 — ' + KEY_NAMES[r.key] + '</span>' +
+      '<div class="detail">' +
+        'المتوسط = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n + '<br>' +
+        'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
+        'لا يتقاطع مع [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']<br>' +
+        't = <code>' + r.tDiff.toFixed(3) + '</code> · p = <code>' + r.pDiff.toFixed(4) + '</code>' +
+      '</div>' +
       '<div class="detail" style="color:#a5d6a7;margin-top:8px">هذا <b>ليس فشلاً — هذا نتيجة</b>.</div>' + lockNote;
   } else {
     const r = inc[0] || results[0];
     const powerApprox = r.sd > 0 ? tostPowerApprox(r.n, r.sd, delta, alpha) : 0;
     const neededN = r.sd > 0 ? tostSampleSizeApprox(r.sd, delta, 0.8, alpha) : '—';
+
     verdict.className = 'verdict pending';
-    verdict.innerHTML = '<span class="big">⏳ غير حاسم — ' + escapeHtml(KEY_NAMES[r.key]) + '</span><div class="detail">' +
-      'المتوسط = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n + ' · SD=<code>' + r.sd.toFixed(4) + '</code><br>' +
-      'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
-      'يخرج جزئياً عن [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']</div>' +
-      '<div class="detail" style="color:#c8e6c9;margin-top:8px"><b>القدرة التقريبية الحالية:</b> ≈ ' + Math.round(powerApprox * 100) + '% (تحتاج 80%)<br>' +
-      '<b>حجم عينة مقترح:</b> ≈ ' + neededN + ' شجرة<br>' +
-      '<i style="opacity:0.7;font-size:0.75rem">تقديرات بافتراض σ≈SD(العينة). القدرة الفعلية عبر non-central t قد تكون أقل.</i></div>' +
+    verdict.innerHTML =
+      '<span class="big">⏳ غير حاسم — ' + KEY_NAMES[r.key] + '</span>' +
+      '<div class="detail">' +
+        'المتوسط = <code>' + r.m.toFixed(4) + '</code> · n=' + r.n +
+        ' · SD=<code>' + r.sd.toFixed(4) + '</code><br>' +
+        'CI95% = [<code>' + r.ciLow.toFixed(4) + '</code>, <code>' + r.ciHigh.toFixed(4) + '</code>]<br>' +
+        'يخرج جزئياً عن [' + r.eqLow.toFixed(4) + ', ' + r.eqHigh.toFixed(4) + ']' +
+      '</div>' +
+      '<div class="detail" style="color:#c8e6c9;margin-top:8px">' +
+        '<b>القدرة التقريبية الحالية:</b> ≈ ' + Math.round(powerApprox * 100) + '% (تحتاج 80%)<br>' +
+        '<b>حجم عينة مقترح:</b> ≈ ' + neededN + ' شجرة<br>' +
+        '<i style="opacity:0.7;font-size:0.75rem">تقديرات بافتراض σ≈SD(العينة). ' +
+        'القدرة الفعلية عبر non-central t قد تكون أقل، وخصوصاً في n الصغيرة.</i>' +
+      '</div>' +
       '<div class="detail" style="color:#a5d6a7;margin-top:8px">⚠️ هذا <b>ليس فشلاً</b> — البيانات غير كافية بعد.</div>' + lockNote;
   }
 }
 
-function parseCSVLine(line, delimiter = ','){
-  const out = []; let cur = '', inQ = false, i = 0;
-  while (i < line.length){
-    const c = line[i];
-    if (inQ){
-      if (c === '"'){ if (line[i+1] === '"'){ cur += '"'; i += 2; continue; } inQ = false; i++; continue; }
-      cur += c; i++; continue;
-    }
-    if (c === '"'){ inQ = true; i++; continue; }
-    if (c === delimiter){ out.push(cur); cur = ''; i++; continue; }
-    cur += c; i++;
-  }
-  out.push(cur); return out;
-}
-
+// ═══════════════════════════════════════════════════════
+//  تصدير / استيراد CSV (كودك الأصلي الذي يعمل)
+// ═══════════════════════════════════════════════════════
 document.getElementById('exportBtn').addEventListener('click', () => {
-  if (trees.length === 0){ showToast('لا توجد بيانات للتصدير', 'error'); return; }
-  const prior = getPrior(); const headers = ['id','site','species','H','h','r','d','L','time','notes','timestamp','hH','rH','2rH','dH','LH','hCrown','crownH'];
-  const rows = trees.map(t => { const r = t.ratios || {}; return [t.id, t.site, t.species, t.H, t.h ?? '', t.r ?? '', t.d ?? '', t.L ?? '', t.time, t.notes, t.timestamp, r.hH?.toFixed(6) ?? '', r.rH?.toFixed(6) ?? '', r['2rH']?.toFixed(6) ?? '', r.dH?.toFixed(6) ?? '', r.LH?.toFixed(6) ?? '', r.hCrown?.toFixed(6) ?? '', r.crownH?.toFixed(6) ?? ''].map(v => { const s = String(v); return /[,"\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; }).join(','); });
-  const priorLines = '# ZX Pre-registration\n# Key: ' + (prior.key || '(none)') + '\n# Delta: ' + (prior.delta || DEFAULT_DELTA) + '\n# Reason: ' + (prior.reason || '(none)') + '\n# Delta reason: ' + (prior.deltaReason || '(none)') + '\n# Locked at: ' + (prior.lockedAt ? new Date(prior.lockedAt).toISOString() : '(not locked)') + '\n# History entries: ' + (prior.history ? prior.history.length : 0) + '\n';
+  if (trees.length === 0){
+    alert('لا توجد بيانات للتصدير');
+    return;
+  }
+
+  const prior = getPrior();
+  const headers = [
+    'id','site','species','H','h','r','d','L','time','notes','timestamp',
+    'hH','rH','2rH','dH','LH','hCrown','crownH'
+  ];
+
+  const rows = trees.map(t => {
+    const r = t.ratios || {};
+    return [
+      t.id, t.site, t.species,
+      t.H, t.h ?? '', t.r ?? '', t.d ?? '', t.L ?? '',
+      t.time, t.notes, t.timestamp,
+      r.hH?.toFixed(6) ?? '',
+      r.rH?.toFixed(6) ?? '',
+      r['2rH']?.toFixed(6) ?? '',
+      r.dH?.toFixed(6) ?? '',
+      r.LH?.toFixed(6) ?? '',
+      r.hCrown?.toFixed(6) ?? '',
+      r.crownH?.toFixed(6) ?? '',
+    ].map(v => {
+      const s = String(v);
+      return s.includes(',') ? '"' + s.replace(/"/g,'""') + '"' : s;
+    }).join(',');
+  });
+
+  const priorLines = '# ZX Pre-registration\n# Key: ' + (prior.key || '(none)') + '\n# Delta: ' + (prior.delta || TOL) + '\n# Reason: ' + (prior.reason || '(none)') + '\n# Delta reason: ' + (prior.deltaReason || '(none)') + '\n# Locked at: ' + (prior.lockedAt ? new Date(prior.lockedAt).toISOString() : '(not locked)') + '\n';
   const csv = '\uFEFF' + priorLines + headers.join(',') + '\n' + rows.join('\n');
+  
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob); const a = document.createElement('a');
-  a.href = url; a.download = 'zx-trees-' + new Date().toISOString().slice(0,10) + '.csv'; a.click(); URL.revokeObjectURL(url);
-  showToast('✅ تم تصدير الملف', 'success');
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `zx-trees-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
 });
 
-document.getElementById('importBtn').addEventListener('click', () => { document.getElementById('importFile').click(); });
+document.getElementById('importBtn').addEventListener('click', () => {
+  document.getElementById('importFile').click();
+});
 
 document.getElementById('importFile').addEventListener('change', (e) => {
-  const file = e.target.files[0]; if (!file) return;
-  showToast('جاري قراءة الملف...', 'info', 2000);
+  const file = e.target.files[0];
+  if (!file) return;
   const reader = new FileReader();
   reader.onload = (ev) => {
-    try {
-      let text = ev.target.result.replace(/^\uFEFF/, '');
+    try{
+      const text = ev.target.result.replace(/^\uFEFF/, '');
+      // تخطي أسطر التعليقات التي تمت إضافتها في التصدير
       const lines = text.split(/\r?\n/).filter(l => !l.trim().startsWith('#') && l.trim() !== '');
-      if (lines.length < 2){ showToast('ملف فارغ أو لا يحتوي بيانات.', 'error'); return; }
+      if (lines.length < 2) return;
+      
+      const headers = lines[0].split(',').map(h => h.trim());
 
-      const firstLine = lines[0];
-      const delimiter = firstLine.includes(';') && !firstLine.includes(',') ? ';' : ',';
-      const headers = parseCSVLine(firstLine, delimiter).map(h => h.trim());
-      const imported = []; let skipped = 0;
-
+      const imported = [];
       for (let i = 1; i < lines.length; i++){
-        const cells = parseCSVLine(lines[i], delimiter);
+        const cells = lines[i].split(',');
         const obj = {};
-        headers.forEach((h, j) => obj[h] = (cells[j] || '').trim());
+        headers.forEach((h, j) => obj[h] = cells[j]?.trim() ?? '');
 
         const H = parseFloat(obj.H);
-        if (!isFinite(H) || H <= 0 || H > 200){ skipped++; continue; }
-
-        const opt = (v, min, max) => { if (!v) return null; const x = parseFloat(v); if (!isFinite(x) || x < min || x > max) return undefined; return x; };
-        const h = opt(obj.h, 0, H); const r = opt(obj.r, 0, H*3); const d = opt(obj.d, 0, H); const L = opt(obj.L, 0, 500);
-        
-        if (h === undefined || r === undefined || d === undefined || L === undefined) { skipped++; continue; }
+        if (!H) continue;
 
         imported.push({
-          id: parseInt(obj.id) || Date.now() + i, site: obj.site || '', species: (obj.species || 'غير محدد').trim(),
-          H, h, r, d, L, time: obj.time || '', notes: obj.notes || '', timestamp: obj.timestamp || new Date().toISOString(),
-          ratios: computeRatios(H, h, r, d, L),
+          id: parseInt(obj.id) || Date.now() + i,
+          site: obj.site || '',
+          species: (obj.species || 'غير محدد').trim(),
+          H,
+          h: parseFloat(obj.h) || null,
+          r: parseFloat(obj.r) || null,
+          d: parseFloat(obj.d) || null,
+          L: parseFloat(obj.L) || null,
+          time: obj.time || '',
+          notes: obj.notes || '',
+          timestamp: obj.timestamp || new Date().toISOString(),
+          ratios: computeRatios(
+            H,
+            parseFloat(obj.h) || null,
+            parseFloat(obj.r) || null,
+            parseFloat(obj.d) || null,
+            parseFloat(obj.L) || null
+          ),
         });
       }
 
-      if (imported.length === 0) {
-        showToast('فشل الاستيراد: لم يتم العثور على صفوف صالحة. تم تجاهل ' + skipped + ' صف.', 'error', 6000);
+      if (imported.length === 0){
+        alert('لم يتم العثور على بيانات صالحة');
         return;
       }
 
-      trees = trees.concat(imported);
-      saveTrees(); 
-      renderTreeList(); 
-      renderFilterBar(); 
-      renderStats();
-      
-      showToast('✅ تم استيراد ' + imported.length + ' شجرة بنجاح' + (skipped > 0 ? ' (تجاهل ' + skipped + ' صف)' : ''), 'success', 5000);
-      
-    } catch(err){
-      showToast('خطأ في قراءة الملف: ' + err.message, 'error', 6000);
+      if (confirm(`استيراد ${imported.length} شجرة؟ (سيتم إضافتها للبيانات الحالية)`)){
+        trees = trees.concat(imported);
+        saveTrees();
+        renderTreeList();
+        renderFilterBar();
+        renderStats();
+        alert('تم الاستيراد بنجاح');
+      }
+    }catch(err){
+      alert('خطأ في قراءة الملف: ' + err.message);
     }
   };
   reader.readAsText(file);
-  e.target.value = ''; 
+  e.target.value = '';
 });
 
 document.getElementById('wipeBtn').addEventListener('click', () => {
   if (trees.length === 0) return;
-  if (confirm('حذف ' + trees.length + ' شجرة نهائياً؟')){
-    trees = []; activeFilter = '__all__';
-    saveTrees(); renderTreeList(); renderFilterBar(); renderStats();
-    showToast('تم حذف جميع البيانات', 'info');
+  if (confirm(`حذف ${trees.length} شجرة نهائيًا؟ لا يمكن التراجع.`)){
+    trees = [];
+    activeFilter = '__all__';
+    saveTrees();
+    renderTreeList();
+    renderFilterBar();
+    renderStats();
   }
 });
 
-(function init(){
-  try {
-    applyPriorToForm(); 
-    renderTreeList(); 
-    renderFilterBar(); 
-    renderStats(); 
-    updateLiveRatios();
-    console.log('%c✅ ZX Protocol Loaded — Ready', 'color:#ffd700;font-weight:bold;');
-  } catch (e) {
-    console.error('Init Error:', e);
-    const errDiv = document.getElementById('fatal-error');
-    errDiv.style.display = 'block';
-    errDiv.innerHTML = '<b>حدث خطأ في تحميل الصفحة (نسخة قديمة تالفة):</b><br>' + e.message + '<br><br><button onclick="localStorage.clear(); location.reload();">مسح الذاكرة وإعادة التحميل</button>';
-  }
-})();
+// ═══════════════════════════════════════════════════════
+//  الإقلاع
+// ═══════════════════════════════════════════════════════
+applyPriorToForm();
+renderTreeList();
+renderFilterBar();
+renderStats();
+updateLiveRatios();
 </script>
 
+<!-- في كل صفحة HTML -->
 <div id="header-placeholder"></div>
 <div id="footer-placeholder"></div>
+<script src="/js/file.js" defer></script>
 <script src="/js/init-page-root.js" defer></script>
+<script src="/js/menu.js" defer></script>
 </body>
 </html>
