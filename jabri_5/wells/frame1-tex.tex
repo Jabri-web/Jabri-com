@@ -1,0 +1,606 @@
+% ================================================================
+% frame1-tex.tex
+% The Numerical Framework — Al-Hindara Mother Paper
+% Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
+% Date: October 2026
+% Status: Conceptual and exploratory mathematical framework
+% ================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% ------------------------------------------------
+% Packages
+% ------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{fancyhdr}
+
+% ------------------------------------------------
+% Page layout and metadata
+% ------------------------------------------------
+\geometry{margin=1in}
+
+\hypersetup{
+colorlinks=true,
+linkcolor=blue,
+citecolor=blue,
+urlcolor=cyan,
+pdftitle={The Numerical Framework: Riemann Zeta Zeros and the Proposed Cutoff 21},
+pdfauthor={Eng. Abdulla M. N. Al-Jabri}
+}
+
+% ------------------------------------------------
+% Header and Footer Customization
+% ------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \textbf{Eng. Abdulla M. N. Al-Jabri} -- Frame 1}
+\fancyhead[R]{\small Al-Hindara Mother Paper}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textit{Al-Hindara Numerical Framework}}
+\fancyfoot[R]{\small \texttt{jabri62018@gmail.com}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+% ------------------------------------------------
+% Title
+% ------------------------------------------------
+\title{
+\textbf{The Numerical Framework:}\\
+\Large A Damping Model, the Riemann Zeta Zeros,
+and the Proposed Integer Cutoff \(x_p=21\)\\[0.5em]
+\large A Conceptual and Exploratory Study within
+the Al-Hindara Framework
+}
+
+\author{
+\textbf{Eng. Abdulla Mohammed Nasser Al-Jabri}\\
+\small Independent Researcher -- Sana'a, Yemen\\
+\small\texttt{jabri62018@gmail.com}\\
+\small ORCID:
+\href{https://orcid.org/0009-0003-3319-3822}
+{0009-0003-3319-3822}
+}
+
+\date{October 2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+% ================================================================
+% ABSTRACT
+% ================================================================
+\begin{abstract}
+\noindent
+This paper presents a conceptual numerical framework within
+the Al-Hindara project. It introduces the normalization proposal
+\(Z+C+A=1\) and studies a candidate damping function involving
+the integer \(x_p=21\), defined as the floor of the ordinate of
+the second positive nontrivial zero of the Riemann zeta function.
+
+The proposed function is
+\[
+Z(x)=x^{-5}\ln(x)\sin\left(\frac{2\pi}{x}\right)e^{-x/x_p},
+\qquad x>1.
+\]
+The choice \(x_p=21\) is a modeling decision motivated by the
+numerical value \(\gamma_2\approx21.022039\). It is not a
+consequence of a theorem about the zeta function.
+
+For the accumulation function
+\[
+A(x)=\int_1^x Z(t)\,dt,
+\]
+sign analysis shows that \(A\) decreases on \(1<x<2\) and
+increases on \(x>2\). Consequently, the proposed function does
+not have a maximum at \(x=42\) on the interval \(1<x\leq200\).
+This distinction between a numerical proposal and a verified
+mathematical property is made explicit.
+
+The paper also discusses the quantity
+\(K=2\pi e^{-1/42}\) and its proposed role in the model.
+No asymptotic connection between this quantity and the
+Riemann zeta function is established here.
+
+A companion study of tree crown ratios is discussed as an
+exploratory empirical investigation. Its small sample does not
+establish a causal or universal biological relationship.
+The paper therefore separates exact mathematical results,
+reported empirical observations, and conjectural modeling
+proposals.
+\vspace{1em}
+
+\noindent\textbf{Keywords:}
+Riemann zeta function, nontrivial zeros, damping function,
+integer cutoff, Al-Hindara, numerical modeling,
+reciprocal Silver Ratio, exploratory analysis.
+\end{abstract}
+
+% ================================================================
+% 1. INTRODUCTION
+% ================================================================
+\section{Introduction}
+
+The Al-Hindara project proposes the conceptual normalization
+relation
+\begin{equation}
+Z+C+A=1.
+\label{eq:normalization}
+\end{equation}
+
+In this paper, Equation~\eqref{eq:normalization} is treated
+as a conceptual framework rather than an established
+mathematical identity. A rigorous quantitative interpretation
+would require explicit definitions of \(Z\), \(C\), and \(A\),
+their domains, their units where applicable, and the
+normalization procedure that makes their sum equal to one.
+
+The present paper investigates a candidate numerical function
+with an exponential damping term. The selected damping
+parameter is
+\[
+x_p=21.
+\]
+This value is motivated by the integer part of the second
+positive nontrivial zero ordinate of the Riemann zeta function.
+
+The objectives are:
+
+\begin{enumerate}
+\item Define the numerical cutoff \(x_p\) precisely.
+\item Introduce and analyze the proposed damping function.
+\item Examine the mathematical behavior of its accumulation
+function.
+\item Distinguish numerical observations from proved results.
+\item Describe the proposed relationship with the companion
+tree-shadow study without asserting an unproved causal link.
+\end{enumerate}
+
+The paper does not claim to prove the Riemann Hypothesis,
+derive the proposed function from the zeta function, or
+establish a universal law connecting number theory and
+biological morphology.
+
+% ================================================================
+% 2. THE RIEMANN ZERO AND THE CUTOFF
+% ================================================================
+\section{The Riemann Zero and the Proposed Integer Cutoff}
+
+Let \(\zeta(s)\) denote the Riemann zeta function. The first
+positive ordinates of its nontrivial zeros on the critical
+line are conventionally denoted by \(\gamma_1,\gamma_2,\ldots\),
+where a zero is written as
+\[
+s=\frac12+i\gamma.
+\]
+
+The first two positive ordinates are approximately
+\[
+\gamma_1\approx14.134725,
+\qquad
+\gamma_2\approx21.022039.
+\]
+See Edwards~\cite{edwards1974} for background on the
+Riemann zeta function and its zeros.
+
+We define the candidate integer cutoff by
+\begin{equation}
+x_p:=\lfloor\gamma_2\rfloor=21.
+\label{eq:xp}
+\end{equation}
+
+Within the Al-Hindara project, the integer \(21\) is referred
+to as the \textit{Yemeni Constant}. This is a project-specific
+name for a model parameter, not a recognized mathematical
+constant established by this paper.
+
+The choice in Equation~\eqref{eq:xp} is a modeling convention.
+Taking the floor of \(\gamma_2\) gives \(21\), but this operation
+alone does not imply that the resulting integer has a special
+analytic role in the distribution of zeta zeros.
+
+Any such role would require a separate mathematical argument
+or reproducible numerical evidence against an appropriate
+comparison model.
+
+% ================================================================
+% 3. THE DAMPING FUNCTION
+% ================================================================
+\section{Definition of the Damping Function}
+
+For \(x>1\), define
+\begin{equation}
+Z(x)=x^{-5}\ln(x)
+\sin\left(\frac{2\pi}{x}\right)e^{-x/x_p},
+\qquad x_p=21.
+\label{eq:field}
+\end{equation}
+
+Equivalently,
+\begin{equation}
+Z(x)=x^{-5}\ln(x)
+\sin\left(\frac{2\pi}{x}\right)e^{-x/21}.
+\label{eq:field_expanded}
+\end{equation}
+
+The expression contains four main factors:
+
+\begin{itemize}
+\item \(x^{-5}\): an algebraic factor that decreases with \(x\).
+\item \(\ln(x)\): a logarithmic factor.
+\item \(\sin(2\pi/x)\): an oscillatory factor whose argument
+depends on the reciprocal of \(x\).
+\item \(e^{-x/21}\): an exponential damping factor.
+\end{itemize}
+
+The sine term should not be described as a sinusoid with a
+constant period in \(x\). Its argument is \(2\pi/x\), so the
+oscillation is not periodic with a fixed period on the
+\(x\)-axis.
+
+Equation~\eqref{eq:field} defines a mathematical function.
+Its interpretation as a physical field, a biological model,
+or a quantity derived from the Riemann zeta function has not
+been established.
+
+% ================================================================
+% 4. SIGN AND ASYMPTOTIC ANALYSIS
+% ================================================================
+\section{Sign and Asymptotic Behavior}
+
+For \(1<x<2\), the angle \(2\pi/x\) lies between \(\pi\) and
+\(2\pi\). Therefore,
+\[
+\sin\left(\frac{2\pi}{x}\right)<0.
+\]
+Since \(x^{-5}>0\), \(\ln(x)>0\), and \(e^{-x/21}>0\) for \(x>1\),
+it follows that
+\begin{equation}
+Z(x)<0,\qquad 1<x<2.
+\label{eq:negative}
+\end{equation}
+
+At \(x=2\),
+\begin{equation}
+Z(2)=0.
+\label{eq:zero2}
+\end{equation}
+
+For \(x>2\), the angle \(2\pi/x\) lies between \(0\) and \(\pi\),
+so
+\begin{equation}
+Z(x)>0,\qquad x>2.
+\label{eq:positive}
+\end{equation}
+
+These sign properties follow directly from the definition
+and do not depend on numerical simulation.
+
+As \(x\to\infty\), the small-angle approximation gives
+\[
+\sin\left(\frac{2\pi}{x}\right)
+\sim\frac{2\pi}{x}.
+\]
+Consequently,
+\begin{align}
+Z(x)
+&\sim x^{-5}\ln(x)\frac{2\pi}{x}e^{-x/21}\\
+&=2\pi x^{-6}\ln(x)e^{-x/21}.
+\end{align}
+
+Thus,
+\begin{equation}
+Z(x)\sim
+2\pi x^{-6}\ln(x)e^{-x/21},
+\qquad x\to\infty.
+\label{eq:asymptotic}
+\end{equation}
+
+This is an asymptotic statement about the defined function
+\(Z(x)\). It is not an asymptotic formula for the Riemann
+zeta function or its zeros.
+
+% ================================================================
+% 5. ACCUMULATION FUNCTION
+% ================================================================
+\section{The Accumulation Function}
+
+Define the continuous accumulation function
+\begin{equation}
+A(x)=\int_1^x Z(t)\,dt,\qquad x>1.
+\label{eq:accumulation}
+\end{equation}
+
+By the Fundamental Theorem of Calculus,
+\begin{equation}
+A'(x)=Z(x).
+\label{eq:accumulation_derivative}
+\end{equation}
+
+Combining Equation~\eqref{eq:accumulation_derivative} with
+the sign analysis in Section~4 gives
+\begin{align}
+A'(x)&<0,\qquad 1<x<2,\\
+A'(2)&=0,\\
+A'(x)&>0,\qquad x>2.
+\end{align}
+
+Therefore, \(A(x)\) decreases on \((1,2)\) and increases on
+\((2,\infty)\). The point \(x=2\) is a minimum, not a maximum.
+
+In particular, on the interval \(1<x\leq200\), the maximum
+of \(A(x)\) occurs at the right endpoint \(x=200\), not at
+\(x=42\).
+
+Hence the claim that the accumulation function defined by
+Equation~\eqref{eq:accumulation} peaks at \(2x_p=42\) is
+not supported by the stated equations.
+
+A different accumulation measure might have an extremum
+near \(42\), but it would need to be defined explicitly and
+analyzed independently. It would not be valid to attribute
+such an extremum to Equation~\eqref{eq:accumulation} without
+a corresponding derivation.
+
+% ================================================================
+% 6. A CANDIDATE NUMERICAL COEFFICIENT
+% ================================================================
+\section{A Candidate Numerical Coefficient}
+
+The project also considers the quantity
+\begin{equation}
+K=2\pi e^{-1/42}.
+\label{eq:K}
+\end{equation}
+
+Numerically,
+\begin{equation}
+K\approx6.1353.
+\end{equation}
+
+Equation~\eqref{eq:K} defines a valid numerical expression.
+However, the expression does not follow from the definition
+of \(Z(x)\) or from the accumulation function in
+Equation~\eqref{eq:accumulation}.
+
+The use of \(42=2x_p\) in Equation~\eqref{eq:K} is a modeling
+choice. No result in the present paper establishes \(K\) as
+an asymptotic coefficient associated with the Riemann
+critical line or the distribution of zeta zeros.
+
+A rigorous investigation of such an interpretation would
+need to state the target asymptotic relation, derive it from
+explicit assumptions, and compare it with known results or
+independent numerical computations.
+
+% ================================================================
+% 7. RELATION TO THE TREE-SHADOW STUDY
+% ================================================================
+\section{Relation to the Tree-Shadow Study}
+
+The companion study, \textit{The Tree and the Shadow},
+considers the exact geometric identity
+\begin{equation}
+\tan\left(\frac{\pi}{8}\right)=\sqrt{2}-1
+\approx0.41421356.
+\label{eq:geometry}
+\end{equation}
+
+The identity in Equation~\eqref{eq:geometry} is exact.
+Its application to tree crown morphology, however, is an
+empirical hypothesis rather than a mathematical consequence
+of trigonometry.
+
+The companion study reports five mango-tree observations
+with a sample mean crown ratio of approximately \(0.41297\)
+and a TOST analysis using an equivalence margin of
+\(\pm0.03\). Those results are exploratory because the sample
+is small and comes from a single location.
+
+The numerical proximity between the reported sample mean
+and \(\sqrt{2}-1\) does not establish a causal relationship
+between tree growth, solar geometry, and the Riemann zeta
+function.
+
+Similarly, the integer cutoff \(x_p=21\) is defined from
+\(\lfloor\gamma_2\rfloor\). This definition does not, by
+itself, establish a mathematical connection between
+Equation~\eqref{eq:geometry} and the zeta zeros.
+
+The proposed relationship among the geometric ratio,
+biological observations, and numerical cutoff is therefore
+a research hypothesis requiring independent tests.
+
+% ================================================================
+% 8. THE NORMALIZATION PROPOSAL
+% ================================================================
+\section{The Al-Hindara Normalization Proposal}
+
+The project uses the relation
+\begin{equation}
+Z+C+A=1
+\label{eq:unity}
+\end{equation}
+as a conceptual statement of unity.
+
+For Equation~\eqref{eq:unity} to become a mathematical
+identity, the three terms must be defined in a common
+normalization scheme. The present paper does not supply a
+derivation showing that the damping function, a separate
+quantity \(C(x)\), and the accumulation function \(A(x)\)
+sum to one.
+
+In particular, setting
+\[
+C(x)=e^{-x/x_p}
+\]
+does not imply that
+\[
+Z(x)+C(x)+A(x)=1.
+\]
+That equality would have to be established independently,
+either by construction with explicitly defined normalized
+quantities or by a proof based on their definitions.
+
+Accordingly, Equation~\eqref{eq:unity} remains a conceptual
+framework in this paper, not a proven conservation law.
+
+% ================================================================
+% 9. DISCUSSION
+% ================================================================
+\section{Discussion: Evidential Status of the Claims}
+
+The claims considered in this paper fall into three categories.
+
+\subsection*{Exact mathematical results}
+
+The definition \(x_p=\lfloor\gamma_2\rfloor=21\) follows from
+the stated numerical value of \(\gamma_2\). The sign of
+\(Z(x)\) on the intervals \((1,2)\) and \((2,\infty)\) follows
+from the signs of the factors in Equation~\eqref{eq:field}.
+The derivative relation \(A'(x)=Z(x)\) follows from the
+Fundamental Theorem of Calculus.
+
+\subsection*{Exploratory empirical observations}
+
+The companion tree-shadow study reports a small pilot sample
+whose mean is close to \(\sqrt{2}-1\). This observation is
+not sufficient to establish a universal biological pattern.
+Independent replication, transparent measurements, and a
+suitable sampling design are necessary.
+
+\subsection*{Conjectural modeling proposals}
+
+The interpretation of \(x_p=21\) as a meaningful bridge
+between geometry and number theory, the proposed coefficient
+\(K\), and the normalization relation \(Z+C+A=1\) require
+further work. No proof connecting the proposed damping
+function to the Riemann zeta function is given here.
+
+This separation is necessary to make the framework
+scientifically testable and to avoid treating numerical
+coincidence as proof of a mathematical relationship.
+
+% ================================================================
+% 10. CONCLUSION
+% ================================================================
+\section{Conclusion}
+
+This paper defines a candidate damping function
+\[
+Z(x)=x^{-5}\ln(x)\sin\left(\frac{2\pi}{x}\right)e^{-x/21}
+\]
+using the integer \(21=\lfloor\gamma_2\rfloor\).
+
+The function's sign can be determined analytically:
+it is negative on \(1<x<2\) and positive on \(x>2\).
+For the accumulation function
+\[
+A(x)=\int_1^x Z(t)\,dt,
+\]
+this means that \(A(x)\) has a minimum at \(x=2\) and is
+increasing for all \(x>2\). Therefore, the stated model does
+not support a maximum at \(x=42\).
+
+The quantity \(K=2\pi e^{-1/42}\) is a well-defined
+numerical expression, but its proposed interpretation
+as a coefficient related to the Riemann critical line
+remains unproved.
+
+The companion tree-shadow study supplies an exploratory
+empirical comparison with the exact value \(\sqrt{2}-1\).
+That comparison does not establish a causal connection
+between biological morphology and the zeta zeros.
+
+Future work should focus on defining any alternative
+accumulation function precisely, testing the model against
+appropriate null models, providing reproducible numerical
+code, and proving the normalization relation if it is
+intended to be an exact mathematical statement.
+
+% ================================================================
+% REFERENCES
+% ================================================================
+\begin{thebibliography}{99}
+
+\bibitem{edwards1974}
+Edwards, H. M. (1974).
+\textit{Riemann's Zeta Function}.
+Academic Press.
+
+\bibitem{schuirmann1987}
+Schuirmann, D. J. (1987).
+A comparison of the two one-sided tests procedure and the
+power approach for assessing the equivalence of average
+bioavailability.
+\textit{Journal of Pharmacokinetics and Biopharmaceutics},
+15(6), 657--680.
+
+\bibitem{halle1978}
+Hall\'e, F., Oldeman, R. A. A., and Tomlinson, P. B. (1978).
+\textit{Tropical Trees and Forests: An Architectural Analysis}.
+Springer-Verlag.
+
+\bibitem{jabri2026frame2}
+Al-Jabri, A. M. N. (2026).
+\textit{The Tree and the Shadow: Geometric Derivation of the
+Reciprocal Silver Ratio and an Exploratory Statistical Analysis
+of Tree Crown Ratios}.
+Companion manuscript. Publication status and persistent
+identifier should be verified before formal submission.
+
+\end{thebibliography}
+
+% ================================================================
+% APPENDIX
+% ================================================================
+\appendix
+
+\section{Reproducibility Checklist}
+
+For a reproducible computational study, archive the following:
+
+\begin{enumerate}
+\item The precise definition and domain of each function.
+\item The numerical value used for \(\gamma_2\) and the
+operation producing \(x_p=21\).
+\item The integration method and numerical tolerance used
+to evaluate \(A(x)\).
+\item The search interval and grid resolution for any
+reported numerical extremum.
+\item Code that reproduces the function values, sign
+analysis, and numerical integration.
+\item A clear distinction between numerical observations
+and analytically proved properties.
+\item The definition and derivation of any proposed
+normalization relation.
+\end{enumerate}
+
+\section{Supplementary Project Resources}
+
+The following project resources were supplied by the author.
+Their current availability and contents should be checked
+before publication.
+
+\begin{itemize}
+\item Frame 2 visual simulation:
+\url{https://jabri-com.vercel.app/tree/tree2.html}
+
+\item Frame 2 TOST tool:
+\url{https://jabri-com.vercel.app/tree/tree3.html}
+
+\item Companion manuscript record:
+\url{https://osf.io/yc9mb/}
+\end{itemize}
+
+\end{document}

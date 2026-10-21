@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z(x) — الدالة المشتقة | بلا ln · اقتران حقيقي</title>
+<style>
+  :root{--gold:#f4c430;--cyan:#6ae3ff;--green:#06d6a0;--panel:#0a1a12;--border:#1f3a2b;--dim:#8aa892;--bg:#0a1410;--red:#e57373}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{min-height:100vh;background:radial-gradient(circle at 30% 15%, #12261c 0%, var(--bg) 70%);color:#e8f5e9;font-family:'Segoe UI',Tahoma,sans-serif;padding:20px 12px;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;gap:14px;line-height:1.7}
+  h1{color:var(--gold);font-size:1.2rem;margin:0;text-align:center;font-weight:600;line-height:1.4}
+  h2{color:#a5d6a7;font-size:0.85rem;margin:0;text-align:center;font-weight:400}
+  .wrap{width:min(940px,100%);background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 20px 60px -20px #000}
+  canvas{display:block;width:100%;height:auto}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:min(940px,100%)}
+  button{background:#1a4d2e;color:#e8f5e9;border:1px solid #2e6b45;padding:9px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.85rem;transition:.15s}
+  button:hover{background:#2e6b45}
+  button.active{background:var(--gold);color:#0a1a12;border-color:var(--gold);font-weight:600}
+  .x-control{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px 16px;width:min(940px,100%);color:var(--dim);font-size:0.85rem}
+  .x-control input[type=range]{flex:1;accent-color:var(--gold)}
+  .x-control .x-val{font-family:'Courier New',monospace;color:var(--gold);font-weight:700;font-size:1rem;min-width:70px;text-align:center;direction:ltr}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;width:min(940px,100%)}
+  .stat{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-align:center}
+  .stat .lbl{color:var(--dim);font-size:0.7rem;display:block;margin-bottom:4px}
+  .stat .val{font-family:'Courier New',monospace;font-weight:700;font-size:0.95rem;direction:ltr;display:inline-block}
+  .stat.z .val{color:var(--gold)}
+  .stat.a .val{color:var(--cyan)}
+  .stat.c .val{color:var(--green)}
+  .stat.sum .val{color:#fff}
+  .block{width:min(940px,100%);background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 22px;line-height:1.9;font-size:0.9rem}
+  .block h3{color:var(--gold);margin:0 0 12px;font-size:1rem;border-bottom:1px solid var(--border);padding-bottom:8px}
+  .block code{background:#132a1d;padding:2px 8px;border-radius:4px;direction:ltr;display:inline-block;color:var(--green);font-family:'Courier New',monospace;font-size:0.85rem}
+  .formula-box{direction:ltr;text-align:center;background:#08140d;padding:16px;border-radius:10px;border:1px solid var(--border);color:var(--gold);margin:12px 0;font-family:'Courier New',monospace;font-size:0.88rem;line-height:2;overflow-x:auto}
+  .emerge{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+  .emerge-item{flex:1;min-width:140px;background:#08140d;border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center}
+  .emerge-item .x-val{color:var(--gold);font-family:'Courier New',monospace;font-weight:700;font-size:1.2rem;display:block;margin-bottom:6px}
+  .emerge-item .role{color:#c8e6c9;font-size:0.8rem;display:block}
+  .emerge-item .origin{color:var(--dim);font-size:0.72rem;margin-top:6px;display:block;font-style:italic}
+  .caveat{width:min(940px,100%);background:#1a1208;border-right:4px solid var(--gold);border-radius:8px;padding:14px 18px;color:#ffe082;font-size:0.85rem;line-height:1.85}
+  .caveat b{color:var(--gold)}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:min(940px,100%)}
+  .btn-row button{padding:11px 20px;font-size:0.9rem}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9999;padding:24px;overflow:auto}
+  .modal.on{display:block}
+  .modal-inner{max-width:920px;margin:auto;background:#0a1a12;border:1px solid var(--border);border-radius:14px;padding:20px}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+  .modal-head h3{margin:0;color:var(--gold);font-size:1.05rem}
+  .modal-head .close{background:#5a1a1a;border-color:#8a2020;padding:7px 14px;font-size:0.85rem}
+  .modal-body{max-height:74vh;overflow:auto;color:#c8e6c9;font-size:0.9rem;line-height:1.9}
+  pre.code{background:#08140d;color:#c8e6c9;padding:16px;border-radius:8px;overflow:auto;font-size:12px;direction:ltr;text-align:left;font-family:'Courier New',monospace;line-height:1.5;white-space:pre;max-height:66vh}
+  footer{width:min(940px,100%);text-align:center;color:var(--dim);font-size:0.8rem;border-top:1px solid var(--border);padding-top:16px;margin-top:8px}
+  footer a{color:var(--gold);text-decoration:none}
+  @media (max-width:600px){
+    h1{font-size:1.05rem}.block{padding:14px 14px}
+    .formula-box{padding:12px;font-size:0.78rem}
+    button{padding:8px 14px;font-size:0.8rem}
+  }
+</style>
+</head>
+<body>
+
+<h1>🌳 Z(x) — الدالة المشتقة</h1>
+<h2>حُذف <code>ln(x)</code> — بقي الاقتران الحقيقي</h2>
+
+<!-- ═══ الصيغة ═══ -->
+<div class="block">
+  <h3>📐 الصيغة الجديدة</h3>
+  <div class="formula-box">
+Z(x) = x⁻⁵ · sin(2π/x) · e^(−x/21)
+  </div>
+  <p style="color:#a5d6a7;margin:0;font-size:0.85rem;text-align:center">
+    ثلاثة حدود — اقتران حقيقي. كان أربعة، والرابع لم يكن مشتقًا.
+  </p>
+</div>
+
+<!-- ═══ الرسم ═══ -->
+<div class="wrap"><canvas id="sim" width="940" height="520"></canvas></div>
+
+<div class="controls">
+  <button id="btnZ" class="active">Z(x) ×80</button>
+  <button id="btnA" class="active">A(x)</button>
+  <button id="btnC" class="active">C(x)</button>
+  <button id="sweepBtn">🌀 مسح تلقائي</button>
+</div>
+
+<div class="x-control">
+  <span>x =</span>
+  <input id="xSlider" type="range" min="1.05" max="80" step="0.05" value="4">
+  <span class="x-val" id="xVal">4.00</span>
+</div>
+
+<div class="stats">
+  <div class="stat z"><span class="lbl">Z(x)</span><span class="val" id="statZ">—</span></div>
+  <div class="stat a"><span class="lbl">A(x)</span><span class="val" id="statA">—</span></div>
+  <div class="stat c"><span class="lbl">C(x)</span><span class="val" id="statC">—</span></div>
+  <div class="stat sum"><span class="lbl">Z + A + C</span><span class="val" id="statSum">—</span></div>
+</div>
+
+<!-- ═══ النقاط الصاعدة ═══ -->
+<div class="block">
+  <h3>🌱 ما الذي "ينبثق" من الصيغة</h3>
+  <div class="emerge">
+    <div class="emerge-item">
+      <span class="x-val">x = 2</span>
+      <span class="role">صفر Z</span>
+      <span class="origin">من 2π/π</span>
+    </div>
+    <div class="emerge-item">
+      <span class="x-val">x = 4</span>
+      <span class="role">قمة Z</span>
+      <span class="origin">من 2π/(π/2) — أي 2×2</span>
+    </div>
+    <div class="emerge-item">
+      <span class="x-val">x = 21</span>
+      <span class="role">حارس</span>
+      <span class="origin">اختيار قيمي — ⌊γ₂⌋</span>
+    </div>
+  </div>
+  <p style="color:#c8e6c9;margin:14px 0 0;font-size:0.85rem">
+    الأولان <b style="color:var(--green)">يظهران من الصيغة نفسها</b> — لم نضعهما. الثالث <b style="color:var(--gold)">قرار</b>.
+  </p>
+</div>
+
+<!-- ═══ المعادلة الأم — بصراحة ═══ -->
+<div class="block">
+  <h3>🔷 المعادلة التي تصف البنية</h3>
+  <div class="formula-box">
+Z'' + (2α/x)·Z' + [β²/x⁴ − 2α/(x·xp) + 1/xp²]·Z = 0
+  </div>
+  <p style="color:#c8e6c9;margin:10px 0 0;font-size:0.85rem">
+    مع <code>α=5</code>، <code>β=2π</code>، <code>xp=21</code>.
+  </p>
+  <p style="color:#ffe082;margin:10px 0 0;font-size:0.82rem">
+    ⚠️ <b>بصراحة</b>: هذه معادلة تصف الشكل الذي اخترناه. رياضياتها سليمة، لكنها <b>مصمّمة لـ Z</b> — لا مشتقة من مبدأ خارجي.
+  </p>
+</div>
+
+<!-- ═══ تنبيه ═══ -->
+<div class="caveat">
+  <b>⚠️ ما تغيّر عن الأصل:</b><br>
+  ✓ حُذف <code>ln(x)</code> — لم يكن مشتقًا<br>
+  ✓ الحدود الثلاثة تتناغم عند x=2 و x=4<br>
+  ✓ الصيغة أنقى، أقصر، أدفع للدفاع<br><br>
+  <b>ما لم يتغيّر:</b><br>
+  ✗ xp=21 لا يزال اختيارًا قيميًا — معلنًا<br>
+  ✗ المعادلة التفاضلية لا تزال داخلية — لا تُثبت شيئًا عن الواقع<br>
+  ✗ لا مفاجأة عددية جديدة (√2−1، 8) ظهرت من الصيغة
+</div>
+
+<!-- ═══ الأزرار ═══ -->
+<div class="btn-row">
+  <button id="showCode" style="background:#f4c430;color:#0a1a12;border-color:#f4c430;font-weight:600">📄 اعرض الكود</button>
+  <button id="showTalk" style="background:#6ae3ff;color:#0a1a12;border-color:#6ae3ff;font-weight:600">💬 النقاش</button>
+</div>
+
+<footer>
+  <p>م/ عبدالله محمد ناصر الجبري — صنعاء</p>
+  <p><a href="https://orcid.org/0009-0003-3319-3822" target="_blank">ORCID</a> · <a href="https://doi.org/10.17605/OSF.IO/YC9MB" target="_blank">DOI</a></p>
+</footer>
+
+<!-- ═══ Modal: Code ═══ -->
+<div class="modal" id="codeModal">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>📄 الكود</h3>
+      <button class="close" id="closeCode">✕ إغلاق</button>
+    </div>
+    <div class="modal-body">
+      <pre class="code" id="codeText">جاري التحميل…</pre>
+      <div style="text-align:center;margin-top:12px">
+        <button id="copyCode" style="background:#1a4d2e;border-color:#2e6b45">📋 نسخ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Modal: Talk ═══ -->
+<div class="modal" id="talkModal">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>💬 النقاش</h3>
+      <button class="close" id="closeTalk">✕ إغلاق</button>
+    </div>
+    <div class="modal-body">
+      <h4 style="color:var(--gold);margin:0 0 10px">ما الذي تغيّر — بلا لف</h4>
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+        <tr style="background:#132a1d">
+          <th style="padding:8px;border:1px solid var(--border);text-align:right;color:var(--gold)">قبل</th>
+          <th style="padding:8px;border:1px solid var(--border);text-align:right;color:var(--gold)">بعد</th>
+        </tr>
+        <tr>
+          <td style="padding:8px;border:1px solid var(--border)"><code>x⁻⁵·ln(x)·sin(2π/x)·e^(−x/xp)</code></td>
+          <td style="padding:8px;border:1px solid var(--border);color:var(--green)"><code>x⁻⁵·sin(2π/x)·e^(−x/xp)</code></td>
+        </tr>
+        <tr>
+          <td style="padding:8px;border:1px solid var(--border)">4 حدود متجاورة</td>
+          <td style="padding:8px;border:1px solid var(--border);color:var(--green)">3 حدود — اقتران</td>
+        </tr>
+        <tr>
+          <td style="padding:8px;border:1px solid var(--border)">Z×300</td>
+          <td style="padding:8px;border:1px solid var(--border);color:var(--green)">Z×80</td>
+        </tr>
+        <tr>
+          <td style="padding:8px;border:1px solid var(--border)">تحصيل حاصل</td>
+          <td style="padding:8px;border:1px solid var(--border);color:var(--green)">بنية متماسكة</td>
+        </tr>
+      </table>
+      <h4 style="color:var(--gold);margin:20px 0 10px">لماذا حُذف ln(x)</h4>
+      <p><code>ln(x)</code> كان يعمل "إنقاذًا" — يُطيل عمر Z قبل الموت الأسي. لكنه لم يكن مشتقًا من ظاهرة مستقلة. حذفه <b>يُنقّي البنية</b> — لا يُضعفها.</p>
+      <h4 style="color:var(--gold);margin:20px 0 10px">ما لم يظهر</h4>
+      <p>لا 8، لا 45، لا √2−1 من الصيغة الجديدة. الأرقام السحرية تبقى في الإطار الثاني.</p>
+      <div style="background:#1a1208;border-right:4px solid var(--gold);padding:14px 18px;border-radius:6px;color:#ffe082;margin-top:16px">
+        <b>الخلاصة:</b> Z أنقى، أقصر، أدفع للدفاع.<br>
+        لكنها لا تزال <b>داخلية</b> — لا تُثبت شيئًا عن العالم.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+const XP = 21;
+const ALPHA = 5;
+const BETA = 2 * Math.PI;
+
+function Zf(x){ if(x<=1) return 0; return Math.pow(x,-ALPHA) * Math.sin(BETA/x) * Math.exp(-x/XP); }
+function Af(x){ return Math.pow(x/XP, 2) * Math.exp(-x/XP); }
+function Cf(x){ return 1 - Zf(x) - Af(x); }
+
+const canvas = document.getElementById('sim');
+const ctx = canvas.getContext('2d');
+const DPR = Math.min(window.devicePixelRatio || 1, 2);
+let W = 940, H = 520;
+
+function resize(){
+  const wrap = canvas.parentElement;
+  const cssW = wrap.clientWidth;
+  const cssH = cssW * (520/940);
+  canvas.style.width = cssW + 'px';
+  canvas.style.height = cssH + 'px';
+  canvas.width = Math.round(cssW * DPR);
+  canvas.height = Math.round(cssH * DPR);
+  W = cssW; H = cssH;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+window.addEventListener('resize', resize, { passive: true });
+
+function line(x1,y1,x2,y2,c,w=1,dash=null){
+  ctx.save();
+  ctx.strokeStyle = c; ctx.lineWidth = w; ctx.lineCap = 'round';
+  if (dash) ctx.setLineDash(dash);
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.restore();
+}
+function mono(t,x,y,c,s=11,a='center',wt='normal'){
+  ctx.fillStyle = c; ctx.font = `${wt} ${s}px 'Courier New',monospace`;
+  ctx.textAlign = a; ctx.textBaseline = 'middle';
+  ctx.fillText(t,x,y);
+}
+function txt(t,x,y,c,s=12,a='center',wt='normal'){
+  ctx.fillStyle = c; ctx.font = `${wt} ${s}px 'Segoe UI',Tahoma`;
+  ctx.textAlign = a; ctx.textBaseline = 'middle';
+  ctx.fillText(t,x,y);
+}
+
+const X_MIN = 1.05, X_MAX = 80;
+const Y_MIN = -0.05, Y_MAX = 1.05;
+function xToPx(x){ return 60 + (x - X_MIN)/(X_MAX - X_MIN) * (W - 100); }
+function yToPy(y){ return H - 60 - (y - Y_MIN)/(Y_MAX - Y_MIN) * (H - 110); }
+
+let showZ=true, showA=true, showC=true;
+let sweeping=false, sweepT=4;
+
+function draw(){
+  const bg = ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,'#0a1a12'); bg.addColorStop(1,'#08140d');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+  // شبكة
+  ctx.strokeStyle = 'rgba(127,176,138,0.08)'; ctx.lineWidth = 1;
+  for (let y=0; y<=1; y+=0.2){
+    const py = yToPy(y);
+    ctx.beginPath(); ctx.moveTo(60,py); ctx.lineTo(W-40,py); ctx.stroke();
+    mono(y.toFixed(1), 48, py, 'rgba(138,168,146,0.55)', 10, 'right');
+  }
+  for (let x=10; x<=80; x+=10){
+    const px = xToPx(x);
+    ctx.beginPath(); ctx.moveTo(px, yToPy(0)); ctx.lineTo(px, yToPy(1)); ctx.stroke();
+    mono(x.toString(), px, H-42, 'rgba(138,168,146,0.55)', 10);
+  }
+  line(60, yToPy(0), W-40, yToPy(0), 'rgba(165,214,167,0.5)', 1.5);
+
+  // خطوط رأسية مميزة
+  line(xToPx(2), yToPy(0), xToPx(2), yToPy(1), 'rgba(244,196,48,0.35)', 1, [4,5]);
+  mono('x=2', xToPx(2), yToPy(1)-14, 'rgba(244,196,48,0.7)', 10, 'center', 'bold');
+  line(xToPx(4), yToPy(0), xToPx(4), yToPy(1), 'rgba(244,196,48,0.35)', 1, [4,5]);
+  mono('x=4', xToPx(4), yToPy(1)-14, 'rgba(244,196,48,0.7)', 10, 'center', 'bold');
+  line(xToPx(21), yToPy(0), xToPx(21), yToPy(1), 'rgba(106,227,255,0.25)', 1, [4,5]);
+  mono('x=21', xToPx(21), yToPy(1)-14, 'rgba(106,227,255,0.6)', 10, 'center', 'bold');
+
+  // A(x)
+  if (showA){
+    ctx.strokeStyle = '#6ae3ff'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); let started = false;
+    for (let x=X_MIN; x<=X_MAX; x+=0.4){
+      const y = Af(x); if (y < Y_MIN) continue;
+      const px = xToPx(x), py = yToPy(y);
+      if (!started){ ctx.moveTo(px,py); started=true; } else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+  }
+
+  // C(x)
+  if (showC){
+    ctx.strokeStyle = '#06d6a0'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); let started = false;
+    for (let x=X_MIN; x<=X_MAX; x+=0.4){
+      const y = Cf(x); if (y < Y_MIN || y > Y_MAX) continue;
+      const px = xToPx(x), py = yToPy(y);
+      if (!started){ ctx.moveTo(px,py); started=true; } else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+  }
+
+  // Z(x) ×80
+  if (showZ){
+    ctx.strokeStyle = '#f4c430'; ctx.lineWidth = 3;
+    ctx.beginPath(); let started = false;
+    for (let x=X_MIN; x<=X_MAX; x+=0.1){
+      const y = Zf(x) * 80;
+      if (y < Y_MIN || y > Y_MAX){ if (started) started=false; continue; }
+      const px = xToPx(x), py = yToPy(y);
+      if (!started){ ctx.moveTo(px,py); started=true; } else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+  }
+
+  // مؤشر x
+  const xCur = parseFloat(document.getElementById('xSlider').value);
+  const pxCur = xToPx(xCur);
+  line(pxCur, yToPy(0), pxCur, yToPy(1), 'rgba(255,255,255,0.45)', 1.5);
+
+  const zC = Zf(xCur), aC = Af(xCur), cC = Cf(xCur);
+
+  // نقاط
+  if (showZ){
+    const pyZ = yToPy(zC * 80);
+    if (pyZ > yToPy(1) && pyZ < yToPy(0)){
+      ctx.fillStyle = '#f4c430';
+      ctx.beginPath(); ctx.arc(pxCur, pyZ, 6, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    }
+  }
+  if (showA){
+    const pyA = yToPy(aC);
+    if (pyA > yToPy(1) && pyA < yToPy(0)){
+      ctx.fillStyle = '#6ae3ff';
+      ctx.beginPath(); ctx.arc(pxCur, pyA, 6, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    }
+  }
+  if (showC){
+    const pyC = yToPy(cC);
+    if (pyC > yToPy(1) && pyC < yToPy(0)){
+      ctx.fillStyle = '#06d6a0';
+      ctx.beginPath(); ctx.arc(pxCur, pyC, 6, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    }
+  }
+
+  // Legend
+  const ly = yToPy(1.02);
+  txt('● Z×80', 90, ly, '#f4c430', 11, 'left', 'bold');
+  txt('● A', 165, ly, '#6ae3ff', 11, 'left', 'bold');
+  txt('● C', 200, ly, '#06d6a0', 11, 'left', 'bold');
+
+  // Stats
+  document.getElementById('statZ').textContent = zC.toExponential(3);
+  document.getElementById('statA').textContent = aC.toFixed(6);
+  document.getElementById('statC').textContent = cC.toFixed(6);
+  document.getElementById('statSum').textContent = (zC + aC + cC).toFixed(6);
+  document.getElementById('xVal').textContent = xCur.toFixed(2);
+}
+
+document.getElementById('xSlider').addEventListener('input', draw);
+
+document.getElementById('btnZ').addEventListener('click', function(){
+  showZ = !showZ; this.classList.toggle('active', showZ); draw();
+});
+document.getElementById('btnA').addEventListener('click', function(){
+  showA = !showA; this.classList.toggle('active', showA); draw();
+});
+document.getElementById('btnC').addEventListener('click', function(){
+  showC = !showC; this.classList.toggle('active', showC); draw();
+});
+
+const sweepBtn = document.getElementById('sweepBtn');
+sweepBtn.addEventListener('click', () => {
+  sweeping = !sweeping;
+  sweepBtn.classList.toggle('active', sweeping);
+  sweepBtn.textContent = sweeping ? '⏸ إيقاف' : '🌀 مسح تلقائي';
+});
+
+// Modals
+const codeModal = document.getElementById('codeModal');
+const talkModal = document.getElementById('talkModal');
+
+document.getElementById('showCode').addEventListener('click', async () => {
+  codeModal.classList.add('on');
+  const pre = document.getElementById('codeText');
+  pre.textContent = 'جاري التحميل…';
+  try {
+    const res = await fetch(location.href, { cache: 'no-store' });
+    pre.textContent = await res.text();
+  } catch(e){ pre.textContent = 'تعذّر: ' + e.message; }
+});
+document.getElementById('closeCode').addEventListener('click', () => codeModal.classList.remove('on'));
+document.getElementById('copyCode').addEventListener('click', (ev) => {
+  const pre = document.getElementById('codeText');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const b = ev.target; const old = b.textContent;
+    b.textContent = '✅ تم النسخ';
+    setTimeout(() => { b.textContent = old; }, 1500);
+  });
+});
+
+document.getElementById('showTalk').addEventListener('click', () => talkModal.classList.add('on'));
+document.getElementById('closeTalk').addEventListener('click', () => talkModal.classList.remove('on'));
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){ codeModal.classList.remove('on'); talkModal.classList.remove('on'); }
+});
+
+// Loop
+function loop(t){
+  if (!loop.last) loop.last = t;
+  const dt = Math.min(50, t - loop.last) / 1000; loop.last = t;
+  if (sweeping){
+    sweepT += dt * 5;
+    if (sweepT > 40) sweepT = 1.05;
+    document.getElementById('xSlider').value = sweepT.toFixed(2);
+    draw();
+  }
+  requestAnimationFrame(loop);
+}
+
+resize();
+draw();
+requestAnimationFrame(loop);
+</script>
+
+</body>
+</html>

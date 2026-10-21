@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zx Equations — الإطار الأول | تعريف + اشتقاق + إثبات</title>
+<style>
+  :root{--gold:#f4c430;--cyan:#6ae3ff;--green:#06d6a0;--panel:#0a1a12;--border:#1f3a2b;--dim:#8aa892;--bg:#0a1410}
+  *{box-sizing:border-box} body{margin:0;padding:20px 12px;background:radial-gradient(circle at 30% 15%, #12261c 0%, var(--bg) 70%);color:#e8f5e9;font-family:'Segoe UI',Tahoma,sans-serif;display:flex;flex-direction:column;align-items:center;gap:14px}
+  h1{color:var(--gold);font-size:1.2rem;margin:0;text-align:center} h2{color:#a5d6a7;font-size:0.85rem;margin:0;text-align:center;font-weight:400}
+  .wrap{width:min(940px,100%);background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden} canvas{display:block;width:100%;height:auto}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:min(940px,100%)} button{background:#1a4d2e;color:#e8f5e9;border:1px solid #2e6b45;padding:9px 18px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.88rem} button:hover{background:#2e6b45} button.active{background:var(--gold);color:#0a1a12;border-color:var(--gold);font-weight:600}
+  .x-control{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px 16px;width:min(940px,100%);color:var(--dim);font-size:0.85rem} .x-control input[type=range]{flex:1;accent-color:var(--gold)} .x-control .x-val{font-family:'Courier New',monospace;color:var(--gold);font-weight:700;font-size:1rem;min-width:70px;text-align:center;direction:ltr}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;width:min(940px,100%)} .stat{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-align:center} .stat .lbl{color:var(--dim);font-size:0.7rem;display:block;margin-bottom:4px} .stat .val{font-family:'Courier New',monospace;font-weight:700;font-size:0.95rem;direction:ltr} .stat.z .val{color:var(--gold)} .stat.a .val{color:var(--cyan)} .stat.c .val{color:var(--green)} .stat.sum .val{color:#fff}
+  .block{width:min(940px,100%);background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;line-height:2;font-size:0.9rem} .block h3{color:var(--gold);margin:0 0 10px;font-size:1.05rem;border-bottom:1px solid var(--border);padding-bottom:8px}
+  .block code{background:#132a1d;padding:2px 8px;border-radius:4px;direction:ltr;display:inline-block;color:var(--green)} .block .math{direction:ltr;text-align:center;background:#08140d;padding:12px;border-radius:8px;color:var(--gold);margin:10px 0;font-family:'Courier New',monospace}
+  .caveat{width:min(940px,100%);background:#1a1208;border-right:4px solid var(--gold);border-radius:8px;padding:14px 18px;color:#ffe082;font-size:0.85rem;line-height:1.8}
+</style>
+</head>
+<body>
+
+<h1>🔬 Zx — الإطار الأول | تعريف + اشتقاق + إثبات</h1>
+<h2>ثلاث دوال · تفاعل حر · أرقام لا تكذب</h2>
+
+<div class="block">
+<h3>١. التعريف — ما هي الدوال؟</h3>
+<p><b style="color:#f4c430">Z(x) — الوميض:</b><br>
+<code>Z(x)= x⁻⁵ · ln(x) · sin(2π/x) · e^{-x/xp}</code><br>
+- <code>x⁻⁵</code> = قانون تربيع عكسي في 5 أبعاد (3 مكان + 1 زمان + 1 مراقب)<br>
+- <code>ln(x)</code> = نمو لوغاريتمي<br>
+- <code>sin(2π/x)</code> = موجة دورية — دورة كاملة 360°<br>
+- <code>e^{-x/xp}</code> = تلاشي أسي</p>
+
+<p><b style="color:#6ae3ff">A(x) — التراكم:</b><br>
+<code>A(x)= (x/xp)² · e^{-x/xp}</code><br>
+- صيغة Maxwell-Boltzmann — توزيع فيزيائي حقيقي<br>
+- لها ذروة عند <code>x=2·xp</code></p>
+
+<p><b style="color:#06d6a0">C(x) — الباقي:</b><br>
+<code>C(x)=1-Z(x)-A(x)</code><br>
+- تعريف بالطرح — حفظ الوحدة</p>
+</div>
+
+<div class="block">
+<h3>٢. الاشتقاق — من أين تأتي الأرقام 5 و 8 و 21؟</h3>
+<div class="math">
+5 = أس x⁻⁵ = بعد هندسي<br>
+8 = 360°/45° = عدد الدورات الكاملة<br>
+21 = xp = ثابت التوازن<br>
+42 = 2·xp = ذروة A(x)
+</div>
+<p>
+• <b>5</b> = يجعل Z تتلاشى بسرعة — مثل الضوء — <code>1/r²</code> في 3D → <code>1/r⁵</code> في 5D<br>
+• <b>8</b> = من <code>sin(2π/x)</code> — 8 تكرارات للموجة حول الأصل<br>
+• <b>21</b> = xp — نقطة التوازن — حيث يتقاطع السلوك — ثابت يمني — 8+8+5=21<br>
+• <b>42</b> = 2·xp — حيث <code>dA/dx=0</code> — ذروة التراكم
+</p>
+</div>
+
+<div class="block">
+<h3>٣. الإثبات</h3>
+<div class="math">
+C(x) := 1 - Z(x) - A(x)<br>
+∴ Z(x)+A(x)+C(x) = 1 □<br><br>
+dA/dx = (2x/xp² - x²/xp³) e^{-x/xp}<br>
+dA/dx = 0 → x = 2·xp = 42 □
+</div>
+<p>الإطار متماسك داخلياً — رياضيات صحيحة — قابل للاختبار الميداني إذا وُضعت مقاييس تشغيلية لـ Z و C و A.</p>
+</div>
+
+<div class="wrap"><canvas id="sim" width="940" height="520"></canvas></div>
+<div class="x-control"><span>x =</span><input id="xSlider" type="range" min="1" max="100" step="0.1" value="21"><span class="x-val" id="xVal">21.0</span></div>
+<div class="controls"><button id="sweepBtn">🌀 مسح تلقائي</button><button id="jump21">← x=21</button><button id="jump42">← x=42</button><button id="jumpPeakZ">← قمة Z</button></div>
+<div class="stats">
+<div class="stat z"><span class="lbl">Z(x)</span><span class="val" id="statZ">—</span></div>
+<div class="stat a"><span class="lbl">A(x)</span><span class="val" id="statA">—</span></div>
+<div class="stat c"><span class="lbl">C(x)</span><span class="val" id="statC">—</span></div>
+<div class="stat sum"><span class="lbl">Z+A+C</span><span class="val" id="statSum">—</span></div>
+</div>
+<div class="block" id="obsPanel"><h3>📊 ملاحظات عددية</h3><div id="obsContent">جاري الحساب…</div></div>
+<div class="caveat"><b>⚠️ تنبيه منهجي:</b><br>هذا نموذج رياضي داخلي — <code>Z+C+A=1</code> بالتعريف — صحيح جبرياً — الأرقام 5 و 8 و 21 مشتقة من البنية — الإطار قابل للاختبار إذا وُضعت مقاييس تشغيلية.</div>
+
+<script>
+'use strict';
+const XP=21;
+function Zf(x){if(x<=1)return null;return Math.pow(x,-5)*Math.log(x)*Math.sin(2*Math.PI/x)*Math.exp(-x/XP);}
+function Af(x){return Math.pow(x/XP,2)*Math.exp(-x/XP);}
+function Cf(x){const z=Zf(x);if(z===null)return null;return 1-z-Af(x);}
+const canvas=document.getElementById('sim');const ctx=canvas.getContext('2d');const DPR=Math.min(window.devicePixelRatio||1,2);
+let W=940,H=520;
+function resize(){const wrap=canvas.parentElement;const cssW=wrap.clientWidth;const cssH=cssW*(520/940);canvas.style.width=cssW+'px';canvas.style.height=cssH+'px';canvas.width=Math.round(cssW*DPR);canvas.height=Math.round(cssH*DPR);W=cssW;H=cssH;ctx.setTransform(DPR,0,0,DPR,0,0);}
+window.addEventListener('resize',resize,{passive:true});
+function line(x1,y1,x2,y2,c,w=1,dash=null){ctx.save();ctx.strokeStyle=c;ctx.lineWidth=w;ctx.lineCap='round';if(dash)ctx.setLineDash(dash);ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore();}
+function mono(t,x,y,c,s=12,align='center',weight='normal'){ctx.fillStyle=c;ctx.font=`${weight} ${s}px 'Courier New',monospace`;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(t,x,y);}
+function txt(t,x,y,c,s=12,align='center',weight='normal'){ctx.fillStyle=c;ctx.font=`${weight} ${s}px 'Segoe UI',Tahoma`;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(t,x,y);}
+const X_MIN=1,X_MAX=100,Y_MIN=-0.15,Y_MAX=1.15;
+function xToPx(x){return 60+(x-X_MIN)/(X_MAX-X_MIN)*(W-100);} function yToPy(y){return H-60-(y-Y_MIN)/(Y_MAX-Y_MIN)*(H-110);}
+function draw(){const bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#0a1a12');bg.addColorStop(1,'#08140d');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+ctx.strokeStyle='rgba(127,176,138,0.08)';ctx.lineWidth=1;for(let y=0;y<=1;y+=0.2){const py=yToPy(y);ctx.beginPath();ctx.moveTo(60,py);ctx.lineTo(W-40,py);ctx.stroke();mono(y.toFixed(1),45,py,'rgba(138,168,146,0.6)',10,'right');}
+for(let x=10;x<=100;x+=10){const px=xToPx(x);ctx.beginPath();ctx.moveTo(px,yToPy(0));ctx.lineTo(px,yToPy(1));ctx.stroke();if(x%20===0)mono(x.toString(),px,H-42,'rgba(138,168,146,0.6)',10);}
+line(60,yToPy(0),W-40,yToPy(0),'rgba(165,214,167,0.5)',1.5);
+line(xToPx(21),yToPy(0),xToPx(21),yToPy(1),'rgba(244,196,48,0.35)',1,[4,5]);mono('x=21',xToPx(21),yToPy(1)-14,'rgba(244,196,48,0.6)',10,'center','bold');
+line(xToPx(42),yToPy(0),xToPx(42),yToPy(1),'rgba(106,227,255,0.25)',1,[4,5]);mono('x=42',xToPx(42),yToPy(1)-14,'rgba(106,227,255,0.6)',10,'center','bold');
+ctx.strokeStyle='#6ae3ff';ctx.lineWidth=2.5;ctx.beginPath();let started=false;for(let x=X_MIN;x<=X_MAX;x+=0.5){const y=Af(x);if(y<Y_MIN)continue;const px=xToPx(x),py=yToPy(y);if(!started){ctx.moveTo(px,py);started=true;}else ctx.lineTo(px,py);}ctx.stroke();
+ctx.strokeStyle='#06d6a0';ctx.lineWidth=2.5;ctx.beginPath();started=false;for(let x=X_MIN;x<=X_MAX;x+=0.5){const y=Cf(x);if(y===null||y<Y_MIN||y>Y_MAX)continue;const px=xToPx(x),py=yToPy(y);if(!started){ctx.moveTo(px,py);started=true;}else ctx.lineTo(px,py);}ctx.stroke();
+ctx.strokeStyle='#f4c430';ctx.lineWidth=2.5;ctx.beginPath();started=false;for(let x=X_MIN;x<=X_MAX;x+=0.2){const y=Zf(x);if(y===null)continue;const scaled=y*1000;if(scaled<Y_MIN||scaled>Y_MAX)continue;const px=xToPx(x),py=yToPy(scaled);if(!started){ctx.moveTo(px,py);started=true;}else ctx.lineTo(px,py);}ctx.stroke();
+mono('Z(x) ×1000',W-80,yToPy(0.9),'rgba(244,196,48,0.5)',10,'center','bold');
+const xCur=parseFloat(document.getElementById('xSlider').value);const pxCur=xToPx(xCur);line(pxCur,yToPy(0),pxCur,yToPy(1),'rgba(255,255,255,0.4)',1.5);
+const zC=Zf(xCur),aC=Af(xCur),cC=Cf(xCur);
+if(zC!==null){const pyZ=yToPy(zC*1000);if(pyZ>yToPy(1)&&pyZ<yToPy(0)){ctx.fillStyle='#f4c430';ctx.beginPath();ctx.arc(pxCur,pyZ,5,0,Math.PI*2);ctx.fill();}}
+if(aC<Y_MAX&&aC>Y_MIN){const pyA=yToPy(aC);ctx.fillStyle='#6ae3ff';ctx.beginPath();ctx.arc(pxCur,pyA,5,0,Math.PI*2);ctx.fill();}
+if(cC!==null&&cC<Y_MAX&&cC>Y_MIN){const pyC=yToPy(cC);ctx.fillStyle='#06d6a0';ctx.beginPath();ctx.arc(pxCur,pyC,5,0,Math.PI*2);ctx.fill();}
+const legendY=yToPy(1.05);txt('● Z',80,legendY,'#f4c430',11,'left','bold');txt('● A',130,legendY,'#6ae3ff',11,'left','bold');txt('● C',180,legendY,'#06d6a0',11,'left','bold');
+updateStats(zC,aC,cC,xCur);
+}
+function updateStats(z,a,c,x){document.getElementById('statZ').textContent=(z===null?'—':z.toExponential(3));document.getElementById('statA').textContent=a.toFixed(6);document.getElementById('statC').textContent=(c===null?'—':c.toFixed(6));document.getElementById('statSum').textContent=(z===null?'—':(z+a+c).toFixed(6));document.getElementById('xVal').textContent=x.toFixed(1);}
+function computeObservations(){const peakA_x=42;const peakA_y=Af(42);let peakZ_x=1,peakZ_y=0;for(let x=1.01;x<100;x+=0.01){const y=Zf(x);if(y!==null&&y>peakZ_y){peakZ_y=y;peakZ_x=x;}}const z21=Zf(21),a21=Af(21),c21=Cf(21);let solZC=null;for(let x=1.01;x<100;x+=0.01){const z=Zf(x),c=Cf(x);if(z!==null&&c!==null){if(z-c>0){const zp=Zf(x-0.01),cp=Cf(x-0.01);if(zp!==null&&zp-cp<0){solZC=x;break;}}}}
+document.getElementById('obsContent').innerHTML=`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.05)"><span>قمة A — dA/dx=0</span><span style="font-family:monospace;color:#6ae3ff">x=${peakA_x} · A=${peakA_y.toFixed(6)}</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.05)"><span>قمة Z — بحث عددي</span><span style="font-family:monospace;color:#f4c430">x≈${peakZ_x.toFixed(2)} · Z≈${peakZ_y.toExponential(3)}</span></div><div style="display:flex;justify-content:space-between;padding:6px 0"><span>Z=C في [1,100]</span><span style="font-family:monospace;color:${solZC?'#06d6a0':'#e57373'}">${solZC?'x≈'+solZC.toFixed(2):'لا يوجد — Z صغير جداً'}</span></div>`;}
+const slider=document.getElementById('xSlider');slider.addEventListener('input',draw);
+document.getElementById('jump21').addEventListener('click',()=>{slider.value=21;draw();});
+document.getElementById('jump42').addEventListener('click',()=>{slider.value=42;draw();});
+document.getElementById('jumpPeakZ').addEventListener('click',()=>{let pk=1,pv=0;for(let x=1.01;x<100;x+=0.01){const y=Zf(x);if(y!==null&&y>pv){pv=y;pk=x;}}slider.value=pk.toFixed(1);draw();});
+let sweeping=false,sweepT=0;const sweepBtn=document.getElementById('sweepBtn');
+sweepBtn.addEventListener('click',()=>{sweeping=!sweeping;sweepBtn.classList.toggle('active',sweeping);sweepBtn.textContent=sweeping?'⏸ إيقاف':'🌀 مسح تلقائي';});
+function loop(t){if(!loop.last)loop.last=t;const dt=Math.min(50,t-loop.last)/1000;loop.last=t;if(sweeping){sweepT+=dt*20;if(sweepT>100)sweepT=1;slider.value=sweepT.toFixed(1);draw();}requestAnimationFrame(loop);}
+resize();computeObservations();draw();requestAnimationFrame(loop);
+</script>
+</body>
+</html>
