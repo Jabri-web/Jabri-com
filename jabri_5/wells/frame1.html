@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame 1 - الإطار العددي | الورقة التفاعلية</title>
+    
+    <meta name="citation_title" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
+    <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
+    <meta name="citation_doi" content="10.5281/zenodo.23540283">
+    
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        :root { --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; }
+        body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
+        .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; position: relative; }
+        
+        .lang-btn { position: absolute; top: -10px; left: 0; background: var(--border); color: var(--text); text-decoration: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--dim); transition: 0.3s; }
+        .lang-btn:hover { background: var(--gold); color: var(--bg); }
+
+        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 30px; }
+        .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
+        .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
+        
+        .badge-exact { background: rgba(6, 214, 160, 0.1); border-right: 4px solid var(--green); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-right: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-conjectural { background: rgba(229, 115, 115, 0.1); border-right: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+
+        .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
+        .math-note { font-size: 0.85rem; color: var(--blue); margin-top: -10px; margin-bottom: 15px; text-align: center; direction: ltr; }
+
+        .dashboard { display: flex; flex-direction: column; gap: 20px; }
+        .chart-container { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 10px; position: relative; height: 350px; width: 100%; }
+        .controls { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 15px; justify-content: center; }
+        .slider-wrap { display: flex; align-items: center; gap: 10px; font-family: monospace; direction: ltr; }
+        input[type=range] { accent-color: var(--gold); width: 200px; }
+        .val-display { color: var(--gold); font-size: 1.2rem; font-weight: bold; min-width: 40px; text-align: center; }
+
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+        th, td { border: 1px solid var(--border); padding: 10px; text-align: center; }
+        th { background: #132a1d; color: var(--gold); }
+        td.highlight { background: rgba(244, 196, 48, 0.15); color: var(--gold); font-weight: bold; }
+
+        details { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin: 15px 0; }
+        summary { color: var(--blue); cursor: pointer; font-weight: bold; outline: none; }
+        details[open] summary { margin-bottom: 15px; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
+
+        .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; }
+        .btn-gold { background: var(--gold); }
+        .btn-blue { background: var(--blue); }
+        .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+        @media print {
+            body { background: white; color: #111; }
+            .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; }
+            h2 { color: #000; border-color: #aaa; }
+            .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; }
+            .lang-btn, button { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="pdf-content">
+    <a href="frame1-en.html" class="lang-btn">🌐 English</a>
+
+    <h1>الإطار العددي — النسخة التفاعلية الشاملة</h1>
+    <div class="subtitle">
+        <strong>The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff \(x_p=21\)</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+    </div>
+
+    <div class="card">
+        <h2>🔬 المحاكاة التفاعلية (Interactive Simulation)</h2>
+        <p>استخدم شريط التمرير أدناه لتغيير قيمة القطع \(x_p\). تم توسيع نطاق الرسم البياني إلى \(x=50\) لتأكيد أن دالة التجميع \(A(x)\) مستمرة في الصعود ولا تمتلك قمة عند \(x=42\).</p>
+        
+        <div class="controls">
+            <div class="slider-wrap">
+                <label>\(x_p\) =</label>
+                <input type="range" id="xpSlider" min="15" max="45" value="21" step="1">
+                <span class="val-display" id="xpValue">21</span>
+            </div>
+            <div style="color:var(--gold); font-size:0.9rem;">
+                * عند \(x=2\): القيمة الصغرى (Minimum) لدالة التجميع. * عند \(x=42\): لا توجد قمة، بل استمرار للصعود.
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="chart-container"><canvas id="zChart"></canvas></div>
+            <div class="chart-container"><canvas id="aChart"></canvas></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>1. صفر ريمان والقطع المقترح</h2>
+        <p><b>تعريف (القطع الصحيح المقترح).</b> ليكن \(\gamma_2 \approx 21.022039\) هو الإحداثي الصادي لثاني صفر غير بديهي موجب لدالة زيتا الريمانية. نعرّف معامل النموذج:</p>
+        <div class="math-block">\[ x_p := \lfloor \gamma_2 \rfloor = 21. \]</div>
+        <div class="badge-exact">
+            <strong>ملاحظة علمية:</strong> تسمية "الثابت اليمني" هي اسم خاص بالمشروع لهذا المعامل المقترح؛ وأي دلالة رياضية أو فيزيائية أوسع له لا تزال بحاجة إلى إثبات مستقل.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>2. تحليل الإشارة (البرهان الرياضي)</h2>
+        <p>من أجل \(x_p>0\)، تحقق الدالة الحقيقية الشروط التالية:</p>
+        <ul>
+            <li>\(Z(x;x_p) < 0\) من أجل \(1 < x < 2\).</li>
+            <li>\(Z(2;x_p) = 0\).</li>
+            <li>\(Z(x;x_p) > 0\) من أجل \(x > 2\).</li>
+        </ul>
+        <details>
+            <summary>انقر لعرض البرهان (Proof)</summary>
+            <p>من أجل \(x>1\)، تكون العوامل \(x^{-5}\) و \(\ln(x)\) و \(e^{-x/x_p}\) موجبة تماماً. لذا تتحدد الإشارة بواسطة \(\sin(2\pi/x)\). إذا كان \(1 < x < 2\)، فإن \(\pi < 2\pi/x < 2\pi\)، وبالتالي تكون دالة الجيب سالبة. وإذا كان \(x > 2\)، فإن \(0 < 2\pi/x < \pi\)، وبالتالي تكون دالة الجيب موجبة.</p>
+        </details>
+    </div>
+
+    <div class="card">
+        <h2>3. دالة التجميع</h2>
+        <p>نعرّف \(A(x):=\int_1^x Z(t;21)\,dt\). وفقاً للنظرية الأساسية للتفاضل والتكامل، \(A'(x) = Z(x;21)\). وهكذا، فإن \(A(x)\) تتناقص على \((1, 2)\)، وتصل إلى <strong>قيمة صغرى عند \(x=2\)</strong>، ثم تتزايد على \((2, \infty)\).</p>
+        <div class="math-note">*(ملاحظة: يتم حساب التكامل في الرسم البياني عددياً باستخدام قاعدة شبه المنحرف بخطوة 0.05).*</div>
+        <div class="badge-exploratory">
+            <strong>⚠️ تصحيح علمي:</strong> الادعاء السابق بأن دالة التجميع لها قمة (Maximum) عند \(x=42\) غير مدعوم بالمعادلات. الدالة تتزايد باستمرار بعد \(x=2\).
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>4. الامتداد المركب والغلاف التقاربي</h2>
+        <p>لفحص السلوك على الخط الحرج \(s=\frac12+it\)، نعرّف امتداداً مركباً صريحاً باستخدام <strong>الفرع الرئيسي</strong> للوغاريتم \(\operatorname{Log}(s)\):</p>
+        <div class="math-block">\[ \mathcal{Z}(s; x_p) = s^{-5} \operatorname{Log}(s) \sin\left(\frac{2\pi}{s}\right) e^{-s/x_p} \]</div>
+        <div class="math-note">*الفرع الرئيسي: \(\operatorname{Log}(s) = \ln|s| + i\arg(s)\) حيث \(-\pi < \arg(s) \le \pi\).*</div>
+        <p>عندما \(t \to \infty\)، يُعطى الغلاف التقاربي بواسطة:</p>
+        <div class="math-block">\[ |\mathcal{Z}(1/2+it; x_p)| \sim K(x_p)\frac{\ln t}{t^6}, \qquad K(x_p) = 2\pi e^{-1/(2x_p)} \]</div>
+        <div class="math-note">*تعريف التكافؤ التقاربي: نكتب \(f(t) \sim g(t)\) إذا وفقط إذا كان \(\lim_{t \to \infty} \frac{f(t)}{g(t)} = 1\).*</div>
+        <div class="badge-exact">
+            <strong>نتيجة رياضية مشتقة:</strong> الغلاف التقاربي مشتق من الامتداد المركب المحدد صراحة. ويصف السلوك عندما \(t\to\infty\) و<strong>لا يشكل نتيجة حول دالة زيتا الريمانية نفسها</strong>.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>5. تحليل الحساسية وحالة الأدلة</h2>
+        <p>هل يوفر \(x_p=21\) أقرب تطابق للهدف \(K \approx 6.1353\)؟</p>
+        <table>
+            <thead><tr><th>المرشح \(n\)</th><th>\(K(n) = 2\pi e^{-1/(2n)}\)</th><th>الفرق \(|K(n)-6.1353|\)</th></tr></thead>
+            <tbody>
+                <tr><td>19</td><td>6.119995</td><td>0.015305</td></tr>
+                <tr><td>20</td><td>6.128053</td><td>0.007247</td></tr>
+                <tr><td class="highlight">21</td><td class="highlight">6.135353</td><td class="highlight">0.000053</td></tr>
+                <tr><td>22</td><td>6.141996</td><td>0.006696</td></tr>
+            </tbody>
+        </table>
+        <div class="badge-conjectural">
+            <strong>تحذير التحقق الدائري:</strong> إذا تم الحصول على القيمة المستهدفة (6.1353) من ملاءمة افترضت مسبقاً \(x_p=21\)، فإن التطابق ليس تحققاً مستقلاً. تُفسر المقارنة على أنها "ملاءمة مشروطة للنموذج"، وليست دليلاً على ثابت كوني.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>6. المنهجية والربط</h2>
+        <div class="badge-conjectural" style="margin-top: 0;">
+            <strong>حالة RiemannOS:</strong> يظل التفسير الكوني الأوسع (RiemannOS) ومعادلة التطبيع \(Z+C+A=1\) <strong>تخمينيين بحتين</strong>. لا تدعي هذه الورقة إثبات فرضية ريمان أو اشتقاق ثوابت كونية. إنها تفصل بدقة بين النتائج الرياضية الدقيقة والمقترحات التجريبية والتخمينية.
+        </div>
+        <p>لمزيد من التفاصيل، راجع <b>الإطار الثاني (Frame 2)</b> الذي يطبق هذه المنهجية على البرهان الهندسي للشجرة والظل والبيانات الميدانية.</p>
+        
+        <div class="links" style="margin-bottom: 15px;">
+            <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame1_tex.pdf" target="_blank" class="btn btn-gold">📄 Frame 1 PDF (رابط خارجي)</a>
+            <a href="/tree/frame2.html" class="btn">🌳 الانتقال إلى الإطار الثاني (Frame 2)</a>
+        </div>
+
+        <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <button onclick="window.print()" class="btn btn-blue">🖨️ طباعة / حفظ (نصي)</button>
+            <button onclick="generateDirectPDF()" class="btn btn-gold">📥 تحميل PDF (مباشر)</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
+        DOI: 10.5281/zenodo.23540283
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof Chart === 'undefined') return;
+        Chart.defaults.color = '#8aa892'; Chart.defaults.borderColor = '#1f3a2b';
+        let zChart, aChart;
+        function calculateZ(x, xp) { return x <= 1 ? 0 : Math.pow(x, -5) * Math.log(x) * Math.sin(2 * Math.PI / x) * Math.exp(-x / xp); }
+        function generateData(xp) {
+            const labels = [], zData = [], aData = [];
+            const step = 0.05, count = Math.round((50 - 1) / step);
+            let cumulativeA = 0, previousZ = calculateZ(1, xp); 
+            for (let i = 0; i <= count; i++) {
+                const x = 1 + i * step, z = calculateZ(x, xp);
+                if (i > 0) cumulativeA += (previousZ + z) * step / 2;
+                labels.push(x.toFixed(2)); zData.push(z); aData.push(cumulativeA);
+                previousZ = z;
+            }
+            return { labels, zData, aData };
+        }
+        function updateCharts(xp) {
+            const { labels, zData, aData } = generateData(xp);
+            if (zChart) zChart.destroy();
+            zChart = new Chart(document.getElementById('zChart'), {
+                type: 'line', data: { labels, datasets: [{ label: 'Z(x)', data: zData, borderColor: '#f4c430', backgroundColor: 'rgba(244, 196, 48, 0.1)', borderWidth: 2, pointRadius: 0, fill: true }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Damping Function Z(x)', color: '#e8f5e9' }, legend: { display: false } } }
+            });
+            if (aChart) aChart.destroy();
+            aChart = new Chart(document.getElementById('aChart'), {
+                type: 'line', data: { labels, datasets: [{ label: 'A(x)', data: aData, borderColor: '#06d6a0', backgroundColor: 'rgba(6, 214, 160, 0.1)', borderWidth: 2, pointRadius: 0, fill: true }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Accumulation Function A(x)', color: '#e8f5e9' }, legend: { display: false } } }
+            });
+        }
+        updateCharts(21);
+        document.getElementById('xpSlider').addEventListener('input', function() {
+            document.getElementById('xpValue').textContent = this.value;
+            updateCharts(parseInt(this.value));
+        });
+    });
+
+    window.generateDirectPDF = function() {
+        const element = document.getElementById('pdf-content');
+        const buttons = document.querySelectorAll('.lang-btn, button');
+        buttons.forEach(btn => btn.style.display = 'none'); // إخفاء الأزرار مؤقتاً
+        
+        const opt = {
+            margin:       10,
+            filename:     'Frame1_Numerical_Framework_AR.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+            buttons.forEach(btn => btn.style.display = ''); // إعادة إظهار الأزرار
+        });
+    };
+</script>
+</body>
+</html>
