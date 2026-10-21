@@ -4,105 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frame 1 - The Numerical Framework | Interactive Paper</title>
+    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
+    <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame1-en.html">
     
+    <!-- Google Scholar Meta Tags -->
     <meta name="citation_title" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
+    <meta name="citation_publication_date" content="2026/10/21">
     <meta name="citation_doi" content="10.5281/zenodo.23540283">
-    
+    <meta name="citation_language" content="en">
+    <meta name="citation_pdf_url" content="https://jabri-com.vercel.app/wells/frame1-en.html">
+
+    <!-- JSON-LD Schema (@graph) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://jabri-com.vercel.app/#website",
+          "url": "https://jabri-com.vercel.app/",
+          "name": "Heaven Al-Jabri",
+          "inLanguage": "en",
+          "publisher": { "@id": "https://jabri-com.vercel.app/#organization" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://jabri-com.vercel.app/#organization",
+          "name": "Heaven Al-Jabri",
+          "url": "https://jabri-com.vercel.app/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://jabri-com.vercel.app/image/logo1.png",
+            "width": 512,
+            "height": 512
+          },
+          "founder": { "@id": "https://jabri-com.vercel.app/#person" },
+          "foundingDate": "2026",
+          "areaServed": "YE"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://jabri-com.vercel.app/#person",
+          "name": "Abdulla Mohammed Nasser Al-Jabri",
+          "alternateName": "عبدالله محمد ناصر الجبري",
+          "url": "https://jabri-com.vercel.app/",
+          "sameAs": [
+            "https://orcid.org/0009-0003-3319-3822",
+            "https://github.com/jabri-web",
+            "https://en.wikipedia.org/wiki/User:Jabri2026"
+          ],
+          "jobTitle": "Researcher, Author and Founder"
+        },
+        {
+          "@type": "ScholarlyArticle",
+          "@id": "https://jabri-com.vercel.app/wells/frame1-en.html#article",
+          "headline": "The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21",
+          "author": { "@id": "https://jabri-com.vercel.app/#person" },
+          "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
+          "datePublished": "2026-10-21",
+          "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "DOI",
+            "value": "10.5281/zenodo.23540283"
+          },
+          "url": "https://jabri-com.vercel.app/wells/frame1-en.html",
+          "inLanguage": "en",
+          "abstract": "This paper presents a conceptual numerical framework within the Al-Hindara project. It discusses the proposed normalization relation Z+C+A=1 and investigates a candidate damping function containing the integer parameter xp=21."
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://jabri-com.vercel.app/wells/frame1-en.html#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jabri-com.vercel.app/en/" },
+            { "@type": "ListItem", "position": 2, "name": "Frame 1", "item": "https://jabri-com.vercel.app/wells/frame1-en.html" }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- MathJax for Equations -->
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- html2pdf -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<!-- Google Scholar Meta Tags -->
-<meta name="citation_title" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
-<meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
-<meta name="citation_publication_date" content="2026/10/21">
-<meta name="citation_doi" content="10.5281/zenodo.23540283">
-<meta name="citation_language" content="en">
-<meta name="citation_pdf_url" content="https://jabri-com.vercel.app/wells/frame1-en.html">
-
-<!-- JSON-LD Schema (ScholarlyArticle) for GSC Valid Item -->
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ScholarlyArticle",
-        "headline": "The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21",
-        "author": {
-            "@type": "Person",
-            "name": "Abdulla Mohammed Nasser Al-Jabri",
-            "identifier": "https://orcid.org/0009-0003-3319-3822"
-        },
-        "datePublished": "2026-10-21",
-        "publisher": {
-            "@type": "Organization",
-            "name": "Al-Hindara Project",
-            "url": "https://jabri-com.vercel.app/"
-        },
-        "identifier": {
-            "@type": "PropertyValue",
-            "propertyID": "DOI",
-            "value": "10.5281/zenodo.23540283"
-        },
-        "abstract": "This paper presents a conceptual numerical framework within the Al-Hindara project. It discusses the proposed normalization relation Z+C+A=1 and investigates a candidate damping function containing the integer parameter xp=21.",
-        "inLanguage": "en",
-        "url": "https://jabri-com.vercel.app/wells/frame1-en.html"
-    }
-</script>
-
-
 
     <style>
         :root { --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; }
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; position: relative; }
-        
         .lang-btn { position: absolute; top: -10px; right: 0; background: var(--border); color: var(--text); text-decoration: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--dim); transition: 0.3s; }
         .lang-btn:hover { background: var(--gold); color: var(--bg); }
-
         h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 30px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
-        
         .badge-exact { background: rgba(6, 214, 160, 0.1); border-left: 4px solid var(--green); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-left: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-conjectural { background: rgba(229, 115, 115, 0.1); border-left: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); text-align: center; font-size: 1.1rem; }
         .math-note { font-size: 0.85rem; color: var(--blue); margin-top: -10px; margin-bottom: 15px; text-align: center; }
-
         .dashboard { display: flex; flex-direction: column; gap: 20px; }
         .chart-container { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 10px; position: relative; height: 350px; width: 100%; }
         .controls { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 15px; justify-content: center; }
         .slider-wrap { display: flex; align-items: center; gap: 10px; font-family: monospace; }
         input[type=range] { accent-color: var(--gold); width: 200px; }
         .val-display { color: var(--gold); font-size: 1.2rem; font-weight: bold; min-width: 40px; text-align: center; }
-
         table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
         th, td { border: 1px solid var(--border); padding: 10px; text-align: center; }
         th { background: #132a1d; color: var(--gold); }
         td.highlight { background: rgba(244, 196, 48, 0.15); color: var(--gold); font-weight: bold; }
-
         details { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin: 15px 0; }
         summary { color: var(--blue); cursor: pointer; font-weight: bold; outline: none; }
         details[open] summary { margin-bottom: 15px; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
-
         .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; }
         .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; }
         .btn-gold { background: var(--gold); }
         .btn-blue { background: var(--blue); }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
-
-        @media print {
-            body { background: white; color: #111; }
-            .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; }
-            h2 { color: #000; border-color: #aaa; }
-            .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; }
-            .lang-btn, button { display: none; }
-        }
+        @media print { body { background: white; color: #111; } .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; } h2 { color: #000; border-color: #aaa; } .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; } .lang-btn, button { display: none; } }
     </style>
 </head>
 <body>
