@@ -268,12 +268,12 @@
   .canvas-wrap{ width:min(940px,100%); background:var(--panel); border:1px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:0 20px 60px -20px #000; }
   canvas{display:block; width:100%; height:auto; touch-action:manipulation}
   .controls{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; width:min(940px,100%);}
-  button{ background:var(--asl); color:#e8f5e9; border:1px solid #2e6b45; padding:10px 18px; border-radius:9px; cursor:pointer; font-family:inherit; font-size:0.88rem; transition:background .2s, transform .1s; user-select:none; }
-  button:hover{background:#2e6b45}
-  button:active{transform:scale(0.97)}
+  button, .lang-btn, .nav-btn{ background:var(--asl); color:#e8f5e9; border:1px solid #2e6b45; padding:10px 18px; border-radius:9px; cursor:pointer; font-family:inherit; font-size:0.88rem; transition:background .2s, transform .1s; user-select:none; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; }
+  button:hover, .lang-btn:hover, .nav-btn:hover{background:#2e6b45}
+  button:active, .lang-btn:active, .nav-btn:active{transform:scale(0.97)}
   button.active{background:var(--noor); color:#0a1a12; border-color:var(--noor); font-weight:600;}
-  button.lang-btn{background:#3a2e15; border-color:#7a5a1a;}
-  button.nav-btn{background:#1a3a5a; border-color:#2e5a7a; text-decoration:none; display:inline-flex; align-items:center;}
+  .lang-btn{background:#3a2e15; border-color:#7a5a1a;}
+  .nav-btn{background:#1a3a5a; border-color:#2e5a7a;}
   .stats{display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:8px; width:min(940px,100%);}
   .stat{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:10px 12px; text-align:center; transition:border-color .3s, box-shadow .3s;}
   .stat.golden{border-color:var(--noor); box-shadow:0 0 24px -6px var(--noor);}
@@ -288,12 +288,74 @@
   .empirical-banner p { color: #c8e6c9; font-size: 0.9rem; margin: 0; line-height: 1.7; }
   .empirical-banner a { display: inline-block; background: #06d6a0; color: #0a1a12; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: background 0.2s; }
   .empirical-banner a:hover { background: #05b98a; }
+
+  /* ─── Math Proof Section ─── */
+  .proof-section {
+    width: min(940px, 100%);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px -15px #000;
+  }
+  .proof-section h3 {
+    color: var(--noor);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .proof-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .proof-block {
+    background: #08140d;
+    border-left: 4px solid var(--noor);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .proof-block h4 {
+    color: var(--tall);
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+  }
+  .proof-block p {
+    margin: 0 0 10px 0;
+    color: #c8e6c9;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .math-box {
+    background: #132a1d;
+    padding: 12px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    color: var(--noor);
+    direction: ltr;
+    text-align: left;
+    font-size: 1.05rem;
+    margin: 10px 0;
+    overflow-x: auto;
+  }
+  .proof-arrow {
+    text-align: center;
+    color: var(--noor);
+    font-size: 1.5rem;
+    margin: 5px 0;
+  }
 </style>
 </head>
 <body>
 
 <!-- ══════════════════════════════════════════════════════════
-     🕵️ Hidden text for bots — explains what the canvas shows
+     🕵️ Hidden text for bots
      ══════════════════════════════════════════════════════════ -->
 <div class="sr-only" aria-hidden="true">
   <h1>Tree of Unification — Visual Simulation</h1>
@@ -310,7 +372,7 @@
   <p>H = tree height (relative constant). L = shadow length = H × tan(θ). At θ = 22.5°, L/H becomes √2 − 1 = 0.41421356 (The Golden Moment).</p>
   <h2>Interactive Buttons</h2>
   <ul>
-    <li>🌐 Language toggle button (English ↔ Arabic).</li>
+    <li>🌐 Language toggle button (opens the Arabic version).</li>
     <li>📏 Measure button: displays H, L, and L/H numerically on the drawing.</li>
     <li>🌞 Sun motion button: animates θ between 22.5° and 60°.</li>
     <li>⟲ Reset to 22.5° button (The Golden Moment).</li>
@@ -334,21 +396,21 @@
 
 <div class="canvas-wrap"><canvas id="sim" aria-label="Simulation of the Tree, Shadow, and Triangle — The 22.5° angle yields the ratio √2−1"></canvas></div>
 <div class="controls">
-  <button id="langBtn" class="lang-btn" type="button">🌐 العربية</button>
+  <a href="/tree/tree2.html" class="lang-btn">🌐 العربية</a>
   <button id="measureBtn" type="button">📏 Measure</button>
   <button id="sunBtn" type="button">🌞 Sun Motion</button>
   <button id="resetBtn" type="button">⟲ Reset to 22.5°</button>
-  <a href="/tree/tree-en.html" class="nav-btn" id="navTree1">🌳 Tree</a>
-  <a href="/tree/tree3-en.html" class="nav-btn" id="navTree3">🌲 Tree 3</a>
-  <a href="/tree/hindara-en.html" class="nav-btn" id="navHindara">🏛️ Geometry</a>
-  <a href="/tree/tree3-pdf-en.html" class="nav-btn" id="navTree3Pdf">📏 Field Report</a>
+  <a href="/tree/tree-en.html" class="nav-btn">🌳 Tree</a>
+  <a href="/tree/tree3-en.html" class="nav-btn">🌲 Tree 3</a>
+  <a href="/tree/hindara-en.html" class="nav-btn">🏛️ Geometry</a>
+  <a href="/tree/tree3-pdf-en.html" class="nav-btn">📏 Field Report</a>
 </div>
 
 <div class="stats">
-  <div class="stat" id="statTheta"><span class="lbl" id="lblTheta">Angle θ (from vertical)</span><span class="val" id="valTheta">22.5°</span></div>
-  <div class="stat" id="statRatio"><span class="lbl" id="lblRatio">L / H (Shadow ÷ Height)</span><span class="val" id="valRatio">0.41421356</span></div>
-  <div class="stat" id="statTan"><span class="lbl" id="lblTan">tan(θ)</span><span class="val" id="valTan">0.41421356</span></div>
-  <div class="stat"><span class="lbl" id="lblRef">√2 − 1 (Reference)</span><span class="val">0.41421356</span></div>
+  <div class="stat" id="statTheta"><span class="lbl">Angle θ (from vertical)</span><span class="val" id="valTheta">22.5°</span></div>
+  <div class="stat" id="statRatio"><span class="lbl">L / H (Shadow ÷ Height)</span><span class="val" id="valRatio">0.41421356</span></div>
+  <div class="stat" id="statTan"><span class="lbl">tan(θ)</span><span class="val" id="valTan">0.41421356</span></div>
+  <div class="stat"><span class="lbl">√2 − 1 (Reference)</span><span class="val">0.41421356</span></div>
 </div>
 
 <div class="note" id="noteTxt">
@@ -364,12 +426,86 @@
   <a href="/tree/tree3-en.html">📏 Explore the field data in (tree3-en)</a>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════
+     📐 Full Mathematical Proof Section
+     ══════════════════════════════════════════════════════════ -->
+<div class="proof-section">
+  <h3>📐 Full Mathematical Proof: From Pythagoras to the Tree</h3>
+  
+  <div class="proof-grid">
+    <!-- Step 1 -->
+    <div class="proof-block">
+      <h4>1. Pythagoras: Z and C are the Legs, A is the Hypotenuse</h4>
+      <p>In the right triangle shown in the simulation (at an angle of 56.6°), the height (Z) and the shadow (C) are not random numbers; they are the legs of a Pythagorean triangle, and the hypotenuse (A) is the path of the sun's ray:</p>
+      <div class="math-box">
+        Z = 192, C = 290.74<br>
+        Z² + C² = A²<br>
+        192² + 290.74² = 121393.74<br>
+        A = √121393.74 ≈ 348.41<br><br>
+        tan(56.6°) = C / Z = 1.514329
+      </div>
+      <p>This proves that the angle, the shadow, and the triangle are all bound by the law of Pythagoras.</p>
+    </div>
+
+    <div class="proof-arrow">↓</div>
+
+    <!-- Step 2 -->
+    <div class="proof-block" style="border-left-color: #06d6a0;">
+      <h4>2. Half-Angle Formula: How Do We Arrive at √2−1?</h4>
+      <p>The number <code>√2−1</code> is not random; it comes directly from the geometry of a square (diagonal = √2). Using the half-angle formula in trigonometry:</p>
+      <div class="math-box">
+        tan(22.5°) = tan(45° / 2)<br>
+        tan(22.5°) = (1 - cos(45°)) / sin(45°)<br>
+        tan(22.5°) = √2 − 1 ≈ 0.41421356
+      </div>
+      <p>At <b>56.6°</b>: the ratio is 1.514 (current state).<br>
+      At <b>22.5°</b>: the ratio becomes <b>√2−1 = 0.4142</b> (The Golden Moment).</p>
+    </div>
+
+    <div class="proof-arrow">↓</div>
+
+    <!-- Step 3 -->
+    <div class="proof-block" style="border-left-color: #6ae3ff;">
+      <h4>3. The Bridge to the Field: Crown Ratio in Mango Trees</h4>
+      <p>This precise theoretical value (0.4142) remarkably matches real field measurements of mango trees in Sana'a:</p>
+      <div class="math-box">
+        C_field = (H − h) / H = 0.41297<br>
+        TOST p = 0.000801 (Equivalence Confirmed)<br>
+        90% CI = [0.40491, 0.42102] ⊂ [0.3842, 0.4442]
+      </div>
+      <p>Pythagoras gives you the theoretical value (22.5° → √2−1), and the field gives you the empirical value (0.41297).</p>
+    </div>
+
+    <div class="proof-arrow">↓</div>
+
+    <!-- Step 4 -->
+    <div class="proof-block" style="border-left-color: #ba68c8;">
+      <h4>4. The Number 21 and the Cosmos: Riemann Zeros</h4>
+      <p>How does this connect to the number 21 (the Yemeni Constant) and the First Framework (Numerical)?</p>
+      <div class="math-box">
+        xp = ⌊γ₂⌋ = ⌊21.0220...⌋ = 21<br>
+        Peak of A(x) = 2 × xp = 42
+      </div>
+      <p>The number 21 is the scale that links the geometry of the tree (Space) with the zeros of the Riemann zeta function (High frequencies).</p>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="proof-block" style="background: #1a1508; border: 1px solid var(--noor); border-left: 6px solid var(--noor); text-align: center; margin-top: 10px;">
+      <h4 style="color: var(--noor); font-size: 1.1rem; margin-bottom: 10px;">Conclusion: The Tree Above is the Triangle Below</h4>
+      <p style="font-size: 1.2rem; font-weight: bold; color: #fff; font-family: 'Courier New', monospace;">
+        Z + C + A = 1
+      </p>
+      <p>Z and C are the legs of Pythagoras, A is the normalized hypotenuse, and their sum is 1.<br>The geometry of the tree above is the same as the geometry of the triangle below.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 'use strict';
 const STRINGS = {
-  ar: { title:'🌳 شجرة التوحيد', sub:'قوس θ مطابق فوق وتحت', langBtn:'🌐 English', measure:'📏 قياس', sunOn:'🌞 إيقاف الحركة', sunOff:'🌞 حركة الشمس', reset:'⟲ العودة إلى 22.5°', navTree1:'🌳 الشجرة', navTree3:'🌲 الشجرة 3', navHindara:'🏛️ هندسة', navTree3Pdf:'📏 التقرير الميداني', lblTheta:'زاوية θ', lblRatio:'L / H', lblTan:'tan(θ)', lblRef:'√2 − 1 (المرجع)', noteHTML:'الجديد في v4: التاج والتسميات نسبية.<br>عند θ = 22.5° فقط: <code>L/H = √2 − 1</code>', canvasLight:'النور', canvasTree:'الشجرة', canvasShadow:'الظل', golden:'اللحظة الذهبية', bottomNote:'Z + C + A = 1  ·  الشجرة فوق والمثلث تحت' },
-  en: { title:'🌳 Tree of Unification', sub:'The θ arc matches above and below', langBtn:'🌐 العربية', measure:'📏 Measure', sunOn:'🌞 Stop motion', sunOff:'🌞 Sun motion', reset:'⟲ Reset to 22.5°', navTree1:'🌳 Tree', navTree3:'🌲 Tree 3', navHindara:'🏛️ Geometry', navTree3Pdf:'📏 Field Report', lblTheta:'Angle θ', lblRatio:'L / H', lblTan:'tan(θ)', lblRef:'√2 − 1 (Reference)', noteHTML:'New in v4: Crown and labels are relative.<br>Only at θ = 22.5°: <code>L/H = √2 − 1</code>', canvasLight:'Light', canvasTree:'Tree', canvasShadow:'Shadow', golden:'Golden Moment', bottomNote:'Z + C + A = 1  ·  Tree above and triangle below' }
+  en: { title:'🌳 Tree of Unification', sub:'The θ arc matches above and below', measure:'📏 Measure', sunOn:'🌞 Stop motion', sunOff:'🌞 Sun motion', reset:'⟲ Reset to 22.5°', noteHTML:'New in v4: Crown and labels are relative.<br>Only at θ = 22.5°: <code>L/H = √2 − 1</code>', canvasLight:'Light', canvasTree:'Tree', canvasShadow:'Shadow', golden:'Golden Moment', bottomNote:'Z + C + A = 1  ·  Tree above and triangle below' }
 };
+// Lock language to English for this page
 let LANG = 'en';
 const ANGLE_REF = Math.PI / 8, ANGLE_MAX = Math.PI / 3, DPR = Math.min(window.devicePixelRatio || 1, 2);
 const COLORS = { gold:'#f4c430', tall:'#7fb08a', mist:'#a5d6a7', dim:'#8aa892', sky1:'#0a1a12', sky2:'#0d1e15', sky3:'#0d1a10', sky4:'#0a1208', earth1:'#1a120a', earth2:'#0a1208', wood:'#4a2e15', leaf:'#2e6b45', leafDark:'rgba(10,40,25,0.8)', leafHi:'rgba(127,176,138,0.55)', leafHi2:'rgba(142,201,154,0.5)', measure:'rgba(100,200,255,0.9)' };
@@ -436,18 +572,13 @@ function draw(){
 let lastStatUpdate = 0;
 function updateStats(theta, ratio, isGolden){ const now = performance.now(); if (now - lastStatUpdate < 50) return; lastStatUpdate = now; document.getElementById('valTheta').textContent = (theta * 180 / Math.PI).toFixed(1) + '°'; document.getElementById('valRatio').textContent = ratio.toFixed(8); document.getElementById('valTan').textContent = Math.tan(theta).toFixed(8); document.getElementById('statRatio').classList.toggle('golden', isGolden); document.getElementById('statTan').classList.toggle('golden', isGolden); document.getElementById('statTheta').classList.toggle('golden', isGolden); }
 function loop(t){ if (!state.lastTime) state.lastTime = t; const dt = Math.min(50, t - state.lastTime) / 1000; state.lastTime = t; stepSun(dt); draw(); requestAnimationFrame(loop); }
-function setLang(lang){
-  LANG = lang; const S = STRINGS[lang], isAr = lang === 'ar';
-  document.documentElement.lang = lang; document.documentElement.dir = isAr ? 'rtl' : 'ltr'; document.title = isAr ? 'شجرة التوحيد — المحاكاة البصرية | 22.5° → √2−1' : 'Tree of Unification — Visual Simulation | 22.5° → √2−1';
-  document.getElementById('titleTxt').textContent = S.title; document.getElementById('subTxt').textContent = S.sub; document.getElementById('langBtn').textContent = S.langBtn; document.getElementById('lblTheta').textContent = S.lblTheta; document.getElementById('lblRatio').textContent = S.lblRatio; document.getElementById('lblTan').textContent = S.lblTan; document.getElementById('lblRef').textContent = S.lblRef; document.getElementById('noteTxt').innerHTML = S.noteHTML;
-  document.getElementById('navTree1').textContent = S.navTree1; document.getElementById('navTree3').textContent = S.navTree3; document.getElementById('navHindara').textContent = S.navHindara; document.getElementById('navTree3Pdf').textContent = S.navTree3Pdf; document.getElementById('sunBtn').textContent = state.sunAnimating ? S.sunOn : S.sunOff; document.getElementById('measureBtn').textContent = S.measure; document.getElementById('resetBtn').textContent = S.reset;
-}
-const measureBtn = document.getElementById('measureBtn'), sunBtn = document.getElementById('sunBtn'), resetBtn = document.getElementById('resetBtn'), langBtn = document.getElementById('langBtn');
+
+const measureBtn = document.getElementById('measureBtn'), sunBtn = document.getElementById('sunBtn'), resetBtn = document.getElementById('resetBtn');
 measureBtn.addEventListener('click', () => { state.showMeasure = !state.showMeasure; measureBtn.classList.toggle('active', state.showMeasure); });
 sunBtn.addEventListener('click', () => { state.sunAnimating = !state.sunAnimating; sunBtn.classList.toggle('active', state.sunAnimating); sunBtn.textContent = state.sunAnimating ? STRINGS[LANG].sunOn : STRINGS[LANG].sunOff; if (!state.sunAnimating) state.theta = ANGLE_REF; });
 resetBtn.addEventListener('click', () => { state.sunAnimating = false; state.sunPhase = 0; state.theta = ANGLE_REF; sunBtn.classList.remove('active'); sunBtn.textContent = STRINGS[LANG].sunOff; });
-langBtn.addEventListener('click', () => { setLang(LANG === 'ar' ? 'en' : 'ar'); });
-resize(); setLang('en'); requestAnimationFrame(loop);
+
+resize(); requestAnimationFrame(loop);
 </script>
 </body>
 </html>

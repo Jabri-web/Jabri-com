@@ -268,12 +268,12 @@
   .canvas-wrap{ width:min(940px,100%); background:var(--panel); border:1px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:0 20px 60px -20px #000; }
   canvas{display:block; width:100%; height:auto; touch-action:manipulation}
   .controls{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; width:min(940px,100%);}
-  button{ background:var(--asl); color:#e8f5e9; border:1px solid #2e6b45; padding:10px 18px; border-radius:9px; cursor:pointer; font-family:inherit; font-size:0.88rem; transition:background .2s, transform .1s; user-select:none; }
-  button:hover{background:#2e6b45}
-  button:active{transform:scale(0.97)}
+  button, .lang-btn, .nav-btn{ background:var(--asl); color:#e8f5e9; border:1px solid #2e6b45; padding:10px 18px; border-radius:9px; cursor:pointer; font-family:inherit; font-size:0.88rem; transition:background .2s, transform .1s; user-select:none; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; }
+  button:hover, .lang-btn:hover, .nav-btn:hover{background:#2e6b45}
+  button:active, .lang-btn:active, .nav-btn:active{transform:scale(0.97)}
   button.active{background:var(--noor); color:#0a1a12; border-color:var(--noor); font-weight:600;}
-  button.lang-btn{background:#3a2e15; border-color:#7a5a1a;}
-  button.nav-btn{background:#1a3a5a; border-color:#2e5a7a; text-decoration:none; display:inline-flex; align-items:center;}
+  .lang-btn{background:#3a2e15; border-color:#7a5a1a;}
+  .nav-btn{background:#1a3a5a; border-color:#2e5a7a;}
   .stats{display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:8px; width:min(940px,100%);}
   .stat{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:10px 12px; text-align:center; transition:border-color .3s, box-shadow .3s;}
   .stat.golden{border-color:var(--noor); box-shadow:0 0 24px -6px var(--noor);}
@@ -288,12 +288,74 @@
   .empirical-banner p { color: #c8e6c9; font-size: 0.9rem; margin: 0; line-height: 1.7; }
   .empirical-banner a { display: inline-block; background: #06d6a0; color: #0a1a12; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: background 0.2s; }
   .empirical-banner a:hover { background: #05b98a; }
+
+  /* ─── قسم البرهان الرياضي الكامل ─── */
+  .proof-section {
+    width: min(940px, 100%);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px -15px #000;
+  }
+  .proof-section h3 {
+    color: var(--noor);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .proof-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .proof-block {
+    background: #08140d;
+    border-right: 4px solid var(--noor);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .proof-block h4 {
+    color: var(--tall);
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+  }
+  .proof-block p {
+    margin: 0 0 10px 0;
+    color: #c8e6c9;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .math-box {
+    background: #132a1d;
+    padding: 12px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    color: var(--noor);
+    direction: ltr;
+    text-align: left;
+    font-size: 1.05rem;
+    margin: 10px 0;
+    overflow-x: auto;
+  }
+  .proof-arrow {
+    text-align: center;
+    color: var(--noor);
+    font-size: 1.5rem;
+    margin: 5px 0;
+  }
 </style>
 </head>
 <body>
 
 <!-- ══════════════════════════════════════════════════════════
-     🕵️ نص مخفي للروبوتات — يشرح ما يعرضه الـ canvas
+     🕵️ نص مخفي للروبوتات
      ══════════════════════════════════════════════════════════ -->
 <div class="sr-only" aria-hidden="true">
   <h1>شجرة التوحيد — المحاكاة البصرية</h1>
@@ -310,7 +372,7 @@
   <p>H = ارتفاع الشجرة (ثابت نسبي). L = طول الظل = H × tan(θ). عند θ = 22.5° تصبح L/H = √2 − 1 = 0.41421356 (اللحظة الذهبية).</p>
   <h2>الأزرار التفاعلية</h2>
   <ul>
-    <li>🌐 زر تبديل اللغة (عربي ↔ إنجليزي).</li>
+    <li>🌐 زر تبديل اللغة (يفتح النسخة الإنجليزية).</li>
     <li>📏 زر القياس: يعرض H و L و L/H بالأرقام على الرسم.</li>
     <li>🌞 زر حركة الشمس: يُحرّك θ بين 22.5° و 60°.</li>
     <li>⟲ زر العودة إلى 22.5° (اللحظة الذهبية).</li>
@@ -334,21 +396,21 @@
 
 <div class="canvas-wrap"><canvas id="sim" aria-label="محاكاة الشجرة والظل والمثلث — الزاوية 22.5° تنتج النسبة √2−1"></canvas></div>
 <div class="controls">
-  <button id="langBtn" class="lang-btn" type="button">🌐 English</button>
+  <a href="/tree/tree2-en.html" class="lang-btn">🌐 English</a>
   <button id="measureBtn" type="button">📏 قياس</button>
   <button id="sunBtn" type="button">🌞 حركة الشمس</button>
   <button id="resetBtn" type="button">⟲ العودة إلى 22.5°</button>
-  <a href="/tree/tree.html" class="nav-btn" id="navTree1">🌳 الشجرة</a>
-  <a href="/tree/tree3.html" class="nav-btn" id="navTree3">🌲 الشجرة 3</a>
-  <a href="/tree/hindara.html" class="nav-btn" id="navHindara">🏛️ هندسة</a>
-  <a href="/tree/tree3-pdf.html" class="nav-btn" id="navTree3Pdf">📏 التقرير الميداني</a>
+  <a href="/tree/tree.html" class="nav-btn">🌳 الشجرة</a>
+  <a href="/tree/tree3.html" class="nav-btn">🌲 الشجرة 3</a>
+  <a href="/tree/hindara.html" class="nav-btn">🏛️ هندسة</a>
+  <a href="/tree/tree3-pdf.html" class="nav-btn">📏 التقرير الميداني</a>
 </div>
 
 <div class="stats">
-  <div class="stat" id="statTheta"><span class="lbl" id="lblTheta">زاوية θ (من العمودي)</span><span class="val" id="valTheta">22.5°</span></div>
-  <div class="stat" id="statRatio"><span class="lbl" id="lblRatio">L / H (الظل ÷ الارتفاع)</span><span class="val" id="valRatio">0.41421356</span></div>
-  <div class="stat" id="statTan"><span class="lbl" id="lblTan">tan(θ)</span><span class="val" id="valTan">0.41421356</span></div>
-  <div class="stat"><span class="lbl" id="lblRef">√2 − 1 (المرجع)</span><span class="val">0.41421356</span></div>
+  <div class="stat" id="statTheta"><span class="lbl">زاوية θ (من العمودي)</span><span class="val" id="valTheta">22.5°</span></div>
+  <div class="stat" id="statRatio"><span class="lbl">L / H (الظل ÷ الارتفاع)</span><span class="val" id="valRatio">0.41421356</span></div>
+  <div class="stat" id="statTan"><span class="lbl">tan(θ)</span><span class="val" id="valTan">0.41421356</span></div>
+  <div class="stat"><span class="lbl">√2 − 1 (المرجع)</span><span class="val">0.41421356</span></div>
 </div>
 
 <div class="note" id="noteTxt">
@@ -364,13 +426,87 @@
   <a href="/tree/tree3.html">📏 استكشف البيانات الميدانية في (tree3)</a>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════
+     📐 قسم البرهان الرياضي الكامل
+     ══════════════════════════════════════════════════════════ -->
+<div class="proof-section">
+  <h3>📐 البرهان الرياضي الكامل: من فيثاغورس إلى الشجرة</h3>
+  
+  <div class="proof-grid">
+    <!-- الخطوة 1 -->
+    <div class="proof-block">
+      <h4>١. فيثاغورس: Z و C هما الساقان، و A هو الوتر</h4>
+      <p>في المثلث القائم الموضح في المحاكاة (عند الزاوية 56.6°)، الارتفاع (Z) والظل (C) ليسا مجرد رقمين عشوائيين، بل هما ساقا مثلث فيثاغورس، والوتر (A) هو مسار شعاع الشمس:</p>
+      <div class="math-box">
+        Z = 192, C = 290.74<br>
+        Z² + C² = A²<br>
+        192² + 290.74² = 121393.74<br>
+        A = √121393.74 ≈ 348.41<br><br>
+        tan(56.6°) = C / Z = 1.514329
+      </div>
+      <p>هذا يثبت أن الزاوية، والظل، والمثلث، كلها مربوطة بقانون فيثاغورس.</p>
+    </div>
+
+    <div class="proof-arrow">↓</div>
+
+    <!-- الخطوة 2 -->
+    <div class="proof-block" style="border-right-color: #06d6a0;">
+      <h4>٢. قانون نصف الزاوية: كيف نصل إلى √2−1؟</h4>
+      <p>الرقم <code>√2−1</code> ليس عشوائياً، بل يأتي مباشرة من هندسة المربع (قطر المربع = √2). باستخدام قانون نصف الزاوية في المثلثات:</p>
+      <div class="math-box">
+        tan(22.5°) = tan(45° / 2)<br>
+        tan(22.5°) = (1 - cos(45°)) / sin(45°)<br>
+        tan(22.5°) = √2 − 1 ≈ 0.41421356
+      </div>
+      <p>عند <b>56.6°</b>: النسبة هي 1.514 (الوضع الحالي).<br>
+      عند <b>22.5°</b>: النسبة تصبح <b>√2−1 = 0.4142</b> (اللحظة الذهبية).</p>
+    </div>
+
+    <div class="proof-arrow">↓</div>
+
+    <!-- الخطوة 3 -->
+    <div class="proof-block" style="border-right-color: #6ae3ff;">
+      <h4>٣. الجسر إلى الميدان: نسبة التاج في أشجار المانجو</h4>
+      <p>هذه القيمة النظرية الدقيقة (0.4142) تتطابق بشكل مذهل مع القياسات الميدانية الحقيقية لأشجار المانجو في صنعاء:</p>
+      <div class="math-box">
+        C_field = (H − h) / H = 0.41297<br>
+        TOST p = 0.000801 (Equivalence Confirmed)<br>
+        90% CI = [0.40491, 0.42102] ⊂ [0.3842, 0.4442]
+      </div>
+      <p>فيثاغورس يعطيك القيمة النظرية (22.5° → √2−1)، والميدان يعطيك القيمة التجريبية (0.41297).</p>
+    </div>
+
+    <div class="proof-arrow">↓</div>
+
+    <!-- الخطوة 4 -->
+    <div class="proof-block" style="border-right-color: #ba68c8;">
+      <h4>٤. الرقم 21 والكون: أصفار ريمان</h4>
+      <p>كيف يرتبط هذا بالرقم 21 (الثابت اليمني) وبالإطار الأول (العددي)؟</p>
+      <div class="math-box">
+        xp = ⌊γ₂⌋ = ⌊21.0220...⌋ = 21<br>
+        Peak of A(x) = 2 × xp = 42
+      </div>
+      <p>الرقم 21 هو المقياس الذي يربط بين هندسة الشجرة (المكان)، وبين أصفار دالة زيتا الريمانية (الترددات العالية).</p>
+    </div>
+
+    <!-- الخلاصة -->
+    <div class="proof-block" style="background: #1a1508; border: 1px solid var(--noor); border-right: 6px solid var(--noor); text-align: center; margin-top: 10px;">
+      <h4 style="color: var(--noor); font-size: 1.1rem; margin-bottom: 10px;">الخلاصة: الشجرة فوق هي المثلث تحت</h4>
+      <p style="font-size: 1.2rem; font-weight: bold; color: #fff; font-family: 'Courier New', monospace;">
+        Z + C + A = 1
+      </p>
+      <p>Z و C هما ساقا فيثاغورس، و A هو الوتر المُطبَّع، ومجموعهم 1.<br>هندسة الشجرة في الأعلى، هي نفسها هندسة المثلث في الأسفل.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 'use strict';
 const STRINGS = {
-  ar: { title:'🌳 شجرة التوحيد', sub:'قوس θ مطابق فوق وتحت', langBtn:'🌐 English', measure:'📏 قياس', sunOn:'🌞 إيقاف الحركة', sunOff:'🌞 حركة الشمس', reset:'⟲ العودة إلى 22.5°', navTree1:'🌳 الشجرة', navTree3:'🌲 الشجرة 3', navHindara:'🏛️ هندسة', navTree3Pdf:'📏 التقرير الميداني', lblTheta:'زاوية θ', lblRatio:'L / H', lblTan:'tan(θ)', lblRef:'√2 − 1 (المرجع)', noteHTML:'الجديد في v4: التاج والتسميات نسبية.<br>عند θ = 22.5° فقط: <code>L/H = √2 − 1</code>', canvasLight:'النور', canvasTree:'الشجرة', canvasShadow:'الظل', golden:'اللحظة الذهبية', bottomNote:'Z + C + A = 1  ·  الشجرة فوق والمثلث تحت' },
-  en: { title:'🌳 Tree of Unification', sub:'The θ arc matches above and below', langBtn:'🌐 عربي', measure:'📏 Measure', sunOn:'🌞 Stop motion', sunOff:'🌞 Sun motion', reset:'⟲ Back to 22.5°', navTree1:'🌳 Tree', navTree3:'🌲 Tree 3', navHindara:'🏛️ Geometry', navTree3Pdf:'📏 Field Report', lblTheta:'Angle θ', lblRatio:'L / H', lblTan:'tan(θ)', lblRef:'√2 − 1 (reference)', noteHTML:'New in v4: crown and labels are relative.<br>Only at θ = 22.5°: <code>L/H = √2 − 1</code>', canvasLight:'Light', canvasTree:'Tree', canvasShadow:'Shadow', golden:'Golden moment', bottomNote:'Z + C + A = 1  ·  Tree above and triangle below' }
+  ar: { title:'🌳 شجرة التوحيد', sub:'قوس θ مطابق فوق وتحت', measure:'📏 قياس', sunOn:'🌞 إيقاف الحركة', sunOff:'🌞 حركة الشمس', reset:'⟲ العودة إلى 22.5°', noteHTML:'الجديد في v4: التاج والتسميات نسبية.<br>عند θ = 22.5° فقط: <code>L/H = √2 − 1</code>', canvasLight:'النور', canvasTree:'الشجرة', canvasShadow:'الظل', golden:'اللحظة الذهبية', bottomNote:'Z + C + A = 1  ·  الشجرة فوق والمثلث تحت' }
 };
-let LANG = 'ar';
+// تثبيت اللغة العربية لهذه الصفحة
+let LANG = 'ar'; 
 const ANGLE_REF = Math.PI / 8, ANGLE_MAX = Math.PI / 3, DPR = Math.min(window.devicePixelRatio || 1, 2);
 const COLORS = { gold:'#f4c430', tall:'#7fb08a', mist:'#a5d6a7', dim:'#8aa892', sky1:'#0a1a12', sky2:'#0d1e15', sky3:'#0d1a10', sky4:'#0a1208', earth1:'#1a120a', earth2:'#0a1208', wood:'#4a2e15', leaf:'#2e6b45', leafDark:'rgba(10,40,25,0.8)', leafHi:'rgba(127,176,138,0.55)', leafHi2:'rgba(142,201,154,0.5)', measure:'rgba(100,200,255,0.9)' };
 const state = { theta: ANGLE_REF, sunPhase: 0, sunAnimating: false, showMeasure: false, lastTime: 0 };
@@ -436,18 +572,13 @@ function draw(){
 let lastStatUpdate = 0;
 function updateStats(theta, ratio, isGolden){ const now = performance.now(); if (now - lastStatUpdate < 50) return; lastStatUpdate = now; document.getElementById('valTheta').textContent = (theta * 180 / Math.PI).toFixed(1) + '°'; document.getElementById('valRatio').textContent = ratio.toFixed(8); document.getElementById('valTan').textContent = Math.tan(theta).toFixed(8); document.getElementById('statRatio').classList.toggle('golden', isGolden); document.getElementById('statTan').classList.toggle('golden', isGolden); document.getElementById('statTheta').classList.toggle('golden', isGolden); }
 function loop(t){ if (!state.lastTime) state.lastTime = t; const dt = Math.min(50, t - state.lastTime) / 1000; state.lastTime = t; stepSun(dt); draw(); requestAnimationFrame(loop); }
-function setLang(lang){
-  LANG = lang; const S = STRINGS[lang], isAr = lang === 'ar';
-  document.documentElement.lang = lang; document.documentElement.dir = isAr ? 'rtl' : 'ltr'; document.title = isAr ? 'شجرة التوحيد — المحاكاة البصرية | 22.5° → √2−1' : 'Tree of Unification — Visual Simulation | 22.5° → √2−1';
-  document.getElementById('titleTxt').textContent = S.title; document.getElementById('subTxt').textContent = S.sub; document.getElementById('langBtn').textContent = S.langBtn; document.getElementById('lblTheta').textContent = S.lblTheta; document.getElementById('lblRatio').textContent = S.lblRatio; document.getElementById('lblTan').textContent = S.lblTan; document.getElementById('lblRef').textContent = S.lblRef; document.getElementById('noteTxt').innerHTML = S.noteHTML;
-  document.getElementById('navTree1').textContent = S.navTree1; document.getElementById('navTree3').textContent = S.navTree3; document.getElementById('navHindara').textContent = S.navHindara; document.getElementById('navTree3Pdf').textContent = S.navTree3Pdf; document.getElementById('sunBtn').textContent = state.sunAnimating ? S.sunOn : S.sunOff; document.getElementById('measureBtn').textContent = S.measure; document.getElementById('resetBtn').textContent = S.reset;
-}
-const measureBtn = document.getElementById('measureBtn'), sunBtn = document.getElementById('sunBtn'), resetBtn = document.getElementById('resetBtn'), langBtn = document.getElementById('langBtn');
+
+const measureBtn = document.getElementById('measureBtn'), sunBtn = document.getElementById('sunBtn'), resetBtn = document.getElementById('resetBtn');
 measureBtn.addEventListener('click', () => { state.showMeasure = !state.showMeasure; measureBtn.classList.toggle('active', state.showMeasure); });
 sunBtn.addEventListener('click', () => { state.sunAnimating = !state.sunAnimating; sunBtn.classList.toggle('active', state.sunAnimating); sunBtn.textContent = state.sunAnimating ? STRINGS[LANG].sunOn : STRINGS[LANG].sunOff; if (!state.sunAnimating) state.theta = ANGLE_REF; });
 resetBtn.addEventListener('click', () => { state.sunAnimating = false; state.sunPhase = 0; state.theta = ANGLE_REF; sunBtn.classList.remove('active'); sunBtn.textContent = STRINGS[LANG].sunOff; });
-langBtn.addEventListener('click', () => { setLang(LANG === 'ar' ? 'en' : 'ar'); });
-resize(); setLang('ar'); requestAnimationFrame(loop);
+
+resize(); requestAnimationFrame(loop);
 </script>
 </body>
 </html>

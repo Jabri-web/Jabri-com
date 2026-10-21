@@ -1,0 +1,586 @@
+% ================================================================
+% frame2-tex.tex
+% The Tree and the Shadow — Al-Hindara Framework
+% Revised Research Manuscript
+% Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
+% Date: October 2026
+% ================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% ------------------------------------------------
+% Packages
+% ------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% ------------------------------------------------
+% Page layout and metadata
+% ------------------------------------------------
+\geometry{margin=1in}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={The Tree and the Shadow: Reciprocal Silver Ratio and Exploratory Analysis},
+    pdfauthor={Eng. Abdulla M. N. Al-Jabri}
+}
+
+% ------------------------------------------------
+% Header and Footer Customization
+% ------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \textbf{Eng. Abdulla M. N. Al-Jabri} -- Frame 2}
+\fancyhead[R]{\small Al-Hindara Tree-Shadow Study}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\small\textit{The Tree and the Shadow}}
+\fancyfoot[R]{\small \texttt{jabri62018@gmail.com}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+% ------------------------------------------------
+% Title
+% ------------------------------------------------
+\title{
+    \textbf{The Tree and the Shadow:}\\
+    \Large Geometric Derivation of the Reciprocal Silver Ratio
+    \(\sqrt{2}-1\) and an Exploratory Statistical Analysis
+    of Tree Crown Ratios\\[0.5em]
+    \large A Pilot Study Bridging Geometry, Biology,
+    and Number Theory
+}
+
+\author{
+    \textbf{Eng. Abdulla Mohammed Nasser Al-Jabri}\\
+    \small Independent Researcher\\
+    \small Sana'a, Yemen\\
+    \small\texttt{jabri62018@gmail.com}\\
+    \small ORCID:
+    \href{https://orcid.org/0009-0003-3319-3822}
+    {0009-0003-3319-3822}
+}
+
+\date{October 2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+% ================================================================
+% ABSTRACT
+% ================================================================
+\begin{abstract}
+\noindent
+This paper presents the Al-Hindara framework as a conceptual
+approach to connecting geometric modeling, management, and
+empirical observation. It derives the exact trigonometric identity
+\[
+    \tan\left(\frac{\pi}{8}\right)=\sqrt{2}-1,
+\]
+the reciprocal of the conventional Silver Ratio
+\(1+\sqrt{2}\). The paper then explores whether this geometric
+reference value is consistent with the crown-to-total-height
+ratio of five mango trees reported to have been measured in
+Sho'ub, Sana'a, Yemen.
+
+The reported pilot sample has a mean crown ratio of approximately
+\(0.41297\). A Two One-Sided Tests (TOST) procedure is described
+using an equivalence margin of \(\pm 0.03\) around the theoretical
+reference value. Under the assumptions of the test, the reported
+results indicate that the sample mean falls within this
+prespecified equivalence region. The small sample size and
+single-location sampling limit the interpretation: these findings
+do not establish a universal biological law or a causal
+relationship between solar geometry and tree crown structure.
+
+The paper also introduces a conjectural numerical modeling
+proposal involving the integer \(21\), obtained by taking the floor
+of the ordinate of the second positive nontrivial zero of the
+Riemann zeta function. The proposed numerical connection is
+exploratory and is not presented as a theorem about the zeta
+function.
+
+The paper distinguishes an exact geometric identity from
+empirical observations and conjectural numerical constructions.
+Its principal aim is to provide a transparent basis for further
+mathematical and field investigation.
+
+\vspace{1em}
+\noindent\textbf{Keywords:}
+Reciprocal Silver Ratio, Half-Angle Identity, Crown Ratio,
+TOST Equivalence Testing, Mango Trees, Riemann Zeta Function,
+Al-Hindara.
+\end{abstract}
+
+% ================================================================
+% 1. INTRODUCTION
+% ================================================================
+\section{Introduction}
+
+The Al-Hindara framework introduces the conceptual relation
+\begin{equation}
+    Z+C+A=1,
+    \label{eq:hindara}
+\end{equation}
+where \(Z\), \(C\), and \(A\) are intended to represent normalized
+components associated with geometry, management, and synthesis.
+
+In this paper, Equation~\eqref{eq:hindara} is treated as a
+conceptual normalization proposal. The variables must be
+operationally defined and normalized before the equation can be
+tested as a quantitative empirical relationship. It is not a
+consequence of the Pythagorean theorem, and the present study
+does not establish it as a universal law.
+
+The paper has three objectives. First, it derives the exact
+trigonometric value associated with a \(22.5^\circ\) angle measured
+from the vertical. Second, it compares that value with the
+reported crown-to-total-height ratios of five mango trees.
+Third, it outlines a conjectural numerical construction involving
+an integer derived from a nontrivial zero ordinate of the
+Riemann zeta function.
+
+These objectives have different evidential status. The
+trigonometric identity is an exact mathematical result. The
+tree measurements constitute a small exploratory dataset.
+The proposed number-theoretic connection is a conjecture
+that requires a separate mathematical derivation.
+
+% ================================================================
+% 2. GEOMETRIC DERIVATION
+% ================================================================
+\section{Geometric Derivation of the Reciprocal Silver Ratio}
+
+Consider an idealized right triangle in which \(Z\) denotes the
+vertical height, \(C\) the horizontal shadow length, and \(A\) the
+length of the slanted ray. The Pythagorean theorem gives
+\begin{equation}
+    Z^2+C^2=A^2.
+    \label{eq:pythagoras}
+\end{equation}
+
+Let \(\theta\) be the angle between the vertical direction and
+the slanted ray. Under this convention, the side opposite
+\(\theta\) is \(C\), and the adjacent side is \(Z\). Therefore,
+\begin{equation}
+    \tan(\theta)=\frac{C}{Z}.
+    \label{eq:shadow_ratio}
+\end{equation}
+
+This angle convention differs from the conventional solar
+elevation angle measured from the horizontal. If
+\(\theta=22.5^\circ\) from the vertical, the corresponding
+elevation angle from the horizontal is \(67.5^\circ\).
+
+To evaluate the ratio at \(\theta=22.5^\circ\), use the
+half-angle identity
+\begin{equation}
+    \tan\left(\frac{\phi}{2}\right)
+    =\frac{1-\cos\phi}{\sin\phi}.
+    \label{eq:half_angle}
+\end{equation}
+
+Setting \(\phi=45^\circ\) yields
+\begin{align}
+    \tan(22.5^\circ)
+    &=\frac{1-\frac{\sqrt{2}}{2}}
+            {\frac{\sqrt{2}}{2}}\\
+    &=\frac{2-\sqrt{2}}{\sqrt{2}}\\
+    &=\sqrt{2}-1\\
+    &\approx 0.4142135624.
+    \label{eq:reciprocal_silver}
+\end{align}
+
+The conventional Silver Ratio is \(1+\sqrt{2}\). Since
+\[
+    \frac{1}{1+\sqrt{2}}=\sqrt{2}-1,
+\]
+the value in Equation~\eqref{eq:reciprocal_silver} is its
+reciprocal.
+
+This result is exact for the specified idealized geometry.
+It does not imply that tree crown structure must follow the
+same ratio. Any application to biological morphology is an
+empirical hypothesis that requires independent observation.
+
+% ================================================================
+% 3. EXPLORATORY FIELD STUDY
+% ================================================================
+\section{Exploratory Field Measurement Protocol}
+
+\subsection{Study objective and operational definition}
+
+The exploratory analysis compares the geometric reference value
+with a crown ratio defined by
+\begin{equation}
+    R=\frac{H-h}{H},
+    \label{eq:crown_ratio}
+\end{equation}
+where \(H\) is the total tree height and \(h\) is the height of
+the first main branching point, both measured from the same
+ground-level reference.
+
+The variable \(R\) is dimensionless. It represents the fraction
+of total height above the specified branching point under this
+operational definition. It should not automatically be
+interpreted as a complete measure of crown volume, crown width,
+or foliage density.
+
+The target reference is
+\begin{equation}
+    R_0=\sqrt{2}-1\approx0.4142135624.
+    \label{eq:target}
+\end{equation}
+
+\subsection{Reported study setting and measurements}
+
+The supplied study record describes a pilot sample of five
+mango trees (\textit{Mangifera indica}) in Sho'ub, Sana'a,
+Yemen, on October 14, 2026.
+
+The reported measurement procedure specifies a metal measuring
+tape with a stated precision of \(\pm1\) mm and an extendable
+rigid pole used to align the measurement with the highest
+leaf apex. The first main branching point is defined as the
+first clear bifurcation at which each of the two branches
+reaches at least \(30\%\) of the original trunk diameter.
+
+These procedural details should be retained as a description
+of the actual study only if they accurately reflect the
+measurements performed. The nominal precision of the tape
+does not, by itself, establish the total accuracy of a
+7--9 m tree-height measurement. Alignment, access to the
+highest leaf, ground slope, branch identification, and
+repeatability may contribute additional uncertainty.
+
+For reproducibility, a future study should document the
+measurement instrument, the positioning procedure, the
+number of repeat measurements, the treatment of sloping
+ground, and the uncertainty associated with both \(H\) and \(h\).
+
+\subsection{Raw pilot data}
+
+Table~\ref{tab:raw_data} reproduces the five observations
+provided for this analysis. The ratios are calculated from
+the supplied heights using Equation~\eqref{eq:crown_ratio}.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{ccccc}
+\toprule
+Tree & \(H\) (m) & \(h\) (m) & \(R=(H-h)/H\) & Reference\\
+\midrule
+1 & 7.80 & 4.50 & 0.42308 & \(\sqrt{2}-1\)\\
+2 & 8.50 & 5.00 & 0.41176 & \(\sqrt{2}-1\)\\
+3 & 7.20 & 4.20 & 0.41667 & \(\sqrt{2}-1\)\\
+4 & 9.00 & 5.40 & 0.40000 & \(\sqrt{2}-1\)\\
+5 & 7.50 & 4.40 & 0.41333 & \(\sqrt{2}-1\)\\
+\bottomrule
+\end{tabular}
+\caption{Reported pilot measurements and crown ratios.
+The theoretical reference is
+\(R_0=\sqrt{2}-1\approx0.414214\).}
+\label{tab:raw_data}
+\end{table}
+
+% ================================================================
+% 4. STATISTICAL ANALYSIS
+% ================================================================
+\section{Statistical Analysis: TOST Equivalence Procedure}
+
+\subsection{Hypotheses and equivalence margin}
+
+The analysis uses the Two One-Sided Tests (TOST) procedure
+for equivalence testing, following Schuirmann~\cite{schuirmann1987}.
+The stated equivalence margin is
+\begin{equation}
+    \Delta=0.03,
+\end{equation}
+so the equivalence interval around the theoretical reference
+is
+\begin{equation}
+    [R_0-\Delta,\ R_0+\Delta]
+    \approx[0.384214,\ 0.444214].
+    \label{eq:equivalence_bounds}
+\end{equation}
+
+Let \(\mu\) denote the population mean under the sampling model.
+The TOST hypotheses are
+\begin{align}
+    H_{01}&:\mu\leq R_0-\Delta,\\
+    H_{02}&:\mu\geq R_0+\Delta,
+\end{align}
+against the alternative that the mean lies strictly within
+the equivalence limits.
+
+At significance level \(\alpha=0.05\), equivalence is concluded
+only when both one-sided null hypotheses are rejected.
+For the conventional paired interpretation of the TOST and
+the corresponding confidence-interval method, the 90\%
+confidence interval for the mean must lie entirely within
+the equivalence bounds.
+
+The equivalence margin is a substantive tolerance, not a
+quantity determined by the observed data. Its scientific
+justification should be specified independently of the
+observed results. If the margin was selected after inspecting
+the sample, it should be described as exploratory rather than
+prespecified.
+
+\subsection{Descriptive statistics}
+
+Using the five ratios in Table~\ref{tab:raw_data}, the reported
+descriptive statistics are approximately
+\begin{align*}
+    n&=5,\\
+    \bar{R}&=0.41297,\\
+    s&=0.00845,\\
+    SE&=0.00378.
+\end{align*}
+
+Under a one-sample Student \(t\) model with \(df=n-1=4\),
+the reported 90\% confidence interval is approximately
+\begin{equation}
+    [0.40491,\ 0.42102].
+    \label{eq:ci}
+\end{equation}
+
+This interval lies within the equivalence bounds in
+Equation~\eqref{eq:equivalence_bounds}. The reported TOST
+p-value is approximately \(0.000801\), using the larger of
+the two one-sided p-values as the combined TOST p-value.
+
+The numerical result should be interpreted conditional on
+the sampling design and statistical assumptions. In
+particular, the analysis assumes that observations are
+independent and that a one-sample \(t\) procedure is
+appropriate for the population mean. With only five
+observations, distributional assumptions and outlier
+sensitivity cannot be assessed reliably.
+
+\subsection{Interpretation and limitations}
+
+The TOST result indicates that the sample mean is
+statistically equivalent to the theoretical reference
+within the stated margin under the assumptions of the test.
+It does not demonstrate that individual trees have this
+ratio, that the ratio is biologically optimal, or that solar
+geometry causes the observed morphology.
+
+The small sample size and single-location sampling make
+this a preliminary exploratory analysis. A stronger follow-up
+study should use a clearly defined sampling frame, more trees
+from multiple locations, repeatability checks, an
+independently justified equivalence margin, and an
+\textit{a priori} sample-size or power analysis.
+
+If several trees share a site or management history, the
+analysis should also consider whether observations are
+clustered rather than independent.
+
+% ================================================================
+% 5. CONJECTURAL NUMERICAL MODEL
+% ================================================================
+\section{A Conjectural Numerical Construction Involving
+the Riemann Zeta Function}
+
+This section presents a numerical modeling proposal rather
+than a proven connection between tree geometry and the
+Riemann zeta function.
+
+Let \(\zeta(s)\) denote the Riemann zeta function. Write
+\(\gamma_2\approx21.022039\) for the ordinate of the second
+positive nontrivial zero on the critical line, where zeros
+are conventionally expressed as
+\(s=\frac12+i\gamma\) and ordered by increasing positive
+ordinate. The first positive ordinate is approximately
+\(14.134725\), and the second is approximately \(21.022039\)
+\cite{edwards1974}.
+
+Define the integer parameter
+\begin{equation}
+    x_p=\lfloor\gamma_2\rfloor=21.
+    \label{eq:xp}
+\end{equation}
+
+Within the proposed numerical model, the parameter \(x_p\)
+is used in the expression
+\begin{equation}
+    Z(x)=x^{-5}\ln(x)\sin\left(\frac{2\pi}{x}\right)
+    e^{-x/x_p},
+    \qquad x>1.
+    \label{eq:z_field}
+\end{equation}
+
+Equation~\eqref{eq:z_field} defines a model expression.
+The present paper does not derive this expression from
+properties of \(\zeta(s)\), nor does it establish that it
+describes a physical field.
+
+The parameter \(x_p=21\) is referred to within the
+Al-Hindara project as the \textit{Yemeni Constant}. This
+is a project-specific name for the chosen integer parameter,
+not a recognized mathematical constant established by
+the results of this paper.
+
+The model also considers the numerical quantity
+\begin{equation}
+    K=2\pi e^{-1/42}\approx6.1353.
+    \label{eq:model_coefficient}
+\end{equation}
+
+The expression in Equation~\eqref{eq:model_coefficient}
+is mathematically well-defined, but its occurrence alone
+does not establish a connection to the asymptotic behavior
+of zeta zeros or to the Riemann critical line.
+
+In particular, the proposed location \(2x_p=42\) for a peak
+of an accumulation function cannot be verified here because
+that function has not been explicitly defined and analyzed.
+Establishing such a claim would require a precise definition
+of the accumulation function, a domain, appropriate
+regularity conditions, and a derivation locating and
+classifying its extrema.
+
+Accordingly, the recurrence of the integers \(21\) and \(42\)
+is presented as a conjectural feature of the proposed
+numerical construction. No theorem linking these integers
+to the geometric ratio \(\sqrt{2}-1\) or to the distribution
+of nontrivial zeta zeros is claimed.
+
+% ================================================================
+% 6. DISCUSSION
+% ================================================================
+\section{Discussion}
+
+The results of this paper belong to three distinct categories.
+
+First, the half-angle identity in
+Equation~\eqref{eq:reciprocal_silver} is exact and follows
+from standard trigonometry.
+
+Second, the five reported crown ratios produce a sample mean
+close to the geometric reference value. The equivalence
+analysis quantifies this closeness relative to the chosen
+margin, but it cannot establish a universal biological
+pattern from such a small sample.
+
+Third, the numerical construction involving \(x_p=21\) and
+\(K=2\pi e^{-1/42}\) is conjectural. It is a proposal for
+future analysis, not a consequence of the geometric proof
+or the field measurements.
+
+These distinctions are essential to the interpretation of
+the Al-Hindara framework. Conceptual unity can motivate
+mathematical models, but a quantitative relation requires
+operational definitions, reproducible measurements, and
+a derivation or empirical test appropriate to the claim.
+
+% ================================================================
+% 7. CONCLUSION
+% ================================================================
+\section{Conclusion}
+
+This paper derives the exact identity
+\[
+    \tan\left(\frac{\pi}{8}\right)=\sqrt{2}-1,
+\]
+which is the reciprocal of the conventional Silver Ratio.
+Under the specified angle convention, the result gives an
+exact shadow-to-height ratio for an idealized right triangle.
+
+The five reported mango-tree observations have a mean crown
+ratio of approximately \(0.41297\). The reported TOST analysis
+indicates equivalence to the theoretical reference within
+the stated margin of \(\pm0.03\), subject to the assumptions
+and limitations of the analysis. Because the sample is
+small and drawn from one location, the result is exploratory
+and should not be interpreted as evidence of a universal
+biological law or a causal relationship.
+
+The paper also defines a conjectural numerical construction
+using the integer \(x_p=21\). Its proposed relationship to the
+Riemann zeta function remains unproved and requires explicit
+mathematical definitions and independent derivation.
+
+Finally, the relation \(Z+C+A=1\) remains a conceptual
+normalization proposal until its variables and normalization
+rules are formally specified. Future work should prioritize
+reproducible field methods, larger and more diverse samples,
+and rigorous analysis of the proposed numerical model.
+
+% ================================================================
+% REFERENCES
+% ================================================================
+\begin{thebibliography}{99}
+
+\bibitem{schuirmann1987}
+Schuirmann, D. J. (1987).
+A comparison of the two one-sided tests procedure and the
+power approach for assessing the equivalence of average
+bioavailability.
+\textit{Journal of Pharmacokinetics and Biopharmaceutics},
+15(6), 657--680.
+
+\bibitem{edwards1974}
+Edwards, H. M. (1974).
+\textit{Riemann's Zeta Function}.
+Academic Press.
+
+\bibitem{halle1978}
+Hall\'e, F., Oldeman, R. A. A., and Tomlinson, P. B. (1978).
+\textit{Tropical Trees and Forests: An Architectural Analysis}.
+Springer-Verlag.
+
+\end{thebibliography}
+
+% ================================================================
+% APPENDICES
+% ================================================================
+\appendix
+
+\section{Supplementary Web Applications}
+
+The following web applications are listed as supplementary
+project resources. Their availability and calculations should
+be independently checked before publication.
+
+\begin{itemize}
+    \item \textbf{Visual Simulation:}
+    \url{https://jabri-com.vercel.app/tree/tree2.html}
+
+    \item \textbf{TOST Field Tool:}
+    \url{https://jabri-com.vercel.app/tree/tree3.html}
+\end{itemize}
+
+\section{Reproducibility Notes}
+
+For a reproducible statistical report, the analysis archive
+should include the unrounded measurements, the calculation
+of each ratio, the sample standard deviation, the standard
+error, the confidence interval, and the two one-sided
+test statistics and p-values.
+
+The reported summary values in this manuscript are rounded
+for presentation. Calculations should be performed using
+unrounded ratios derived from the original measurements.
+The measurement record should also document the actual
+instrument and field procedure used.
+
+\end{document}
