@@ -123,7 +123,7 @@
         summary { color: var(--blue); cursor: pointer; font-weight: bold; outline: none; }
         details[open] summary { margin-bottom: 15px; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
         .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; }
-        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; text-align: center; }
         .btn-gold { background: var(--gold); }
         .btn-blue { background: var(--blue); }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
@@ -239,6 +239,43 @@
         <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
             <button onclick="window.print()" class="btn btn-blue">🖨️ Print / Save (Text)</button>
             <button onclick="generateDirectPDF()" class="btn btn-gold">📥 Download PDF (Direct)</button>
+        </div>
+    </div>
+
+    <!-- ==================== Section 7: Computational Tools (NEW) ==================== -->
+    <div class="card">
+        <h2>🛠️ 7. Computational Tools & Numerical Verification</h2>
+        <p>To ensure full reproducibility of the results and to rigorously verify the derivatives, the following interactive and programmatic tools are provided with this framework:</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+            
+            <!-- Calculator v3.2.2 -->
+            <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <strong style="color: var(--gold);">Z(x) Interactive Calculator (v3.2.2)</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--dim);">Live web app to calculate Z(x) and its derivatives based on the first 100 Riemann zeros.</span>
+                </div>
+                <a href="calculator.html" target="_blank" class="btn btn-blue">🧮 Open Calculator</a>
+            </div>
+
+            <!-- Calculator v3.4.0 -->
+            <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <strong style="color: var(--gold);">Convergence Calculator (v3.4.0)</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--dim);">Calculates the partial sum Z_N(44) and demonstrates its convergence towards -1.00.</span>
+                </div>
+                <a href="calculator-v340.html" target="_blank" class="btn btn-blue">📈 Open Convergence Tool</a>
+            </div>
+
+            <!-- Numerical Verification -->
+            <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <strong style="color: var(--gold);">Python Numerical Verification</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--dim);">Comparison between analytical and numerical derivatives (error ~10^-13) proving the mathematical integrity of the code.</span>
+                </div>
+                <a href="appendix-d.png" target="_blank" class="btn btn-gold">📊 View Verification Table</a>
+            </div>
+
         </div>
     </div>
 
