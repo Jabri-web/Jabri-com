@@ -98,9 +98,48 @@
         :root { --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; }
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; position: relative; }
-        .lang-btn { position: absolute; top: -10px; right: 0; background: var(--border); color: var(--text); text-decoration: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--dim); transition: 0.3s; }
-        .lang-btn:hover { background: var(--gold); color: var(--bg); }
-        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 30px; }
+        
+        /* Language Toggle Button */
+        .lang-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
+        .lang-btn:hover { background: var(--gold); color: #0a1a12; }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(10, 26, 18, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            width: 100%;
+        }
+        .nav-item {
+            color: var(--dim);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .nav-item:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(244, 196, 48, 0.1);
+        }
+        .nav-item.active {
+            color: #0a1a12;
+            background: var(--gold);
+            border-color: var(--gold);
+            cursor: default;
+        }
+
+        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
@@ -127,13 +166,23 @@
         .btn-gold { background: var(--gold); }
         .btn-blue { background: var(--blue); }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
-        @media print { body { background: white; color: #111; } .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; } h2 { color: #000; border-color: #aaa; } .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; } .lang-btn, button { display: none; } }
+        @media print { body { background: white; color: #111; } .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; } h2 { color: #000; border-color: #aaa; } .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; } .lang-btn, .top-nav, button { display: none; } }
     </style>
 </head>
 <body>
 
 <div class="container" id="pdf-content">
     <a href="frame1.html" class="lang-btn">🌐 العربية</a>
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <a href="../index-en.html" class="nav-item">🏠 Home</a>
+        <a href="frame1-en.html" class="nav-item active">1. Raw Math</a>
+        <a href="bridge-en.html" class="nav-item">Bridge</a>
+        <a href="../tree/frame2-en.html" class="nav-item">2. Application</a>
+        <a href="frame3-en.html" class="nav-item">3. Fine Structure</a>
+        <a href="frame4-en.html" class="nav-item">4. Spectral Problem</a>
+    </nav>
 
     <h1>The Numerical Framework — Interactive Paper</h1>
     <div class="subtitle">
@@ -232,8 +281,9 @@
         <p>For more details, see <b>Frame 2</b> which applies this methodology to the geometric proof of the tree and shadow, and field data.</p>
         
         <div class="links" style="margin-bottom: 15px;">
+            <a href="../index-en.html" class="btn">🏠 Home</a>
+            <a href="bridge-en.html" class="btn">← Bridge</a>
             <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame1_tex.pdf" target="_blank" class="btn btn-gold">📄 Frame 1 PDF (External Link)</a>
-            <a href="/tree/frame2-en.html" class="btn">🌳 Go to Frame 2</a>
         </div>
 
         <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
@@ -325,7 +375,7 @@
 
     window.generateDirectPDF = function() {
         const element = document.getElementById('pdf-content');
-        const buttons = document.querySelectorAll('.lang-btn, button');
+        const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
         buttons.forEach(btn => btn.style.display = 'none'); 
         
         const opt = {

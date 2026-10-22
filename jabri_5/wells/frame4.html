@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame 4 - نحو مسألة طيفية | الحل الصفري والتنظيم الزيتاوي</title>
+    <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization">
+    
+    <!-- MathJax for Equations -->
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root { 
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; 
+            --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; --purple: #c792ea;
+        }
+        body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; position: relative; }
+        .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; }
+        
+        /* زر تبديل اللغة */
+        .lang-btn { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
+        .lang-btn:hover { background: var(--gold); color: #0a1a12; }
+
+        /* شريط التنقل العلوي */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(10, 26, 18, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .nav-item {
+            color: var(--dim);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .nav-item:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(244, 196, 48, 0.1);
+        }
+        .nav-item.active {
+            color: #0a1a12;
+            background: var(--gold);
+            border-color: var(--gold);
+            cursor: default;
+        }
+
+        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
+        .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
+        .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
+        .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
+        
+        .badge-info { background: rgba(106, 227, 255, 0.1); border-right: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-neutral { background: rgba(255, 255, 255, 0.05); border-right: 4px solid #666; padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+
+        .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
+        
+        .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border); }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #04b586; }
+        .btn-gold { background: var(--gold); color: #0a1a12; }
+        .btn-gold:hover { background: #d3a71b; }
+        .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+<a href="frame4-en.html" class="lang-btn">🌐 English</a>
+
+<div class="container">
+    <!-- شريط التنقل العلوي -->
+    <nav class="top-nav">
+        <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
+        <a href="/wells/frame1.html" class="nav-item">1. الإطار الرياضي</a>
+        <a href="/wells/bridge.html" class="nav-item">الجسر (Bridge)</a>
+        <a href="/tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
+        <a href="/wells/frame3.html" class="nav-item">3. البنية الدقيقة</a>
+        <a href="/wells/frame4.html" class="nav-item active">4. المسألة الطيفية</a>
+    </nav>
+
+    <h1>الإطار الرابع: نحو مسألة طيفية</h1>
+    <div class="subtitle">
+        <strong>Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+    </div>
+
+    <div class="card">
+        <h2>1. من مؤثر الإطار الثالث إلى مسألة طيفية</h2>
+        <p>أثبت الإطار الثالث الهوية الجبرية:</p>
+        <div class="math-block">\[ H_g(gY) = g(-Y'') \]</div>
+        <p>وبناءً على ذلك، يمكن تعريف مؤثر شرودنغر مستقل بالصيغة:</p>
+        <div class="math-block">\[ L = -\frac{d^2}{du^2} + V_{\mathrm{eff}}(u), \qquad V_{\mathrm{eff}}(u) = \frac{g''(u)}{g(u)} \]</div>
+        
+        <h3>الحل الصفري والتفكيك الفائق التناظر (Zero Mode and Supersymmetric Factorization)</h3>
+        <div class="badge-info">
+            <strong>خاصية بنيوية للمؤثر:</strong> من تعريف الجهد \(V_{\mathrm{eff}} = g''/g\)، نحصل على الهوية الأساسية:
+            \[ Lg = -g'' + \frac{g''}{g}g = 0 \]
+            أي أن الغلاف \(g(u)\) هو <strong>حل صفري (Zero-Mode)</strong> للمؤثر \(L\) على المجال الداخلي. كما يمكن تفكيك المؤثر جبرياً على الصورة:
+            \[ L = \left(-\frac{d}{du} - p\right)\left(\frac{d}{du} - p\right), \qquad p = \frac{g'}{g} \]
+            هذا التفكيك يتوافق مع البنية الرياضية المستخدمة في الميكانيكا الكمية فائقة التناظر (SUSY QM). لكن التفكيك الشكلي وحده لا يثبت أن كل تحقيق ذاتي الترافق للمؤثر غير سالب؛ ذلك يتوقف على المجال وشروط الحدود. كذلك فإن تسمية "الحالة الأرضية" تتطلب إثبات أنها حالة ذاتية مسموحة وقابلة للتطبيع، وأن الصفر هو أدنى قيمة ذاتية.
+        </div>
+
+        <h3>السلوك التقاربي للجهد \(V_{\mathrm{eff}}(u)\)</h3>
+        <p>باستخدام العلاقة \(V_{\mathrm{eff}} = p' + p^2\)، حيث \(p(u) = \frac{5}{u} - \frac{1}{u\ln(2\pi/u)} + \frac{2\pi}{21u^2}\)، يمكن استخراج السلوك الطرفي:</p>
+        <ul>
+            <li><strong>عند \(u\to0^+\):</strong> يهيمن الحد \(2\pi/(21u^2)\)، ومن ثم \(V_{\mathrm{eff}}(u)\sim \frac{4\pi^2}{441u^4}\to+\infty\).</li>
+            <li><strong>عند \(u\to2\pi^-\):</strong> بوضع \(t=2\pi-u\)، يعطي التوسع الطرفي للغلاف \(g(u) \approx C t\)، ومن ثم \(V_{\mathrm{eff}}(u)\sim -\frac{191}{42\pi(2\pi-u)}\).</li>
+        </ul>
+        <p>هذا <strong>يقيّد تحليل النهايات المفردة ويساعد على تحديد شروط الحدود المناسبة</strong>، ولا يحددها بصورة فريدة بمفرده.</p>
+    </div>
+
+    <div class="card">
+        <h2>2. الغلاف كمنظم طبيعي محتمل (فرضية بحثية)</h2>
+        <p>في نظرية المجال الكمي، حساب طاقة الفراغ يتطلب جمع طاقات نقطة الصفر. إحدى الفرضيات هي أن الغلاف \(g(u)\) يعمل كمنظم طبيعي (Natural Regulator) في المؤثر \(L\).</p>
+        <p>لكن هذا يبقى فرضية حتى نثبت أن السلوك الطيفي عالي الطاقة للمؤثر \(L\) ينتج عنه تقارب. تتمثل الخطوة التالية في <strong>اشتقاق السلوك عالي الطاقة للقيم الذاتية \(\lambda_n\)</strong>، ثم تحديد ما إذا كان مجموع طاقة نقطة الصفر متقارباً أو يتطلب تنظيمًا زيتاوياً.</p>
+    </div>
+
+    <div class="card">
+        <h2>3. دالة زيتا الطيفية وطاقة الفراغ</h2>
+        <p>إذا كان طيفه غير الصفري موجباً وكانت معالجة النمط الصفري محددة، تُعرّف دالة زيتا الطيفية على الطيف غير الصفري بالعلاقة:</p>
+        <div class="math-block">\[ \zeta_{L,\ne0}(s) = \sum_{\lambda_n>0} \lambda_n^{-s} \]</div>
+        <p>وعند توافر الاستمرار التحليلي المناسب، يمكن تعريف طاقة الفراغ المنتظمة زيتاوياً بالعلاقة:</p>
+        <div class="math-block">\[ E_{\mathrm{vac}}^{\mathrm{reg}} = \frac{1}{2}\zeta_{L,\ne0}\left(-\frac{1}{2}\right) \]</div>
+        
+        <div class="badge-neutral">
+            <strong>معالجة الحل الصفري (Zero-Mode):</strong> تحقق الهوية \(Lg=0\) وجود حل صفري للمعادلة التفاضلية على المجال الداخلي. وبما أن \(g\) تتناقص سريعًا عند الطرف الأول وتؤول إلى الصفر خطيًا عند الطرف الثاني، فهي مرشحة لأن تكون دالة ذاتية قابلة للتطبيع. لكن تأكيد أن \(\lambda_0=0\) قيمة ذاتية للمؤثر \(L\) يتطلب إثبات انتماء \(g\) إلى مجال تحقيق ذاتي الترافق محدد.
+            <br><br>
+            إذا ثبت ذلك، تُعرّف دالة زيتا على الطيف غير الصفري كما هو موضح أعلاه. أما إذا لم يُثبت وجود النمط الصفري، فيجب تعريف دالة زيتا على الطيف الذي يثبته التحقيق الذاتي الترافق المختار، لا افتراض وجود نمط صفري مسبقًا. أما عدم سلبية المؤثر، فيجب إثباته بصورة مستقلة من خلال المجال وشروط الحدود أو من خلال صياغة تربيعية مناسبة.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>4. النتائج ونطاق النموذج (Results and Scope)</h2>
+        <p><strong>ما تم إنجازه (الإنتاج الرياضي):</strong> أثبتنا في الإطار الثالث أن الغلاف غير المتماثل يزيل حجة التناظر (بنسبة \(R_{13/12} \approx 0.60352\)). وفي الإطار الرابع، أثبتنا أن الغلاف \(g(u)\) يحقق الهوية التفاضلية الدقيقة \(Lg=0\) على المجال الداخلي، وهو ما يفتح الباب لدراسة المسألة ضمن إطار التفكيك الفائق التناظر.</p>
+        
+        <p><strong>التنبؤ الفيزيائي (مشروط):</strong> إذا ثبتت البنية الذاتية الترافق، وشروط الحدود، والارتباط بين المؤثر والنظام الفيزيائي، أمكن اختبار تنبؤات الطيف. أما نسبة \(R_{13/12}\) فتحتاج إلى توثيق اشتقاقها وافتراضاتها في الإطار الثالث كي تكون تنبؤاً كمياً قابلاً للتحقق.</p>
+        
+        <p><strong>الخطوات القادمة المطلوبة:</strong></p>
+        <ol style="padding-right: 20px;">
+            <li><strong>بناء تحقيق ذاتي الترافق:</strong> تحديد مجال مناسب للمؤثر \(L\)، والتحقق من انتماء \(g\) إليه.</li>
+            <li><strong>دراسة الطيف:</strong> إثبات خصائص الطيف (مثل وجود حد سفلي) قبل الانتقال إلى تفسير طاقة الفراغ.</li>
+            <li><strong>الحساب العددي:</strong> حساب أول مجموعة من القيم الذاتية الموجبة \(\lambda_n\) عددياً.</li>
+        </ol>
+    </div>
+
+    <div class="links">
+        <a href="frame3.html" class="btn">← الإطار الثالث</a>
+        <a href="../index.html" class="btn">🏠 الرئيسية</a>
+    </div>
+
+    <div class="footer">
+        © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
+        Frame 4: Towards a Spectral Problem & Zeta Regularization.
+    </div>
+</div>
+</body>
+</html>

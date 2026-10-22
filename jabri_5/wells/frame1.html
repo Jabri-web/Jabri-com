@@ -99,10 +99,47 @@
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; position: relative; }
         
-        .lang-btn { position: absolute; top: -10px; left: 0; background: var(--border); color: var(--text); text-decoration: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--dim); transition: 0.3s; }
-        .lang-btn:hover { background: var(--gold); color: var(--bg); }
+        /* زر تبديل اللغة */
+        .lang-btn { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
+        .lang-btn:hover { background: var(--gold); color: #0a1a12; }
+
+        /* شريط التنقل العلوي */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(10, 26, 18, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            width: 100%;
+        }
+        .nav-item {
+            color: var(--dim);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .nav-item:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(244, 196, 48, 0.1);
+        }
+        .nav-item.active {
+            color: #0a1a12;
+            background: var(--gold);
+            border-color: var(--gold);
+            cursor: default;
+        }
         
-        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 30px; }
+        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
         
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
@@ -138,13 +175,23 @@
         .btn-blue { background: var(--blue); }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
         
-        @media print { body { background: white; color: #111; } .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; } h2 { color: #000; border-color: #aaa; } .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; } .lang-btn, button { display: none; } }
+        @media print { body { background: white; color: #111; } .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; } h2 { color: #000; border-color: #aaa; } .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; } .lang-btn, .top-nav, button { display: none; } }
     </style>
 </head>
 <body>
 
 <div class="container" id="pdf-content">
     <a href="frame1-en.html" class="lang-btn">🌐 English</a>
+
+    <!-- شريط التنقل العلوي -->
+    <nav class="top-nav">
+        <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
+        <a href="frame1.html" class="nav-item active">1. الإطار الرياضي</a>
+        <a href="bridge.html" class="nav-item">الجسر (Bridge)</a>
+        <a href="../tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
+        <a href="frame3.html" class="nav-item">3. البنية الدقيقة</a>
+        <a href="frame4.html" class="nav-item">4. المسألة الطيفية</a>
+    </nav>
 
     <h1>الإطار العددي — الورقة التفاعلية الشاملة</h1>
     <div class="subtitle">
@@ -265,8 +312,9 @@
         <p>لمزيد من التفاصيل، راجع <b>الإطار الثاني (Frame 2)</b> الذي يطبق هذه المنهجية على البرهان الهندسي للشجرة والظل والبيانات الميدانية.</p>
         
         <div class="links" style="margin-bottom: 15px;">
+            <a href="../index.html" class="btn">🏠 الرئيسية</a>
+            <a href="bridge.html" class="btn">← الجسر (Bridge)</a>
             <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame1_tex.pdf" target="_blank" class="btn btn-gold">📄 Frame 1 PDF (رابط خارجي)</a>
-            <a href="/tree/frame2.html" class="btn">🌳 الانتقال إلى الإطار الثاني (Frame 2)</a>
         </div>
 
         <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
@@ -366,7 +414,7 @@
 
     window.generateDirectPDF = function() {
         const element = document.getElementById('pdf-content');
-        const buttons = document.querySelectorAll('.lang-btn, button');
+        const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
         buttons.forEach(btn => btn.style.display = 'none'); 
         
         const opt = {

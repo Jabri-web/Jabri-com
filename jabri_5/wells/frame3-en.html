@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame 3 - Algebraic Transformation & Symmetry-Induced Cancellation</title>
+    <meta name="description" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model">
+    
+    <!-- MathJax for Equations -->
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root { 
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; 
+            --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; --purple: #c792ea;
+            --code-bg: #1e1e1e; --code-text: #d4d4d4; --terminal-bg: #000000; --terminal-text: #00ff00;
+        }
+        body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; position: relative; }
+        .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; }
+        
+        /* Language Toggle Button */
+        .lang-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
+        .lang-btn:hover { background: var(--gold); color: #0a1a12; }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(10, 26, 18, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .nav-item {
+            color: var(--dim);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .nav-item:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(244, 196, 48, 0.1);
+        }
+        .nav-item.active {
+            color: #0a1a12;
+            background: var(--gold);
+            border-color: var(--gold);
+            cursor: default;
+        }
+
+        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
+        .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
+        .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
+        .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
+        
+        .badge-info { background: rgba(106, 227, 255, 0.1); border-left: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-neutral { background: rgba(255, 255, 255, 0.05); border-left: 4px solid #666; padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+
+        .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+        th, td { border: 1px solid var(--border); padding: 10px; text-align: center; }
+        th { background: #132a1d; color: var(--gold); }
+        td.highlight { background: rgba(244, 196, 48, 0.15); color: var(--gold); font-weight: bold; }
+        ul { padding-left: 20px; } li { margin-bottom: 8px; }
+        .code-btn-container { text-align: center; margin: 20px 0; }
+        .btn-code { background: #2d2d2d; color: var(--blue); border: 1px solid var(--blue); padding: 10px 20px; border-radius: 8px; font-family: monospace; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-code:hover { background: var(--blue); color: #000; }
+        .code-container { display: none; background: var(--code-bg); border: 1px solid #444; border-radius: 8px; margin-top: 15px; position: relative; direction: ltr; text-align: left; overflow: hidden; }
+        .code-header { background: #333; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; }
+        .code-header span { color: #aaa; font-family: monospace; }
+        .btn-copy { background: #555; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+        .btn-copy:hover { background: var(--green); color: black; }
+        pre.code-block { margin: 0; padding: 15px; overflow-x: auto; color: var(--code-text); font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9rem; line-height: 1.5; border-bottom: 2px dashed #555; }
+        .terminal-header { background: #222; color: #fff; padding: 5px 15px; font-family: monospace; font-size: 0.85rem; border-bottom: 1px solid #444; }
+        pre.terminal-output { margin: 0; padding: 15px; background: var(--terminal-bg); color: var(--terminal-text); font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9rem; line-height: 1.4; overflow-x: auto; }
+        .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border); }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #04b586; }
+        .btn-gold { background: var(--gold); color: #0a1a12; }
+        .btn-gold:hover { background: #d3a71b; }
+        .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+<a href="frame3.html" class="lang-btn">🌐 العربية</a>
+
+<div class="container">
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <a href="../index-en.html" class="nav-item">🏠 Home</a>
+        <a href="frame1-en.html" class="nav-item">1. Raw Math</a>
+        <a href="bridge-en.html" class="nav-item">Bridge</a>
+        <a href="../tree/frame2-en.html" class="nav-item">2. Application</a>
+        <a href="frame3-en.html" class="nav-item active">3. Fine Structure</a>
+        <a href="frame4-en.html" class="nav-item">4. Spectral Problem</a>
+    </nav>
+
+    <h1>Frame 3: Algebraic Transformation & Symmetry-Induced Cancellation</h1>
+    <div class="subtitle">
+        <strong>Algebraic Transformation & Symmetry-Induced Cancellation Removal</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+    </div>
+
+    <div class="card">
+        <h2>1. Objective of Frame 3</h2>
+        <div class="badge-info">
+            <strong>🔗 Journey Between Frames:</strong><br>
+            In <strong>Frame 1</strong>, we studied the raw mathematical code via the function \(Z(x)\). In the <strong>Bridge</strong>, we assigned physical scales. Now, in <strong>Frame 3</strong>, we test whether the mathematical structure of the envelope \(g(u)\) can remove the symmetry-induced cancellation in matrix elements, potentially opening the door to new interpretations of spectral transitions.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>2. Algebraic Transformation of the Operator</h2>
+        <p>We define the variable transformation \(u = 2\pi/x\), yielding the function:</p>
+        <div class="math-block">\[ Z(u) = g(u) \sin(u) \]</div>
+        <p>where the envelope is:</p>
+        <div class="math-block">\[ g(u) = \left(\frac{u}{2\pi}\right)^5 \ln\left(\frac{2\pi}{u}\right) e^{-2\pi/(21u)} \]</div>
+        <p>If we define \(p(u) = g'(u)/g(u)\), the explicit formula is:</p>
+        <div class="math-block">\[ p(u) = \frac{5}{u} - \frac{1}{u \ln(2\pi/u)} + \frac{2\pi}{21u^2} \]</div>
+        <p>The following operator satisfies the algebraic identity:</p>
+        <div class="math-block">\[ H_g = -\frac{d^2}{du^2} + 2p(u)\frac{d}{du} + p'(u) - p(u)^2 \]</div>
+        <p>which satisfies: \(H_g(gY) = g(-Y'')\). This means if \(-Y_n'' = \lambda_n Y_n\), then \(H_g(gY_n) = \lambda_n(gY_n)\).</p>
+        
+        <div class="badge-neutral">
+            <strong>Operator Interpretation:</strong> The identity \(H_g(gY) = g(-Y'')\) establishes an exact algebraic relation on the domain where the expressions are defined. It provides the basis for investigating the corresponding spectral problem, including its boundary conditions and operator properties.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>3. Symmetry-Induced Cancellation Removal</h2>
+        <p>In physics, "selection rules" forbid certain transitions due to reflection symmetry. In our domain \(u \in (0, 2\pi)\), the reflection is \(\hat{P}u = 2\pi - u\).</p>
+        <p>Under reflection about the midpoint of the domain \(\hat{P}u = 2\pi - u\), the transition operator \(D(u) = \cos(u/2)\) transforms to \(-D(u)\). Combined with the parity of the basis states \(Y_n(2\pi-u) = (-1)^{n+1}Y_n(u)\), this symmetry forces the reference element \(\mathcal{A}_{13}^{(0)}\) to vanish in the unperturbed model.</p>
+        <p>However, the envelope \(g(u)\) is <strong>not symmetric</strong> under this reflection:</p>
+        <div class="math-block">\[ g(u) \neq g(2\pi - u) \]</div>
+        <p>Introducing the asymmetric envelope removes the symmetry argument that forced \(\mathcal{A}_{13}^{(0)} = 0\) in the reference model. This alone does not guarantee a non-zero integral, but numerical calculation with current definitions yields \(\mathcal{A}_{13} \neq 0\) at \(x_p=21\).</p>
+    </div>
+
+    <div class="card">
+        <h2>4. Transition Elements Test</h2>
+        <p>We chose the transition operator \(D(u) = \cos(u/2)\). For complete documentation and reproducibility, we define the basis states \(Y_n(u)\) and normalized states \(\Psi_n(u)\) using the <strong>standard measure (\(du\))</strong> as follows:</p>
+
+        <div class="math-block">
+            \[ Y_n(u) = \sin\left(\frac{nu}{2}\right), \qquad n=1,2,3,\ldots \]
+            \[ \Psi_n(u) = \frac{g(u)Y_n(u)}{\sqrt{N_n}}, \qquad N_n = \int_0^{2\pi} g(u)^2 Y_n(u)^2 \, du \]
+        </div>
+        <p>The matrix elements and ratio are then defined as:</p>
+        <div class="math-block">
+            \[ \mathcal{A}_{mn} = \int_0^{2\pi} \Psi_m(u) D(u) \Psi_n(u) \, du, \qquad R_{13/12} = \frac{|\mathcal{A}_{13}|^2}{|\mathcal{A}_{12}|^2} \]
+        </div>
+
+        <div class="badge-info">
+            <strong>Mathematical Result:</strong> In the reference model (no envelope), \(\mathcal{A}_{13}^{(0)} = 0\) due to symmetry, while the normalized element \(\mathcal{A}_{12}^{(0)} = 1/2\). However, in this specific model with the envelope and standard measure, the cancellation is removed and \(\mathcal{A}_{13} \neq 0\) (it is negative in these calculations). The ratio of the squared transition elements at \(x_p = 21\) is:
+            \[ R_{13/12} \approx 0.60352 \quad (60.35\%) \]
+        </div>
+
+        <h3>Dependence of the Ratio on \(x_p\) within the Chosen Definitions:</h3>
+        <p>To study the dependence of the ratio on the parameter \(x_p\), it was calculated for several values. The results show a smooth variation within the tested range, with no special behavior appearing at \(x_p=21\).</p>
+        <table>
+            <thead><tr><th>\(x_p\)</th><th>\(R_{13/12}\)</th><th>Observation</th></tr></thead>
+            <tbody>
+                <tr><td>10</td><td>0.61417</td><td>Smooth variation</td></tr>
+                <tr><td>15</td><td>0.60742</td><td>Smooth variation</td></tr>
+                <tr><td class="highlight">21</td><td class="highlight">0.60352</td><td>Reference value</td></tr>
+                <tr><td>30</td><td>0.60056</td><td>Smooth variation</td></tr>
+                <tr><td>50</td><td>0.59778</td><td>Smooth variation</td></tr>
+            </tbody>
+        </table>
+        <p class="footer" style="margin-top: 5px; border: none; padding: 0;">
+            *Values computed numerically using adaptive quadrature via <code>scipy.integrate.quad</code> in Python, with <code>limit=200</code> for maximum subdivisions. Normalization is with respect to the standard measure (\(du\)). Values are approximate and depend on the envelope, states, transition operator, and inner product definitions.
+        </p>
+
+        <div class="code-btn-container">
+            <button class="btn-code" onclick="toggleCode()" id="codeBtn">💻 View Verification Code & Output (Python)</button>
+        </div>
+
+        <div class="code-container" id="pythonCode">
+            <div class="code-header">
+                <span>Python / SciPy Script</span>
+                <button class="btn-copy" onclick="copyCode()" id="copyBtn">Copy Code</button>
+            </div>
+            <pre class="code-block"><code id="codeText">import numpy as np
+from scipy.integrate import quad
+
+def g(u, xp=21.0):
+    if u &lt;= 0 or u &gt;= 2*np.pi: return 0.0
+    return ((u / (2*np.pi))**5) * np.log(2*np.pi / u) * np.exp(-2*np.pi / (xp * u))
+
+def Y(n, u): return np.sin(n * u / 2.0)
+def D(u): return np.cos(u / 2.0)
+
+def norm_integrand(u, n, xp): return (g(u, xp) * Y(n, u))**2
+
+def matrix_element_integrand(u, m, n, xp, N_m, N_n):
+    psi_m = g(u, xp) * Y(m, u) / np.sqrt(N_m)
+    psi_n = g(u, xp) * Y(n, u) / np.sqrt(N_n)
+    return psi_m * D(u) * psi_n
+
+def calculate_ratio(xp):
+    print(f"--- Calculation at x_p = {xp} ---")
+    N_1, err_N1 = quad(norm_integrand, 0, 2*np.pi, args=(1, xp), limit=200)
+    N_2, err_N2 = quad(norm_integrand, 0, 2*np.pi, args=(2, xp), limit=200)
+    N_3, err_N3 = quad(norm_integrand, 0, 2*np.pi, args=(3, xp), limit=200)
+    
+    print(f"N_1 = {N_1:.10f} (err: {err_N1:.1e})")
+    print(f"N_2 = {N_2:.10f} (err: {err_N2:.1e})")
+    print(f"N_3 = {N_3:.10f} (err: {err_N3:.1e})")
+    
+    A_12, err_A12 = quad(matrix_element_integrand, 0, 2*np.pi, args=(1, 2, xp, N_1, N_2), limit=200)
+    A_13, err_A13 = quad(matrix_element_integrand, 0, 2*np.pi, args=(1, 3, xp, N_1, N_3), limit=200)
+    
+    print(f"A_12 = {A_12:.8f} (err: {err_A12:.1e})")
+    print(f"A_13 = {A_13:.8f} (err: {err_A13:.1e})")
+    
+    R = (abs(A_13)**2) / (abs(A_12)**2)
+    print(f"R_13/12 = {R:.8f}\n")
+    return R
+
+x_values = [10, 15, 21, 30, 50]
+for xp in x_values:
+    calculate_ratio(xp)</code></pre>
+            
+            <div class="terminal-header">Terminal Output (Numerical Results)</div>
+            <pre class="terminal-output">--- Calculation at x_p = 10 ---
+N_1 = 0.0030709680 (err: 2.1e-14)
+N_2 = 0.0048258897 (err: 2.0e-14)
+N_3 = 0.0042376174 (err: 2.0e-14)
+A_12 = 0.62678855 (err: 1.2e-14)
+A_13 = -0.49120653 (err: 1.1e-14)
+R_13/12 = 0.61416656
+
+--- Calculation at x_p = 15 ---
+N_1 = 0.0033843304 (err: 2.1e-14)
+N_2 = 0.0052677281 (err: 2.0e-14)
+N_3 = 0.0046153844 (err: 2.0e-14)
+A_12 = 0.62379990 (err: 1.2e-14)
+A_13 = -0.48617326 (err: 1.1e-14)
+R_13/12 = 0.60742342
+
+--- Calculation at x_p = 21 ---
+N_1 = 0.0035779945 (err: 2.1e-14)
+N_2 = 0.0055384080 (err: 2.0e-14)
+N_3 = 0.0048466511 (err: 2.0e-14)
+A_12 = 0.62207485 (err: 1.2e-14)
+A_13 = -0.48326669 (err: 1.1e-14)
+R_13/12 = 0.60351552
+
+--- Calculation at x_p = 30 ---
+N_1 = 0.0037307068 (err: 2.1e-14)
+N_2 = 0.0057506430 (err: 2.0e-14)
+N_3 = 0.0050279116 (err: 2.0e-14)
+A_12 = 0.62077276 (err: 1.2e-14)
+A_13 = -0.48107216 (err: 1.1e-14)
+R_13/12 = 0.60055827
+
+--- Calculation at x_p = 50 ---
+N_1 = 0.0038792969 (err: 2.1e-14)
+N_2 = 0.0059561711 (err: 2.0e-14)
+N_3 = 0.0052033919 (err: 2.0e-14)
+A_12 = 0.61955102 (err: 1.2e-14)
+A_13 = -0.47901258 (err: 1.1e-14)
+R_13/12 = 0.59777767</pre>
+        </div>
+
+        <div class="badge-neutral" style="margin-top: 20px;">
+            <strong>Comparison of Inner Products:</strong><br>
+            The calculated transition-element ratio depends on the inner product used to normalize the states. With the unweighted measure \(du\), the present model gives \(R_{13/12} \approx 0.60352\) at \(x_p=21\). With the weighted inner product \(\langle f,h\rangle_g = \int_0^{2\pi} f^*(u)h(u)/g(u)^2\,du\), the envelope cancels algebraically, and the reference symmetry gives \(R_{13/12} = 0\).
+            <br><br>
+            This comparison reveals how the mathematical structure and the choice of inner product affect the result. The appropriate inner product for a physical application remains to be determined from the system being modeled.
+            <br><br>
+            <span style="font-size: 0.9rem; color: var(--dim);">
+                <em>Note: Since \(g(u) \to 0\) at the boundaries, the weight \(1/g(u)^2\) becomes singular there, and defining the Hilbert space and boundary conditions requires independent analysis.</em>
+            </span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>5. Results and Scope of the Model</h2>
+        <p>The present model establishes an algebraic transformation of \(Z(u)\), identifies the symmetry responsible for the vanishing reference matrix element, and demonstrates how an asymmetric envelope changes the calculated transition elements under the specified normalization.</p>
+        <p>For \(x_p=21\), numerical integration gives \(R_{13/12} \approx 0.60352\). The dependence of this ratio on \(x_p\) is also examined, and the calculation is provided for independent reproduction.</p>
+        <p>These results motivate further investigation of the associated spectral problem, the appropriate state space and inner product, and the possible relevance of the model to physical systems.</p>
+    </div>
+
+    <div class="links">
+        <a href="../tree/frame2-en.html" class="btn">← Frame 2</a>
+        <a href="../index-en.html" class="btn">🏠 Home</a>
+        <a href="frame4-en.html" class="btn btn-gold">Frame 4 →</a>
+    </div>
+
+    <div class="footer">
+        © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
+        Frame 3: Algebraic Transformation & Symmetry-Induced Cancellation Removal.
+    </div>
+</div>
+
+<script>
+    function toggleCode() {
+        const container = document.getElementById('pythonCode');
+        const btn = document.getElementById('codeBtn');
+        if (container.style.display === 'none' || container.style.display === '') {
+            container.style.display = 'block';
+            btn.innerHTML = '❌ Hide Code & Output';
+            btn.style.background = '#444'; btn.style.color = '#fff';
+        } else {
+            container.style.display = 'none';
+            btn.innerHTML = '💻 View Verification Code & Output (Python)';
+            btn.style.background = '#2d2d2d'; btn.style.color = 'var(--blue)';
+        }
+    }
+    function copyCode() {
+        const codeText = document.getElementById('codeText').innerText;
+        const showSuccess = () => {
+            const btn = document.getElementById('copyBtn');
+            btn.innerText = 'Copied! ✔️';
+            btn.style.background = 'var(--green)'; btn.style.color = '#000';
+            setTimeout(() => {
+                btn.innerText = 'Copy Code';
+                btn.style.background = '#555'; btn.style.color = 'white';
+            }, 2000);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(codeText).then(showSuccess).catch(err => fallbackCopy(codeText, showSuccess));
+        } else {
+            fallbackCopy(codeText, showSuccess);
+        }
+    }
+    function fallbackCopy(text, callback) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text; textArea.style.position = "fixed"; textArea.style.top = "-9999px";
+        document.body.appendChild(textArea); textArea.focus(); textArea.select();
+        try {
+            if (document.execCommand('copy')) callback();
+            else alert('Auto-copy failed. Please select and copy manually.');
+        } catch (err) { alert('Error copying text.'); }
+        document.body.removeChild(textArea);
+    }
+</script>
+</body>
+</html>

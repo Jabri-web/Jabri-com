@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame 4 - Towards a Spectral Problem | Zero Mode and Zeta Regularization</title>
+    <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization">
+    
+    <!-- MathJax for Equations -->
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root { 
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; 
+            --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; --purple: #c792ea;
+        }
+        body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; position: relative; }
+        .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; }
+        
+        /* Language Toggle Button */
+        .lang-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
+        .lang-btn:hover { background: var(--gold); color: #0a1a12; }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(10, 26, 18, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .nav-item {
+            color: var(--dim);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .nav-item:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(244, 196, 48, 0.1);
+        }
+        .nav-item.active {
+            color: #0a1a12;
+            background: var(--gold);
+            border-color: var(--gold);
+            cursor: default;
+        }
+
+        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
+        .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
+        .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
+        .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
+        
+        .badge-info { background: rgba(106, 227, 255, 0.1); border-left: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-neutral { background: rgba(255, 255, 255, 0.05); border-left: 4px solid #666; padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+
+        .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
+        
+        .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border); }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #04b586; }
+        .btn-gold { background: var(--gold); color: #0a1a12; }
+        .btn-gold:hover { background: #d3a71b; }
+        .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+<a href="frame4.html" class="lang-btn">🌐 العربية</a>
+
+<div class="container">
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <a href="../index-en.html" class="nav-item">🏠 Home</a>
+        <a href="frame1-en.html" class="nav-item">1. Raw Math</a>
+        <a href="bridge-en.html" class="nav-item">Bridge</a>
+        <a href="../tree/frame2-en.html" class="nav-item">2. Application</a>
+        <a href="frame3-en.html" class="nav-item">3. Fine Structure</a>
+        <a href="frame4-en.html" class="nav-item active">4. Spectral Problem</a>
+    </nav>
+
+    <h1>Frame 4: Towards a Spectral Problem</h1>
+    <div class="subtitle">
+        <strong>Towards a Spectral Problem, Zero Mode, and Zeta Regularization</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+    </div>
+
+    <div class="card">
+        <h2>1. From the Frame 3 Operator to a Spectral Problem</h2>
+        <p>Frame 3 established the algebraic identity:</p>
+        <div class="math-block">\[ H_g(gY) = g(-Y'') \]</div>
+        <p>Accordingly, an independent Schrödinger operator can be defined as:</p>
+        <div class="math-block">\[ L = -\frac{d^2}{du^2} + V_{\mathrm{eff}}(u), \qquad V_{\mathrm{eff}}(u) = \frac{g''(u)}{g(u)} \]</div>
+        
+        <h3>Zero Mode and Supersymmetric Factorization</h3>
+        <div class="badge-info">
+            <strong>Structural Property of the Operator:</strong> From the potential definition \(V_{\mathrm{eff}} = g''/g\), we obtain the fundamental identity:
+            \[ Lg = -g'' + \frac{g''}{g}g = 0 \]
+            This means the envelope \(g(u)\) is a <strong>Zero-Mode</strong> solution of \(L\) on the interior domain. Furthermore, the operator can be algebraically factorized as:
+            \[ L = \left(-\frac{d}{du} - p\right)\left(\frac{d}{du} - p\right), \qquad p = \frac{g'}{g} \]
+            This factorization aligns with the mathematical structure of Supersymmetric Quantum Mechanics (SUSY QM). However, the formal factorization alone does not prove that every self-adjoint realization of the operator is non-negative; this depends on the domain and boundary conditions. Likewise, calling it the "ground state" requires proving it is an allowed, normalizable eigenstate, and that zero is the lowest eigenvalue.
+        </div>
+
+        <h3>Asymptotic Behavior of \(V_{\mathrm{eff}}(u)\)</h3>
+        <p>Using \(V_{\mathrm{eff}} = p' + p^2\), where \(p(u) = \frac{5}{u} - \frac{1}{u\ln(2\pi/u)} + \frac{2\pi}{21u^2}\), the endpoint behavior is:</p>
+        <ul>
+            <li><strong>As \(u\to0^+\):</strong> The term \(2\pi/(21u^2)\) dominates, yielding \(V_{\mathrm{eff}}(u)\sim \frac{4\pi^2}{441u^4}\to+\infty\).</li>
+            <li><strong>As \(u\to2\pi^-\):</strong> Letting \(t=2\pi-u\), the envelope behaves as \(g(u) \approx C t\), yielding \(V_{\mathrm{eff}}(u)\sim -\frac{191}{42\pi(2\pi-u)}\).</li>
+        </ul>
+        <p>This <strong>constrains the analysis of singular endpoints and helps determine appropriate boundary conditions</strong>, but does not uniquely determine them on its own.</p>
+    </div>
+
+    <div class="card">
+        <h2>2. The Envelope as a Candidate Natural Regulator (Research Hypothesis)</h2>
+        <p>In QFT, calculating Vacuum Energy requires summing zero-point energies. One hypothesis is that the envelope \(g(u)\) acts as a natural regulator in operator \(L\).</p>
+        <p>However, this remains a hypothesis until we prove that the high-energy spectral behavior of \(L\) results in convergence. The next step is to <strong>derive the high-energy behavior of the eigenvalues \(\lambda_n\)</strong>, and then determine whether the sum is convergent or requires zeta regularization.</p>
+    </div>
+
+    <div class="card">
+        <h2>3. Spectral Zeta Function and Vacuum Energy</h2>
+        <p>If its non-zero spectrum is positive and the zero-mode treatment is specified, the spectral zeta function is defined over the non-zero spectrum as:</p>
+        <div class="math-block">\[ \zeta_{L,\ne0}(s) = \sum_{\lambda_n>0} \lambda_n^{-s} \]</div>
+        <p>Given appropriate analytic continuation, the zeta-regularized vacuum energy is defined as:</p>
+        <div class="math-block">\[ E_{\mathrm{vac}}^{\mathrm{reg}} = \frac{1}{2}\zeta_{L,\ne0}\left(-\frac{1}{2}\right) \]</div>
+        
+        <div class="badge-neutral">
+            <strong>Handling the Zero-Mode:</strong> The identity \(Lg=0\) verifies the existence of a zero solution to the differential equation on the interior domain. Since \(g\) decays rapidly at the first endpoint and approaches zero linearly at the second, it is a candidate for a normalizable eigenfunction. However, confirming that \(\lambda_0=0\) is an eigenvalue of operator \(L\) requires proving that \(g\) belongs to the domain of a specific self-adjoint realization.
+            <br><br>
+            If this is established, the zeta function is defined on the non-zero spectrum as shown above. If the existence of the zero mode is not proven, the zeta function must be defined on the spectrum established by the chosen self-adjoint realization, not by assuming a zero mode in advance. The non-negativity of the operator must be proven independently through the domain and boundary conditions or through an appropriate quadratic form.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>4. Results and Scope of the Model</h2>
+        <p><strong>What has been achieved (Mathematical Production):</strong> In Frame 3, we proved that the asymmetric envelope removes the symmetry argument (yielding \(R_{13/12} \approx 0.60352\)). In Frame 4, we established that the envelope \(g(u)\) satisfies the exact differential identity \(Lg=0\) on the interior domain, opening the way to a supersymmetric factorization approach.</p>
+        
+        <p><strong>Physical Prediction (Conditional):</strong> If self-adjointness, boundary conditions, and the connection between the operator and a physical system are established, the spectral predictions can be tested. The \(R_{13/12}\) ratio requires documented derivation and assumptions in Frame 3 to serve as a quantitative prediction.</p>
+        
+        <p><strong>Required Next Steps:</strong></p>
+        <ol style="padding-left: 20px;">
+            <li><strong>Building a Self-Adjoint Realization:</strong> Define an appropriate domain for operator \(L\), and verify that \(g\) belongs to it.</li>
+            <li><strong>Studying the Spectrum:</strong> Prove spectral properties (such as the existence of a lower bound) before moving to vacuum energy interpretation.</li>
+            <li><strong>Numerical Calculation:</strong> Compute the first set of positive eigenvalues \(\lambda_n\) numerically.</li>
+        </ol>
+    </div>
+
+    <div class="links">
+        <a href="frame3-en.html" class="btn">← Frame 3</a>
+        <a href="../index-en.html" class="btn">🏠 Home</a>
+    </div>
+
+    <div class="footer">
+        © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
+        Frame 4: Towards a Spectral Problem & Zeta Regularization.
+    </div>
+</div>
+</body>
+</html>
