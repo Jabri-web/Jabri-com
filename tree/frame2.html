@@ -91,6 +91,42 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top,#182b43 0,#0b1220 55%);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}
 .wrap{max-width:1120px;margin:auto;padding:20px}.hero,.card{border:1px solid var(--line);background:rgba(18,30,48,.94);border-radius:18px;padding:clamp(16px,3vw,28px);margin:14px 0;box-shadow:0 12px 32px #0002;position:relative;}
 .hero{background:linear-gradient(135deg,#1b3048,#111d2e 70%);border-top:3px solid var(--gold)}
+
+/* شريط التنقل العلوي */
+.top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(18, 30, 48, 0.9);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.nav-item {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+.nav-item:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(242, 200, 121, 0.1);
+}
+.nav-item.active {
+    color: #19202b;
+    background: var(--gold);
+    border-color: var(--gold);
+    cursor: default;
+}
+
 .kicker{color:var(--gold);font-weight:800;letter-spacing:.04em}h1{font-size:clamp(1.8rem,5vw,3.2rem);line-height:1.25;margin:.4rem 0}h2{font-size:1.45rem;margin:0 0 12px;color:var(--gold)}h3{font-size:1.08rem;color:var(--cyan)}p{margin:.5rem 0 1rem}.muted,small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}.stat{background:var(--panel2);padding:15px;border-radius:13px;border:1px solid var(--line)}.stat b{display:block;font-size:1.45rem;color:var(--cyan);direction:ltr;text-align:right}.formula{direction:ltr;text-align:center;font-family:Cambria,"Times New Roman",serif;font-size:clamp(1.1rem,3vw,1.6rem);padding:15px;background:#0b1524;border:1px solid #314966;border-radius:12px;overflow-wrap:anywhere;margin:12px 0}.callout{border-right:4px solid var(--gold);background:#2a261b;padding:12px 15px;border-radius:8px}.good{border-right-color:var(--green);background:#142a25}.warn{border-right-color:var(--red);background:#30201f}
 table{width:100%;border-collapse:collapse;min-width:620px;font-variant-numeric:tabular-nums}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:center}th{background:#1b2b41;color:var(--gold)}td{direction:ltr} .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
 label{display:block;margin:12px 0 4px;color:var(--muted)}input[type=range]{width:100%;accent-color:var(--cyan)}input[type=number]{background:#0b1524;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:9px;width:100%;font:inherit}button{background:var(--gold);color:#19202b;border:0;padding:10px 15px;border-radius:9px;font-weight:800;font:inherit;cursor:pointer}button.secondary{background:#233750;color:var(--ink);border:1px solid var(--line)}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.canvas-wrap{background:#0a1422;border:1px solid var(--line);border-radius:12px;padding:8px;overflow:hidden}svg{display:block;width:100%;height:auto} .legend{display:flex;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:.9rem}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-left:5px}.pill{display:inline-block;border:1px solid var(--line);background:#17263b;border-radius:99px;padding:3px 10px;margin:3px;color:var(--muted);font-size:.85rem}
@@ -99,153 +135,165 @@ details{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px
 .btn-nav:hover{background:#314966}
 .btn-pdf{display:inline-block;background:var(--gold);color:#19202b;text-decoration:none;padding:10px 15px;border-radius:9px;font-weight:bold;margin:5px;transition:0.3s}
 .btn-pdf:hover{background:#e0b568}
-.lang-btn { position: absolute; top: 15px; left: 20px; background: rgba(255,255,255,0.1); color: var(--ink); text-decoration: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--line); transition: 0.3s; }
+.lang-btn { position: absolute; top: 15px; left: 20px; background: rgba(255,255,255,0.1); color: var(--ink); text-decoration: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--line); transition: 0.3s; z-index: 100; }
 .lang-btn:hover { background: var(--gold); color: #111; }
 @media(max-width:600px){.wrap{padding:10px}.hero,.card{padding:15px;border-radius:13px}th,td{padding:8px;font-size:.9rem}.lang-btn{top:10px; left:10px;}}
-@media print{body{background:white;color:#111}.hero,.card{background:white;color:#111;box-shadow:none;border:1px solid #aaa;break-inside:avoid}h2,h3,.kicker{color:#333}.muted,small{color:#444}.formula,.stat,.callout,.canvas-wrap,th{background:#f5f5f5;color:#111}button,input,a,.lang-btn{display:none}td,th{border-color:#aaa}}
+@media print{body{background:white;color:#111}.hero,.card{background:white;color:#111;box-shadow:none;border:1px solid #aaa;break-inside:avoid}h2,h3,.kicker{color:#333}.muted,small{color:#444}.formula,.stat,.callout,.canvas-wrap,th{background:#f5f5f5;color:#111}button,input,a,.lang-btn,.top-nav{display:none}td,th{border-color:#aaa}}
 </style>
 </head>
 <body>
 <div class="wrap" id="pdf-content">
-<header class="hero">
-  <a href="frame2-en.html" class="lang-btn">🌐 English</a>
-  <div class="kicker">AL-HINDARA · FRAME 2 · OCTOBER 2026</div>
-  <h1>الشجرة والظل</h1>
-  <p>إطار هندسي وعددي قابل لإعادة التشغيل: برهان زاوية 22.5°، ومحاكاة تفاعلية، ورسم بياني، وجدول القياسات الأولية.</p>
-  <div>
-    <span class="pill">المؤلف: م/ عبدالله محمد ناصر الجبري</span>
-    <span class="pill">شعوب — صنعاء — اليمن</span><br>
-    <span class="pill" style="color:var(--gold); border-color:var(--gold);">Frame 1 DOI: 10.5281/zenodo.23540283</span>
-    <span class="pill" style="color:var(--green); border-color:var(--green);">Frame 2 DOI: 10.5281/zenodo.23540796</span>
-    <span class="pill">OSF DOI: 10.17605/OSF.IO/YC9MB</span>
-  </div>
-  <p class="muted">هذه الصفحة تميّز بين البرهان الرياضي الدقيق، والبيانات الميدانية الاستكشافية، والفرضيات التي ما زالت تحتاج إلى اختبار مستقل.</p>
-</header>
 
-<section class="card">
-<h2>1. النتيجة الرياضية الدقيقة</h2>
-<p>إذا كانت الزاوية θ مقاسة من الاتجاه الرأسي، فإن زاوية ارتفاع الشمس عن الأفق هي α = 90° − θ. ولشعاع شمسي يصنع زاوية ارتفاع α مع أرض أفقية، ينتج من مثلث قائم أن نسبة الظل الأفقي إلى الارتفاع الرأسي هي:</p>
-<div class="formula">S / H = cot(α) = tan(θ)</div>
-<p>عند θ = 22.5° تكون α = 67.5°، وبالتالي:</p>
-<div class="formula">tan(22.5°) = tan(45° / 2) = √2 − 1 ≈ 0.4142135624</div>
-<h3>برهان نصف الزاوية</h3>
-<p>ضع x = tan(22.5°). وبما أن tan(45°) = 1، فمن صيغة ضعف الزاوية:</p>
-<div class="formula">1 = tan(45°) = 2x / (1 − x²)</div>
-<p>إعادة الترتيب تعطي x² + 2x − 1 = 0. ومن حل المعادلة التربيعية:</p>
-<div class="formula">x = −1 ± √2</div>
-<p>ولأن 22.5° زاوية حادة فـ x موجب، لذلك:</p>
-<div class="formula">x = √2 − 1</div>
-<div class="callout good"><b>ما الذي ثبت؟</b> القيمة المثلثية الدقيقة √2−1، وعلاقة الظل الهندسية تحت افتراض سطح أفقي وشعاع ضوئي مستقيم وقياس صحيح للزاوية. هذا لا يثبت وحده أن نسبة تاج شجرة مقاسة ميدانيًا يجب أن تساوي هذه القيمة.</div>
-</section>
+  <!-- شريط التنقل العلوي -->
+  <nav class="top-nav">
+      <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
+      <a href="../wells/frame1.html" class="nav-item">1. الإطار الرياضي</a>
+      <a href="../wells/bridge.html" class="nav-item">الجسر (Bridge)</a>
+      <a href="frame2.html" class="nav-item active">2. الإطار التطبيقي</a>
+      <a href="../wells/frame3.html" class="nav-item">3. البنية الدقيقة</a>
+      <a href="../wells/frame4.html" class="nav-item">4. المسألة الطيفية</a>
+  </nav>
 
-<section class="card">
-<h2>2. محاكاة هندسية تفاعلية</h2>
-<p>غيّر ارتفاع الجسم وزاوية θ لترى طول الظل المتوقع وفق النموذج الهندسي. θ هنا مقاسة من الرأسي، لا من الأفق.</p>
-<div class="controls">
- <div><label for="height">الارتفاع الرأسي H (متر)</label><input id="height" type="number" min="0.1" max="100" step="0.1" value="7.8"></div>
- <div><label for="theta">θ من الرأسي: <b id="thetaVal">22.5°</b></label><input id="theta" type="range" min="5" max="60" step="0.5" value="22.5"></div>
- <div><label for="sun">ارتفاع الشمس α: <b id="alphaVal">67.5°</b></label><input id="sun" type="range" min="30" max="85" step="0.5" value="67.5"></div>
-</div>
-<div class="grid" style="margin-top:12px">
- <div class="stat"><span class="muted">طول الظل النظري S</span><b id="shadowVal">3.23 m</b></div>
- <div class="stat"><span class="muted">النسبة S/H</span><b id="ratioVal">0.41421</b></div>
- <div class="stat"><span class="muted">tan(θ)</span><b id="tanVal">0.41421</b></div>
-</div>
-<div class="canvas-wrap" style="margin-top:14px">
-<svg id="simSvg" viewBox="0 0 720 300" role="img" aria-label="رسم مثلث قائم يوضح ارتفاع الجسم وطول الظل والشعاع الشمسي">
- <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f2c879"/></marker></defs>
- <line x1="55" y1="240" x2="665" y2="240" stroke="#a8b8ce" stroke-width="2"/>
- <line id="treeLine" x1="150" y1="240" x2="150" y2="55" stroke="#8bd5a5" stroke-width="8" stroke-linecap="round"/>
- <line id="shadowLine" x1="150" y1="240" x2="390" y2="240" stroke="#76d6e8" stroke-width="5" stroke-linecap="round"/>
- <line id="rayLine" x1="150" y1="55" x2="390" y2="240" stroke="#f2c879" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
- <path id="rightAngle" d="M150 220 L170 220 L170 240" fill="none" stroke="#edf4ff" stroke-width="2"/>
- <text id="hLabel" x="130" y="150" fill="#8bd5a5" text-anchor="end" font-size="16">H = 7.8 m</text>
- <text id="sLabel" x="270" y="265" fill="#76d6e8" text-anchor="middle" font-size="16">S = 3.23 m</text>
- <text id="thetaLabel" x="205" y="220" fill="#f2c879" text-anchor="middle" font-size="14">θ = 22.5°</text>
- <text x="360" y="25" fill="#a8b8ce" text-anchor="middle" font-size="14">الرسم تخطيطي؛ النسب البصرية تتكيف مع القيم</text>
-</svg>
-<div class="legend"><span><i class="dot" style="background:#8bd5a5"></i>الارتفاع H</span><span><i class="dot" style="background:#76d6e8"></i>الظل S</span><span><i class="dot" style="background:#f2c879"></i>الشعاع الشمسي</span></div>
-</div>
-<p class="muted">تنبيه: إذا غُيّرت زاوية ارتفاع الشمس α، تُحسب زاوية θ المكملة تلقائيًا؛ وإذا غُيّرت θ مباشرة، تتغير α إلى 90°−θ.</p>
-</section>
+  <header class="hero">
+    <a href="frame2-en.html" class="lang-btn">🌐 English</a>
+    <div class="kicker">AL-HINDARA · FRAME 2 · OCTOBER 2026</div>
+    <h1>الشجرة والظل</h1>
+    <p>إطار هندسي وعددي قابل لإعادة التشغيل: برهان زاوية 22.5°، ومحاكاة تفاعلية، ورسم بياني، وجدول القياسات الأولية.</p>
+    <div>
+      <span class="pill">المؤلف: م/ عبدالله محمد ناصر الجبري</span>
+      <span class="pill">شعوب — صنعاء — اليمن</span><br>
+      <span class="pill" style="color:var(--gold); border-color:var(--gold);">Frame 1 DOI: 10.5281/zenodo.23540283</span>
+      <span class="pill" style="color:var(--green); border-color:var(--green);">Frame 2 DOI: 10.5281/zenodo.23540796</span>
+      <span class="pill">OSF DOI: 10.17605/OSF.IO/YC9MB</span>
+    </div>
+    <p class="muted">هذه الصفحة تميّز بين البرهان الرياضي الدقيق، والبيانات الميدانية الاستكشافية، والفرضيات التي ما زالت تحتاج إلى اختبار مستقل.</p>
+  </header>
 
-<section class="card">
-<h2>3. القياسات الميدانية الأولية</h2>
-<p>خمس أشجار مانجو في شعوب، صنعاء؛ تاريخ القياس المسجل: 14 أكتوبر 2026. الرمز H هو الارتفاع الكلي، وh هو الارتفاع السفلي المقاس، وC = H−h هو الفرق الرأسي. النسبة المدروسة R = (H−h)/H.</p>
-<div class="table-scroll"><table id="dataTable">
-<thead><tr><th>الشجرة</th><th>H (m)</th><th>h (m)</th><th>C = H−h (m)</th><th>R = C/H</th><th>الفرق عن √2−1</th></tr></thead>
-<tbody>
-<tr><th>1</th><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00887</td></tr>
-<tr><th>2</th><td>8.50</td><td>5.00</td><td>3.50</td><td>0.41176</td><td>−0.00245</td></tr>
-<tr><th>3</th><td>7.20</td><td>4.20</td><td>3.00</td><td>0.41667</td><td>+0.00245</td></tr>
-<tr><th>4</th><td>9.00</td><td>5.40</td><td>3.60</td><td>0.40000</td><td>−0.01421</td></tr>
-<tr><th>5</th><td>7.50</td><td>4.40</td><td>3.10</td><td>0.41333</td><td>−0.00088</td></tr>
-</tbody></table></div>
-<div class="grid" style="margin-top:14px">
- <div class="stat"><span class="muted">متوسط R</span><b>0.41297</b></div>
- <div class="stat"><span class="muted">الانحراف المعياري للعينة</span><b>0.00845</b></div>
- <div class="stat"><span class="muted">الخطأ المعياري</span><b>0.00378</b></div>
- <div class="stat"><span class="muted">فاصل الثقة 90% للمتوسط</span><b style="font-size:1.1rem">[0.40491, 0.42102]</b></div>
-</div>
-<div class="callout warn"><b>تمييز مهم في القياس:</b> C = H−h فرق ارتفاع رأسي، وليس طول ظل أفقيًا. لذلك لا ينبغي تسمية C «طول الظل» ما لم يكن القياس الميداني قد عرّفها فعليًا بهذا المعنى. البيانات الحالية تصف نسبة تاج/ارتفاع وفق التعريف أعلاه؛ ولا تحتوي في هذا الجدول على قياس مستقل لطول ظل أفقي يمكنه اختبار قانون S/H = tan(θ) مباشرة.</div>
-</section>
+  <section class="card">
+    <h2>1. النتيجة الرياضية الدقيقة</h2>
+    <p>إذا كانت الزاوية θ مقاسة من الاتجاه الرأسي، فإن زاوية ارتفاع الشمس عن الأفق هي α = 90° − θ. ولشعاع شمسي يصنع زاوية ارتفاع α مع أرض أفقية، ينتج من مثلث قائم أن نسبة الظل الأفقي إلى الارتفاع الرأسي هي:</p>
+    <div class="formula">S / H = cot(α) = tan(θ)</div>
+    <p>عند θ = 22.5° تكون α = 67.5°، وبالتالي:</p>
+    <div class="formula">tan(22.5°) = tan(45° / 2) = √2 − 1 ≈ 0.4142135624</div>
+    <h3>برهان نصف الزاوية</h3>
+    <p>ضع x = tan(22.5°). وبما أن tan(45°) = 1، فمن صيغة ضعف الزاوية:</p>
+    <div class="formula">1 = tan(45°) = 2x / (1 − x²)</div>
+    <p>إعادة الترتيب تعطي x² + 2x − 1 = 0. ومن حل المعادلة التربيعية:</p>
+    <div class="formula">x = −1 ± √2</div>
+    <p>ولأن 22.5° زاوية حادة فـ x موجب، لذلك:</p>
+    <div class="formula">x = √2 − 1</div>
+    <div class="callout good"><b>ما الذي ثبت؟</b> القيمة المثلثية الدقيقة √2−1، وعلاقة الظل الهندسية تحت افتراض سطح أفقي وشعاع ضوئي مستقيم وقياس صحيح للزاوية. هذا لا يثبت وحده أن نسبة تاج شجرة مقاسة ميدانيًا يجب أن تساوي هذه القيمة.</div>
+  </section>
 
-<section class="card">
-<h2>4. الرسم البياني: النسب الفردية مقابل القيمة النظرية</h2>
-<p>كل عمود يمثل R لشجرة، والخط المتقطع هو القيمة النظرية √2−1 ≈ 0.41421. الرسم يقارن القيم، لكنه لا يثبت أن التشابه ناتج عن علاقة سببية.</p>
-<div class="canvas-wrap"><svg id="barChart" viewBox="0 0 720 340" role="img" aria-label="مخطط أعمدة لنسب الأشجار الخمس مع خط القيمة النظرية"></svg></div>
-<div class="legend"><span><i class="dot" style="background:#76d6e8"></i>النسبة المقاسة R</span><span><i class="dot" style="background:#f2c879"></i>القيمة النظرية √2−1</span></div>
-</section>
+  <section class="card">
+    <h2>2. محاكاة هندسية تفاعلية</h2>
+    <p>غيّر ارتفاع الجسم وزاوية θ لترى طول الظل المتوقع وفق النموذج الهندسي. θ هنا مقاسة من الرأسي، لا من الأفق.</p>
+    <div class="controls">
+     <div><label for="height">الارتفاع الرأسي H (متر)</label><input id="height" type="number" min="0.1" max="100" step="0.1" value="7.8"></div>
+     <div><label for="theta">θ من الرأسي: <b id="thetaVal">22.5°</b></label><input id="theta" type="range" min="5" max="60" step="0.5" value="22.5"></div>
+     <div><label for="sun">ارتفاع الشمس α: <b id="alphaVal">67.5°</b></label><input id="sun" type="range" min="30" max="85" step="0.5" value="67.5"></div>
+    </div>
+    <div class="grid" style="margin-top:12px">
+     <div class="stat"><span class="muted">طول الظل النظري S</span><b id="shadowVal">3.23 m</b></div>
+     <div class="stat"><span class="muted">النسبة S/H</span><b id="ratioVal">0.41421</b></div>
+     <div class="stat"><span class="muted">tan(θ)</span><b id="tanVal">0.41421</b></div>
+    </div>
+    <div class="canvas-wrap" style="margin-top:14px">
+    <svg id="simSvg" viewBox="0 0 720 300" role="img" aria-label="رسم مثلث قائم يوضح ارتفاع الجسم وطول الظل والشعاع الشمسي">
+     <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f2c879"/></marker></defs>
+     <line x1="55" y1="240" x2="665" y2="240" stroke="#a8b8ce" stroke-width="2"/>
+     <line id="treeLine" x1="150" y1="240" x2="150" y2="55" stroke="#8bd5a5" stroke-width="8" stroke-linecap="round"/>
+     <line id="shadowLine" x1="150" y1="240" x2="390" y2="240" stroke="#76d6e8" stroke-width="5" stroke-linecap="round"/>
+     <line id="rayLine" x1="150" y1="55" x2="390" y2="240" stroke="#f2c879" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+     <path id="rightAngle" d="M150 220 L170 220 L170 240" fill="none" stroke="#edf4ff" stroke-width="2"/>
+     <text id="hLabel" x="130" y="150" fill="#8bd5a5" text-anchor="end" font-size="16">H = 7.8 m</text>
+     <text id="sLabel" x="270" y="265" fill="#76d6e8" text-anchor="middle" font-size="16">S = 3.23 m</text>
+     <text id="thetaLabel" x="205" y="220" fill="#f2c879" text-anchor="middle" font-size="14">θ = 22.5°</text>
+     <text x="360" y="25" fill="#a8b8ce" text-anchor="middle" font-size="14">الرسم تخطيطي؛ النسب البصرية تتكيف مع القيم</text>
+    </svg>
+    <div class="legend"><span><i class="dot" style="background:#8bd5a5"></i>الارتفاع H</span><span><i class="dot" style="background:#76d6e8"></i>الظل S</span><span><i class="dot" style="background:#f2c879"></i>الشعاع الشمسي</span></div>
+    </div>
+    <p class="muted">تنبيه: إذا غُيّرت زاوية ارتفاع الشمس α، تُحسب زاوية θ المكملة تلقائيًا؛ وإذا غُيّرت θ مباشرة، تتغير α إلى 90°−θ.</p>
+  </section>
 
-<section class="card">
-<h2>5. جدول تفسير الأدلة</h2>
-<div class="table-scroll"><table>
-<thead><tr><th>الادعاء</th><th>الحالة</th><th>حدود الاستنتاج</th></tr></thead>
-<tbody>
-<tr><td>tan(22.5°) = √2−1</td><td>مثبت رياضيًا</td><td>نتيجة مثلثية دقيقة</td></tr>
-<tr><td>S/H = tan(θ)</td><td>صحيح ضمن النموذج الهندسي</td><td>يتطلب سطحًا أفقيًا وقياسات زاوية/ظل متسقة</td></tr>
-<tr><td>متوسط R للأشجار قريب من √2−1</td><td>وصف عددي لعينة صغيرة</td><td>خمس أشجار في موقع واحد؛ لا تكفي للتعميم</td></tr>
-<tr><td>تكافؤ المتوسط ضمن Δ = ±0.03</td><td>اختبار مشروط بالهامش المختار</td><td>الهامش عملي/اصطلاحي ويجب تبريره قبل جمع البيانات</td></tr>
-<tr><td>رابط عام مع فرضية ريمان</td><td>غير مثبت</td><td>التشابه العددي لا ينشئ برهانًا أو رابطًا رياضيًا</td></tr>
-</tbody></table></div>
-<h3>ملاحظة إحصائية</h3>
-<p>فاصل الثقة 90% المعروض هو فاصل t لمتوسط العينة (n=5، درجات الحرية 4). أما اختبار التكافؤ TOST فيعتمد على هامش التكافؤ Δ الذي يحدده الباحث مسبقًا؛ ولا يعني اجتياز الاختبار إثبات مساواة تامة أو قانون طبيعي عام. قيمة p السابقة (0.000801) تُعامل هنا كنتيجة حسابية من التحليل السابق بشرط استخدام العينة والهامش والإجراءات نفسها، وينبغي إعادة حسابها من ملف البيانات/البرنامج قبل النشر النهائي.</p>
-</section>
+  <section class="card">
+    <h2>3. القياسات الميدانية الأولية</h2>
+    <p>خمس أشجار مانجو في شعوب، صنعاء؛ تاريخ القياس المسجل: 14 أكتوبر 2026. الرمز H هو الارتفاع الكلي، وh هو الارتفاع السفلي المقاس، وC = H−h هو الفرق الرأسي. النسبة المدروسة R = (H−h)/H.</p>
+    <div class="table-scroll"><table id="dataTable">
+    <thead><tr><th>الشجرة</th><th>H (m)</th><th>h (m)</th><th>C = H−h (m)</th><th>R = C/H</th><th>الفرق عن √2−1</th></tr></thead>
+    <tbody>
+    <tr><th>1</th><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00887</td></tr>
+    <tr><th>2</th><td>8.50</td><td>5.00</td><td>3.50</td><td>0.41176</td><td>−0.00245</td></tr>
+    <tr><th>3</th><td>7.20</td><td>4.20</td><td>3.00</td><td>0.41667</td><td>+0.00245</td></tr>
+    <tr><th>4</th><td>9.00</td><td>5.40</td><td>3.60</td><td>0.40000</td><td>−0.01421</td></tr>
+    <tr><th>5</th><td>7.50</td><td>4.40</td><td>3.10</td><td>0.41333</td><td>−0.00088</td></tr>
+    </tbody></table></div>
+    <div class="grid" style="margin-top:14px">
+     <div class="stat"><span class="muted">متوسط R</span><b>0.41297</b></div>
+     <div class="stat"><span class="muted">الانحراف المعياري للعينة</span><b>0.00845</b></div>
+     <div class="stat"><span class="muted">الخطأ المعياري</span><b>0.00378</b></div>
+     <div class="stat"><span class="muted">فاصل الثقة 90% للمتوسط</span><b style="font-size:1.1rem">[0.40491, 0.42102]</b></div>
+    </div>
+    <div class="callout warn"><b>تمييز مهم في القياس:</b> C = H−h فرق ارتفاع رأسي، وليس طول ظل أفقيًا. لذلك لا ينبغي تسمية C «طول الظل» ما لم يكن القياس الميداني قد عرّفها فعليًا بهذا المعنى. البيانات الحالية تصف نسبة تاج/ارتفاع وفق التعريف أعلاه؛ ولا تحتوي في هذا الجدول على قياس مستقل لطول ظل أفقي يمكنه اختبار قانون S/H = tan(θ) مباشرة.</div>
+  </section>
 
-<section class="card">
-<h2>6. صياغة البرهان والاستنتاج النهائي</h2>
-<ol>
-<li><b>فرضيات النموذج:</b> جسم رأسي ارتفاعه H فوق أرض أفقية، وشعاع ضوئي يصنع زاوية ارتفاع α مع الأفق.</li>
-<li><b>من المثلث القائم:</b> tan(α) = H/S، ومنه S/H = 1/tan(α).</li>
-<li><b>تعريف الزاوية من الرأسي:</b> θ = 90°−α، ولذلك cot(α) = tan(θ)، فينتج S/H = tan(θ).</li>
-<li><b>عند θ = 22.5°:</b> النسبة النظرية للظل إلى الارتفاع هي √2−1 ≈ 0.41421356.</li>
-<li><b>فحص البيانات:</b> متوسط النسبة الميدانية R ≈ 0.41297 قريب عدديًا من القيمة النظرية، لكن R = (H−h)/H ليست هي S/H ما لم يثبت القياس أن H−h هو طول ظل أفقي؛ لذلك لا تعد هذه العينة اختبارًا مباشرًا لقانون الظل.</li>
-</ol>
-<div class="formula">النتيجة المبرهنة: S/H = tan(θ)، وعند θ=22.5° تساوي √2−1.</div>
-<div class="callout"><b>الاستنتاج المنضبط:</b> البرهان الهندسي دقيق. أما بيانات المانجو فهي استكشافية وتُظهر تقاربًا عدديًا بين متوسط R والقيمة √2−1، لا إثباتًا بأن الطبيعة تفرض هذه النسبة على الأشجار. لا يوجد في هذه الصفحة برهان على صلة بفرضية ريمان أو على قانون كوني أوسع.</div>
-</section>
+  <section class="card">
+    <h2>4. الرسم البياني: النسب الفردية مقابل القيمة النظرية</h2>
+    <p>كل عمود يمثل R لشجرة، والخط المتقطع هو القيمة النظرية √2−1 ≈ 0.41421. الرسم يقارن القيم، لكنه لا يثبت أن التشابه ناتج عن علاقة سببية.</p>
+    <div class="canvas-wrap"><svg id="barChart" viewBox="0 0 720 340" role="img" aria-label="مخطط أعمدة لنسب الأشجار الخمس مع خط القيمة النظرية"></svg></div>
+    <div class="legend"><span><i class="dot" style="background:#76d6e8"></i>النسبة المقاسة R</span><span><i class="dot" style="background:#f2c879"></i>القيمة النظرية √2−1</span></div>
+  </section>
 
-<section class="card">
-<h2>7. خطوات إعادة الإنتاج والروابط</h2>
-<ul>
-<li>احفظ الملف باسم <code>frame2.html</code> وافتحه في متصفح حديث؛ لا يحتاج إلى مكتبات أو اتصال بالإنترنت.</li>
-<li>عدّل H وθ في المحاكاة، وتحقق من أن S = H × tan(θ).</li>
-<li>لتحويل الدراسة إلى اختبار ميداني مباشر، قِس ارتفاع الجسم H وطول الظل الأفقي S في الوقت نفسه، وسجّل زاوية الشمس، وكرّر القياسات في أوقات ومواقع وأجسام متعددة.</li>
-<li>احتفظ بالبيانات الخام، ووحدات القياس، وطريقة تقدير عدم اليقين، وخطة التحليل المحددة قبل جمع بيانات جديدة.</li>
-</ul>
-<div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-    <button onclick="window.print()" class="secondary" style="background:var(--cyan); color:#111;">🖨️ طباعة / حفظ (نصي)</button>
-    <button onclick="generateDirectPDF()" style="background:var(--gold); color:#111;">📥 تحميل PDF (مباشر)</button>
-    <button class="secondary" onclick="downloadCSV()">تنزيل جدول القياسات CSV</button>
-</div>
+  <section class="card">
+    <h2>5. جدول تفسير الأدلة</h2>
+    <div class="table-scroll"><table>
+    <thead><tr><th>الادعاء</th><th>الحالة</th><th>حدود الاستنتاج</th></tr></thead>
+    <tbody>
+    <tr><td>tan(22.5°) = √2−1</td><td>مثبت رياضيًا</td><td>نتيجة مثلثية دقيقة</td></tr>
+    <tr><td>S/H = tan(θ)</td><td>صحيح ضمن النموذج الهندسي</td><td>يتطلب سطحًا أفقيًا وقياسات زاوية/ظل متسقة</td></tr>
+    <tr><td>متوسط R للأشجار قريب من √2−1</td><td>وصف عددي لعينة صغيرة</td><td>خمس أشجار في موقع واحد؛ لا تكفي للتعميم</td></tr>
+    <tr><td>تكافؤ المتوسط ضمن Δ = ±0.03</td><td>اختبار مشروط بالهامش المختار</td><td>الهامش عملي/اصطلاحي ويجب تبريره قبل جمع البيانات</td></tr>
+    <tr><td>رابط عام مع فرضية ريمان</td><td>غير مثبت</td><td>التشابه العددي لا ينشئ برهانًا أو رابطًا رياضيًا</td></tr>
+    </tbody></table></div>
+    <h3>ملاحظة إحصائية</h3>
+    <p>فاصل الثقة 90% المعروض هو فاصل t لمتوسط العينة (n=5، درجات الحرية 4). أما اختبار التكافؤ TOST فيعتمد على هامش التكافؤ Δ الذي يحدده الباحث مسبقًا؛ ولا يعني اجتياز الاختبار إثبات مساواة تامة أو قانون طبيعي عام. قيمة p السابقة (0.000801) تُعامل هنا كنتيجة حسابية من التحليل السابق بشرط استخدام العينة والهامش والإجراءات نفسها، وينبغي إعادة حسابها من ملف البيانات/البرنامج قبل النشر النهائي.</p>
+  </section>
 
-<div style="margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--line); display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-    <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v6.1.0/frame2_tex.pdf" target="_blank" class="btn-pdf">📄 تحميل ورقة Frame 2 (PDF)</a>
-    <a href="/wells/frame1.html" target="_blank" class="btn-nav">🔗 العودة إلى الإطار النظري (Frame 1)</a>
-</div>
-</section>
+  <section class="card">
+    <h2>6. صياغة البرهان والاستنتاج النهائي</h2>
+    <ol>
+    <li><b>فرضيات النموذج:</b> جسم رأسي ارتفاعه H فوق أرض أفقية، وشعاع ضوئي يصنع زاوية ارتفاع α مع الأفق.</li>
+    <li><b>من المثلث القائم:</b> tan(α) = H/S، ومنه S/H = 1/tan(α).</li>
+    <li><b>تعريف الزاوية من الرأسي:</b> θ = 90°−α، ولذلك cot(α) = tan(θ)، فينتج S/H = tan(θ).</li>
+    <li><b>عند θ = 22.5°:</b> النسبة النظرية للظل إلى الارتفاع هي √2−1 ≈ 0.41421356.</li>
+    <li><b>فحص البيانات:</b> متوسط النسبة الميدانية R ≈ 0.41297 قريب عدديًا من القيمة النظرية، لكن R = (H−h)/H ليست هي S/H ما لم يثبت القياس أن H−h هو طول ظل أفقي؛ لذلك لا تعد هذه العينة اختبارًا مباشرًا لقانون الظل.</li>
+    </ol>
+    <div class="formula">النتيجة المبرهنة: S/H = tan(θ)، وعند θ=22.5° تساوي √2−1.</div>
+    <div class="callout"><b>الاستنتاج المنضبط:</b> البرهان الهندسي دقيق. أما بيانات المانجو فهي استكشافية وتُظهر تقاربًا عدديًا بين متوسط R والقيمة √2−1، لا إثباتًا بأن الطبيعة تفرض هذه النسبة على الأشجار. لا يوجد في هذه الصفحة برهان على صلة بفرضية ريمان أو على قانون كوني أوسع.</div>
+  </section>
 
-<footer>Al-Hindara · Frame 2 — The Tree and the Shadow<br>نسخة HTML مستقلة للمراجعة العلمية وإعادة الإنتاج · أكتوبر 2026</footer>
+  <section class="card">
+    <h2>7. خطوات إعادة الإنتاج والروابط</h2>
+    <ul>
+    <li>احفظ الملف باسم <code>frame2.html</code> وافتحه في متصفح حديث؛ لا يحتاج إلى مكتبات أو اتصال بالإنترنت.</li>
+    <li>عدّل H وθ في المحاكاة، وتحقق من أن S = H × tan(θ).</li>
+    <li>لتحويل الدراسة إلى اختبار ميداني مباشر، قِس ارتفاع الجسم H وطول الظل الأفقي S في الوقت نفسه، وسجّل زاوية الشمس، وكرّر القياسات في أوقات ومواقع وأجسام متعددة.</li>
+    <li>احتفظ بالبيانات الخام، ووحدات القياس، وطريقة تقدير عدم اليقين، وخطة التحليل المحددة قبل جمع بيانات جديدة.</li>
+    </ul>
+    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+        <button onclick="window.print()" class="secondary" style="background:var(--cyan); color:#111;">🖨️ طباعة / حفظ (نصي)</button>
+        <button onclick="generateDirectPDF()" style="background:var(--gold); color:#111;">📥 تحميل PDF (مباشر)</button>
+        <button class="secondary" onclick="downloadCSV()">تنزيل جدول القياسات CSV</button>
+    </div>
+
+    <div style="margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--line); display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+        <a href="../wells/bridge.html" class="btn-nav">← الجسر (Bridge)</a>
+        <a href="../index.html" class="btn-nav">🏠 الرئيسية</a>
+        <a href="../wells/frame3.html" class="btn-pdf">الإطار الثالث (Frame 3) →</a>
+    </div>
+  </section>
+
+  <footer>Al-Hindara · Frame 2 — The Tree and the Shadow<br>نسخة HTML مستقلة للمراجعة العلمية وإعادة الإنتاج · أكتوبر 2026</footer>
 </div>
 <script>
 (function(){
@@ -289,7 +337,7 @@ details{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px
 
  window.generateDirectPDF = function() {
     const element = document.getElementById('pdf-content');
-    const buttons = document.querySelectorAll('.lang-btn, button');
+    const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
     buttons.forEach(btn => btn.style.display = 'none');
     
     const opt = {

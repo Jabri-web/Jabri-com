@@ -91,6 +91,42 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top,#182b43 0,#0b1220 55%);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}
 .wrap{max-width:1120px;margin:auto;padding:20px}.hero,.card{border:1px solid var(--line);background:rgba(18,30,48,.94);border-radius:18px;padding:clamp(16px,3vw,28px);margin:14px 0;box-shadow:0 12px 32px #0002;position:relative;}
 .hero{background:linear-gradient(135deg,#1b3048,#111d2e 70%);border-top:3px solid var(--gold)}
+
+/* Top Navigation Bar */
+.top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(18, 30, 48, 0.9);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.nav-item {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+.nav-item:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(242, 200, 121, 0.1);
+}
+.nav-item.active {
+    color: #19202b;
+    background: var(--gold);
+    border-color: var(--gold);
+    cursor: default;
+}
+
 .kicker{color:var(--gold);font-weight:800;letter-spacing:.04em}h1{font-size:clamp(1.8rem,5vw,3.2rem);line-height:1.25;margin:.4rem 0}h2{font-size:1.45rem;margin:0 0 12px;color:var(--gold)}h3{font-size:1.08rem;color:var(--cyan)}p{margin:.5rem 0 1rem}.muted,small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}.stat{background:var(--panel2);padding:15px;border-radius:13px;border:1px solid var(--line)}.stat b{display:block;font-size:1.45rem;color:var(--cyan);direction:ltr;text-align:left}.formula{direction:ltr;text-align:center;font-family:Cambria,"Times New Roman",serif;font-size:clamp(1.1rem,3vw,1.6rem);padding:15px;background:#0b1524;border:1px solid #314966;border-radius:12px;overflow-wrap:anywhere;margin:12px 0}.callout{border-left:4px solid var(--gold);background:#2a261b;padding:12px 15px;border-radius:8px}.good{border-left-color:var(--green);background:#142a25}.warn{border-left-color:var(--red);background:#30201f}
 table{width:100%;border-collapse:collapse;min-width:620px;font-variant-numeric:tabular-nums}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:center}th{background:#1b2b41;color:var(--gold)}td{} .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
 label{display:block;margin:12px 0 4px;color:var(--muted)}input[type=range]{width:100%;accent-color:var(--cyan)}input[type=number]{background:#0b1524;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:9px;width:100%;font:inherit}button{background:var(--gold);color:#19202b;border:0;padding:10px 15px;border-radius:9px;font-weight:800;font:inherit;cursor:pointer}button.secondary{background:#233750;color:var(--ink);border:1px solid var(--line)}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.canvas-wrap{background:#0a1422;border:1px solid var(--line);border-radius:12px;padding:8px;overflow:hidden}svg{display:block;width:100%;height:auto} .legend{display:flex;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:.9rem}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}.pill{display:inline-block;border:1px solid var(--line);background:#17263b;border-radius:99px;padding:3px 10px;margin:3px;color:var(--muted);font-size:.85rem}
@@ -99,14 +135,25 @@ details{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px
 .btn-nav:hover{background:#314966}
 .btn-pdf{display:inline-block;background:var(--gold);color:#19202b;text-decoration:none;padding:10px 15px;border-radius:9px;font-weight:bold;margin:5px;transition:0.3s}
 .btn-pdf:hover{background:#e0b568}
-.lang-btn { position: absolute; top: 15px; right: 20px; background: rgba(255,255,255,0.1); color: var(--ink); text-decoration: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--line); transition: 0.3s; }
+.lang-btn { position: absolute; top: 15px; right: 20px; background: rgba(255,255,255,0.1); color: var(--ink); text-decoration: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--line); transition: 0.3s; z-index: 100; }
 .lang-btn:hover { background: var(--gold); color: #111; }
 @media(max-width:600px){.wrap{padding:10px}.hero,.card{padding:15px;border-radius:13px}th,td{padding:8px;font-size:.9rem}.lang-btn{top:10px; right:10px;}}
-@media print{body{background:white;color:#111}.hero,.card{background:white;color:#111;box-shadow:none;border:1px solid #aaa;break-inside:avoid}h2,h3,.kicker{color:#333}.muted,small{color:#444}.formula,.stat,.callout,.canvas-wrap,th{background:#f5f5f5;color:#111}button,input,a,.lang-btn{display:none}td,th{border-color:#aaa}}
+@media print{body{background:white;color:#111}.hero,.card{background:white;color:#111;box-shadow:none;border:1px solid #aaa;break-inside:avoid}h2,h3,.kicker{color:#333}.muted,small{color:#444}.formula,.stat,.callout,.canvas-wrap,th{background:#f5f5f5;color:#111}button,input,a,.lang-btn,.top-nav{display:none}td,th{border-color:#aaa}}
 </style>
 </head>
 <body>
 <div class="wrap" id="pdf-content">
+
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+      <a href="../index-en.html" class="nav-item">🏠 Home</a>
+      <a href="../wells/frame1-en.html" class="nav-item">1. Raw Math</a>
+      <a href="../wells/bridge-en.html" class="nav-item">Bridge</a>
+      <a href="frame2-en.html" class="nav-item active">2. Application</a>
+      <a href="../wells/frame3-en.html" class="nav-item">3. Fine Structure</a>
+      <a href="../wells/frame4-en.html" class="nav-item">4. Spectral Problem</a>
+  </nav>
+
 <header class="hero">
   <a href="frame2.html" class="lang-btn">🌐 العربية</a>
   <div class="kicker">AL-HINDARA · FRAME 2 · OCTOBER 2026</div>
@@ -240,8 +287,9 @@ details{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px
 </div>
 
 <div style="margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--line); display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-    <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v6.1.0/frame2_tex.pdf" target="_blank" class="btn-pdf">📄 Download Frame 2 Paper (PDF)</a>
-    <a href="/wells/frame1-en.html" target="_blank" class="btn-nav">🔗 Back to Theoretical Framework (Frame 1)</a>
+    <a href="../wells/bridge-en.html" class="btn-nav">← Bridge</a>
+    <a href="../index-en.html" class="btn-nav">🏠 Home</a>
+    <a href="../wells/frame3-en.html" class="btn-pdf">Frame 3 (Fine Structure) →</a>
 </div>
 </section>
 
@@ -289,7 +337,7 @@ details{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px
 
  window.generateDirectPDF = function() {
     const element = document.getElementById('pdf-content');
-    const buttons = document.querySelectorAll('.lang-btn, button');
+    const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
     buttons.forEach(btn => btn.style.display = 'none');
     
     const opt = {
