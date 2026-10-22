@@ -17,7 +17,23 @@
     .card {
       width: 100%; max-width: 680px; padding: 34px 38px;
       border: 1.5px solid #222; background: #fff;
+      position: relative; /* [إضافة جديدة] لضمان بقاء الزر في الزاوية */
     }
+    
+    /* [إضافة جديدة] تصميم زر اللغة الأزرق */
+    .lang-switch {
+      position: absolute; top: 15px; left: 15px;
+      font-family: "Courier New", monospace; font-size: 0.8rem;
+      text-decoration: none; color: #ffffff;
+      border: 1px solid #1a73e8; padding: 5px 12px;
+      border-radius: 6px; background: #1a73e8;
+      transition: all 0.2s ease; font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .lang-switch:hover { 
+      background: #1557b0; border-color: #1557b0; 
+    }
+    
     .name { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; text-align: center; }
     .degree { color: #444; font-size: 0.9rem; margin-bottom: 22px; text-align: center; }
     .section-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; text-align: right; }
@@ -49,6 +65,7 @@
       font-family: "Courier New", monospace; font-size: 0.85rem; text-align: center;
     }
     .link a { color: #111; text-decoration: none; border-bottom: 1px solid #111; }
+    
     @media (max-width: 600px) {
       body { padding: 12px; align-items: flex-start; }
       .card { padding: 22px 16px; }
@@ -56,16 +73,25 @@
       table { font-size: 0.75rem; }
       th, td { padding: 5px 3px; }
       .stats-box { font-size: 0.8rem; }
+      /* [إضافة جديدة] تصغير الزر في الجوال */
+      .lang-switch { top: 10px; left: 10px; font-size: 0.75rem; padding: 4px 8px; }
     }
+    
     @media print {
       body { min-height: auto; padding: 0; display: block; }
       .card { max-width: none; margin: 0 auto; break-inside: avoid; }
       a { color: #000; }
+      /* [إضافة جديدة] إخفاء الزر عند الطباعة */
+      .lang-switch { display: none; }
     }
   </style>
 </head>
 <body>
   <main class="card">
+    
+    <!-- [إضافة جديدة] زر اللغة هنا -->
+    <a href="card-en.html" class="lang-switch" aria-label="Switch to English">English</a>
+
     <header>
       <div class="name">عبدالله محمد ناصر الجبري</div>
       <div class="degree">بكالوريوس علوم الحاسب — KFUPM — الظهران</div>
