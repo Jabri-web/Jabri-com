@@ -1,6 +1,7 @@
 % ============================================================
-%  all-frames-tex.tex  (v7 — final with custom footer)
-%  Al-Hindara Working Paper No. 3
+%  all-frames-tex.tex (Consolidated Manuscript Draft - v11)
+%  A Unified Framework: Numerical Damping, Geometric Ratios,
+%  Algebraic Symmetry-Breaking, and Spectral Theory
 %  Author: Abdulla M. N. Al-Jabri
 %  October 2026
 %  License: CC-BY-4.0
@@ -16,26 +17,28 @@
 \usepackage{booktabs}
 \usepackage{microtype}
 \usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{float}
 
 \geometry{margin=1in}
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
 
-% ---------- Footer and Header (fancyhdr) ----------
+% ---------- Footer and Header ----------
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\textit{Al-Jabri (2026)}}
-\fancyhead[R]{\small\textit{An Algebraic Identity and a Numerical Symmetry-Breaking Effect}}
-\fancyfoot[L]{\small Zenodo preprint}
+\fancyhead[R]{\small\textit{The Al-Hindara Unified Framework}}
+\fancyfoot[L]{\small Al-Hindara Project — Consolidated Draft}
 \fancyfoot[C]{\small\thepage}
-\fancyfoot[R]{\small DOI: 10.5281/zenodo.XXXXXXX}
+\fancyfoot[R]{\small DOI: [Pending Verification]}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \fancypagestyle{plain}{
   \fancyhf{}
-  \fancyfoot[L]{\small Zenodo preprint}
+  \fancyfoot[L]{\small Al-Hindara Project — Consolidated Draft}
   \fancyfoot[C]{\small\thepage}
-  \fancyfoot[R]{\small DOI: 10.5281/zenodo.XXXXXXX}
+  \fancyfoot[R]{\small DOI: [Pending Verification]}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0.4pt}
 }
@@ -45,9 +48,8 @@
 \newtheorem{observation}[proposition]{Observation}
 \newtheorem{remark}{Remark}
 
-\title{\textbf{An Algebraic Identity and a Numerical\\
-Symmetry-Breaking Effect in a One-Parameter\\
-Family of Functions}}
+\title{\textbf{A Unified Framework: Numerical Damping, Geometric Ratios,\\
+Algebraic Symmetry-Breaking, and Spectral Theory}}
 
 \author{
     Abdulla M.~N.~Al-Jabri\thanks{Independent Researcher, Sana'a, Yemen. ORCID: 0009-0003-3319-3822. Email: \texttt{jabri62018@gmail.com}.} \\
@@ -63,460 +65,317 @@ Family of Functions}}
 \thispagestyle{plain}
 
 \begin{abstract}
-We study a one-parameter family of real functions \(g(u; x_p)\) on \((0, 2\pi)\) defined by
-\[
-g(u; x_p) = \left(\frac{u}{2\pi}\right)^{5} \ln\!\left(\frac{2\pi}{u}\right) e^{-2\pi/(x_p u)},
-\]
-with \(x_p > 0\). The family is motivated by, but strictly independent of, the arithmetic of the second non-trivial zero of the Riemann zeta function; the specific value \(x_p = 21\) is a modelling choice.
-
-We establish four results. First, an exact algebraic identity \(H_g(gY) = g(-Y'')\) relating the standard second-derivative operator acting on \(Y\) to a first-order-corrected operator \(H_g = -\partial_u^2 + 2p\partial_u + (p'-p^2)\), where \(p = g'/g\). Second, an exact symmetry argument showing that a matrix element of the operator \(D(u) = \cos(u/2)\) between normalized states vanishes in a reflection-symmetric reference model. Third, a numerical demonstration that the asymmetry of \(g\) in \((0, 2\pi)\) breaks this vanishing: for \(x_p = 21\), the specified transition operator, and the specified unweighted \(L^2\) normalization, composite Simpson quadrature reproducibly yields \(R_{13/12} \approx 0.6035155248\). Fourth, we show that \(g\) is a formal zero mode of the operator \(L = -\partial_u^2 + g''/g\), which factors as \(L = (-\partial_u - p)(\partial_u - p)\).
-
-The results are either algebraic identities or numerical observations for the stated setup; Section~\ref{sec:scope} states the exact scope of the claims.
+This paper consolidates four exploratory frameworks of the Al-Hindara project. While presented together, these paths do not constitute a single continuous chain of mathematical proof; instead, they represent four distinct exploratory studies presented within a common methodological framework. We define a numerical damping function demonstrating specific accumulation properties. We derive the geometric ratio \(\sqrt{2}-1\) and present exploratory field measurements. We establish an algebraic gauging identity and demonstrate numerically how structural asymmetry breaks symmetry-induced cancellation. Finally, we formulate a spectral problem where the kernel acts as a formal zero mode. We maintain a strict boundary between analytically proven identities, numerically computed results (independently reproduced using the supplied Python code), and empirical observations.
 \end{abstract}
 
 \vspace{1em}
-\noindent\textbf{Keywords:} algebraic gauging; Sturm-Liouville theory; symmetry-breaking; numerical integration.
-
-\noindent\textbf{MSC 2020:} 34B24, 65D30, 81Q10.
+\noindent\textbf{Keywords:} Sturm-Liouville theory; symmetry-breaking; numerical integration; geometric ratios; Riemann zeta function.
 
 \tableofcontents
 \vspace{1em}
 \newpage
 
 % ============================================================
-\section{Introduction}
+\section{Introduction and Methodology}
 \label{sec:intro}
 % ============================================================
 
-\subsection{Context}
-
-A companion project of exploratory documents \cite{Frame1,Frame2} investigates elementary functions on \((0, 2\pi)\) constructed from the ordinates \(\gamma_k\) of the non-trivial zeros of the Riemann zeta function. The present note isolates the mathematical content of two of those documents and states it in a self-contained form suitable for external review.
-
-The central object is the family \eqref{eq:g} below, parameterized by \(x_p > 0\). The choice \(x_p = 21 = \lfloor \gamma_2 \rfloor\), where \(\gamma_2 \approx 21.022\) is the second positive non-trivial zero of the Riemann zeta function, is used throughout for numerical illustrations. It is a \emph{modelling choice}; no arithmetic property of \(\gamma_2\) enters any proof.
-
-\subsection{What is specific to this kernel}
-
-The individual techniques used here are standard in Sturm--Liouville theory and in supersymmetric quantum mechanics \cite{Teschl,SUSYQM}. The contribution of the present note is their application to the specific kernel \eqref{eq:g}, and the following observations:
-
+The Al-Hindara project explores mathematical structures across numerical, geometric, and algebraic domains. The central methodology of this paper is the rigorous separation of claims into three categories:
 \begin{enumerate}
-    \item \textbf{Structural asymmetry.} Unlike exactly solvable problems whose potentials are reflection-symmetric about the midpoint of the interval, the effective potential \(V_{\text{eff}} = g''/g\) associated with \eqref{eq:g} has a positive fourth-order pole at one endpoint and a negative first-order pole at the other (Section~\ref{sec:asymptotics}). The reflection symmetry that would force the vanishing of certain matrix elements (Proposition~\ref{prop:symmetry}) is therefore broken.
-    
-    \item \textbf{Quantitative fingerprint.} For the specific kernel, parameter value, transition operator, and normalization considered here, the asymmetry produces the numerical value \(R_{13/12} \approx 0.6035155248\) (Observation~\ref{obs:numerical}). This is a numerical observation for the stated setup; no universality is claimed.
-    
-    \item \textbf{Formal zero mode.} The kernel \(g\) itself is a formal zero mode of the operator \(L\), giving a supersymmetric factorization (Proposition~\ref{prop:zero-mode}).
+    \item \textbf{Analytically Proven:} Exact identities and algebraic relations derived from explicit definitions.
+    \item \textbf{Numerically Computed and Verified:} Reproducible computations and convergence behaviors for specified parameters.
+    \item \textbf{Empirically Observed:} Exploratory data presented without claims of universal physical laws.
 \end{enumerate}
 
-\subsection{Scope of claims}
-\label{sec:scope}
-
-\paragraph{What is proven.} Proposition~\ref{prop:gauging} (gauging identity) is proven for any \(C^2\) function \(Y\) and any \(g \in C^2(0,2\pi)\) with \(g > 0\). Proposition~\ref{prop:symmetry} (vanishing in the reference model) is proven for any continuous, positive, reflection-symmetric weight \(h\) with finite normalization integrals. Proposition~\ref{prop:zero-mode} (formal zero mode and factorization) is proven as an algebraic identity. The endpoint asymptotics of Section~\ref{sec:asymptotics} are derived in full.
-
-\paragraph{What is observed numerically.} For the specified kernel, parameter value, transition operator, and normalization, composite Simpson quadrature reproducibly gives \(R_{13/12} \approx 0.6035155248\) (Observation~\ref{obs:numerical}), in agreement with an independent adaptive-quadrature reference.
-
-\paragraph{What is not claimed.} No proof of, or contribution to, the Riemann Hypothesis. No spectral theorem for \(H_g\) or \(L\) on a self-adjoint realization. No cosmological or physical interpretation. No universality of \(R_{13/12}\) across alternative normalizations or transition operators. The choice \(x_p = 21\) carries no arithmetic necessity.
+\textbf{Scope of Integration:} It is crucial to note that the four sections of this paper represent parallel exploratory paths. While they share the Al-Hindara context, the geometric observations (Section~\ref{sec:geometric}) neither mathematically cause nor prove the algebraic symmetry-breaking (Section~\ref{sec:algebraic}), nor do they dictate the spectral properties (Section~\ref{sec:spectral}). The unifying element is the methodology, not a cascading mathematical proof.
 
 % ============================================================
-\section{Setup}
+\section{The Numerical Damping Framework}
+\label{sec:numerical}
 % ============================================================
 
-\subsection{The kernel and its logarithmic derivative}
+\subsection{Definition and Sign Analysis}
+We consider the real function \(Z(x; x_p)\) defined on \(x \ge 1\):
+\begin{equation}
+\label{eq:Z}
+Z(x; x_p) = x^{-5} \ln(x) \sin\left(\frac{2\pi}{x}\right) e^{-x/x_p}.
+\end{equation}
+The parameter \(x_p\) serves as a damping parameter. The specific choice \(x_p = 21 = \lfloor \gamma_2 \rfloor\), where \(\gamma_2 \approx 21.022\) is the imaginary part of the second positive non-trivial zero of the Riemann zeta function, is a \emph{modelling choice}. No arithmetic property of \(\gamma_2\) enters the analytical proofs.
 
-Throughout, \(u\) ranges over \((0, 2\pi)\) and \(x_p > 0\). We write
-\begin{equation}
-\label{eq:g}
-g(u) := \left(\frac{u}{2\pi}\right)^{5} \ln\!\left(\frac{2\pi}{u}\right) e^{-2\pi/(x_p u)},
-\end{equation}
-suppressing the dependence on \(x_p\) when no confusion can arise. The logarithmic derivative is
-\begin{equation}
-\label{eq:p}
-p(u) := \frac{g'(u)}{g(u)} = \frac{5}{u} - \frac{1}{u \ln(2\pi/u)} + \frac{2\pi}{x_p u^2},
-\end{equation}
-and its derivative is
-\begin{equation}
-\label{eq:dp}
-p'(u) = -\frac{5}{u^2} + \frac{\ln(2\pi/u) - 1}{u^2 \ln^2(2\pi/u)} - \frac{4\pi}{x_p u^3}.
-\end{equation}
+For \(x_p > 0\), the sign of \(Z(x)\) is dictated by \(\sin(2\pi/x)\). Thus, \(Z(x) < 0\) on \((1, 2)\), \(Z(2) = 0\), and \(Z(x) > 0\) on \((2, \infty)\).
 
-The function \(g\) is strictly positive on \((0, 2\pi)\) and vanishes at both endpoints; its asymptotics are analyzed in Section~\ref{sec:asymptotics}. We record for later use that \(g\) decays faster than any power of \(u\) as \(u \to 0^{+}\), but near \(u = 2\pi\) it vanishes only linearly in \(t = 2\pi - u\).
-
-\subsection{The differential operator \(H_g\)}
-
-Let \(H_g\) denote the second-order differential operator
-\begin{equation}
-\label{eq:Hg}
-H_g := -\partial_u^2 + 2 p(u)\,\partial_u + p'(u) - p(u)^2,
-\end{equation}
-acting on \(C^2\) functions. This operator is not self-adjoint with respect to the standard inner product on \(L^2((0,2\pi))\); it carries a first-order correction \(2p\,\partial_u\), which is the origin of the gauging identity.
-
-\subsection{States, normalization, and matrix elements}
-
-For \(n \in \mathbb{N}_{\geq 1}\) let \(Y_n(u) := \sin(nu/2)\). Assume the weight \(g\) is such that
-\begin{equation}
-\label{eq:Nn}
-N_n := \int_0^{2\pi} g(u)^2 Y_n(u)^2 \, du \in (0, \infty),
-\end{equation}
-which holds for \(g\) as in \eqref{eq:g}. Define the normalized states
-\begin{equation}
-\Psi_n(u) := \frac{g(u) Y_n(u)}{\sqrt{N_n}}.
-\end{equation}
-For the transition operator \(D(u) := \cos(u/2)\), define
-\begin{equation}
-\label{eq:Amn}
-\mathcal{A}_{mn} := \int_0^{2\pi} \Psi_m(u) D(u) \Psi_n(u) \, du,
-\end{equation}
-and the dimensionless ratio
-\begin{equation}
-\label{eq:R}
-R_{13/12} := \frac{|\mathcal{A}_{13}|^{2}}{|\mathcal{A}_{12}|^{2}}.
-\end{equation}
-
-The \emph{reference model} replaces \(g\) by a weight \(h \in C^0(0,2\pi)\) satisfying \(h(2\pi - u) = h(u)\) and \(h > 0\) on \((0,2\pi)\), with normalization integrals
-\begin{equation}
-\label{eq:tilde-Nn}
-0 < \tilde{N}_n := \int_0^{2\pi} h(u)^2 Y_n(u)^2 \, du < \infty, \qquad n = 1, 2, 3.
-\end{equation}
+\subsection{The Accumulation Function}
+Define the accumulation function \(A(x) := \int_1^x Z(t; 21) \, dt\). Since \(A'(x) = Z(x)\), it follows that \(A(x)\) strictly decreases on \((1, 2)\), reaches a global minimum at \(x = 2\), and strictly increases for all \(x > 2\). (An initial hypothesis of a local maximum at \(x = 42\) is analytically false).
 
 % ============================================================
-\section{The gauging identity}
-\label{sec:gauging}
+\section{Geometric Ratios and Empirical Observations}
+\label{sec:geometric}
 % ============================================================
 
-\begin{proposition}[Gauging identity]
-\label{prop:gauging}
-Let \(g \in C^2(0, 2\pi)\) with \(g(u) > 0\) on \((0, 2\pi)\), and define \(p := g'/g\). Let \(H_g\) be the operator \eqref{eq:Hg}. Then for every \(Y \in C^2(0, 2\pi)\),
+\subsection{The Reciprocal Silver Ratio}
+Consider an object of height \(H\) casting a horizontal shadow of length \(S\). For a solar elevation angle \(\alpha\), the geometry dictates \(S/H = \cot(\alpha)\). Defining the angle from the vertical as \(\theta = 90^\circ - \alpha\), we obtain \(S/H = \tan(\theta)\). At \(\theta = 22.5^\circ\), the half-angle formula yields the exact identity:
 \begin{equation}
-\label{eq:gauging}
-H_g(g Y) = -g\,Y''.
+\tan(22.5^\circ) = \sqrt{2} - 1 \approx 0.41421356.
 \end{equation}
-\end{proposition}
 
-\begin{proof}
-We compute
-\begin{align*}
-H_g(gY) &= -\partial_u^2(gY) + 2 p\,\partial_u(gY) + (p'-p^2)(gY) \\
-&= -(g'' Y + 2 g' Y' + g Y'') + 2\frac{g'}{g}(g' Y + g Y') + (p'-p^2) g Y.
-\end{align*}
-The \(g'Y'\) terms cancel. Using \(p' = g''/g - p^2\), we have \(p'-p^2 = g''/g - 2p^2\), hence
-\begin{align*}
-H_g(gY) &= -g'' Y - g Y'' + 2 p^2 g Y + \left(\frac{g''}{g} - 2 p^2\right) g Y \\
-&= -g'' Y - g Y'' + 2 p^2 g Y + g'' Y - 2 p^2 g Y = -g Y''.
-\end{align*}
-\end{proof}
+\subsection{Exploratory Field Measurements}
+Five mango trees in Sana'a, Yemen, were measured for total height \(H\) and lower crown height \(h\). The vertical crown difference is \(C = H - h\), and the ratio is \(R = C/H\). 
 
-\begin{corollary}
-\label{cor:eigen}
-Suppose \(Y \in C^2(0, 2\pi)\) satisfies \(-Y'' = \lambda Y\) for some \(\lambda \in \mathbb{R}\). Then \(\psi := g Y\) satisfies \(H_g \psi = \lambda \psi\) in \((0, 2\pi)\).
-\end{corollary}
-
-\begin{remark}
-Proposition~\ref{prop:gauging} is a special case of the standard \emph{gauging} technique in Sturm--Liouville theory: \(H_g\) is obtained from \(-\partial_u^2\) by conjugation with the multiplication operator \(M_g : f \mapsto gf\). The identity is classical; the specific content of the paper lies in the choice \eqref{eq:g} and the numerical consequences of Sections~\ref{sec:breaking} and~\ref{sec:L}.
-
-Corollary~\ref{cor:eigen} is a statement about formal eigenfunctions. It does not promote the algebraic relation to an equality of self-adjoint operators on a Hilbert space, nor does it guarantee coincidence of boundary conditions in any self-adjoint realization. \(H_g\) is not symmetric on \(C_c^\infty(0,2\pi)\) in the standard \(L^2\) inner product; a genuine spectral analysis requires choosing a domain invariant under \(H_g\) and analyzing its adjoint. This is not attempted here.
-\end{remark}
-
-% ============================================================
-\section{Symmetry argument and its failure}
-\label{sec:breaking}
-% ============================================================
-
-\subsection{Parity of the states and of the transition operator}
-
-Consider the reflection \(\hat{P} : u \mapsto 2\pi - u\). Direct computation gives
-\begin{align}
-Y_n(2\pi - u) &= (-1)^{n+1} Y_n(u), \label{eq:parity-Y} \\
-D(2\pi - u) &= -D(u) = (-1)^{1} D(u). \label{eq:parity-D}
-\end{align}
-Hence
-\begin{equation}
-(Y_n D Y_m)(2\pi - u) = (-1)^{n+m+3} (Y_n D Y_m)(u). \label{eq:parity-product}
-\end{equation}
-In particular:
-\begin{itemize}
-    \item For \(n = 1\), \(m = 3\): exponent \(7\) is odd, so \(Y_1 D Y_3\) is \textbf{odd} under \(\hat{P}\).
-    \item For \(n = 1\), \(m = 2\): exponent \(6\) is even, so \(Y_1 D Y_2\) is \textbf{even} under \(\hat{P}\). Moreover, a direct computation gives
-    \begin{equation}
-    \label{eq:Y1DY2}
-    Y_1(u) D(u) Y_2(u) = \tfrac{1}{2}\sin^2(u),
-    \end{equation}
-    which is non-negative on \((0, 2\pi)\) and positive except on a set of measure zero.
-\end{itemize}
-
-\subsection{Vanishing in the symmetric reference model}
-
-\begin{proposition}[Vanishing in the reference model]
-\label{prop:symmetry}
-Let \(h \in C^0(0, 2\pi)\) satisfy \(h(2\pi - u) = h(u)\) and \(h > 0\) on \((0, 2\pi)\), with \eqref{eq:tilde-Nn}. Define
-\[
-\tilde{\Psi}_n(u) := \frac{h(u) Y_n(u)}{\sqrt{\tilde{N}_n}}, \qquad n = 1, 2, 3,
-\]
-and \(\tilde{\mathcal{A}}_{mn} := \int_0^{2\pi} \tilde{\Psi}_m(u) D(u) \tilde{\Psi}_n(u) \, du\). Then
-\[
-\tilde{\mathcal{A}}_{13} = 0, \qquad \tilde{\mathcal{A}}_{12} > 0.
-\]
-\end{proposition}
-
-\begin{proof}
-Since \(h\) is even under \(\hat{P}\), so is \(h^2\). The integrand of \(\tilde{\mathcal{A}}_{13}\) is proportional to \(h^2 (Y_1 D Y_3)\), an even function times an odd function, hence is odd. Its integral over \((0, 2\pi)\) vanishes.
-
-For \(\tilde{\mathcal{A}}_{12}\), by \eqref{eq:Y1DY2} the integrand is
-\[
-\tilde{\Psi}_1(u) D(u) \tilde{\Psi}_2(u) = \frac{h(u)^2}{\sqrt{\tilde{N}_1 \tilde{N}_2}} \cdot \frac{1}{2} \sin^2(u).
-\]
-Since \(h > 0\) and \(\sin^2(u) > 0\) almost everywhere on \((0, 2\pi)\), the integrand is strictly positive almost everywhere. With \eqref{eq:tilde-Nn}, this yields \(\tilde{\mathcal{A}}_{12} > 0\).
-\end{proof}
-
-\subsection{The asymmetric weight and numerical symmetry-breaking}
-
-The weight \(g\) of \eqref{eq:g} does \emph{not} satisfy \(g(2\pi - u) = g(u)\); the ratio \(g(2\pi - u)/g(u)\) differs from one. Consequently, Proposition~\ref{prop:symmetry} does not apply, and the vanishing of \(\mathcal{A}_{13}\) is not expected to persist.
-
-\begin{observation}[Numerical symmetry-breaking]
-\label{obs:numerical}
-For \(x_p = 21\), \(D(u) = \cos(u/2)\), and the normalization \eqref{eq:Amn}, composite Simpson quadrature with \(N\) subintervals gives the values in Table~\ref{tab:conv}. The reference value \(R^{*} \approx 0.6035155247873\) is computed independently by adaptive quadrature (\texttt{scipy.integrate.quad}, \texttt{limit}$=300$); the corresponding reference matrix elements are \(\mathcal{A}_{12}^{*} \approx 0.6220748484804\) and \(\mathcal{A}_{13}^{*} \approx -0.4832666943981\).
-\end{observation}
-
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\caption{Composite Simpson quadrature for \(R_{13/12}\) at \(x_p = 21\), against the independent reference \(R^{*} \approx 0.6035155247873\). Column \(|R - R^{*}|\) is the true error; it decays rapidly with \(N\). Column \(|R - 0.60352|\) is the difference from the rounded value; since \(0.60352\) is not the reference but a rounding, this column converges to \(|R^{*} - 0.60352| \approx 4.47 \times 10^{-6}\) rather than to zero and is shown for convenience only.}
-\label{tab:conv}
-\small
-\begin{tabular}{cccc}
+\caption{Exploratory field measurements of tree crown ratios.}
+\label{tab:tree_data}
+\begin{tabular}{cccccc}
 \toprule
-\(N\) & \(R_{13/12}\) & \(|R_{13/12} - R^{*}|\) & \(|R_{13/12} - 0.60352|\) \\
+Tree & \(H\) (m) & \(h\) (m) & \(C = H-h\) (m) & \(R = C/H\) & Deviation from \(\sqrt{2}-1\) \\
 \midrule
-\(20\)  & \(0.6033930653528\) & \(1.22 \times 10^{-4}\) & \(1.27 \times 10^{-4}\) \\
-\(40\)  & \(0.6035132002964\) & \(2.32 \times 10^{-6}\) & \(6.80 \times 10^{-6}\) \\
-\(80\)  & \(0.6035154874052\) & \(3.74 \times 10^{-8}\) & \(4.51 \times 10^{-6}\) \\
-\(200\) & \(0.6035155246329\) & \(1.54 \times 10^{-10}\) & \(4.48 \times 10^{-6}\) \\
-\(400\) & \(0.6035155247852\) & \(2.10 \times 10^{-12}\) & \(4.47 \times 10^{-6}\) \\
+1 & 7.80 & 4.50 & 3.30 & 0.42308 & \(+0.00887\) \\
+2 & 8.50 & 5.00 & 3.50 & 0.41176 & \(-0.00245\) \\
+3 & 7.20 & 4.20 & 3.00 & 0.41667 & \(+0.00245\) \\
+4 & 9.00 & 5.40 & 3.60 & 0.40000 & \(-0.01421\) \\
+5 & 7.50 & 4.40 & 3.10 & 0.41333 & \(-0.00088\) \\
+\midrule
+\multicolumn{4}{r}{\textbf{Mean \(R\):}} & \textbf{0.41297} & \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{remark}
-The rapid decay of \(|R - R^{*}|\) is consistent with fourth-order accuracy of composite Simpson quadrature on smooth integrands; the present data are insufficient to fit a definite empirical order (the ratios of successive errors depend on subdominant endpoint corrections). What the table establishes is that, for the specified setup, \(R_{13/12}\) converges to \(R^{*} \approx 0.6035155248\) to at least eight significant figures by \(N = 200\). The value \(0.6035155248\) is a reproducible numerical observation for the stated setup; no universality is claimed.
+The mean \(R \approx 0.41297\) is numerically close to \(\sqrt{2}-1\). However, \(C\) represents a vertical height difference, not a horizontal shadow length. This table documents an empirical observation. It does not test the geometric law directly, and the numerical proximity does not prove the existence of a shared geometric law governing tree crowns. No causal link to the spectral operator is claimed.
 \end{remark}
 
 % ============================================================
-\section{The operator \(L\) and its formal zero mode}
-\label{sec:L}
+\section{Algebraic Symmetry-Breaking}
+\label{sec:algebraic}
 % ============================================================
 
-\subsection{The operator \(L\)}
-
-Let
+\subsection{The Kernel and the Gauging Identity}
+Let \(u \in (0, 2\pi)\) and define the kernel:
 \begin{equation}
-\label{eq:L}
+\label{eq:g}
+g(u) := \left(\frac{u}{2\pi}\right)^{5} \ln\!\left(\frac{2\pi}{u}\right) e^{-2\pi/(x_p u)}.
+\end{equation}
+Let \(p(u) := g'(u)/g(u)\). We define the first-order-corrected operator:
+\begin{equation}
+H_g := -\partial_u^2 + 2p(u)\partial_u + p'(u) - p(u)^2.
+\end{equation}
+
+\begin{proposition}[Gauging Identity]
+For any \(Y \in C^2(0, 2\pi)\), \(H_g(gY) = -gY''\).
+\end{proposition}
+\begin{proof}
+We expand the operator \(H_g\) directly acting on \(gY\):
+\begin{align*}
+H_g(gY) &= -(gY)'' + 2p(gY)' + (p'-p^2)gY \\
+&= -gY'' - 2g'Y' - g''Y + 2p(gY' + g'Y) + (p'-p^2)gY \\
+&= -gY'' - 2g'Y' - g''Y + 2\frac{g'}{g}(gY' + g'Y) + \left(\frac{g''}{g} - 2\frac{(g')^2}{g^2}\right)gY.
+\end{align*}
+Expanding the remaining terms:
+\begin{align*}
+H_g(gY) &= -gY'' - 2g'Y' - g''Y + 2g'Y' + 2\frac{(g')^2}{g}Y + g''Y - 2\frac{(g')^2}{g}Y \\
+&= -gY''.
+\end{align*}
+The terms \(-2g'Y'\) and \(+2g'Y'\) cancel identically. The terms \(-g''Y\) and \(+g''Y\) cancel identically. The terms \(2(g')^2/g Y\) and \(-2(g')^2/g Y\) cancel identically, leaving only \(-gY''\).
+\end{proof}
+
+\subsection{Removal of Symmetry-Induced Cancellation}
+In a symmetric model, the reflection \(\hat{P}u = 2\pi-u\) and the parity of states \(Y_n(u) = \sin(nu/2)\) force the transition matrix element \(\mathcal{A}_{13}^{(0)}\) (with \(D(u)=\cos(u/2)\)) to vanish.
+
+However, \(g(u)\) is asymmetric. We define the unweighted \(L^2\) normalized states \(\Psi_n(u) = g(u)Y_n(u)/\sqrt{N_n}\), where \(N_n = \int_0^{2\pi} g(u)^2 Y_n(u)^2 du\). We compute:
+\begin{equation}
+\mathcal{A}_{mn} = \int_0^{2\pi} \Psi_m D \Psi_n \, du, \qquad R_{13/12} = \frac{|\mathcal{A}_{13}|^2}{|\mathcal{A}_{12}|^2}.
+\end{equation}
+Using numerical integration (Simpson quadrature and adaptive methods) at \(x_p=21\), the asymmetry breaks the cancellation, yielding a computed numerical value (independently reproduced using the supplied Python code):
+\begin{equation}
+R_{13/12} \approx 0.6035155248.
+\end{equation}
+
+% ============================================================
+\section{Towards a Spectral Problem}
+\label{sec:spectral}
+% ============================================================
+
+\subsection{The Formal Zero Mode and Factorization}
+The gauging identity motivates the definition of a Schr\"odinger-like operator:
+\begin{equation}
 L := -\partial_u^2 + V_{\text{eff}}(u), \qquad V_{\text{eff}}(u) := \frac{g''(u)}{g(u)}.
 \end{equation}
-
-The operators \(H_g\) of \eqref{eq:Hg} and \(L\) of \eqref{eq:L} are distinct differential operators constructed from the same function \(g\). The gauging identity of Proposition~\ref{prop:gauging} concerns \(H_g\); the formal zero-mode identity and factorization for \(L\) are established separately below. No claim of equivalence between the two operators is made here.
-
-\subsection{The formal zero mode}
-
-\begin{proposition}[Formal zero mode]
-\label{prop:zero-mode}
-For \(g \in C^2(0,2\pi)\) with \(g > 0\) on \((0, 2\pi)\) and \(V_{\text{eff}} := g''/g\), the function \(g\) satisfies
+\begin{proposition}[Formal Zero Mode]
+The kernel \(g\) satisfies \(Lg = 0\). Furthermore, \(L\) admits a supersymmetric (SUSY QM) factorization:
 \begin{equation}
-\label{eq:Lg0}
-L g = 0 \quad \text{on } (0, 2\pi).
-\end{equation}
-Moreover, with \(p := g'/g\), the operator \(L\) factors formally as
-\begin{equation}
-\label{eq:factorization}
 L = (-\partial_u - p)(\partial_u - p).
 \end{equation}
 \end{proposition}
 
-\begin{proof}
-The identity \eqref{eq:Lg0} is a direct computation: \(Lg = -g'' + (g''/g)g = 0\).
-
-For \eqref{eq:factorization}, apply both sides to \(f \in C^2(0,2\pi)\):
-\begin{align*}
-(-\partial_u - p)(\partial_u - p) f &= -\partial_u(\partial_u f - pf) - p(\partial_u f - pf) \\
-&= -\partial_u^2 f + (p' + p^2) f.
-\end{align*}
-Since \(p' + p^2 = g''/g = V_{\text{eff}}\), the right-hand side equals \(Lf\).
-\end{proof}
-
 \begin{remark}
-Proposition~\ref{prop:zero-mode} is an \emph{algebraic} statement on the open interval. It does not assert that \(g\) is a norm-square-integrable eigenfunction of a self-adjoint realization of \(L\) on \(L^2((0,2\pi))\). The potential \(V_{\text{eff}}\) has a strong singularity at \(u = 2\pi\) (Section~\ref{sec:asymptotics}); a careful analysis of the self-adjoint extensions of \(L\) is required before any spectral statement can be made, and is not attempted here.
+The identity \(Lg=0\) is a formal algebraic statement. It does not assert that \(g\) is a normalizable eigenfunction on a specified self-adjoint domain. Furthermore, the algebraic factorization alone does not guarantee the positivity of the operator or dictate the spectrum; those properties depend critically on the choice of boundary conditions.
 \end{remark}
 
-% ============================================================
-\section{Asymptotics of \(g\) and \(V_{\text{eff}}\)}
-\label{sec:asymptotics}
-% ============================================================
-
-\paragraph{Near \(u = 0^{+}\).} As \(u \to 0^{+}\),
-\[
-g(u; x_p) = O\!\left(u^{5} \ln\!\left(\frac{2\pi}{u}\right) e^{-2\pi/(x_p u)}\right).
-\]
-Since the exponential dominates any power of \(u\) and any power of \(\ln(2\pi/u)\), we have \(g(u) = O(u^N)\) as \(u \to 0^{+}\) for every \(N \in \mathbb{N}\), and \(g \to 0\).
-
-The potential \(V_{\text{eff}}\) is dominated by the \(2\pi/(x_p u^2)\) term in \(p\), so \(p(u) \sim 2\pi/(x_p u^2)\) and
-\begin{equation}
-\label{eq:Veff-u0}
-V_{\text{eff}}(u) = p(u)^2 + p'(u) \sim \frac{4\pi^2}{x_p^2 u^4} \to +\infty \quad (u \to 0^{+}).
-\end{equation}
-
-\paragraph{Near \(u = 2\pi^{-}\).} Set \(t := 2\pi - u > 0\). Since \(\ln(2\pi/u) \sim t/(2\pi)\),
-\begin{equation}
-\label{eq:g-u2pi}
-g(u) = \frac{e^{-1/21}}{2\pi} \cdot t \cdot \left(1 + O(t)\right) = C\, t + O(t^2), \qquad C = \frac{e^{-1/21}}{2\pi} \text{ for } x_p = 21.
-\end{equation}
-Thus \(g\) vanishes linearly as \(u \to 2\pi^{-}\). Correspondingly,
-\begin{equation}
-\label{eq:Veff-u2pi}
-V_{\text{eff}}(u) \sim -\frac{191}{42\pi(2\pi - u)} \to -\infty \quad (u \to 2\pi^{-}).
-\end{equation}
-
-\begin{remark}
-The two endpoint behaviors have different singular orders: a positive fourth-order pole at \(u = 0\), and a negative first-order pole at \(u = 2\pi\). The potential is not of the standard form required for a regular Sturm--Liouville problem; both endpoints are singular. Correspondingly, \(g\) vanishes super-polynomially at \(u = 0\) but only linearly at \(u = 2\pi\).
-\end{remark}
+\subsection{Asymptotics of the Effective Potential}
+The spectral properties are constrained by the singularities of \(V_{\text{eff}}\):
+\begin{itemize}
+    \item \textbf{Near \(u \to 0^{+}\):} \(p(u) \sim 2\pi/(x_p u^2)\), so \(V_{\text{eff}}(u) \sim \frac{4\pi^2}{x_p^2 u^4} \to +\infty\).
+    \item \textbf{Near \(u \to 2\pi^{-}\):} Let \(t = 2\pi - u \to 0^+\). Expanding \(g(u) = At + Bt^2 + O(t^3)\), we find \(A = \frac{e^{-1/x_p}}{2\pi}\) and \(B = -\frac{e^{-1/x_p}}{8\pi^2}(9 + \frac{2}{x_p})\). Since \(g''/g \sim 2B/(At)\), we obtain:
+    \begin{equation}
+    V_{\text{eff}}(u) \sim -\frac{9 + 2/x_p}{2\pi(2\pi - u)}.
+    \end{equation}
+    For \(x_p = 21\), this yields \(V_{\text{eff}}(u) \sim -\frac{191}{42\pi(2\pi - u)} \to -\infty\).
+\end{itemize}
+These asymmetric singularities dictate the domain and boundary conditions required for self-adjoint extensions of \(L\), which remain an open question.
 
 % ============================================================
-\section{Discussion and open questions}
-\label{sec:discussion}
+\section{Summary and Remaining Work}
+\label{sec:summary}
 % ============================================================
 
-\subsection{Summary}
+To ensure the integrity of this exploratory work, we explicitly demarcate what has been accomplished, what requires further verification, and what remains open. 
 
-The paper establishes:
-\begin{enumerate}
-    \item The gauging identity \(H_g(gY) = -g\,Y''\) (Proposition~\ref{prop:gauging}).
-    \item The vanishing of \(\tilde{\mathcal{A}}_{13}\) in a symmetric reference model (Proposition~\ref{prop:symmetry}), made precise by the explicit identity \eqref{eq:Y1DY2}.
-    \item For the specified setup, the reproducible numerical value \(R_{13/12} \approx 0.6035155248\) at \(x_p = 21\) (Observation~\ref{obs:numerical}).
-    \item The formal zero-mode identity \(Lg = 0\) and factorization \(L = (-\partial_u - p)(\partial_u - p)\) (Proposition~\ref{prop:zero-mode}).
-\end{enumerate}
+\paragraph{What has been accomplished.}
+We have presented the mathematical definitions and formulations of the four frameworks. We established the analytical gauging identity and the formal zero-mode factorization. We provided a numerical evaluation of the transition ratio \(R_{13/12}\) and documented the exploratory geometric measurements. 
 
-The scope of these claims, and the list of what is not established, is given in Section~\ref{sec:scope}.
+\paragraph{What requires verification.}
+A rigorous line-by-line audit of the traceability matrix (Appendix~\ref{app:audit}) against the original HTML frames is necessary. Furthermore, all bibliographic references and DOI links must be verified prior to final publication.
 
-\subsection{Open questions}
-\label{sec:open}
+\paragraph{What remains open.}
+The complete spectral interpretation of the operator \(L\) remains unresolved, specifically concerning the self-adjoint domain, boundary conditions, and the normalizability of the kernel \(g(u)\). Additionally, the empirical tree measurements require further refinement to serve as a direct test of the geometric shadow law.
 
-\begin{enumerate}
-    \item \emph{Domain and boundary conditions for \(L\).} Determine the self-adjoint extensions of \(L\) on \(L^2((0,2\pi))\), and whether any admits \(g\) as a genuine eigenstate. The singularity structure \eqref{eq:Veff-u0}--\eqref{eq:Veff-u2pi} suggests that limit-circle behavior may be relevant at \(u = 2\pi\).
-    
-    \item \emph{Spectral density of \(L\).} If \(L\) admits a self-adjoint realization with discrete spectrum \(\{\lambda_n\}\), determine the asymptotic behavior of \(\lambda_n\) as \(n \to \infty\) and the properties of the associated spectral zeta function.
-    
-    \item \emph{Dependence of \(R_{13/12}\) on \(x_p\).} A systematic study of \(R_{13/12}(x_p)\) across \((0, \infty)\) is left for future work; no claim about monotonicity or continuity in \(x_p\) is made here.
-    
-    \item \emph{Alternative normalizations.} The choice \eqref{eq:Amn} reflects a specific weighted \(L^2\) inner product. How does \(R_{13/12}\) vary under alternative normalizations, and what is the correct interpretation?
-\end{enumerate}
+\paragraph{What is not claimed.}
+It is not claimed that these four parallel paths have established a unified physical law, a causal link between the distinct frames, or a proof of the Riemann Hypothesis. The numerical coincidence observed in the tree crown ratios does not constitute a proof of a natural law.
 
 % ============================================================
-\section*{Acknowledgments}
+\section*{Epilogue: A Message to the Next Researcher}
+\label{sec:epilogue}
 % ============================================================
 
-The author thanks an anonymous reviewer for many useful remarks that substantially improved the scope, honesty, and clarity of the paper, and for independently verifying the numerical value of \(R_{13/12}\).
-
-% ============================================================
-\section*{Data availability}
-% ============================================================
-
-The Python code in Appendix~\ref{app:code} reproduces both the Simpson quadrature table (Table~\ref{tab:conv}) and the reference value via adaptive quadrature.
+\textit{This document serves to preserve a starting point, not to serve as a final verdict on the validity of every inference. Whoever continues this project must strictly separate mathematical proof, computational results, and empirical observation; re-verify every testable result; and never attribute more to the project than the evidence allows. The value of this work lies in the ideas it makes possible to examine, and in the questions it leaves clear for those who follow.}
 
 % ============================================================
 \appendix
-\section{Reproducibility: Python code}
+\section{Traceability Matrix}
+\label{app:audit}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Preliminary Traceability Matrix: Mapping of results from original frames to the consolidated draft.}
+\label{tab:traceability}
+\scriptsize
+\begin{tabular}{p{2.8cm} p{2.2cm} p{2.5cm} p{6cm}}
+\toprule
+\textbf{Result / Claim} & \textbf{Source Frame} & \textbf{Action in Draft} & \textbf{Verification Status \& Notes} \\
+\midrule
+Sign analysis of \(Z(x)\) & Frame 1 & Re-derived & \textbf{Proven.} Rigorous mathematical check on \((1,2)\) and \((2,\infty)\). \\
+\midrule
+Global Minimum at \(x=2\) & Frame 1 & Re-derived & \textbf{Proven.} Follows directly from \(A'(x)=Z(x)\). (Note: \(x=42\) max was discarded). \\
+\midrule
+Exact ratio \(\tan(22.5^\circ) = \sqrt{2}-1\) & Frame 2 & Verbatim & \textbf{Proven.} Standard trigonometric identity. \\
+\midrule
+Tree crown ratio \(R \approx 0.41297\) & Frame 2 & Verbatim & \textbf{Observed.} \(N=5\) sample. Vertical heights only; not a shadow test. \\
+\midrule
+Gauging Identity \(H_g(gY) = -gY''\) & Frame 3 & Re-derived & \textbf{Proven.} Explicit algebraic expansion provided in proof. \\
+\midrule
+Numerical ratio \(R_{13/12} \approx 0.60352\) & Frame 3 & Re-computed & \textbf{Computed \& Verified.} The supplied Python code was executed successfully, and its results matched the reported values. \\
+\midrule
+Zero-mode \(Lg = 0\) & Frame 4 & Re-derived & \textbf{Proven (Formal).} Does not imply normalizability. \\
+\midrule
+Factorization of \(L\) & Frame 4 & Re-derived & \textbf{Proven (Algebraic).} Does not prove operator positivity. \\
+\midrule
+Asymptotic \(V_{\text{eff}} \sim -\frac{191}{42\pi t}\) & Frame 4 & Re-derived & \textbf{Proven.} Explicit Taylor expansion provided. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Reproducibility: Python Code}
 \label{app:code}
 % ============================================================
 
-The following Python~3 code (requiring \texttt{numpy} and \texttt{scipy}) reproduces Observation~\ref{obs:numerical} and Table~\ref{tab:conv}. The function \texttt{simpson} implements the composite Simpson rule; \texttt{ratio\_simpson} evaluates \(R_{13/12}\) at a given number of subintervals \(N\); \texttt{reference\_value} uses \texttt{scipy.integrate.quad} to compute the reference value \(R^{*}\).
+The following Python code reproduces the numerical results in Section~\ref{sec:algebraic}. It has been independently executed in a standard Python environment with \texttt{NumPy} and \texttt{SciPy}, yielding the expected output.
 
 \begin{verbatim}
+import sys
 import numpy as np
 from scipy.integrate import quad
 
-def g(u, xp=21.0):
-    if u <= 0 or u >= 2*np.pi:
+XP = 21.0
+PI2 = 2.0 * np.pi
+
+EXPECTED_A12 = 0.6220748484804
+EXPECTED_A13 = -0.4832666943981
+EXPECTED_R = 0.6035155247873
+
+EXPECTED_TABLE = {
+    20: 0.6033930653531,
+    40: 0.6035132002961,
+    80: 0.6035154874047,
+    200: 0.6035155246331,
+    400: 0.6035155247849,
+}
+
+def g(u, xp=XP):
+    if u <= 0.0 or u >= PI2:
         return 0.0
-    return (u/(2*np.pi))**5 * np.log(2*np.pi/u) * np.exp(-2*np.pi/(xp*u))
+    return ((u / PI2)**5 * np.log(PI2 / u) * np.exp(-PI2 / (xp * u)))
 
-def Y(n, u):
-    return np.sin(n*u/2.0)
-
-def D(u):
-    return np.cos(u/2.0)
+def Y(n, u): return np.sin(n * u / 2.0)
+def D(u): return np.cos(u / 2.0)
 
 def simpson(f, a, b, N):
-    if N % 2 != 0:
-        N += 1
+    if N < 2: raise ValueError("N must be at least 2")
+    if N % 2: N += 1
     h = (b - a) / N
-    s = f(a) + f(b)
-    for i in range(1, N, 2):
-        s += 4 * f(a + i*h)
-    for i in range(2, N, 2):
-        s += 2 * f(a + i*h)
-    return s * h / 3
+    total = f(a) + f(b)
+    total += 4.0 * sum(f(a + i * h) for i in range(1, N, 2))
+    total += 2.0 * sum(f(a + i * h) for i in range(2, N, 2))
+    return total * h / 3.0
 
-def ratio_simpson(N, xp=21.0):
-    a, b = 0.0, 2*np.pi
-    N1 = simpson(lambda u: (g(u,xp)*Y(1,u))**2, a, b, N)
-    N2 = simpson(lambda u: (g(u,xp)*Y(2,u))**2, a, b, N)
-    N3 = simpson(lambda u: (g(u,xp)*Y(3,u))**2, a, b, N)
-    A12 = simpson(lambda u:
-        (g(u,xp)*Y(1,u)/np.sqrt(N1)) * D(u) * (g(u,xp)*Y(2,u)/np.sqrt(N2)),
-        a, b, N)
-    A13 = simpson(lambda u:
-        (g(u,xp)*Y(1,u)/np.sqrt(N1)) * D(u) * (g(u,xp)*Y(3,u)/np.sqrt(N3)),
-        a, b, N)
-    return A12, A13, (A13/A12)**2
+def matrix_elements(integrate, xp=XP):
+    norms = [integrate(lambda u: (g(u, xp) * Y(n, u))**2) for n in (1, 2, 3)]
+    if any(not np.isfinite(v) or v <= 0 for v in norms):
+        raise ArithmeticError("Invalid normalization integral")
 
-def reference_value(xp=21.0, limit=300):
-    N1 = quad(lambda u: (g(u,xp)*Y(1,u))**2, 0, 2*np.pi, limit=limit)[0]
-    N2 = quad(lambda u: (g(u,xp)*Y(2,u))**2, 0, 2*np.pi, limit=limit)[0]
-    N3 = quad(lambda u: (g(u,xp)*Y(3,u))**2, 0, 2*np.pi, limit=limit)[0]
-    A12 = quad(lambda u:
-        (g(u,xp)*Y(1,u)/np.sqrt(N1)) * D(u) * (g(u,xp)*Y(2,u)/np.sqrt(N2)),
-        0, 2*np.pi, limit=limit)[0]
-    A13 = quad(lambda u:
-        (g(u,xp)*Y(1,u)/np.sqrt(N1)) * D(u) * (g(u,xp)*Y(3,u)/np.sqrt(N3)),
-        0, 2*np.pi, limit=limit)[0]
-    return A12, A13, (A13/A12)**2
+    def amplitude(m, n):
+        return integrate(lambda u: (g(u, xp) * Y(m, u) / np.sqrt(norms[m - 1])) * 
+                         D(u) * (g(u, xp) * Y(n, u) / np.sqrt(norms[n - 1])))
+    a12 = amplitude(1, 2)
+    a13 = amplitude(1, 3)
+    if not np.isfinite(a12) or not np.isfinite(a13) or a12 == 0:
+        raise ArithmeticError("Invalid matrix element")
+    return a12, a13, (a13 / a12)**2
 
-if __name__ == '__main__':
-    xp = 21.0
-    A12r, A13r, Rr = reference_value(xp)
-    print(f"Reference (adaptive quad):")
-    print(f"  A12 = {A12r:.13f}")
-    print(f"  A13 = {A13r:.13f}")
-    print(f"  R   = {Rr:.13f}")
-    print()
-    print(f"Composite Simpson convergence at xp = {xp}:")
-    print(f"{'N':>6} | {'R':>16} | {'|R-R*|':>12} | {'|R-0.60352|':>12}")
-    print("-" * 60)
-    for N in [20, 40, 80, 200, 400]:
-        A12, A13, R = ratio_simpson(N, xp)
-        print(f"{N:>6} | {R:.13f} | {abs(R-Rr):.4e}   | {abs(R-0.60352):.4e}")
+def adaptive_integral(f):
+    value, error = quad(f, 0.0, PI2, limit=300, epsabs=1e-12, epsrel=1e-12)
+    if not np.isfinite(value) or not np.isfinite(error):
+        raise ArithmeticError("Adaptive quadrature failed")
+    return value
+
+def simpson_integral(f, N): return simpson(f, 0.0, PI2, N)
+
+def main():
+    a12, a13, r_ref = matrix_elements(adaptive_integral)
+    assert abs(a12 - EXPECTED_A12) < 5e-11
+    assert abs(a13 - EXPECTED_A13) < 5e-11
+    assert abs(r_ref - EXPECTED_R) < 5e-11
+
+    print(f"Adaptive quad: A12={a12:.13f}, A13={a13:.13f}, R={r_ref:.13f}")
+    
+    previous_error = float("inf")
+    for N, expected in EXPECTED_TABLE.items():
+        _, _, r = matrix_elements(lambda f, n=N: simpson_integral(f, n))
+        error = abs(r - r_ref)
+        assert abs(r - expected) < 5e-11
+        assert error < previous_error
+        print(f"N={N:3d} | R={r:.13f} | Error={error:.4e}")
+        previous_error = error
+        
+    print("\nVerification successful.")
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:
+        print(f"NOT VERIFIED: {exc}", file=sys.stderr)
+        sys.exit(1)
 \end{verbatim}
-
-Expected output:
-\begin{verbatim}
-Reference (adaptive quad):
-  A12 = 0.6220748484804
-  A13 = -0.4832666943981
-  R   = 0.6035155247873
-
-Composite Simpson convergence at xp = 21.0:
-     N |                R |       |R-R*| | |R-0.60352|
-------------------------------------------------------------
-    20 | 0.6033930653528 | 1.2246e-04   | 1.2693e-04
-    40 | 0.6035132002964 | 2.3245e-06   | 6.7997e-06
-    80 | 0.6035154874052 | 3.7382e-08   | 4.5126e-06
-   200 | 0.6035155246329 | 1.5441e-10   | 4.4753e-06
-   400 | 0.6035155247852 | 2.1000e-12   | 4.4750e-06
-\end{verbatim}
-
-Values in the last one or two digits may vary across platforms due to
-floating-point accumulation in the adaptive quadrature routine and in the
-composite Simpson sums. The values above are for reference and correspond to
-\texttt{numpy}~1.26 and \texttt{scipy}~1.13 on a standard x86-64 platform.
-
-The rounded value \(0.60352\) appearing in the last column of
-Table~\ref{tab:conv} is a rounding, not an exact value; the difference
-\(|R^{*} - 0.60352| \approx 4.47 \times 10^{-6}\) is therefore a floor,
-not a measure of quadrature error.
 
 % ============================================================
 \begin{thebibliography}{99}
@@ -527,17 +386,14 @@ A.~M.~N.~Al-Jabri, \emph{The Numerical Framework: A Damping Model, the Riemann Z
 \bibitem{Frame2}
 A.~M.~N.~Al-Jabri, \emph{The Tree and the Shadow: Geometric Derivation of the Reciprocal Silver Ratio and an Exploratory Statistical Analysis of Tree Crown Ratios}, Al-Hindara Working Paper No.~2, Zenodo (2026). DOI: \href{https://doi.org/10.5281/zenodo.23540796}{10.5281/zenodo.23540796}.
 
-\bibitem{Riemann}
-B.~Riemann, \emph{\"Uber die Anzahl der Primzahlen unter einer gegebenen Gr\"o\ss e}, Monatsber.\ K\"onigl.\ Preu\ss.\ Akad.\ Wiss.\ Berlin (1859), 671--680.
+\bibitem{Frame3}
+A.~M.~N.~Al-Jabri, \emph{Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal}, Al-Hindara Project Technical Documentation (2026).
 
-\bibitem{Odlyzko}
-A.~M.~Odlyzko, \emph{Tables of zeros of the Riemann zeta function}, \url{https://www.dtc.umn.edu/~odlyzko/zeta_tables/zeros1} (accessed October 2026).
+\bibitem{Frame4}
+A.~M.~N.~Al-Jabri, \emph{Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization}, Al-Hindara Project Technical Documentation (2026).
 
 \bibitem{Teschl}
 G.~Teschl, \emph{Mathematical Methods in Quantum Mechanics: With Applications to Schr\"odinger Operators}, 2nd ed., American Mathematical Society, Providence, RI, 2014.
-
-\bibitem{SUSYQM}
-F.~Cooper, A.~Khare, and U.~Sukhatme, \emph{Supersymmetry and Quantum Mechanics}, Phys.\ Rep.\ \textbf{251} (1995), 267--385.
 
 \end{thebibliography}
 

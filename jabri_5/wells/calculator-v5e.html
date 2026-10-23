@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master Calculator — Al-Hindara Project</title>
+<script>
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--gold:#f4c430;--green:#06d6a0;--bg:#0a1410;--panel:#0a1a12;--border:#1f3a2b;--text:#e8f5e9;--dim:#8aa892;--red:#e57373;--blue:#6ae3ff;}
+*{box-sizing:border-box;}
+body{margin:0;padding:20px 12px;background:var(--bg);color:var(--text);font-family:'Segoe UI',Tahoma,sans-serif;line-height:1.8;display:flex;flex-direction:column;align-items:center;}
+.container{width:min(1000px,100%);display:flex;flex-direction:column;gap:20px;}
+.top-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:rgba(10,26,18,0.9);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 4px 15px rgba(0,0,0,0.3);width:100%;}
+.nav-item{color:var(--dim);text-decoration:none;padding:6px 14px;border-radius:8px;font-size:0.85rem;font-weight:bold;border:1px solid transparent;transition:0.3s;}
+.nav-item:hover{color:var(--gold);border-color:var(--gold);background:rgba(244,196,48,0.1);}
+.nav-item.active{color:#0a1a12;background:var(--gold);border-color:var(--gold);cursor:default;}
+h1{color:var(--gold);text-align:center;font-size:1.8rem;margin-bottom:5px;margin-top:10px;}
+.subtitle{text-align:center;color:var(--dim);font-size:1rem;margin-bottom:20px;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:0 10px 30px -15px #000;}
+.card h2{color:var(--green);margin-top:0;border-bottom:1px solid var(--border);padding-bottom:10px;font-size:1.3rem;}
+.box,.note,.legend{background:rgba(255,255,255,.06);padding:15px;border-radius:12px;margin:12px auto;border:1px solid #38354f;text-align:left;}
+.controls{text-align:center;}
+.controls label{display:inline-block;margin:6px;}
+input,select{padding:10px;border:2px solid var(--gold);background:#17142f;color:white;width:130px;text-align:center;border-radius:6px;font-size:16px;margin:5px;}
+select{width:auto;}
+button{padding:10px 18px;background:var(--gold);color:#17142f;border:0;border-radius:8px;font-weight:bold;cursor:pointer;margin:5px;font-family:inherit;}
+button.secondary{background:#8ab4f8;}
+button.python-btn{background:#3b82f6;color:white;}
+button.python-btn:hover{background:#2563eb;}
+button.active-mode{background:var(--green);color:#0a1a12;}
+button:hover{opacity:0.9;}
+#out,#resultBridge,#resultTree,#resultFrame3,#resultFrame4,#derivTest{
+    margin-top:10px;font-family:monospace;direction:ltr;text-align:left;overflow-wrap:anywhere;white-space:pre-wrap;
+    background:rgba(106,227,255,0.05);border:1px solid var(--border);border-radius:8px;padding:15px;display:none;
+}
+canvas{width:100%;height:auto;background:#08080d;border-radius:10px;border:1px solid #333;margin:10px auto;display:block;}
+.tablewrap{overflow-x:auto;}
+table{margin:10px auto;border-collapse:collapse;width:100%;background:#1a1a2e;font-size:12px;}
+th,td{border:1px solid #444;padding:7px;white-space:nowrap;text-align:center;}
+th{background:#0d1117;color:var(--gold);}
+.note{font-size:13px;line-height:1.9;}
+.warn{border-color:#b87d25;color:#ffe3a3;}
+.muted{color:#bbb;font-size:12px;}
+code,.ltr{direction:ltr;unicode-bidi:embed;color:var(--blue);overflow-wrap:anywhere;}
+.footer{color:#aaa;font-size:12px;margin:24px 0;text-align:center;}
+.math-block{background:#051009;padding:15px;border-radius:8px;overflow-x:auto;margin:15px 0;border:1px solid var(--border);direction:ltr;text-align:center;font-size:1.1rem;}
+.scale-key{font-size:11px;background:rgba(0,0,0,0.3);padding:8px 12px;border-radius:6px;display:inline-block;margin:6px 0;}
+
+.python-panel{display:none;margin-top:15px;background:#051009;border:1px solid #2a4050;border-radius:10px;overflow:hidden;}
+.python-panel.show{display:block;}
+.python-header{display:flex;justify-content:space-between;align-items:center;padding:10px 15px;background:#0a1a25;border-bottom:1px solid #2a4050;font-family:monospace;font-size:13px;color:#8aa892;}
+.python-header span{color:var(--blue);}
+.python-copy-btn{background:#334155;color:white;border:none;padding:5px 12px;border-radius:5px;cursor:pointer;font-size:12px;font-family:inherit;margin:0;}
+.python-copy-btn:hover{background:var(--green);color:#0a1a12;}
+.python-copy-btn.copied{background:var(--green);color:#0a1a12;}
+pre.python-code{margin:0;padding:15px;overflow-x:auto;color:#d4d4d4;font-family:'Consolas','Courier New',monospace;font-size:12.5px;line-height:1.6;direction:ltr;text-align:left;white-space:pre;}
+</style>
+</head>
+<body>
+    
+    
+    
+<div class="container">
+    <nav class="top-nav">
+        <a href="../index.html" class="nav-item">🏠 Home</a>
+        <a href="frame1.html" class="nav-item">1. Numerical Framework</a>
+        <a href="bridge.html" class="nav-item">Bridge</a>
+        <a href="../tree/frame2.html" class="nav-item">2. Applied Framework</a>
+        <a href="frame3.html" class="nav-item">3. Fine Structure</a>
+        <a href="frame4.html" class="nav-item">4. Spectral Problem</a>
+        <a href="calculator-en.html" class="nav-item active">Master Calculator</a>
+    </nav>
+
+    <h1>Master Calculator — Al-Hindara Project</h1>
+    <div class="subtitle">
+        <strong>Master Calculator: Frames 1-4</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+    </div>
+
+    <!-- ============ Frame 1 ============ -->
+    <div class="card">
+        <h2>1. Z(x) Calculator (Frame 1)</h2>
+        <div class="note warn">
+            <strong>Warning:</strong> Results are a <strong>partial sum</strong> over the first N zeros.
+            <br><br>
+            <strong>Definitions:</strong> <code>Z_N(x) = -Σ 2x/(x²+γₖ²)</code> | <code>w_proxy = -1 + Z'''/Z'</code> (experimental) | <code>A = -0.011139</code> | <code>C(x) = 1 - Z - A</code>.
+            <br><br>
+            <small style="color:var(--dim)">
+                🔍 Data Source: <a href="https://www.dtc.umn.edu/~odlyzko/zeta_tables/zeros1" target="_blank" style="color:var(--blue)">Odlyzko, zeros1</a> — First 100 zeros, rounded to 15 decimal places. The seven anchors below are an internal consistency check, not a full external audit.
+            </small>
+        </div>
+        <div class="box controls">
+            <label>x:<br><input id="xInput" type="number" value="44" min="0.000001" step="0.5"></label>
+            <label>N (1-100):<br><input id="nInput" type="number" value="100" min="1" max="100" step="1"></label>
+            <br>
+            <button id="calcBtn">Calculate</button>
+            <button class="secondary" id="resetBtn">Reset</button>
+            <button class="secondary" onclick="testZDerivatives()">Test Derivatives (Central Differences)</button>
+            <div id="out"></div>
+            <div id="derivTest"></div>
+        </div>
+        <div class="scale-key">
+            <strong>Y-axis scaling:</strong> Z(x) × 1 | Z'(x) × 100 | w_proxy ÷ 5
+        </div>
+        <div class="box controls">
+            <strong>Display Curve:</strong>
+            <button class="secondary active-mode" onclick="setChartMode('all', this)">All</button>
+            <button class="secondary" onclick="setChartMode('z', this)">Z(x)</button>
+            <button class="secondary" onclick="setChartMode('zp', this)">Z'(x)</button>
+            <button class="secondary" onclick="setChartMode('w', this)">w_proxy</button>
+        </div>
+        <canvas id="chart1" width="900" height="380"></canvas>
+        <div class="tablewrap"><table><thead><tr><th>x</th><th>Z_N(x)</th><th>Z′_N(x)</th><th>Z″_N(x)</th><th>w_proxy</th><th>C(x)</th></tr></thead><tbody id="tbody1"></tbody></table></div>
+    </div>
+
+    <!-- ============ Bridge ============ -->
+    <div class="card">
+        <h2>2. Bridge</h2>
+        <p>A numerical multiplication process, not a physical derivation.</p>
+        <div class="box controls">
+            <label>Value:<br><input type="number" id="rawValBridge" value="0.41421" step="0.00001"></label>
+            <label>Factor:<br>
+                <select id="scaleSelectBridge">
+                    <option value="1.616255e-35">Planck Length (meter)</option>
+                    <option value="1.956e9">Planck Energy (joule)</option>
+                    <option value="5.391247e-44">Planck Time (second)</option>
+                    <option value="2.176434e-8">Planck Mass (kg)</option>
+                </select>
+            </label>
+            <br><button onclick="calcBridge()">Apply</button>
+            <div id="resultBridge"></div>
+        </div>
+    </div>
+
+    <!-- ============ Frame 2 ============ -->
+    <div class="card">
+        <h2>3. The Tree and the Shadow (Frame 2)</h2>
+        <p>\(\theta\) from vertical, \(S/H = \tan\theta\).</p>
+        <div class="box controls">
+            <label>H (meters):<br><input type="number" id="treeH" value="7.8" step="0.1"></label>
+            <label>θ (0 ≤ θ < 90):<br><input type="number" id="treeTheta" value="22.5" min="0" max="89.9" step="0.5"></label>
+            <br><button onclick="calcTree()">Calculate</button>
+            <div id="resultTree"></div>
+        </div>
+    </div>
+
+    <!-- ============ Frame 3 ============ -->
+    <div class="card">
+        <h2>4. Frame 3 — \(R_{13/12}\)</h2>
+        <p>Numerical ratio. <code>0.60352</code> is a comparison target, not a proof. Numerical stability ≠ model validity.</p>
+        <div class="box controls">
+            <label>x_p:<br><input type="number" id="xpCalc" value="21" step="1"></label>
+            <br><button onclick="calcFrame3()">Calculate & Check Convergence</button>
+            <div id="resultFrame3"></div>
+        </div>
+
+        <div class="box controls" style="background:transparent; border:none; padding:0;">
+            <button class="python-btn" onclick="togglePython('py-frame3', this)">
+                🐍 Show Python Code for Verification (scipy.quad)
+            </button>
+        </div>
+        <div id="py-frame3" class="python-panel">
+            <div class="python-header">
+                <span>python · verification_frame3.py</span>
+                <button class="python-copy-btn" onclick="copyPython('py-frame3-code', this)">📋 Copy</button>
+            </div>
+            <pre class="python-code" id="py-frame3-code">import numpy as np
+from scipy.integrate import quad
+
+def g(u, xp=21.0):
+    if u &lt;= 0 or u &gt;= 2*np.pi: return 0.0
+    return (u/(2*np.pi))**5 * np.log(2*np.pi/u) * np.exp(-2*np.pi/(xp*u))
+
+def Y(n, u): return np.sin(n*u/2.0)
+def D(u): return np.cos(u/2.0)
+
+xp = 21
+N1 = quad(lambda u: (g(u,xp)*Y(1,u))**2, 0, 2*np.pi, limit=300)[0]
+N2 = quad(lambda u: (g(u,xp)*Y(2,u))**2, 0, 2*np.pi, limit=300)[0]
+N3 = quad(lambda u: (g(u,xp)*Y(3,u))**2, 0, 2*np.pi, limit=300)[0]
+
+A12 = quad(lambda u: (g(u,xp)*Y(1,u)/np.sqrt(N1)) * D(u) * (g(u,xp)*Y(2,u)/np.sqrt(N2)), 0, 2*np.pi, limit=300)[0]
+A13 = quad(lambda u: (g(u,xp)*Y(1,u)/np.sqrt(N1)) * D(u) * (g(u,xp)*Y(3,u)/np.sqrt(N3)), 0, 2*np.pi, limit=300)[0]
+
+R = (A13/A12)**2
+print(f"N1 = {N1:.10e}")
+print(f"N2 = {N2:.10e}")
+print(f"N3 = {N3:.10e}")
+print(f"A12 = {A12:.10e}")
+print(f"A13 = {A13:.10e}")
+print(f"R   = {R:.10f}")
+print(f"Target error = {abs(R - 0.60352):.3e}")</pre>
+        </div>
+    </div>
+
+    <!-- ============ Frame 4 ============ -->
+    <div class="card">
+        <h2>5. Frame 4 — Verification</h2>
+        <div class="note">
+            \(Lg = -g'' + (g''/g)g = 0\) is an <strong>algebraic identity</strong>. The test below compares a numerical derivative with the analytical formula, not a spectral test.
+        </div>
+        <div class="box" style="text-align:center;">
+            <button onclick="verifyFrame4()">Verify at u=1</button>
+            <div id="resultFrame4"></div>
+        </div>
+
+        <div class="box controls" style="background:transparent; border:none; padding:0; margin-top:15px;">
+            <button class="python-btn" onclick="togglePython('py-frame4', this)">
+                🐍 Show Python Code for Analytical Verification
+            </button>
+        </div>
+        <div id="py-frame4" class="python-panel">
+            <div class="python-header">
+                <span>python · verification_frame4.py</span>
+                <button class="python-copy-btn" onclick="copyPython('py-frame4-code', this)">📋 Copy</button>
+            </div>
+            <pre class="python-code" id="py-frame4-code">import numpy as np
+
+def g(u, xp=21.0):
+    """Envelope function"""
+    return (u/(2*np.pi))**5 * np.log(2*np.pi/u) * np.exp(-2*np.pi/(xp*u))
+
+def p(u, xp=21.0):
+    """p = g'/g"""
+    ell = np.log(2*np.pi/u)
+    a = 2*np.pi/xp
+    return 5/u - 1/(u*ell) + a/(u**2)
+
+def dp(u, xp=21.0):
+    """p' = d/du(g'/g)"""
+    ell = np.log(2*np.pi/u)
+    a = 2*np.pi/xp
+    return -5/u**2 + (ell-1)/(u**2*ell**2) - 2*a/u**3
+
+def g_second_analytic(u, xp=21.0):
+    """g'' analytically = g * (p^2 + p')"""
+    return g(u,xp) * (p(u,xp)**2 + dp(u,xp))
+
+def g_second_numeric(u, xp=21.0, h=1e-5):
+    """g'' numerically via central differences"""
+    return (g(u+h,xp) - 2*g(u,xp) + g(u-h,xp)) / (h**2)
+
+u, xp, h = 1.0, 21.0, 1e-5
+
+gu = g(u, xp)
+gpp_num = g_second_numeric(u, xp, h)
+gpp_ana = g_second_analytic(u, xp)
+
+print(f"u = {u}, xp = {xp}, h = {h}")
+print(f"g(u)              = {gu:.10e}")
+print(f"g'' (numeric)     = {gpp_num:.10e}")
+print(f"g'' (analytic)    = {gpp_ana:.10e}")
+print(f"derivative diff   = {abs(gpp_num - gpp_ana):.4e}")
+print()
+print("Identity check: -g'' + (g''/g)*g = 0, where g != 0.")
+print("This is an algebraic identity, not a spectral verification.")</pre>
+        </div>
+    </div>
+
+    <div class="footer">© 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.</div>
+</div>
+
+<script>
+// ============ Utilities ============
+function readFiniteNumber(id, label) {
+    const raw = String(document.getElementById(id).value ?? "").trim();
+    if (raw === "") throw new Error(`Enter a value for: ${label}`);
+    const val = Number(raw);
+    if (!Number.isFinite(val)) throw new Error(`Invalid value in: ${label}`);
+    return val;
+}
+function requireNonZero(value, label) {
+    if (!Number.isFinite(value) || value === 0) throw new Error(`${label} = 0.`);
+    return value;
+}
+function derivativeCentral(f, x, h) {
+    return (f(x + h) - f(x - h)) / (2 * h);
+}
+function secondDerivativeCentral(f, u, h) {
+    return (f(u + h) - 2*f(u) + f(u - h)) / (h * h);
+}
+
+// ============ Python Panel ============
+function togglePython(panelId, btn) {
+    const panel = document.getElementById(panelId);
+    const isShown = panel.classList.toggle('show');
+
+    if (!btn.dataset.originalText) {
+        btn.dataset.originalText = btn.textContent.trim();
+    }
+
+    btn.textContent = isShown
+        ? '❌ Hide Python Code'
+        : btn.dataset.originalText;
+}
+
+async function copyPython(codeId, btn) {
+    const codeEl = document.getElementById(codeId);
+    const text = codeEl.textContent;
+    try {
+        await navigator.clipboard.writeText(text);
+    } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+    }
+    const original = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+    }, 2000);
+}
+
+// ============ Frame 1 ============
+const MAX_N = 100;
+const GAMMAS = [
+14.134725141734693,21.022039638771555,25.010857580145688,30.424876125859513,32.935061587739189,37.586178158825671,40.918719012147495,43.327073280914999,48.005150881167159,49.773832477672302,
+52.97032147771446,56.446247697063394,59.347044002602353,60.831778524609809,65.112544048081606,67.079810529494173,69.546401711173979,72.067157674481907,75.704690699083933,77.144840068874805,
+79.337375020249367,82.910380854086030,84.735492980517050,87.425274613125229,88.809111207634465,92.491899270558484,94.651344040519886,95.870634228245309,98.831194218193692,101.317851005731391,
+103.725538040478339,105.446623052326094,107.168611184276407,111.029535543169674,111.874659176992637,114.320220915452712,116.226680320857554,118.790782865976217,121.370125002420645,122.946829293552588,
+124.256818554345767,127.516683879596495,129.578704199956050,131.087688530932656,133.497737202997586,134.756509753373871,138.116042054533443,139.736208952121123,141.123707404021123,143.111845807620632,
+146.000982486765518,147.422765342559602,150.053520420784878,150.925257612241466,153.024693811198890,156.112909294683282,157.597591817594059,158.849988171420498,161.188964138444257,163.030709687181998,
+165.537069187900396,167.184439978174514,169.094515415572818,169.911976479411699,173.411536519591552,174.754191523365725,176.441434297710418,178.377407776099978,179.916484020256997,182.207078484366462,
+184.874467848387500,185.598783677707528,187.228922583501867,189.416158656016937,192.026656360378558,193.079726603845696,195.265396679529235,196.876481840958313,198.015309676251911,201.264751943703788,
+202.493594514140534,204.189671803104532,205.394697202163022,207.906258887806210,209.576509716856265,211.690862595365312,213.347919359712667,214.547044783491446,216.169538508263756,219.067596349021372,
+220.714918839314003,221.430705554693346,224.007000254604311,224.983324669581993,227.421444279679285,229.337413305525371,231.250188700499163,231.987235253180248,233.693404178908301,236.524229665816206
+];
+const A_CONST = -0.011139;
+
+const ANCHORS = [
+    { idx: 0,  val: 14.134725141734693,   name: "γ₁" },
+    { idx: 4,  val: 32.935061587739189,   name: "γ₅" },
+    { idx: 9,  val: 49.773832477672302,   name: "γ₁₀" },
+    { idx: 10, val: 52.97032147771446,    name: "γ₁₁" },
+    { idx: 20, val: 79.337375020249367,   name: "γ₂₁" },
+    { idx: 49, val: 143.111845807620632,  name: "γ₅₀" },
+    { idx: 99, val: 236.524229665816206,  name: "γ₁₀₀" }
+];
+
+(function validateZeros() {
+    if (GAMMAS.length !== MAX_N) { console.error(`List length ${GAMMAS.length} ≠ ${MAX_N}`); return; }
+    for (let i = 1; i < GAMMAS.length; i++) {
+        if (!Number.isFinite(GAMMAS[i]) || GAMMAS[i] <= GAMMAS[i-1]) {
+            console.error(`Invalid value or wrong order at index ${i}.`); return;
+        }
+    }
+    let err = 0;
+    for (const a of ANCHORS) {
+        if (Math.abs(GAMMAS[a.idx] - a.val) > 1e-10) { console.error(`Anchor ${a.name} mismatch.`); err++; }
+    }
+    if (err === 0) console.log(`✓ ${GAMMAS.length} values + ${ANCHORS.length} internal consistency anchors matched.`);
+})();
+
+function countN() {
+    const raw = document.getElementById("nInput").value.trim();
+    if (raw === "") throw new Error("Enter N.");
+    const n = Number(raw);
+    if (!Number.isInteger(n) || n < 1 || n > MAX_N) throw new Error(`N must be between 1 and ${MAX_N}.`);
+    return n;
+}
+function Z(x,n){let s=0;for(let i=0;i<n;i++){const g=GAMMAS[i];s+=2*x/(x*x+g*g);}return -s;}
+function Zp(x,n){let s=0;for(let i=0;i<n;i++){const g=GAMMAS[i];s+=2*(g*g-x*x)/Math.pow(x*x+g*g,2);}return -s;}
+function Zpp(x,n){let s=0;for(let i=0;i<n;i++){const g=GAMMAS[i];s+=4*x*(3*g*g-x*x)/Math.pow(x*x+g*g,3);}return s;}
+function Zppp(x,n){let s=0;for(let i=0;i<n;i++){const g=GAMMAS[i];s+=12*(x**4-6*x*x*g*g+g**4)/Math.pow(x*x+g*g,4);}return s;}
+function wp(x,n){const d=Zp(x,n);return Math.abs(d)<1e-12?null:-1+Zppp(x,n)/d;}
+function Cx(x,n){return 1-Z(x,n)-A_CONST;}
+function fmt(v,d=6){return Number.isFinite(v)?v.toFixed(d):'—';}
+
+function clearFrame1Results() {
+    document.getElementById("tbody1").replaceChildren();
+    const canvas = document.getElementById("chart1");
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function testZDerivatives() {
+    const out = document.getElementById('derivTest');
+    out.style.display = 'block';
+    try {
+        const x = 44, n = countN();
+        const hList = [1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8];
+        const a1 = Zp(x, n), a2 = Zpp(x, n), a3 = Zppp(x, n);
+        let txt = `x = ${x}, N = ${n}\n`;
+        txt += `Absolute error |Z_num - Z_ana| at different h values (central differences):\n\n`;
+        txt += `       h |    |Z'-err|   |    |Z''-err|   |    |Z'''-err|   |\n`;
+        txt += `---------+----------------+----------------+----------------+\n`;
+        for (const h of hList) {
+            const d1 = derivativeCentral(v => Z(v, n), x, h);
+            const d2 = derivativeCentral(v => Zp(v, n), x, h);
+            const d3 = derivativeCentral(v => Zpp(v, n), x, h);
+            txt += `${h.toExponential(0).padStart(8)} | ${Math.abs(d1-a1).toExponential(2).padStart(14)} | ${Math.abs(d2-a2).toExponential(2).padStart(14)} | ${Math.abs(d3-a3).toExponential(2).padStart(14)} |\n`;
+        }
+        txt += `\nAnalytical values:\n`;
+        txt += `Z'(x)   = ${a1.toExponential(6)}\n`;
+        txt += `Z''(x)  = ${a2.toExponential(6)}\n`;
+        txt += `Z'''(x) = ${a3.toExponential(6)}\n\n`;
+        txt += `Note: Large h → Truncation error O(h²) | Small h → Floating point error | Optimal ~ ε^(1/3) ≈ 6e-6`;
+        out.textContent = txt;
+    } catch (e) { out.textContent = "Error: " + e.message; }
+}
+
+let chartMode = 'all';
+function setChartMode(mode, btn) {
+    chartMode = mode;
+    document.querySelectorAll('.controls button.active-mode').forEach(b => b.classList.remove('active-mode'));
+    if (btn) btn.classList.add('active-mode');
+    try {
+        drawChart1(countN());
+    } catch (e) {
+        clearFrame1Results();
+        const out = document.getElementById('out');
+        out.style.display = 'block';
+        out.textContent = 'Error: ' + e.message;
+    }
+}
+
+function calc() {
+    const out = document.getElementById('out');
+    out.style.display = 'block';
+    try {
+        const x = readFiniteNumber('xInput', 'x');
+        if (x <= 0) throw new Error("x must be positive.");
+        const n = countN();
+        const w = wp(x,n);
+        out.textContent = `N = ${n}\nZ(${x}) = ${fmt(Z(x,n))}\nZ'(${x}) = ${Zp(x,n).toExponential(6)}\nZ''(${x}) = ${Zpp(x,n).toExponential(6)}\nw_proxy = ${w===null?'—':fmt(w,6)}\nC(${x}) = ${fmt(Cx(x,n))}`;
+        const tbody = document.getElementById('tbody1');
+        tbody.innerHTML = '';
+        const xs = [12,20,27.817274,32.935062,40,44,66,77,x].filter(v => Number.isFinite(v) && v > 0);
+        xs.forEach(val => {
+            const wv = wp(val, n);
+            const tr = document.createElement('tr');
+            const td = (text) => { const e = document.createElement('td'); e.textContent = text; return e; };
+            tr.appendChild(td(fmt(val,6)));
+            tr.appendChild(td(fmt(Z(val,n))));
+            tr.appendChild(td(Zp(val,n).toExponential(3)));
+            tr.appendChild(td(Zpp(val,n).toExponential(3)));
+            tr.appendChild(td(wv===null?'—':fmt(wv,4)));
+            tr.appendChild(td(fmt(Cx(val,n),4)));
+            tbody.appendChild(tr);
+        });
+        drawChart1(n);
+    } catch (e) {
+        out.textContent = "Error: " + e.message;
+        clearFrame1Results();
+    }
+}
+
+function drawChart1(n) {
+    const c = document.getElementById('chart1'), ctx = c.getContext('2d');
+    const W = c.width, H = c.height, xmin = 0.5, xmax = 60;
+    const M = { l: 55, r: 20, t: 50, b: 35 };
+    const pw = W - M.l - M.r, ph = H - M.t - M.b;
+    ctx.clearRect(0, 0, W, H);
+    const scale = 60;
+    const yMax = ph / (2 * scale);
+    ctx.font = '10px monospace'; ctx.textAlign = 'right';
+    for (let i = 0; i <= 6; i++) {
+        const yPos = M.t + i * ph / 6;
+        const val = yMax - i * (2 * yMax / 6);
+        ctx.fillStyle = '#666'; ctx.fillText(val.toFixed(2), M.l - 5, yPos + 3);
+        ctx.strokeStyle = 'rgba(255,255,255,.08)';
+        ctx.beginPath(); ctx.moveTo(M.l, yPos); ctx.lineTo(W - M.r, yPos); ctx.stroke();
+    }
+    ctx.textAlign = 'center';
+    for (let i = 0; i <= 6; i++) {
+        const xVal = xmin + (xmax - xmin) * i / 6;
+        const xPos = M.l + i * pw / 6;
+        ctx.fillStyle = '#666'; ctx.fillText(xVal.toFixed(1), xPos, H - 15);
+        ctx.strokeStyle = 'rgba(255,255,255,.08)';
+        ctx.beginPath(); ctx.moveTo(xPos, M.t); ctx.lineTo(xPos, H - M.b); ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(255,255,255,.3)';
+    ctx.beginPath(); ctx.moveTo(M.l, M.t + ph/2); ctx.lineTo(W - M.r, M.t + ph/2); ctx.stroke();
+    const allSeries = [
+        { key: 'z', f: x => Z(x,n), color: '#ffd700', label: 'Z(x) [×1]' },
+        { key: 'zp', f: x => Zp(x,n)*100, color: '#00bfff', label: "Z'(x) [×100]" },
+        { key: 'w', f: x => { let w = wp(x,n); return w===null || Math.abs(w)>5 ? null : w/5; }, color: '#ff6666', label: 'w_proxy [÷5]' }
+    ];
+    const series = chartMode === 'all' ? allSeries : allSeries.filter(s => s.key === chartMode);
+    for (const s of series) {
+        ctx.strokeStyle = s.color; ctx.lineWidth = 2; ctx.beginPath(); let on = false;
+        for (let px = 0; px < pw; px++) {
+            const x = xmin + (xmax-xmin)*px/pw, y = s.f(x);
+            if (y === null || !Number.isFinite(y)) { on = false; continue; }
+            const py = M.t + ph/2 - y*scale;
+            if (py < M.t || py > H - M.b) { on = false; continue; }
+            if (!on) { ctx.moveTo(M.l+px, py); on = true; } else ctx.lineTo(M.l+px, py);
+        }
+        ctx.stroke();
+    }
+    ctx.textAlign = 'left';
+    ctx.font = '13px monospace'; ctx.fillStyle = '#ddd';
+    const modeLabel = chartMode === 'all' ? 'All curves' : `Mode: ${chartMode}`;
+    ctx.fillText(`Frame 1 (N=${n}) — ${modeLabel} — Y-axis shows scaled values`, M.l, 20);
+    let lx = M.l; ctx.font = '12px monospace';
+    for (const s of series) { ctx.fillStyle = s.color; ctx.fillText(s.label, lx, 38); lx += 130; }
+}
+
+// ============ Bridge ============
+function calcBridge() {
+    const box = document.getElementById('resultBridge');
+    box.style.display = 'block';
+    try {
+        const raw = readFiniteNumber('rawValBridge', 'Value');
+        const sel = document.getElementById('scaleSelectBridge');
+        const factor = parseFloat(sel.value);
+        const unitName = sel.options[sel.selectedIndex].text;
+        if (!Number.isFinite(factor) || factor <= 0) throw new Error("Invalid factor.");
+        const res = raw * factor;
+        if (!Number.isFinite(res)) throw new Error("Result is not finite.");
+        box.textContent = `Value=${raw}\nFactor=${unitName}\nResult=${res.toExponential(6)}\n\n*Numerical unit conversion.`;
+    } catch (e) { box.textContent = "Error: " + e.message; }
+}
+
+// ============ Tree ============
+function calcTree() {
+    const box = document.getElementById('resultTree');
+    box.style.display = 'block';
+    try {
+        const H = readFiniteNumber('treeH', 'H');
+        const thetaDeg = readFiniteNumber('treeTheta', 'θ');
+        if (H <= 0) throw new Error("H must be > 0.");
+        if (thetaDeg < 0 || thetaDeg >= 90) throw new Error("θ must be in [0, 90).");
+        const ratio = Math.tan(thetaDeg * Math.PI / 180);
+        box.textContent = `θ=${thetaDeg}°\nS/H=${ratio.toFixed(6)}\nS=${(H*ratio).toFixed(4)} m\n\nθ=22.5°: ${(Math.SQRT2 - 1).toFixed(6)}`;
+    } catch (e) { box.textContent = "Error: " + e.message; }
+}
+
+// ============ Frame 3 ============
+function simpson(f, a, b, n) {
+    if (n % 2 !== 0) n++;
+    const h = (b - a) / n;
+    let sum = f(a) + f(b);
+    for (let i = 1; i < n; i += 2) sum += 4 * f(a + i*h);
+    for (let i = 2; i < n; i += 2) sum += 2 * f(a + i*h);
+    return sum * h / 3;
+}
+function convergenceMetrics(results, target = 0.60352) {
+    return results.map((curr, i) => {
+        const prev = i > 0 ? results[i - 1] : null;
+        const prev2 = i > 1 ? results[i - 2] : null;
+        const delta = prev !== null ? Math.abs(curr.R - prev.R) : null;
+        const relativeDelta = prev !== null && prev.R !== 0 ? delta / Math.abs(prev.R) : null;
+        
+        let estimatedOrder = null;
+        if (prev !== null && prev2 !== null && delta !== null && delta > 0) {
+            const prevDelta = Math.abs(prev.R - prev2.R);
+            if (prevDelta > 0 && delta < prevDelta) {
+                estimatedOrder = Math.log2(prevDelta / delta);
+            }
+        }
+        
+        return { 
+            N: curr.N, R: curr.R, delta, relativeDelta, 
+            targetError: Math.abs(curr.R - target),
+            estimatedOrder 
+        };
+    });
+}
+let frame3RequestId = 0;
+function calcFrame3() {
+    const box = document.getElementById('resultFrame3');
+    box.style.display = 'block';
+    try {
+        const xp = readFiniteNumber('xpCalc', 'x_p');
+        if (xp <= 0) throw new Error("x_p must be positive.");
+        const myId = ++frame3RequestId;
+        box.textContent = "Calculating...";
+        setTimeout(() => {
+            if (myId !== frame3RequestId) return;
+            try {
+                const g = (u) => {
+                    if (u <= 0 || u >= 2*Math.PI) return 0;
+                    return Math.pow(u/(2*Math.PI), 5) * Math.log(2*Math.PI/u) * Math.exp(-2*Math.PI/(xp*u));
+                };
+                const Y = (n, u) => Math.sin(n*u/2);
+                const D = (u) => Math.cos(u/2);
+                const a = 0, b = 2*Math.PI;
+                const steps = [1000, 2000, 4000, 8000];
+                const results = [];
+                for (const N of steps) {
+                    const N1 = simpson(u => Math.pow(g(u)*Y(1,u), 2), a, b, N);
+                    const N2 = simpson(u => Math.pow(g(u)*Y(2,u), 2), a, b, N);
+                    const N3 = simpson(u => Math.pow(g(u)*Y(3,u), 2), a, b, N);
+                    if (![N1,N2,N3].every(v => Number.isFinite(v) && v > 0)) throw new Error(`Invalid normalization integral at N=${N}.`);
+                    const A12 = simpson(u => (g(u)*Y(1,u)/Math.sqrt(N1)) * D(u) * (g(u)*Y(2,u)/Math.sqrt(N2)), a, b, N);
+                    const A13 = simpson(u => (g(u)*Y(1,u)/Math.sqrt(N1)) * D(u) * (g(u)*Y(3,u)/Math.sqrt(N3)), a, b, N);
+                    if (!Number.isFinite(A12) || !Number.isFinite(A13) || Math.abs(A12) < 1e-12) throw new Error(`Invalid A12 at N=${N}.`);
+                    const R = (A13 / A12) ** 2;
+                    if (!Number.isFinite(R)) throw new Error(`R is not finite at N=${N}.`);
+                    results.push({ N, R, A12, A13 });
+                }
+                const metrics = convergenceMetrics(results);
+                let txt = `x_p = ${xp}\n\nActual Values:\n`;
+                txt += `     N |       A12       |       A13       |        R\n`;
+                txt += `-------+-----------------+-----------------+---------------\n`;
+                for (const r of results) {
+                    txt += `${String(r.N).padStart(6)} | ${r.A12.toExponential(5)} | ${r.A13.toExponential(5)} | ${r.R.toFixed(8)}\n`;
+                }
+                txt += `\nConvergence Analysis:\n`;
+                txt += `     N |      ΔR         |    ΔR/R         | |R-target|  | p_est |\n`;
+                txt += `-------+-----------------+-----------------+-------------+-------+\n`;
+                for (const m of metrics) {
+                    txt += `${String(m.N).padStart(6)} | `;
+                    txt += (m.delta !== null ? m.delta.toExponential(3).padStart(15) : '       —       ');
+                    txt += ` | `;
+                    txt += (m.relativeDelta !== null ? m.relativeDelta.toExponential(3).padStart(15) : '       —       ');
+                    txt += ` | ${m.targetError.toExponential(3)} `;
+                    txt += `| ${m.estimatedOrder !== null ? m.estimatedOrder.toFixed(2) : '  —  '} |\n`;
+                }
+                txt += `\nNote: 0.60352 is the reference. Simpson convergence ≠ model validity.`;
+                txt += `\np_est ≈ log₂(ΔR_prev / ΔR_curr). Expected for Simpson's rule ~4 (error O(h⁴)).`;
+                if (myId === frame3RequestId) box.textContent = txt;
+            } catch (e) {
+                if (myId === frame3RequestId) box.textContent = "Error: " + e.message;
+            }
+        }, 50);
+    } catch (e) { box.textContent = "Error: " + e.message; }
+}
+
+// ============ Frame 4 ============
+function gSecondDerivativeAnalytic(u, xp) {
+    const ell = Math.log(2*Math.PI / u);
+    const a = 2*Math.PI / xp;
+    const g = Math.pow(u/(2*Math.PI), 5) * ell * Math.exp(-a/u);
+    const p = 5/u - 1/(u*ell) + a/(u*u);
+    const dp = -5/(u*u) + (ell-1)/(u*u*ell*ell) - 2*a/(u*u*u);
+    return g * (p*p + dp);
+}
+function verifyFrame4() {
+    const box = document.getElementById('resultFrame4');
+    box.style.display = 'block';
+    try {
+        const u = 1, xp = 21, h = 1e-5;
+        const g = (x) => Math.pow(x/(2*Math.PI), 5) * Math.log(2*Math.PI/x) * Math.exp(-2*Math.PI/(xp*x));
+        const gu = g(u);
+        requireNonZero(gu, "g(u)");
+        const gppNum = secondDerivativeCentral(g, u, h);
+        const gppAna = gSecondDerivativeAnalytic(u, xp);
+        box.textContent =
+            `u=${u}, xp=${xp}, h=${h}\n\n` +
+            `g(u)                 = ${gu.toExponential(8)}\n` +
+            `g''_num              = ${gppNum.toExponential(8)}\n` +
+            `g''_ana              = ${gppAna.toExponential(8)}\n` +
+            `derivativeDifference = ${Math.abs(gppNum - gppAna).toExponential(4)}\n\n` +
+            `Identity check: -g'' + (g''/g)*g = 0, where g != 0.\n` +
+            `This is an algebraic identity, not a spectral verification.`;
+    } catch (e) { box.textContent = "Error: " + e.message; }
+}
+
+document.getElementById('calcBtn').addEventListener('click', calc);
+document.getElementById('xInput').addEventListener('input', calc);
+document.getElementById('nInput').addEventListener('change', calc);
+document.getElementById('resetBtn').addEventListener('click', () => {
+    document.getElementById('xInput').value = 44;
+    document.getElementById('nInput').value = 100;
+    calc();
+});
+calc();
+calcTree();
+</script>
+</body>
+</html>
