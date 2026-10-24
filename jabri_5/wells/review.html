@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الحالة العلمية — Al-Hindara Research Status</title>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root { --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --blue: #6ae3ff; --red: #e57373; --orange: #ff9800; --purple: #ba68c8; }
+        body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
+        .container { width: min(1100px, 100%); display: flex; flex-direction: column; gap: 20px; }
+        
+        /* Top Navigation */
+        .top-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; background: rgba(10, 26, 18, 0.9); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; width: 100%; }
+        .nav-item { color: var(--dim); text-decoration: none; padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; border: 1px solid transparent; transition: 0.3s; }
+        .nav-item:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
+        .nav-item.active { color: #0a1a12; background: var(--red); border-color: var(--red); }
+        
+        /* Header */
+        h1 { color: var(--red); text-align: center; font-size: 1.8rem; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 5px; }
+        .version-badge { display: block; text-align: center; color: var(--gold); font-size: 0.85rem; margin-bottom: 20px; font-family: monospace; }
+        
+        /* Cards */
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .card h2 { color: var(--gold); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
+        .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
+        .card h4 { color: var(--text); font-size: 1rem; margin-top: 15px; border-bottom: 1px dashed var(--border); padding-bottom: 5px; }
+        
+        /* Legend */
+        .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin: 15px 0; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+        
+        /* Status Badges */
+        .status {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: bold;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .status-work { background: #333; color: #fff; border: 1px solid #555; }
+        .status-work-active { background: rgba(255, 152, 0, 0.2); color: var(--orange); border: 1px solid rgba(255, 152, 0, 0.4); }
+        .status-sci-proven { background: rgba(6, 214, 160, 0.15); color: var(--green); border: 1px solid rgba(6, 214, 160, 0.3); }
+        .status-sci-conditional { background: rgba(244, 196, 48, 0.15); color: var(--gold); border: 1px solid rgba(244, 196, 48, 0.3); }
+        .status-sci-exploratory { background: rgba(106, 227, 255, 0.15); color: var(--blue); border: 1px solid rgba(106, 227, 255, 0.3); }
+        .status-sci-open { background: rgba(229, 115, 115, 0.15); color: var(--red); border: 1px solid rgba(229, 115, 115, 0.3); }
+        .status-verif-none { background: rgba(229, 115, 115, 0.1); color: var(--red); border: 1px dashed var(--red); }
+        .status-verif-internal { background: rgba(244, 196, 48, 0.1); color: var(--gold); border: 1px dashed var(--gold); }
+        .status-verif-repro { background: rgba(6, 214, 160, 0.1); color: var(--green); border: 1px dashed var(--green); }
+        
+        /* Summary Grid */
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
+        .summary-card { background: #051009; border: 2px solid var(--border); border-radius: 10px; padding: 18px; text-decoration: none; color: var(--text); transition: 0.3s; display: flex; flex-direction: column; }
+        .summary-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .summary-card .header { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+        .summary-card .num { font-size: 0.75rem; color: var(--gold); font-family: monospace; font-weight: bold; }
+        .summary-card .title { font-size: 1.05rem; font-weight: bold; margin: 8px 0 5px 0; }
+        .summary-card .desc { font-size: 0.85rem; color: var(--dim); margin-bottom: 12px; }
+        .summary-card .last-status { font-size: 0.85rem; color: var(--text); background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; margin-top: auto; }
+        .summary-card .last-status strong { color: var(--gold); font-size: 0.78rem; display: block; margin-bottom: 3px; }
+        .summary-card .status-group { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+        
+        /* Details */
+        details { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 15px; }
+        details summary { cursor: pointer; outline: none; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+        details summary::-webkit-details-marker { color: var(--gold); }
+        details[open] summary { margin-bottom: 15px; border-bottom: 2px solid var(--border); padding-bottom: 12px; }
+        details .record-meta { font-size: 0.8rem; color: var(--dim); font-family: monospace; margin-bottom: 15px; background: #0a1a12; padding: 8px; border-radius: 4px; border-right: 3px solid var(--gold); }
+        
+        /* Six-section layout */
+        .record-section { margin-bottom: 18px; }
+        .record-section .label { font-size: 0.8rem; color: var(--gold); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: block; }
+        .record-section .content { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 6px; border-right: 3px solid var(--border); }
+        
+        /* Math */
+        .math-block { background: #0a1410; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1rem; }
+        
+        /* Other elements */
+        .badge-exact { background: rgba(6, 214, 160, 0.1); border-right: 4px solid var(--green); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.9rem; }
+        .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-right: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.9rem; }
+        .badge-red { background: rgba(229, 115, 115, 0.1); border-right: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.9rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.85rem; }
+        th, td { border: 1px solid var(--border); padding: 8px; text-align: right; }
+        th { background: #132a1d; color: var(--gold); text-align: center; }
+        
+        .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <nav class="top-nav">
+        <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
+        <a href="frame1.html" class="nav-item">1. الإطار الرياضي</a>
+        <a href="bridge.html" class="nav-item">الجسر</a>
+        <!-- تأكد من اسم ملف الإطار الثاني الفعلي في مجلد tree (frame2.html أو tree2.html) -->
+        <a href="../tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
+        <a href="frame3.html" class="nav-item">3. البنية الدقيقة</a>
+        <a href="frame4.html" class="nav-item">4. المسألة الطيفية</a>
+        <a href="review.html" class="nav-item active">📊 لوحة الحالة</a>
+    </nav>
+
+    <h1>لوحة الحالة العلمية للمشروع</h1>
+    <div class="subtitle">Al-Hindara Research Status & Decision Log</div>
+    <div class="version-badge">Status v2.0 | آخر تحديث: 25 أكتوبر 2026</div>
+
+    <div class="card">
+        <h2>📖 كيف تُقرأ هذه اللوحة؟</h2>
+        <p>هذه الصفحة ليست أرشيفاً للنقاشات فقط، بل <strong>لوحة متابعة علمية</strong> تُجيب مباشرة عن السؤال: <em>"أين وصلنا في كل إطار، ما نعرفه فعلاً، وما العمل التالي؟"</em></p>
+        
+        <div class="legend">
+            <div class="legend-item"><span class="status status-work">مغلق</span> إداريًا (انتهت المهمة)</div>
+            <div class="legend-item"><span class="status status-work-active">قيد التنفيذ</span> عمل جارٍ</div>
+            <div class="legend-item"><span class="status status-sci-proven">مثبت</span> بدليل رياضي/عددي</div>
+            <div class="legend-item"><span class="status status-sci-conditional">مشروط</span> صحيح بشروط محددة</div>
+            <div class="legend-item"><span class="status status-sci-exploratory">استكشافي</span> فرضية لا برهان</div>
+            <div class="legend-item"><span class="status status-sci-open">مفتوح</span> لم يُحسم</div>
+            <div class="legend-item"><span class="status status-verif-none">لم يُختبر</span> لا تحقق</div>
+            <div class="legend-item"><span class="status status-verif-internal">تحقق داخلي</span> من كودنا</div>
+            <div class="legend-item"><span class="status status-verif-repro">أُعيد إنتاجه</span> من طرف مستقل</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📋 ملخص حالة الإطارات (Summary)</h2>
+        <p style="color: var(--dim); font-size: 0.9rem;">هذا ملخص مستخلص من آخر مراجعاتنا، وليس ادعاءً بأن كل ملف قد أُعيد اختباره الآن.</p>
+        
+        <div class="summary-grid">
+            <!-- Frame 1 -->
+            <a href="#frame-1" class="summary-card">
+                <div class="header">
+                    <span class="num">FRAME 01</span>
+                    <span class="status status-sci-conditional">مشروط</span>
+                </div>
+                <div class="title">الإطار الأول — الدالة الأم</div>
+                <div class="desc">الدالة، الغلاف التقاربي، والتحقق العددي</div>
+                <div class="last-status">
+                    <strong>آخر حالة:</strong>
+                    الصيغة التحليلية محددة، وجدول مدوّن، لكن إعادة إنتاج الحسابات العددية مطلوبة.
+                </div>
+                <div class="status-group">
+                    <span class="status status-work">مغلق</span>
+                    <span class="status status-verif-internal">تحقق داخلي</span>
+                </div>
+            </a>
+
+            <!-- Frame 2 -->
+            <a href="#frame-2" class="summary-card">
+                <div class="header">
+                    <span class="num">FRAME 02</span>
+                    <span class="status status-sci-exploratory">استكشافي</span>
+                </div>
+                <div class="title">الإطار الثاني — الشجرة والظل</div>
+                <div class="desc">الهندرة والنسبة الفضية</div>
+                <div class="last-status">
+                    <strong>آخر حالة:</strong>
+                    الهوية صحيحة رياضيًا، أما مطابقة قياسات الأشجار فتبقى فرضية استكشافية محدودة البيانات.
+                </div>
+                <div class="status-group">
+                    <span class="status status-work">مغلق</span>
+                    <span class="status status-verif-none">لم يُختبر</span>
+                </div>
+            </a>
+
+            <!-- Frame 3 -->
+            <a href="#frame-3" class="summary-card">
+                <div class="header">
+                    <span class="num">FRAME 03</span>
+                    <span class="status status-sci-conditional">مشروط</span>
+                </div>
+                <div class="title">الإطار الثالث — البنية والتحويل</div>
+                <div class="desc">تحويل المتغير والمؤثر والقياسات النموذجية</div>
+                <div class="last-status">
+                    <strong>آخر حالة:</strong>
+                    هوية التحويل صحيحة ضمن شروطها؛ لكن التماثل الذاتي للمؤثر والمجال الطيفي يحتاجان معالجة مستقلة.
+                </div>
+                <div class="status-group">
+                    <span class="status status-work">مغلق</span>
+                    <span class="status status-verif-internal">تحقق داخلي</span>
+                </div>
+            </a>
+
+            <!-- Frame 4 -->
+            <a href="#frame-4" class="summary-card">
+                <div class="header">
+                    <span class="num">FRAME 04</span>
+                    <span class="status status-sci-open">مفتوح</span>
+                </div>
+                <div class="title">الإطار الرابع — المسألة الطيفية</div>
+                <div class="desc">المؤثر، التحقيق الذاتي الترافق، وطاقة الفراغ</div>
+                <div class="last-status">
+                    <strong>آخر حالة:</strong>
+                    هوية تفاضلية شكلية؛ وعدم سلبية الشكل على الدوال الاختبارية نتيجة أولية، لا برهان مكتمل.
+                </div>
+                <div class="status-group">
+                    <span class="status status-work-active">قيد التنفيذ</span>
+                    <span class="status status-verif-internal">تحقق داخلي</span>
+                </div>
+            </a>
+
+            <!-- Bridge -->
+            <a href="#bridge" class="summary-card">
+                <div class="header">
+                    <span class="num">BRIDGE</span>
+                    <span class="status status-sci-conditional">مشروط</span>
+                </div>
+                <div class="title">الجسر — الربط الفيزيائي</div>
+                <div class="desc">تحويل المقاييس والوحدات</div>
+                <div class="last-status">
+                    <strong>آخر حالة:</strong>
+                    الجسر يوضح تحويلًا من متغير لا بُعدي إلى مقياس ذي أبعاد؛ ولا يشكل إثباتًا فيزيائيًا.
+                </div>
+                <div class="status-group">
+                    <span class="status status-work">مغلق</span>
+                    <span class="status status-verif-none">لم يُختبر</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- ==================== FRAME 1 RECORD ==================== -->
+    <div class="card" id="frame-1">
+        <details open>
+            <summary>
+                <strong style="color: var(--gold); font-size: 1.15rem;">FRAME 01 — الإطار الأول (الدالة الأم)</strong>
+                <span class="status status-sci-conditional">مشروط</span>
+                <span class="status status-work">مغلق</span>
+            </summary>
+            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v1.2 | الملف: <a href="frame1.html" style="color: var(--blue);">frame1.html</a></div>
+            
+            <div class="record-section">
+                <span class="label">🎯 الهدف</span>
+                <div class="content">تعريف الدالة \(Z(x)\), تحليل إشارتها وجذورها، دالة التجميع \(A(x)\), والامتداد المركب \(\mathcal{Z}(s)\).</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📍 آخر حالة وصلنا إليها</span>
+                <div class="content">تم تصحيح جدول التقارب وإضافة سطر التوسع التقاربي. الحالة الحالية: الصيغة التحليلية محددة، لكن الجدول العددي يحتاج إلى إعادة إنتاج مستقلة.</div>
+            </div>
+
+            <!-- التعديل المطلوب من الرفيق المشاكس هنا -->
+            <div class="record-section">
+                <span class="label">✅ ما ثبت</span>
+                <div class="content">
+                    <p style="margin-top: 0; color: var(--dim); font-size: 0.85rem;"><strong>ما ثبت تحليليًا:</strong></p>
+                    <ul>
+                        <li><strong>تحليل الإشارة والجذور:</strong> صحيح (برهان تحليلي مباشر).</li>
+                        <li><strong>\(A_\infty < 0\):</strong> برهان تحليلي باستخدام متباينتين قياسيتين (المتباينة اللوغاريتمية والمتباينة على \(B\)).</li>
+                        <li><strong>\(E(A) > 0\):</strong> برهان تحليلي وفق التعريف والافتراضات المبيّنة في الاشتقاق (المجال المفتوح \((1,2)\)).</li>
+                        <li><strong>الصيغة التقاربية:</strong> \(|\mathcal{Z}| \sim K(21)\ln(t)/t^6\) (مشتقة تحليليًا).</li>
+                    </ul>
+                    <div class="badge-exploratory" style="margin-top: 10px;">
+                        <strong>حدود التحقق:</strong> النتائج التحليلية أعلاه منفصلة عن إعادة الإنتاج العددية المستقلة. جدول القيم العددية (في §7) يحتاج إلى توثيق طريقة الحساب وإعادة تشغيلها بصورة قابلة للتحقق قبل اعتباره "مُثبتاً خارجياً".
+                    </div>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">❓ ما لم يُحسم</span>
+                <div class="content">
+                    <ul>
+                        <li>إعادة إنتاج الجدول العددي (Simpson/SciPy) من قبل طرف مستقل.</li>
+                        <li>مراجعة الكود البرمجي للتأكد من صحة تعريف \(Z\) وطريقة الحساب.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📝 القرارات والتصحيحات</span>
+                <div class="content">
+                    <ul>
+                        <li><strong>v1.2 (25/10):</strong> تصحيح جدول §7 (4 صفوف). إضافة سطر النهاية. تحديث رابط PDF إلى v7.0.</li>
+                        <li><strong>v1.1:</strong> توحيد تاريخ النشر وتصحيح رابط PDF.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">➡️ الخطوة التالية</span>
+                <div class="content">
+                    <strong>مراجعة كود الحساب والجدول معًا، ثم تسجيل نتيجة التحقق.</strong> معيار الإكمال: نشر تقرير إعادة إنتاج مستقل في <code>audit/</code>.
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== FRAME 2 RECORD ==================== -->
+    <div class="card" id="frame-2">
+        <details>
+            <summary>
+                <strong style="color: var(--gold); font-size: 1.15rem;">FRAME 02 — الإطار الثاني (الشجرة والظل)</strong>
+                <span class="status status-sci-exploratory">استكشافي</span>
+                <span class="status status-work">مغلق</span>
+            </summary>
+            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="../tree/frame2.html" style="color: var(--blue);">tree/frame2.html</a></div>
+            
+            <div class="record-section">
+                <span class="label">🎯 الهدف</span>
+                <div class="content">إثبات الهوية الهندسية \(\tan(22.5^\circ) = \sqrt{2}-1\)، ومقارنتها بقياسات ميدانية لأشجار المانجو.</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📍 آخر حالة وصلنا إليها</span>
+                <div class="content">الهوية صحيحة رياضيًا. البيانات الميدانية (N=5) تُظهر متوسط \(R \approx 0.413\)، لكن العينة صغيرة والاستنتاج استكشافي فقط.</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">✅ ما ثبت</span>
+                <div class="content">الهوية الهندسية \(\tan(\pi/8) = \sqrt{2}-1\) (برهان جبري).</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">❓ ما لم يُحسم</span>
+                <div class="content">
+                    <ul>
+                        <li>هل التقارب العددي (\(0.413\) vs \(0.414\)) دال على قانون عام؟ (الجواب: لا، عينة صغيرة).</li>
+                        <li>هل هناك صلة بالإطار الرابع؟ (لا توجد صلة رياضية مثبتة).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📝 القرارات والتصحيحات</span>
+                <div class="content">
+                    <ul>
+                        <li><strong>v7.0:</strong> إعادة صياغة الحدود المنهجية: "هذا الجدول ملاحظة تجريبية، لا يختبر القانون مباشرة".</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">➡️ الخطوة التالية</span>
+                <div class="content">
+                    <strong>تثبيت تعريف النسبة المقاسة، البروتوكول، والبيانات قبل توسيع الاستنتاج.</strong> معيار الإكمال: عينة أكبر (N>30) مع بروتوكول قياس منشور.
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== FRAME 3 RECORD ==================== -->
+    <div class="card" id="frame-3">
+        <details>
+            <summary>
+                <strong style="color: var(--gold); font-size: 1.15rem;">FRAME 03 — الإطار الثالث (البنية والتحويل)</strong>
+                <span class="status status-sci-conditional">مشروط</span>
+                <span class="status status-work">مغلق</span>
+            </summary>
+            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="frame3.html" style="color: var(--blue);">frame3.html</a></div>
+            
+            <div class="record-section">
+                <span class="label">🎯 الهدف</span>
+                <div class="content">التحويل من \(Z(x)\) إلى النواة \(g(u)\) عبر \(u=2\pi/x\)، إثبات هوية Gauging، وحساب \(R_{13/12}\).</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📍 آخر حالة وصلنا إليها</span>
+                <div class="content">هوية التحويل صحيحة. \(\mathcal{H}_g[gY] = -gY''\) مثبتة. لكن التماثل الذاتي للمؤثر والمجال الطيفي يحتاجان معالجة مستقلة (في الإطار الرابع).</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">✅ ما ثبت</span>
+                <div class="content">
+                    <ul>
+                        <li>التحويل \(Z(2\pi/u) = g(u)\sin(u)\) (جبري).</li>
+                        <li>الهوية التفاضلية \(\mathcal{H}_g[gY] = -gY''\) (برهان مباشر).</li>
+                        <li>\(R_{13/12} \approx 0.60351\) (حساب عددي في الإطار الأول).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">❓ ما لم يُحسم</span>
+                <div class="content">
+                    <ul>
+                        <li>اختيار الجداء الداخلي (موزون vs غير موزون).</li>
+                        <li>العلاقة الطيفية بين \(\mathcal{H}_g\) و \(L\) (تنتقل للإطار الرابع).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📝 القرارات والتصحيحات</span>
+                <div class="content">
+                    <ul>
+                        <li><strong>v7.0:</strong> فصل الإطار الثالث عن الرابع بوضوح، والتأكيد على أن \(g(u)\) هي الدالة الأم بعد تغيير المتغير (وليس غلافًا مستقلاً).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">➡️ الخطوة التالية</span>
+                <div class="content">
+                    <strong>تثبيت المجالات وشروط الحدود والتمييز بين الهوية الجبرية والمسألة الطيفية.</strong> معيار الإكمال: تحديد ما إذا كان \(\mathcal{H}_g\) مكافئًا طيفيًا لـ \(L\) (ينتقل للإطار الرابع).
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== FRAME 4 RECORD ==================== -->
+    <div class="card" id="frame-4">
+        <details>
+            <summary>
+                <strong style="color: var(--gold); font-size: 1.15rem;">FRAME 04 — الإطار الرابع (المسألة الطيفية)</strong>
+                <span class="status status-sci-open">مفتوح</span>
+                <span class="status status-work-active">قيد التنفيذ</span>
+            </summary>
+            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="frame4.html" style="color: var(--blue);">frame4.html</a></div>
+            
+            <div class="record-section">
+                <span class="label">🎯 الهدف</span>
+                <div class="content">تعريف \(V_{\text{eff}} = g''/g\), المؤثر \(L\), إثبات الحالة الصفرية \(Lg = 0\), وتحليل التحلل SUSY.</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📍 آخر حالة وصلنا إليها</span>
+                <div class="content">الهوية الشكلية \(Lg = 0\) صحيحة. عدم السلبية على الدوال الاختبارية \(q[\psi] \ge 0\) صحيحة (عبر هوية الحالة الأرضية). لكن تحديد التحقيق الذاتي الترافق لا يزال مفتوحًا.</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">✅ ما ثبت</span>
+                <div class="content">
+                    <ul>
+                        <li>الهوية الشكلية \(Lg = 0\) (حيث \(g \neq 0\)).</li>
+                        <li>عدم السلبية على الدوال الاختبارية: \(q[\psi] = \int g^2 |(\psi/g)'|^2 du \ge 0\).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">❓ ما لم يُحسم</span>
+                <div class="content">
+                    <ul>
+                        <li><strong>قابلية الإغلاق (Closability):</strong> هل الشكل التربيعي قابل للإغلاق؟ ما هو إغلاقه ومجاله؟</li>
+                        <li><strong>تحديد التحقيق الذاتي الترافق:</strong> هل نستخدم تحقيق فريدريش (Friedrichs extension) أم تحقيقًا آخر بشرط حدود صريح؟</li>
+                        <li><strong>انتماء \(g\) للمجال:</strong> هل \(g \in \text{Domain}(L)\) وأن \(Lg = 0\) بالمعنى القوي؟</li>
+                        <li><strong>طاقة الفراغ:</strong> هل الصفر قيمة ذاتية دنيا (Ground State Energy = 0)؟</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📝 القرارات والتصحيحات</span>
+                <div class="content">
+                    <ul>
+                        <li><strong>v7.0:</strong> تصحيح صياغة "تطابق التعبيرين التفاضليين" لتوضيح أنه تطابق في المعادلة، وليس تكافؤًا طيفيًا.</li>
+                        <li><strong>v7.0:</strong> إضافة قسم "الحدود المفتوحة" يوضح ما لا يثبته الإطار.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">➡️ الخطوة التالية</span>
+                <div class="content">
+                    <strong>دراسة قابلية الإغلاق، تحديد التحقيق الذاتي الترافق، وفحص انتماء \(g\) للمجال.</strong> معيار الإكمال: نشر ملحق رياضي مستقل (Record 02) يتضمن برهانًا كاملًا أو إثباتًا لاستحالة أحد الخيارات.
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== BRIDGE RECORD ==================== -->
+    <div class="card" id="bridge">
+        <details>
+            <summary>
+                <strong style="color: var(--gold); font-size: 1.15rem;">BRIDGE — الجسر (الربط الفيزيائي)</strong>
+                <span class="status status-sci-conditional">مشروط</span>
+                <span class="status status-work">مغلق</span>
+            </summary>
+            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="bridge.html" style="color: var(--blue);">bridge.html</a></div>
+            
+            <div class="record-section">
+                <span class="label">🎯 الهدف</span>
+                <div class="content">ربط الكميات اللابُعدية بمقاييس فيزيائية ذات أبعاد عبر \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\).</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📍 آخر حالة وصلنا إليها</span>
+                <div class="content">التحويل البُعدي صحيح رياضيًا. لكن الجسر لا يشكل إثباتًا فيزيائيًا، ولا يقدم تنبؤًا تجريبيًا قابلًا للاختبار.</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">✅ ما ثبت</span>
+                <div class="content">التحويل البُعدي \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\) (صحيح شرط اختيار عامل القياس المناسب).</div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">❓ ما لم يُحسم</span>
+                <div class="content">
+                    <ul>
+                        <li>معنى مقياس التحويل \(\Lambda_{\text{scale}}\): هل هو طول بلانك، طاقة بلانك، أم مقياس آخر؟</li>
+                        <li>الافتراضات اللازمة لأي تفسير فيزيائي.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">📝 القرارات والتصحيحات</span>
+                <div class="content">
+                    <ul>
+                        <li><strong>v7.0:</strong> توضيح أن طول بلانك مقياس طبيعي وليس حدًا أدنى للطول ثبت تجريبيًا.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="record-section">
+                <span class="label">➡️ الخطوة التالية</span>
+                <div class="content">
+                    <strong>تحديد معنى مقياس التحويل ومصدره، وبيان الافتراضات اللازمة لأي تفسير فيزيائي.</strong> معيار الإكمال: تحديد ما إذا كان الجسر يقدم تنبؤًا تجريبيًا قابلًا للدحض.
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="footer">
+        © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
+        لوحة الحالة العلمية · v2.0 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
+        <em>المبدأ الحاكم: لا نرفع نتيجة إلى مرتبة البرهان لمجرد أن الأرقام تبدو متناسقة، ولا نخفض قيمة هوية رياضية صحيحة لمجرد أن المسألة الطيفية الكاملة لم تُحل بعد.</em>
+    </div>
+</div>
+</body>
+</html>
