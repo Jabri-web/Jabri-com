@@ -3,169 +3,750 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame 4 - Towards a Spectral Problem | Zero Mode and Zeta Regularization</title>
-    <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization">
-    
-    <!-- MathJax for Equations -->
+    <title>Frame 4 — Towards a Spectral Problem | Zero Mode and Zeta Regularization</title>
+    <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization — with Algebraic Origin Verification">
+    <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame4-en.html">
+
+    <!-- Google Scholar Meta Tags -->
+    <meta name="citation_title" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization">
+    <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
+    <meta name="citation_publication_date" content="2026/10/21">
+    <meta name="citation_language" content="en">
+    <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame4_tex.pdf">
+
     <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        :root { 
-            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; 
+        :root {
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9;
             --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; --purple: #c792ea;
         }
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; position: relative; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; }
-        
-        /* Language Toggle Button */
+
         .lang-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
         .lang-btn:hover { background: var(--gold); color: #0a1a12; }
 
-        /* Top Navigation Bar */
         .top-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(10, 26, 18, 0.9);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+            background: rgba(10, 26, 18, 0.9); border: 1px solid var(--border);
+            border-radius: 12px; padding: 12px; margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .nav-item {
-            color: var(--dim);
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border: 1px solid transparent;
-            transition: 0.3s;
+            color: var(--dim); text-decoration: none; padding: 6px 14px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: bold;
+            border: 1px solid transparent; transition: 0.3s;
         }
-        .nav-item:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-            background: rgba(244, 196, 48, 0.1);
-        }
-        .nav-item.active {
-            color: #0a1a12;
-            background: var(--gold);
-            border-color: var(--gold);
-            cursor: default;
-        }
+        .nav-item:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
+        .nav-item.active { color: #0a1a12; background: var(--gold); border-color: var(--gold); cursor: default; }
 
         h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
-        
+
         .badge-info { background: rgba(106, 227, 255, 0.1); border-left: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-neutral { background: rgba(255, 255, 255, 0.05); border-left: 4px solid #666; padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-reject { background: rgba(229, 115, 115, 0.08); border-left: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-caveat { background: rgba(244, 196, 48, 0.08); border-left: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
 
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
-        
+
+        .opening { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .opening-col { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .opening-col strong { display: block; margin-bottom: 8px; font-size: 1rem; }
+        .opening-col p { font-size: 0.88rem; margin: 0; color: var(--text); }
+        @media (max-width: 760px) { .opening { grid-template-columns: 1fr; } }
+
         .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border); }
-        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; font-family: inherit; }
         .btn:hover { background: #04b586; }
         .btn-gold { background: var(--gold); color: #0a1a12; }
         .btn-gold:hover { background: #d3a71b; }
+        .btn-blue { background: var(--blue); color: #0a1a12; }
+        .btn-blue:hover { background: #3fb8d0; }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+        .assessment-content { display: none; margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 8px; border: 1px solid var(--border); }
+        .assessment-content h4 { color: var(--gold); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; }
+        .assessment-content ul { padding-left: 20px; margin-top: 5px; }
+        .assessment-content li { margin-bottom: 8px; }
+
+        .deriv-box { margin: 12px 0; border: 1px dashed var(--border); border-radius: 8px; padding: 8px 14px; background: #051009; }
+        .deriv-box summary { cursor: pointer; color: var(--blue); font-weight: bold; font-size: 0.9rem; padding: 4px 0; }
+        .deriv-box summary:hover { color: var(--gold); }
+        .deriv-box p { margin: 8px 0; font-size: 0.92rem; }
+
+        .next-step-box { margin: 18px 0 0; padding: 16px 18px; background: rgba(244, 196, 48, 0.08); border: 1px solid var(--gold); border-left: 4px solid var(--gold); border-radius: 8px; }
+        .next-step-box h3 { margin: 0 0 10px; color: var(--gold); font-size: 1.02rem; }
+        .next-step-box p { margin: 8px 0; font-size: 0.95rem; }
+
+        .plan-box { margin: 14px 0 0; padding: 12px 14px; background: rgba(0, 0, 0, 0.25); border: 1px dashed var(--gold); border-radius: 6px; }
+        .plan-box h4 { margin: 0 0 8px; color: var(--gold); font-size: 0.95rem; }
+        .plan-box p { margin: 6px 0; font-size: 0.93rem; }
+        .plan-box ol { padding-left: 22px; margin: 8px 0 0; }
+        .plan-box li { margin-bottom: 6px; font-size: 0.93rem; }
+
+        .appendix-card { background: #071912; border: 1px solid var(--purple); }
+        .appendix-card h2 { color: var(--purple); border-bottom-color: var(--purple); }
+        .appendix-card h3 { color: var(--purple); }
+        .appendix-badge { background: rgba(199, 146, 234, 0.1); border-left: 4px solid var(--purple); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .endpoint-result { padding: 10px 14px; margin: 10px 0; border-radius: 6px; font-size: 0.93rem; }
+        .endpoint-lc { background: rgba(229, 115, 115, 0.08); border-left: 3px solid var(--red); }
+        .endpoint-lp { background: rgba(6, 214, 160, 0.08); border-left: 3px solid var(--green); }
+
+        .summary-section { margin: 20px 0 0; padding: 16px 18px; border-radius: 10px; }
+        .summary-achieved { background: rgba(6, 214, 160, 0.06); border-left: 4px solid var(--green); }
+        .summary-next { background: rgba(244, 196, 48, 0.06); border-left: 4px solid var(--gold); margin-top: 14px; }
+        .summary-section h3 { margin: 0 0 10px; font-size: 1.02rem; }
+        .summary-achieved h3 { color: var(--green); }
+        .summary-next h3 { color: var(--gold); }
+        .summary-section ul, .summary-section ol { padding-left: 22px; margin: 8px 0 0; }
+        .summary-section li { margin-bottom: 8px; font-size: 0.94rem; }
+
+        .verify-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.92rem; }
+        .verify-table th { background: rgba(0,0,0,0.3); color: var(--gold); padding: 10px; border: 1px solid var(--border); text-align: left; }
+        .verify-table td { padding: 10px; border: 1px solid var(--border); vertical-align: top; }
+        .verify-ok { color: var(--green); }
+        .verify-fail { color: var(--red); }
+        .verify-open { color: var(--gold); }
+
+        .legend-box {
+            background: rgba(199, 146, 234, 0.08);
+            border: 1px solid var(--purple);
+            border-left: 4px solid var(--purple);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+        }
+        .legend-box h3 { color: var(--purple); margin: 0 0 10px; font-size: 1rem; }
+        .legend-box ul { margin: 0; padding-left: 20px; }
+        .legend-box li { margin: 6px 0; font-size: 0.92rem; }
+        .legend-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 6px;
+        }
+        .legend-established { background: rgba(6, 214, 160, 0.2); color: var(--green); }
+        .legend-proved { background: rgba(106, 227, 255, 0.2); color: var(--blue); }
+        .legend-notinv { background: rgba(138, 168, 146, 0.2); color: var(--dim); }
+        .legend-open { background: rgba(244, 196, 48, 0.2); color: var(--gold); }
+
+        @media print {
+            body { background: white; color: #111; }
+            .card, .opening-col { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; }
+            h1, h2, h3, h4 { color: #000; border-color: #aaa; }
+            .math-block, .badge-info, .badge-neutral, .badge-reject, .badge-caveat, .deriv-box, .assessment-content, .appendix-badge, .next-step-box, .plan-box, .summary-section, .legend-box { background: #f5f5f5; color: #111; border-color: #aaa; }
+            .lang-btn, .top-nav, button { display: none; }
+            .assessment-content { display: block !important; }
+        }
     </style>
 </head>
 <body>
 <a href="frame4.html" class="lang-btn">🌐 العربية</a>
 
-<div class="container">
-    <!-- Top Navigation Bar -->
+<div class="container" id="pdf-content">
     <nav class="top-nav">
-        <a href="../index-en.html" class="nav-item">🏠 Home</a>
-        <a href="frame1-en.html" class="nav-item">1. Raw Math</a>
+        <a href="../en/index.html" class="nav-item">🏠 Home</a>
+        <a href="frame1-en.html" class="nav-item">1. Mathematical Frame</a>
         <a href="bridge-en.html" class="nav-item">Bridge</a>
-        <a href="../tree/frame2-en.html" class="nav-item">2. Application</a>
+        <a href="../tree/frame2-en.html" class="nav-item">2. Applied Frame</a>
         <a href="frame3-en.html" class="nav-item">3. Fine Structure</a>
         <a href="frame4-en.html" class="nav-item active">4. Spectral Problem</a>
     </nav>
 
     <h1>Frame 4: Towards a Spectral Problem</h1>
     <div class="subtitle">
-        <strong>Towards a Spectral Problem, Zero Mode, and Zeta Regularization</strong><br>
+        <strong>Zero Mode and Zeta Regularization</strong><br>
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
     </div>
 
+    <!-- ==================== Epistemic Legend ==================== -->
+    <div class="legend-box">
+        <h3>Epistemic Categories Used in This Document</h3>
+        <ul>
+            <li><span class="legend-tag legend-established">ESTABLISHED</span> Algebraic identities, potentials, and local expansions derived within the open interval.</li>
+            <li><span class="legend-tag legend-proved">PROVED (stated assumptions)</span> Exclusion of the standard first-order Darboux transformation, with the assumptions stated explicitly.</li>
+            <li><span class="legend-tag legend-notinv">NOT INVESTIGATED</span> Generalized Darboux transformations (higher order, Darboux–Goncharenko, or non-standard seeds).</li>
+            <li><span class="legend-tag legend-open">OPEN</span> Spectral questions: self-adjoint realization, lower bound, eigenvalue computation, zeta continuation.</li>
+        </ul>
+    </div>
+
+    <!-- ==================== Opening triple ==================== -->
     <div class="card">
-        <h2>1. From the Frame 3 Operator to a Spectral Problem</h2>
+        <h2>Opening — Problem, Achievement, Type of Evidence</h2>
+        <div class="opening">
+            <div class="opening-col" style="border-left:4px solid var(--gold);">
+                <strong style="color: var(--gold);">Problem</strong>
+                <p>Which differential operator can be constructed from the envelope \(g(u)\) shared by Frames 1 and 3? Is this operator <em>derived</em> from the master equation of Frame 1, or is it a <em>compatible choice</em>? What structural properties (formal zero mode, endpoint classification) can be established, and what constraints do they impose on the spectral problem?</p>
+            </div>
+            <div class="opening-col" style="border-left:4px solid var(--green);">
+                <strong style="color: var(--green);">Achievement</strong>
+                <p>Construction of \(L=-\partial_u^2+g''/g\), proof of the structural identity \(Lg=0\), the formal factorization, endpoint singularity analysis, Limit Point/Circle classification, and a conditional definition of the spectral zeta function. <strong>Additionally:</strong> a precise algebraic analysis (§2) shows that the exact transformation of the master equation yields a different normalized coefficient \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\); and a local argument at \(u=\pi\) rejects the standard first-order Darboux transformation.</p>
+            </div>
+            <div class="opening-col" style="border-left:4px solid var(--blue);">
+                <strong style="color: var(--blue);">Type of Evidence</strong>
+                <p>Exact differential identities on the open interval. Frobenius analysis for endpoint classification. Explicit algebraic derivation (§2) showing the non-equivalence of \(V_{\mathrm{new}}\) and \(V_{\mathrm{eff}}\), with a local proof rejecting the standard first-order Darboux path through \(\pi\). Generalized Darboux transformations are outside the scope of the proof. Choice of self-adjoint realization, lower bound, eigenvalues, and zeta convergence remain open and are documented as next steps, not claimed results.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== §1 ==================== -->
+    <div class="card">
+        <h2>1. From Frame 3's Operator to a Spectral Problem</h2>
         <p>Frame 3 established the algebraic identity:</p>
         <div class="math-block">\[ H_g(gY) = g(-Y'') \]</div>
-        <p>Accordingly, an independent Schrödinger operator can be defined as:</p>
+        <p>On this basis, one may define a Schrödinger-type operator:</p>
         <div class="math-block">\[ L = -\frac{d^2}{du^2} + V_{\mathrm{eff}}(u), \qquad V_{\mathrm{eff}}(u) = \frac{g''(u)}{g(u)} \]</div>
-        
-        <h3>Zero Mode and Supersymmetric Factorization</h3>
+
+        <h3>Formal Zero Mode and Supersymmetric Factorization</h3>
         <div class="badge-info">
-            <strong>Structural Property of the Operator:</strong> From the potential definition \(V_{\mathrm{eff}} = g''/g\), we obtain the fundamental identity:
+            <strong>Structural property of the operator.</strong> From the definition \(V_{\mathrm{eff}} = g''/g\):
             \[ Lg = -g'' + \frac{g''}{g}g = 0 \]
-            This means the envelope \(g(u)\) is a <strong>Zero-Mode</strong> solution of \(L\) on the interior domain. Furthermore, the operator can be algebraically factorized as:
-            \[ L = \left(-\frac{d}{du} - p\right)\left(\frac{d}{du} - p\right), \qquad p = \frac{g'}{g} \]
-            This factorization aligns with the mathematical structure of Supersymmetric Quantum Mechanics (SUSY QM). However, the formal factorization alone does not prove that every self-adjoint realization of the operator is non-negative; this depends on the domain and boundary conditions. Likewise, calling it the "ground state" requires proving it is an allowed, normalizable eigenstate, and that zero is the lowest eigenvalue.
-        </div>
-
-        <h3>Asymptotic Behavior of \(V_{\mathrm{eff}}(u)\)</h3>
-        <p>Using \(V_{\mathrm{eff}} = p' + p^2\), where \(p(u) = \frac{5}{u} - \frac{1}{u\ln(2\pi/u)} + \frac{2\pi}{21u^2}\), the endpoint behavior is:</p>
-        <ul>
-            <li><strong>As \(u\to0^+\):</strong> The term \(2\pi/(21u^2)\) dominates, yielding \(V_{\mathrm{eff}}(u)\sim \frac{4\pi^2}{441u^4}\to+\infty\).</li>
-            <li><strong>As \(u\to2\pi^-\):</strong> Letting \(t=2\pi-u\), the envelope behaves as \(g(u) \approx C t\), yielding \(V_{\mathrm{eff}}(u)\sim -\frac{191}{42\pi(2\pi-u)}\).</li>
-        </ul>
-        <p>This <strong>constrains the analysis of singular endpoints and helps determine appropriate boundary conditions</strong>, but does not uniquely determine them on its own.</p>
-    </div>
-
-    <div class="card">
-        <h2>2. The Envelope as a Candidate Natural Regulator (Research Hypothesis)</h2>
-        <p>In QFT, calculating Vacuum Energy requires summing zero-point energies. One hypothesis is that the envelope \(g(u)\) acts as a natural regulator in operator \(L\).</p>
-        <p>However, this remains a hypothesis until we prove that the high-energy spectral behavior of \(L\) results in convergence. The next step is to <strong>derive the high-energy behavior of the eigenvalues \(\lambda_n\)</strong>, and then determine whether the sum is convergent or requires zeta regularization.</p>
-    </div>
-
-    <div class="card">
-        <h2>3. Spectral Zeta Function and Vacuum Energy</h2>
-        <p>If its non-zero spectrum is positive and the zero-mode treatment is specified, the spectral zeta function is defined over the non-zero spectrum as:</p>
-        <div class="math-block">\[ \zeta_{L,\ne0}(s) = \sum_{\lambda_n>0} \lambda_n^{-s} \]</div>
-        <p>Given appropriate analytic continuation, the zeta-regularized vacuum energy is defined as:</p>
-        <div class="math-block">\[ E_{\mathrm{vac}}^{\mathrm{reg}} = \frac{1}{2}\zeta_{L,\ne0}\left(-\frac{1}{2}\right) \]</div>
-        
-        <div class="badge-neutral">
-            <strong>Handling the Zero-Mode:</strong> The identity \(Lg=0\) verifies the existence of a zero solution to the differential equation on the interior domain. Since \(g\) decays rapidly at the first endpoint and approaches zero linearly at the second, it is a candidate for a normalizable eigenfunction. However, confirming that \(\lambda_0=0\) is an eigenvalue of operator \(L\) requires proving that \(g\) belongs to the domain of a specific self-adjoint realization.
+            so the envelope \(g(u)\) satisfies the operator equation on the open interval and is a <strong>formal zero-mode</strong>. Whether \(g\) is an actual eigenfunction with eigenvalue zero for a self-adjoint realization of \(L\) requires specifying the domain and verifying the boundary conditions.
             <br><br>
-            If this is established, the zeta function is defined on the non-zero spectrum as shown above. If the existence of the zero mode is not proven, the zeta function must be defined on the spectrum established by the chosen self-adjoint realization, not by assuming a zero mode in advance. The non-negativity of the operator must be proven independently through the domain and boundary conditions or through an appropriate quadratic form.
+            The operator also admits the algebraic factorization
+            \[ L = \left(-\frac{d}{du} - p\right)\left(\frac{d}{du} - p\right), \qquad p = \frac{g'}{g} \]
+            This is a formal differential identity on smooth functions on the interval. Since \(p=g'/g\), we have \((\partial_u - p)g=0\); however, this does not decide whether \(g\) belongs to the kernel of a specific self-adjoint realization, which depends on the domain and boundary conditions.
+        </div>
+
+        <h3>Asymptotic behaviour of \(V_{\mathrm{eff}}(u)\)</h3>
+        <p>Using \(V_{\mathrm{eff}} = p' + p^2\) with \(p(u) = \frac{5}{u} - \frac{1}{u\ln(2\pi/u)} + \frac{2\pi}{21u^2}\):</p>
+        <ul>
+            <li><strong>As \(u\to 0^+\):</strong> the \(2\pi/(21u^2)\) term dominates, giving \(V_{\mathrm{eff}}(u)\sim \dfrac{4\pi^2}{441u^4}\to+\infty\). Order-4 singularity.</li>
+            <li><strong>As \(u\to 2\pi^-\):</strong> we find \(V_{\mathrm{eff}}(u)\sim -\dfrac{191}{42\pi(2\pi-u)}\to-\infty\). Order-1 singularity.</li>
+        </ul>
+
+        <details class="deriv-box">
+            <summary>Derivation of the asymptotic limit at \(u \to 2\pi^-\)</summary>
+            <p>Set \(t = 2\pi - u\) and \(\delta = t/(2\pi)\), so \(x = u/(2\pi) = 1-\delta\). Expand each factor:</p>
+            <div class="math-block">
+                \[
+                    x^5 = 1 - 5\delta + 10\delta^2 + O(\delta^3),
+                \]
+                \[
+                    \ln(1/x) = \delta + \tfrac12\delta^2 + O(\delta^3),
+                \]
+                \[
+                    e^{-1/(21x)} = e^{-1/21}\left(1 - \tfrac{\delta}{21} - \tfrac{41}{882}\delta^2 + O(\delta^3)\right).
+                \]
+            </div>
+            <p>Multiplying: \(g(u) = e^{-1/21}\left[\delta - \tfrac{191}{42}\delta^2 + O(\delta^3)\right]\), i.e. \(g(u) \approx C\,t + a\,t^2\) with \(C = e^{-1/21}/(2\pi)\) and \(a = -191\,e^{-1/21}/(168\pi^2)\). Hence</p>
+            <div class="math-block">
+                \[
+                    V_{\mathrm{eff}}(u) = \frac{g''(u)}{g(u)} \sim \frac{2a}{C\,t} = -\frac{191}{42\pi\,(2\pi-u)}.
+                \]
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== §2 (English, with corrections) ==================== -->
+    <div class="card">
+        <h2>2. Verification of Origin — Is Frame 4's Operator Derived from the Master Equation?</h2>
+
+        <div class="badge-info">
+            <strong>Question of this section.</strong> Frame 4's operator is \(L = -\partial_u^2 + g''/g\). Can it be extracted from the master equation of Frame 1 — after the change of variable \(x\to u\) and elimination of the first derivative — or is it a <em>compatible choice</em> that retains the envelope \(g\) and discards the oscillatory factor \(\sin u\)?
+        </div>
+
+        <h3>2.1 Change of variable: \(x = 2\pi/u\)</h3>
+        <div class="math-block">
+            \[
+                \frac{du}{dx} = -\frac{u^2}{2\pi}, \quad \partial_x = -\frac{u^2}{2\pi}\,\partial_u, \quad \partial_x^2 = \frac{u^4}{4\pi^2}\,\partial_u^2 + \frac{u^3}{2\pi^2}\,\partial_u
+            \]
+        </div>
+        <p>The first-order term arises from differentiating the coefficient, and cannot be dropped.</p>
+
+        <h3>2.2 The master operator in \(u\)</h3>
+        <div class="math-block">
+            \[
+                H_u = -\frac{u^4}{4\pi^2}\,\partial_u^2 - \frac{u^3}{2\pi^2}\,\partial_u + Q\!\left(\frac{2\pi}{u}\right)
+            \]
+        </div>
+        <p>Abbreviate \(A(u) = u^4/(4\pi^2) > 0\) and \(B(u) = u^3/(2\pi^2) > 0\), so \(H_u = -A\partial_u^2 - B\partial_u + Q\).</p>
+
+        <h3>2.3 The key identity</h3>
+        <p>Substituting \(x = 2\pi/u\) in the master function:</p>
+        <div class="math-block">
+            \[
+                y(u) := Z\!\left(\frac{2\pi}{u}\right) = g(u)\sin(u), \qquad
+                g(u) = \left(\frac{u}{2\pi}\right)^5 \ln\!\left(\frac{2\pi}{u}\right) e^{-2\pi/(21u)}
+            \]
+        </div>
+        <p>An exact identity that separates the <strong>envelope \(g(u)\)</strong> from the <strong>oscillatory factor \(\sin u\)</strong>.</p>
+
+        <h3>2.4 Elimination of the first derivative</h3>
+        <p>Set \(y = w/u\) (i.e. \(w = uy\)). Then</p>
+        <div class="math-block">
+            \[
+                y' = \frac{w'}{u} - \frac{w}{u^2}, \qquad
+                y'' = \frac{w''}{u} - \frac{2w'}{u^2} + \frac{2w}{u^3}
+            \]
+        </div>
+        <p>Substituting into \(H_u y = 0\) and multiplying by \(u\):</p>
+        <div class="math-block">
+            \[
+                -A\,w'' + \left(\frac{2A}{u} - B\right) w' + \left(-\frac{2A}{u^2} + \frac{B}{u} + Q\right) w = 0
+            \]
+        </div>
+        <p>The first-derivative coefficient vanishes identically from the definitions of \(A\) and \(B\):</p>
+        <div class="math-block">
+            \[
+                \frac{2A}{u} - B = \frac{u^3}{2\pi^2} - \frac{u^3}{2\pi^2} = 0, \qquad
+                -\frac{2A}{u^2} + \frac{B}{u} = -\frac{u^2}{2\pi^2} + \frac{u^2}{2\pi^2} = 0
+            \]
+        </div>
+        <p>No assumption is required; the cancellation is automatic. The remaining equation is</p>
+        <div class="math-block">
+            \[
+                \boxed{\,A\,w'' = Q\,w\,} \quad \Longleftrightarrow \quad w'' = \frac{4\pi^2}{u^4}\,Q\!\left(\frac{2\pi}{u}\right) w
+            \]
+        </div>
+
+        <h3>2.5 The normalized coefficient</h3>
+        <p>In the Schrödinger convention \(-w'' + V_{\mathrm{new}} w = 0\):</p>
+        <div class="math-block">
+            \[
+                \boxed{\,V_{\mathrm{new}}(u) = \frac{4\pi^2}{u^4}\,Q\!\left(\frac{2\pi}{u}\right)\,}
+            \]
+        </div>
+        <p>The factor \(4\pi^2/u^4\) is a direct artefact of the change of variable. Note that \(V_{\mathrm{new}}\) is defined on \((0,\pi)\cup(\pi,2\pi)\) only, because \(Q(2)\) is undefined (zero of \(Z\) at \(x=2\)).</p>
+
+        <div class="badge-caveat">
+            <strong>Caveat on spectral equivalence.</strong> \(V_{\mathrm{new}}(u) := (4\pi^2/u^4)Q(2\pi/u)\) is the coefficient in the <em>transformed equation</em> \(-w'' + V_{\mathrm{new}}w = 0\), obtained after the change of variable \(x = 2\pi/u\) and the substitution \(w = uy\). This is an identity between differential expressions on \((0,2\pi)\). <em>Spectral equivalence</em> between two self-adjoint operators on Hilbert spaces additionally requires matching the measure, the domain, and the boundary conditions. Establishing such equivalence (or proving its impossibility) is a separate question, and is not claimed here.
+        </div>
+
+        <h3>2.6 Darboux-equivalence test</h3>
+
+        <p>Explicit difference:</p>
+        <div class="math-block">
+            \[
+                \Delta V := V_{\mathrm{new}} - V_{\mathrm{eff}} = 2\,\frac{g'}{g}\,\cot u - 1 + \frac{2}{u}\frac{g'}{g} + \frac{2}{u}\cot u
+            \]
+        </div>
+
+        <p><strong>Standard first-order Darboux condition.</strong> Equivalence of \(L_1 = -\partial^2 + V_1\) and \(L_2 = -\partial^2 + V_2\) requires a <em>seed</em> \(\varphi\) satisfying</p>
+        <div class="math-block">
+            \[
+                -\varphi'' + V_1\varphi = \lambda\varphi \quad (\text{for some } \lambda), \qquad V_2 = V_1 - 2(\ln\varphi)''
+            \]
+        </div>
+
+        <p><strong>Local argument at \(u=\pi\).</strong> We show that no standard first-order Darboux transformation (at any \(\lambda\)) produces \(V_{\mathrm{new}}\) from \(V_{\mathrm{eff}}\).</p>
+
+        <p>Facts:</p>
+        <ul>
+            <li>\(V_{\mathrm{eff}}\) is smooth at \(u=\pi\) (since \(g(\pi)\neq 0\)).</li>
+            <li>\(V_{\mathrm{new}}\) has a <strong>non-zero simple pole</strong> at \(u=\pi\) with residue \(C_\pi := \dfrac{2(128\ln 2 - 21)}{21\pi\ln 2} \approx 2.96\) (see §2.7).</li>
+        </ul>
+
+        <p>Since \(V_{\mathrm{eff}}\) is smooth, every non-zero solution \(\varphi\) of \(-\varphi'' + V_{\mathrm{eff}}\varphi = \lambda\varphi\) is smooth in a neighbourhood of \(u=\pi\) (standard ODE theory). Hence:</p>
+        <ul>
+            <li><strong>If \(\varphi(\pi)\neq 0\):</strong> \((\ln\varphi)''\) is smooth at \(\pi\), so \(V_D = V_{\mathrm{eff}} - 2(\ln\varphi)''\) is <strong>smooth</strong> at \(\pi\) — no pole.</li>
+            <li><strong>If \(\varphi(\pi)=0\):</strong> then \(\varphi'(\pi)\neq 0\) (otherwise \(\varphi\equiv 0\) by uniqueness). So \(\varphi(u)\sim C_0(u-\pi)\), giving
+            \[
+                (\ln\varphi)'' \sim -\frac{1}{(u-\pi)^2}, \qquad V_D \sim \frac{2}{(u-\pi)^2}
+            \]
+            i.e. a <strong>double pole</strong> with residue \(2\) — not a simple pole, and not with residue \(C_\pi\approx 2.96\).</li>
+        </ul>
+
+        <p>In neither case can \(V_D\) equal \(V_{\mathrm{new}}\) (which has a simple pole with residue \(C_\pi\approx 2.96\) at \(\pi\)). This is a complete local proof: no seed \(\varphi\) satisfying the standard first-order Darboux conditions can produce \(V_{\mathrm{new}}\).</p>
+
+        <div class="badge-reject">
+            <strong>Verdict (upgraded from "open" to "rejected for the standard class").</strong>
+            No standard first-order Darboux transformation (with any seed \(\varphi\) solving \(-\varphi''+V_{\mathrm{eff}}\varphi=\lambda\varphi\)) relates \(V_{\mathrm{eff}}\) to \(V_{\mathrm{new}}\). The proof is local at \(u=\pi\) and uses only:
+            <ul style="margin-top: 8px;">
+                <li>smoothness of \(V_{\mathrm{eff}}\) at \(\pi\);</li>
+                <li>existence of a non-zero simple pole in \(V_{\mathrm{new}}\) at \(\pi\);</li>
+                <li>the local behaviour of the seed at its zero (simple, not double).</li>
+            </ul>
+            <strong>Scope.</strong> Standard first-order Darboux transformations only. Generalized transformations (higher-order, Darboux–Goncharenko, or seeds not constrained to solve the eigenvalue equation) fall outside this argument and have not been investigated here.
+        </div>
+
+        <h3>2.7 Comparison of singular structure</h3>
+
+        <p>To pin down the residue \(C_\pi\) used in the argument, we derive the local expansion. Write the master function explicitly:</p>
+        <div class="math-block">
+            \[
+                Z(x) = x^{-5} \ln(x)\, e^{-x/21} \sin\!\left(\frac{2\pi}{x}\right), \qquad x>1
+            \]
+        </div>
+
+        <p>The table below records the behaviour of both potentials:</p>
+
+        <table class="verify-table">
+            <thead>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>\(V_{\mathrm{eff}} = g''/g\)</th>
+                    <th>\(V_{\mathrm{new}} = (4\pi^2/u^4)Q\)</th>
+                    <th>Observation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>\(u\to 0^+\)</td>
+                    <td>\(\sim \dfrac{4\pi^2}{441u^4}\to+\infty\)</td>
+                    <td>\(\sim \dfrac{4\pi^2}{441u^4}\to+\infty\)</td>
+                    <td>Same leading behaviour (order-4 pole)</td>
+                </tr>
+                <tr>
+                    <td>\(u=\pi\)</td>
+                    <td>Smooth, finite (\(g(\pi)\neq 0\))</td>
+                    <td>Simple pole \(\sim \dfrac{C_\pi}{u-\pi}\), \(C_\pi\approx 2.96\)</td>
+                    <td>Structural difference: \(V_{\mathrm{new}}\) has an interior simple pole, \(V_{\mathrm{eff}}\) does not</td>
+                </tr>
+                <tr>
+                    <td>\(u\to 2\pi^-\)</td>
+                    <td>\(\sim -\dfrac{191}{42\pi t}\to-\infty\)</td>
+                    <td>\(\sim +\dfrac{2}{t^2}\to+\infty\)</td>
+                    <td>\(t=2\pi-u\). Simple negative vs. double positive</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Reading the table.</strong> \(V_{\mathrm{new}}\) and \(V_{\mathrm{eff}}\):</p>
+        <ul>
+            <li><strong>agree</strong> as \(u\to 0^+\) (same order-4 pole);</li>
+            <li><strong>differ fundamentally</strong> at \(u=\pi\): \(V_{\mathrm{eff}}\) smooth, \(V_{\mathrm{new}}\) has a simple pole;</li>
+            <li><strong>differ fundamentally</strong> as \(u\to 2\pi^-\): simple negative vs. double positive.</li>
+        </ul>
+
+        <p>This structural mismatch is what makes the local argument in §2.6 possible, and confirms the rejection of the standard first-order Darboux equivalence.</p>
+
+        <details class="deriv-box">
+            <summary>Details: singularity of \(V_{\mathrm{new}}\) as \(u\to 2\pi^-\)</summary>
+            <p>Set \(t = 2\pi-u \to 0^+\), so \(x = 2\pi/u = 2\pi/(2\pi-t) = 1/(1 - t/(2\pi))\). Hence</p>
+            <div class="math-block">
+                \[
+                    x - 1 = \frac{t}{2\pi - t} \sim \frac{t}{2\pi} > 0.
+                \]
+            </div>
+            <p>Expanding \(Z(x)\) near \(x=1\):</p>
+            <div class="math-block">
+                \[
+                    Z(x) \sim -2\pi e^{-1/21}\,(x-1)^2 \quad \text{(double zero)}
+                \]
+                \[
+                    Z''(x) \sim -4\pi e^{-1/21}, \qquad Q(x) = \frac{Z''(x)}{Z(x)} \sim \frac{2}{(x-1)^2}
+                \]
+            </div>
+            <p>Since \(x-1 \sim t/(2\pi)\), we get \(Q \sim 2/(t/(2\pi))^2 = 8\pi^2/t^2\), and therefore</p>
+            <div class="math-block">
+                \[
+                    V_{\mathrm{new}} = \frac{4\pi^2}{u^4}\,Q \sim \frac{4\pi^2}{16\pi^4}\cdot\frac{8\pi^2}{t^2} = \frac{2}{t^2}.
+                \]
+            </div>
+        </details>
+
+        <details class="deriv-box">
+            <summary>Details: residue \(C_\pi\) at \(u=\pi\)</summary>
+            <p>Set \(x=2+\varepsilon\); the zero of \(Z\) at \(x=2\) is simple. Expand the four factors of \(Z\):</p>
+            <div class="math-block">
+                \[
+                    (2+\varepsilon)^{-5} = 2^{-5}\left(1 + \tfrac{\varepsilon}{2}\right)^{-5} = 2^{-5}\left(1 - \tfrac{5}{2}\varepsilon + O(\varepsilon^2)\right),
+                \]
+                \[
+                    \ln(2+\varepsilon) = \ln 2 \cdot \left(1 + \frac{\varepsilon}{2\ln 2} + O(\varepsilon^2)\right),
+                \]
+                \[
+                    e^{-(2+\varepsilon)/21} = e^{-2/21}\left(1 - \tfrac{\varepsilon}{21} + O(\varepsilon^2)\right),
+                \]
+                \[
+                    \sin\!\left(\frac{2\pi}{2+\varepsilon}\right) = \frac{\pi}{2}\varepsilon - \frac{\pi}{4}\varepsilon^2 + O(\varepsilon^3).
+                \]
+            </div>
+            <p>Writing \(Z(2+\varepsilon) = \alpha\varepsilon + \beta\varepsilon^2 + O(\varepsilon^3)\), we obtain</p>
+            <div class="math-block">
+                \[
+                    \frac{\beta}{\alpha} = \frac{21 - 128\ln 2}{42\ln 2} \approx -2.32627.
+                \]
+            </div>
+            <p>Since \(Q(x) \sim 2(\beta/\alpha)/(x-2)\) near \(x=2\), and using \(x = 2\pi/u\), at \(x=2\) we have \(u=\pi\) with \(\delta x = -2\pi/u^2\,\delta u = -2\delta u/\pi\). Thus \(\varepsilon \approx -\tfrac{2}{\pi}(u-\pi)\), and</p>
+            <div class="math-block">
+                \[
+                    V_{\mathrm{new}} \sim -\frac{4(\beta/\alpha)}{\pi(u-\pi)} = \underbrace{\frac{2(128\ln 2 - 21)}{21\pi\ln 2}}_{\approx\,2.9619}\cdot\frac{1}{u-\pi}.
+                \]
+            </div>
+            <p>This establishes a simple pole with non-zero residue \(C_\pi\approx 2.96\), the foundation of the argument in §2.6.</p>
+        </details>
+
+        <h3>2.8 Summary</h3>
+
+        <table class="verify-table">
+            <thead>
+                <tr><th>Item</th><th>Status</th><th>Category</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>\(Z(2\pi/u) = g(u)\sin(u)\)</td><td class="verify-ok">✓ Established</td><td><span class="legend-tag legend-established">ESTABLISHED</span></td></tr>
+                <tr><td>Automatic vanishing of first-derivative term</td><td class="verify-ok">✓ Established</td><td><span class="legend-tag legend-established">ESTABLISHED</span></td></tr>
+                <tr><td>\(V_{\mathrm{new}} = (4\pi^2/u^4)Q\) (as coefficient in transformed equation)</td><td class="verify-ok">✓ Established</td><td><span class="legend-tag legend-established">ESTABLISHED</span></td></tr>
+                <tr><td>\(V_{\mathrm{new}} = V_{\mathrm{eff}}\)</td><td class="verify-fail">✗ Rejected (\(\Delta V \neq 0\))</td><td><span class="legend-tag legend-established">ESTABLISHED</span></td></tr>
+                <tr><td>Spectral equivalence between the two transformed problems</td><td class="verify-open">? Not claimed</td><td><span class="legend-tag legend-open">OPEN</span></td></tr>
+                <tr><td>Standard first-order Darboux relating \(V_{\mathrm{eff}}\) to \(V_{\mathrm{new}}\)</td><td class="verify-fail">✗ Rejected (local argument at \(\pi\))</td><td><span class="legend-tag legend-proved">PROVED (stated assumptions)</span></td></tr>
+                <tr><td>Generalized Darboux (higher order, Darboux–Goncharenko)</td><td class="verify-open">○ Not investigated</td><td><span class="legend-tag legend-notinv">NOT INVESTIGATED</span></td></tr>
+                <tr><td>Matching singularity structure</td><td class="verify-fail">✗ At \(u=\pi\) and \(u\to 2\pi^-\)</td><td><span class="legend-tag legend-established">ESTABLISHED</span></td></tr>
+            </tbody>
+        </table>
+
+        <div class="next-step-box">
+            <h3>Conclusion</h3>
+            <p><strong>Frame 4's operator, \(L = -\partial_u^2 + g''/g\), is not derived algebraically from the master equation of Frame 1.</strong> The exact transformation yields \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\), differing from \(V_{\mathrm{eff}}\):</p>
+            <ul>
+                <li>as \(u\to 0^+\): leading behaviour matches;</li>
+                <li>at \(u=\pi\): \(V_{\mathrm{eff}}\) smooth, \(V_{\mathrm{new}}\) has a simple pole of residue \(\approx 2.96\);</li>
+                <li>as \(u\to 2\pi^-\): \(V_{\mathrm{eff}}\) simple negative pole, \(V_{\mathrm{new}}\) double positive pole.</li>
+            </ul>
+            <p>The standard first-order Darboux transformation is <strong>rejected</strong> by the local argument at \(u=\pi\). Generalized transformations remain outside the scope of this argument. Frame 4 is a legitimate spectral problem, but it is a <strong>compatible choice</strong>, not a derived consequence.</p>
+        </div>
+
+        <div class="plan-box" style="margin-top: 20px;">
+            <h4>Open question worth pursuing</h4>
+            <p>Does a <em>generalized</em> Darboux transformation (higher order, Darboux–Goncharenko, or a seed not constrained to solve the eigenvalue equation) relate \(V_{\mathrm{eff}}\) to \(V_{\mathrm{new}}\)? This is an independent question, outside the scope of §2, but it is the precise form of the remaining question once the standard class is closed.</p>
         </div>
     </div>
 
+    <!-- ==================== §3 ==================== -->
     <div class="card">
-        <h2>4. Results and Scope of the Model</h2>
-        <p><strong>What has been achieved (Mathematical Production):</strong> In Frame 3, we proved that the asymmetric envelope removes the symmetry argument (yielding \(R_{13/12} \approx 0.60352\)). In Frame 4, we established that the envelope \(g(u)\) satisfies the exact differential identity \(Lg=0\) on the interior domain, opening the way to a supersymmetric factorization approach.</p>
-        
-        <p><strong>Physical Prediction (Conditional):</strong> If self-adjointness, boundary conditions, and the connection between the operator and a physical system are established, the spectral predictions can be tested. The \(R_{13/12}\) ratio requires documented derivation and assumptions in Frame 3 to serve as a quantitative prediction.</p>
-        
-        <p><strong>Required Next Steps:</strong></p>
-        <ol style="padding-left: 20px;">
-            <li><strong>Building a Self-Adjoint Realization:</strong> Define an appropriate domain for operator \(L\), and verify that \(g\) belongs to it.</li>
-            <li><strong>Studying the Spectrum:</strong> Prove spectral properties (such as the existence of a lower bound) before moving to vacuum energy interpretation.</li>
-            <li><strong>Numerical Calculation:</strong> Compute the first set of positive eigenvalues \(\lambda_n\) numerically.</li>
-        </ol>
+        <h2>3. The Envelope as a Natural Regulator (Research Hypothesis)</h2>
+        <p>In quantum field theory, the vacuum energy computation requires summing zero-point energies. One working hypothesis is that the envelope \(g(u)\) acts as a natural regulator in \(L\).</p>
+        <p>This remains a hypothesis until one establishes that the high-energy spectral behaviour of \(L\) yields convergence. The next step is to derive the <strong>high-energy asymptotics of the eigenvalues \(\lambda_n\)</strong>, and thereby decide whether the zero-point sum converges or requires zeta regularization.</p>
+    </div>
+
+    <!-- ==================== §4 ==================== -->
+    <div class="card">
+        <h2>4. Spectral Zeta Function and Vacuum Energy</h2>
+        <p>If the non-zero spectrum is positive and the zero-mode treatment is specified, the spectral zeta function on the non-zero spectrum is defined by</p>
+        <div class="math-block">\[ \zeta_{L,\ne0}(s) = \sum_{\lambda_n>0} \lambda_n^{-s} \]</div>
+        <p>Provided the appropriate analytic continuation exists, the zeta-regularized vacuum energy is defined by</p>
+        <div class="math-block">\[ E_{\mathrm{vac}}^{\mathrm{reg}} = \frac{1}{2}\zeta_{L,\ne0}\left(-\frac{1}{2}\right) \]</div>
+
+        <p>If the \(\lambda_n\) are squares of physical frequencies, the above corresponds to regularizing \(\sum_{\lambda_n>0}\sqrt{\lambda_n}\) with the zero mode removed, in units \(\hbar=1\).</p>
+
+        <div class="badge-neutral">
+            <strong>Conditional definition, not a computed result.</strong> The expression \(E_{\mathrm{vac}}^{\mathrm{reg}} = \tfrac12\zeta_{L,\ne 0}(-1/2)\) is a proposed definition, not a value. Its numerical evaluation requires:
+            <ul style="margin-top: 8px;">
+                <li>establishing that the zeta series converges in some range;</li>
+                <li>establishing the appropriate analytic continuation to \(s=-1/2\);</li>
+                <li>handling any scale dependence or regularization subtraction imposed by the physical setup.</li>
+            </ul>
+        </div>
+
+        <div class="badge-neutral">
+            <strong>Treatment of the zero mode.</strong>
+            The function \(g(u)\) is square-integrable on \((0,2\pi)\). Near \(0^+\), it decays faster than any power because of the factor \(e^{-2\pi/(21u)}\). Near \(2\pi^-\), \(g(u) \sim \frac{e^{-1/21}}{2\pi}(2\pi-u)\), also integrable. Hence \(g \in L^2((0,2\pi))\).
+            <br><br>
+            However, \(L^2\) membership alone does not establish that \(g\) lies in the domain of a self-adjoint realization of \(L\); the latter requires specifying a self-adjoint extension and verifying the domain conditions.
+        </div>
+
+        <div class="next-step-box">
+            <h3>Next analytic step: local behaviour of solutions near the endpoints</h3>
+            <p>Choosing a self-adjoint realization requires more than checking normalizability of \(g\); it requires studying the solutions of \(L\psi=\lambda\psi\) near both endpoints. §5 performs this step.</p>
+            <div class="plan-box">
+                <h4>Computational work plan</h4>
+                <ol>
+                    <li>Analyze the solutions near each endpoint and identify their asymptotic behaviour.</li>
+                    <li>Specify domain, boundary conditions, and a self-adjoint realization.</li>
+                    <li>Test whether the operator is bounded below.</li>
+                    <li>Compute the eigenvalues numerically.</li>
+                    <li>Study the convergence of the spectral zeta and its continuation to \(s=-1/2\).</li>
+                </ol>
+                <p>§5 carries out steps 1 and 2.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== §5 (English, corrected) ==================== -->
+    <div class="card appendix-card">
+        <h2>5. Appendix: Local Behaviour of Solutions and Boundary Conditions</h2>
+        <p>This appendix carries out step 1 of the work plan: analyzing the local behaviour of solutions near both endpoints and classifying the endpoints.</p>
+
+        <h3>A. Endpoint \(u \to 2\pi^-\): Limit Circle</h3>
+        <p>Set \(t = 2\pi - u \to 0^+\). The potential:</p>
+        <div class="math-block">\[ V_{\mathrm{eff}}(t) \sim -\frac{c}{t}, \qquad c = \frac{191}{42\pi} > 0. \]</div>
+        <p>The eigenvalue equation near \(t=0\), neglecting \(\lambda\psi\) at leading order:</p>
+        <div class="math-block">\[ \psi''(t) + \frac{c}{t}\psi(t) \approx 0. \]</div>
+
+        <p><strong>Frobenius analysis.</strong> Write \(\psi = t^r\sum_{n\ge 0}a_n t^n\) with \(a_0 \ne 0\). The indicial equation at order \(t^0\) gives \(r(r-1) = 0\), hence \(r\in\{0,1\}\).</p>
+
+        <p><strong>Branch \(r=1\):</strong> the recursion at the next order gives \(a_1 = -c\,a_0/2\), so</p>
+        <div class="math-block">\[ \psi_1(t) = a_0\left(t - \frac{c}{2}t^2 + O(t^3)\right). \]</div>
+
+        <p><strong>Branch \(r=0\)</strong> is resonant; the second solution requires logarithmic terms:</p>
+        <div class="math-block">\[ \psi_2(t) = 1 - c\,t\ln t + O(t^2\ln t) \quad \text{(with a suitable normalization)}. \]</div>
+
+        <p><strong>Square-integrability.</strong> \(\int_0^\varepsilon |\psi_1|^2 dt \sim \int_0^\varepsilon t^2 dt < \infty\), and \(\int_0^\varepsilon |\psi_2|^2 dt \sim \int_0^\varepsilon (1 - ct\ln t)^2 dt < \infty\) (since \(t\ln t \to 0\)). Both solutions belong to \(L^2\); the endpoint is <strong>Limit Circle</strong>.</p>
+
+        <div class="badge-neutral">
+            <strong>Boundary conditions at a Limit Circle endpoint.</strong> At a Limit Circle endpoint, the space of locally square-integrable solutions is two-dimensional, so \(L^2\) alone does not select a unique solution. A self-adjoint realization is specified by a <em>boundary condition on the Wronskian boundary trace</em>.
+            <br><br>
+            Concretely, the maximal domain \(\mathcal{D}_{\max}\) consists of functions \(\psi\) with \(\psi, \psi'\in AC_{\mathrm{loc}}\) and \(L\psi\in L^2\) locally; on this domain the Wronskian boundary form
+            \[
+                [\psi, \chi]_0 := \lim_{t\to 0}\left[\psi(t)\overline{\chi'(t)} - \psi'(t)\overline{\chi(t)}\right]
+            \]
+            exists for all \(\psi, \chi\in\mathcal{D}_{\max}\) (a standard fact in the Limit Circle theory). The self-adjoint extensions are parameterized by a unitary \(U(1)\) family; the corresponding boundary conditions are expressed via this Lagrange/Wronskian boundary form, <em>not</em> via a direct Robin form
+            \[
+                \alpha\,\psi(2\pi^-) + \beta\,\psi'(2\pi^-) = 0,
+            \]
+            because \(\psi_2'(t) \sim -c\ln t\) diverges logarithmically as \(t\to 0^+\), so the finite limit \(\psi'(2\pi^-)\) does not exist in general.
+            <br><br>
+            <strong>Dirichlet as a specific choice.</strong> The condition \(\psi(2\pi^-)=0\) is one particular member of the \(U(1)\) family, not the unique consequence of the classification. It is the natural candidate for a first study, since \(g\) satisfies it.
+        </div>
+
+        <div class="endpoint-result endpoint-lc">
+            <strong>Result at \(2\pi^-\):</strong> Limit Circle. A self-adjoint boundary condition is required, expressed via the Lagrange/Wronskian boundary trace. Dirichlet is one specific choice among the \(U(1)\) family.
+        </div>
+
+        <h3>B. Endpoint \(u \to 0^+\): Limit Point</h3>
+        <div class="math-block">\[ V_{\mathrm{eff}}(u) \sim +\frac{C}{u^4}, \qquad C = \left(\frac{2\pi}{21}\right)^2 > 0. \]</div>
+        <p>Two independent solutions behave approximately as</p>
+        <div class="math-block">\[ \psi_\pm(u) \sim \exp\!\left(\mp\frac{2\pi}{21u}\right). \]</div>
+        <p>\(\psi_+ \in L^2\) while \(\psi_- \notin L^2\). The endpoint is <strong>Limit Point</strong>: no extra boundary condition is needed; \(L^2\) automatically selects the admissible behaviour.</p>
+
+        <div class="endpoint-result endpoint-lp">
+            <strong>Result at \(0^+\):</strong> Limit Point. \(L^2\) selects the admissible behaviour automatically.
+        </div>
+
+        <h3>C. Combined result</h3>
+        <div class="appendix-badge">
+            <ul style="margin: 0; padding-left: 20px;">
+                <li><strong>At \(u=0^+\):</strong> Limit Point (no extra boundary condition).</li>
+                <li><strong>At \(u=2\pi^-\):</strong> Limit Circle (boundary condition required; expressed via the Lagrange/Wronskian boundary trace, not via a direct Robin form).</li>
+                <li><strong>The envelope \(g\)</strong> behaves at \(2\pi^-\) like \(\psi_1\), and satisfies \(g(2\pi^-)=0\). It therefore satisfies the Dirichlet condition, which remains one <em>specific</em> choice among the self-adjoint extensions, not the unique outcome of the classification.</li>
+                <li><strong>Open question:</strong> does a specific realization (e.g. Dirichlet) make the operator bounded below? Is zero the ground-state energy?</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== §6 ==================== -->
+    <div class="card">
+        <h2>6. Results and Scope</h2>
+
+        <div class="summary-section summary-achieved">
+            <h3>What this frame has established</h3>
+            <ul>
+                <li><strong>Construction of an operator from the envelope:</strong> definition of \(L = -\partial_u^2 + g''/g\), and proof of the structural identity \(Lg=0\) on the open interval.</li>
+                <li><strong>Algebraic analysis of origin (§2):</strong> the exact transformation of Frame 1 yields \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\), not \(V_{\mathrm{eff}}\). The vanishing of the first-derivative term is automatic. A local argument at \(u=\pi\) rejects the standard first-order Darboux transformation.</li>
+                <li><strong>SUSY QM factorization:</strong> \(L = (-\partial_u - p)(\partial_u - p)\) as a formal identity.</li>
+                <li><strong>Endpoint singularity analysis:</strong> \(1/u^4\) at \(0^+\), \(-1/(2\pi-u)\) at \(2\pi^-\), and a simple pole in \(V_{\mathrm{new}}\) at \(u=\pi\) with no counterpart in \(V_{\mathrm{eff}}\).</li>
+                <li><strong>Endpoint classification:</strong> Limit Point at \(0^+\), Limit Circle at \(2\pi^-\). The boundary condition at \(2\pi^-\) is expressed via the Lagrange/Wronskian boundary trace; Dirichlet is one specific choice.</li>
+                <li><strong>Definition of the spectral zeta function</strong> as a conditional definition.</li>
+                <li><strong>Separation of what is established from what is open:</strong> distinction between the formal zero mode and the actual eigenfunction; between the envelope as a candidate regulator and a proven one; between Frame 4 as an independent operator and Frame 4 as a derived consequence (the latter rejected).</li>
+            </ul>
+        </div>
+
+        <div class="summary-section summary-next">
+            <h3>What comes next</h3>
+            <ol>
+                <li><strong>Choose a self-adjoint realization at \(2\pi^-\)</strong>, starting with the Dirichlet condition \(\psi(2\pi^-)=0\) as the natural first candidate.</li>
+                <li><strong>Verify that \(g\) belongs to the domain of this realization.</strong></li>
+                <li><strong>Prove existence of a lower bound on the spectrum.</strong></li>
+                <li><strong>Compute the positive eigenvalues \(\lambda_n\)</strong> numerically.</li>
+                <li><strong>Only then:</strong> study the convergence of the zeta function and the possibility of defining a physical vacuum energy.</li>
+            </ol>
+        </div>
+
+        <p style="margin-top: 20px;">
+            <strong>Note on \(R_{13/12}\):</strong>
+            The numerical result \(R_{13/12} \approx 0.60352\) from Frame 3 is not derived from the zeta problem here. Under the state choices, transition operator, and integration measure fixed in Frame 3, it is interpreted by comparing the asymmetric-envelope model with a symmetric reference.
+        </p>
+    </div>
+
+    <!-- ==================== §7 ==================== -->
+    <div class="card">
+        <h2>7. Supplementary Notes (behind the toggle)</h2>
+        <p>This section is not essential for reading the main text; it collects additional derivations and interpretive notes. The reader interested in results alone will find them in §1–§6.</p>
+        <div style="text-align: center; margin-top: 15px;">
+            <button id="toggleAssessmentBtn" class="btn btn-gold" onclick="toggleAssessment()" aria-controls="assessmentContent" aria-expanded="false">📖 Show supplementary notes</button>
+        </div>
+
+        <div id="assessmentContent" class="assessment-content">
+            <p>This section provides a detailed reading of what has been achieved and what has been left open.</p>
+
+            <h4>1. The identity \(Lg = 0\): structurally guaranteed</h4>
+            <p>By definition \(V_{\mathrm{eff}} = g''/g\), the identity \(Lg=0\) follows immediately. This is a precise mathematical result, not a numerical approximation. It does not, however, by itself establish that \(g\) is an actual eigenfunction; that requires specifying the domain and boundary conditions, as §5 does.</p>
+
+            <h4>2. Consequence of §2: Frame 4 is a compatible choice, not a derivation</h4>
+            <p>The algebraic analysis in §2 shows that the exact transformation of Frame 1 yields \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\), which differs from \(V_{\mathrm{eff}}\). The local argument at \(u=\pi\) rejects the standard first-order Darboux transformation (since \(V_{\mathrm{eff}}\) is smooth at \(\pi\), \(V_{\mathrm{new}}\) has a simple pole of residue \(\approx 2.96\), and seed behaviour at zeros yields smooth or double-pole — never a simple pole). Generalized Darboux transformations are outside the scope of that argument. This is consistent with the methodological stance of the consolidated manuscript: the four frames are parallel paths, not a serial chain.</p>
+
+            <h4>3. Endpoint classification</h4>
+            <p>§5 derives Limit Point at \(0^+\), Limit Circle at \(2\pi^-\). This is a structural classification; it does not establish a lower bound for the spectrum. At the Limit Circle endpoint, the boundary condition is expressed via the Lagrange or reference Wronskian form, not by a direct Robin form (since \(\psi_2'\) diverges logarithmically).</p>
+
+            <h4>4. Zeta regularization</h4>
+            <p>Defining \(\zeta_{L,\ne 0}(s)\) and \(E_{\mathrm{vac}}^{\mathrm{reg}}\) is conditional on three issues: (a) knowing the series in some range, (b) the appropriate analytic continuation, (c) handling of scale dependence.</p>
+
+            <h4>5. The envelope as a natural regulator</h4>
+            <p>A hypothesis, not a result. Proving it requires establishing the high-energy behaviour of the eigenvalues.</p>
+
+            <h4>6. Note on \(R_{13/12}\)</h4>
+            <p>A numerical result from Frame 3. It does not establish the spectral properties of Frame 4, nor does it predict the vacuum energy. The link between the frames is the shared envelope, not a derivation of the operator.</p>
+
+            <h4>Summary</h4>
+            <p>This frame produced: the operator, the structural identity, the formal factorization, the endpoint analysis, the endpoint classification, <strong>and an algebraic demonstration that the operator is a compatible choice, not a derived consequence</strong>, together with a local proof rejecting the standard first-order Darboux transformation. It leaves open: generalized Darboux transformations, self-adjoint realization, lower bound, eigenvalue computation, and zeta convergence.</p>
+        </div>
     </div>
 
     <div class="links">
         <a href="frame3-en.html" class="btn">← Frame 3</a>
-        <a href="../index-en.html" class="btn">🏠 Home</a>
+        <a href="../en/index.html" class="btn">🏠 Home</a>
+    </div>
+
+    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+        <button onclick="window.print()" class="btn btn-blue">🖨️ Print / Save (text)</button>
+        <button onclick="generateDirectPDF()" class="btn btn-gold">📥 Download PDF (direct)</button>
     </div>
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 4: Towards a Spectral Problem & Zeta Regularization.
+        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v6 (English; corrections to Frobenius notation, Wronskian reference, and spectral-equivalence caveat).
     </div>
 </div>
+
+<script>
+    function toggleAssessment() {
+        const content = document.getElementById('assessmentContent');
+        const btn = document.getElementById('toggleAssessmentBtn');
+        const isOpening = getComputedStyle(content).display === 'none';
+        content.style.display = isOpening ? 'block' : 'none';
+        btn.textContent = isOpening ? '❌ Hide supplementary notes' : '📖 Show supplementary notes';
+        btn.classList.toggle('btn-gold', !isOpening);
+        btn.setAttribute('aria-expanded', String(isOpening));
+    }
+
+    window.generateDirectPDF = function() {
+        const element = document.getElementById('pdf-content');
+        const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
+        const assessment = document.getElementById('assessmentContent');
+        const previousDisplay = assessment ? assessment.style.display : '';
+        buttons.forEach(btn => btn.style.display = 'none');
+        if (assessment) assessment.style.display = 'block';
+        const opt = {
+            margin:       10,
+            filename:     'Frame4_Spectral_Problem_EN_v6.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save()
+            .catch(err => console.error('PDF generation failed:', err))
+            .finally(() => {
+                buttons.forEach(btn => btn.style.display = '');
+                if (assessment) assessment.style.display = previousDisplay;
+            });
+    };
+</script>
 </body>
 </html>

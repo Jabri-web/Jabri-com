@@ -1,469 +1,500 @@
 <!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════
+     bridge.html — The Scaling Bridge
+     corrected draft 2026-10-24
+     Changes from previous version:
+       (1) MathJax config fixed (correct delimiter pairs);
+       (2) language-toggle button restored;
+       (3) calculator: finite-input validation, no Infinity/NaN,
+           scientific notation, unit shown explicitly;
+       (4) unit extraction via data-unit-* attributes;
+       (5) Planck-length note revised (natural scale, not a
+           proven minimum of length);
+       (6) dimension-vs-prediction clarification (§3);
+       (7) "what the bridge does NOT do" (§4);
+       (8) cross-reference to Frame 3's R_13/12;
+       (9) display:inline preserved for .lang-* spans;
+      (10) canonical, description, citation meta added.
+     ═══════════════════════════════════════════════════════════════ -->
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الجسر - من الرياضيات إلى الفيزياء | The Scaling Bridge</title>
-    <meta name="description" content="The Scaling Bridge: Translating Raw Mathematics into Physical Reality">
-    
-    <!-- MathJax for Equations -->
+    <title>الجسر — من الرياضيات إلى الفيزياء | The Scaling Bridge</title>
+    <meta name="description" content="The Scaling Bridge: translating dimensionless mathematics into scaled physical quantities. A methodological note distinguishing dimensional consistency from physical prediction.">
+    <link rel="canonical" href="https://jabri-com.vercel.app/wells/bridge.html">
+
+    <meta name="citation_title" content="The Scaling Bridge: From Mathematics to Physics">
+    <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
+    <meta name="citation_publication_date" content="2026/10/21">
+    <meta name="citation_language" content="ar">
+    <meta name="citation_doi" content="10.5281/zenodo.23540283">
+
     <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { 
-            --gold: #f4c430; 
-            --green: #06d6a0; 
-            --bg: #0a1410; 
-            --panel: #0a1a12; 
-            --border: #1f3a2b; 
-            --text: #e8f5e9; 
-            --dim: #8aa892; 
-            --red: #e57373; 
-            --blue: #6ae3ff; 
+        :root {
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12;
+            --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff;
         }
-        body { 
-            margin: 0; 
-            padding: 20px 12px; 
-            background: var(--bg); 
-            color: var(--text); 
-            font-family: 'Segoe UI', Tahoma, sans-serif; 
-            line-height: 1.8; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            transition: background 0.3s;
-        }
-        .container { 
-            width: min(1000px, 100%); 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-        }
-        
-        /* شريط التنقل العلوي */
-        .top-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(10, 26, 18, 0.9);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            width: 100%;
-        }
-        .nav-item {
-            color: var(--dim);
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border: 1px solid transparent;
-            transition: 0.3s;
-        }
-        .nav-item:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-            background: rgba(244, 196, 48, 0.1);
-        }
-        .nav-item.active {
-            color: #0a1a12;
-            background: var(--gold);
-            border-color: var(--gold);
-            cursor: default;
-        }
+        body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text);
+               font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8;
+               display: flex; flex-direction: column; align-items: center;
+               position: relative; transition: background 0.3s; }
+        .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; }
 
-        /* زر تبديل اللغة */
-        .lang-toggle-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--gold);
-            color: #0a1a12;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 100;
-            transition: 0.3s;
-            font-family: inherit;
-        }
-        .lang-toggle-btn:hover { background: #d3a71b; }
-        
-        /* إخفاء العناصر حسب اللغة */
-        .lang-en { display: none; }
+        /* Language: hide/enable by mode, preserve natural display */
+        body:not(.en-mode) .lang-en { display: none; }
         body.en-mode .lang-ar { display: none; }
-        body.en-mode .lang-en { display: block; }
-        body.en-mode { direction: ltr; text-align: left; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body.en-mode .badge-info, body.en-mode .badge-exact { border-right: none; border-left: 4px solid; }
-        body.en-mode .badge-info { border-left-color: var(--blue); }
-        body.en-mode .badge-exact { border-left-color: var(--green); }
+        body.en-mode { direction: ltr; text-align: left; }
+        body.en-mode .badge-info { border-right: none; border-left: 4px solid var(--blue); }
+        body.en-mode .badge-exact { border-right: none; border-left: 4px solid var(--green); }
 
-        h1 { 
-            color: var(--gold); 
-            text-align: center; 
-            font-size: 1.8rem; 
-            margin-bottom: 5px; 
-            margin-top: 30px; 
-        }
-        .subtitle { 
-            text-align: center; 
-            color: var(--dim); 
-            font-size: 1rem; 
-            margin-bottom: 20px; 
-        }
-        
-        .card { 
-            background: var(--panel); 
-            border: 1px solid var(--border); 
-            border-radius: 12px; 
-            padding: 24px; 
-            box-shadow: 0 10px 30px -15px #000; 
-        }
-        .card h2 { 
-            color: var(--green); 
-            margin-top: 0; 
-            border-bottom: 1px solid var(--border); 
-            padding-bottom: 10px; 
-            font-size: 1.3rem; 
-        }
-        
-        .badge-exact { 
-            background: rgba(6, 214, 160, 0.1); 
-            border-right: 4px solid var(--green); 
-            padding: 12px; 
-            border-radius: 4px; 
-            margin: 15px 0; 
-            font-size: 0.95rem; 
-        }
-        .badge-info { 
-            background: rgba(106, 227, 255, 0.1); 
-            border-right: 4px solid var(--blue); 
-            padding: 12px; 
-            border-radius: 4px; 
-            margin: 15px 0; 
-            font-size: 0.95rem; 
-        }
+        .lang-toggle-btn { position: absolute; top: 15px; left: 15px;
+            background: var(--gold); color: #0a1a12; border: none;
+            padding: 8px 16px; border-radius: 8px; font-weight: bold;
+            cursor: pointer; z-index: 100; transition: 0.3s; font-family: inherit; }
+        .lang-toggle-btn:hover { background: #d3a71b; }
 
-        .math-block { 
-            background: #051009; 
-            padding: 15px; 
-            border-radius: 8px; 
-            overflow-x: auto; 
-            margin: 15px 0; 
-            border: 1px solid var(--border); 
-            direction: ltr; 
-            text-align: center; 
-            font-size: 1.1rem; 
-        }
+        .top-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+            background: rgba(10, 26, 18, 0.9); border: 1px solid var(--border);
+            border-radius: 12px; padding: 12px; margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); width: 100%; }
+        .nav-item { color: var(--dim); text-decoration: none; padding: 6px 14px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: bold;
+            border: 1px solid transparent; transition: 0.3s; }
+        .nav-item:hover { color: var(--gold); border-color: var(--gold);
+            background: rgba(244, 196, 48, 0.1); }
+        .nav-item.active { color: #0a1a12; background: var(--gold);
+            border-color: var(--gold); cursor: default; }
 
-        .interactive-box { 
-            background: #051009; 
-            border: 1px solid var(--border); 
-            border-radius: 8px; 
-            padding: 20px; 
-            margin-bottom: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 15px; 
-        }
-        
-        .input-group { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-start; 
-            width: 100%; 
-            max-width: 400px; 
-            gap: 5px; 
-        }
-        .input-group label { 
-            font-size: 0.9rem; 
-            color: var(--blue); 
-        }
-        input[type="number"], select { 
-            width: 100%; 
-            padding: 10px; 
-            background: var(--bg); 
-            border: 1px solid var(--border); 
-            color: var(--text); 
-            border-radius: 6px; 
-            font-family: monospace; 
-            font-size: 1rem; 
-        }
-        
-        .btn { 
-            background: var(--green); 
-            color: #0a1a12; 
-            padding: 10px 20px; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 0.9rem; 
-            border: none; 
-            cursor: pointer; 
-            font-family: inherit; 
-            text-align: center; 
-            transition: 0.3s; 
-        }
+        h1 { color: var(--gold); text-align: center; font-size: 1.8rem;
+             margin-bottom: 5px; margin-top: 30px; }
+        .subtitle { text-align: center; color: var(--dim); font-size: 1rem;
+                    margin-bottom: 20px; }
+
+        .card { background: var(--panel); border: 1px solid var(--border);
+                border-radius: 12px; padding: 24px;
+                box-shadow: 0 10px 30px -15px #000; }
+        .card h2 { color: var(--green); margin-top: 0;
+                   border-bottom: 1px solid var(--border);
+                   padding-bottom: 10px; font-size: 1.3rem; }
+        .card h3 { color: var(--blue); font-size: 1.05rem; margin-top: 18px; }
+
+        .badge-exact { background: rgba(6, 214, 160, 0.1);
+            border-right: 4px solid var(--green); padding: 12px;
+            border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-info { background: rgba(106, 227, 255, 0.1);
+            border-right: 4px solid var(--blue); padding: 12px;
+            border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-neutral { background: rgba(138, 168, 146, 0.1);
+            border-right: 4px solid var(--dim); padding: 12px;
+            border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        body.en-mode .badge-neutral { border-right: none;
+            border-left: 4px solid var(--dim); }
+
+        .math-block { background: #051009; padding: 15px; border-radius: 8px;
+            overflow-x: auto; margin: 15px 0; border: 1px solid var(--border);
+            direction: ltr; text-align: center; font-size: 1.1rem; }
+
+        .entity-table { width: 100%; border-collapse: collapse; margin: 15px 0;
+            font-size: 0.92rem; }
+        .entity-table th, .entity-table td {
+            border: 1px solid var(--border); padding: 10px; }
+        .entity-table th { background: #132a1d; color: var(--gold); text-align: center; }
+        .entity-table td { text-align: right; }
+        body.en-mode .entity-table td { text-align: left; }
+
+        .interactive-box { background: #051009; border: 1px solid var(--border);
+            border-radius: 8px; padding: 20px; margin-bottom: 20px;
+            display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .input-group { display: flex; flex-direction: column;
+            align-items: flex-start; width: 100%; max-width: 420px; gap: 5px; }
+        .input-group label { font-size: 0.9rem; color: var(--blue); }
+        input[type="number"], select { width: 100%; padding: 10px;
+            background: var(--bg); border: 1px solid var(--border);
+            color: var(--text); border-radius: 6px;
+            font-family: monospace; font-size: 1rem; }
+        .small-note { color: var(--dim); font-size: 0.8rem; margin-top: 5px; }
+
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px;
+            border-radius: 8px; text-decoration: none; font-weight: bold;
+            font-size: 0.9rem; border: none; cursor: pointer;
+            font-family: inherit; text-align: center; transition: 0.3s; }
         .btn:hover { background: #04b586; }
         .btn-gold { background: var(--gold); color: #0a1a12; }
         .btn-gold:hover { background: #d3a71b; }
-        
-        #result-box { 
-            display: none; 
-            width: 100%; 
-            margin-top: 15px; 
-            background: rgba(106, 227, 255, 0.1); 
-            border: 1px solid var(--blue); 
-            border-radius: 8px; 
-            padding: 15px; 
-            text-align: center; 
-            font-family: monospace; 
-        }
-        #result-box span { color: var(--blue); font-size: 1.2rem; font-weight: bold; }
 
-        .links { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 10px; 
-            justify-content: center; 
-            margin-top: 25px; 
-            padding-top: 20px;
-            border-top: 1px dashed var(--border);
-        }
-        .footer { 
-            text-align: center; 
-            color: var(--dim); 
-            font-size: 0.85rem; 
-            margin-top: 30px; 
-            padding-top: 20px; 
-            border-top: 1px solid var(--border); 
-        }
+        #result-box { display: none; width: 100%; margin-top: 15px;
+            background: rgba(106, 227, 255, 0.1); border: 1px solid var(--blue);
+            border-radius: 8px; padding: 15px; text-align: center;
+            font-family: monospace; }
+        #result-box p { margin: 6px 0; }
+        #result-box .val { color: var(--blue); font-size: 1.15rem; font-weight: bold; }
+        #result-box .warn { color: var(--gold); font-size: 0.85rem; margin-top: 12px; }
+
+        .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+            margin-top: 25px; padding-top: 20px;
+            border-top: 1px dashed var(--border); }
+        .footer { text-align: center; color: var(--dim); font-size: 0.85rem;
+            margin-top: 30px; padding-top: 20px;
+            border-top: 1px solid var(--border); }
+
+        ul { padding-right: 22px; }
+        body.en-mode ul { padding-right: 0; padding-left: 22px; }
+        li { margin-bottom: 6px; }
     </style>
 </head>
 <body>
 
-<button class="lang-toggle-btn" onclick="toggleLanguage()" id="langBtn">🌐 English</button>
+<button id="langBtn" class="lang-toggle-btn" onclick="toggleLanguage()">🌐 English</button>
 
 <div class="container">
-    <!-- شريط التنقل العلوي -->
+
     <nav class="top-nav">
         <a href="../index.html" class="nav-item lang-ar">🏠 الرئيسية</a>
-        <a href="../index-en.html" class="nav-item lang-en">🏠 Home</a>
-        
+        <a href="../en/index.html" class="nav-item lang-en">🏠 Home</a>
         <a href="frame1.html" class="nav-item lang-ar">1. الإطار الرياضي</a>
         <a href="frame1-en.html" class="nav-item lang-en">1. Raw Math</a>
-        
         <a href="bridge.html" class="nav-item active lang-ar">الجسر (Bridge)</a>
         <a href="bridge.html" class="nav-item active lang-en">Bridge</a>
-        
         <a href="../tree/frame2.html" class="nav-item lang-ar">2. الإطار التطبيقي</a>
         <a href="../tree/frame2-en.html" class="nav-item lang-en">2. Application</a>
-        
         <a href="frame3.html" class="nav-item lang-ar">3. البنية الدقيقة</a>
         <a href="frame3-en.html" class="nav-item lang-en">3. Fine Structure</a>
-        
         <a href="frame4.html" class="nav-item lang-ar">4. المسألة الطيفية</a>
         <a href="frame4-en.html" class="nav-item lang-en">4. Spectral Problem</a>
     </nav>
 
     <h1 class="lang-ar">الجسر — من الرياضيات إلى الفيزياء</h1>
     <h1 class="lang-en">The Scaling Bridge — From Mathematics to Physics</h1>
-
     <div class="subtitle">
-        <span class="lang-ar"><strong>Frame 3: Translating Dimensionless Math to Physical Reality</strong><br>Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026</span>
-        <span class="lang-en"><strong>Translating Dimensionless Math to Physical Reality</strong><br>Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026</span>
+        <span class="lang-ar"><strong>تحويل الكميات المجردة إلى كميات مقيسة بوحدات فيزيائية</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026</span>
+        <span class="lang-en"><strong>Translating Dimensionless Quantities into Physically Scaled Values</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026</span>
     </div>
 
-    <!-- القسم 1: شرح فلسفة الجسر -->
+    <!-- ==================== §1 ==================== -->
     <div class="card">
         <h2 class="lang-ar">1. لماذا نحتاج إلى جسر؟</h2>
         <h2 class="lang-en">1. Why do we need a bridge?</h2>
-        
+
         <div class="badge-info">
             <span class="lang-ar">
-                <strong>🔗 الرحلة بين الإطارات:</strong><br>
-                في <strong>الإطار الأول (Frame 1)</strong>، استخرجنا "الكود الخام" للكون (أرقام مجردة بلا وحدات).<br>
-                في <strong>الإطار الثاني (Frame 2)</strong>، سنطبق هذه الأرقام على الواقع المادي (مثل هندسة الشجرة والظل).<br>
-                لكن كيف ننتقل من رقم مجرد إلى مسافة فيزيائية؟ هنا يأتي دور <strong>الجسر (Bridge)</strong>.
+                <strong>🔗 موقع الجسر في التسلسل:</strong><br>
+                <strong>Frame 1</strong> ← يعرّف <em>بنية رياضية مجردة</em> (بلا وحدات).<br>
+                <strong>Bridge</strong> ← الطريقة المتّفق عليها لتحويل القيم العددية الناتجة إلى كميات بأبعاد فيزيائية (طول، طاقة، زمن، كتلة).<br>
+                <strong>Frame 2</strong> ← يطبّق هذا التحويل على ظاهرة محددة (هندسة الشجرة والظل).<br>
+                <strong>Frame 3</strong> ← يستخدم الغلاف \(g(u)\) في بنية جبرية مختلفة (عناصر انتقال ونسب).<br>
+                <strong>Frame 4</strong> ← يستخدم \(g\) لبناء مؤثر تفاضلي.<br>
+                الجسر <strong>لا يُنتج</strong> أي إطار، بل يوفّر <em>لغة مشتركة</em> بين الإطارين 1 و2.
             </span>
             <span class="lang-en">
-                <strong>🔗 Journey Between Frames:</strong><br>
-                In <strong>Frame 1</strong>, we studied the raw mathematical code via the function \(Z(x)\). In the <strong>Bridge</strong>, we assigned physical scales.<br>
-                Now, in <strong>Frame 2</strong>, we apply these numbers to physical reality (like the tree and shadow).<br>
-                But how do we transition from a dimensionless number to a physical distance? This is where the <strong>Bridge</strong> comes in.
+                <strong>🔗 Where the Bridge sits:</strong><br>
+                <strong>Frame 1</strong> ← defines a <em>dimensionless mathematical structure</em>.<br>
+                <strong>Bridge</strong> ← the agreed method for turning the resulting numerical values into dimensioned physical quantities (length, energy, time, mass).<br>
+                <strong>Frame 2</strong> ← applies this conversion to a specific phenomenon (tree-and-shadow geometry).<br>
+                <strong>Frame 3</strong> ← uses the envelope \(g(u)\) in a different algebraic structure (transition elements and ratios).<br>
+                <strong>Frame 4</strong> ← uses \(g\) to build a differential operator.<br>
+                The Bridge <strong>does not generate</strong> any frame; it provides a <em>shared language</em> between Frames 1 and 2.
             </span>
         </div>
-        
-        <p class="lang-ar">الكون لا يعرف ما هو "المتر" أو "الكيلوجرام". هذه وحدات بشرية. لكن لكي نربط الرياضيات بالفيزياء، نستخدم <strong>عوامل القياس (Scaling Factors)</strong> مثل طول بلانك أو طاقة بلانك. هذا الجسر هو أداة "التكامل الفيزيائي".</p>
-        <p class="lang-en">The universe does not know what a "meter" or a "kilogram" is. These are human constructs. To connect mathematics with physics, we use <strong>Scaling Factors</strong> like the Planck length or Planck energy. This bridge is a tool for "physical integration".</p>
-        
+
+        <p class="lang-ar">الكون لا يعرف ما هو "المتر" أو "الكيلوجرام"؛ هذه وحدات بشرية. لكن لكي نربط الرياضيات بالفيزياء، نستخدم <strong>عوامل قياس (Scaling Factors)</strong> مشتقة من ثوابت أساسية، مثل طول بلانك \(\ell_P = \sqrt{\hbar G / c^3}\). هذا الجسر هو <strong>عملية تحويل أبعاد</strong> (dimensional scaling)، وليس اشتقاقًا لنموذج فيزيائي جديد.</p>
+        <p class="lang-en">The universe does not know what a "meter" or a "kilogram" is; these are human conventions. To connect mathematics with physics, we use <strong>scaling factors</strong> derived from fundamental constants, such as the Planck length \(\ell_P = \sqrt{\hbar G / c^3}\). This bridge is a <strong>dimensional scaling operation</strong>, not the derivation of a new physical model.</p>
+
         <div class="math-block">
-            \[ \text{Physical Quantity} = \underbrace{\text{Raw Math } Z(x)}_{\text{From Frame 1}} \times \underbrace{\Lambda_{\text{scale}}}_{\text{Physical Unit}} \]
+            \[ Q_{\text{physical}} = \underbrace{z}_{\text{dimensionless}} \times \underbrace{\Lambda_{\text{scale}}}_{\text{units}} \]
+        </div>
+
+        <h3 class="lang-ar">ثلاثة كيانات متمايزة يجب عدم الخلط بينها</h3>
+        <h3 class="lang-en">Three distinct entities that must not be conflated</h3>
+
+        <table class="entity-table">
+            <thead>
+                <tr>
+                    <th class="lang-ar">الرمز</th>
+                    <th class="lang-ar">ما هو؟</th>
+                    <th class="lang-ar">أبعاده</th>
+                    <th class="lang-en">Symbol</th>
+                    <th class="lang-en">What it is</th>
+                    <th class="lang-en">Dimensions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="lang-ar">\(x\)</td>
+                    <td class="lang-ar">متغير مستقل في \(Z(x)\)، \(x \ge 1\) (إحداثي)</td>
+                    <td class="lang-ar">بلا أبعاد</td>
+                    <td class="lang-en">\(x\)</td>
+                    <td class="lang-en">independent variable in \(Z(x)\), \(x \ge 1\) (coordinate)</td>
+                    <td class="lang-en">dimensionless</td>
+                </tr>
+                <tr>
+                    <td class="lang-ar">\(Z(x)\)</td>
+                    <td class="lang-ar">قيمة الدالة عند \(x\); قابلة للإشارة (سالبة/موجبة)</td>
+                    <td class="lang-ar">بلا أبعاد</td>
+                    <td class="lang-en">\(Z(x)\)</td>
+                    <td class="lang-en">function value at \(x\); signed (positive/negative)</td>
+                    <td class="lang-en">dimensionless</td>
+                </tr>
+                <tr>
+                    <td class="lang-ar">\(\Lambda_{\text{scale}}\)</td>
+                    <td class="lang-ar">عامل تحويل وحدات (طول بلانك أو ما يعادله)</td>
+                    <td class="lang-ar">وحدة فيزيائية</td>
+                    <td class="lang-en">\(\Lambda_{\text{scale}}\)</td>
+                    <td class="lang-en">unit-conversion factor (Planck length or equivalent)</td>
+                    <td class="lang-en">physical unit</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="badge-neutral">
+            <span class="lang-ar">
+                <strong>ملاحظة على الأبعاد.</strong> \(x\) و\(Z(x)\) <em>ليسا الشيء نفسه</em>، رغم أن كليهما بلا أبعاد. \(x\) إحداثي في المجال، و\(Z(x)\) قيمة دالة عند ذلك الإحداثي. أيُّهما يُدخَل في الحاسبة يعتمد على السؤال. الناتج الفيزيائي يكتسب وحدته من \(\Lambda_{\text{scale}}\)، لكن <em>معناه</em> يعتمد على أيّ كمية قصدتها.
+            </span>
+            <span class="lang-en">
+                <strong>Note on dimensions.</strong> \(x\) and \(Z(x)\) are <em>not the same thing</em>, even though both are dimensionless. \(x\) is a coordinate on the domain; \(Z(x)\) is a function value at that coordinate. Which one to enter in the calculator depends on the question. The physical result gets its unit from \(\Lambda_{\text{scale}}\), but its <em>meaning</em> depends on which quantity was intended.
+            </span>
         </div>
     </div>
 
-    <!-- القسم 2: الآلة الحاسبة -->
+    <!-- ==================== §2 ==================== -->
     <div class="card">
-        <h2 class="lang-ar">2. آلة التكامل الفيزيائي (The Scaling Calculator)</h2>
+        <h2 class="lang-ar">2. آلة التحويل الفيزيائي</h2>
         <h2 class="lang-en">2. The Scaling Calculator</h2>
-        
-        <p class="lang-ar">أدخل قيمة رياضية خام (من الإطار الأول)، واختر وحدة قياس فيزيائية لترى كيف يتحول الرقم المجرد إلى كمية مادية:</p>
-        <p class="lang-en">Enter a raw mathematical value (from Frame 1), and select a physical scale to see how the dimensionless number transforms into a physical quantity:</p>
+
+        <p class="lang-ar">أدخل قيمة عددية (بلا أبعاد)، واختر وحدة فيزيائية. الناتج قيمة عددية مضروبة في وحدة، وليس تنبؤًا فيزيائيًا بذاته (انظر §3).</p>
+        <p class="lang-en">Enter a dimensionless number and choose a physical unit. The result is a number multiplied by a unit — not, by itself, a physical prediction (see §3).</p>
 
         <div class="interactive-box">
             <div class="input-group">
-                <label class="lang-ar">القيمة الرياضية الخام (\(x\) أو \(Z(x)\)):</label>
-                <label class="lang-en">Raw Mathematical Value (\(x\) or \(Z(x)\)):</label>
-                <input type="number" id="rawValue" value="0.41421" step="0.00001" placeholder="...">
-                <small style="color:var(--dim); font-size:0.8rem; margin-top:5px;" class="lang-ar">*ملاحظة: 0.41421 هي قيمة \(\sqrt{2}-1\) من Frame 2</small>
-                <small style="color:var(--dim); font-size:0.8rem; margin-top:5px;" class="lang-en">*Note: 0.41421 is the value \(\sqrt{2}-1\) from Frame 2</small>
+                <label class="lang-ar">القيمة العددية (بلا أبعاد):</label>
+                <label class="lang-en">Dimensionless numerical value:</label>
+                <input type="number" id="rawValue" value="2" step="any" placeholder="...">
+                <small class="small-note lang-ar">*مثال: \(x = 2\) هو إحداثي القيمة الصغرى للدالة التجميعية \(A(x)\) في Frame 1. يمكنك أيضًا إدخال \(Z(2) = 0\)، أو أي قيمة أخرى.</small>
+                <small class="small-note lang-en">*Example: \(x = 2\) is the coordinate of the global minimum of the accumulation function \(A(x)\) in Frame 1. You can also enter \(Z(2)=0\), or any other value.</small>
             </div>
-            
+
             <div class="input-group">
-                <label class="lang-ar">عامل القياس الفيزيائي (\(\Lambda_{\text{scale}}\)):</label>
-                <label class="lang-en">Physical Scaling Factor (\(\Lambda_{\text{scale}}\)):</label>
+                <label class="lang-ar">عامل التحويل الفيزيائي \(\Lambda_{\text{scale}}\):</label>
+                <label class="lang-en">Physical scaling factor \(\Lambda_{\text{scale}}\):</label>
                 <select id="scaleSelect">
-                    <option value="1.616255e-35" data-ar="طول بلانك (Planck Length) - متر" data-en="Planck Length - meters">طول بلانك (Planck Length) - متر</option>
-                    <option value="1.956e9" data-ar="طاقة بلانك (Planck Energy) - جول" data-en="Planck Energy - Joules">طاقة بلانك (Planck Energy) - جول</option>
-                    <option value="5.391247e-44" data-ar="زمن بلانك (Planck Time) - ثانية" data-en="Planck Time - seconds">زمن بلانك (Planck Time) - ثانية</option>
-                    <option value="2.176434e-8" data-ar="كتلة بلانك (Planck Mass) - كجم" data-en="Planck Mass - kg">كتلة بلانك (Planck Mass) - كجم</option>
+                    <option value="1.616255e-35"
+                            data-ar-name="طول بلانك" data-en-name="Planck length"
+                            data-ar-unit="متر"      data-en-unit="meters">
+                        طول بلانك — متر
+                    </option>
+                    <option value="1.956e9"
+                            data-ar-name="طاقة بلانك" data-en-name="Planck energy"
+                            data-ar-unit="جول"        data-en-unit="joules">
+                        طاقة بلانك — جول
+                    </option>
+                    <option value="5.391247e-44"
+                            data-ar-name="زمن بلانك" data-en-name="Planck time"
+                            data-ar-unit="ثانية"     data-en-unit="seconds">
+                        زمن بلانك — ثانية
+                    </option>
+                    <option value="2.176434e-8"
+                            data-ar-name="كتلة بلانك" data-en-name="Planck mass"
+                            data-ar-unit="كجم"        data-en-unit="kg">
+                        كتلة بلانك — كجم
+                    </option>
                 </select>
             </div>
-            
-            <button onclick="calculateIntegration()" class="btn btn-gold lang-ar">⚡ تطبيق التكامل (Apply Scaling)</button>
-            <button onclick="calculateIntegration()" class="btn btn-gold lang-en">⚡ Apply Scaling</button>
-            
+
+            <button onclick="calculateIntegration()" class="btn btn-gold lang-ar">⚡ تطبيق التحويل</button>
+            <button onclick="calculateIntegration()" class="btn btn-gold lang-en">⚡ Apply scaling</button>
+
             <div id="result-box">
-                <p class="lang-ar">القيمة الخام: <span id="resRaw-ar">0</span></p>
-                <p class="lang-en">Raw Value: <span id="resRaw-en">0</span></p>
-                
-                <p class="lang-ar">عامل القياس: <span id="resScaleName-ar">-</span></p>
-                <p class="lang-en">Scaling Factor: <span id="resScaleName-en">-</span></p>
-                
-                <p class="lang-ar">النتيجة الفيزيائية المكافئة: <span id="resFinal-ar">0</span></p>
-                <p class="lang-en">Equivalent Physical Result: <span id="resFinal-en">0</span></p>
+                <p class="lang-ar">المدخل (بلا أبعاد): <span class="val" id="resRaw-ar">—</span></p>
+                <p class="lang-en">Input (dimensionless): <span class="val" id="resRaw-en">—</span></p>
+                <p class="lang-ar">عامل التحويل: <span class="val" id="resScaleName-ar">—</span></p>
+                <p class="lang-en">Scaling factor: <span class="val" id="resScaleName-en">—</span></p>
+                <p class="lang-ar">الناتج العددي × الوحدة: <span class="val" id="resFinal-ar">—</span></p>
+                <p class="lang-en">Result (number × unit): <span class="val" id="resFinal-en">—</span></p>
+                <p class="warn lang-ar">تنبيه: الناتج ذو أبعاد فيزيائية، لكن دلالته تعتمد على نموذج فيزيائي مستقل. لا يُفسَّر بوصفه حدًّا أدنى أو قيمة مقاسة.</p>
+                <p class="warn lang-en">Note: the result has physical units, but its meaning depends on an independent physical model. It is not to be interpreted as a minimum or as a measured value.</p>
             </div>
         </div>
     </div>
 
-    <!-- القسم 3: النزاهة العلمية -->
+    <!-- ==================== §3 ==================== -->
     <div class="card">
-        <h2 class="lang-ar">3. حدود الجسر (Scientific Boundaries)</h2>
+        <h2 class="lang-ar">3. حدود الاستنتاج العلمي</h2>
         <h2 class="lang-en">3. Scientific Boundaries</h2>
-        
-        <div class="badge-exact">
+
+        <h3 class="lang-ar">3.1 طول بلانك: مقياس طبيعي، لا حدّ أدنى للوجود</h3>
+        <h3 class="lang-en">3.1 Planck length: a natural scale, not a minimum of existence</h3>
+
+        <div class="badge-neutral">
             <span class="lang-ar">
-                <strong>🔬 تنبيه علمي:</strong> 
-                هذا الجسر لا يدعي أن الكون يعمل بالرياضيات فقط، بل يوضح كيف نترجم لغة الرياضيات إلى لغة الفيزياء. 
-                <br><br>
-                على سبيل المثال: إذا كان لدينا رقم خام \(x = 0.5\)، فإن ضربه في طول بلانك يعطينا مسافة فيزيائية مقدارها \(8.08 \times 10^{-36}\) متر. هذا الرقم يعبر عن "الحد الأدنى" للوجود المادي (Planck Scale). 
-                <br><br>
-                بدون هذا الجسر، تبقى أوراق الإطار الأول مجرد "تمرين رياضي". ومع هذا الجسر، تصبح قابلة للقياس والمقارنة في الإطار الثاني.
+                طول بلانك \(\ell_P = \sqrt{\hbar G / c^3} \approx 1.616 \times 10^{-35}\,\mathrm{m}\) هو <strong>مقياس طبيعي</strong> مشتق من ثوابت أساسية (\(G, \hbar, c\)). وهو <strong>ليس</strong> حدًّا أدنى ثبت تجريبيًا للطول، ولا يعني أن المسافات دونه "غير موجودة". إنه المقياس الذي تصبح عنده التأثيرات الكمومية للجاذبية متوقعة أن تكون بنفس رتبة التأثيرات الأخرى. أيُّ تفسير فيزيائي لنتيجة التحويل يحتاج إلى نموذج مستقل.
             </span>
             <span class="lang-en">
-                <strong>🔬 Scientific Note:</strong> 
-                This bridge does not claim that the universe operates on mathematics alone, but shows how we translate the language of mathematics into the language of physics.
-                <br><br>
-                For example: if we have a raw number \(x = 0.5\), multiplying it by the Planck length gives a physical distance of \(8.08 \times 10^{-36}\) meters. This number represents the "minimum limit" of physical existence (Planck Scale).
-                <br><br>
-                Without this bridge, the papers of Frame 1 remain merely a "mathematical exercise". With this bridge, they become measurable and comparable in Frame 2.
+                The Planck length \(\ell_P = \sqrt{\hbar G / c^3} \approx 1.616 \times 10^{-35}\,\mathrm{m}\) is a <strong>natural scale</strong> derived from fundamental constants (\(G, \hbar, c\)). It is <strong>not</strong> an experimentally established minimum of length, nor does it mean that distances below it "do not exist". It is the scale at which quantum-gravitational effects are expected to become of the same order as other effects. Any physical interpretation of a scaling result requires an independent model.
+            </span>
+        </div>
+
+        <p class="lang-ar">على سبيل المثال: المدخل \(0.5\) مع عامل \(\ell_P\) يعطي \(0.5\,\ell_P \approx 8.08 \times 10^{-36}\,\mathrm{m}\). هذه القيمة <strong>نصف طول بلانك</strong> وفق عامل التحويل المختار؛ وليست "أصغر مسافة ممكنة"، ولا حدًّا أدنى للوجود المادي.</p>
+        <p class="lang-en">For example: the input \(0.5\) with the \(\ell_P\) factor gives \(0.5\,\ell_P \approx 8.08 \times 10^{-36}\,\mathrm{m}\). This is <strong>half the Planck length</strong> under the chosen scaling factor; it is not a "smallest possible distance", nor a minimum of physical existence.</p>
+
+        <h3 class="lang-ar">3.2 الاتساق البُعدي ≠ التنبؤ الفيزيائي</h3>
+        <h3 class="lang-en">3.2 Dimensional consistency ≠ physical prediction</h3>
+
+        <div class="badge-info">
+            <span class="lang-ar">
+                العملية \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\) <strong>صحيحة بُعديًا</strong> حين يكون \(z\) بلا أبعاد و\(\Lambda_{\text{scale}}\) ذا وحدة الكمية المطلوبة. لكنها <strong>لا تُثبت وحدها</strong> أن \(Q_{\text{physical}}\) تنبؤ فيزيائي للنموذج، ولا أن \(z\) يمثّل كمية فيزيائية قابلة للقياس. هذا يتطلب سياقًا فيزيائيًا مستقلاً: نموذجًا، وشروطًا، وإجراء قياس.
+            </span>
+            <span class="lang-en">
+                The operation \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\) is <strong>dimensionally consistent</strong> whenever \(z\) is dimensionless and \(\Lambda_{\text{scale}}\) carries the unit of the desired quantity. By itself, however, it <strong>does not establish</strong> that \(Q_{\text{physical}}\) is a physical prediction of the model, nor that \(z\) represents a measurable physical quantity. That requires an independent physical context: a model, conditions, and a measurement procedure.
+            </span>
+        </div>
+
+        <h3 class="lang-ar">3.3 ربط صريح مع الإطار الثالث</h3>
+        <h3 class="lang-en">3.3 Explicit cross-reference to Frame 3</h3>
+
+        <div class="badge-neutral">
+            <span class="lang-ar">
+                النسبة \(R_{13/12} \approx 0.60352\) الواردة في Frame 3 نتيجة عددية خاصة بذلك النموذج: غلافه، وحالاته، ومؤثر انتقاله \(\cos(u/2)\)، وجدائه الداخلي غير الموزون. <strong>هي ليست مخرجاتِ حاسبة التحويل في هذه الصفحة</strong>، وليست قياسًا فيزيائيًا. يمكن استخدام هذه الحاسبة لتحويل <em>قيم عددية معينة</em>، لكن نسبة مثل \(R_{13/12}\) تبقى كمية بلا أبعاد ناتجة عن تعريفات Frame 3، لا عن عملية تحويل بحد ذاتها.
+            </span>
+            <span class="lang-en">
+                The ratio \(R_{13/12} \approx 0.60352\) reported in Frame 3 is a numerical consequence of that model: its envelope, its states, its transition operator \(\cos(u/2)\), and its unweighted inner product. It is <strong>not produced by the scaling calculator on this page</strong>, and it is not a physical measurement. The calculator can convert <em>specific numerical values</em>, but a ratio like \(R_{13/12}\) remains a dimensionless quantity arising from Frame 3's definitions, not from any scaling operation as such.
             </span>
         </div>
     </div>
 
-    <!-- أزرار التنقل السفلية -->
-    <div class="links">
-        <a href="frame1.html" class="btn lang-ar">← العودة إلى الإطار الأول (Frame 1)</a>
-        <a href="frame1-en.html" class="btn lang-en">← Back to Frame 1</a>
-        
-        <a href="../index.html" class="btn lang-ar">🏠 الرئيسية</a>
-        <a href="../index-en.html" class="btn lang-en">🏠 Home</a>
+    <!-- ==================== §4 ==================== -->
+    <div class="card">
+        <h2 class="lang-ar">4. ما <em>لا</em> يفعله الجسر</h2>
+        <h2 class="lang-en">4. What the bridge does <em>not</em> do</h2>
 
-        <a href="../tree/frame2.html" class="btn btn-gold lang-ar">الانتقال إلى الإطار الثاني (Frame 2) →</a>
+        <ul class="lang-ar">
+            <li><strong>لا يثبت</strong> أن نموذجًا رياضيًا صحيح.</li>
+            <li><strong>لا يحوّل</strong> \(Z(x)\) إلى "جهد" أو "حقل" فيزيائي — بل يحوّل <em>قيمة عددية</em> إلى كمية بوحدة.</li>
+            <li><strong>لا يُنتج</strong> النسبة \(R_{13/12}\) ولا أي نتيجة عددية خاصة بـ Frame 3 أو Frame 4.</li>
+            <li><strong>لا يعني</strong> أن الكميات المنتمية إلى مقياس بلانك يمكن قياسها تجريبيًا.</li>
+            <li><strong>لا يستبدل</strong> النموذج الفيزيائي: يبقى الجسر عملية تحويل أبعاد، لا نظرية فيزيائية.</li>
+        </ul>
+        <ul class="lang-en">
+            <li><strong>Does not prove</strong> that a mathematical model is correct.</li>
+            <li><strong>Does not turn</strong> \(Z(x)\) into a "potential" or a physical "field" — it converts a <em>numerical value</em> into a quantity with a unit.</li>
+            <li><strong>Does not produce</strong> the ratio \(R_{13/12}\), nor any other numerical result specific to Frame 3 or Frame 4.</li>
+            <li><strong>Does not imply</strong> that Planck-scale quantities are experimentally measurable.</li>
+            <li><strong>Does not replace</strong> a physical model: the bridge remains a dimensional-scaling operation, not a physical theory.</li>
+        </ul>
+    </div>
+
+    <!-- ==================== Links ==================== -->
+    <div class="links">
+        <a href="frame1.html" class="btn lang-ar">← العودة إلى Frame 1</a>
+        <a href="frame1-en.html" class="btn lang-en">← Back to Frame 1</a>
+        <a href="../index.html" class="btn lang-ar">🏠 الرئيسية</a>
+        <a href="../en/index.html" class="btn lang-en">🏠 Home</a>
+        <a href="../tree/frame2.html" class="btn btn-gold lang-ar">الانتقال إلى Frame 2 →</a>
         <a href="../tree/frame2-en.html" class="btn btn-gold lang-en">Go to Frame 2 →</a>
     </div>
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
         DOI: 10.5281/zenodo.23540283
+        <br><span style="opacity:0.7;">corrected draft — 2026-10-24</span>
     </div>
+
 </div>
 
 <script>
-    // دالة تبديل اللغة
+    /* ---------------- Language toggle ---------------- */
     function toggleLanguage() {
         const body = document.body;
         const html = document.documentElement;
         const btn = document.getElementById('langBtn');
-
         body.classList.toggle('en-mode');
 
-        if (body.classList.contains('en-mode')) {
-            html.setAttribute('dir', 'ltr');
-            html.setAttribute('lang', 'en');
-            btn.innerHTML = '🌐 العربية';
-            // تحديث خيارات القائمة المنسدلة للإنجليزية
-            const select = document.getElementById('scaleSelect');
-            Array.from(select.options).forEach(opt => {
-                opt.text = opt.getAttribute('data-en');
-            });
-        } else {
-            html.setAttribute('dir', 'rtl');
-            html.setAttribute('lang', 'ar');
-            btn.innerHTML = '🌐 English';
-            // تحديث خيارات القائمة المنسدلة للعربية
-            const select = document.getElementById('scaleSelect');
-            Array.from(select.options).forEach(opt => {
-                opt.text = opt.getAttribute('data-ar');
-            });
+        const isEn = body.classList.contains('en-mode');
+        html.setAttribute('dir', isEn ? 'ltr' : 'rtl');
+        html.setAttribute('lang', isEn ? 'en' : 'ar');
+        btn.innerHTML = isEn ? '🌐 العربية' : '🌐 English';
+
+        // Update <select> option labels
+        const select = document.getElementById('scaleSelect');
+        Array.from(select.options).forEach(opt => {
+            const name = isEn ? opt.getAttribute('data-en-name') : opt.getAttribute('data-ar-name');
+            const unit = isEn ? opt.getAttribute('data-en-unit') : opt.getAttribute('data-ar-unit');
+            opt.text = `${name} — ${unit}`;
+        });
+
+        // Re-typeset MathJax (labels may have changed)
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise();
         }
     }
 
-    // دالة الحاسبة
-    function calculateIntegration() {
-        const rawValue = parseFloat(document.getElementById('rawValue').value);
-        const scaleSelect = document.getElementById('scaleSelect');
-        const scaleFactor = parseFloat(scaleSelect.value);
-        
-        // الحصول على النص المترجم للوحدة
-        const isEnglish = document.body.classList.contains('en-mode');
-        const scaleName = isEnglish ? scaleSelect.options[scaleSelect.selectedIndex].getAttribute('data-en') : scaleSelect.options[scaleSelect.selectedIndex].getAttribute('data-ar');
+    /* ---------------- Number formatting ---------------- */
+    function fmt(x) {
+        if (!isFinite(x)) return String(x);
+        if (x === 0) return "0";
+        const ax = Math.abs(x);
+        if (ax >= 1e-3 && ax < 1e6) {
+            return x.toPrecision(8).replace(/\.?0+(e|$)/, '$1');
+        }
+        return x.toExponential(6);
+    }
 
-        if (isNaN(rawValue)) {
-            alert(isEnglish ? "Please enter a valid number." : "الرجاء إدخال قيمة رقمية صحيحة.");
+    /* ---------------- Scaling calculator ---------------- */
+    function calculateIntegration() {
+        const isEn = document.body.classList.contains('en-mode');
+        const rawEl = document.getElementById('rawValue');
+        const sel = document.getElementById('scaleSelect');
+        const opt = sel.options[sel.selectedIndex];
+
+        // Validate raw input
+        const rawValue = parseFloat(rawEl.value);
+        if (!Number.isFinite(rawValue)) {
+            alert(isEn ? "Please enter a finite number." : "الرجاء إدخال عدد محدود صحيح.");
             return;
         }
 
-        const result = rawValue * scaleFactor;
-        
-        // استخراج الوحدة فقط (متر، جول، إلخ)
-        const unit = isEnglish ? scaleName.split(' - ')[1] : scaleName.split(' - ')[1];
-        const unitName = isEnglish ? scaleName.split(' - ')[1] : scaleName.split(' - ')[1]; // متر / meters
+        // Read scale factor
+        const scaleFactor = parseFloat(sel.value);
+        if (!Number.isFinite(scaleFactor)) {
+            alert(isEn ? "Selected scaling factor is invalid." : "عامل التحويل المختار غير صالح.");
+            return;
+        }
 
-        // تحديث النتائج للنسختين
-        document.getElementById('resRaw-ar').innerText = rawValue;
-        document.getElementById('resRaw-en').innerText = rawValue;
-        
-        document.getElementById('resScaleName-ar').innerText = scaleName.split(' - ')[0];
-        document.getElementById('resScaleName-en').innerText = scaleName.split(' - ')[0];
-        
-        const finalText = result.toExponential(6) + " " + unit;
-        
-        document.getElementById('resFinal-ar').innerText = finalText;
-        document.getElementById('resFinal-en').innerText = finalText;
-        
-        // إظهار الصندوق
+        // Compute
+        const result = rawValue * scaleFactor;
+        if (!Number.isFinite(result)) {
+            alert(isEn ? "Result overflows the representable range." : "الناتج يتجاوز النطاق العددي القابل للتمثيل.");
+            return;
+        }
+
+        // Fetch labels (bilingual)
+        const name = isEn ? opt.getAttribute('data-en-name') : opt.getAttribute('data-ar-name');
+        const unit = isEn ? opt.getAttribute('data-en-unit') : opt.getAttribute('data-ar-unit');
+
+        const finalText = `${fmt(result)} ${unit}`;
+
+        // Populate both language slots
+        document.getElementById('resRaw-ar').innerText       = fmt(rawValue);
+        document.getElementById('resRaw-en').innerText       = fmt(rawValue);
+        document.getElementById('resScaleName-ar').innerText = `${name} (${unit})`;
+        document.getElementById('resScaleName-en').innerText = `${name} (${unit})`;
+        document.getElementById('resFinal-ar').innerText     = finalText;
+        document.getElementById('resFinal-en').innerText     = finalText;
+
         document.getElementById('result-box').style.display = 'block';
     }
 </script>
+
 </body>
 </html>

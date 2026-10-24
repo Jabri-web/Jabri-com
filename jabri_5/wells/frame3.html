@@ -1,73 +1,74 @@
 <!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════
+     Frame 3 — corrected draft 2026-10-24
+     (No official version bump yet; awaiting English-side review)
+     Changes: (1) A_12^(0) unnormalized = π/2 clarified;
+              (2) weighted-inner-product claim made conditional;
+              (3) var(--cyan) → var(--blue);
+              (4) sensitivity-table limitations note added;
+              (5) same corrections in modal (§3, §5).
+     ═══════════════════════════════════════════════════════════════ -->
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frame 3 - التحويل الجبري وإزالة الإلغاء التناظري | البنية الدقيقة</title>
     <meta name="description" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model">
-    
-    <!-- MathJax for Equations -->
+    <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame3.html">
+
+    <!-- Google Scholar Meta Tags -->
+    <meta name="citation_title" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model">
+    <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
+    <meta name="citation_publication_date" content="2026/10/21">
+    <meta name="citation_language" content="ar">
+    <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame3_tex.pdf">
+
+    <!-- MathJax -->
     <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        :root { 
-            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; 
+        :root {
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9;
             --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; --purple: #c792ea;
             --code-bg: #1e1e1e; --code-text: #d4d4d4; --terminal-bg: #000000; --terminal-text: #00ff00;
         }
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; position: relative; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; }
-        
-        /* زر تبديل اللغة */
+
         .lang-btn { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
         .lang-btn:hover { background: var(--gold); color: #0a1a12; }
 
-        /* شريط التنقل العلوي */
-        .top-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(10, 26, 18, 0.9);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .nav-item {
-            color: var(--dim);
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border: 1px solid transparent;
-            transition: 0.3s;
-        }
-        .nav-item:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-            background: rgba(244, 196, 48, 0.1);
-        }
-        .nav-item.active {
-            color: #0a1a12;
-            background: var(--gold);
-            border-color: var(--gold);
-            cursor: default;
-        }
+        .top-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; background: rgba(10, 26, 18, 0.9); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .nav-item { color: var(--dim); text-decoration: none; padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; border: 1px solid transparent; transition: 0.3s; }
+        .nav-item:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
+        .nav-item.active { color: #0a1a12; background: var(--gold); border-color: var(--gold); cursor: default; }
 
         h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
-        .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
+        .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 10px; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
-        
+
         .badge-info { background: rgba(106, 227, 255, 0.1); border-right: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-neutral { background: rgba(255, 255, 255, 0.05); border-right: 4px solid #666; padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+
+        /* الافتتاحية الثلاثية */
+        .opening { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .opening-col { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .opening-col strong { display: block; margin-bottom: 8px; font-size: 1rem; }
+        .opening-col p { font-size: 0.88rem; margin: 0; color: var(--text); }
+        @media (max-width: 760px) { .opening { grid-template-columns: 1fr; } }
 
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
@@ -87,18 +88,62 @@
         .terminal-header { background: #222; color: #fff; padding: 5px 15px; font-family: monospace; font-size: 0.85rem; border-bottom: 1px solid #444; }
         pre.terminal-output { margin: 0; padding: 15px; background: var(--terminal-bg); color: var(--terminal-text); font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9rem; line-height: 1.4; overflow-x: auto; }
         .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border); }
-        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; font-family: inherit; }
         .btn:hover { background: #04b586; }
         .btn-gold { background: var(--gold); color: #0a1a12; }
         .btn-gold:hover { background: #d3a71b; }
+        .btn-blue { background: var(--blue); color: #0a1a12; }
+        .btn-blue:hover { background: #3fb8d0; }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+        /* ===== زر شرح الإطار الثالث ===== */
+        .frame3-cta-row { display: flex; justify-content: center; margin: 4px 0 0; }
+        .frame3-explanation-btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border: 1px solid var(--blue); border-radius: 10px; background: rgba(106, 227, 255, 0.08); color: var(--blue); font-size: 0.95rem; font-weight: 700; font-family: inherit; cursor: pointer; transition: 0.25s ease; }
+        .frame3-explanation-btn:hover { background: var(--blue); color: #0a1a12; }
+        .frame3-explanation-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+        /* ===== نافذة الشرح ===== */
+        .frame3-modal { position: fixed; inset: 0; z-index: 9999; display: none; }
+        .frame3-modal.is-open { display: block; }
+        .frame3-modal-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.72); backdrop-filter: blur(3px); }
+        .frame3-modal-panel { position: relative; z-index: 1; width: min(900px, calc(100% - 32px)); max-height: calc(100vh - 48px); margin: 24px auto; background: var(--panel); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65); display: flex; flex-direction: column; overflow: hidden; }
+        .frame3-modal-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border); background: #0d2018; }
+        .frame3-modal-header h2 { margin: 0; font-size: 1.15rem; color: var(--gold); }
+        .frame3-modal-close { width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--text); font-size: 22px; line-height: 1; cursor: pointer; transition: 0.2s ease; }
+        .frame3-modal-close:hover { background: var(--red); color: #000; border-color: var(--red); }
+        .frame3-modal-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+        .frame3-modal-body { padding: 18px 22px; overflow-y: auto; color: var(--text); line-height: 1.9; font-size: 0.95rem; }
+        .frame3-modal-body details { border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; background: #051009; }
+        .frame3-modal-body summary { cursor: pointer; font-weight: 700; color: var(--green); padding: 4px 0; font-size: 1rem; }
+        .frame3-modal-body summary:hover { color: var(--gold); }
+        .frame3-modal-body p { margin: 10px 0; }
+        .frame3-modal-body ul { padding-right: 24px; margin: 10px 0; }
+        .frame3-modal-body li { margin-bottom: 6px; }
+        .frame3-modal-body .math-block { background: #0a1a12; }
+        .frame3-modal-body mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hidden; padding: 8px 0; }
+        @media (max-width: 600px) {
+            .frame3-modal-panel { width: calc(100% - 12px); margin: 6px auto; max-height: calc(100vh - 12px); border-radius: 10px; }
+            .frame3-modal-body { padding: 12px; font-size: 14px; }
+            .frame3-modal-header { padding: 10px 14px; }
+            .frame3-modal-header h2 { font-size: 1rem; }
+        }
+
+        /* ===== أنماط الطباعة ===== */
+        @media print {
+            body { background: white; color: #111; }
+            .card, .opening-col { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; }
+            h1, h2, h3 { color: #000; border-color: #aaa; }
+            .math-block, th, .badge-info, .badge-neutral, .code-block, .terminal-output { background: #f5f5f5; color: #111; border-color: #aaa; }
+            .lang-btn, .top-nav, button, .frame3-cta-row { display: none; }
+            .code-container { display: block !important; }
+            .frame3-modal { display: none !important; }
+        }
     </style>
 </head>
 <body>
 <a href="frame3-en.html" class="lang-btn">🌐 English</a>
 
-<div class="container">
-    <!-- شريط التنقل العلوي -->
+<div class="container" id="pdf-content">
     <nav class="top-nav">
         <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
         <a href="frame1.html" class="nav-item">1. الإطار الرياضي</a>
@@ -110,8 +155,39 @@
 
     <h1>الإطار الثالث: التحويل الجبري وإزالة الإلغاء التناظري</h1>
     <div class="subtitle">
-        <strong>Frame 3: Algebraic Transformation & Symmetry-Induced Cancellation Removal</strong><br>
+        <strong>Frame 3: Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal</strong><br>
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+    </div>
+
+    <!-- ==================== الافتتاحية الثلاثية ==================== -->
+    <div class="card">
+        <h2>الافتتاحية — المشكلة، الإنجاز، نوع الدليل</h2>
+        <div class="opening">
+            <div class="opening-col" style="border-right:4px solid var(--gold);">
+                <strong style="color: var(--gold);">المشكلة</strong>
+                <p>كيف يغيّر الغلاف غير المتماثل \(g(u)\) عناصرَ الانتقال في البنية الرياضية، وأي أثر يتركه اختيار الجداء الداخلي على النتائج، مع تمييز البرهان التناظري من الحساب العددي؟</p>
+            </div>
+            <div class="opening-col" style="border-right:4px solid var(--green);">
+                <strong style="color: var(--green);">الإنجاز</strong>
+                <p>تحويل \(u=2\pi/x\)، واشتقاق الغلاف \(g(u)\)، وبناء الهوية الجبرية \(H_g(gY)=-gY''\)، وإثبات تناظر \(D(u)\) الذي يفرض \(\mathcal{A}_{13}^{(0)}=0\) في النموذج المرجعي، وحساب \(\mathcal{A}_{13}\) و\(\mathcal{A}_{12}\) عند \(x_p=21\) (نسبة \(R_{13/12}\approx0.60352\))، وفحص حساسية \(x_p\)، ومقارنة أثر الجداء الداخلي.</p>
+            </div>
+            <div class="opening-col" style="border-right:4px solid var(--blue);">
+                <strong style="color: var(--blue);">نوع الدليل</strong>
+                <p>هوية تفاضلية دقيقة على المجال الداخلي حيث \(g>0\) وناعمة و\(p\) معرّف. حجة تناظر دقيقة في النموذج المرجعي. حسابات عددية بـ<code>scipy.integrate.quad</code> مع توثيق tolerance وشيفرة لإعادة الإنتاج. تعريف فضاء هيلبرت المناسب (بسبب تفرد \(1/g^2\) عند الحدود) يبقى مسألة مفتوحة.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="frame3-cta-row">
+        <button
+            type="button"
+            id="openFrame3Explanation"
+            class="frame3-explanation-btn"
+            aria-haspopup="dialog"
+            aria-controls="frame3ExplanationModal"
+        >
+            📘 شرح الإطار الثالث بالتفصيل
+        </button>
     </div>
 
     <div class="card">
@@ -133,9 +209,13 @@
         <p>ومن ثم، فإن المؤثر التالي يحقق الهوية الجبرية:</p>
         <div class="math-block">\[ H_g = -\frac{d^2}{du^2} + 2p(u)\frac{d}{du} + p'(u) - p(u)^2 \]</div>
         <p>والتي تحقق: \(H_g(gY) = g(-Y'')\). وهذا يعني أنه إذا كانت \(-Y_n'' = \lambda_n Y_n\)، فإن \(H_g(gY_n) = \lambda_n(gY_n)\).</p>
-        
+
         <div class="badge-neutral">
-            <strong>تفسير المؤثر:</strong> تُثبت الهوية \(H_g(gY) = g(-Y'')\) وجود علاقة جبرية دقيقة على المجال الذي تكون فيه التعريفات منتظمة. وهي توفر الأساس لدراسة المسألة الطيفية المقابلة، بما في ذلك شروط حدودها وخصائص المؤثر.
+            <strong>تفسير المؤثر:</strong>
+            تُثبت الهوية \(H_g(gY) = g(-Y'')\) وجود علاقة جبرية دقيقة على المجال الداخلي الذي تكون فيه \(g\) موجبة وناعمة و\(p\) معرّفاً. وهي توفر الأساس لدراسة المسألة الطيفية المقابلة.
+            <br><br>
+            لكن الهوية وحدها لا تُنتج مسألة قيم ذاتية مكتملة؛ فالمجال التشغيلي وشروط الحدود لا بد من تحديدهما بشكل مستقل.
+            كما أن القيم \(-Y_n'' = \lambda_n Y_n\) تتبع مباشرة من اختيار \(Y_n = \sin(nu/2)\) مع \(\lambda_n = n^2/4\)، وليست نتيجة طيفية جديدة مستقلة عن هذا الاختيار.
         </div>
     </div>
 
@@ -151,7 +231,7 @@
     <div class="card">
         <h2>4. اختبار عناصر الانتقال (Transition Elements Test)</h2>
         <p>اخترنا مؤثر الانتقال \(D(u) = \cos(u/2)\). لغرض التوثيق الكامل وإعادة الحساب، نعرّف الحالات الأساسية \(Y_n(u)\) والحالات المطبّعة \(\Psi_n(u)\) باستخدام <strong>القياس غير الموزون (\(du\))</strong> كما يلي:</p>
-        
+
         <div class="math-block">
             \[ Y_n(u) = \sin\left(\frac{nu}{2}\right), \qquad n=1,2,3,\ldots \]
             \[ \Psi_n(u) = \frac{g(u)Y_n(u)}{\sqrt{N_n}}, \qquad N_n = \int_0^{2\pi} g(u)^2 Y_n(u)^2 \, du \]
@@ -162,8 +242,18 @@
         </div>
 
         <div class="badge-info">
-            <strong>النتيجة الرياضية:</strong> في النموذج المرجعي (بدون غلاف)، \(\mathcal{A}_{13}^{(0)} = 0\) بسبب التناظر، بينما العنصر المطبع \(\mathcal{A}_{12}^{(0)} = 1/2\). لكن في هذا النموذج المحدد، مع الغلاف والقياس غير الموزون، يُزال الإلغاء ويصبح \(\mathcal{A}_{13} \neq 0\) (وهو سالب في هذه الحسابات). النسبة بين مربعي عنصري الانتقال عند \(x_p = 21\) هي:
-            \[ R_{13/12} \approx 0.60352 \quad (60.35\%) \]
+            <strong>النتيجة الرياضية:</strong>
+            في النموذج المرجعي بدون غلاف، يفرض التناظر \(\mathcal{A}_{13}^{(0)} = 0\).
+            أما العنصر بين الحالتين الأولى والثانية، فتختلف قيمته بحسب التطبيع:
+            <ul style="margin-top: 8px;">
+                <li>بالتكامل المباشر للحالتين غير المطبّعتين \(Y_1, Y_2\):
+                    \(\displaystyle \int_0^{2\pi} Y_1(u)D(u)Y_2(u)\,du = \frac{\pi}{2}\).</li>
+                <li>بعد تطبيع الحالتين المرجعيتين \(Y_1, Y_2\) إلى معيار \(\sqrt{\pi}\) في \(L^2(0,2\pi)\):
+                    \(\mathcal{A}_{12}^{(0)} = \dfrac{\pi/2}{\pi} = \dfrac{1}{2}\).</li>
+            </ul>
+            في النموذج ذي الغلاف، وباستخدام الحالات المطبّعة \(\Psi_n\) المعرّفة أعلاه، يعطي الحساب العددي \(\mathcal{A}_{13} \neq 0\)، وقيمته سالبة ضمن التعريفات المختارة. وعند \(x_p=21\) نحصل على:
+            \[ R_{13/12} = \frac{|\mathcal{A}_{13}|^2}{|\mathcal{A}_{12}|^2} \approx 0.60352 \quad (60.35\%) \]
+            هذه نسبة عددية خاصة بالنموذج والتطبيع ومؤثر الانتقال المحددة هنا، وليست بحد ذاتها تنبؤًا فيزيائيًا أو قيمة تجريبية.
         </div>
 
         <h3>اعتماد النسبة على \(x_p\) ضمن التعريفات المختارة:</h3>
@@ -181,6 +271,11 @@
         <p class="footer" style="margin-top: 5px; border: none; padding: 0;">
             *حُسبت القيم عددياً باستخدام التكامل التكيفي عبر <code>scipy.integrate.quad</code> في بايثون، مع تحديد <code>limit=200</code> للحد الأقصى للتقسيمات الفرعية. التطبيع بالنسبة إلى القياس غير الموزون (\(du\)). القيم تقريبية وتعتمد على تعريف الغلاف والحالات ومؤثر الانتقال والجداء الداخلي.
         </p>
+
+        <div class="badge-neutral" style="margin-top: 15px;">
+            <strong>حدود الاستنتاج من جدول الحساسية.</strong>
+            تُظهر القيم المعروضة تغيرًا سلسًا للنسبة ضمن المجال المختبَر، ولا تكفي وحدها لإثبات أن \(x_p = 21\) قيمة مثلى أو مميزة رياضيًا. كما أن تقديرات الخطأ التي يعرضها التكامل التكيفي عبر <code>quad</code> هي تقديرات عددية عملية، وليست حدودًا صارمة مضمونة للخطأ.
+        </div>
 
         <div class="code-btn-container">
             <button class="btn-code" onclick="toggleCode()" id="codeBtn">💻 عرض الشيفرة والمخرجات العددية (Python)</button>
@@ -213,17 +308,17 @@ def calculate_ratio(xp):
     N_1, err_N1 = quad(norm_integrand, 0, 2*np.pi, args=(1, xp), limit=200)
     N_2, err_N2 = quad(norm_integrand, 0, 2*np.pi, args=(2, xp), limit=200)
     N_3, err_N3 = quad(norm_integrand, 0, 2*np.pi, args=(3, xp), limit=200)
-    
+
     print(f"N_1 = {N_1:.10f} (err: {err_N1:.1e})")
     print(f"N_2 = {N_2:.10f} (err: {err_N2:.1e})")
     print(f"N_3 = {N_3:.10f} (err: {err_N3:.1e})")
-    
+
     A_12, err_A12 = quad(matrix_element_integrand, 0, 2*np.pi, args=(1, 2, xp, N_1, N_2), limit=200)
     A_13, err_A13 = quad(matrix_element_integrand, 0, 2*np.pi, args=(1, 3, xp, N_1, N_3), limit=200)
-    
+
     print(f"A_12 = {A_12:.8f} (err: {err_A12:.1e})")
     print(f"A_13 = {A_13:.8f} (err: {err_A13:.1e})")
-    
+
     R = (abs(A_13)**2) / (abs(A_12)**2)
     print(f"R_13/12 = {R:.8f}\n")
     return R
@@ -231,7 +326,7 @@ def calculate_ratio(xp):
 x_values = [10, 15, 21, 30, 50]
 for xp in x_values:
     calculate_ratio(xp)</code></pre>
-            
+
             <div class="terminal-header">Terminal Output (Numerical Results)</div>
             <pre class="terminal-output">--- الحساب عند x_p = 10 ---
 N_1 = 0.0030709680 (err: 2.1e-14)
@@ -276,13 +371,11 @@ R_13/12 = 0.59777767</pre>
 
         <div class="badge-neutral" style="margin-top: 20px;">
             <strong>مقارنة الجداءات الداخلية:</strong><br>
-            تعتمد نسبة عناصر الانتقال المحسوبة على الجداء الداخلي المستخدم في تطبيع الحالات. فمع القياس غير الموزون \(du\)، يعطي النموذج الحالي \(R_{13/12} \approx 0.60352\) عند \(x_p = 21\). أما مع الجداء الداخلي الموزون \(\langle f,h\rangle_g = \int_0^{2\pi} f^*(u)h(u)/g(u)^2\,du\)، فإن الغلاف يُختزل جبرياً، ويعود التناظر المرجعي ليعطي \(R_{13/12} = 0\).
+            تعتمد نسبة عناصر الانتقال المحسوبة على الجداء الداخلي المستخدم في تطبيع الحالات. فمع القياس غير الموزون \(du\)، يعطي النموذج الحالي \(R_{13/12} \approx 0.60352\) عند \(x_p = 21\). أما مع الجداء الداخلي الموزون \(\langle f,h\rangle_g = \int_0^{2\pi} f^*(u)h(u)/g(u)^2\,du\)، فإن عوامل الغلاف تُختزل جبريًا <strong>في عنصر الانتقال بين الحالتين \(\Psi_1\) و\(\Psi_3\) بالتحديد</strong> (مع الحالات من الصورة \(gY_n\) بعد إعادة التطبيع وفق هذا الجداء)، ويعود التناظر ليفرض انعدام ذلك العنصر.
             <br><br>
-            يكشف هذا التباين كيف تؤثر البنية الرياضية واختيار الجداء الداخلي على النتيجة. ولا يزال تحديد الجداء الداخلي المناسب للتطبيق الفيزيائي بحاجة إلى استنتاجه من النظام قيد النمذجة.
+            <strong>تقييد مهم.</strong> هذا الاختزال نتيجة جبرية <em>مشروطة</em> بأن تكون الحالات ضمن مجال قابل للتكامل والتطبيع في الفضاء الموزون — وهو ما لم يُحسم بعد. بما أن \(g(u) \to 0\) عند طرفي المجال، فإن الوزن \(1/g(u)^2\) يصبح مفردًا هناك، ويتطلب اعتبار هذا الجداء فضاءَ هيلبرت صالحًا للمسألة التحقق من قابلية التكامل، وتعريف المجال المناسب، وشروط الحدود. فانعدام \(\mathcal{A}_{13}\) في هذا الجداء نتيجة جبرية مشروطة، لا نتيجة مكتملة عن فضاء هيلبرت لم يُحدَّد بعد.
             <br><br>
-            <span style="font-size: 0.9rem; color: var(--dim);">
-                <em>تنبيه: نظراً لأن \(g(u) \to 0\) عند طرفي المجال، فإن الوزن \(1/g(u)^2\) يصبح مفرداً هناك، ويتطلب تعريف فضاء هيلبرت وشروط الحدود فحصاً مستقلاً.</em>
-            </span>
+            اختيار الجداء الداخلي ليس تغييرًا شكليًا؛ فهو يحدد فضاء الحالات ومعيارها. ويكشف التباين بين الجداءين كيف تؤثر البنية الرياضية في النتيجة، ولا يزال تحديد الجداء المناسب للتطبيق الفيزيائي بحاجة إلى استنتاجه من النظام قيد النمذجة.
         </div>
     </div>
 
@@ -290,6 +383,12 @@ R_13/12 = 0.59777767</pre>
         <h2>5. النتائج ونطاق النموذج (Results and Scope of the Model)</h2>
         <p>يؤسس النموذج الحالي تحويلاً جبرياً للدالة \(Z(u)\)، ويحدد التناظر المسؤول عن انعدام عنصر المصفوفة المرجعي، ويوضح كيف يغير الغلاف غير المتماثل عناصر الانتقال المحسوبة وفق التطبيع المحدد.</p>
         <p>عند \(x_p = 21\)، يعطي التكامل العددي \(R_{13/12} \approx 0.60352\). كما تم فحص اعتماد هذه النسبة على \(x_p\)، وتوفير الحسابات لإعادة الإنتاج المستقل.</p>
+
+        <div class="badge-info">
+            <strong>نطاق النتيجة:</strong>
+            يثبت النموذج المرجعي أن انعدام عنصر الانتقال ناتج عن تناظر الانعكاس وفق التعريفات المحددة. وعند إدخال الغلاف غير المتماثل \(g\)، واستخدام الجداء الداخلي غير الموزون، ينتج حسابيًا عنصر غير صفري ونسبة عند \(x_p = 21\). وتعتمد هذه القيمة على اختيار الغلاف والحالات ومؤثر الانتقال والجداء الداخلي؛ لذلك تُعرض بوصفها نتيجة للنموذج الرياضي المحدد، بينما يبقى تفسيرها الفيزيائي وتحديد فضاء الحالات المناسب موضوعين للبحث اللاحق.
+        </div>
+
         <p>هذه النتائج تحفز مزيداً من البحث في المسألة الطيفية المرتبطة، وفضاء الحالات والجداء الداخلي المناسبين، والأهمية المحتملة للنموذج في الأنظمة الفيزيائية.</p>
     </div>
 
@@ -299,9 +398,113 @@ R_13/12 = 0.59777767</pre>
         <a href="frame4.html" class="btn btn-gold">الإطار الرابع (Frame 4) →</a>
     </div>
 
+    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+        <button onclick="window.print()" class="btn btn-blue">🖨️ طباعة / حفظ (نصي)</button>
+        <button onclick="generateDirectPDF()" class="btn btn-gold">📥 تحميل PDF (مباشر)</button>
+    </div>
+
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 3: Algebraic Transformation & Symmetry-Induced Cancellation Removal.
+        Frame 3: Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal.
+    </div>
+</div>
+
+<!-- ============ نافذة الشرح المنبثقة ============ -->
+<div id="frame3ExplanationModal" class="frame3-modal" aria-hidden="true">
+    <div class="frame3-modal-backdrop" data-close-frame3></div>
+
+    <div class="frame3-modal-panel" role="dialog" aria-modal="true" aria-labelledby="frame3ExplanationTitle" tabindex="-1">
+        <div class="frame3-modal-header">
+            <h2 id="frame3ExplanationTitle">شرح الإطار الثالث</h2>
+            <button type="button" class="frame3-modal-close" data-close-frame3 aria-label="إغلاق">×</button>
+        </div>
+
+        <div class="frame3-modal-body" dir="rtl">
+
+            <details open>
+                <summary>1. تحويل المتغير واستخراج الغلاف</summary>
+                <p>بدأ الإطار الثالث من التحويل:</p>
+                <div class="math-block">\[ u=\frac{2\pi}{x} \]</div>
+                <p>وكُتبت الدالة في الصورة:</p>
+                <div class="math-block">\[ Z(u)=g(u)\sin u \]</div>
+                <p>حيث:</p>
+                <div class="math-block">\[ g(u)=\left(\frac{u}{2\pi}\right)^5 \ln\!\left(\frac{2\pi}{u}\right) e^{-\frac{2\pi}{21u}}. \]</div>
+                <p>هذا يفصل الدالة إلى جزأين: الجزء المتذبذب \(\sin u\)، والغلاف \(g(u)\) الذي يغيّر وزن الأجزاء المختلفة من المجال. والغلاف غير متماثل تحت الانعكاس، وهذه الخاصية هي أساس اختبار التناظر.</p>
+            </details>
+
+            <details>
+                <summary>2. بناء الهوية الجبرية</summary>
+                <p>عُرّف:</p>
+                <div class="math-block">\[ p(u)=\frac{g'(u)}{g(u)}=\frac{5}{u}-\frac{1}{u\ln(2\pi/u)}+\frac{2\pi}{21u^2}, \]</div>
+                <p>ثم المؤثر:</p>
+                <div class="math-block">\[ H_g=-\frac{d^2}{du^2}+2p(u)\frac{d}{du}+p'(u)-p(u)^2. \]</div>
+                <p>والنتيجة الأساسية هي:</p>
+                <div class="math-block">\[ \boxed{H_g(gY)=-gY''}. \]</div>
+                <p>هذه هوية تفاضلية صحيحة على المجال الداخلي الذي تكون فيه \(g\) موجبة وناعمة، ويكون \(p\) معرّفًا هناك. وهي تعني أن تطبيق \(H_g\) على حاصل ضرب الغلاف والدالة يكافئ تطبيق المؤثر على \(Y\) ثم ضرب الناتج في \(g\). وإذا كانت \(Y_n\) تحقق:</p>
+                <div class="math-block">\[ -Y_n''=\lambda_nY_n, \]</div>
+                <p>فإن:</p>
+                <div class="math-block">\[ H_g(gY_n)=\lambda_n\,gY_n. \]</div>
+                <p>لكن الهوية وحدها لا تُنتج مسألة قيم ذاتية مكتملة؛ إذ يتطلب ذلك تحديد المجال التشغيلي وشروط الحدود. كما أن القيم \(\lambda_n\) تتبع مباشرة من اختيار الدوال \(Y_n\)، وليست نتيجة طيفية جديدة مستقلة عن هذا الاختيار.</p>
+            </details>
+
+            <details>
+                <summary>3. اختبار التناظر</summary>
+                <p>عُرّف مؤثر الانتقال:</p>
+                <div class="math-block">\[ D(u)=\cos(u/2), \]</div>
+                <p>واستُخدم الانعكاس حول منتصف المجال:</p>
+                <div class="math-block">\[ \hat P u=2\pi-u. \]</div>
+                <p>في النموذج المرجعي، من دون الغلاف، عُرّفت الحالات:</p>
+                <div class="math-block">\[ Y_n(u)=\sin(nu/2). \]</div>
+                <p>وتحقق:</p>
+                <div class="math-block">\[ Y_n(2\pi-u)=(-1)^{n+1}Y_n(u). \]</div>
+                <p>وفي الوقت نفسه:</p>
+                <div class="math-block">\[ D(2\pi-u)=-D(u). \]</div>
+                <p>عند حساب عنصر الانتقال بين الحالتين الأولى والثالثة، يصبح حاصل الضرب داخل التكامل فرديًا تحت الانعكاس، فيتلاشى التكامل:</p>
+                <div class="math-block">\[ \boxed{\mathcal A_{13}^{(0)}=0}. \]</div>
+                <p>أما العنصر بين الحالتين الأولى والثانية، فإن تكامله باستخدام الدالتين غير المطبّعتين يساوي:</p>
+                <div class="math-block">
+                    \[ \int_0^{2\pi} Y_1(u) D(u) Y_2(u)\,du = \frac{\pi}{2}. \]
+                </div>
+                <p>وبعد تطبيع الحالتين المرجعيتين \(Y_1, Y_2\) إلى معيار \(\sqrt{\pi}\) في \(L^2(0,2\pi)\)، تصبح قيمة عنصر الانتقال المرجعي \(\mathcal{A}_{12}^{(0)} = \tfrac12\).</p>
+                <p>إذن الصفر في الحالة المرجعية ناتج عن التناظر لا عن تقريب عددي. وعند إدخال الغلاف \(g\)، يصبح حاصل الضرب داخل التكامل متأثرًا بوزن غير متماثل، فلم يعد التناظر يفرض انعدام عنصر الانتقال الأول–الثالث.</p>
+            </details>
+
+            <details>
+                <summary>4. الحساب العددي</summary>
+                <p>عُرّفت الحالات المطبَّعة وفق الجداء الداخلي غير الموزون:</p>
+                <div class="math-block">\[ \Psi_n(u)=\frac{g(u)Y_n(u)}{\sqrt{N_n}}, \qquad N_n=\int_0^{2\pi}g(u)^2Y_n(u)^2\,du. \]</div>
+                <p>ثم حُسبت عناصر الانتقال:</p>
+                <div class="math-block">\[ \mathcal A_{mn}=\int_0^{2\pi}\Psi_m(u)D(u)\Psi_n(u)\,du. \]</div>
+                <p>النتائج عند القيمة المختارة للمعلمة:</p>
+                <ul>
+                    <li>\(\mathcal A_{12}\approx 0.62207485\)</li>
+                    <li>\(\mathcal A_{13}\approx -0.48326669\)</li>
+                    <li>\(R_{13/12}=|\mathcal A_{13}|^2/|\mathcal A_{12}|^2 \approx 0.60351552\) (نحو \(60.35\%\))</li>
+                </ul>
+                <p>أي أن العنصر الأول–الثالث، الذي كان صفرًا في النموذج المرجعي المتناظر، أصبح غير صفري مع الغلاف ووفق التعريفات المختارة.</p>
+
+                <p><strong>نطاق النتيجة:</strong> يثبت النموذج المرجعي أن انعدام عنصر الانتقال ناتج عن تناظر الانعكاس وفق التعريفات المحددة. وعند إدخال الغلاف غير المتماثل \(g\)، واستخدام الجداء الداخلي غير الموزون، ينتج حسابيًا عنصر غير صفري ونسبة عند القيمة المختارة. وتعتمد هذه القيمة على اختيار الغلاف والحالات ومؤثر الانتقال والجداء الداخلي؛ لذلك تُعرض بوصفها نتيجة للنموذج الرياضي المحدد، بينما يبقى تفسيرها الفيزيائي وتحديد فضاء الحالات المناسب موضوعين للبحث اللاحق.</p>
+            </details>
+
+            <details>
+                <summary>5. أثر طريقة التطبيع</summary>
+                <p>مع الجداء الداخلي غير الموزون، تدخل عوامل \(g\) في التكامل، ولذلك تؤثر لا متماثلية الغلاف في عناصر الانتقال. أما إذا استُخدم الجداء الداخلي الموزون:</p>
+                <div class="math-block">\[ \langle f,h\rangle_g = \int_0^{2\pi} \frac{f^*(u)\,h(u)}{g(u)^2}\,du, \]</div>
+                <p>فإن عوامل الغلاف تُختزل جبريًا <strong>في عنصر الانتقال بين الحالتين \(\Psi_1\) و\(\Psi_3\) بالتحديد</strong>، وتُعاد الحالات تطبيعًا وفق هذا الجداء الداخلي الجديد، ويعود التناظر إلى فرض انعدام ذلك العنصر.</p>
+                <p><strong>تقييد.</strong> هذا الاختزال نتيجة جبرية مشروطة بأن تكون الحالات ضمن مجال قابل للتكامل والتطبيع في الفضاء الموزون. وبما أن \(g\) مفرد قرب طرفي المجال، فإن الوزن \(1/g(u)^2\) يصبح مفردًا هناك، ويتطلب اعتبار هذا الجداء فضاءَ هيلبرت صالحًا للمسألة التحقق من قابلية التكامل، وتعريف المجال المناسب، وشروط الحدود.</p>
+            </details>
+
+            <details>
+                <summary>6. العلاقة بالإطار الرابع</summary>
+                <p>الإطار الثالث يستخدم الغلاف لتكوين الحالات \(\Psi_n\)، ويدرس أثره في عناصر الانتقال والتناظر. أما الإطار الرابع فيستخدم الدالة نفسها لبناء الجهد والمؤثر، ثم يطرح دراسة طيفه. إذن كلا الإطارين يستخدم الغلاف نفسه، لكنهما يدرسان خاصيتين مختلفتين له: الثالث يدرس عناصر الانتقال، والرابع يدرس المؤثر التفاضلي والطيف المحتمل.</p>
+            </details>
+
+            <details>
+                <summary>7. خلاصة الإطار الثالث</summary>
+                <p>أنتج الإطار الثالث نموذجًا رياضيًا محددًا لكيفية زوال إلغاء تفرضه التناظرية عند تغيير وزن الحالات بغلاف غير متماثل، مع حسابات عددية وشيفرة يمكن فحصها. وأهم ما يحافظ عليه هو الفصل بين برهان التناظر في الحالة المرجعية، والحساب العددي في الحالة الموزونة، ثم أي تفسير فيزيائي محتمل.</p>
+            </details>
+
+        </div>
     </div>
 </div>
 
@@ -331,7 +534,7 @@ R_13/12 = 0.59777767</pre>
             }, 2000);
         };
         if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(codeText).then(showSuccess).catch(err => fallbackCopy(codeText, showSuccess));
+            navigator.clipboard.writeText(codeText).then(showSuccess).catch(() => fallbackCopy(codeText, showSuccess));
         } else {
             fallbackCopy(codeText, showSuccess);
         }
@@ -346,6 +549,98 @@ R_13/12 = 0.59777767</pre>
         } catch (err) { alert('حدث خطأ أثناء النسخ.'); }
         document.body.removeChild(textArea);
     }
+
+    window.generateDirectPDF = function() {
+        const element = document.getElementById('pdf-content');
+        const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
+        const codeContainers = document.querySelectorAll('.code-container');
+
+        buttons.forEach(btn => btn.style.display = 'none');
+        codeContainers.forEach(c => c.style.display = 'block');
+
+        const opt = {
+            margin:       10,
+            filename:     'Frame3_Algebraic_Transformation_AR.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // try...finally لضمان استعادة الأنماط حتى لو فشل save()
+        html2pdf().set(opt).from(element).save()
+            .catch(err => console.error('PDF generation failed:', err))
+            .finally(() => {
+                buttons.forEach(btn => btn.style.display = '');
+                codeContainers.forEach(c => c.style.display = 'none');
+            });
+    };
+
+    (function () {
+        const openBtn = document.getElementById("openFrame3Explanation");
+        const modal = document.getElementById("frame3ExplanationModal");
+        if (!openBtn || !modal) return;
+
+        const panel = modal.querySelector(".frame3-modal-panel");
+        let lastFocused = null;
+
+        const focusableSelector =
+            'a[href], button:not([disabled]), input, select, textarea, summary, [tabindex]:not([tabindex="-1"])';
+
+        function getFocusable() {
+            return Array.from(panel.querySelectorAll(focusableSelector))
+                .filter(el => el.offsetParent !== null);
+        }
+
+        function openModal() {
+            lastFocused = document.activeElement;
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+            const focusables = getFocusable();
+            (focusables[0] || panel).focus();
+        }
+
+        function closeModal() {
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+            if (lastFocused && typeof lastFocused.focus === "function") {
+                lastFocused.focus();
+            }
+        }
+
+        openBtn.addEventListener("click", openModal);
+
+        modal.querySelectorAll("[data-close-frame3]").forEach(el => {
+            el.addEventListener("click", closeModal);
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (modal.getAttribute("aria-hidden") !== "false") return;
+
+            if (e.key === "Escape") {
+                e.preventDefault();
+                closeModal();
+                return;
+            }
+
+            if (e.key === "Tab") {
+                const focusables = getFocusable();
+                if (focusables.length === 0) return;
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+    })();
 </script>
+
 </body>
 </html>

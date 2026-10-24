@@ -1,208 +1,135 @@
 <!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════
+     Frame 1 — الإطار العددي | The Numerical Framework
+     VERSION: v7.0 | 2026-10-24
+     Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
+     DOI: 10.5281/zenodo.23540283
+     ═══════════════════════════════════════════════════════════════ -->
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame 1 - الإطار العددي | الورقة التفاعلية</title>
-    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
+    <meta name="version" content="7.0">
+    <title>Frame 1 — الإطار العددي | الورقة التفاعلية (v7.0)</title>
+    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21 — v7.0">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame1.html">
-    
-    <!-- Google Scholar Meta Tags -->
+
     <meta name="citation_title" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
-    <meta name="citation_publication_date" content="2026/10/21">
+    <!-- تم توحيد تاريخ النشر مع تاريخ الصفحة بناءً على ملاحظة الرفيق -->
+    <meta name="citation_publication_date" content="2026/10/24">
     <meta name="citation_doi" content="10.5281/zenodo.23540283">
     <meta name="citation_language" content="ar">
-    <meta name="citation_pdf_url" content="https://jabri-com.vercel.app/wells/frame1.html">
+    <!-- تم تحديث رابط الـ PDF ليشير للإصدار v7.0 -->
+    <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v7.0.0/frame1_tex.pdf">
 
-    <!-- JSON-LD Schema (@graph) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": "https://jabri-com.vercel.app/#website",
-          "url": "https://jabri-com.vercel.app/",
-          "name": "واحة الجبري | Heaven Al-Jabri",
-          "inLanguage": "ar",
-          "publisher": { "@id": "https://jabri-com.vercel.app/#organization" }
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://jabri-com.vercel.app/#organization",
-          "name": "واحة الجبري | Heaven Al-Jabri",
-          "url": "https://jabri-com.vercel.app/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://jabri-com.vercel.app/image/logo1.png",
-            "width": 512,
-            "height": 512
-          },
-          "founder": { "@id": "https://jabri-com.vercel.app/#person" },
-          "foundingDate": "2026",
-          "areaServed": "YE"
-        },
-        {
-          "@type": "Person",
-          "@id": "https://jabri-com.vercel.app/#person",
-          "name": "عبدالله محمد ناصر الجبري",
-          "alternateName": "Abdulla Mohammed Nasser Al-Jabri",
-          "url": "https://jabri-com.vercel.app/",
-          "sameAs": [
-            "https://orcid.org/0009-0003-3319-3822",
-            "https://github.com/jabri-web",
-            "https://en.wikipedia.org/wiki/User:Jabri2026"
-          ],
-          "jobTitle": "باحث ومؤلف ومؤسس"
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "@id": "https://jabri-com.vercel.app/wells/frame1.html#article",
-          "headline": "The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21",
-          "author": { "@id": "https://jabri-com.vercel.app/#person" },
-          "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
-          "datePublished": "2026-10-21",
-          "identifier": {
-            "@type": "PropertyValue",
-            "propertyID": "DOI",
-            "value": "10.5281/zenodo.23540283"
-          },
-          "url": "https://jabri-com.vercel.app/wells/frame1.html",
-          "inLanguage": "ar",
-          "abstract": "This paper presents a conceptual numerical framework within the Al-Hindara project. It discusses the proposed normalization relation Z+C+A=1 and investigates a candidate damping function containing the integer parameter xp=21."
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": "https://jabri-com.vercel.app/wells/frame1.html#breadcrumb",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://jabri-com.vercel.app/" },
-            { "@type": "ListItem", "position": 2, "name": "Frame 1", "item": "https://jabri-com.vercel.app/wells/frame1.html" }
-          ]
-        }
-      ]
-    }
-    </script>
-
-    <!-- MathJax for Equations -->
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- html2pdf -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         :root { --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; }
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; position: relative; }
-        
-        /* زر تبديل اللغة */
         .lang-btn { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
         .lang-btn:hover { background: var(--gold); color: #0a1a12; }
-
-        /* شريط التنقل العلوي */
-        .top-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(10, 26, 18, 0.9);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            width: 100%;
-        }
-        .nav-item {
-            color: var(--dim);
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border: 1px solid transparent;
-            transition: 0.3s;
-        }
-        .nav-item:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-            background: rgba(244, 196, 48, 0.1);
-        }
-        .nav-item.active {
-            color: #0a1a12;
-            background: var(--gold);
-            border-color: var(--gold);
-            cursor: default;
-        }
-        
+        .top-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; background: rgba(10, 26, 18, 0.9); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); width: 100%; }
+        .nav-item { color: var(--dim); text-decoration: none; padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; border: 1px solid transparent; transition: 0.3s; }
+        .nav-item:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
+        .nav-item.active { color: #0a1a12; background: var(--gold); border-color: var(--gold); cursor: default; }
         h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
-        
+        .version-badge { display: inline-block; background: rgba(244, 196, 48, 0.15); color: var(--gold); padding: 3px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: bold; margin-top: 10px; border: 1px solid rgba(244, 196, 48, 0.35); direction: ltr; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
-        
         .badge-exact { background: rgba(6, 214, 160, 0.1); border-right: 4px solid var(--green); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-right: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-        .badge-conjectural { background: rgba(229, 115, 115, 0.1); border-right: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-
+        .badge-neutral { background: rgba(138, 168, 146, 0.1); border-right: 4px solid var(--dim); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .opening { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .opening-col { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .opening-col strong { display: block; margin-bottom: 8px; font-size: 1rem; }
+        .opening-col p { font-size: 0.88rem; margin: 0; color: var(--text); }
+        @media (max-width: 760px) { .opening { grid-template-columns: 1fr; } }
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
-        .math-note { font-size: 0.85rem; color: var(--blue); margin-top: -10px; margin-bottom: 15px; text-align: center; direction: ltr; }
-
         .dashboard { display: flex; flex-direction: column; gap: 20px; }
         .chart-container { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 10px; position: relative; height: 350px; width: 100%; }
         .controls { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 15px; justify-content: center; }
         .slider-wrap { display: flex; align-items: center; gap: 10px; font-family: monospace; direction: ltr; }
         input[type=range] { accent-color: var(--gold); width: 200px; }
         .val-display { color: var(--gold); font-size: 1.2rem; font-weight: bold; min-width: 40px; text-align: center; }
-
         table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
         th, td { border: 1px solid var(--border); padding: 10px; text-align: center; }
         th { background: #132a1d; color: var(--gold); }
         td.highlight { background: rgba(244, 196, 48, 0.15); color: var(--gold); font-weight: bold; }
-
         details { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin: 15px 0; }
         summary { color: var(--blue); cursor: pointer; font-weight: bold; outline: none; }
         details[open] summary { margin-bottom: 15px; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
-
         .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; }
-        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; text-align: center; }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; text-align: center; transition: 0.3s; }
+        .btn:hover { opacity: 0.85; }
         .btn-gold { background: var(--gold); }
         .btn-blue { background: var(--blue); }
+        .btn-red { background: var(--dim); color: #0a1a12; }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .toggle-content { display: none; margin-top: 15px; padding: 15px; background: #051009; border: 1px dashed var(--border); border-radius: 8px; }
+        pre.code-block { background: #0a1524; border: 1px solid var(--border); border-radius: 8px; padding: 15px; overflow-x: auto; direction: ltr; text-align: left; font-size: 0.85rem; color: #d4d4d4; font-family: 'Courier New', monospace; }
         
-        @media print { body { background: white; color: #111; } .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; } h2 { color: #000; border-color: #aaa; } .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; } .lang-btn, .top-nav, button { display: none; } }
+        /* تحسينات الطباعة لمنع تقطيع المعادلات */
+        @media print { 
+            body { background: white; color: #111; } 
+            .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; page-break-inside: avoid; } 
+            h2 { color: #000; border-color: #aaa; } 
+            .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-neutral, th, .opening-col, pre.code-block { background: #f5f5f5; color: #111; border-color: #aaa; } 
+            .lang-btn, .top-nav, button { display: none; } 
+            .toggle-content { display: block !important; border: none; } 
+        }
     </style>
 </head>
 <body>
 
 <div class="container" id="pdf-content">
-    <a href="../jabri_5/wells/frame1-en.html" class="lang-btn">🌐 English</a>
+    <a href="frame1-en.html" class="lang-btn">🌐 English</a>
 
-    <!-- شريط التنقل العلوي -->
     <nav class="top-nav">
-        <a href="../en/index.html" class="nav-item">🏠 الرئيسية</a>
-        <a href="../jabri_5/wells/frame1.html" class="nav-item active">1. الإطار الرياضي</a>
-        <a href="../jabri_5/wells/bridge.html" class="nav-item">الجسر (Bridge)</a>
+        <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
+        <a href="frame1.html" class="nav-item active">1. الإطار الرياضي</a>
+        <a href="bridge.html" class="nav-item">الجسر (Bridge)</a>
         <a href="../tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
-        <a href="../jabri_5/wrlls/frame3.html" class="nav-item">3. البنية الدقيقة</a>
-        <a href="../jabri_5/wells/frame4.html" class="nav-item">4. المسألة الطيفية</a>
+        <a href="frame3.html" class="nav-item">3. البنية الدقيقة</a>
+        <a href="frame4.html" class="nav-item">4. المسألة الطيفية</a>
     </nav>
 
     <h1>الإطار العددي — الورقة التفاعلية الشاملة</h1>
     <div class="subtitle">
         <strong>The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff \(x_p=21\)</strong><br>
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+        <br><span class="version-badge">v7.0 — 2026-10-24</span>
+    </div>
+
+    <div class="card">
+        <div class="opening">
+            <div class="opening-col">
+                <strong style="color: var(--gold);">المشكلة</strong>
+                <p>كيف تتفاعل البنية التذبذبية مع عامل التخميد في دالة تجمع اللوغاريتم والجيب والأسّ، وما السلوك التراكمي الذي ينتج عن هذا التفاعل؟</p>
+            </div>
+            <div class="opening-col">
+                <strong style="color: var(--green);">الإنجاز</strong>
+                <p>تعريف \(Z(x;21)=x^{-5}\ln x\sin(2\pi/x)e^{-x/21}\)، وتحليل إشارتها وجذورها (\(x=1\)، \(x=2\))، ودراسة تكاملها التراكمي \(A(x)\)، واشتقاق غلافها التقاربي \(K(x_p)\ln t/t^6\) في امتداد مركب محدد.</p>
+            </div>
+            <div class="opening-col">
+                <strong style="color: var(--blue);">نوع الدليل</strong>
+                <p>برهان تحليلي لإشارة \(Z\) وجذورها، وبرهان تحليلي لـ\(A_\infty<0\) يعتمد على متباينتين قياسيتين، مع تحقق عددي مستقل (الملحق D). اشتقاق تقاربي للامتداد المركب مع تحقق عددي.</p>
+            </div>
+        </div>
     </div>
 
     <div class="card">
         <h2>🔬 المحاكاة التفاعلية (Interactive Simulation)</h2>
         <p>استخدم شريط التمرير أدناه لتغيير قيمة القطع \(x_p\). تم توسيع نطاق الرسم البياني إلى \(x=50\) لتأكيد أن دالة التجميع \(A(x)\) مستمرة في الصعود ولا تمتلك قمة عند \(x=42\).</p>
-        
         <div class="controls">
             <div class="slider-wrap">
                 <label>\(x_p\) =</label>
@@ -213,7 +140,6 @@
                 * عند \(x=2\): القيمة الصغرى (Minimum) لدالة التجميع. * عند \(x=42\): لا توجد قمة، بل استمرار للصعود.
             </div>
         </div>
-
         <div class="dashboard">
             <div class="chart-container"><canvas id="zChart"></canvas></div>
             <div class="chart-container"><canvas id="aChart"></canvas></div>
@@ -224,9 +150,17 @@
         <h2>1. صفر ريمان والقطع المقترح</h2>
         <p><b>تعريف (القطع الصحيح المقترح).</b> ليكن \(\gamma_2 \approx 21.022039\) هو الإحداثي الصادي لثاني صفر غير بديهي موجب لدالة زيتا الريمانية. نعرّف معامل النموذج:</p>
         <div class="math-block">\[ x_p := \lfloor \gamma_2 \rfloor = 21. \]</div>
-        <div class="badge-conjectural">
-            <strong>⚠️ توضيح جوهري (أصفار ريمان vs جذور الدالة):</strong> <br>
-            استخدام القيمة 21 هو مجرد <strong>اختيار نمذجي</strong> مستوحى من صفر ريمان. <strong>لا يعني هذا بأي حال</strong> أن \(\gamma_2 = 21.022\) هو جذر للدالة \(Z(x)\) أو لمشتقتها \(Z'(x)\). في مجال الدراسة الحالي (\(x \ge 1\))، الجذر الوحيد للدالة \(Z(x)\) هو \(x=2\). الجذور الأخرى (مثل \(x=2/3, 2/5\)) تقع خارج المجال المعرّف للمحاكاة (\(x < 1\)).
+        <p><strong>تنبيه اصطلاحي.</strong> اختيار \(x_p = 21\) <em>اختيار نمذجي حرّ</em>، مستوحى من \(\lfloor \gamma_2 \rfloor\) لأغراض التقريب العددي فقط. ليس اشتقاقًا من دالة زيتا، ولا يدّعي النموذج وجود علاقة رياضية بنيوية بين أصفار ريمان والدالة \(Z\).</p>
+        <button class="btn btn-red" onclick="toggleSection('sec1-note')">📌 توضيح اصطلاحي (أصفار ريمان vs جذور الدالة)</button>
+        <div id="sec1-note" class="toggle-content badge-neutral" style="margin-top: 10px;">
+            استخدام القيمة 21 هو مجرد <strong>اختيار نمذجي</strong> مستوحى من صفر ريمان. <strong>لا يعني هذا بأي حال</strong> أن \(\gamma_2 = 21.022\) هو جذر للدالة \(Z(x)\) أو لمشتقتها \(Z'(x)\).
+            <br><br>
+            في مجال الدراسة الحالي (\(x \ge 1\))، جذرا الدالة \(Z(x)\) هما:
+            <ul>
+                <li><strong>\(x = 1\)</strong> عند طرف المجال، لأن \(\ln 1 = 0\) وأيضًا \(\sin(2\pi) = 0\).</li>
+                <li><strong>\(x = 2\)</strong> الجذر الداخلي الوحيد، لأن \(\sin(\pi) = 0\).</li>
+            </ul>
+            الجذور الأخرى (مثل \(x=2/3, 2/5\)) تقع خارج المجال المعرّف للمحاكاة (\(x < 1\)).
         </div>
     </div>
 
@@ -235,12 +169,12 @@
         <p>من أجل \(x_p>0\)، تحقق الدالة الحقيقية الشروط التالية:</p>
         <ul>
             <li>\(Z(x;x_p) < 0\) من أجل \(1 < x < 2\).</li>
-            <li>\(Z(2;x_p) = 0\).</li>
+            <li>\(Z(1;x_p) = Z(2;x_p) = 0\) (جذرا الدالة في \([1,\infty)\)).</li>
             <li>\(Z(x;x_p) > 0\) من أجل \(x > 2\).</li>
         </ul>
         <details>
             <summary>انقر لعرض البرهان (Proof)</summary>
-            <p>من أجل \(x>1\)، تكون العوامل \(x^{-5}\) و \(\ln(x)\) و \(e^{-x/x_p}\) موجبة تماماً. لذا تتحدد الإشارة بواسطة \(\sin(2\pi/x)\). إذا كان \(1 < x < 2\)، فإن \(\pi < 2\pi/x < 2\pi\)، وبالتالي تكون دالة الجيب سالبة. وإذا كان \(x > 2\)، فإن \(0 < 2\pi/x < \pi\)، وبالتالي تكون دالة الجيب موجبة.</p>
+            <p>من أجل \(x>1\)، تكون العوامل \(x^{-5}\) و\(\ln(x)\) و\(e^{-x/x_p}\) موجبة تماماً. لذا تتحدد الإشارة بواسطة \(\sin(2\pi/x)\). إذا كان \(1 < x < 2\)، فإن \(\pi < 2\pi/x < 2\pi\)، وبالتالي تكون دالة الجيب سالبة. وإذا كان \(x > 2\)، فإن \(0 < 2\pi/x < \pi\)، وبالتالي تكون دالة الجيب موجبة. عند \(x=1\) ينعدم \(\ln x\)، وعند \(x=2\) ينعدم \(\sin(2\pi/x)\)، فهما الجذران الوحيدان في \([1,\infty)\).</p>
         </details>
     </div>
 
@@ -248,140 +182,366 @@
         <h2>3. دالة التجميع</h2>
         <p>نعرّف دالة التجميع رياضياً على المجال \(x \ge 1\) بالعلاقة: \(A(x) := \int_1^x Z(t;21)\,dt\). وفقاً للنظرية الأساسية للتفاضل والتكامل، \(A'(x) = Z(x;21)\).</p>
         <p>بما أن \(Z(x)\) سالبة على \((1, 2)\) وموجبة على \((2, \infty)\)، فإن \(A(x)\) تتناقص على \((1, 2)\)، وتصل إلى <strong>قيمة صغرى مطلقة (Global Minimum) عند \(x=2\)</strong>، ثم تتزايد على \((2, \infty)\).</p>
-        <div class="math-note">*(ملاحظة رياضية: عند \(x=1\)، نهاية الدالة من اليمين هي \(\lim_{x\to 1^+} Z(x) = 0\). لذلك التكامل يبدأ بسلاسة من الصفر دون أي قفزات، ويتم حسابه عددياً باستخدام قاعدة شبه المنحرف بخطوة 0.05).*</div>
-        
-        <div class="badge-exploratory">
-            <strong>⚠️ تصحيح علمي:</strong> الادعاء السابق بأن دالة التجميع لها قمة (Maximum) عند \(x=42\) غير مدعوم بالمعادلات. الدالة تتزايد باستمرار بعد \(x=2\).
+        <h3>سلوك \(A(x)\) عند اللانهاية</h3>
+        <p>التكامل \(A_\infty := \int_1^\infty Z(t;21)\,dt\) متقارب تقاربًا مطلقًا بسبب العامل \(e^{-t/21}\). بتحويل \(t = 2\pi/x\) نحصل على:</p>
+        <div class="math-block">\[ A_\infty = \frac{1}{(2\pi)^4} \int_0^{2\pi} W(t)\sin(t)\,dt, \qquad W(t) = t^3 \ln\!\left(\frac{2\pi}{t}\right) e^{-2\pi/(21t)}. \]</div>
+        <p>بتقسيم التكامل على \((0,\pi)\) و\((\pi, 2\pi)\) واستخدام التعويض \(t \mapsto 2\pi - t\) في الشطر الثاني:</p>
+        <div class="math-block">\[ \boxed{\,A_\infty = \frac{1}{(2\pi)^4} \int_0^\pi \bigl[W(t) - W(2\pi-t)\bigr]\sin(t)\,dt\,} \]</div>
+        <details>
+            <summary>انقر لعرض البرهان التحليلي لـ \(A_\infty < 0\)</summary>
+            <p><strong>الخطوة 1.</strong> نضع \(\varphi(u) := \log W(\pi+u) - \log W(\pi-u)\) على \((0,\pi)\). المطلوب إثبات \(\varphi(u) > 0\)، أي \(W(2\pi-t) > W(t)\) حيث \(t = \pi - u\).</p>
+            <p><strong>الخطوة 2.</strong> \(\lim_{u\to 0^+}\varphi(u)=0\). يكفي إثبات \(\varphi'(u) > 0\). باشتقاق \(\log W\):</p>
+            <div class="math-block">\[ \varphi'(u) = \frac{g(A)}{\pi+u} + \frac{g(B)}{\pi-u} + \frac{2\pi}{21}\left(\frac{1}{(\pi-u)^2} + \frac{1}{(\pi+u)^2}\right), \]</div>
+            <p>حيث \(A = 2\pi/(\pi+u)\)، \(B = 2\pi/(\pi-u)\)، و\(g(s) = 3 - 1/\ln s\).</p>
+            <p><strong>الخطوة 3.</strong> بضرب في \(2\pi\) والتحويل إلى \(A\) (بحيث \(B = A/(A-1)\)):</p>
+            <div class="math-block">\[ E(A) := 2\pi\varphi'(u) = \frac{3A^2}{A-1} - \frac{A}{\ln A} - \frac{A}{(A-1)\ln B} + \frac{A^2}{21}\!\left(1 + \frac{1}{(A-1)^2}\right). \]</div>
+            <p>عند \(u\in(0,\pi)\) يكون \(A = 2\pi/(\pi+u)\) محصورًا بشكل صارم داخل \((1,2)\): عند \(u\to0^+\) يكون \(A\to2^-\)، وعند \(u\to\pi^-\) يكون \(A\to1^+\). فالدالة \(u\mapsto A(u)\) تتناقص بصرامة على \((0,\pi)\) من \(2\) إلى \(1\)، وتبقى \(A(u)\) داخل المجال المفتوح \((1,2)\) طوال المجال.</p>
+            <p><strong>الخطوة 4 (إيجابية \(E(A)\) على \((1,2)\)).</strong> نستخدم متباينتين قياسيتين:</p>
+            <ul>
+                <li>لكل \(A>1\): \(\ln A \ge \dfrac{2(A-1)}{A+1}\)، والمتباينة صارمة عند \(A>1\)؛ ومنها \(-\dfrac{A}{\ln A} \ge -\dfrac{A(A+1)}{2(A-1)}\) (صارمة على \((1,2)\)).</li>
+                <li>على \((1,2)\): \(B = A/(A-1) > 2\)، ومنه \(\ln B > \ln 2\)، وبالتالي \(-\dfrac{A}{(A-1)\ln B} > -\dfrac{A}{(A-1)\ln 2}\).</li>
+            </ul>
+            <p>بالتعويض:</p>
+            <div class="math-block">
+                \[
+                \begin{aligned}
+                E(A) &> \frac{A}{A-1}\left(\frac{5A-1}{2} - \frac{1}{\ln 2}\right)
+                + \frac{A^2}{21}\!\left(1+\frac{1}{(A-1)^2}\right) \\
+                &> 0.
+                \end{aligned}
+                \]
+            </div>
+            <p>على \((1,2)\) لدينا \(\dfrac{5A-1}{2} > 2\) (صارمة لأن \(A>1\)، والمساواة تقع عند \(A=1\) خارج المجال)، و\(2 > \dfrac{1}{\ln 2}\approx 1.4427\)، فالقوس الأول موجب. والحد الثاني \(\dfrac{A^2}{21}\!\left(1+\dfrac{1}{(A-1)^2}\right)\) موجب دائمًا. لذلك \(E(A) > 0\) على كامل \((1,2)\).</p>
+            <p><strong>الخطوة 5.</strong> بما أن \(A(u)\) يبقى داخل \((1,2)\) على كامل \((0,\pi)\)، فإيجابية \(E(A)\) على \((1,2)\) تعني \(\varphi'(u) = E(A(u))/(2\pi) > 0\) على كامل \((0,\pi)\). مع \(\lim_{u\to 0^+}\varphi(u)=0\)، نحصل على \(\varphi(u) > 0\) لكل \(u\in(0,\pi)\)، أي \(W(2\pi-t) > W(t)\) على \((0,\pi)\).</p>
+            <p><strong>الخطوة 6.</strong> بصيغة التكامل المتناظرة:</p>
+            <div class="math-block">\[ A_\infty = \frac{1}{(2\pi)^4}\int_0^\pi \bigl[W(t)-W(2\pi-t)\bigr]\sin t\,dt. \]</div>
+            <p>وبما أن \(W(2\pi-t) > W(t)\) على \((0,\pi)\) و\(\sin t > 0\) على \((0,\pi)\)، يكون المقدار تحت التكامل سالبًا نقطةً بنقطة، ومنه:</p>
+            <div class="math-block">\[ \boxed{\,A_\infty = \frac{1}{(2\pi)^4}\int_0^\pi \bigl[W(t)-W(2\pi-t)\bigr]\sin t\,dt < 0\,} \]</div>
+            <p style="font-size: 0.85rem; color: var(--dim); border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 15px;"><strong>ملاحظة.</strong> البرهان أعلاه يثبت \(A_\infty<0\) تحليليًا، ولا يحتاج إلى تحقق عددي لإتمامه. التحقق العددي في الملحق D يُعرض بوصفه اختبارًا مستقلًا للتنفيذ والحساب، لا كبديل عن البرهان.</p>
+        </details>
+        <p><strong>النتيجة.</strong> بما أن \(A(2)<0\)، و\(A'(x) = Z(x;21) > 0\) على \((2,\infty)\)، و\(A_\infty < 0\)، فإن:</p>
+        <ul>
+            <li>\(A(x) < 0\) لكل \(x > 1\).</li>
+            <li>لا تعود \(A(x)\) إلى الصفر بعد \(x=2\).</li>
+            <li>الجذر الوحيد لـ\(A\) في \([1,\infty)\) هو \(x=1\).</li>
+        </ul>
+        <button class="btn btn-gold" onclick="toggleSection('sec3-note')">📝 ملاحظة رياضية (طريقة التكامل)</button>
+        <div id="sec3-note" class="toggle-content badge-exploratory" style="margin-top: 10px;">
+            عند \(x=1\)، نهاية الدالة من اليمين هي \(\lim_{x\to 1^+} Z(x) = 0\). لذلك يبدأ التكامل بسلاسة من الصفر دون أي قفزات.
+            <br><br>
+            <strong>طريقة التكامل العددي.</strong> قاعدة شبه المنحرف بخطوة \(h = 0.05\) على \([1, 50]\). التكامل حتى اللانهاية يُقدَّر بحد صريح لباقي الذيل باستخدام عامل التخميد \(e^{-x/21}\) (انظر الملحق D).
+            <br><br>
+            <strong>ملاحظة.</strong> الرسم البياني يعرض \(A(x)\) حتى \(x=50\) لأغراض الاستكشاف. أما سلوك \(A\) على المجال اللانهائي فمحسوم بالبرهان التحليلي أعلاه، ومدعوم بتحقق عددي مستقل.
         </div>
     </div>
 
     <div class="card">
         <h2>4. الامتداد المركب والغلاف التقاربي</h2>
-        <p>لفحص السلوك على الخط الحرج \(s=\frac12+it\)، نعرّف امتداداً مركباً صريحاً باستخدام <strong>الفرع الرئيسي</strong> للوغاريتم \(\operatorname{Log}(s)\):</p>
-        <div class="math-block">\[ \mathcal{Z}(s; x_p) = s^{-5} \operatorname{Log}(s) \sin\left(\frac{2\pi}{s}\right) e^{-s/x_p} \]</div>
-        <div class="math-note">*الفرع الرئيسي: \(\operatorname{Log}(s) = \ln|s| + i\arg(s)\) حيث \(-\pi < \arg(s) \le \pi\).*</div>
+        <p>لفحص السلوك على الخط الحرج \(s=\tfrac12+it\)، نعرّف امتداداً مركباً صريحاً باستخدام <strong>الفرع الرئيسي</strong> للوغاريتم \(\operatorname{Log}(s)\):</p>
+        <div class="math-block">\[ \mathcal{Z}(s; x_p) = s^{-5} \operatorname{Log}(s) \sin\!\left(\frac{2\pi}{s}\right) e^{-s/x_p}. \]</div>
         <p>عندما \(t \to \infty\)، يُعطى الغلاف التقاربي بواسطة:</p>
-        <div class="math-block">\[ |\mathcal{Z}(1/2+it; x_p)| \sim K(x_p)\frac{\ln t}{t^6}, \qquad K(x_p) = 2\pi e^{-1/(2x_p)} \]</div>
-        <div class="math-note">*تعريف التكافؤ التقاربي: نكتب \(f(t) \sim g(t)\) إذا وفقط إذا كان \(\lim_{t \to \infty} \frac{f(t)}{g(t)} = 1\).*</div>
-        <div class="badge-exact">
-            <strong>نتيجة رياضية مشتقة:</strong> الغلاف التقاربي مشتق من الامتداد المركب المحدد صراحة. ويصف السلوك عندما \(t\to\infty\) و<strong>لا يشكل نتيجة حول دالة زيتا الريمانية نفسها</strong>.
+        <div class="math-block">\[ |\mathcal{Z}(1/2+it; x_p)| \sim K(x_p)\frac{\ln t}{t^6}, \qquad K(x_p) = 2\pi e^{-1/(2x_p)}. \]</div>
+        <div class="badge-exploratory" style="margin-top: 10px;">
+            <strong>نطاق الاستنتاج.</strong> الصيغة أعلاه تخص <strong>الامتداد المركب المعرّف في هذه الورقة</strong>، وليست صيغة تقاربية لدالة زيتا الريمانية نفسها. الثابت \(K(x_p)\) مشتق من هذا الامتداد، ولا يُقدَّم كخاصية لدالة زيتا.
+        </div>
+        <button class="btn btn-blue" onclick="toggleSection('sec4-note')">📖 تفاصيل الاشتقاق والتكافؤ</button>
+        <div id="sec4-note" class="toggle-content badge-exact" style="margin-top: 10px;">
+            <strong>الفرع الرئيسي.</strong> \(\operatorname{Log}(s) = \ln|s| + i\arg(s)\) حيث \(-\pi < \arg(s) \le \pi\).<br>
+            <strong>تعريف التكافؤ التقاربي.</strong> نكتب \(f(t) \sim g(t)\) إذا وفقط إذا كان \(\lim_{t\to\infty} f(t)/g(t) = 1\).<br>
+            <strong>نتيجة رياضية مشتقة.</strong> الغلاف التقاربي مشتق من الامتداد المركب المحدد صراحة، ويصف السلوك عندما \(t\to\infty\). ولا يشكل نتيجة حول دالة زيتا الريمانية نفسها.
         </div>
     </div>
 
     <div class="card">
         <h2>5. تحليل الحساسية وحالة الأدلة</h2>
-        <p>هل يوفر \(x_p=21\) أقرب تطابق للهدف \(K \approx 6.1353\)؟</p>
-        <table>
-            <thead><tr><th>المرشح \(n\)</th><th>\(K(n) = 2\pi e^{-1/(2n)}\)</th><th>الفرق \(|K(n)-6.1353|\)</th></tr></thead>
-            <tbody>
-                <tr><td>19</td><td>6.119995</td><td>0.015305</td></tr>
-                <tr><td>20</td><td>6.128053</td><td>0.007247</td></tr>
-                <tr><td class="highlight">21</td><td class="highlight">6.135353</td><td class="highlight">0.000053</td></tr>
-                <tr><td>22</td><td>6.141996</td><td>0.006696</td></tr>
-            </tbody>
-        </table>
-        <div class="badge-conjectural">
-            <strong>تحذير التحقق الدائري:</strong> إذا تم الحصول على القيمة المستهدفة (6.1353) من ملاءمة افترضت مسبقاً \(x_p=21\)، فإن التطابق ليس تحققاً مستقلاً. تُفسر المقارنة على أنها "ملاءمة مشروطة للنموذج"، وليست دليلاً على ثابت كوني.
+        <p><strong>مصدر القيمة المستهدفة.</strong> القيمة \(K \approx 6.1353\) هي \(K(21) = 2\pi e^{-1/42}\) نفسها، محسوبة من الصيغة البنائية للنموذج. لذلك فإن «التطابق» بين \(K(21)\) و\(6.1353\) <em>تحقق دائري بالبناء</em>، وليس اختبارًا مستقلًا.</p>
+        <p>يُقرأ الجدول أدناه بوصفه <strong>تحليل حساسية</strong> لاختيار \(x_p\) ضمن نطاق محدود (19–22)، لا بوصفه دليلًا على تفوّق \(21\) على أي قيمة أخرى. المقارنة مفيدة لمعرفة درجة انحناء \(K(x_p)\) حول القيمة المختارة، لا لإثبات تفرّدها.</p>
+        <button class="btn btn-gold" onclick="toggleSection('sec5-table')">📊 عرض جدول تحليل الحساسية</button>
+        <div id="sec5-table" class="toggle-content" style="margin-top: 10px;">
+            <table>
+                <thead><tr><th>المرشح \(n\)</th><th>\(K(n) = 2\pi e^{-1/(2n)}\)</th><th>الفرق \(|K(n)-6.1353|\)</th></tr></thead>
+                <tbody>
+                    <tr><td>19</td><td>6.119995</td><td>0.015305</td></tr>
+                    <tr><td>20</td><td>6.128053</td><td>0.007247</td></tr>
+                    <tr><td class="highlight">21</td><td class="highlight">6.135353</td><td class="highlight">0.000053</td></tr>
+                    <tr><td>22</td><td>6.141996</td><td>0.006696</td></tr>
+                </tbody>
+            </table>
+            <div class="badge-neutral">
+                <strong>ملاحظة على طبيعة المقارنة.</strong> القيمة المستهدفة 6.1353 هي \(K(21)\) نفسها. الفروق الموجبة في العمود الثالث لـ\(n \ne 21\) تعكس ببساطة موقع \(K(n)\) على منحنى \(K(x_p) = 2\pi e^{-1/(2x_p)}\)، وهو منحنى متزايد ببطء. الأصغرية عند \(n=21\) بالبناء، لا باكتشاف مستقل.
+            </div>
         </div>
     </div>
 
     <div class="card">
         <h2>6. امتدادات كونية تخمينية (RiemannOS)</h2>
-        
-        <div class="badge-conjectural" style="margin-top: 0;">
-            <strong>حالة RiemannOS:</strong> التفسير الكوني الأوسع (RiemannOS) ومعادلة التطبيع \(Z+C+A=1\) يمثلان <strong>تخمينات فلسفية/فيزيائية</strong>. لا تدعي هذه الورقة إثبات فرضية ريمان أو اشتقاق ثوابت كونية. 
+        <div class="badge-neutral" style="margin-top: 0; margin-bottom: 15px;">
+            <strong>حالة RiemannOS.</strong> التفسير الكوني الأوسع (RiemannOS) ومعادلة التطبيع \(Z+C+A=1\) يمثلان <strong>فرضيات فلسفية/فيزيائية استكشافية</strong>. لا تدعي هذه الورقة إثبات فرضية ريمان أو اشتقاق ثوابت كونية.
         </div>
-
-        <h3>أ. فرضية Jabri-A (الطاقة المظلمة)</h3>
-        <p>في مسودات سابقة للمشروع، تمت ملاحظة تطابق عددي مثير للاهتمام. إذا قمنا بتعريف الجذور \(t_k\) على أنها الجذور التي تحقق \(Z'(t_k) = 0\) (وهي جذور خاصة بدالتنا وليست أصفار ريمان)، فإن تقييم المشتقة الثانية للجهد عند الجذر الخامس \(t_5 \approx 32.935\) يعطي قيمة عددية \(Z''(t_5) \sim 10^{-123}\)، وهي قريبة جداً من كثافة الطاقة المفرغة المرصودة \(\Lambda \sim 10^{-122} M_{Pl}^2\).</p>
-        
-        <div class="badge-conjectural" style="background: rgba(229, 115, 115, 0.15);">
-            <strong>⚠️ تحذير علمي صارم (إعادة ضبط):</strong> هذا التطابق هو <strong>مصادفة عددية (Numerical Coincidence)</strong> وليس اشتقاقاً فيزيائياً. جذور \(Z'(t_k)=0\) لا تمثل أصفار دالة زيتا. لذلك، لا يمكن اعتبار هذا النموذج حلاً لمشكلة الثابت الكوني. يُقدَّم فقط كملاحظة رياضية استكشافية قد تُلهم أبحاثاً مستقبلية.
-        </div>
-
-        <h3>ب. فرضية Jabri-C (الزمكان كتنفيذ للكود)</h3>
-        <p>تقترح فرضية فلسفية أكثر جرأة (Jabri-C) أن الزمكان ليس مسرحاً مستقلاً، بل هو "مخرجات تشغيل" (Runtime Output) للكود الرياضي. يتم صياغة ذلك افتراضياً عبر فعل (Action) يربط بين هندسة أينشتاين والحقل \(Z(x)\):</p>
-        <div class="math-block">
-            \[ S = \int d^4x \sqrt{-g} \left[ \frac{R}{16\pi G} + \frac{1}{2} \partial_\mu Z \partial^\mu Z - V(Z) \right] \]
-        </div>
-        
-        <div class="badge-conjectural" style="background: rgba(229, 115, 115, 0.15);">
-            <strong>⚠️ تحذير علمي صارم:</strong> هذا الفعل هو <strong>محاكاة فلسفية (Philosophical Analogy)</strong>. لا يوجد إثبات رياضي يربط بين معادلات أينشتاين الحقلية وجذور الدالة \(Z(x)\). تُقدَّم هذه الأفكار كبذور للتفكير، وليست حقائق فيزيائية مثبتة.
-        </div>
-
-        <p>لمزيد من التفاصيل، راجع <b>الإطار الثاني (Frame 2)</b> الذي يطبق هذه المنهجية على البرهان الهندسي للشجرة والظل والبيانات الميدانية.</p>
-        
-        <div class="links" style="margin-bottom: 15px;">
-            <a href="../ar/index.html" class="btn">🏠 الرئيسية</a>
-            <a href="../jabri_5/wells/bridge.html" class="btn">← الجسر (Bridge)</a>
-            <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame1_tex.pdf" target="_blank" class="btn btn-gold">📄 Frame 1 PDF (رابط خارجي)</a>
-        </div>
-
-        <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-            <button onclick="window.print()" class="btn btn-blue">🖨️ طباعة / حفظ (نصي)</button>
-            <button onclick="generateDirectPDF()" class="btn btn-gold">📥 تحميل PDF (مباشر)</button>
+        <button class="btn btn-red" onclick="toggleSection('sec6-content')">🔭 عرض الفرضيات الاستكشافية (Jabri-A & Jabri-C)</button>
+        <div id="sec6-content" class="toggle-content" style="margin-top: 10px;">
+            <h3>أ. فرضية Jabri-A (الطاقة المظلمة)</h3>
+            <p>في مسودات سابقة للمشروع، تمت ملاحظة تطابق عددي مثير للاهتمام. إذا عرّفنا الجذور \(t_k\) على أنها الجذور التي تحقق \(Z'(t_k) = 0\) (وهي جذور خاصة بالدالة \(Z\)، وليست أصفار ريمان)، فإن تقييم <strong>المشتقة الثانية للدالة \(Z\)</strong> — أي \(Z''(t_k)\)، لا «مشتقة ثانية لجهد» فيزيائي — عند الجذر الخامس \(t_5 \approx 32.935\) يُنتج، وفقًا لملاحظات سابقة، قيمة عددية صغيرة جدًا من رتبة \(10^{-123}\).</p>
+            <p><strong>تنبيه اصطلاحي وعددي.</strong> \(Z(x)\) دالة نموذجية رياضية، وليست جهدًا فيزيائيًا. القيمة \(Z''(t_5)\) <em>لم يُعَد التحقق منها عدديًا في هذه النسخة</em>، وينبغي إعادة حسابها باستخدام الدالة \(Z\) المعرّفة في §1 قبل اعتبارها نتيجة رقمية. أما المقارنة برتبة \(\Lambda \sim 10^{-122} M_{Pl}^2\)، فهي <em>مقارنة أسّية</em> لا مقارنة فيزيائية بوحدات موحّدة، إلى أن تُحدَّد التطبيعات والوحدات.</p>
+            <div class="badge-neutral">
+                <strong>ملاحظة منهجية.</strong> هذه الملاحظة الرياضية لا تشكل أساسًا لحل مشكلة الثابت الكوني، وتُقدَّم كبذرة استكشافية قد تُلهم أبحاثًا مستقبلية. جذور \(Z'(t_k)=0\) لا تمثل أصفار دالة زيتا.
+            </div>
+            <h3>ب. فرضية Jabri-C (الزمكان كتنفيذ للكود)</h3>
+            <p>تقترح فرضية فلسفية أكثر جرأة (Jabri-C) أن الزمكان ليس مسرحاً مستقلاً، بل هو «مخرجات تشغيل» للكود الرياضي. يتم صياغة ذلك افتراضياً عبر فعل (Action) يربط بين هندسة أينشتاين والحقل \(Z(x)\):</p>
+            <div class="math-block">
+                \[ S = \int d^4x \sqrt{-g} \left[ \frac{R}{16\pi G} + \frac{1}{2} \partial_\mu Z \partial^\mu Z - V(Z) \right] \]
+            </div>
+            <div class="badge-neutral">
+                <strong>ملاحظة منهجية.</strong> هذا الفعل هو <strong>محاكاة فلسفية</strong>. لا يوجد إثبات رياضي يربط بين معادلات أينشتاين الحقلية وجذور الدالة \(Z(x)\). تُقدَّم هذه الأفكار كبذور للتفكير، وليست حقائق فيزيائية مثبتة.
+            </div>
+            <p>لمزيد من التفاصيل، راجع <b>الإطار الثاني (Frame 2)</b> الذي يطبق هذه المنهجية على البرهان الهندسي للشجرة والظل والبيانات الميدانية.</p>
         </div>
     </div>
 
-    <!-- ==================== قسم الأدوات البرمجية والتحقق (جديد) ==================== -->
     <div class="card">
         <h2>🛠️ 7. الأدوات البرمجية والتحقق العددي (Computational Tools)</h2>
-        <p>لضمان إمكانية إعادة إنتاج النتائج (Reproducibility) والتحقق من صحة المشتقات، تم تزويد هذا الإطار بالأدوات التفاعلية والبرمجية التالية:</p>
-        
+        <p>لضمان إمكانية إعادة إنتاج النتائج والتحقق من صحة المشتقات، تم تزويد هذا الإطار بالأدوات التفاعلية والبرمجية التالية:</p>
         <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-            
-            <!-- الحاسبة v3.2.2 -->
             <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <div>
-                    <strong style="color: var(--gold);">حاسبة Z(x) التفاعلية (v3.2.2)</strong><br>
-                    <span style="font-size: 0.85rem; color: var(--dim);">تطبيق ويب لحظي لحساب Z(x) ومشتقاتها بناءً على 100 صفر لريمان.</span>
+                    <strong style="color: var(--gold);">حاسبة Z(x) التفاعلية (v5)</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--dim);">تطبيق ويب لحظي لحساب <strong>دالة \(Z(x)\) المعرّفة في هذا الإطار</strong> ومشتقاتها. هذه الحاسبة مخصصة لدالة النموذج، وليست لدالة زيتا الريمانية.</span>
                 </div>
-                <a href="calculator.html" target="_blank" class="btn btn-blue">🧮 فتح الحاسبة</a>
+                <a href="calculator-v5.html" target="_blank" class="btn btn-blue">🧮 فتح الحاسبة</a>
             </div>
-
-            <!-- الحاسبة v3.4.0 -->
             <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <div>
-                    <strong style="color: var(--gold);">حاسبة التقارب (v3.4.0)</strong><br>
-                    <span style="font-size: 0.85rem; color: var(--dim);">حساب المجموع الجزئي Z_N(44) وإثبات تقاربه نحو -1.00.</span>
+                    <strong style="color: var(--gold);">حاسبة التقارب (v5)</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--dim);">حساب المجموع الجزئي \(Z_N(44)\) وسلوكه التقاربي. هذه الحاسبة أداة مستقلة ذات سياق مختلف؛ نتائجها لا تُستخدم لتأكيد نتائج هذا الإطار إلا حيث تُوثَّق الصلة صراحة.</span>
                 </div>
-                <a href="calculator-v340.html" target="_blank" class="btn btn-blue">📈 فتح حاسبة التقارب</a>
+                <a href="calculator-v5.html" target="_blank" class="btn btn-blue">📈 فتح حاسبة التقارب</a>
             </div>
-
-            <!-- التحقق العددي -->
-            <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                <div>
-                    <strong style="color: var(--gold);">التحقق العددي (Python Verification)</strong><br>
-                    <span style="font-size: 0.85rem; color: var(--dim);">مقارنة بين الاشتقاق التحليلي والعددي (خطأ ~10^-13) لإثبات سلامة الكود الرياضي.</span>
+            <div style="background: #051009; border: 1px solid var(--border); padding: 8px; border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <strong style="color: var(--gold);">التحقق العددي (Python — الملحق D)</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--dim);">مقارنة بين الاشتقاق التحليلي والتقييم العددي للامتداد المركب، مع تقدير صريح لباقي الذيل.</span>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="appendix-d.png" target="_blank" class="btn btn-gold">📊 رسوم التحقق</a>
+                        <button onclick="toggleSection('verificationTable')" class="btn btn-blue">🔢 عرض الجدول الرقمي</button>
+                    </div>
                 </div>
-                <a href="appendix-d.png" target="_blank" class="btn btn-gold">📊 عرض جدول التحقق</a>
-            </div>
+                <div id="verificationTable" class="toggle-content" style="overflow-x: auto; background: transparent; border: none; padding: 0;">
+                    <div class="badge-exploratory" style="margin-top: 15px; margin-bottom: 5px;">
+                        <strong>حالة الجدول.</strong> القيم العددية أدناه مأخوذة من الملحق D (§8). عمود التوقع التقاربي هو \(K(21)\ln(t)/t^6\). العمود العددي هو تقييم فعلي للامتداد المركب عند \(s=1/2+it\).
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 15px;"><strong>الصيغة التقاربية:</strong> \(|\mathcal{Z}(1/2+it;21)| \sim K(21)\cdot\ln(t)/t^6\)، حيث \(K(21) = 2\pi e^{-1/42} \approx 6.135353\).</p>
+                    <p style="font-size: 0.9rem;"><strong>الكمية المقاسة:</strong> \(C(t) := |\mathcal{Z}(1/2+it;21)|\cdot t^6/\ln(t)\)، ويُتوقع \(C(t)\to K(21)\) مع \(t\to\infty\).</p>
+                    <p style="font-size: 0.9rem;"><strong>تحديد أنواع الخطأ:</strong> «الخطأ المطلق» هو \(|C(t)-K(21)|\)، و«الخطأ النسبي» هو \(|C(t)-K(21)|/K(21)\).</p>
+                    <table style="margin-top: 15px;">
+                        <thead>
+                            <tr>
+                                <th>\(t\)</th>
+                                <th>\(K(21)\cdot\ln(t)/t^6\)<br><small>(توقع تقاربي)</small></th>
+                                <th>\(|\mathcal{Z}(1/2+it;21)|\)<br><small>(عددي — §8)</small></th>
+                                <th>\(C(t)\)</th>
+                                <th>\(|C(t)-K(21)|\)<br><small>(مطلق)</small></th>
+                                <th>\(|C(t)-K(21)|/K(21)\)<br><small>(نسبي)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>\(10^2\)</td>
+                                <td>\(2.8254\times10^{-11}\)</td>
+                                <td>\(2.9860\times10^{-11}\)</td>
+                                <td>\(6.484090\)</td>
+                                <td>\(0.348738\)</td>
+                                <td>\(5.68\times10^{-2}\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(10^3\)</td>
+                                <td>\(4.2382\times10^{-17}\)</td>
+                                <td>\(4.3463\times10^{-17}\)</td>
+                                <td>\(6.291918\)</td>
+                                <td>\(0.156565\)</td>
+                                <td>\(2.55\times10^{-2}\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(10^4\)</td>
+                                <td>\(5.6509\times10^{-23}\)</td>
+                                <td>\(5.7325\times10^{-23}\)</td>
+                                <td>\(6.223935\)</td>
+                                <td>\(0.088583\)</td>
+                                <td>\(1.44\times10^{-2}\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(10^5\)</td>
+                                <td>\(7.0636\times10^{-29}\)</td>
+                                <td>\(7.1290\times10^{-29}\)</td>
+                                <td>\(6.192194\)</td>
+                                <td>\(0.056842\)</td>
+                                <td>\(9.26\times10^{-3}\)</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>\(t\to\infty\)</td>
+                                <td>\(0\)</td>
+                                <td>\(0\)</td>
+                                <td>\(K(21)=6.135353\)</td>
+                                <td>\(0\)</td>
+                                <td>\(0\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p style="font-size: 0.85rem; color: var(--dim); margin-top: 10px;">
+                        <strong>ملاحظة حول الصف الأخير:</strong> القيم 0 في عمودَي التوقع التقاربي و\(|Z|\) تعني أن \(t \to \infty\) تجعلهما يقتربان من الصفر، وليس أن لهما قيمة منتهية تساوي الصفر.
+                    </p>
 
+                    <p style="font-size: 0.9rem; margin-top: 15px;"><strong>سلوك التقارب التحليلي (Asymptotic Convergence).</strong> كما \(t\to\infty\):</p>
+                    <div class="math-block" style="margin-top: 5px;">
+                        \[
+                        C(t)=K(21)\left[1+\frac{\pi^2}{8(\ln t)^2}
+                        +O\!\left(\frac{1}{(\ln t)^4}\right)\right].
+                        \]
+                    </div>
+                    <p style="font-size: 0.9rem;">وبالتالي، فإن الانحراف النسبي الرئيسي عن \(K(21)\) يتناقص بمعدل \(1/(\ln t)^2\). هذا التوسع التقاربي مشتق تحليلياً، ويوضح سبب بطء الاقتراب في الجدول.</p>
+
+                    <div class="badge-exploratory" style="margin-top: 15px;">
+                        <strong>تنبيه على نطاق الصيغة.</strong> الصيغة \(|\mathcal{Z}(1/2+it;21)| \sim K(21)\ln(t)/t^6\) تخص الامتداد المركب المعرّف في هذه الورقة، وليست صيغة تقاربية لدالة زيتا الريمانية نفسها.
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!-- ==================== الملحق D ==================== -->
+    <div class="card">
+        <h2>8. الملحق D — التحقق العددي التفصيلي</h2>
+        <p>يقدّم هذا الملحق تفاصيل التحقق العددي المستقل الذي يدعم النتائج التحليلية في المتن، دون أن يحل محل البرهان:</p>
+        <ol>
+            <li><strong>إشارة \(A_\infty\):</strong> تقدير صريح لباقي الذيل، مع حساب \(A(100)\) بدقة عالية.</li>
+            <li><strong>تقارب \(C(t)\):</strong> شيفرة Python لتقييم \(|\mathcal{Z}(1/2+it;21)|\) ومقارنته بالتوقع التقاربي (النتائج في جدول §7).</li>
+        </ol>
+
+        <h3>D.1 تقدير باقي الذيل لـ \(A_\infty\)</h3>
+        <!-- التصحيح الرياضي الدقيق: تقييد المجال إلى t >= 2 -->
+        <p>لكل \(t \ge 2\)، المتباينة \(|\sin(2\pi/t)| \le 2\pi/t\) صحيحة. بما أن \(\ln t > 0\) على هذا المجال، فإن:</p>
+        <div class="math-block">\[
+            |Z(t;21)| = t^{-5}\ln(t)\,|\sin(2\pi/t)|\,e^{-t/21}
+            \le 2\pi\, t^{-6}\ln(t)\,e^{-t/21}.
+        \]</div>
+        <p>لإيجاد حد للتكامل، نلاحظ أن الدالة \(g(t)=t^{-6}\ln t\) تتناقص لكل \(t \ge 2\)، لأن:</p>
+        <div class="math-block">\[
+            g'(t)=t^{-7}(1-6\ln t)<0.
+        \]</div>
+        <p>لذلك، لكل \(X \ge 2\):</p>
+        <div class="math-block">\[
+            \left|\int_X^\infty Z(t;21)\,dt\right|
+            \le \int_X^\infty |Z(t;21)|\,dt
+            \le 42\pi\, X^{-6}\ln X \cdot e^{-X/21}.
+        \]</div>
+        <p>عند \(X=100\):</p>
+        <div class="math-block">\[
+            \left|\int_{100}^\infty Z(t;21)\,dt\right|
+            \le 42\pi \cdot 100^{-6} \cdot \ln(100) \cdot e^{-100/21}
+            \approx 5.2 \times 10^{-12}.
+        \]</div>
+        <p>وبذلك \(A_\infty = A(100) \pm 5.2 \times 10^{-12}\). حساب \(A(100)\) عدديًا يكفي لتحديد إشارة \(A_\infty\) بدقة تتجاوز أي شك معقول، طالما أن \(|A(100)| \gg 5.2 \times 10^{-12}\).</p>
+
+        <h3>D.2 الشيفرة (Python — NumPy / SciPy)</h3>
+        <pre class="code-block"><code>import numpy as np
+from scipy.integrate import quad
+
+# D.1 — التكامل A(100) وحدّ الذيل
+def Z_real(t, xp=21.0):
+    if t &lt;= 1: return 0.0
+    return (t**-5) * np.log(t) * np.sin(2*np.pi/t) * np.exp(-t/xp)
+
+A_100, err_A100 = quad(Z_real, 1, 100, limit=500,
+                       epsabs=1e-15, epsrel=1e-12)
+X = 100.0
+tail = 42*np.pi * X**-6 * np.log(X) * np.exp(-X/21.0)
+print(f"A(100)      = {A_100:.12f}   (quad err: {err_A100:.1e})")
+print(f"Tail bound  = {tail:.3e}")
+print(f"A_inf       = {A_100:.12f} +/- {err_A100 + tail:.1e}")
+print(f"A_inf < 0 : {A_100 + err_A100 + tail < 0}")
+print()
+
+# D.2 — تقييم |Z(1/2+it;21)|
+def Z_cplx(s, xp=21.0):
+    return (s**-5) * np.log(s) * np.sin(2*np.pi/s) * np.exp(-s/xp)
+
+K21 = 2*np.pi*np.exp(-1/42)
+print(f"K(21) = 2*pi*e^(-1/42) = {K21:.6f}")
+print(f"{'t':>8} {'K ln(t)/t^6':>16} {'|Z|':>16} "
+      f"{'C(t)':>10} {'|C-K|':>10} {'rel':>10}")
+print("-" * 80)
+for t in [1e2, 1e3, 1e4, 1e5]:
+    z = abs(Z_cplx(0.5 + 1j*t))
+    C = z * t**6 / np.log(t)
+    err = abs(C - K21); rel = err / K21
+    asymp = K21 * np.log(t) / t**6
+    print(f"{t:>8.0e} {asymp:>16.4e} {z:>16.4e} "
+          f"{C:>10.6f} {err:>10.6f} {rel:>10.2e}")</code></pre>
+
+        <h3>D.3 نتيجة \(A_\infty\)</h3>
+        <p>بتشغيل الشيفرة:</p>
+        <ul>
+            <li><strong>\(A(100) \approx -0.0247\)</strong> (القيمة الفعلية تعتمد على إصدار SciPy، وتختلف في الرقم الأخير).</li>
+            <li><strong>حدّ تحليلي صارم لباقي الذيل</strong> عند \(X=100\): \(\left|\int_{100}^\infty Z\,dt\right| \le 5.2 \times 10^{-12}\). هذا الحد مضبوط رياضيًا في D.1، وليس تقديرًا عدديًا.</li>
+            <li><strong>تقدير خطأ التكامل العددي (`quad`)</strong>: \(\sim 10^{-15}\) عند إعداداتنا. هذا <em>تقدير عملي</em> من مكتبة SciPy، لا حدّ صارم مضمون.</li>
+        </ul>
+        <p>إذن:</p>
+        <div class="math-block">\[ A_\infty \in \bigl[A(100) - \epsilon_{\text{quad}} - 5.2\!\times\!10^{-12},\; A(100) + \epsilon_{\text{quad}} + 5.2\!\times\!10^{-12}\bigr] \]</div>
+        <p>بما أن \(|A(100)| \approx 0.0247\) أكبر باثني عشر ترتيبًا من حدّ الذيل التحليلي، ومن أي تقدير معقول لخطأ `quad`، فإن الإشارة السالبة \(A_\infty < 0\) <strong>محسومة بأي حدّ خطأ يمكن أن ينتج عن التنفيذ العددي الحالي</strong>.</p>
+        <p>هذا التحقق مستقل عن برهان \(E(A) > 0\) في §3. البرهان يثبت الإشارة تحليليًا، والتحقق العددي يؤكد التنفيذ ويتوافق معه.</p>
+
+        <h3>D.4 ملاحظات إعادة الإنتاج</h3>
+        <ul>
+            <li><strong>البيئة:</strong> Python 3.9+ مع NumPy وSciPy. التكامل يستخدم <code>scipy.integrate.quad</code> بتفاوتات <code>epsabs=1e-15</code> و<code>epsrel=1e-12</code> و<code>limit=500</code>.</li>
+            <li><strong>الدقة:</strong> القيم المعروضة تقريبية، وقد تختلف في الرقم الأخير بحسب إصدار المكتبة. الاستنتاجات النوعية (إشارة \(A_\infty\)، اتجاه \(C(t)\)) مستقرة ولا تعتمد على هذا الاختلاف.</li>
+            <li><strong>الفرع الرئيسي للوغاريتم:</strong> يُستخدم <code>numpy.log</code> للفرع الرئيسي، بجزء تخيلي في \((-\pi, \pi]\)، وهو التعريف المعتمد في §4.</li>
+            <li><strong>قابلية التصحيح:</strong> أي تصحيح في الصيغ الرياضية يجب أن يظهر في §3 و§4 أولًا، ثم يُعاد اشتقاق الشيفرة؛ لا يُعدَّل الحد العددي استقلالًا عن البرهان.</li>
+        </ul>
+
+        <div class="badge-exploratory">
+            <strong>حدود التحقق.</strong> التحقق يؤكد تنفيذ الصيغ والتوافق العددي مع التوقع التقاربي. لا يثبت أن الامتداد المركب \(\mathcal{Z}\) مرتبط بدالة زيتا الريمانية، ولا يقدم أي ادعاء حول أصفارها.
+        </div>
+    </div>
+
+    <div class="links" style="margin-top: 30px;">
+        <a href="../index.html" class="btn">🏠 الرئيسية</a>
+        <a href="bridge.html" class="btn">← الجسر (Bridge)</a>
+        <!-- تم تحديث رابط الـ PDF ليطابق الإصدار v7.0 -->
+        <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v7.0.0/frame1_tex.pdf" target="_blank" class="btn btn-gold">📄 Frame 1 PDF (v7.0)</a>
+    </div>
+
+    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+        <button onclick="window.print()" class="btn btn-blue">🖨️ طباعة / حفظ (نصي)</button>
+        <button onclick="generateDirectPDF()" class="btn btn-gold">📥 تحميل PDF (مباشر)</button>
     </div>
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        DOI: 10.5281/zenodo.23540283
+        DOI: 10.5281/zenodo.23540283 &nbsp;|&nbsp; النسخة v7.0 — 2026-10-24
     </div>
 </div>
 
 <script>
+    function toggleSection(id) {
+        const el = document.getElementById(id);
+        if (el.style.display === 'block') { el.style.display = 'none'; }
+        else { el.style.display = 'block'; }
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         if (typeof Chart === 'undefined') return;
         Chart.defaults.color = '#8aa892'; Chart.defaults.borderColor = '#1f3a2b';
         let zChart, aChart;
-        
-        // دالة التخميد Z(x)
-        function calculateZ(x, xp) { 
-            if (x <= 1) return 0; 
-            return Math.pow(x, -5) * Math.log(x) * Math.sin(2 * Math.PI / x) * Math.exp(-x / xp); 
+        function calculateZ(x, xp) {
+            if (x <= 1) return 0;
+            return Math.pow(x, -5) * Math.log(x) * Math.sin(2 * Math.PI / x) * Math.exp(-x / xp);
         }
-
         function generateData(xp) {
             const labels = [], zData = [], aData = [];
             const step = 0.05, count = Math.round((50 - 1) / step);
-            let cumulativeA = 0, previousZ = calculateZ(1, xp); 
+            let cumulativeA = 0, previousZ = calculateZ(1, xp);
             for (let i = 0; i <= count; i++) {
                 const x = 1 + i * step, z = calculateZ(x, xp);
                 if (i > 0) cumulativeA += (previousZ + z) * step / 2;
@@ -390,7 +550,6 @@
             }
             return { labels, zData, aData };
         }
-        
         function updateCharts(xp) {
             const { labels, zData, aData } = generateData(xp);
             if (zChart) zChart.destroy();
@@ -404,7 +563,6 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Accumulation Function A(x)', color: '#e8f5e9' }, legend: { display: false } } }
             });
         }
-        
         updateCharts(21);
         document.getElementById('xpSlider').addEventListener('input', function() {
             document.getElementById('xpValue').textContent = this.value;
@@ -414,20 +572,36 @@
 
     window.generateDirectPDF = function() {
         const element = document.getElementById('pdf-content');
+        if (!element || typeof html2pdf === 'undefined') {
+            console.error('PDF generation unavailable: element or library missing.');
+            return;
+        }
         const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
-        buttons.forEach(btn => btn.style.display = 'none'); 
-        
+        const toggles = document.querySelectorAll('.toggle-content');
+        const buttonStates = Array.from(buttons).map(btn => btn.style.display);
+        const toggleStates = Array.from(toggles).map(t => t.style.display);
+        const restoreState = () => {
+            buttons.forEach((btn, i) => { btn.style.display = buttonStates[i]; });
+            toggles.forEach((t, i) => { t.style.display = toggleStates[i]; });
+        };
+        buttons.forEach(btn => { btn.style.display = 'none'; });
+        toggles.forEach(t => { t.style.display = 'block'; });
         const opt = {
             margin:       10,
-            filename:     'Frame1_Numerical_Framework_AR.pdf',
+            filename:     'Frame1_Numerical_Framework_AR_v7.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
-
-        html2pdf().set(opt).from(element).save().then(() => {
-            buttons.forEach(btn => btn.style.display = ''); 
-        });
+        try {
+            const result = html2pdf().set(opt).from(element).save();
+            Promise.resolve(result)
+                .catch(err => console.error('PDF generation failed:', err))
+                .finally(restoreState);
+        } catch (err) {
+            console.error('PDF generation init failed:', err);
+            restoreState();
+        }
     };
 </script>
 </body>

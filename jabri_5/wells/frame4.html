@@ -3,93 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame 4 - نحو مسألة طيفية | الحل الصفري والتنظيم الزيتاوي</title>
-    <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization">
-    
-    <!-- MathJax for Equations -->
+    <title>Frame 4 — نحو مسألة طيفية | الحل الصفري والتنظيم الزيتاوي</title>
+    <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization — with Algebraic Origin Verification">
+    <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame4.html">
+
+    <meta name="citation_title" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization">
+    <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
+    <meta name="citation_publication_date" content="2026/10/21">
+    <meta name="citation_language" content="ar">
+    <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame4_tex.pdf">
+
     <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        :root { 
-            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; 
+        :root {
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9;
             --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; --purple: #c792ea;
         }
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; position: relative; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; }
-        
-        /* زر تبديل اللغة */
+
         .lang-btn { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
         .lang-btn:hover { background: var(--gold); color: #0a1a12; }
 
-        /* شريط التنقل العلوي */
         .top-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(10, 26, 18, 0.9);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+            background: rgba(10, 26, 18, 0.9); border: 1px solid var(--border);
+            border-radius: 12px; padding: 12px; margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .nav-item {
-            color: var(--dim);
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border: 1px solid transparent;
-            transition: 0.3s;
+            color: var(--dim); text-decoration: none; padding: 6px 14px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: bold;
+            border: 1px solid transparent; transition: 0.3s;
         }
-        .nav-item:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-            background: rgba(244, 196, 48, 0.1);
-        }
-        .nav-item.active {
-            color: #0a1a12;
-            background: var(--gold);
-            border-color: var(--gold);
-            cursor: default;
-        }
+        .nav-item:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
+        .nav-item.active { color: #0a1a12; background: var(--gold); border-color: var(--gold); cursor: default; }
 
         h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
-        
+
         .badge-info { background: rgba(106, 227, 255, 0.1); border-right: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-neutral { background: rgba(255, 255, 255, 0.05); border-right: 4px solid #666; padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-reject { background: rgba(229, 115, 115, 0.08); border-right: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-caveat { background: rgba(244, 196, 48, 0.08); border-right: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
 
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
-        
+
+        .opening { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .opening-col { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .opening-col strong { display: block; margin-bottom: 8px; font-size: 1rem; }
+        .opening-col p { font-size: 0.88rem; margin: 0; color: var(--text); }
+        @media (max-width: 760px) { .opening { grid-template-columns: 1fr; } }
+
         .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border); }
-        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; }
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; font-family: inherit; }
         .btn:hover { background: #04b586; }
         .btn-gold { background: var(--gold); color: #0a1a12; }
         .btn-gold:hover { background: #d3a71b; }
+        .btn-blue { background: var(--blue); color: #0a1a12; }
+        .btn-blue:hover { background: #3fb8d0; }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+        .assessment-content { display: none; margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 8px; border: 1px solid var(--border); text-align: right; }
+        .assessment-content h4 { color: var(--gold); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; }
+        .assessment-content ul { padding-right: 20px; margin-top: 5px; }
+        .assessment-content li { margin-bottom: 8px; }
+
+        .deriv-box { margin: 12px 0; border: 1px dashed var(--border); border-radius: 8px; padding: 8px 14px; background: #051009; }
+        .deriv-box summary { cursor: pointer; color: var(--blue); font-weight: bold; font-size: 0.9rem; padding: 4px 0; }
+        .deriv-box summary:hover { color: var(--gold); }
+        .deriv-box p { margin: 8px 0; font-size: 0.92rem; }
+
+        .next-step-box { margin: 18px 0 0; padding: 16px 18px; background: rgba(244, 196, 48, 0.08); border: 1px solid var(--gold); border-right: 4px solid var(--gold); border-radius: 8px; }
+        .next-step-box h3 { margin: 0 0 10px; color: var(--gold); font-size: 1.02rem; }
+        .next-step-box p { margin: 8px 0; font-size: 0.95rem; }
+
+        .plan-box { margin: 14px 0 0; padding: 12px 14px; background: rgba(0, 0, 0, 0.25); border: 1px dashed var(--gold); border-radius: 6px; }
+        .plan-box h4 { margin: 0 0 8px; color: var(--gold); font-size: 0.95rem; }
+        .plan-box p { margin: 6px 0; font-size: 0.93rem; }
+        .plan-box ol { padding-right: 22px; margin: 8px 0 0; }
+        .plan-box li { margin-bottom: 6px; font-size: 0.93rem; }
+
+        .appendix-card { background: #071912; border: 1px solid var(--purple); }
+        .appendix-card h2 { color: var(--purple); border-bottom-color: var(--purple); }
+        .appendix-card h3 { color: var(--purple); }
+        .appendix-badge { background: rgba(199, 146, 234, 0.1); border-right: 4px solid var(--purple); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .endpoint-result { padding: 10px 14px; margin: 10px 0; border-radius: 6px; font-size: 0.93rem; }
+        .endpoint-lc { background: rgba(229, 115, 115, 0.08); border-right: 3px solid var(--red); }
+        .endpoint-lp { background: rgba(6, 214, 160, 0.08); border-right: 3px solid var(--green); }
+
+        .summary-section { margin: 20px 0 0; padding: 16px 18px; border-radius: 10px; }
+        .summary-achieved { background: rgba(6, 214, 160, 0.06); border-right: 4px solid var(--green); }
+        .summary-next { background: rgba(244, 196, 48, 0.06); border-right: 4px solid var(--gold); margin-top: 14px; }
+        .summary-section h3 { margin: 0 0 10px; font-size: 1.02rem; }
+        .summary-achieved h3 { color: var(--green); }
+        .summary-next h3 { color: var(--gold); }
+        .summary-section ul, .summary-section ol { padding-right: 22px; margin: 8px 0 0; }
+        .summary-section li { margin-bottom: 8px; font-size: 0.94rem; }
+
+        .verify-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.92rem; }
+        .verify-table th { background: rgba(0,0,0,0.3); color: var(--gold); padding: 10px; border: 1px solid var(--border); text-align: right; }
+        .verify-table td { padding: 10px; border: 1px solid var(--border); vertical-align: top; }
+        .verify-ok { color: var(--green); }
+        .verify-fail { color: var(--red); }
+        .verify-open { color: var(--gold); }
+
+        .legend-box {
+            background: rgba(199, 146, 234, 0.08);
+            border: 1px solid var(--purple);
+            border-right: 4px solid var(--purple);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+        }
+        .legend-box h3 { color: var(--purple); margin: 0 0 10px; font-size: 1rem; }
+        .legend-box ul { margin: 0; padding-right: 20px; }
+        .legend-box li { margin: 6px 0; font-size: 0.92rem; }
+        .legend-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-left: 6px;
+        }
+        .legend-established { background: rgba(6, 214, 160, 0.2); color: var(--green); }
+        .legend-proved { background: rgba(106, 227, 255, 0.2); color: var(--blue); }
+        .legend-notinv { background: rgba(138, 168, 146, 0.2); color: var(--dim); }
+        .legend-open { background: rgba(244, 196, 48, 0.2); color: var(--gold); }
+
+        @media print {
+            body { background: white; color: #111; }
+            .card, .opening-col { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; }
+            h1, h2, h3, h4 { color: #000; border-color: #aaa; }
+            .math-block, .badge-info, .badge-neutral, .badge-reject, .badge-caveat, .deriv-box, .assessment-content, .appendix-badge, .next-step-box, .plan-box, .summary-section, .legend-box { background: #f5f5f5; color: #111; border-color: #aaa; }
+            .lang-btn, .top-nav, button { display: none; }
+            .assessment-content { display: block !important; }
+        }
     </style>
 </head>
 <body>
 <a href="frame4-en.html" class="lang-btn">🌐 English</a>
 
-<div class="container">
-    <!-- شريط التنقل العلوي -->
+<div class="container" id="pdf-content">
     <nav class="top-nav">
         <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
-        <a href="/wells/frame1.html" class="nav-item">1. الإطار الرياضي</a>
-        <a href="/wells/bridge.html" class="nav-item">الجسر (Bridge)</a>
-        <a href="/tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
-        <a href="/wells/frame3.html" class="nav-item">3. البنية الدقيقة</a>
-        <a href="/wells/frame4.html" class="nav-item active">4. المسألة الطيفية</a>
+        <a href="frame1.html" class="nav-item">1. الإطار الرياضي</a>
+        <a href="bridge.html" class="nav-item">الجسر (Bridge)</a>
+        <a href="../tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
+        <a href="frame3.html" class="nav-item">3. البنية الدقيقة</a>
+        <a href="frame4.html" class="nav-item active">4. المسألة الطيفية</a>
     </nav>
 
     <h1>الإطار الرابع: نحو مسألة طيفية</h1>
@@ -98,63 +174,528 @@
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
     </div>
 
+    <!-- ==================== الفواصل المعرفية ==================== -->
+    <div class="legend-box">
+        <h3>الفواصل المعرفية المستخدمة في هذا المستند</h3>
+        <ul>
+            <li><span class="legend-tag legend-established">مثبت</span> هويات جبرية وجهود وتوسعات محلية مشتقة داخل المجال المفتوح.</li>
+            <li><span class="legend-tag legend-proved">مبرهن (بفرضيات معلنة)</span> استبعاد تحويل داربوكس القياسي من الرتبة الأولى، بفرضيات مذكورة صراحةً.</li>
+            <li><span class="legend-tag legend-notinv">لم يُبحث</span> التحويلات الداربوكسية المعمّمة (رتب أعلى، Darboux–Goncharenko، أو بذور غير قياسية).</li>
+            <li><span class="legend-tag legend-open">مفتوح</span> أسئلة طيفية: التحقيق الذاتي الترافق، الحد السفلي، حساب القيم الذاتية، الاستمرار الزيتاوي.</li>
+        </ul>
+    </div>
+
+    <!-- ==================== الافتتاحية الثلاثية ==================== -->
+    <div class="card">
+        <h2>الافتتاحية — المشكلة، الإنجاز، نوع الدليل</h2>
+        <div class="opening">
+            <div class="opening-col" style="border-right:4px solid var(--gold);">
+                <strong style="color: var(--gold);">المشكلة</strong>
+                <p>ما المؤثر التفاضلي الذي يمكن بناؤه من الغلاف \(g(u)\) المشترك في الإطارين الأول والثالث؟ وهل هذا المؤثر مُشتق من المعادلة الأم في Frame 1، أم مجرد اختيار متوافق؟ وما الخصائص البنيوية (الحل الصفري، تصنيف النهايات) التي يمكن إثباتها، وما الشروط الرياضية التي يفرضها ذلك على المسألة الطيفية؟</p>
+            </div>
+            <div class="opening-col" style="border-right:4px solid var(--green);">
+                <strong style="color: var(--green);">الإنجاز</strong>
+                <p>بناء المؤثر \(L=-\partial_u^2+g''/g\)، وإثبات الهوية البنيوية \(Lg=0\)، والتفكيك الشكلي، وتحليل تفرد الجهد عند الطرفين، وتصنيف النهايات (Limit Point/Circle)، وتعريف مشروط لدالة زيتا الطيفية. <strong>ويُضاف:</strong> تحليل جبري دقيق (§2) يثبت أن التحويل الدقيق للمعادلة الأم يعطي معاملًا مطبّعًا مختلفًا \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\)؛ وبرهان محلي عند \(u=\pi\) يرفض تحويل داربوكس القياسي من الرتبة الأولى.</p>
+            </div>
+            <div class="opening-col" style="border-right:4px solid var(--blue);">
+                <strong style="color: var(--blue);">نوع الدليل</strong>
+                <p>هويات تفاضلية دقيقة على المجال المفتوح. تحليل فروبنيوس لتصنيف النهايات. اشتقاق جبري صريح (§2) يُظهر عدم تكافؤ \(V_{\mathrm{new}}\) و\(V_{\mathrm{eff}}\)، مع برهان محلي يرفض داربوكس قياسي عبر \(\pi\). التحويلات المعمّمة خارج نطاق البرهان. أما اختيار التحقيق الذاتي الترافق، والحد السفلي، والقيم الذاتية، وتقارب دالة زيتا، فهي مسائل مفتوحة موثّقة كخطوة تالية، لا نتائج مُدّعاة.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== §1 ==================== -->
     <div class="card">
         <h2>1. من مؤثر الإطار الثالث إلى مسألة طيفية</h2>
         <p>أثبت الإطار الثالث الهوية الجبرية:</p>
         <div class="math-block">\[ H_g(gY) = g(-Y'') \]</div>
         <p>وبناءً على ذلك، يمكن تعريف مؤثر شرودنغر مستقل بالصيغة:</p>
         <div class="math-block">\[ L = -\frac{d^2}{du^2} + V_{\mathrm{eff}}(u), \qquad V_{\mathrm{eff}}(u) = \frac{g''(u)}{g(u)} \]</div>
-        
-        <h3>الحل الصفري والتفكيك الفائق التناظر (Zero Mode and Supersymmetric Factorization)</h3>
+
+        <h3>الحل الصفري الشكلي والتفكيك الفائق التناظر</h3>
         <div class="badge-info">
-            <strong>خاصية بنيوية للمؤثر:</strong> من تعريف الجهد \(V_{\mathrm{eff}} = g''/g\)، نحصل على الهوية الأساسية:
+            <strong>خاصية بنيوية للمؤثر.</strong> من تعريف \(V_{\mathrm{eff}} = g''/g\):
             \[ Lg = -g'' + \frac{g''}{g}g = 0 \]
-            أي أن الغلاف \(g(u)\) هو <strong>حل صفري (Zero-Mode)</strong> للمؤثر \(L\) على المجال الداخلي. كما يمكن تفكيك المؤثر جبرياً على الصورة:
+            فيكون الغلاف \(g(u)\) حلًا صفريًا شكليًا (formal zero-mode) على المجال المفتوح. أما كونه دالة ذاتية فعلية بقيمة صفرية لتحقيق ذاتي الترافق، فيتطلب تحديد المجال والتحقق من شروط الحدود.
+            <br><br>
+            كما يقبل المؤثر التفكيك الجبري:
             \[ L = \left(-\frac{d}{du} - p\right)\left(\frac{d}{du} - p\right), \qquad p = \frac{g'}{g} \]
-            هذا التفكيك يتوافق مع البنية الرياضية المستخدمة في الميكانيكا الكمية فائقة التناظر (SUSY QM). لكن التفكيك الشكلي وحده لا يثبت أن كل تحقيق ذاتي الترافق للمؤثر غير سالب؛ ذلك يتوقف على المجال وشروط الحدود. كذلك فإن تسمية "الحالة الأرضية" تتطلب إثبات أنها حالة ذاتية مسموحة وقابلة للتطبيع، وأن الصفر هو أدنى قيمة ذاتية.
+            وهي هوية تفاضلية شكلية على الدوال الملساء داخل المجال. بما أن \(p = g'/g\)، فإن \((\partial_u - p)g=0\)؛ لكن هذا لا يقرر انتماء \(g\) إلى نواة تحقيق ذاتي الترافق محدد، وهو ما يعتمد على المجال وشروط الحدود.
         </div>
 
         <h3>السلوك التقاربي للجهد \(V_{\mathrm{eff}}(u)\)</h3>
-        <p>باستخدام العلاقة \(V_{\mathrm{eff}} = p' + p^2\)، حيث \(p(u) = \frac{5}{u} - \frac{1}{u\ln(2\pi/u)} + \frac{2\pi}{21u^2}\)، يمكن استخراج السلوك الطرفي:</p>
+        <p>باستخدام \(V_{\mathrm{eff}} = p' + p^2\) مع \(p(u) = \frac{5}{u} - \frac{1}{u\ln(2\pi/u)} + \frac{2\pi}{21u^2}\):</p>
         <ul>
-            <li><strong>عند \(u\to0^+\):</strong> يهيمن الحد \(2\pi/(21u^2)\)، ومن ثم \(V_{\mathrm{eff}}(u)\sim \frac{4\pi^2}{441u^4}\to+\infty\).</li>
-            <li><strong>عند \(u\to2\pi^-\):</strong> بوضع \(t=2\pi-u\)، يعطي التوسع الطرفي للغلاف \(g(u) \approx C t\)، ومن ثم \(V_{\mathrm{eff}}(u)\sim -\frac{191}{42\pi(2\pi-u)}\).</li>
+            <li><strong>عند \(u\to 0^+\):</strong> يهيمن \(2\pi/(21u^2)\)، ومنه \(V_{\mathrm{eff}}(u)\sim \dfrac{4\pi^2}{441u^4}\to+\infty\). تفرد من رتبة 4.</li>
+            <li><strong>عند \(u\to 2\pi^-\):</strong> نحصل على \(V_{\mathrm{eff}}(u)\sim -\dfrac{191}{42\pi(2\pi-u)}\to-\infty\). تفرد من رتبة 1.</li>
         </ul>
-        <p>هذا <strong>يقيّد تحليل النهايات المفردة ويساعد على تحديد شروط الحدود المناسبة</strong>، ولا يحددها بصورة فريدة بمفرده.</p>
+
+        <details class="deriv-box">
+            <summary>اشتقاق الحد التقاربي عند \(u \to 2\pi^-\)</summary>
+            <p>نضع \(t = 2\pi - u\) و\(\delta = t/(2\pi)\)، فتصبح \(x = u/(2\pi) = 1-\delta\). بتوسيع العوامل الثلاثة:</p>
+            <div class="math-block">
+                \[
+                    x^5 = 1 - 5\delta + 10\delta^2 + O(\delta^3),
+                \]
+                \[
+                    \ln(1/x) = \delta + \tfrac12\delta^2 + O(\delta^3),
+                \]
+                \[
+                    e^{-1/(21x)} = e^{-1/21}\left(1 - \tfrac{\delta}{21} - \tfrac{41}{882}\delta^2 + O(\delta^3)\right).
+                \]
+            </div>
+            <p>بضربها نحصل على \(g(u) = e^{-1/21}\left[\delta - \tfrac{191}{42}\delta^2 + O(\delta^3)\right]\)، أي \(g(u) \approx C\,t + a\,t^2\) حيث \(C = e^{-1/21}/(2\pi)\) و\(a = -191\,e^{-1/21}/(168\pi^2)\). إذن:</p>
+            <div class="math-block">
+                \[
+                    V_{\mathrm{eff}}(u) = \frac{g''(u)}{g(u)} \sim \frac{2a}{C\,t} = -\frac{191}{42\pi\,(2\pi-u)}.
+                \]
+            </div>
+        </details>
     </div>
 
+    <!-- ==================== §2 (v6) ==================== -->
     <div class="card">
-        <h2>2. الغلاف كمنظم طبيعي محتمل (فرضية بحثية)</h2>
-        <p>في نظرية المجال الكمي، حساب طاقة الفراغ يتطلب جمع طاقات نقطة الصفر. إحدى الفرضيات هي أن الغلاف \(g(u)\) يعمل كمنظم طبيعي (Natural Regulator) في المؤثر \(L\).</p>
-        <p>لكن هذا يبقى فرضية حتى نثبت أن السلوك الطيفي عالي الطاقة للمؤثر \(L\) ينتج عنه تقارب. تتمثل الخطوة التالية في <strong>اشتقاق السلوك عالي الطاقة للقيم الذاتية \(\lambda_n\)</strong>، ثم تحديد ما إذا كان مجموع طاقة نقطة الصفر متقارباً أو يتطلب تنظيمًا زيتاوياً.</p>
-    </div>
+        <h2>2. التحقق من الأصل — هل مؤثر Frame 4 مُشتق من المعادلة الأم؟</h2>
 
-    <div class="card">
-        <h2>3. دالة زيتا الطيفية وطاقة الفراغ</h2>
-        <p>إذا كان طيفه غير الصفري موجباً وكانت معالجة النمط الصفري محددة، تُعرّف دالة زيتا الطيفية على الطيف غير الصفري بالعلاقة:</p>
-        <div class="math-block">\[ \zeta_{L,\ne0}(s) = \sum_{\lambda_n>0} \lambda_n^{-s} \]</div>
-        <p>وعند توافر الاستمرار التحليلي المناسب، يمكن تعريف طاقة الفراغ المنتظمة زيتاوياً بالعلاقة:</p>
-        <div class="math-block">\[ E_{\mathrm{vac}}^{\mathrm{reg}} = \frac{1}{2}\zeta_{L,\ne0}\left(-\frac{1}{2}\right) \]</div>
-        
-        <div class="badge-neutral">
-            <strong>معالجة الحل الصفري (Zero-Mode):</strong> تحقق الهوية \(Lg=0\) وجود حل صفري للمعادلة التفاضلية على المجال الداخلي. وبما أن \(g\) تتناقص سريعًا عند الطرف الأول وتؤول إلى الصفر خطيًا عند الطرف الثاني، فهي مرشحة لأن تكون دالة ذاتية قابلة للتطبيع. لكن تأكيد أن \(\lambda_0=0\) قيمة ذاتية للمؤثر \(L\) يتطلب إثبات انتماء \(g\) إلى مجال تحقيق ذاتي الترافق محدد.
-            <br><br>
-            إذا ثبت ذلك، تُعرّف دالة زيتا على الطيف غير الصفري كما هو موضح أعلاه. أما إذا لم يُثبت وجود النمط الصفري، فيجب تعريف دالة زيتا على الطيف الذي يثبته التحقيق الذاتي الترافق المختار، لا افتراض وجود نمط صفري مسبقًا. أما عدم سلبية المؤثر، فيجب إثباته بصورة مستقلة من خلال المجال وشروط الحدود أو من خلال صياغة تربيعية مناسبة.
+        <div class="badge-info">
+            <strong>سؤال هذا القسم.</strong> مؤثر Frame 4 هو \(L = -\partial_u^2 + g''/g\). هل يمكن استخراجه من المعادلة الأم في Frame 1 — بعد تغيير المتغير \(x\to u\) وإزالة المشتقة الأولى — أم أنه <em>اختيار متوافق</em> يحتفظ بالغلاف \(g\) ويهمل العامل التذبذبي \(\sin u\)؟
+        </div>
+
+        <h3>2.1 التحويل: \(x = 2\pi/u\)</h3>
+        <div class="math-block">
+            \[
+                \frac{du}{dx} = -\frac{u^2}{2\pi}, \quad \partial_x = -\frac{u^2}{2\pi}\,\partial_u, \quad \partial_x^2 = \frac{u^4}{4\pi^2}\,\partial_u^2 + \frac{u^3}{2\pi^2}\,\partial_u
+            \]
+        </div>
+        <p>الحد ذو الرتبة الأولى ناتج عن اشتقاق المعامل، ولا يجوز إسقاطه.</p>
+
+        <h3>2.2 المؤثر الأم في \(u\)</h3>
+        <div class="math-block">
+            \[
+                H_u = -\frac{u^4}{4\pi^2}\,\partial_u^2 - \frac{u^3}{2\pi^2}\,\partial_u + Q\!\left(\frac{2\pi}{u}\right)
+            \]
+        </div>
+        <p>نضع اختصارًا \(A(u) = u^4/(4\pi^2) > 0\) و\(B(u) = u^3/(2\pi^2) > 0\)، فيصبح \(H_u = -A\partial_u^2 - B\partial_u + Q\).</p>
+
+        <h3>2.3 الهوية المفتاحية</h3>
+        <p>بتعويض \(x = 2\pi/u\) في الدالة الأم:</p>
+        <div class="math-block">
+            \[
+                y(u) := Z\!\left(\frac{2\pi}{u}\right) = g(u)\sin(u), \qquad
+                g(u) = \left(\frac{u}{2\pi}\right)^5 \ln\!\left(\frac{2\pi}{u}\right) e^{-2\pi/(21u)}
+            \]
+        </div>
+        <p>هوية دقيقة تفصل صراحةً بين <strong>الغلاف \(g(u)\)</strong> و<strong>العامل التذبذبي \(\sin u\)</strong>.</p>
+
+        <h3>2.4 إزالة المشتقة الأولى</h3>
+        <p>نضع \(y = w/u\) (أي \(w = uy\)). إذن:</p>
+        <div class="math-block">
+            \[
+                y' = \frac{w'}{u} - \frac{w}{u^2}, \qquad
+                y'' = \frac{w''}{u} - \frac{2w'}{u^2} + \frac{2w}{u^3}
+            \]
+        </div>
+        <p>بالتعويض في \(H_u y = 0\) والضرب في \(u\):</p>
+        <div class="math-block">
+            \[
+                -A\,w'' + \left(\frac{2A}{u} - B\right) w' + \left(-\frac{2A}{u^2} + \frac{B}{u} + Q\right) w = 0
+            \]
+        </div>
+        <p>معامل المشتقة الأولى يختفي تلقائيًا من تعريفَي \(A\) و\(B\):</p>
+        <div class="math-block">
+            \[
+                \frac{2A}{u} - B = \frac{u^3}{2\pi^2} - \frac{u^3}{2\pi^2} = 0, \qquad
+                -\frac{2A}{u^2} + \frac{B}{u} = -\frac{u^2}{2\pi^2} + \frac{u^2}{2\pi^2} = 0
+            \]
+        </div>
+        <p>لا يفترض اختفاء المشتقة الأولى: بل يتحقق تلقائيًا. تبقى المعادلة:</p>
+        <div class="math-block">
+            \[
+                \boxed{\,A\,w'' = Q\,w\,} \quad \Longleftrightarrow \quad w'' = \frac{4\pi^2}{u^4}\,Q\!\left(\frac{2\pi}{u}\right) w
+            \]
+        </div>
+
+        <h3>2.5 المعامل المطبّع</h3>
+        <p>باصطلاح شرودنغر \(-w'' + V_{\mathrm{new}} w = 0\):</p>
+        <div class="math-block">
+            \[
+                \boxed{\,V_{\mathrm{new}}(u) = \frac{4\pi^2}{u^4}\,Q\!\left(\frac{2\pi}{u}\right)\,}
+            \]
+        </div>
+        <p>العامل \(4\pi^2/u^4\) أثر مباشر لتغيير المتغير. لاحظ أن \(V_{\mathrm{new}}\) معرّف على \((0,\pi)\cup(\pi,2\pi)\) فقط، لأن \(Q(2)\) غير معرّفة (صفر \(Z\) عند \(x=2\)).</p>
+
+        <div class="badge-caveat">
+            <strong>تحفّظ على التكافؤ الطيفي.</strong> \(V_{\mathrm{new}}(u) := (4\pi^2/u^4)Q(2\pi/u)\) هو <em>معامل في المعادلة المحوّلة</em> \(-w'' + V_{\mathrm{new}}w=0\)، بعد تغيير المتغير \(x=2\pi/u\) والتعويض \(w=uy\). هذا تطابق بين تعبيرين تفاضليين على \((0,2\pi)\). أما <em>التكافؤ الطيفي</em> بين مؤثرين ذاتيَي الترافق على فضاءَي هيلبرت فيتطلب فوق ذلك مطابقة القياس والمجال وشروط الحدود. إثبات هذا التكافؤ (أو إثبات استحالته) مسألة منفصلة، ولا يُدَّعى هنا.
+        </div>
+
+        <h3>2.6 اختبار التكافؤ الداربوكسي</h3>
+
+        <p>الفرق الصريح:</p>
+        <div class="math-block">
+            \[
+                \Delta V := V_{\mathrm{new}} - V_{\mathrm{eff}} = 2\,\frac{g'}{g}\,\cot u - 1 + \frac{2}{u}\frac{g'}{g} + \frac{2}{u}\cot u
+            \]
+        </div>
+
+        <p><strong>شرط داربوكس القياسي من الرتبة الأولى.</strong> تكافؤ \(L_1 = -\partial^2 + V_1\) و\(L_2 = -\partial^2 + V_2\) يقتضي وجود <em>بذرة</em> \(\varphi\) تحقق:</p>
+        <div class="math-block">
+            \[
+                -\varphi'' + V_1\varphi = \lambda\varphi \quad \text{(لبعض } \lambda\text{)}, \qquad V_2 = V_1 - 2(\ln\varphi)''
+            \]
+        </div>
+
+        <p><strong>برهان محلي عند \(u=\pi\).</strong> نثبت أنه لا يوجد تحويل داربوكس قياسي من الرتبة الأولى (عند أي \(\lambda\)) ينتج \(V_{\mathrm{new}}\) من \(V_{\mathrm{eff}}\).</p>
+
+        <p>حقائق:</p>
+        <ul>
+            <li>\(V_{\mathrm{eff}}\) ناعم عند \(u=\pi\) (لأن \(g(\pi)\neq 0\)).</li>
+            <li>\(V_{\mathrm{new}}\) له <strong>قطب بسيط غير صفري</strong> عند \(u=\pi\) بمعامل \(C_\pi := \dfrac{2(128\ln 2 - 21)}{21\pi\ln 2} \approx 2.96\) (انظر §2.7).</li>
+        </ul>
+
+        <p>بما أن \(V_{\mathrm{eff}}\) ناعم، فكل حل غير صفري \(\varphi\) لـ \(-\varphi'' + V_{\mathrm{eff}}\varphi = \lambda\varphi\) ناعم على جوار \(u=\pi\) (نظرية معادلات تفاضلية عادية). إذن:</p>
+        <ul>
+            <li><strong>إذا كان \(\varphi(\pi)\neq 0\):</strong> فـ \((\ln\varphi)''\) ناعم عند \(\pi\)، ومنه \(V_D = V_{\mathrm{eff}} - 2(\ln\varphi)''\) <strong>ناعم</strong> عند \(\pi\) — لا قطب.</li>
+            <li><strong>إذا كان \(\varphi(\pi)= 0\):</strong> فـ \(\varphi'(\pi)\neq 0\) (وإلا \(\varphi\equiv 0\) بالوحدانية). إذن \(\varphi(u)\sim C_0(u-\pi)\)، ومنه:
+            \[
+                (\ln\varphi)'' \sim -\frac{1}{(u-\pi)^2}, \qquad V_D \sim \frac{2}{(u-\pi)^2}
+            \]
+            أي <strong>قطب مزدوج</strong> بمعامل 2 — لا قطب بسيط، ولا معامل \(C_\pi\approx 2.96\).</li>
+        </ul>
+
+        <p>في كلتا الحالتين، لا يمكن أن يساوي \(V_D\) الجهد \(V_{\mathrm{new}}\) (الذي له قطب بسيط بمعامل \(C_\pi\approx 2.96\) عند \(\pi\)). إذن لا وجود لبذرة \(\varphi\) تحقق شرط الداربوكس القياسي وتنتج \(V_{\mathrm{new}}\).</p>
+
+        <div class="badge-reject">
+            <strong>الحكم (مرفوض للصنف القياسي).</strong>
+            لا يوجد تحويل داربوكس قياسي من الرتبة الأولى (بأي بذرة \(\varphi\) تحقق \(-\varphi''+V_{\mathrm{eff}}\varphi=\lambda\varphi\)) يربط \(V_{\mathrm{eff}}\) بـ\(V_{\mathrm{new}}\). البرهان محلي عند \(u=\pi\)، ويعتمد فقط على:
+            <ul style="margin-top: 8px;">
+                <li>نعومة \(V_{\mathrm{eff}}\) عند \(\pi\)؛</li>
+                <li>وجود قطب بسيط غير صفري في \(V_{\mathrm{new}}\) عند \(\pi\)؛</li>
+                <li>سلوك البذرة عند صفرها (بسيط، لا مزدوج).</li>
+            </ul>
+            <strong>نطاق البرهان.</strong> التحويلات الداربوكسية القياسية من الرتبة الأولى فقط. أما التحويلات المعمّمة (ذات الرتب العليا، أو Darboux–Goncharenko، أو بذور غير مقيَّدة بحل معادلة القيمة الذاتية) فهي خارج هذا البرهان، ولم تُبحث هنا.
+        </div>
+
+        <h3>2.7 مقارنة بنية التفردات</h3>
+
+        <p>لتثبيت معامل القطب \(C_\pi\) المستخدم في البرهان، نشتق التوسيع المحلي بدقة. نكتب الدالة الأم صراحةً:</p>
+        <div class="math-block">
+            \[
+                Z(x) = x^{-5} \ln(x)\, e^{-x/21} \sin\!\left(\frac{2\pi}{x}\right), \qquad x>1
+            \]
+        </div>
+
+        <p>الجدول يوضح سلوك الجهدين:</p>
+
+        <table class="verify-table">
+            <thead>
+                <tr>
+                    <th>الطرف</th>
+                    <th>\(V_{\mathrm{eff}} = g''/g\)</th>
+                    <th>\(V_{\mathrm{new}} = (4\pi^2/u^4)Q\)</th>
+                    <th>الملاحظة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>\(u\to 0^+\)</td>
+                    <td>\(\sim \dfrac{4\pi^2}{441u^4}\to+\infty\)</td>
+                    <td>\(\sim \dfrac{4\pi^2}{441u^4}\to+\infty\)</td>
+                    <td>نفس السلوك القيادي (قطب رتبة 4)</td>
+                </tr>
+                <tr>
+                    <td>\(u=\pi\)</td>
+                    <td>ناعم، محدود (\(g(\pi)\neq 0\))</td>
+                    <td>قطب بسيط \(\sim \dfrac{C_\pi}{u-\pi}\)، \(C_\pi\approx 2.96\)</td>
+                    <td>اختلاف بنيوي: \(V_{\mathrm{new}}\) له قطب داخلي بسيط، \(V_{\mathrm{eff}}\) لا</td>
+                </tr>
+                <tr>
+                    <td>\(u\to 2\pi^-\)</td>
+                    <td>\(\sim -\dfrac{191}{42\pi t}\to-\infty\)</td>
+                    <td>\(\sim +\dfrac{2}{t^2}\to+\infty\)</td>
+                    <td>\(t=2\pi-u\). بسيط سالب مقابل مزدوج موجب</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>قراءة الجدول.</strong> \(V_{\mathrm{new}}\) و\(V_{\mathrm{eff}}\):</p>
+        <ul>
+            <li><strong>يتماثلان</strong> عند \(u\to 0^+\) (نفس قطب الرتبة 4)؛</li>
+            <li><strong>يختلفان جذريًا</strong> عند \(u=\pi\): \(V_{\mathrm{eff}}\) ناعم، \(V_{\mathrm{new}}\) له قطب بسيط؛</li>
+            <li><strong>يختلفان جذريًا</strong> عند \(u\to 2\pi^-\): بسيط سالب مقابل مزدوج موجب.</li>
+        </ul>
+
+        <p>هذا الاختلاف البنيوي هو ما يجعل البرهان المحلي في §2.6 ممكنًا، ويؤكد رفض التكافؤ الداربوكسي القياسي.</p>
+
+        <details class="deriv-box">
+            <summary>تفاصيل: تفرد \(V_{\mathrm{new}}\) عند \(u\to 2\pi^-\)</summary>
+            <p>نضع \(t = 2\pi-u \to 0^+\)، أي \(x = 2\pi/u = 2\pi/(2\pi-t) = 1/(1 - t/(2\pi))\). إذن</p>
+            <div class="math-block">
+                \[
+                    x - 1 = \frac{t}{2\pi - t} \sim \frac{t}{2\pi} > 0.
+                \]
+            </div>
+            <p>بتوسيع \(Z(x)\) قرب \(x=1\):</p>
+            <div class="math-block">
+                \[
+                    Z(x) \sim -2\pi e^{-1/21}\,(x-1)^2 \quad \text{(صفر مزدوج)}
+                \]
+                \[
+                    Z''(x) \sim -4\pi e^{-1/21}, \qquad Q(x) = \frac{Z''(x)}{Z(x)} \sim \frac{2}{(x-1)^2}
+                \]
+            </div>
+            <p>بما أن \(x-1 \sim t/(2\pi)\)، نحصل على \(Q \sim 2/(t/(2\pi))^2 = 8\pi^2/t^2\)، ومنه</p>
+            <div class="math-block">
+                \[
+                    V_{\mathrm{new}} = \frac{4\pi^2}{u^4}\,Q \sim \frac{4\pi^2}{16\pi^4}\cdot\frac{8\pi^2}{t^2} = \frac{2}{t^2}.
+                \]
+            </div>
+        </details>
+
+        <details class="deriv-box">
+            <summary>تفاصيل: معامل القطب \(C_\pi\) عند \(u=\pi\)</summary>
+            <p>نضع \(x=2+\varepsilon\)، وصفر \(Z\) عند \(x=2\) بسيط. بتوسيع العوامل الأربعة للدالة \(Z\):</p>
+            <div class="math-block">
+                \[
+                    (2+\varepsilon)^{-5} = 2^{-5}\left(1 + \tfrac{\varepsilon}{2}\right)^{-5} = 2^{-5}\left(1 - \tfrac{5}{2}\varepsilon + O(\varepsilon^2)\right),
+                \]
+                \[
+                    \ln(2+\varepsilon) = \ln 2 \cdot \left(1 + \frac{\varepsilon}{2\ln 2} + O(\varepsilon^2)\right),
+                \]
+                \[
+                    e^{-(2+\varepsilon)/21} = e^{-2/21}\left(1 - \tfrac{\varepsilon}{21} + O(\varepsilon^2)\right),
+                \]
+                \[
+                    \sin\!\left(\frac{2\pi}{2+\varepsilon}\right) = \frac{\pi}{2}\varepsilon - \frac{\pi}{4}\varepsilon^2 + O(\varepsilon^3).
+                \]
+            </div>
+            <p>بضربها وكتابة \(Z(2+\varepsilon) = \alpha\varepsilon + \beta\varepsilon^2 + O(\varepsilon^3)\)، نحصل على</p>
+            <div class="math-block">
+                \[
+                    \frac{\beta}{\alpha} = \frac{21 - 128\ln 2}{42\ln 2} \approx -2.32627.
+                \]
+            </div>
+            <p>بما أن \(Q(x) \sim 2(\beta/\alpha)/(x-2)\) قرب \(x=2\)، وباستخدام \(x = 2\pi/u\)، عند \(x=2\) لدينا \(u=\pi\) مع \(\delta x = -2\pi/u^2\,\delta u = -2\delta u/\pi\). إذن \(\varepsilon \approx -\tfrac{2}{\pi}(u-\pi)\)، ومنه</p>
+            <div class="math-block">
+                \[
+                    V_{\mathrm{new}} \sim -\frac{4(\beta/\alpha)}{\pi(u-\pi)} = \underbrace{\frac{2(128\ln 2 - 21)}{21\pi\ln 2}}_{\approx\,2.9619}\cdot\frac{1}{u-\pi}.
+                \]
+            </div>
+            <p>هذا يثبت وجود قطب بسيط بمعامل غير صفري \(C_\pi\approx 2.96\)، وهو أساس برهان §2.6.</p>
+        </details>
+
+        <h3>2.8 الخلاصة</h3>
+
+        <table class="verify-table">
+            <thead>
+                <tr><th>البند</th><th>الحالة</th><th>التصنيف</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>\(Z(2\pi/u) = g(u)\sin(u)\)</td><td class="verify-ok">✓ مثبت</td><td><span class="legend-tag legend-established">مثبت</span></td></tr>
+                <tr><td>اختفاء المشتقة الأولى تلقائيًا</td><td class="verify-ok">✓ مثبت</td><td><span class="legend-tag legend-established">مثبت</span></td></tr>
+                <tr><td>\(V_{\mathrm{new}} = (4\pi^2/u^4)Q\) (كمعامل في المعادلة المحوّلة)</td><td class="verify-ok">✓ مثبت</td><td><span class="legend-tag legend-established">مثبت</span></td></tr>
+                <tr><td>\(V_{\mathrm{new}} = V_{\mathrm{eff}}\)</td><td class="verify-fail">✗ مرفوض (\(\Delta V \neq 0\))</td><td><span class="legend-tag legend-established">مثبت</span></td></tr>
+                <tr><td>التكافؤ الطيفي بين المسألتين المحوّلتين</td><td class="verify-open">? غير مُدَّعى</td><td><span class="legend-tag legend-open">مفتوح</span></td></tr>
+                <tr><td>تحويل داربوكس قياسي من الرتبة الأولى بين \(V_{\mathrm{eff}}\) و\(V_{\mathrm{new}}\)</td><td class="verify-fail">✗ مرفوض (برهان محلي عند \(\pi\))</td><td><span class="legend-tag legend-proved">مبرهن (بفرضيات)</span></td></tr>
+                <tr><td>تحويلات داربوكس معمّمة</td><td class="verify-open">○ لم تُبحث</td><td><span class="legend-tag legend-notinv">لم يُبحث</span></td></tr>
+                <tr><td>تطابق بنية التفردات</td><td class="verify-fail">✗ عند \(u=\pi\) و\(u\to 2\pi^-\)</td><td><span class="legend-tag legend-established">مثبت</span></td></tr>
+            </tbody>
+        </table>
+
+        <div class="next-step-box">
+            <h3>النتيجة</h3>
+            <p><strong>مؤثر Frame 4، \(L = -\partial_u^2 + g''/g\)، ليس مُشتقًا جبريًا من المعادلة الأم في Frame 1.</strong> التحويل الدقيق يعطي \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\)، وهو مختلف عن \(V_{\mathrm{eff}}\):</p>
+            <ul>
+                <li>عند \(u\to 0^+\): السلوك القيادي متطابق؛</li>
+                <li>عند \(u=\pi\): \(V_{\mathrm{eff}}\) ناعم، \(V_{\mathrm{new}}\) له قطب بسيط بمعامل \(\approx 2.96\)؛</li>
+                <li>عند \(u\to 2\pi^-\): قطب بسيط سالب مقابل قطب مزدوج موجب.</li>
+            </ul>
+            <p>تحويل داربوكس قياسي من الرتبة الأولى <strong>مرفوض</strong> بالبرهان المحلي عند \(u=\pi\). التحويلات المعمّمة خارج نطاق البرهان. Frame 4 مسألة طيفية مشروعة، لكنه <strong>اختيار متوافق</strong>، لا نتيجة استنتاجية.</p>
+        </div>
+
+        <div class="plan-box" style="margin-top: 20px;">
+            <h4>سؤال مفتوح يستحق البحث</h4>
+            <p>هل يوجد تحويل داربوكسي <em>معمّم</em> (من رتبة أعلى، أو Darboux–Goncharenko، أو ببذرة لا تحل معادلة القيمة الذاتية) يربط \(V_{\mathrm{eff}}\) بـ\(V_{\mathrm{new}}\)؟ هذا سؤال مستقل، خارج نطاق §2، لكنه الصيغة الدقيقة للسؤال المتبقي بعد إغلاق الصنف القياسي.</p>
         </div>
     </div>
 
+    <!-- ==================== §3 ==================== -->
     <div class="card">
-        <h2>4. النتائج ونطاق النموذج (Results and Scope)</h2>
-        <p><strong>ما تم إنجازه (الإنتاج الرياضي):</strong> أثبتنا في الإطار الثالث أن الغلاف غير المتماثل يزيل حجة التناظر (بنسبة \(R_{13/12} \approx 0.60352\)). وفي الإطار الرابع، أثبتنا أن الغلاف \(g(u)\) يحقق الهوية التفاضلية الدقيقة \(Lg=0\) على المجال الداخلي، وهو ما يفتح الباب لدراسة المسألة ضمن إطار التفكيك الفائق التناظر.</p>
-        
-        <p><strong>التنبؤ الفيزيائي (مشروط):</strong> إذا ثبتت البنية الذاتية الترافق، وشروط الحدود، والارتباط بين المؤثر والنظام الفيزيائي، أمكن اختبار تنبؤات الطيف. أما نسبة \(R_{13/12}\) فتحتاج إلى توثيق اشتقاقها وافتراضاتها في الإطار الثالث كي تكون تنبؤاً كمياً قابلاً للتحقق.</p>
-        
-        <p><strong>الخطوات القادمة المطلوبة:</strong></p>
-        <ol style="padding-right: 20px;">
-            <li><strong>بناء تحقيق ذاتي الترافق:</strong> تحديد مجال مناسب للمؤثر \(L\)، والتحقق من انتماء \(g\) إليه.</li>
-            <li><strong>دراسة الطيف:</strong> إثبات خصائص الطيف (مثل وجود حد سفلي) قبل الانتقال إلى تفسير طاقة الفراغ.</li>
-            <li><strong>الحساب العددي:</strong> حساب أول مجموعة من القيم الذاتية الموجبة \(\lambda_n\) عددياً.</li>
-        </ol>
+        <h2>3. الغلاف كمنظم طبيعي (فرضية بحثية)</h2>
+        <p>في نظرية المجال الكمي، حساب طاقة الفراغ يتطلب جمع طاقات نقطة الصفر. إحدى الفرضيات أن الغلاف \(g(u)\) يعمل كمنظم طبيعي في \(L\).</p>
+        <p>يبقى هذا فرضية حتى نثبت أن السلوك الطيفي عالي الطاقة للمؤثر \(L\) ينتج عنه تقارب. تتمثل الخطوة التالية في اشتقاق <strong>السلوك عالي الطاقة للقيم الذاتية \(\lambda_n\)</strong>، ثم تحديد ما إذا كان مجموع طاقة نقطة الصفر متقاربًا أو يتطلب تنظيمًا زيتاويًا.</p>
+    </div>
+
+    <!-- ==================== §4 ==================== -->
+    <div class="card">
+        <h2>4. دالة زيتا الطيفية وطاقة الفراغ</h2>
+        <p>إذا كان الطيف غير الصفري موجبًا وكانت معالجة النمط الصفري محددة، تُعرّف دالة زيتا الطيفية على الطيف غير الصفري بالعلاقة:</p>
+        <div class="math-block">\[ \zeta_{L,\ne0}(s) = \sum_{\lambda_n>0} \lambda_n^{-s} \]</div>
+        <p>وعند توافر الاستمرار التحليلي المناسب، تُعرّف طاقة الفراغ المنتظمة زيتاويًا بالعلاقة:</p>
+        <div class="math-block">\[ E_{\mathrm{vac}}^{\mathrm{reg}} = \frac{1}{2}\zeta_{L,\ne0}\left(-\frac{1}{2}\right) \]</div>
+
+        <p>إذا كانت \(\lambda_n\) مربعات ترددات فيزيائية، فإن العلاقة السابقة تقابل تنظيم \(\sum_{\lambda_n>0}\sqrt{\lambda_n}\) مع استبعاد النمط الصفري، بوحدات \(\hbar=1\).</p>
+
+        <div class="badge-neutral">
+            <strong>تعريف مشروط، لا نتيجة محسوبة.</strong> التعبير \(E_{\mathrm{vac}}^{\mathrm{reg}} = \tfrac12\zeta_{L,\ne 0}(-1/2)\) تعريف مقترح، لا قيمة. تقويمه عدديًا يتطلب:
+            <ul style="margin-top: 8px;">
+                <li>إثبات تقارب متسلسلة زيتا في نطاق ما؛</li>
+                <li>إثبات وجود الاستمرار التحليلي المناسب إلى \(s=-1/2\)؛</li>
+                <li>معالجة أي اعتماد على المقياس أو طرح منتظم يفرضه السياق الفيزيائي.</li>
+            </ul>
+        </div>
+
+        <div class="badge-neutral">
+            <strong>معالجة الحل الصفري.</strong>
+            الدالة \(g(u)\) قابلة للتكامل مربعًا على \((0,2\pi)\). قرب \(0^+\) تتلاشى أسرع من أي قوة بفضل \(e^{-2\pi/(21u)}\)؛ وقرب \(2\pi^-\) يتحقق \(g(u) \sim \frac{e^{-1/21}}{2\pi}(2\pi-u)\)، وهو سلوك قابل للتكامل. إذن \(g \in L^2((0,2\pi))\).
+            <br><br>
+            لكن الانتماء إلى \(L^2\) لا يثبت وحده انتماء \(g\) إلى مجال تحقيق ذاتي الترافق لـ\(L\)؛ فذلك يتطلب تحديد التحقيق والتحقق من شروط المجال.
+        </div>
+
+        <div class="next-step-box">
+            <h3>الخطوة التحليلية التالية: السلوك المحلي للحلول قرب النهايات</h3>
+            <p>اختيار تحقيق ذاتي الترافق يستلزم أكثر من فحص قابلية تطبيع \(g\)؛ يستلزم دراسة حلول \(L\psi=\lambda\psi\) قرب الطرفين. §5 ينفّذ هذه الخطوة.</p>
+            <div class="plan-box">
+                <h4>خطة العمل الحسابية</h4>
+                <ol>
+                    <li>تحليل الحلول قرب كل طرف وتحديد سلوكها التقاربي.</li>
+                    <li>تحديد المجال وشروط الحدود وتحقيق ذاتي الترافق.</li>
+                    <li>فحص ما إذا كان المؤثر محدودًا من الأسفل.</li>
+                    <li>حساب القيم الذاتية عدديًا.</li>
+                    <li>دراسة تقارب دالة زيتا واستمرارها إلى \(s=-1/2\).</li>
+                </ol>
+                <p>§5 ينفّذ الخطوتين 1 و2.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== §5 (v6) ==================== -->
+    <div class="card appendix-card">
+        <h2>5. ملحق: السلوك المحلي للحلول وشروط الحدود</h2>
+        <p>ينفّذ هذا الملحق الخطوة الأولى من خطة العمل: تحليل السلوك المحلي للحلول قرب الطرفين وتصنيف النهايات.</p>
+
+        <h3>أ. الطرف \(u \to 2\pi^-\): Limit Circle</h3>
+        <p>نضع \(t = 2\pi - u \to 0^+\). الجهد:</p>
+        <div class="math-block">\[ V_{\mathrm{eff}}(t) \sim -\frac{c}{t}, \qquad c = \frac{191}{42\pi} > 0. \]</div>
+        <p>معادلة القيمة الذاتية قرب \(t=0\)، بإهمال \(\lambda\psi\) في الرتبة الأولى:</p>
+        <div class="math-block">\[ \psi''(t) + \frac{c}{t}\psi(t) \approx 0. \]</div>
+
+        <p><strong>تحليل فروبنيوس.</strong> نكتب \(\psi = t^r\sum_{n\ge 0}a_n t^n\) مع \(a_0 \ne 0\). معادلة الدليل عند الرتبة \(t^0\) تعطي \(r(r-1) = 0\)، إذن \(r\in\{0,1\}\).</p>
+
+        <p><strong>الفرع \(r=1\):</strong> من علاقة التكرار عند الرتبة التالية \(a_1 = -c\,a_0/2\)، ومنه</p>
+        <div class="math-block">\[ \psi_1(t) = a_0\left(t - \frac{c}{2}t^2 + O(t^3)\right). \]</div>
+
+        <p><strong>الفرع \(r=0\)</strong> جذر رنيني؛ الحل الثاني يتضمن حدودًا لوغاريتمية:</p>
+        <div class="math-block">\[ \psi_2(t) = 1 - c\,t\ln t + O(t^2\ln t) \quad \text{(مع تطبيع مناسب)}. \]</div>
+
+        <p><strong>قابلية التكامل المربع.</strong> \(\int_0^\varepsilon |\psi_1|^2 dt \sim \int_0^\varepsilon t^2 dt < \infty\)، و\(\int_0^\varepsilon |\psi_2|^2 dt \sim \int_0^\varepsilon (1 - ct\ln t)^2 dt < \infty\) (لأن \(t\ln t \to 0\)). كلا الحلين في \(L^2\)؛ الطرف <strong>Limit Circle</strong>.</p>
+
+        <div class="badge-neutral">
+            <strong>شروط الحدود عند طرف Limit Circle.</strong> عند طرف Limit Circle، فضاء الحلول المربعة القابلة للتكامل من البعد 2، فلا يختار \(L^2\) حلًا وحيدًا. يُحدَّد التحقيق الذاتي الترافق بـ<em>شرط على أثر الورونسكي الحدّي</em>.
+            <br><br>
+            بتحديد أدق: المجال الأقصى \(\mathcal{D}_{\max}\) يتكون من دوال \(\psi\) بحيث \(\psi, \psi'\in AC_{\mathrm{loc}}\) و\(L\psi\in L^2\) محليًا؛ وعلى هذا المجال توجد صيغة الورونسكي الحدّية
+            \[
+                [\psi, \chi]_0 := \lim_{t\to 0}\left[\psi(t)\overline{\chi'(t)} - \psi'(t)\overline{\chi(t)}\right]
+            \]
+            لكل \(\psi, \chi\in\mathcal{D}_{\max}\) (حقيقة قياسية في نظرية Limit Circle). التحقيقات الذاتية الترافق تُعامَل بعائلة \(U(1)\)؛ شروط الحدود المقابلة تُعبَّر عبر صيغة لاغرانج/الورونسكي، <em>لا</em> عبر شرط روبين مباشر
+            \[
+                \alpha\,\psi(2\pi^-) + \beta\,\psi'(2\pi^-) = 0,
+            \]
+            لأن \(\psi_2'(t) \sim -c\ln t\) يتباعد لوغاريتميًا عند \(t\to 0^+\)، فالنهاية المنتهية \(\psi'(2\pi^-)\) غير موجودة عمومًا.
+            <br><br>
+            <strong>ديريكليه كاختيار محدد.</strong> الشرط \(\psi(2\pi^-)=0\) عضو واحد في عائلة \(U(1)\)، لا النتيجة الوحيدة للتصنيف. وهو المرشح الطبيعي للدراسة الأولى، لأن \(g\) يحققه.
+        </div>
+
+        <div class="endpoint-result endpoint-lc">
+            <strong>النتيجة عند \(2\pi^-\):</strong> Limit Circle. يلزم شرط حدود ذاتي الترافق، يُصاغ عبر أثر لاغرانج/الورونسكي. ديريكليه أحد الخيارات المحددة في عائلة \(U(1)\).
+        </div>
+
+        <h3>ب. الطرف \(u \to 0^+\): Limit Point</h3>
+        <div class="math-block">\[ V_{\mathrm{eff}}(u) \sim +\frac{C}{u^4}, \qquad C = \left(\frac{2\pi}{21}\right)^2 > 0. \]</div>
+        <p>حلان مستقلان تقريبيًا:</p>
+        <div class="math-block">\[ \psi_\pm(u) \sim \exp\!\left(\mp\frac{2\pi}{21u}\right). \]</div>
+        <p>\(\psi_+ \in L^2\) و\(\psi_- \notin L^2\). الطرف <strong>Limit Point</strong>: لا حاجة لشرط حدود إضافي؛ \(L^2\) يختار السلوك المقبول تلقائيًا.</p>
+
+        <div class="endpoint-result endpoint-lp">
+            <strong>النتيجة عند \(0^+\):</strong> Limit Point. \(L^2\) يختار السلوك المقبول تلقائيًا.
+        </div>
+
+        <h3>ج. النتيجة التركيبية</h3>
+        <div class="appendix-badge">
+            <ul style="margin: 0; padding-right: 20px;">
+                <li><strong>عند \(u=0^+\):</strong> Limit Point (لا شرط حدود إضافي).</li>
+                <li><strong>عند \(u=2\pi^-\):</strong> Limit Circle (يلزم شرط حدود ذاتي الترافق، يُصاغ عبر لاغرانج/الورونسكي، لا روبين مباشر).</li>
+                <li><strong>الغلاف \(g\)</strong> يتصرف عند \(2\pi^-\) كـ\(\psi_1\)، ويحقق \(g(2\pi^-)=0\). لذلك يحقق شرط ديريكليه، وهو <em>اختيار محدد</em> ضمن التحقيقات الذاتية الترافق، لا النتيجة الوحيدة للتصنيف.</li>
+                <li><strong>سؤال مفتوح:</strong> هل يجعل تحقيق محدد (مثل ديريكليه) المؤثر محدودًا من الأسفل؟ وهل الصفر هو طاقة الحالة الأرضية؟</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== §6 ==================== -->
+    <div class="card">
+        <h2>6. النتائج ونطاق النموذج</h2>
+
+        <div class="summary-section summary-achieved">
+            <h3>ما الذي أنجزه هذا الإطار؟</h3>
+            <ul>
+                <li><strong>بناء مؤثر من الغلاف:</strong> تعريف \(L = -\partial_u^2 + g''/g\)، وإثبات الهوية البنيوية \(Lg=0\) على المجال المفتوح.</li>
+                <li><strong>التحليل الجبري للأصل (§2):</strong> التحويل الدقيق من Frame 1 يعطي \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\)، لا \(V_{\mathrm{eff}}\). اختفاء المشتقة الأولى تلقائي. برهان محلي عند \(u=\pi\) يرفض تحويل داربوكس قياسي من الرتبة الأولى.</li>
+                <li><strong>تفكيك SUSY QM:</strong> \(L = (-\partial_u - p)(\partial_u - p)\) كهوية شكلية.</li>
+                <li><strong>تحليل تفرد الجهد:</strong> \(1/u^4\) عند \(0^+\)، \(-1/(2\pi-u)\) عند \(2\pi^-\)، وقطب بسيط في \(V_{\mathrm{new}}\) عند \(u=\pi\) بلا نظير في \(V_{\mathrm{eff}}\).</li>
+                <li><strong>تصنيف النهايات:</strong> Limit Point عند \(0^+\)، Limit Circle عند \(2\pi^-\). شرط الحدود عند \(2\pi^-\) يُصاغ عبر لاغرانج/الورونسكي؛ ديريكليه اختيار محدد.</li>
+                <li><strong>تعريف دالة زيتا الطيفية</strong> كتعريف مشروط.</li>
+                <li><strong>الفصل بين ما ثبت وما هو مفتوح:</strong> بين الحل الصفري الشكلي والدالة الذاتية الفعلية؛ بين الغلاف كمنظم محتمل والمنظم المثبت؛ بين Frame 4 كمؤثر مستقل وFrame 4 كنتيجة استنتاجية (الأخيرة مرفوضة).</li>
+            </ul>
+        </div>
+
+        <div class="summary-section summary-next">
+            <h3>ما الخطوة التالية؟</h3>
+            <ol>
+                <li><strong>اختيار تحقيق ذاتي الترافق عند \(2\pi^-\)</strong>، بدءًا بشرط ديريكليه \(\psi(2\pi^-)=0\) كمرشح طبيعي أول.</li>
+                <li><strong>التحقق من انتماء \(g\) إلى مجال هذا التحقيق.</strong></li>
+                <li><strong>إثبات وجود حد سفلي للطيف.</strong></li>
+                <li><strong>حساب القيم الذاتية الموجبة \(\lambda_n\)</strong> عدديًا.</li>
+                <li><strong>بعد ذلك فقط:</strong> دراسة تقارب دالة زيتا وإمكان تعريف طاقة فراغ فيزيائية.</li>
+            </ol>
+        </div>
+
+        <p style="margin-top: 20px;">
+            <strong>ملاحظة على \(R_{13/12}\):</strong>
+            النتيجة العددية \(R_{13/12} \approx 0.60352\) من Frame 3، وليست مشتقة من مسألة زيتا هنا. ضمن اختيار الحالات ومؤثر الانتقال والتكامل المحدد في Frame 3، تُفسَّر بمقارنة نموذج الغلاف غير المتماثل بمرجع متماثل.
+        </p>
+    </div>
+
+    <!-- ==================== §7 ==================== -->
+    <div class="card">
+        <h2>7. ملاحظات تكميلية (خلف الزر)</h2>
+        <p>هذا القسم ليس أساسيًا لقراءة المتن؛ يجمع اشتقاقات وتفسيرات إضافية. من يكتفي بالنتائج يجدها في §1–§6.</p>
+        <div style="text-align: center; margin-top: 15px;">
+            <button id="toggleAssessmentBtn" class="btn btn-gold" onclick="toggleAssessment()" aria-controls="assessmentContent" aria-expanded="false">📖 عرض الملاحظات التكميلية</button>
+        </div>
+
+        <div id="assessmentContent" class="assessment-content">
+            <p>يقدّم هذا القسم قراءة تفصيلية لما أنجزه الإطار وما تركه مفتوحًا.</p>
+
+            <h4>1. الهوية \(Lg = 0\): مضمونة بنيائيًا</h4>
+            <p>من تعريف \(V_{\mathrm{eff}} = g''/g\)، تتحقق الهوية مباشرة. هذه نتيجة رياضية دقيقة، لا تقريب عددي. لكنها لا تثبت وحدها أن \(g\) دالة ذاتية فعلية؛ فذلك يتطلب تحديد المجال وشروط الحدود، كما يفعل §5.</p>
+
+            <h4>2. نتيجة §2: Frame 4 اختيار متوافق، لا استنتاج</h4>
+            <p>التحليل الجبري في §2 يُظهر أن التحويل الدقيق من Frame 1 يعطي \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\)، وهو مختلف عن \(V_{\mathrm{eff}}\). البرهان المحلي عند \(u=\pi\) يرفض تحويل داربوكس قياسي من الرتبة الأولى (لأن \(V_{\mathrm{eff}}\) ناعم عند \(\pi\)، و\(V_{\mathrm{new}}\) له قطب بسيط بمعامل \(\approx 2.96\)، وسلوك البذرة عند صفرها يعطي نعومة أو قطبًا مزدوجًا — لا قطبًا بسيطًا). التحويلات المعمّمة خارج نطاق هذا البرهان. يتسق هذا مع الموقف المنهجي للمخطوط الموحّد: الأطر الأربعة مسارات متوازية، لا سلسلة استنتاجية.</p>
+
+            <h4>3. تصنيف النهايات</h4>
+            <p>§5 يشتق Limit Point عند \(0^+\)، Limit Circle عند \(2\pi^-\). تصنيف بنيوي، لا يثبت حدًّا سفليًا للطيف. عند طرف Limit Circle، شرط الحدود يُصاغ عبر لاغرانج أو ورونسكي مرجعي، لا روبين مباشر (لأن \(\psi_2'\) يتباعد لوغاريتميًا).</p>
+
+            <h4>4. التنظيم الزيتاوي</h4>
+            <p>تعريف \(\zeta_{L,\ne 0}(s)\) و\(E_{\mathrm{vac}}^{\mathrm{reg}}\) مشروط بثلاثة أمور: (أ) معرفة المتسلسلة في نطاق، (ب) الاستمرار التحليلي المناسب، (ج) معالجة الاعتماد على المقياس.</p>
+
+            <h4>5. الغلاف كمنظم طبيعي</h4>
+            <p>فرضية لا نتيجة. إثباتها يتطلب إظهار السلوك عالي الطاقة للقيم الذاتية.</p>
+
+            <h4>6. ملاحظة على \(R_{13/12}\)</h4>
+            <p>نتيجة عددية من Frame 3. لا تُثبت الخصائص الطيفية لـ Frame 4، ولا تتنبأ بطاقة الفراغ. الرابط بين الإطارين هو الغلاف المشترك، لا اشتقاق المؤثر.</p>
+
+            <h4>الخلاصة</h4>
+            <p>أنتج هذا الإطار: المؤثر، الهوية البنيوية، التفكيك الشكلي، تحليل الجهد الطرفي، تصنيف النهايات، <strong>وإثباتًا جبريًا أن المؤثر اختيار متوافق لا نتيجة مشتقة</strong>، مع برهان محلي يرفض تحويل داربوكس قياسي من الرتبة الأولى. ويترك مفتوحًا: التحويلات المعمّمة، التحقيق الذاتي الترافق، الحد السفلي، حساب القيم الذاتية، تقارب دالة زيتا.</p>
+        </div>
     </div>
 
     <div class="links">
@@ -162,10 +703,49 @@
         <a href="../index.html" class="btn">🏠 الرئيسية</a>
     </div>
 
+    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+        <button onclick="window.print()" class="btn btn-blue">🖨️ طباعة / حفظ (نصي)</button>
+        <button onclick="generateDirectPDF()" class="btn btn-gold">📥 تحميل PDF (مباشر)</button>
+    </div>
+
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 4: Towards a Spectral Problem & Zeta Regularization.
+        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v6 (Arabic; corrections to Frobenius notation, Wronskian reference, and spectral-equivalence caveat).
     </div>
 </div>
+
+<script>
+    function toggleAssessment() {
+        const content = document.getElementById('assessmentContent');
+        const btn = document.getElementById('toggleAssessmentBtn');
+        const isOpening = getComputedStyle(content).display === 'none';
+        content.style.display = isOpening ? 'block' : 'none';
+        btn.textContent = isOpening ? '❌ إخفاء الملاحظات التكميلية' : '📖 عرض الملاحظات التكميلية';
+        btn.classList.toggle('btn-gold', !isOpening);
+        btn.setAttribute('aria-expanded', String(isOpening));
+    }
+
+    window.generateDirectPDF = function() {
+        const element = document.getElementById('pdf-content');
+        const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
+        const assessment = document.getElementById('assessmentContent');
+        const previousDisplay = assessment ? assessment.style.display : '';
+        buttons.forEach(btn => btn.style.display = 'none');
+        if (assessment) assessment.style.display = 'block';
+        const opt = {
+            margin:       10,
+            filename:     'Frame4_Spectral_Problem_AR_v6.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save()
+            .catch(err => console.error('PDF generation failed:', err))
+            .finally(() => {
+                buttons.forEach(btn => btn.style.display = '');
+                if (assessment) assessment.style.display = previousDisplay;
+            });
+    };
+</script>
 </body>
 </html>

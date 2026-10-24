@@ -1,153 +1,71 @@
 <!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════
+     Frame 1 — The Numerical Framework
+     VERSION: v7.0 | 2026-10-24
+     Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
+     DOI: 10.5281/zenodo.23540283
+     ═══════════════════════════════════════════════════════════════ -->
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame 1 - The Numerical Framework | Interactive Paper</title>
-    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
+    <meta name="version" content="7.0">
+    <title>Frame 1 — The Numerical Framework | Interactive Paper (v7.0)</title>
+    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21 — v7.0">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame1-en.html">
-    
-    <!-- Google Scholar Meta Tags -->
+
     <meta name="citation_title" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
-    <meta name="citation_publication_date" content="2026/10/21">
+    <meta name="citation_publication_date" content="2026/10/24">
     <meta name="citation_doi" content="10.5281/zenodo.23540283">
     <meta name="citation_language" content="en">
-    <meta name="citation_pdf_url" content="https://jabri-com.vercel.app/wells/frame1-en.html">
+    <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v7.0.0/frame1_tex.pdf">
 
-    <!-- JSON-LD Schema (@graph) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": "https://jabri-com.vercel.app/#website",
-          "url": "https://jabri-com.vercel.app/",
-          "name": "Heaven Al-Jabri",
-          "inLanguage": "en",
-          "publisher": { "@id": "https://jabri-com.vercel.app/#organization" }
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://jabri-com.vercel.app/#organization",
-          "name": "Heaven Al-Jabri",
-          "url": "https://jabri-com.vercel.app/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://jabri-com.vercel.app/image/logo1.png",
-            "width": 512,
-            "height": 512
-          },
-          "founder": { "@id": "https://jabri-com.vercel.app/#person" },
-          "foundingDate": "2026",
-          "areaServed": "YE"
-        },
-        {
-          "@type": "Person",
-          "@id": "https://jabri-com.vercel.app/#person",
-          "name": "Abdulla Mohammed Nasser Al-Jabri",
-          "alternateName": "عبدالله محمد ناصر الجبري",
-          "url": "https://jabri-com.vercel.app/",
-          "sameAs": [
-            "https://orcid.org/0009-0003-3319-3822",
-            "https://github.com/jabri-web",
-            "https://en.wikipedia.org/wiki/User:Jabri2026"
-          ],
-          "jobTitle": "Researcher, Author and Founder"
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "@id": "https://jabri-com.vercel.app/wells/frame1-en.html#article",
-          "headline": "The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21",
-          "author": { "@id": "https://jabri-com.vercel.app/#person" },
-          "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
-          "datePublished": "2026-10-21",
-          "identifier": {
-            "@type": "PropertyValue",
-            "propertyID": "DOI",
-            "value": "10.5281/zenodo.23540283"
-          },
-          "url": "https://jabri-com.vercel.app/wells/frame1-en.html",
-          "inLanguage": "en",
-          "abstract": "This paper presents a conceptual numerical framework within the Al-Hindara project. It discusses the proposed normalization relation Z+C+A=1 and investigates a candidate damping function containing the integer parameter xp=21."
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": "https://jabri-com.vercel.app/wells/frame1-en.html#breadcrumb",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jabri-com.vercel.app/en/" },
-            { "@type": "ListItem", "position": 2, "name": "Frame 1", "item": "https://jabri-com.vercel.app/wells/frame1-en.html" }
-          ]
-        }
+        {"@type": "WebSite","@id": "https://jabri-com.vercel.app/#website","url": "https://jabri-com.vercel.app/","name": "Heaven Al-Jabri","inLanguage": "en","publisher": {"@id": "https://jabri-com.vercel.app/#organization"}},
+        {"@type": "Organization","@id": "https://jabri-com.vercel.app/#organization","name": "Heaven Al-Jabri","url": "https://jabri-com.vercel.app/","logo": {"@type": "ImageObject","url": "https://jabri-com.vercel.app/image/logo1.png","width": 512,"height": 512},"founder": {"@id": "https://jabri-com.vercel.app/#person"},"foundingDate": "2026","areaServed": "YE"},
+        {"@type": "Person","@id": "https://jabri-com.vercel.app/#person","name": "Abdulla Mohammed Nasser Al-Jabri","alternateName": "عبدالله محمد ناصر الجبري","url": "https://jabri-com.vercel.app/","sameAs": ["https://orcid.org/0009-0003-3319-3822","https://github.com/jabri-web","https://en.wikipedia.org/wiki/User:Jabri2026"],"jobTitle": "Researcher, Author and Founder"},
+        {"@type": "ScholarlyArticle","@id": "https://jabri-com.vercel.app/wells/frame1-en.html#article","headline": "The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21","author": {"@id": "https://jabri-com.vercel.app/#person"},"publisher": {"@id": "https://jabri-com.vercel.app/#organization"},"datePublished": "2026-10-24","identifier": {"@type": "PropertyValue","propertyID": "DOI","value": "10.5281/zenodo.23540283"},"url": "https://jabri-com.vercel.app/wells/frame1-en.html","inLanguage": "en","abstract": "This paper presents a conceptual numerical framework within the Al-Hindara project. It discusses the proposed normalization relation Z+C+A=1 and investigates a candidate damping function containing the integer parameter xp=21."},
+        {"@type": "BreadcrumbList","@id": "https://jabri-com.vercel.app/wells/frame1-en.html#breadcrumb","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://jabri-com.vercel.app/en/"},{"@type": "ListItem","position": 2,"name": "Frame 1","item": "https://jabri-com.vercel.app/wells/frame1-en.html"}]}
       ]
     }
     </script>
 
-    <!-- MathJax for Equations -->
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- html2pdf -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         :root { --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; }
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; position: relative; }
-        
-        /* Language Toggle Button */
         .lang-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); color: var(--text); text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: 0.3s; z-index: 100; display: flex; align-items: center; gap: 8px; }
         .lang-btn:hover { background: var(--gold); color: #0a1a12; }
-
-        /* Top Navigation Bar */
-        .top-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(10, 26, 18, 0.9);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            width: 100%;
-        }
-        .nav-item {
-            color: var(--dim);
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border: 1px solid transparent;
-            transition: 0.3s;
-        }
-        .nav-item:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-            background: rgba(244, 196, 48, 0.1);
-        }
-        .nav-item.active {
-            color: #0a1a12;
-            background: var(--gold);
-            border-color: var(--gold);
-            cursor: default;
-        }
-
+        .top-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; background: rgba(10, 26, 18, 0.9); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); width: 100%; }
+        .nav-item { color: var(--dim); text-decoration: none; padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; border: 1px solid transparent; transition: 0.3s; }
+        .nav-item:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
+        .nav-item.active { color: #0a1a12; background: var(--gold); border-color: var(--gold); cursor: default; }
         h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
+        .version-badge { display: inline-block; background: rgba(244, 196, 48, 0.15); color: var(--gold); padding: 3px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: bold; margin-top: 10px; border: 1px solid rgba(244, 196, 48, 0.35); direction: ltr; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
+        .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
         .badge-exact { background: rgba(6, 214, 160, 0.1); border-left: 4px solid var(--green); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-left: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-        .badge-conjectural { background: rgba(229, 115, 115, 0.1); border-left: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-neutral { background: rgba(138, 168, 146, 0.1); border-left: 4px solid var(--dim); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .opening { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .opening-col { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .opening-col strong { display: block; margin-bottom: 8px; font-size: 1rem; }
+        .opening-col p { font-size: 0.88rem; margin: 0; color: var(--text); }
+        @media (max-width: 760px) { .opening { grid-template-columns: 1fr; } }
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); text-align: center; font-size: 1.1rem; }
-        .math-note { font-size: 0.85rem; color: var(--blue); margin-top: -10px; margin-bottom: 15px; text-align: center; }
         .dashboard { display: flex; flex-direction: column; gap: 20px; }
         .chart-container { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 10px; position: relative; height: 350px; width: 100%; }
         .controls { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 15px; justify-content: center; }
@@ -165,35 +83,55 @@
         .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; text-align: center; }
         .btn-gold { background: var(--gold); }
         .btn-blue { background: var(--blue); }
+        .btn-red { background: var(--dim); color: #0a1a12; }
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
-        @media print { body { background: white; color: #111; } .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; } h2 { color: #000; border-color: #aaa; } .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-conjectural, th { background: #f5f5f5; color: #111; border-color: #aaa; } .lang-btn, .top-nav, button { display: none; } }
+        .toggle-content { display: none; margin-top: 15px; padding: 15px; background: #051009; border: 1px dashed var(--border); border-radius: 8px; }
+        pre.code-block { background: #0a1524; border: 1px solid var(--border); border-radius: 8px; padding: 15px; overflow-x: auto; text-align: left; font-size: 0.85rem; color: #d4d4d4; }
+        @media print { body { background: white; color: #111; } .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; } h2 { color: #000; border-color: #aaa; } .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-neutral, th, .opening-col, pre.code-block { background: #f5f5f5; color: #111; border-color: #aaa; } .lang-btn, .top-nav, button { display: none; } .toggle-content { display: block !important; border: none; } }
     </style>
 </head>
 <body>
 
 <div class="container" id="pdf-content">
-    <a href="../jabri_5/wells/frame1.html" class="lang-btn">🌐 العربية</a>
+    <a href="frame1.html" class="lang-btn">🌐 العربية</a>
 
-    <!-- Top Navigation Bar -->
     <nav class="top-nav">
-        <a href="../en/index.html" class="nav-item">🏠 Home</a>
-        <a href="../jabri_5/wells/frame1-en.html" class="nav-item active">1. Raw Math</a>
-        <a href="../jabri_5/wells/bridge-en.html" class="nav-item">Bridge</a>
+        <a href="../index.html" class="nav-item">🏠 Home</a>
+        <a href="frame1-en.html" class="nav-item active">1. Raw Math</a>
+        <a href="bridge-en.html" class="nav-item">Bridge</a>
         <a href="../tree/frame2-en.html" class="nav-item">2. Application</a>
-        <a href="../jabri_5/wells/frame3-en.html" class="nav-item">3. Fine Structure</a>
-        <a href="../jabri_5/wells/frame4-en.html" class="nav-item">4. Spectral Problem</a>
+        <a href="frame3-en.html" class="nav-item">3. Fine Structure</a>
+        <a href="frame4-en.html" class="nav-item">4. Spectral Problem</a>
     </nav>
 
     <h1>The Numerical Framework — Interactive Paper</h1>
     <div class="subtitle">
         <strong>The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff \(x_p=21\)</strong><br>
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+        <br><span class="version-badge">v7.0 — 2026-10-24</span>
+    </div>
+
+    <!-- ==================== Opening ==================== -->
+    <div class="card">
+        <div class="opening">
+            <div class="opening-col">
+                <strong style="color: var(--gold);">Problem</strong>
+                <p>How does the oscillatory structure interact with the damping factor in a function combining log, sine, and exponential, and what cumulative behavior results from this interaction?</p>
+            </div>
+            <div class="opening-col">
+                <strong style="color: var(--green);">Achievement</strong>
+                <p>Definition of \(Z(x;21)=x^{-5}\ln x\sin(2\pi/x)e^{-x/21}\); analysis of its sign and roots (\(x=1\), \(x=2\)); study of its accumulation \(A(x)\); derivation of the asymptotic envelope \(K(x_p)\ln t/t^6\) in a specified complex extension.</p>
+            </div>
+            <div class="opening-col">
+                <strong style="color: var(--blue);">Type of Evidence</strong>
+                <p>Analytic proof of the sign and roots of \(Z\); analytic proof of \(A_\infty<0\) via two standard inequalities; independent numerical verification (Appendix D); asymptotic derivation for the complex extension with numerical verification.</p>
+            </div>
+        </div>
     </div>
 
     <div class="card">
         <h2>🔬 Interactive Simulation</h2>
-        <p>Use the slider below to change the cutoff value \(x_p\). The graph's range is extended to \(x=50\) to confirm that the accumulation function \(A(x)\) continues to increase and does not peak at \(x=42\).</p>
-        
+        <p>Use the slider below to change the cutoff \(x_p\). The graph's range is extended to \(x=50\) to confirm that \(A(x)\) continues to increase and does not peak at \(x=42\).</p>
         <div class="controls">
             <div class="slider-wrap">
                 <label>\(x_p\) =</label>
@@ -201,10 +139,9 @@
                 <span class="val-display" id="xpValue">21</span>
             </div>
             <div style="color:var(--gold); font-size:0.9rem;">
-                * At \(x=2\): Minimum of accumulation function. * At \(x=42\): No peak, just continuous growth.
+                * At \(x=2\): Minimum of \(A(x)\). * At \(x=42\): No peak, just continuous growth.
             </div>
         </div>
-
         <div class="dashboard">
             <div class="chart-container"><canvas id="zChart"></canvas></div>
             <div class="chart-container"><canvas id="aChart"></canvas></div>
@@ -213,129 +150,385 @@
 
     <div class="card">
         <h2>1. The Riemann Zero and Proposed Cutoff</h2>
-        <p><b>Definition (Proposed Integer Cutoff).</b> Let \(\gamma_2 \approx 21.022039\) denote the ordinate of the second positive nontrivial zero of the Riemann zeta function. We define the model parameter:</p>
+        <p><b>Definition.</b> Let \(\gamma_2 \approx 21.022039\) be the ordinate of the second positive nontrivial zero of the Riemann zeta function. We define the model parameter:</p>
         <div class="math-block">\[ x_p := \lfloor \gamma_2 \rfloor = 21. \]</div>
-        <div class="badge-exact">
-            <strong>Scientific Note:</strong> The designation “Yemeni Constant” is a project-specific name for this proposed parameter; its broader mathematical or physical significance remains to be independently established.
+        <p><strong>Naming note.</strong> The choice \(x_p=21\) is a <em>free modelling choice</em>, inspired by \(\lfloor \gamma_2 \rfloor\) for numerical approximation purposes only. It is not a derivation from the zeta function, and the model makes no claim of a structural mathematical relationship between Riemann zeros and the function \(Z\).</p>
+        <button class="btn btn-red" onclick="toggleSection('sec1-note')">📌 Terminology note (Riemann zeros vs roots of the function)</button>
+        <div id="sec1-note" class="toggle-content badge-neutral" style="margin-top: 10px;">
+            The choice of 21 is a <strong>modelling choice</strong> inspired by a Riemann zero. It <strong>does not</strong> mean that \(\gamma_2 = 21.022\) is a root of \(Z(x)\) or \(Z'(x)\). On the study domain \(x \ge 1\), the roots of \(Z(x)\) are:
+            <ul>
+                <li><strong>\(x=1\)</strong> at the boundary of the domain, since \(\ln 1 = 0\) and also \(\sin(2\pi)=0\).</li>
+                <li><strong>\(x=2\)</strong>, the unique interior root, since \(\sin(\pi)=0\).</li>
+            </ul>
+            Other zeros (e.g. \(x=2/3, 2/5\)) lie outside the simulation domain (\(x<1\)). The name "Yemeni Constant" is project-specific and does not connote established mathematical or physical significance.
         </div>
     </div>
 
     <div class="card">
-        <h2>2. Sign Analysis (Mathematical Proof)</h2>
+        <h2>2. Sign Analysis (Analytic Proof)</h2>
         <p>For \(x_p>0\), the real-variable function satisfies:</p>
         <ul>
             <li>\(Z(x;x_p) < 0\) for \(1 < x < 2\).</li>
-            <li>\(Z(2;x_p) = 0\).</li>
+            <li>\(Z(1;x_p) = Z(2;x_p) = 0\) (the roots in \([1,\infty)\)).</li>
             <li>\(Z(x;x_p) > 0\) for \(x > 2\).</li>
         </ul>
         <details>
-            <summary>Click to view Proof</summary>
-            <p>For \(x>1\), the factors \(x^{-5}\), \(\ln(x)\), and \(e^{-x/x_p}\) are strictly positive. The sign is determined by \(\sin(2\pi/x)\). If \(1 < x < 2\), then \(\pi < 2\pi/x < 2\pi\), so the sine is negative. If \(x > 2\), then \(0 < 2\pi/x < \pi\), so the sine is positive.</p>
+            <summary>Click to view proof</summary>
+            <p>For \(x>1\), the factors \(x^{-5}\), \(\ln(x)\), and \(e^{-x/x_p}\) are strictly positive. The sign is determined by \(\sin(2\pi/x)\). If \(1 < x < 2\), then \(\pi < 2\pi/x < 2\pi\), so the sine is negative. If \(x > 2\), then \(0 < 2\pi/x < \pi\), so the sine is positive. At \(x=1\), \(\ln x = 0\); at \(x=2\), \(\sin(2\pi/x)=0\). These are the only two roots in \([1,\infty)\).</p>
         </details>
     </div>
 
     <div class="card">
         <h2>3. Accumulation Function</h2>
-        <p>Define \(A(x):=\int_1^x Z(t;21)\,dt\). By the Fundamental Theorem of Calculus, \(A'(x) = Z(x;21)\). Thus, \(A(x)\) decreases on \((1, 2)\), reaches a <strong>minimum at \(x=2\)</strong>, and increases on \((2, \infty)\).</p>
-        <div class="math-note">*(Note: The integration in the graph above is computed numerically using the Trapezoidal Rule with step size 0.05).*</div>
+        <p>Define \(A(x):=\int_1^x Z(t;21)\,dt\). By the Fundamental Theorem of Calculus, \(A'(x) = Z(x;21)\). Since \(Z(x)<0\) on \((1,2)\) and \(>0\) on \((2,\infty)\), \(A(x)\) decreases on \((1,2)\), attains a <strong>global minimum at \(x=2\)</strong>, and increases on \((2,\infty)\).</p>
+
+        <h3>Behaviour of \(A(x)\) at infinity</h3>
+        <p>The integral \(A_\infty := \int_1^\infty Z(t;21)\,dt\) converges absolutely because of the factor \(e^{-t/21}\). Substituting \(t = 2\pi/x\):</p>
+        <div class="math-block">\[ A_\infty = \frac{1}{(2\pi)^4} \int_0^{2\pi} W(t)\sin(t)\,dt, \qquad W(t) = t^3 \ln\!\left(\frac{2\pi}{t}\right) e^{-2\pi/(21t)}. \]</div>
+        <p>Splitting the integral over \((0,\pi)\) and \((\pi, 2\pi)\) and substituting \(t \mapsto 2\pi - t\) in the second part:</p>
+        <div class="math-block">\[ \boxed{\,A_\infty = \frac{1}{(2\pi)^4} \int_0^\pi \bigl[W(t) - W(2\pi-t)\bigr]\sin(t)\,dt\,} \]</div>
+
+        <details>
+            <summary>Click to view analytic proof that \(A_\infty < 0\)</summary>
+            <p><strong>Step 1.</strong> Let \(\varphi(u) := \log W(\pi+u) - \log W(\pi-u)\) on \((0,\pi)\). We want to show \(\varphi(u) > 0\), i.e. \(W(2\pi-t) > W(t)\) with \(t=\pi-u\).</p>
+            <p><strong>Step 2.</strong> \(\lim_{u\to 0^+}\varphi(u)=0\). It suffices to show \(\varphi'(u) > 0\). Differentiating \(\log W\):</p>
+            <div class="math-block">\[ \varphi'(u) = \frac{g(A)}{\pi+u} + \frac{g(B)}{\pi-u} + \frac{2\pi}{21}\left(\frac{1}{(\pi-u)^2} + \frac{1}{(\pi+u)^2}\right), \]</div>
+            <p>where \(A = 2\pi/(\pi+u)\), \(B = 2\pi/(\pi-u)\), and \(g(s) = 3 - 1/\ln s\).</p>
+            <p><strong>Step 3.</strong> Multiplying by \(2\pi\) and substituting (so that \(B = A/(A-1)\)):</p>
+            <div class="math-block">\[ E(A) := 2\pi\varphi'(u) = \frac{3A^2}{A-1} - \frac{A}{\ln A} - \frac{A}{(A-1)\ln B} + \frac{A^2}{21}\!\left(1 + \frac{1}{(A-1)^2}\right). \]</div>
+            <p>For \(u\in(0,\pi)\), \(A = 2\pi/(\pi+u)\) lies strictly inside \((1,2)\): as \(u\to0^+\), \(A\to2^-\); as \(u\to\pi^-\), \(A\to1^+\). The map \(u\mapsto A(u)\) is strictly decreasing on \((0,\pi)\) from \(2\) to \(1\), and \(A(u)\) remains inside the open interval \((1,2)\) throughout.</p>
+            <p><strong>Step 4 (positivity of \(E(A)\) on \((1,2)\)).</strong> Two standard inequalities:</p>
+            <ul>
+                <li>For all \(A>1\): \(\ln A \ge \dfrac{2(A-1)}{A+1}\), strict for \(A>1\); hence \(-\dfrac{A}{\ln A} \ge -\dfrac{A(A+1)}{2(A-1)}\) (strict on \((1,2)\)).</li>
+                <li>On \((1,2)\): \(B = A/(A-1) > 2\), hence \(\ln B > \ln 2\), so \(-\dfrac{A}{(A-1)\ln B} > -\dfrac{A}{(A-1)\ln 2}\).</li>
+            </ul>
+            <p>Substituting:</p>
+            <div class="math-block">
+                \[
+                \begin{aligned}
+                E(A) &> \frac{A}{A-1}\left(\frac{5A-1}{2} - \frac{1}{\ln 2}\right)
+                + \frac{A^2}{21}\!\left(1+\frac{1}{(A-1)^2}\right) \\
+                &> 0.
+                \end{aligned}
+                \]
+            </div>
+            <p>On \((1,2)\), \(\dfrac{5A-1}{2} > 2\) (strict because \(A>1\); equality at \(A=1\) lies outside), and \(2 > \dfrac{1}{\ln 2}\approx 1.4427\), so the first bracket is positive. The second term \(\dfrac{A^2}{21}\!\left(1+\dfrac{1}{(A-1)^2}\right)\) is always positive. Hence \(E(A) > 0\) on all of \((1,2)\).</p>
+            <p><strong>Step 5.</strong> Since \(A(u)\) remains inside \((1,2)\) on all of \((0,\pi)\), positivity of \(E(A)\) on \((1,2)\) gives \(\varphi'(u) = E(A(u))/(2\pi) > 0\) on all of \((0,\pi)\). With \(\lim_{u\to 0^+}\varphi(u)=0\), we obtain \(\varphi(u) > 0\) for every \(u\in(0,\pi)\), i.e. \(W(2\pi-t) > W(t)\) on \((0,\pi)\).</p>
+            <p><strong>Step 6.</strong> In the symmetric form:</p>
+            <div class="math-block">\[ A_\infty = \frac{1}{(2\pi)^4}\int_0^\pi \bigl[W(t)-W(2\pi-t)\bigr]\sin t\,dt. \]</div>
+            <p>Since \(W(2\pi-t) > W(t)\) on \((0,\pi)\) and \(\sin t > 0\) on \((0,\pi)\), the integrand is negative pointwise, hence:</p>
+            <div class="math-block">\[ \boxed{\,A_\infty = \frac{1}{(2\pi)^4}\int_0^\pi \bigl[W(t)-W(2\pi-t)\bigr]\sin t\,dt < 0\,} \]</div>
+            <p style="font-size: 0.85rem; color: var(--dim); border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 15px;"><strong>Note.</strong> The above establishes \(A_\infty<0\) analytically and does not require numerical verification. The numerical verification in Appendix D is presented as an independent check of the implementation, not as a substitute for the proof.</p>
+        </details>
+
+        <p><strong>Result.</strong> Since \(A(2)<0\), \(A'(x) = Z(x;21) > 0\) on \((2,\infty)\), and \(A_\infty < 0\):</p>
+        <ul>
+            <li>\(A(x) < 0\) for all \(x > 1\).</li>
+            <li>\(A(x)\) does not return to zero after \(x=2\).</li>
+            <li>The unique root of \(A\) in \([1,\infty)\) is \(x=1\).</li>
+        </ul>
+
         <div class="badge-exploratory">
-            <strong>⚠️ Scientific Correction:</strong> The previous claim that the accumulation function has a maximum at \(x=42\) is not supported by the equations. The function continues to increase after \(x=2\).
+            <strong>Numerical integration note.</strong> The graph uses the trapezoidal rule with step \(h=0.05\) on \([1,50]\). The integral to infinity is estimated with an explicit tail bound using the damping factor \(e^{-x/21}\) (see Appendix D). The graph is exploratory; it does not replace the analytic proof above.
         </div>
     </div>
 
     <div class="card">
         <h2>4. Complex Extension & Asymptotic Envelope</h2>
-        <p>To examine behavior along the critical line \(s=\frac12+it\), we define an explicit complex extension using the <strong>principal branch</strong> of the logarithm \(\operatorname{Log}(s)\):</p>
-        <div class="math-block">\[ \mathcal{Z}(s; x_p) = s^{-5} \operatorname{Log}(s) \sin\left(\frac{2\pi}{s}\right) e^{-s/x_p} \]</div>
-        <div class="math-note">*Principal branch: \(\operatorname{Log}(s) = \ln|s| + i\arg(s)\) where \(-\pi < \arg(s) \le \pi\).*</div>
-        <p>As \(t \to \infty\), the asymptotic envelope is given by:</p>
-        <div class="math-block">\[ |\mathcal{Z}(1/2+it; x_p)| \sim K(x_p)\frac{\ln t}{t^6}, \qquad K(x_p) = 2\pi e^{-1/(2x_p)} \]</div>
-        <div class="math-note">*Asymptotic equivalence definition: \(f(t) \sim g(t)\) if and only if \(\lim_{t \to \infty} \frac{f(t)}{g(t)} = 1\).*</div>
-        <div class="badge-exact">
-            <strong>Mathematically Derived Asymptotic Result:</strong> The asymptotic envelope is derived from the explicitly defined complex extension. It describes the behavior as \(t\to\infty\) and <strong>does not constitute a result about the Riemann zeta function itself</strong>.
+        <p>To examine behaviour along the critical line \(s=\tfrac12+it\), define an explicit complex extension using the <strong>principal branch</strong> of the logarithm \(\operatorname{Log}(s)\):</p>
+        <div class="math-block">\[ \mathcal{Z}(s; x_p) = s^{-5} \operatorname{Log}(s) \sin\!\left(\frac{2\pi}{s}\right) e^{-s/x_p}. \]</div>
+        <p>As \(t \to \infty\):</p>
+        <div class="math-block">\[ |\mathcal{Z}(1/2+it; x_p)| \sim K(x_p)\frac{\ln t}{t^6}, \qquad K(x_p) = 2\pi e^{-1/(2x_p)}. \]</div>
+        <div class="badge-exploratory">
+            <strong>Scope.</strong> The asymptotic formula above is specific to the <strong>complex extension defined in this paper</strong>; it is not an asymptotic formula for the Riemann zeta function itself. The constant \(K(x_p)\) derives from this extension and is not asserted as a property of \(\zeta\).
         </div>
+        <details>
+            <summary>Derivation and asymptotic equivalence</summary>
+            <p><strong>Principal branch.</strong> \(\operatorname{Log}(s) = \ln|s| + i\arg(s)\) with \(-\pi < \arg(s) \le \pi\).</p>
+            <p><strong>Asymptotic equivalence.</strong> We write \(f(t) \sim g(t)\) iff \(\lim_{t\to\infty} f(t)/g(t) = 1\).</p>
+            <p><strong>Derived result.</strong> The asymptotic envelope follows from the explicit complex extension, and describes the \(t\to\infty\) behaviour. It does not constitute a result about the Riemann zeta function itself.</p>
+        </details>
     </div>
 
     <div class="card">
         <h2>5. Sensitivity Analysis & Evidential Status</h2>
-        <p>Does \(x_p=21\) provide the closest match to the target \(K \approx 6.1353\)?</p>
-        <table>
-            <thead><tr><th>Candidate \(n\)</th><th>\(K(n) = 2\pi e^{-1/(2n)}\)</th><th>Diff \(|K(n)-6.1353|\)</th></tr></thead>
-            <tbody>
-                <tr><td>19</td><td>6.119995</td><td>0.015305</td></tr>
-                <tr><td>20</td><td>6.128053</td><td>0.007247</td></tr>
-                <tr><td class="highlight">21</td><td class="highlight">6.135353</td><td class="highlight">0.000053</td></tr>
-                <tr><td>22</td><td>6.141996</td><td>0.006696</td></tr>
-            </tbody>
-        </table>
-        <div class="badge-conjectural">
-            <strong>Circular Validation Warning:</strong> If the target value (6.1353) was obtained from a fit that already assumed \(x_p=21\), the agreement is not an independent validation. The comparison is therefore interpreted as a "Conditional Model Fit", not proof of a universal constant.
+        <p><strong>Source of the target value.</strong> The value \(K \approx 6.1353\) is \(K(21) = 2\pi e^{-1/42}\) itself, computed from the model's own defining formula. Therefore the "agreement" between \(K(21)\) and \(6.1353\) is <em>circular by construction</em>, not an independent test.</p>
+        <p>The table below is best read as a <strong>sensitivity analysis</strong> of the choice of \(x_p\) over a bounded range (19–22), not as evidence that 21 is uniquely favoured. The comparison is informative about the curvature of \(K(x_p)\) around the chosen value, not about its uniqueness.</p>
+        <button class="btn btn-gold" onclick="toggleSection('sec5-table')">📊 Show sensitivity table</button>
+        <div id="sec5-table" class="toggle-content" style="margin-top: 10px;">
+            <table>
+                <thead><tr><th>Candidate \(n\)</th><th>\(K(n) = 2\pi e^{-1/(2n)}\)</th><th>Diff \(|K(n)-6.1353|\)</th></tr></thead>
+                <tbody>
+                    <tr><td>19</td><td>6.119995</td><td>0.015305</td></tr>
+                    <tr><td>20</td><td>6.128053</td><td>0.007247</td></tr>
+                    <tr><td class="highlight">21</td><td class="highlight">6.135353</td><td class="highlight">0.000053</td></tr>
+                    <tr><td>22</td><td>6.141996</td><td>0.006696</td></tr>
+                </tbody>
+            </table>
+            <div class="badge-neutral">
+                <strong>Note on the nature of the comparison.</strong> The target value 6.1353 is \(K(21)\) itself. The positive entries in the third column for \(n \ne 21\) simply reflect the position of \(K(n)\) on the curve \(K(x_p) = 2\pi e^{-1/(2x_p)}\), which is slowly increasing. Minimality at \(n=21\) is by construction, not by independent discovery.
+            </div>
         </div>
     </div>
 
     <div class="card">
-        <h2>6. Methodology & Linking</h2>
-        <div class="badge-conjectural" style="margin-top: 0;">
-            <strong>RiemannOS Status:</strong> The wider cosmological interpretation (RiemannOS) and the proposed normalization \(Z+C+A=1\) remain <strong>purely conjectural</strong>. This paper does not claim to prove the Riemann Hypothesis or derive cosmological constants. It strictly separates exact mathematical results from empirical and speculative proposals.
+        <h2>6. Methodological & Cosmological Extensions (Exploratory)</h2>
+        <div class="badge-neutral" style="margin-top: 0; margin-bottom: 15px;">
+            <strong>RiemannOS status.</strong> The wider cosmological interpretation (RiemannOS) and the proposed normalization \(Z+C+A=1\) are <strong>exploratory philosophical/physical hypotheses</strong>. This paper does not claim to prove the Riemann Hypothesis or derive cosmological constants.
         </div>
-        <p>For more details, see <b>Frame 2</b> which applies this methodology to the geometric proof of the tree and shadow, and field data.</p>
-        
-        <div class="links" style="margin-bottom: 15px;">
-            <a href="../index-en.html" class="btn">🏠 Home</a>
-            <a href="bridge-en.html" class="btn">← Bridge</a>
-            <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame1_tex.pdf" target="_blank" class="btn btn-gold">📄 Frame 1 PDF (External Link)</a>
-        </div>
-
-        <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-            <button onclick="window.print()" class="btn btn-blue">🖨️ Print / Save (Text)</button>
-            <button onclick="generateDirectPDF()" class="btn btn-gold">📥 Download PDF (Direct)</button>
+        <button class="btn btn-red" onclick="toggleSection('sec6-content')">🔭 Show exploratory hypotheses (Jabri-A & Jabri-C)</button>
+        <div id="sec6-content" class="toggle-content" style="margin-top: 10px;">
+            <h3>A. Jabri-A hypothesis (dark energy)</h3>
+            <p>In earlier drafts of the project, a numerically interesting coincidence was noted. If we define the roots \(t_k\) as those satisfying \(Z'(t_k) = 0\) (roots of the function \(Z\), not Riemann zeros), then evaluating the <strong>second derivative of the function \(Z\)</strong> — i.e. \(Z''(t_k)\), not a "second derivative of a physical potential" — at the fifth root \(t_5 \approx 32.935\) was reported to produce a very small numerical value of order \(10^{-123}\).</p>
+            <p><strong>Terminological and numerical note.</strong> \(Z(x)\) is a purely mathematical model function, not a physical potential. The value \(Z''(t_5)\) <em>has not been re-verified numerically in this version</em>, and should be recomputed using the function \(Z\) defined in §1 before being treated as a numerical result. As for the comparison with the order of \(\Lambda \sim 10^{-122} M_{Pl}^2\), it is an <em>exponential comparison</em> only, not a physical comparison in unified units, until normalizations and units are specified.</p>
+            <div class="badge-neutral">
+                <strong>Methodological note.</strong> This numerical observation does not constitute a basis for solving the cosmological constant problem, and is offered as an exploratory seed. Roots of \(Z'(t_k)=0\) are not zeros of the zeta function.
+            </div>
+            <h3>B. Jabri-C hypothesis (spacetime as execution of code)</h3>
+            <p>A bolder philosophical hypothesis (Jabri-C) proposes that spacetime is not an independent stage but the "output" of a mathematical code. This is formalized hypothetically via an action linking Einstein's geometry to the field \(Z(x)\):</p>
+            <div class="math-block">
+                \[ S = \int d^4x \sqrt{-g} \left[ \frac{R}{16\pi G} + \frac{1}{2} \partial_\mu Z \partial^\mu Z - V(Z) \right] \]
+            </div>
+            <div class="badge-neutral">
+                <strong>Methodological note.</strong> This action is a <strong>philosophical simulation</strong>. No mathematical proof links Einstein's field equations to the roots of \(Z(x)\). These ideas are offered as seeds for thinking, not as established physical facts.
+            </div>
+            <p>For more details, see <b>Frame 2</b>, which applies this methodology to the geometric proof of the tree-and-shadow, and to field data.</p>
         </div>
     </div>
 
-    <!-- ==================== Section 7: Computational Tools (NEW) ==================== -->
+    <!-- ==================== Section 7 ==================== -->
     <div class="card">
         <h2>🛠️ 7. Computational Tools & Numerical Verification</h2>
-        <p>To ensure full reproducibility of the results and to rigorously verify the derivatives, the following interactive and programmatic tools are provided with this framework:</p>
-        
+        <p>To ensure reproducibility of the results and to verify the derivatives, the following tools are provided:</p>
         <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-            
-            <!-- Calculator v3.2.2 -->
             <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <div>
-                    <strong style="color: var(--gold);">Z(x) Interactive Calculator (v3.2.2)</strong><br>
-                    <span style="font-size: 0.85rem; color: var(--dim);">Live web app to calculate Z(x) and its derivatives based on the first 100 Riemann zeros.</span>
+                    <strong style="color: var(--gold);">Z(x) Interactive Calculator (v5)</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--dim);">Computes the <strong>paper's model function \(Z(x)\)</strong> and its derivatives. Not the Riemann zeta function.</span>
                 </div>
-                <a href="calculator.html" target="_blank" class="btn btn-blue">🧮 Open Calculator</a>
+                <a href="calculator-v5.html" target="_blank" class="btn btn-blue">🧮 Open Calculator</a>
             </div>
-
-            <!-- Calculator v3.4.0 -->
             <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <div>
-                    <strong style="color: var(--gold);">Convergence Calculator (v3.4.0)</strong><br>
-                    <span style="font-size: 0.85rem; color: var(--dim);">Calculates the partial sum Z_N(44) and demonstrates its convergence towards -1.00.</span>
+                    <strong style="color: var(--gold);">Convergence Calculator (v5)</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--dim);">Partial sum \(Z_N(44)\) and its asymptotic behaviour. A standalone tool; results are not used to confirm this paper's conclusions unless the link is documented explicitly.</span>
                 </div>
-                <a href="calculator-v340.html" target="_blank" class="btn btn-blue">📈 Open Convergence Tool</a>
+                <a href="calculator-v5.html" target="_blank" class="btn btn-blue">📈 Open Convergence Tool</a>
             </div>
-
-            <!-- Numerical Verification -->
-            <div style="background: #051009; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                <div>
-                    <strong style="color: var(--gold);">Python Numerical Verification</strong><br>
-                    <span style="font-size: 0.85rem; color: var(--dim);">Comparison between analytical and numerical derivatives (error ~10^-13) proving the mathematical integrity of the code.</span>
+            <div style="background: #051009; border: 1px solid var(--border); padding: 8px; border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <strong style="color: var(--gold);">Numerical Verification (Python — Appendix D)</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--dim);">Comparison of analytic and numerical evaluation of the complex extension, with an explicit tail bound.</span>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="appendix-d.png" target="_blank" class="btn btn-gold">📊 Verification Figure</a>
+                        <button onclick="toggleSection('verificationTable')" class="btn btn-blue">🔢 Show Numerical Table</button>
+                    </div>
                 </div>
-                <a href="appendix-d.png" target="_blank" class="btn btn-gold">📊 View Verification Table</a>
-            </div>
+                <div id="verificationTable" class="toggle-content" style="overflow-x: auto; background: transparent; border: none; padding: 0;">
+                    <div class="badge-exploratory" style="margin-top: 15px; margin-bottom: 5px;">
+                        <strong>Table status.</strong> The numerical values below come from Appendix D (§8). The "asymptotic expectation" column is \(K(21)\ln(t)/t^6\); the "numerical" column is the actual evaluation of the complex extension at \(s=1/2+it\).
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 15px;"><strong>Asymptotic formula:</strong> \(|\mathcal{Z}(1/2+it;21)| \sim K(21)\cdot\ln(t)/t^6\), where \(K(21) = 2\pi e^{-1/42} \approx 6.135353\).</p>
+                    <p style="font-size: 0.9rem;"><strong>Measured quantity:</strong> \(C(t) := |\mathcal{Z}(1/2+it;21)|\cdot t^6/\ln(t)\); expected \(C(t)\to K(21)\) as \(t\to\infty\).</p>
+                    <p style="font-size: 0.9rem;"><strong>Error definitions:</strong> "Absolute error" is \(|C(t)-K(21)|\); "relative error" is \(|C(t)-K(21)|/K(21)\).</p>
+                    <table style="margin-top: 15px;">
+                        <thead>
+                            <tr>
+                                <th>\(t\)</th>
+                                <th>\(K(21)\cdot\ln(t)/t^6\)<br><small>(asymptotic)</small></th>
+                                <th>\(|\mathcal{Z}(1/2+it;21)|\)<br><small>(numerical — §8)</small></th>
+                                <th>\(C(t)\)</th>
+                                <th>\(|C(t)-K(21)|\)<br><small>(absolute)</small></th>
+                                <th>\(|C(t)-K(21)|/K(21)\)<br><small>(relative)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>\(10^2\)</td>
+                                <td>\(2.8254\times10^{-11}\)</td>
+                                <td>\(2.9860\times10^{-11}\)</td>
+                                <td>\(6.484090\)</td>
+                                <td>\(0.348738\)</td>
+                                <td>\(5.68\times10^{-2}\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(10^3\)</td>
+                                <td>\(4.2382\times10^{-17}\)</td>
+                                <td>\(4.3463\times10^{-17}\)</td>
+                                <td>\(6.291918\)</td>
+                                <td>\(0.156565\)</td>
+                                <td>\(2.55\times10^{-2}\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(10^4\)</td>
+                                <td>\(5.6509\times10^{-23}\)</td>
+                                <td>\(5.7325\times10^{-23}\)</td>
+                                <td>\(6.223935\)</td>
+                                <td>\(0.088583\)</td>
+                                <td>\(1.44\times10^{-2}\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(10^5\)</td>
+                                <td>\(7.0636\times10^{-29}\)</td>
+                                <td>\(7.1290\times10^{-29}\)</td>
+                                <td>\(6.192194\)</td>
+                                <td>\(0.056842\)</td>
+                                <td>\(9.26\times10^{-3}\)</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>\(t\to\infty\)</td>
+                                <td>\(0\)</td>
+                                <td>\(0\)</td>
+                                <td>\(K(21)=6.135353\)</td>
+                                <td>\(0\)</td>
+                                <td>\(0\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p style="font-size: 0.85rem; color: var(--dim); margin-top: 10px;">
+                        <strong>Note on the final row:</strong> The 0 values in the "asymptotic expectation" and \(|Z|\) columns mean that as \(t \to \infty\), they approach zero, not that they have a finite value of zero.
+                    </p>
 
+                    <p style="font-size: 0.9rem; margin-top: 15px;"><strong>Asymptotic Convergence.</strong> As \(t\to\infty\):</p>
+                    <div class="math-block" style="margin-top: 5px;">
+                        \[
+                        C(t)=K(21)\left[1+\frac{\pi^2}{8(\ln t)^2}
+                        +O\!\left(\frac{1}{(\ln t)^4}\right)\right].
+                        \]
+                    </div>
+                    <p style="font-size: 0.9rem;">Thus, the leading relative deviation from \(K(21)\) decays as \(1/(\ln t)^2\). This asymptotic expansion is derived analytically, explaining the slow convergence seen in the table.</p>
+
+                    <div class="badge-exploratory" style="margin-top: 15px;">
+                        <strong>Scope note.</strong> The formula \(|\mathcal{Z}(1/2+it;21)| \sim K(21)\ln(t)/t^6\) refers to the complex extension defined in this paper; it is not an asymptotic formula for the Riemann zeta function.
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!-- ==================== Section 8: Appendix D ==================== -->
+    <div class="card">
+        <h2>8. Appendix D — Numerical Verification Details</h2>
+        <p>This appendix presents the details of the independent numerical verification supporting the analytic results of the main text, without replacing the proofs:</p>
+        <ol>
+            <li><strong>Sign of \(A_\infty\):</strong> explicit tail bound plus a high-precision evaluation of \(A(100)\).</li>
+            <li><strong>Convergence of \(C(t)\):</strong> Python code to evaluate \(|\mathcal{Z}(1/2+it;21)|\) and compare with the asymptotic expectation (results in §7).</li>
+        </ol>
+
+        <h3>D.1 Tail bound for \(A_\infty\)</h3>
+        <!-- Applied the companion's exact correction here -->
+        <p>For all \(t \ge 2\), the bound \(|\sin(2\pi/t)| \le 2\pi/t\) holds. Since \(\ln t > 0\) on this domain,</p>
+        <div class="math-block">\[
+            |Z(t;21)| = t^{-5}\ln(t)\,|\sin(2\pi/t)|\,e^{-t/21}
+            \le 2\pi\, t^{-6}\ln(t)\,e^{-t/21}.
+        \]</div>
+        <p>To bound the integral, note that \(g(t)=t^{-6}\ln t\) is decreasing for \(t\ge2\), since</p>
+        <div class="math-block">\[
+            g'(t)=t^{-7}(1-6\ln t)<0.
+        \]</div>
+        <p>Therefore, for every \(X\ge2\),</p>
+        <div class="math-block">\[
+            \left|\int_X^\infty Z(t;21)\,dt\right|
+            \le \int_X^\infty |Z(t;21)|\,dt
+            \le 42\pi\, X^{-6}\ln X \cdot e^{-X/21}.
+        \]</div>
+        <p>At \(X=100\):</p>
+        <div class="math-block">\[
+            \left|\int_{100}^\infty Z(t;21)\,dt\right|
+            \le 42\pi \cdot 100^{-6} \cdot \ln(100) \cdot e^{-100/21}
+            \approx 5.2 \times 10^{-12}.
+        \]</div>
+        <p>Hence \(A_\infty = A(100) \pm 5.2 \times 10^{-12}\). The numerical evaluation of \(A(100)\) therefore suffices to fix the sign of \(A_\infty\) to a precision beyond any reasonable doubt, provided \(|A(100)| \gg 5.2 \times 10^{-12}\).</p>
+
+        <h3>D.2 Code (Python — NumPy / SciPy)</h3>
+        <pre class="code-block"><code>import numpy as np
+from scipy.integrate import quad
+
+# D.1 — evaluate A(100) and the tail bound
+def Z_real(t, xp=21.0):
+    if t &lt;= 1: return 0.0
+    return (t**-5) * np.log(t) * np.sin(2*np.pi/t) * np.exp(-t/xp)
+
+A_100, err_A100 = quad(Z_real, 1, 100, limit=500,
+                       epsabs=1e-15, epsrel=1e-12)
+X = 100.0
+tail = 42*np.pi * X**-6 * np.log(X) * np.exp(-X/21.0)
+print(f"A(100)      = {A_100:.12f}   (quad err: {err_A100:.1e})")
+print(f"Tail bound  = {tail:.3e}")
+print(f"A_inf       = {A_100:.12f} +/- {err_A100 + tail:.1e}")
+print(f"A_inf < 0 : {A_100 + err_A100 + tail < 0}")
+print()
+
+# D.2 — evaluate |Z(1/2+it;21)|
+def Z_cplx(s, xp=21.0):
+    return (s**-5) * np.log(s) * np.sin(2*np.pi/s) * np.exp(-s/xp)
+
+K21 = 2*np.pi*np.exp(-1/42)
+print(f"K(21) = 2*pi*e^(-1/42) = {K21:.6f}")
+print(f"{'t':>8} {'K ln(t)/t^6':>16} {'|Z|':>16} "
+      f"{'C(t)':>10} {'|C-K|':>10} {'rel':>10}")
+print("-" * 80)
+for t in [1e2, 1e3, 1e4, 1e5]:
+    z = abs(Z_cplx(0.5 + 1j*t))
+    C = z * t**6 / np.log(t)
+    err = abs(C - K21); rel = err / K21
+    asymp = K21 * np.log(t) / t**6
+    print(f"{t:>8.0e} {asymp:>16.4e} {z:>16.4e} "
+          f"{C:>10.6f} {err:>10.6f} {rel:>10.2e}")</code></pre>
+
+        <h3>D.3 Result for \(A_\infty\)</h3>
+        <p>Running the code:</p>
+        <ul>
+            <li><strong>\(A(100) \approx -0.0247\)</strong> (the exact value depends on the SciPy version, differing in the last digit).</li>
+            <li><strong>Analytic tail bound</strong> at \(X=100\): \(\left|\int_{100}^\infty Z\,dt\right| \le 5.2 \times 10^{-12}\). This is a rigorous mathematical bound derived in D.1, not a numerical estimate.</li>
+            <li><strong>Numerical integration error (`quad`)</strong> estimate: \(\sim 10^{-15}\) with our settings. This is a <em>practical</em> SciPy estimate, not a rigorous guaranteed bound.</li>
+        </ul>
+        <p>Hence:</p>
+        <div class="math-block">\[ A_\infty \in \bigl[A(100) - \epsilon_{\text{quad}} - 5.2\!\times\!10^{-12},\; A(100) + \epsilon_{\text{quad}} + 5.2\!\times\!10^{-12}\bigr] \]</div>
+        <p>Since \(|A(100)| \approx 0.0247\) exceeds the analytic tail bound by twelve orders of magnitude, and exceeds any reasonable `quad` error estimate, the negative sign \(A_\infty < 0\) is <strong>resolved by any error bound that the current numerical execution could produce</strong>.</p>
+        <p>This is independent of the analytic proof of \(E(A) > 0\) in §3. The proof establishes the sign analytically; the numerical evaluation confirms the implementation and agrees with it.</p>
+
+        <h3>D.4 Reproducibility Notes</h3>
+        <ul>
+            <li><strong>Environment:</strong> Python 3.9+ with NumPy and SciPy. Integration via <code>scipy.integrate.quad</code> with <code>epsabs=1e-15</code>, <code>epsrel=1e-12</code>, <code>limit=500</code>.</li>
+            <li><strong>Precision:</strong> Displayed values are approximate and may vary in the last digit across library versions. Qualitative conclusions (sign of \(A_\infty\), direction of \(C(t)\)) are stable.</li>
+            <li><strong>Principal branch:</strong> <code>numpy.log</code> uses the principal branch with imaginary part in \((-\pi, \pi]\), the convention of §4.</li>
+            <li><strong>Correctability:</strong> Any correction to the mathematical formulas must appear in §3 and §4 first, then be re-derived in the code; numerical bounds are not modified independently of the proofs.</li>
+        </ul>
+
+        <div class="badge-exploratory">
+            <strong>Limits of verification.</strong> The verification confirms the implementation of the formulas and numerical agreement with the asymptotic expectation. It does not establish that the complex extension \(\mathcal{Z}\) is related to the Riemann zeta function, and makes no claim about its zeros.
+        </div>
+    </div>
+
+    <div class="links" style="margin-top: 30px;">
+        <a href="../index.html" class="btn">🏠 Home</a>
+        <a href="bridge-en.html" class="btn">← Bridge</a>
+        <!-- Updated PDF link to v7.0.0 -->
+        <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v7.0.0/frame1_tex.pdf" target="_blank" class="btn btn-gold">📄 Frame 1 PDF (v7.0)</a>
+    </div>
+
+    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+        <button onclick="window.print()" class="btn btn-blue">🖨️ Print / Save (Text)</button>
+        <button onclick="generateDirectPDF()" class="btn btn-gold">📥 Download PDF (Direct)</button>
     </div>
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        DOI: 10.5281/zenodo.23540283
+        DOI: 10.5281/zenodo.23540283 &nbsp;|&nbsp; Version v7.0 — 2026-10-24
     </div>
 </div>
 
 <script>
+    function toggleSection(id) {
+        const el = document.getElementById(id);
+        if (el.style.display === 'block') { el.style.display = 'none'; }
+        else { el.style.display = 'block'; }
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         if (typeof Chart === 'undefined') return;
         Chart.defaults.color = '#8aa892'; Chart.defaults.borderColor = '#1f3a2b';
@@ -344,7 +537,7 @@
         function generateData(xp) {
             const labels = [], zData = [], aData = [];
             const step = 0.05, count = Math.round((50 - 1) / step);
-            let cumulativeA = 0, previousZ = calculateZ(1, xp); 
+            let cumulativeA = 0, previousZ = calculateZ(1, xp);
             for (let i = 0; i <= count; i++) {
                 const x = 1 + i * step, z = calculateZ(x, xp);
                 if (i > 0) cumulativeA += (previousZ + z) * step / 2;
@@ -375,20 +568,36 @@
 
     window.generateDirectPDF = function() {
         const element = document.getElementById('pdf-content');
+        if (!element || typeof html2pdf === 'undefined') {
+            console.error('PDF generation unavailable: element or library missing.');
+            return;
+        }
         const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
-        buttons.forEach(btn => btn.style.display = 'none'); 
-        
+        const toggles = document.querySelectorAll('.toggle-content');
+        const buttonStates = Array.from(buttons).map(btn => btn.style.display);
+        const toggleStates = Array.from(toggles).map(t => t.style.display);
+        const restoreState = () => {
+            buttons.forEach((btn, i) => { btn.style.display = buttonStates[i]; });
+            toggles.forEach((t, i) => { t.style.display = toggleStates[i]; });
+        };
+        buttons.forEach(btn => { btn.style.display = 'none'; });
+        toggles.forEach(t => { t.style.display = 'block'; });
         const opt = {
             margin:       10,
-            filename:     'Frame1_Numerical_Framework_EN.pdf',
+            filename:     'Frame1_Numerical_Framework_EN_v7.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
-
-        html2pdf().set(opt).from(element).save().then(() => {
-            buttons.forEach(btn => btn.style.display = ''); 
-        });
+        try {
+            const result = html2pdf().set(opt).from(element).save();
+            Promise.resolve(result)
+                .catch(err => console.error('PDF generation failed:', err))
+                .finally(restoreState);
+        } catch (err) {
+            console.error('PDF generation init failed:', err);
+            restoreState();
+        }
     };
 </script>
 </body>
