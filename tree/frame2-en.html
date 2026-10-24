@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#101827">
 <title>Frame 2 | The Tree and the Shadow — Al-Hindara</title>
-<meta name="description" content="The Tree and the Shadow: Geometric Derivation of the Reciprocal Silver Ratio and an Exploratory Statistical Analysis of Tree Crown Ratios">
+<meta name="description" content="Frame 2: The Tree and the Shadow — exact trigonometric proof that tan(22.5°)=√2−1, geometric shadow-to-height model, and an exploratory field note on five mango trees with a reproducible TOST equivalence test and visible reference checks of the t distribution.">
 <link rel="canonical" href="https://jabri-com.vercel.app/tree/frame2-en.html">
+<link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/tree/frame2-en.html">
+<link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/frame2.html">
+<link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/tree/frame2.html">
 
 <!-- Google Scholar Meta Tags -->
 <meta name="citation_title" content="The Tree and the Shadow: Geometric Derivation of the Reciprocal Silver Ratio and an Exploratory Statistical Analysis of Tree Crown Ratios">
@@ -14,9 +17,9 @@
 <meta name="citation_publication_date" content="2026/10/21">
 <meta name="citation_doi" content="10.5281/zenodo.23540796">
 <meta name="citation_language" content="en">
-<meta name="citation_pdf_url" content="https://jabri-com.vercel.app/tree/frame2-en.html">
+<meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame2_tex.pdf">
 
-<!-- JSON-LD Schema (@graph) -->
+<!-- JSON-LD Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -25,14 +28,14 @@
       "@type": "WebSite",
       "@id": "https://jabri-com.vercel.app/#website",
       "url": "https://jabri-com.vercel.app/",
-      "name": "Heaven Al-Jabri",
-      "inLanguage": "en",
+      "name": "واحة الجبري | Heaven Al-Jabri",
+      "inLanguage": ["ar","en"],
       "publisher": { "@id": "https://jabri-com.vercel.app/#organization" }
     },
     {
       "@type": "Organization",
       "@id": "https://jabri-com.vercel.app/#organization",
-      "name": "Heaven Al-Jabri",
+      "name": "واحة الجبري | Heaven Al-Jabri",
       "url": "https://jabri-com.vercel.app/",
       "logo": {
         "@type": "ImageObject",
@@ -47,20 +50,21 @@
     {
       "@type": "Person",
       "@id": "https://jabri-com.vercel.app/#person",
-      "name": "Abdulla Mohammed Nasser Al-Jabri",
-      "alternateName": "عبدالله محمد ناصر الجبري",
+      "name": "عبدالله محمد ناصر الجبري",
+      "alternateName": "Abdulla Mohammed Nasser Al-Jabri",
       "url": "https://jabri-com.vercel.app/",
       "sameAs": [
         "https://orcid.org/0009-0003-3319-3822",
         "https://github.com/jabri-web",
         "https://en.wikipedia.org/wiki/User:Jabri2026"
       ],
-      "jobTitle": "Researcher, Author and Founder"
+      "jobTitle": "Researcher, author, founder"
     },
     {
       "@type": "ScholarlyArticle",
       "@id": "https://jabri-com.vercel.app/tree/frame2-en.html#article",
       "headline": "The Tree and the Shadow: Geometric Derivation of the Reciprocal Silver Ratio and an Exploratory Statistical Analysis of Tree Crown Ratios",
+      "alternateName": "الشجرة والظل: اشتقاق هندسي للنسبة الفضية المقلوبة وتحليل إحصائي استكشافي لنسب تاج الأشجار",
       "author": { "@id": "https://jabri-com.vercel.app/#person" },
       "publisher": { "@id": "https://jabri-com.vercel.app/#organization" },
       "datePublished": "2026-10-21",
@@ -71,13 +75,14 @@
       },
       "url": "https://jabri-com.vercel.app/tree/frame2-en.html",
       "inLanguage": "en",
-      "abstract": "This paper presents the Al-Hindara framework as a conceptual approach to connecting geometric modeling, management, and empirical observation. It derives the exact trigonometric identity tan(pi/8)=sqrt(2)-1."
+      "translationOfWork": { "@id": "https://jabri-com.vercel.app/tree/frame2.html#article" },
+      "abstract": "This frame provides an exact trigonometric proof that tan(π/8)=√2−1, a geometric model relating horizontal shadow length to vertical height, and preliminary field measurements on five mango trees (crown/height ratio) with a TOST equivalence test reproducible in-page and visible reference checks of the t distribution. The data are exploratory and do not establish a general law; the frame makes no proven claim of a link to the Riemann hypothesis."
     },
     {
       "@type": "BreadcrumbList",
       "@id": "https://jabri-com.vercel.app/tree/frame2-en.html#breadcrumb",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jabri-com.vercel.app/en/" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jabri-com.vercel.app/" },
         { "@type": "ListItem", "position": 2, "name": "Frame 2", "item": "https://jabri-com.vercel.app/tree/frame2-en.html" }
       ]
     }
@@ -85,273 +90,788 @@
 }
 </script>
 
+<!--
+  Reproducibility note:
+  This file uses html2pdf.js only for the PDF button. For full offline use,
+  host the library locally at vendor/html2pdf.bundle.min.js and switch the
+  src below to a relative path.
+-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 :root{--bg:#0b1220;--panel:#121e30;--panel2:#17263b;--ink:#edf4ff;--muted:#a8b8ce;--line:#2b405c;--gold:#f2c879;--cyan:#76d6e8;--green:#8bd5a5;--red:#ffb0a8}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top,#182b43 0,#0b1220 55%);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}
-.wrap{max-width:1120px;margin:auto;padding:20px}.hero,.card{border:1px solid var(--line);background:rgba(18,30,48,.94);border-radius:18px;padding:clamp(16px,3vw,28px);margin:14px 0;box-shadow:0 12px 32px #0002;position:relative;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at top,#182b43 0,#0b1220 55%);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}
+.wrap{max-width:1120px;margin:auto;padding:20px}
+.hero,.card{border:1px solid var(--line);background:rgba(18,30,48,.94);border-radius:18px;padding:clamp(16px,3vw,28px);margin:14px 0;box-shadow:0 12px 32px #0002;position:relative}
 .hero{background:linear-gradient(135deg,#1b3048,#111d2e 70%);border-top:3px solid var(--gold)}
-
-/* Top Navigation Bar */
-.top-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    background: rgba(18, 30, 48, 0.9);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 14px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-.nav-item {
-    color: var(--muted);
-    text-decoration: none;
-    padding: 6px 14px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    border: 1px solid transparent;
-    transition: 0.3s;
-}
-.nav-item:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-    background: rgba(242, 200, 121, 0.1);
-}
-.nav-item.active {
-    color: #19202b;
-    background: var(--gold);
-    border-color: var(--gold);
-    cursor: default;
-}
-
-.kicker{color:var(--gold);font-weight:800;letter-spacing:.04em}h1{font-size:clamp(1.8rem,5vw,3.2rem);line-height:1.25;margin:.4rem 0}h2{font-size:1.45rem;margin:0 0 12px;color:var(--gold)}h3{font-size:1.08rem;color:var(--cyan)}p{margin:.5rem 0 1rem}.muted,small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}.stat{background:var(--panel2);padding:15px;border-radius:13px;border:1px solid var(--line)}.stat b{display:block;font-size:1.45rem;color:var(--cyan);direction:ltr;text-align:left}.formula{direction:ltr;text-align:center;font-family:Cambria,"Times New Roman",serif;font-size:clamp(1.1rem,3vw,1.6rem);padding:15px;background:#0b1524;border:1px solid #314966;border-radius:12px;overflow-wrap:anywhere;margin:12px 0}.callout{border-left:4px solid var(--gold);background:#2a261b;padding:12px 15px;border-radius:8px}.good{border-left-color:var(--green);background:#142a25}.warn{border-left-color:var(--red);background:#30201f}
-table{width:100%;border-collapse:collapse;min-width:620px;font-variant-numeric:tabular-nums}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:center}th{background:#1b2b41;color:var(--gold)}td{} .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
-label{display:block;margin:12px 0 4px;color:var(--muted)}input[type=range]{width:100%;accent-color:var(--cyan)}input[type=number]{background:#0b1524;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:9px;width:100%;font:inherit}button{background:var(--gold);color:#19202b;border:0;padding:10px 15px;border-radius:9px;font-weight:800;font:inherit;cursor:pointer}button.secondary{background:#233750;color:var(--ink);border:1px solid var(--line)}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.canvas-wrap{background:#0a1422;border:1px solid var(--line);border-radius:12px;padding:8px;overflow:hidden}svg{display:block;width:100%;height:auto} .legend{display:flex;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:.9rem}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}.pill{display:inline-block;border:1px solid var(--line);background:#17263b;border-radius:99px;padding:3px 10px;margin:3px;color:var(--muted);font-size:.85rem}
-details{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0}summary{cursor:pointer;color:var(--cyan);font-weight:700}footer{text-align:center;color:var(--muted);padding:22px;font-size:.9rem}a{color:var(--cyan)}.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block} .result{font-size:1.15rem;font-weight:700;color:var(--green)}
-.btn-nav{display:inline-block;background:#233750;color:var(--ink);border:1px solid var(--line);text-decoration:none;padding:10px 15px;border-radius:9px;font-weight:bold;margin:5px;transition:0.3s}
+.top-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:rgba(18,30,48,.9);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+.nav-item{color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:8px;font-size:.85rem;font-weight:bold;border:1px solid transparent;transition:.3s}
+.nav-item:hover{color:var(--gold);border-color:var(--gold);background:rgba(242,200,121,.1)}
+.nav-item.active{color:#19202b;background:var(--gold);border-color:var(--gold);cursor:default}
+.kicker{color:var(--gold);font-weight:800;letter-spacing:.04em}
+h1{font-size:clamp(1.8rem,5vw,3.2rem);line-height:1.25;margin:.4rem 0}
+h2{font-size:1.45rem;margin:0 0 12px;color:var(--gold)}
+h3{font-size:1.08rem;color:var(--cyan)}
+p{margin:.5rem 0 1rem}
+.muted,small{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.stat{background:var(--panel2);padding:15px;border-radius:13px;border:1px solid var(--line)}
+.stat b{display:block;font-size:1.45rem;color:var(--cyan);direction:ltr;text-align:start}
+.formula{direction:ltr;text-align:center;font-family:Cambria,"Times New Roman",serif;font-size:clamp(1.1rem,3vw,1.6rem);padding:15px;background:#0b1524;border:1px solid #314966;border-radius:12px;overflow-wrap:anywhere;margin:12px 0}
+.callout{border-inline-start:4px solid var(--gold);background:#2a261b;padding:12px 15px;border-radius:8px;margin:12px 0}
+.good{border-inline-start-color:var(--green);background:#142a25}
+.warn{border-inline-start-color:var(--red);background:#30201f}
+table{width:100%;border-collapse:collapse;min-width:620px;font-variant-numeric:tabular-nums}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:center}
+th{background:#1b2b41;color:var(--gold)}
+td{direction:ltr}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+label{display:block;margin:12px 0 4px;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--cyan)}
+input[type=number]{background:#0b1524;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:9px;width:100%;font:inherit}
+input[aria-invalid="true"]{border-color:var(--red);outline:1px solid var(--red)}
+.field-error{color:var(--red);font-size:.85rem;display:none;margin-top:4px}
+.field-error.info{color:var(--cyan)}
+button{background:var(--gold);color:#19202b;border:0;padding:10px 15px;border-radius:9px;font-weight:800;font:inherit;cursor:pointer}
+button.secondary{background:#233750;color:var(--ink);border:1px solid var(--line)}
+button:focus-visible,.lang-btn:focus-visible,.nav-item:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.canvas-wrap{background:#0a1422;border:1px solid var(--line);border-radius:12px;padding:8px;overflow:hidden}
+svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:.9rem}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.pill{display:inline-block;border:1px solid var(--line);background:#17263b;border-radius:99px;padding:3px 10px;margin:3px;color:var(--muted);font-size:.85rem}
+details{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0}
+summary{cursor:pointer;color:var(--cyan);font-weight:700}
+footer{text-align:center;color:var(--muted);padding:22px;font-size:.9rem}
+a{color:var(--cyan)}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.btn-nav{display:inline-block;background:#233750;color:var(--ink);border:1px solid var(--line);text-decoration:none;padding:10px 15px;border-radius:9px;font-weight:bold;margin:5px;transition:.3s}
 .btn-nav:hover{background:#314966}
-.btn-pdf{display:inline-block;background:var(--gold);color:#19202b;text-decoration:none;padding:10px 15px;border-radius:9px;font-weight:bold;margin:5px;transition:0.3s}
+.btn-pdf{display:inline-block;background:var(--gold);color:#19202b;text-decoration:none;padding:10px 15px;border-radius:9px;font-weight:bold;margin:5px;transition:.3s}
 .btn-pdf:hover{background:#e0b568}
-.lang-btn { position: absolute; top: 15px; right: 20px; background: rgba(255,255,255,0.1); color: var(--ink); text-decoration: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--line); transition: 0.3s; z-index: 100; }
-.lang-btn:hover { background: var(--gold); color: #111; }
-@media(max-width:600px){.wrap{padding:10px}.hero,.card{padding:15px;border-radius:13px}th,td{padding:8px;font-size:.9rem}.lang-btn{top:10px; right:10px;}}
-@media print{body{background:white;color:#111}.hero,.card{background:white;color:#111;box-shadow:none;border:1px solid #aaa;break-inside:avoid}h2,h3,.kicker{color:#333}.muted,small{color:#444}.formula,.stat,.callout,.canvas-wrap,th{background:#f5f5f5;color:#111}button,input,a,.lang-btn,.top-nav{display:none}td,th{border-color:#aaa}}
+.lang-btn{position:absolute;top:15px;right:20px;background:rgba(255,255,255,.1);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:8px;font-weight:bold;font-size:.85rem;border:1px solid var(--line);transition:.3s;z-index:100}
+.lang-btn:hover{background:var(--gold);color:#111}
+.opening-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.opening-col{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:16px}
+.opening-col strong{display:block;margin-bottom:8px;font-size:1rem}
+.opening-col p{font-size:.88rem;margin:0;color:var(--ink)}
+@media (max-width:760px){.opening-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.wrap{padding:10px}.hero,.card{padding:15px;border-radius:13px}th,td{padding:8px;font-size:.9rem}.lang-btn{top:10px;right:10px}}
+@media print{body{background:#fff;color:#111}.hero,.card,.opening-col{background:#fff;color:#111;box-shadow:none;border:1px solid #aaa;break-inside:avoid}h2,h3,.kicker{color:#333}.muted,small{color:#444}.formula,.stat,.callout,.canvas-wrap,th{background:#f5f5f5;color:#111}button,input,a,.lang-btn,.top-nav{display:none}td,th{border-color:#aaa}}
 </style>
 </head>
 <body>
 <div class="wrap" id="pdf-content">
 
-  <!-- Top Navigation Bar -->
-  <nav class="top-nav">
-      <a href="../en/index.html" class="nav-item">🏠 Home</a>
-      <a href="../jabri_5/wells/frame1-en.html" class="nav-item">1. Raw Math</a>
-      <a href="../jabri_5/wells/bridge-en.html" class="nav-item">Bridge</a>
-      <a href="../tree/frame2-en.html" class="nav-item active">2. Application</a>
-      <a href="../jabri_5/wells/frame3-en.html" class="nav-item">3. Fine Structure</a>
-      <a href="../jabri_5/wells/frame4-en.html" class="nav-item">4. Spectral Problem</a>
+  <nav class="top-nav" aria-label="Frame navigation">
+    <a href="../en/index.html" class="nav-item">🏠 Home</a>
+    <a href="../jabri_5/wells/frame1.html" class="nav-item">1. Mathematical Frame</a>
+    <a href="../jabri_5/wells/bridge.html" class="nav-item">The Bridge</a>
+    <a href="../tree/frame2-en.html" class="nav-item active" aria-current="page">2. Applied Frame</a>
+    <a href="../jabri_5/wells/frame3.html" class="nav-item">3. Fine Structure</a>
+    <a href="../jabri_5/wells/frame4.html" class="nav-item">4. Spectral Problem</a>
   </nav>
 
-<header class="hero">
-  <a href="../tree/frame2.html" class="lang-btn">🌐 العربية</a>
-  <div class="kicker">AL-HINDARA · FRAME 2 · OCTOBER 2026</div>
-  <h1>The Tree and the Shadow</h1>
-  <p>A reproducible geometric and numerical framework: 22.5° angle proof, interactive simulation, graph, and initial field measurements table.</p>
-  <div>
-    <span class="pill">Author: Eng. Abdulla M. N. Al-Jabri</span>
-    <span class="pill">Sho'ub — Sana'a — Yemen</span><br>
-    <span class="pill" style="color:var(--gold); border-color:var(--gold);">Frame 1 DOI: 10.5281/zenodo.23540283</span>
-    <span class="pill" style="color:var(--green); border-color:var(--green);">Frame 2 DOI: 10.5281/zenodo.23540796</span>
-    <span class="pill">OSF DOI: 10.17605/OSF.IO/YC9MB</span>
-  </div>
-  <p class="muted">This page distinguishes between the exact mathematical proof, exploratory field data, and hypotheses that still require independent testing.</p>
-</header>
+  <header class="hero">
+    <a href="../tree/frame2.html" class="lang-btn" hreflang="ar" lang="ar">🌐 العربية</a>
+    <div class="kicker">AL-HINDARA · FRAME 2 · OCTOBER 2026</div>
+    <h1>The Tree and the Shadow</h1>
+    <p>A geometric and numerical frame, reproducible in the browser: proof of the 22.5° angle, an interactive simulation, a bar chart, the preliminary measurement table, and a TOST equivalence test computed in-page with automated verification of the t distribution.</p>
+    <div>
+      <span class="pill">Author: Abdulla Mohammed Nasser Al-Jabri</span>
+      <span class="pill">Shu'ub — Sana'a — Yemen</span><br>
+      <span class="pill" style="color:var(--gold);border-color:var(--gold)">Frame 1 DOI: 10.5281/zenodo.23540283</span>
+      <span class="pill" style="color:var(--green);border-color:var(--green)">Frame 2 DOI: 10.5281/zenodo.23540796</span>
+      <span class="pill">OSF DOI: 10.17605/OSF.IO/YC9MB</span>
+    </div>
+    <p class="muted">The frame begins with an exact trigonometric result, then builds an interactive simulation on it, then presents preliminary field measurements that are examined exploratorily against a pre-specified equivalence margin.</p>
+  </header>
 
-<section class="card">
-<h2>1. Exact Mathematical Result</h2>
-<p>If the angle θ is measured from the vertical direction, then the sun's elevation angle from the horizon is α = 90° − θ. For a sun ray making an elevation angle α with a horizontal ground, a right-angled triangle yields that the ratio of horizontal shadow to vertical height is:</p>
-<div class="formula">S / H = cot(α) = tan(θ)</div>
-<p>At θ = 22.5°, α = 67.5°, and therefore:</p>
-<div class="formula">tan(22.5°) = tan(45° / 2) = √2 − 1 ≈ 0.4142135624</div>
-<h3>Half-Angle Proof</h3>
-<p>Let x = tan(22.5°). Since tan(45°) = 1, from the double-angle formula:</p>
-<div class="formula">1 = tan(45°) = 2x / (1 − x²)</div>
-<p>Rearranging gives x² + 2x − 1 = 0. Solving the quadratic equation:</p>
-<div class="formula">x = −1 ± √2</div>
-<p>Since 22.5° is an acute angle, x must be positive, therefore:</p>
-<div class="formula">x = √2 − 1</div>
-<div class="callout good"><b>What is proven?</b> The exact trigonometric value √2−1, and the geometric shadow relationship under the assumptions of a horizontal surface, a straight light ray, and a correct angle measurement. This alone does not prove that a field-measured tree crown ratio must equal this value.</div>
-</section>
+  <section class="card" aria-labelledby="opening-h">
+    <h2 id="opening-h">Opening — Problem, Achievement, Type of Evidence</h2>
+    <div class="opening-grid">
+      <div class="opening-col" style="border-inline-start:4px solid var(--gold)">
+        <strong style="color:var(--gold)">Problem</strong>
+        <p>How can an exact geometric relationship (tan 22.5° = √2−1) be linked to measurable field observations, and what is actually inferred from a numerical proximity between a crown/height ratio in a small sample and the theoretical value?</p>
+      </div>
+      <div class="opening-col" style="border-inline-start:4px solid var(--green)">
+        <strong style="color:var(--green)">Achievement</strong>
+        <p>An exact trigonometric proof of tan(22.5°) = √2−1, the shadow ratio relation S/H = tan(θ) within the geometric model, an interactive simulation, preliminary measurements of five mango trees, and a TOST equivalence test reproducible within the page with visible reference tests.</p>
+      </div>
+      <div class="opening-col" style="border-inline-start:4px solid var(--cyan)">
+        <strong style="color:var(--cyan)">Type of Evidence</strong>
+        <p>An exact mathematical proof for the trigonometric result. A geometric model with specified conditions (horizontal ground, straight light ray) for the shadow relation. Exploratory field data (n=5) showing numerical proximity, not proof. This frame makes no proven claim of a connection to the Riemann hypothesis.</p>
+      </div>
+    </div>
+  </section>
 
-<section class="card">
-<h2>2. Interactive Geometric Simulation</h2>
-<p>Change the object height and angle θ to see the expected shadow length according to the geometric model. θ here is measured from the vertical, not the horizontal.</p>
-<div class="controls">
- <div><label for="height">Vertical Height H (m)</label><input id="height" type="number" min="0.1" max="100" step="0.1" value="7.8"></div>
- <div><label for="theta">θ from vertical: <b id="thetaVal">22.5°</b></label><input id="theta" type="range" min="5" max="60" step="0.5" value="22.5"></div>
- <div><label for="sun">Sun elevation α: <b id="alphaVal">67.5°</b></label><input id="sun" type="range" min="30" max="85" step="0.5" value="67.5"></div>
-</div>
-<div class="grid" style="margin-top:12px">
- <div class="stat"><span class="muted">Theoretical Shadow S</span><b id="shadowVal">3.23 m</b></div>
- <div class="stat"><span class="muted">Ratio S/H</span><b id="ratioVal">0.41421</b></div>
- <div class="stat"><span class="muted">tan(θ)</span><b id="tanVal">0.41421</b></div>
-</div>
-<div class="canvas-wrap" style="margin-top:14px">
-<svg id="simSvg" viewBox="0 0 720 300" role="img" aria-label="Right triangle diagram showing object height, shadow length, and sun ray">
- <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f2c879"/></marker></defs>
- <line x1="55" y1="240" x2="665" y2="240" stroke="#a8b8ce" stroke-width="2"/>
- <line id="treeLine" x1="150" y1="240" x2="150" y2="55" stroke="#8bd5a5" stroke-width="8" stroke-linecap="round"/>
- <line id="shadowLine" x1="150" y1="240" x2="390" y2="240" stroke="#76d6e8" stroke-width="5" stroke-linecap="round"/>
- <line id="rayLine" x1="150" y1="55" x2="390" y2="240" stroke="#f2c879" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
- <path id="rightAngle" d="M150 220 L170 220 L170 240" fill="none" stroke="#edf4ff" stroke-width="2"/>
- <text id="hLabel" x="130" y="150" fill="#8bd5a5" text-anchor="end" font-size="16">H = 7.8 m</text>
- <text id="sLabel" x="270" y="265" fill="#76d6e8" text-anchor="middle" font-size="16">S = 3.23 m</text>
- <text id="thetaLabel" x="205" y="220" fill="#f2c879" text-anchor="middle" font-size="14">θ = 22.5°</text>
- <text x="360" y="25" fill="#a8b8ce" text-anchor="middle" font-size="14">Schematic drawing; visual proportions adapt to values</text>
-</svg>
-<div class="legend"><span><i class="dot" style="background:#8bd5a5"></i>Height H</span><span><i class="dot" style="background:#76d6e8"></i>Shadow S</span><span><i class="dot" style="background:#f2c879"></i>Sun ray</span></div>
-</div>
-<p class="muted">Note: If the sun elevation angle α is changed, the complementary angle θ is calculated automatically; if θ is changed directly, α changes to 90°−θ.</p>
-</section>
+  <section class="card" aria-labelledby="sec1">
+    <h2 id="sec1">1. The Exact Mathematical Result</h2>
+    <p>If the angle θ is measured from the vertical, then the sun's elevation angle above the horizon is α = 90° − θ. For a solar ray making elevation angle α with a horizontal ground, a right triangle yields that the ratio of the horizontal shadow to the vertical height is:</p>
+    <div class="formula">S / H = cot(α) = tan(θ)</div>
+    <p>At θ = 22.5°, α = 67.5°, and therefore:</p>
+    <div class="formula">tan(22.5°) = tan(45° / 2) = √2 − 1 ≈ 0.4142135624</div>
+    <h3>Half-angle proof</h3>
+    <p>Let x = tan(22.5°). Since tan(45°) = 1, the double-angle formula gives:</p>
+    <div class="formula">1 = tan(45°) = 2x / (1 − x²)</div>
+    <p>Rearranging gives x² + 2x − 1 = 0. Solving the quadratic:</p>
+    <div class="formula">x = −1 ± √2</div>
+    <p>Since 22.5° is an acute angle, x is positive, therefore:</p>
+    <div class="formula">x = √2 − 1</div>
+    <div class="callout good"><b>What has been proved?</b> The exact trigonometric value √2−1, and the geometric shadow relation under the assumptions of horizontal ground, a straight light ray, and a correctly measured angle. This alone does not prove that a crown ratio measured in the field must equal this value.</div>
+  </section>
 
-<section class="card">
-<h2>3. Initial Field Measurements</h2>
-<p>Five mango trees in Sho'ub, Sana'a; recorded measurement date: October 14, 2026. The symbol H is total height, h is the measured lower height, and C = H−h is the vertical difference. The studied ratio is R = (H−h)/H.</p>
-<div class="table-scroll"><table id="dataTable">
-<thead><tr><th>Tree</th><th>H (m)</th><th>h (m)</th><th>C = H−h (m)</th><th>R = C/H</th><th>Difference from √2−1</th></tr></thead>
-<tbody>
-<tr><th>1</th><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00887</td></tr>
-<tr><th>2</th><td>8.50</td><td>5.00</td><td>3.50</td><td>0.41176</td><td>−0.00245</td></tr>
-<tr><th>3</th><td>7.20</td><td>4.20</td><td>3.00</td><td>0.41667</td><td>+0.00245</td></tr>
-<tr><th>4</th><td>9.00</td><td>5.40</td><td>3.60</td><td>0.40000</td><td>−0.01421</td></tr>
-<tr><th>5</th><td>7.50</td><td>4.40</td><td>3.10</td><td>0.41333</td><td>−0.00088</td></tr>
-</tbody></table></div>
-<div class="grid" style="margin-top:14px">
- <div class="stat"><span class="muted">Mean R</span><b>0.41297</b></div>
- <div class="stat"><span class="muted">Sample Standard Deviation</span><b>0.00845</b></div>
- <div class="stat"><span class="muted">Standard Error</span><b>0.00378</b></div>
- <div class="stat"><span class="muted">90% CI for Mean</span><b style="font-size:1.1rem">[0.40491, 0.42102]</b></div>
-</div>
-<div class="callout warn"><b>Important measurement distinction:</b> C = H−h is a vertical height difference, not a horizontal shadow length. Therefore, C should not be called "shadow length" unless the field measurement actually defined it as such. The current data describes a crown/height ratio according to the definition above; and does not contain an independent measurement of horizontal shadow length in this table that could directly test the law S/H = tan(θ).</div>
-</section>
+  <section class="card" aria-labelledby="sec2">
+    <h2 id="sec2">2. Interactive Geometric Simulation</h2>
+    <p>Change the object height and angle θ to see the theoretical shadow length under the geometric model. θ is measured from the vertical, not the horizon. Angle ranges are complementary: θ ∈ [5°,60°], α = 90°−θ ∈ [30°,85°].</p>
+    <div class="controls">
+      <div>
+        <label for="height">Vertical height H (m, 0.1–100)</label>
+        <input id="height" type="number" min="0.1" max="100" step="0.1" value="7.8" inputmode="decimal" aria-describedby="heightErr">
+        <span id="heightErr" class="field-error" aria-live="polite"></span>
+      </div>
+      <div>
+        <label for="theta">θ from vertical: <b id="thetaVal">22.5°</b></label>
+        <input id="theta" type="range" min="5" max="60" step="0.5" value="22.5">
+      </div>
+      <div>
+        <label for="sun">Sun elevation α: <b id="alphaVal">67.5°</b></label>
+        <input id="sun" type="range" min="30" max="85" step="0.5" value="67.5">
+      </div>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <div class="stat"><span class="muted">Theoretical shadow length S</span><b id="shadowVal">3.23 m</b></div>
+      <div class="stat"><span class="muted">Ratio S/H</span><b id="ratioVal">0.41421</b></div>
+      <div class="stat"><span class="muted">tan(θ)</span><b id="tanVal">0.41421</b></div>
+    </div>
+    <div class="canvas-wrap" style="margin-top:14px">
+      <svg id="simSvg" viewBox="0 0 720 300" role="img" aria-labelledby="simTitle simDesc">
+        <title id="simTitle">Right triangle showing object height, shadow length, solar ray, and angle θ</title>
+        <desc id="simDesc">Diagram is not to scale; displayed lengths are computed from the inputs, not measured from the drawing.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f2c879"/>
+          </marker>
+        </defs>
+        <line x1="55" y1="240" x2="665" y2="240" stroke="#a8b8ce" stroke-width="2"/>
+        <line id="treeLine" x1="150" y1="240" x2="150" y2="55" stroke="#8bd5a5" stroke-width="8" stroke-linecap="round"/>
+        <line id="shadowLine" x1="150" y1="240" x2="390" y2="240" stroke="#76d6e8" stroke-width="5" stroke-linecap="round"/>
+        <line id="rayLine" x1="150" y1="55" x2="390" y2="240" stroke="#f2c879" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+        <path id="rightAngle" d="M150 220 L170 220 L170 240" fill="none" stroke="#edf4ff" stroke-width="2"/>
+        <path id="thetaArc" d="" fill="none" stroke="#f2c879" stroke-width="1.5"/>
+        <text id="hLabel" x="130" y="150" fill="#8bd5a5" text-anchor="end" font-size="16">H = 7.8 m</text>
+        <text id="sLabel" x="270" y="265" fill="#76d6e8" text-anchor="middle" font-size="16">S = 3.23 m</text>
+        <text id="thetaLabel" x="170" y="205" fill="#f2c879" text-anchor="start" font-size="14">θ = 22.5°</text>
+        <text x="360" y="20" fill="#a8b8ce" text-anchor="middle" font-size="13">Diagram is not to scale; displayed lengths are computed, not measured from the drawing</text>
+      </svg>
+      <div class="legend"><span><i class="dot" style="background:#8bd5a5"></i>Height H</span><span><i class="dot" style="background:#76d6e8"></i>Shadow S</span><span><i class="dot" style="background:#f2c879"></i>Solar ray</span></div>
+    </div>
+    <p class="muted">Note: changing the sun elevation α updates θ to its complement; changing θ directly updates α to 90°−θ. Bounds are limited to the complementary ranges above.</p>
+  </section>
 
-<section class="card">
-<h2>4. Bar Chart: Individual Ratios vs Theoretical Value</h2>
-<p>Each bar represents R for a tree, and the dashed line is the theoretical value √2−1 ≈ 0.41421. The chart compares values, but does not prove that the similarity is due to a causal relationship.</p>
-<div class="canvas-wrap"><svg id="barChart" viewBox="0 0 720 340" role="img" aria-label="Bar chart of five tree ratios with theoretical value line"></svg></div>
-<div class="legend"><span><i class="dot" style="background:#76d6e8"></i>Measured Ratio R</span><span><i class="dot" style="background:#f2c879"></i>Theoretical Value √2−1</span></div>
-</section>
+  <section class="card" aria-labelledby="sec3">
+    <h2 id="sec3">3. Preliminary Field Measurements</h2>
+    <p>Five mango trees in Shu'ub, Sana'a; recorded measurement date: October 14, 2026. H is total height, h is measured lower height, C = H−h is the vertical difference. The studied ratio is R = (H−h)/H.</p>
+    <div class="table-scroll">
+      <table id="dataTable" aria-describedby="dataTableNote">
+        <caption class="muted" style="caption-side:top;padding:6px;text-align:left;font-size:.9rem">Table 1: measurements of the five mango trees (source: frame data, October 14, 2026).</caption>
+        <thead>
+          <tr><th scope="col">Tree</th><th scope="col">H (m)</th><th scope="col">h (m)</th><th scope="col">C = H−h (m)</th><th scope="col">R = C/H</th><th scope="col">Difference from √2−1</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">1</th><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00887</td></tr>
+          <tr><th scope="row">2</th><td>8.50</td><td>5.00</td><td>3.50</td><td>0.41176</td><td>−0.00245</td></tr>
+          <tr><th scope="row">3</th><td>7.20</td><td>4.20</td><td>3.00</td><td>0.41667</td><td>+0.00245</td></tr>
+          <tr><th scope="row">4</th><td>9.00</td><td>5.40</td><td>3.60</td><td>0.40000</td><td>−0.01421</td></tr>
+          <tr><th scope="row">5</th><td>7.50</td><td>4.40</td><td>3.10</td><td>0.41333</td><td>−0.00088</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p id="dataTableNote" class="muted" style="font-size:.85rem">The sign of row 5 has been corrected (previously +0.00088, now −0.00088). All values are computed from the displayed H and h.</p>
 
-<section class="card">
-<h2>5. Evidence Interpretation Table</h2>
-<div class="table-scroll"><table>
-<thead><tr><th>Claim</th><th>Status</th><th>Limits of Conclusion</th></tr></thead>
-<tbody>
-<tr><td>tan(22.5°) = √2−1</td><td>Proven mathematically</td><td>Exact trigonometric result</td></tr>
-<tr><td>S/H = tan(θ)</td><td>True within the geometric model</td><td>Requires horizontal ground and consistent angle/shadow measurements</td></tr>
-<tr><td>Mean R of trees is close to √2−1</td><td>Numerical description of a small sample</td><td>Five trees at one location; insufficient for generalization</td></tr>
-<tr><td>Mean equivalence within Δ = ±0.03</td><td>Test conditional on chosen margin</td><td>The margin is practical/conventional and must be justified before data collection</td></tr>
-<tr><td>General link to Riemann hypothesis</td><td>Unproven</td><td>Numerical similarity does not create a proof or mathematical link</td></tr>
-</tbody></table></div>
-<h3>Statistical Note</h3>
-<p>The displayed 90% confidence interval is a t-interval for the sample mean (n=5, degrees of freedom 4). The TOST equivalence test depends on the equivalence margin Δ defined by the researcher in advance; passing the test does not imply exact equality or a general natural law. The previous p-value (0.000801) is treated here as a computational result from the previous analysis, provided the same sample, margin, and procedures are used, and should be recalculated from the data file/software before final publication.</p>
-</section>
+    <div class="grid" style="margin-top:14px">
+      <div class="stat"><span class="muted">Mean R</span><b id="meanVal">—</b></div>
+      <div class="stat"><span class="muted">Sample standard deviation</span><b id="sdVal">—</b></div>
+      <div class="stat"><span class="muted">Standard error</span><b id="seVal">—</b></div>
+      <div class="stat"><span class="muted">90% CI for the mean</span><b style="font-size:1.1rem" id="ciVal">—</b></div>
+    </div>
 
-<section class="card">
-<h2>6. Proof Formulation and Final Conclusion</h2>
-<ol>
-<li><b>Model assumptions:</b> A vertical object of height H above a horizontal ground, and a light ray making an elevation angle α with the horizon.</li>
-<li><b>From the right triangle:</b> tan(α) = H/S, hence S/H = 1/tan(α).</li>
-<li><b>Angle definition from vertical:</b> θ = 90°−α, therefore cot(α) = tan(θ), yielding S/H = tan(θ).</li>
-<li><b>At θ = 22.5°:</b> The theoretical shadow-to-height ratio is √2−1 ≈ 0.41421356.</li>
-<li><b>Data check:</b> The mean field ratio R ≈ 0.41297 is numerically close to the theoretical value, but R = (H−h)/H is not S/H unless the measurement proves that H−h is a horizontal shadow length; therefore, this sample is not a direct test of the shadow law.</li>
-</ol>
-<div class="formula">Proven result: S/H = tan(θ), and at θ=22.5° it equals √2−1.</div>
-<div class="callout"><b>Controlled Conclusion:</b> The geometric proof is exact. The mango data is exploratory and shows a numerical convergence between the mean R and the value √2−1, not a proof that nature imposes this ratio on trees. There is no proof in this page of a link to the Riemann hypothesis or to a broader cosmic law.</div>
-</section>
+    <div class="callout warn" style="margin-top:14px">
+      <b>Crucial distinction between the two models:</b>
+      <ul style="margin:8px 0 0 0">
+        <li><b>Geometric model (Section 2):</b> the ratio <span class="ltr">S/H = tan(θ)</span> applies to a <em>horizontal</em> shadow, under assumptions of horizontal ground, straight ray, and accurate angle measurement.</li>
+        <li><b>Field data (Section 3):</b> the ratio <span class="ltr">R = (H−h)/H</span> is a crown/height ratio, not a shadow length.</li>
+      </ul>
+      <p style="margin:.6rem 0 0">A successful TOST comparing mean <span class="ltr">R</span> to <span class="ltr">√2−1</span> does <em>not</em> prove the shadow law <span class="ltr">S/H = tan(θ)</span>, because the two are different quantities. The honest phrasing is: "mean crown/height ratio in this sample is numerically close to <span class="ltr">√2−1</span> within the specified margin", without claiming causality or generalizing to mango trees at large.</p>
+    </div>
 
-<section class="card">
-<h2>7. Reproducibility Steps and Links</h2>
-<ul>
-<li>Save the file as <code>frame2-en.html</code> and open it in a modern browser; no libraries or internet connection required.</li>
-<li>Adjust H and θ in the simulation, and verify that S = H × tan(θ).</li>
-<li>To convert the study into a direct field test, measure the object height H and horizontal shadow length S at the same time, record the sun angle, and repeat measurements at different times, locations, and objects.</li>
-<li>Keep raw data, measurement units, uncertainty estimation method, and a pre-specified analysis plan before collecting new data.</li>
-</ul>
-<div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-    <button onclick="window.print()" class="secondary" style="background:var(--cyan); color:#111;">🖨️ Print / Save (Text)</button>
-    <button onclick="generateDirectPDF()" style="background:var(--gold); color:#111;">📥 Download PDF (Direct)</button>
-    <button class="secondary" onclick="downloadCSV()">Download Data CSV</button>
-</div>
+    <h3 style="margin-top:18px">TOST equivalence test — computed from the five data points</h3>
+    <p>The two-one-sided equivalence test at α = 0.05 corresponds to a 90% confidence interval for the mean lying entirely inside [μ<sub>target</sub>−Δ, μ<sub>target</sub>+Δ]. The margin Δ must be specified <b>before</b> data collection; changing it after seeing the result invalidates the test's confirmatory meaning.</p>
+    <div class="controls" style="max-width:340px">
+      <div>
+        <label for="tostDelta">Pre-specified equivalence margin Δ (0.001–0.1)</label>
+        <input id="tostDelta" type="number" min="0.001" max="0.1" step="0.001" value="0.03" aria-describedby="deltaErr">
+        <span id="deltaErr" class="field-error" aria-live="polite"></span>
+      </div>
+    </div>
+    <div class="table-scroll" style="margin-top:10px">
+      <table aria-describedby="tostNote">
+        <caption class="muted" style="caption-side:top;padding:6px;text-align:left;font-size:.9rem">Table 2: TOST output for Table 1 data (n=5, df=4, α=0.05).</caption>
+        <thead>
+          <tr><th scope="col">Quantity</th><th scope="col">Value</th></tr>
+        </thead>
+        <tbody id="tostBody"></tbody>
+      </table>
+    </div>
+    <p id="tostNote" class="muted" style="font-size:.85rem">p₁ is the one-sided test of the lower bound (H₀: μ ≤ μ<sub>target</sub>−Δ); p₂ is the one-sided test of the upper bound (H₀: μ ≥ μ<sub>target</sub>+Δ); p_TOST = max(p₁, p₂). Equivalence at α=0.05 is concluded when p_TOST &lt; 0.05. Note that n=5 is small, statistical power is limited, and the conclusion depends on the chosen margin.</p>
+    <div id="tostVerdict" aria-live="polite" class="callout" style="margin-top:10px"></div>
 
-<div style="margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--line); display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-    <a href="../jabri_5/wells/bridge-en.html" class="btn-nav">← Bridge</a>
-    <a href="../en/index.html" class="btn-nav">🏠 Home</a>
-    <a href="../jabri_5/wells/frame3-en.html" class="btn-pdf">Frame 3 (Fine Structure) →</a>
-</div>
-</section>
+    <details style="margin-top:14px">
+      <summary>Independent verification of the t distribution (visible reference tests)</summary>
+      <p class="muted" style="font-size:.9rem">These tests run automatically on page load; results are visible below. Reference values are taken from standard t distribution tables.</p>
+      <div class="table-scroll">
+        <table id="tTailTests" aria-describedby="tTailSummary">
+          <thead><tr>
+            <th>t</th><th>df</th><th>Expected</th><th>Actual</th><th>|Error|</th><th>Result</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="tTailSummary" class="muted" aria-live="polite" style="margin-top:8px"></p>
+    </details>
+  </section>
 
-<footer>Al-Hindara · Frame 2 — The Tree and the Shadow<br>Standalone HTML version for scientific review and reproduction · October 2026</footer>
+  <section class="card" aria-labelledby="sec4">
+    <h2 id="sec4">4. Bar Chart: Individual Ratios vs. Theoretical Value</h2>
+    <p>Each bar represents R for one tree; the dashed line is the theoretical value √2−1 ≈ 0.41421. The chart compares values but does not establish that the similarity is causal.</p>
+    <div class="canvas-wrap"><svg id="barChart" viewBox="0 0 720 340" role="img" aria-label="Bar chart of the five tree ratios with the theoretical value line √2−1"></svg></div>
+    <div class="legend"><span><i class="dot" style="background:#76d6e8"></i>Measured ratio R</span><span><i class="dot" style="background:#f2c879"></i>Theoretical value √2−1</span></div>
+  </section>
+
+  <section class="card" aria-labelledby="sec5">
+    <h2 id="sec5">5. Evidence Interpretation Table</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Claim</th><th scope="col">Status</th><th scope="col">Limits of inference</th></tr></thead>
+        <tbody>
+          <tr><td>tan(22.5°) = √2−1</td><td>Proven mathematically</td><td>Exact trigonometric result</td></tr>
+          <tr><td>S/H = tan(θ)</td><td>Correct within the geometric model</td><td>Requires horizontal ground and consistent angle/shadow measurements</td></tr>
+          <tr><td>Mean R for trees is close to √2−1</td><td>Numerical description of a small sample</td><td>Five trees at one site; insufficient for generalization</td></tr>
+          <tr><td>Mean equivalence within Δ (value computed above)</td><td>Test conditional on chosen margin</td><td>Margin is practical/conventional and must be justified before data collection; power is limited at n=5</td></tr>
+          <tr><td>General link to the Riemann hypothesis</td><td>Not proven</td><td>Numerical similarity does not create a proof or a mathematical connection</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Statistical note</h3>
+    <p>The displayed 90% CI is the t-based interval for the sample mean (n=5, df=4). The TOST in Section 3 is computed from the same five data points and reports the margin, degrees of freedom, p₁, p₂, and p_TOST. Passing the test does not amount to proving exact equality or a general natural law. The reference tests of the t distribution (Section 3) show whether the displayed p-values can be trusted before relying on them.</p>
+  </section>
+
+  <section class="card" aria-labelledby="sec6">
+    <h2 id="sec6">6. Proof Formulation and Final Conclusion</h2>
+    <ol>
+      <li><b>Model assumptions:</b> a vertical object of height H above horizontal ground, with a light ray making elevation angle α with the horizon.</li>
+      <li><b>From the right triangle:</b> tan(α) = H/S, hence S/H = 1/tan(α).</li>
+      <li><b>Angle defined from the vertical:</b> θ = 90°−α, therefore cot(α) = tan(θ), yielding S/H = tan(θ).</li>
+      <li><b>At θ = 22.5°:</b> the theoretical shadow-to-height ratio is √2−1 ≈ 0.41421356.</li>
+      <li><b>Data check:</b> the field mean R ≈ 0.41297 is numerically close to the theoretical value, but R = (H−h)/H is not S/H unless the measurement established that H−h is the horizontal shadow length; therefore this sample is not a direct test of the shadow law.</li>
+    </ol>
+    <div class="formula">Proven result: S/H = tan(θ), and at θ=22.5° it equals √2−1.</div>
+    <div class="callout"><b>Controlled conclusion:</b> the geometric proof is exact. The mango data are exploratory and show numerical proximity between mean R and √2−1, not a demonstration that nature imposes this ratio on trees. Nothing on this page proves a connection to the Riemann hypothesis or to a broader cosmic law.</div>
+  </section>
+
+  <section class="card" aria-labelledby="sec7">
+    <h2 id="sec7">7. Reproduction Steps and Links</h2>
+    <ul>
+      <li>Save the file as <code>frame2-en.html</code> and open in a modern browser. Calculations, plots, and CSV export work offline. The "Download PDF" button requires loading <code>html2pdf.js</code> from CDN on first use, or hosting it locally.</li>
+      <li>Change H and θ in the simulation and verify that S = H × tan(θ). Invalid inputs are flagged as you type and corrected when the field loses focus.</li>
+      <li>Change the margin Δ in Section 3 to see its effect on the TOST outcome; the margin should be fixed before data collection.</li>
+      <li>Review the reference t distribution tests in Section 3 before relying on p_TOST.</li>
+      <li>To turn the study into a direct field test, measure the object height H and the horizontal shadow length S at the same time, record the sun angle, and repeat across times, sites, and objects.</li>
+      <li>Keep the raw data, units, uncertainty estimation method, and the analysis plan fixed before collecting new data.</li>
+    </ul>
+    <details>
+      <summary>Exported CSV structure</summary>
+      <p>The file begins with <code>#</code>-comment metadata identifying the frame, author, DOI, collection date and site, and units, followed by the column header row:</p>
+      <p><code>tree, H_m, h_m, C_m, R, target_sqrt2_minus_1, difference_from_target</code></p>
+      <p>Columns <code>tree, H_m, h_m</code> are the measured data; <code>C_m, R, difference_from_target</code> are derived; <code>target_sqrt2_minus_1</code> is a theoretical constant. The file does not contain additional raw measurements or a record of instruments and uncertainty, which must be added before use in a new analysis.</p>
+    </details>
+    <div style="margin-top:15px;display:flex;gap:10px;flex-wrap:wrap">
+      <button onclick="window.print()" class="secondary" style="background:var(--cyan);color:#111">🖨️ Print / Save (text)</button>
+      <button onclick="generateDirectPDF()" style="background:var(--gold);color:#111">📥 Download PDF (direct)</button>
+      <button class="secondary" onclick="downloadCSV()">Download measurement table (CSV)</button>
+    </div>
+    <p id="pdfStatus" aria-live="polite" class="muted" style="display:none;margin-top:8px;font-size:.9rem"></p>
+
+    <div style="margin-top:25px;padding-top:15px;border-top:1px dashed var(--line);display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <a href="../jabri_5/wells/bridge.html" class="btn-nav">← The Bridge</a>
+      <a href="../en/index.html" class="btn-nav">🏠 Home</a>
+      <a href="../jabri_5/wells/frame3.html" class="btn-pdf">Frame 3 (Fine Structure) →</a>
+    </div>
+  </section>
+
+  <footer>Al-Hindara · Frame 2 — The Tree and the Shadow<br>Standalone HTML edition for scholarly review and reproduction · October 2026</footer>
 </div>
 <script>
 (function(){
- const target=Math.SQRT2-1;
- const H=document.getElementById('height'), theta=document.getElementById('theta'), sun=document.getElementById('sun');
- let lastChanged='theta';
- function fmt(x,n=5){return Number.isFinite(x)?x.toFixed(n):'—'}
- function update(which){
-   if(which)lastChanged=which;
-   let t=Number(theta.value), a=Number(sun.value), h=Math.max(.1,Math.min(100,Number(H.value)||7.8));
-   if(lastChanged==='theta'){a=90-t;sun.value=a}
-   else if(lastChanged==='sun'){t=90-a;theta.value=t}
-   document.getElementById('thetaVal').textContent=fmt(t,1)+'°';
-   document.getElementById('alphaVal').textContent=fmt(a,1)+'°';
-   const ratio=Math.tan(t*Math.PI/180), s=h*ratio;
-   document.getElementById('shadowVal').textContent=fmt(s,3)+' m';
-   document.getElementById('ratioVal').textContent=fmt(ratio,5);
-   document.getElementById('tanVal').textContent=fmt(ratio,5);
-   const baseY=240, topY=55, leftX=150, scale=Math.min(185/h, 30), pxH=Math.min(185,h*scale), pxS=Math.min(400,pxH*ratio);
-   const x2=Math.min(650,leftX+pxS), y2=baseY-pxH;
-   document.getElementById('treeLine').setAttribute('x2',leftX);document.getElementById('treeLine').setAttribute('y1',baseY-pxH);
-   document.getElementById('rayLine').setAttribute('x1',leftX);document.getElementById('rayLine').setAttribute('y1',baseY-pxH);document.getElementById('rayLine').setAttribute('x2',x2);document.getElementById('rayLine').setAttribute('y2',baseY);
-   document.getElementById('shadowLine').setAttribute('x2',x2);
-   document.getElementById('rightAngle').setAttribute('d',`M${leftX} ${baseY-20} L${leftX+20} ${baseY-20} L${leftX+20} ${baseY}`);
-   const hl=document.getElementById('hLabel');hl.setAttribute('y',baseY-pxH/2);hl.textContent='H = '+fmt(h,2)+' m';
-   const sl=document.getElementById('sLabel');sl.setAttribute('x',(leftX+x2)/2);sl.textContent='S = '+fmt(s,3)+' m';
-   const tl=document.getElementById('thetaLabel');tl.setAttribute('x',leftX+Math.min(70,pxS*.25+12));tl.setAttribute('y',baseY-12);tl.textContent='θ = '+fmt(t,1)+'°';
- }
- H.addEventListener('input',()=>update());theta.addEventListener('input',()=>update('theta'));sun.addEventListener('input',()=>update('sun'));
- update('theta');
- const rows=[{n:1,H:7.8,h:4.5},{n:2,H:8.5,h:5},{n:3,H:7.2,h:4.2},{n:4,H:9,h:5.4},{n:5,H:7.5,h:4.4}];
- const svg=document.getElementById('barChart'), ns='http://www.w3.org/2000/svg';
- function el(tag,attrs,text){const e=document.createElementNS(ns,tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;svg.appendChild(e);return e}
- const left=72,right=680,top=30,bottom=275,min=.38,max=.43;
- const y=v=>bottom-(v-min)/(max-min)*(bottom-top);
- [0.38,0.39,0.40,0.41,0.42,0.43].forEach(v=>{el('line',{x1:left,y1:y(v),x2:right,y2:y(v),stroke:'#2b405c','stroke-width':1});el('text',{x:left-10,y:y(v)+5,fill:'#a8b8ce','text-anchor':'end','font-size':12},v.toFixed(2))});
- const targetY=y(target);el('line',{x1:left,y1:targetY,x2:right,y2:targetY,stroke:'#f2c879','stroke-width':3,'stroke-dasharray':'8 5'});el('text',{x:right-2,y:targetY-8,fill:'#f2c879','text-anchor':'end','font-size':12},'√2−1 = '+target.toFixed(5));
- rows.forEach((r,i)=>{const val=(r.H-r.h)/r.H,x=130+i*112,bw=48;el('rect',{x:x-bw/2,y:y(val),width:bw,height:bottom-y(val),rx:4,fill:'#76d6e8'});el('text',{x,y:bottom+23,fill:'#edf4ff','text-anchor':'middle','font-size':13},'Tree '+r.n);el('text',{x,y:y(val)-8,fill:'#edf4ff','text-anchor':'middle','font-size':12},val.toFixed(5))});
- el('line',{x1:left,y1:bottom,x2:right,y2:bottom,stroke:'#a8b8ce','stroke-width':2});
- window.downloadCSV=function(){const lines=['tree,H_m,h_m,C_H_minus_h_m,R_C_over_H,target_sqrt2_minus_1,difference'];rows.forEach(r=>{let c=r.H-r.h,v=c/r.H;lines.push([r.n,r.H,r.h,c,v,target,v-target].join(','))});const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='frame2-tree-shadow-data.csv';a.click();URL.revokeObjectURL(url)};
+  'use strict';
 
- window.generateDirectPDF = function() {
-    const element = document.getElementById('pdf-content');
-    const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
-    buttons.forEach(btn => btn.style.display = 'none');
-    
-    const opt = {
-        margin:       10,
-        filename:     'Frame2_Tree_and_Shadow_EN.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0b1220' },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
+  const TARGET = Math.SQRT2 - 1;
 
-    html2pdf().set(opt).from(element).save().then(() => {
-        buttons.forEach(btn => btn.style.display = '');
+  // ============================================================
+  // Statistics: logGamma (Lanczos) + regularized incomplete Beta (Lentz)
+  // Reference: Numerical Recipes §6.1 (gammln) and §6.4 (betacf)
+  // ============================================================
+  function logGamma(z){
+    const g=7,c=[0.99999999999980993,676.5203681218851,-1259.1392167224028,
+      771.32342877765313,-176.61502916214059,12.507343278686905,
+      -0.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];
+    if(z<0.5) return Math.log(Math.PI/Math.sin(Math.PI*z))-logGamma(1-z);
+    z-=1; let x=c[0];
+    for(let i=1;i<g+2;i++) x+=c[i]/(z+i);
+    const t=z+g+0.5;
+    return 0.5*Math.log(2*Math.PI)+(z+0.5)*Math.log(t)-t+Math.log(x);
+  }
+  function logBeta(a,b){ return logGamma(a)+logGamma(b)-logGamma(a+b); }
+
+  // Continued fraction for the incomplete beta ratio.
+  // Returns NaN if the loop exhausts MAXIT without meeting the convergence tolerance.
+  function betacf(a,b,x){
+    const MAXIT=500, EPS=3e-16, FPMIN=1e-300;
+    const qab=a+b, qap=a+1, qam=a-1;
+    let c=1, d=1-qab*x/qap;
+    if(Math.abs(d)<FPMIN) d=FPMIN;
+    d=1/d; let h=d;
+    let converged=false;
+    for(let m=1;m<=MAXIT;m++){
+      const m2=2*m;
+      let aa=m*(b-m)*x/((qam+m2)*(a+m2));
+      d=1+aa*d; if(Math.abs(d)<FPMIN) d=FPMIN;
+      c=1+aa/c; if(Math.abs(c)<FPMIN) c=FPMIN;
+      d=1/d; h*=d*c;
+      aa=-(a+m)*(qab+m)*x/((a+m2)*(qap+m2));
+      d=1+aa*d; if(Math.abs(d)<FPMIN) d=FPMIN;
+      c=1+aa/c; if(Math.abs(c)<FPMIN) c=FPMIN;
+      d=1/d;
+      const del=d*c; h*=del;
+      if(Math.abs(del-1)<EPS){ converged=true; break; }
+    }
+    return converged ? h : NaN;
+  }
+  function regIncBeta(x,a,b){
+    if(x<=0) return 0;
+    if(x>=1) return 1;
+    const lb=logBeta(a,b);
+    const bt=Math.exp(a*Math.log(x)+b*Math.log(1-x)-lb);
+    return (x<(a+1)/(a+b+2)) ? bt*betacf(a,b,x)/a : 1-bt*betacf(b,a,1-x)/b;
+  }
+
+  // P(T > t) for the t distribution with df degrees of freedom
+  function tTail(t,df){
+    if(Number.isNaN(t) || !(df > 0)) return NaN;
+    if(t === Infinity)  return 0;
+    if(t === -Infinity) return 1;
+    const x = df / (df + t*t);
+    const p = 0.5 * regIncBeta(x, df/2, 0.5);
+    return t >= 0 ? p : 1 - p;
+  }
+
+  // Two-sided critical value: t such that P(T>t)=tailProb
+  function tCritical(tailProb,df){
+    let lo=0, hi=100;
+    for(let i=0;i<120;i++){
+      const mid=(lo+hi)/2;
+      if(tTail(mid,df)>tailProb) lo=mid; else hi=mid;
+    }
+    return (lo+hi)/2;
+  }
+
+  const tTests = [
+    { t: 2.131846786326736, df: 4, expected: 0.05,  label: 'df=4, two-sided 90%' },
+    { t: 2.776445105197799, df: 4, expected: 0.025, label: 'df=4, two-sided 95%' },
+    { t: 4.604094871419159, df: 4, expected: 0.005, label: 'df=4, two-sided 99%' },
+    { t: 2.015048372669157, df: 5, expected: 0.05,  label: 'df=5, two-sided 90%' }
+  ];
+  function runTests(){
+    const results = tTests.map(v => {
+      const actual = tTail(v.t, v.df);
+      const err = Math.abs(actual - v.expected);
+      return { ...v, actual, err, pass: Number.isFinite(actual) && err < 1e-6 };
     });
- };
+    const tCritCheck = Math.abs(tCritical(0.05, 4) - 2.131846786326736) < 1e-4;
+    return { results, tCritCheck };
+  }
+
+  // ============================================================
+  // Data and descriptive statistics
+  // ============================================================
+  const rows = [
+    {n:1,H:7.8,h:4.5},
+    {n:2,H:8.5,h:5.0},
+    {n:3,H:7.2,h:4.2},
+    {n:4,H:9.0,h:5.4},
+    {n:5,H:7.5,h:4.4}
+  ];
+  const ratios = rows.map(r => (r.H - r.h) / r.H);
+
+  function describe(v){
+    const n=v.length;
+    const mean=v.reduce((a,b)=>a+b,0)/n;
+    const sd=Math.sqrt(v.reduce((a,b)=>a+(b-mean)**2,0)/(n-1));
+    const se=sd/Math.sqrt(n);
+    return {n,mean,sd,se,df:n-1};
+  }
+
+  const desc = describe(ratios);
+  const tCrit90 = tCritical(0.05, desc.df);
+  const ciLo = desc.mean - tCrit90 * desc.se;
+  const ciHi = desc.mean + tCrit90 * desc.se;
+
+  document.getElementById('meanVal').textContent = desc.mean.toFixed(5);
+  document.getElementById('sdVal').textContent   = desc.sd.toFixed(5);
+  document.getElementById('seVal').textContent   = desc.se.toFixed(5);
+  document.getElementById('ciVal').textContent   =
+    '[' + ciLo.toFixed(5) + ', ' + ciHi.toFixed(5) + ']';
+
+  // ============================================================
+  // TOST
+  // ============================================================
+  const tostDelta = document.getElementById('tostDelta');
+  const tostBody  = document.getElementById('tostBody');
+  const tostVerdict = document.getElementById('tostVerdict');
+  const deltaErr = document.getElementById('deltaErr');
+
+  function fmtP(p){
+    if(!Number.isFinite(p)) return '—';
+    if(p >= 0.9995) return '> 0.999';
+    if(p < 0.0001)  return '< 0.0001';
+    return p.toFixed(4);
+  }
+
+  function tost(values, target, delta, alpha){
+    const d = describe(values);
+    const lower = target - delta, upper = target + delta;
+    const t1 = (d.mean - lower) / d.se;
+    const t2 = (upper - d.mean) / d.se;
+    const p1 = tTail(t1, d.df);
+    const p2 = tTail(t2, d.df);
+    const pTOST = Math.max(p1, p2);
+    return {...d, lower, upper, t1, t2, p1, p2, pTOST,
+            equivalent: pTOST < alpha, alpha};
+  }
+
+  function checkDelta(commit){
+    const v = parseFloat(tostDelta.value);
+    const ok = isFinite(v) && v >= 0.001 && v <= 0.1;
+    if(ok){
+      tostDelta.removeAttribute('aria-invalid');
+      deltaErr.classList.remove('info');
+      deltaErr.textContent = ''; deltaErr.style.display = 'none';
+      return v;
+    }
+    if(commit){
+      const corrected = isFinite(v) ? Math.min(0.1, Math.max(0.001, v)) : 0.03;
+      tostDelta.value = String(corrected);
+      tostDelta.removeAttribute('aria-invalid');
+      deltaErr.classList.add('info');
+      deltaErr.textContent = `Corrected to ${corrected} (allowed range 0.001–0.1).`;
+      deltaErr.style.display = 'block';
+      return corrected;
+    }
+    tostDelta.setAttribute('aria-invalid','true');
+    deltaErr.classList.remove('info');
+    deltaErr.textContent = 'Invalid or out-of-range value (0.001–0.1).';
+    deltaErr.style.display = 'block';
+    return null;
+  }
+
+  function updateTOST(){
+    const delta = parseFloat(tostDelta.value);
+    if(!isFinite(delta) || delta < 0.001 || delta > 0.1) return;
+    const r = tost(ratios, TARGET, delta, 0.05);
+    const lines = [
+      ['Pre-specified margin Δ',     '±' + delta.toFixed(3)],
+      ['Mean R',                     r.mean.toFixed(5)],
+      ['Sample standard deviation',  r.sd.toFixed(5)],
+      ['Standard error',             r.se.toFixed(5)],
+      ['Degrees of freedom df = n−1', String(r.df)],
+      ['Lower equivalence bound μₜ−Δ', r.lower.toFixed(5)],
+      ['Upper equivalence bound μₜ+Δ', r.upper.toFixed(5)],
+      ['t₁ = (x̄ − (μₜ−Δ)) / SE',    r.t1.toFixed(4)],
+      ['p₁ (one-sided, H₀: μ ≤ μₜ−Δ)', fmtP(r.p1)],
+      ['t₂ = ((μₜ+Δ) − x̄) / SE',    r.t2.toFixed(4)],
+      ['p₂ (one-sided, H₀: μ ≥ μₜ+Δ)', fmtP(r.p2)],
+      ['p_TOST = max(p₁, p₂)',       fmtP(r.pTOST)],
+      ['α',                          '0.05'],
+      ['Decision', r.equivalent ? 'Equivalence holds at this margin' : 'Equivalence does not hold at this margin']
+    ];
+    tostBody.innerHTML = lines.map(([k,v]) =>
+      `<tr><td style="text-align:start;direction:ltr">${k}</td><td>${v}</td></tr>`
+    ).join('');
+
+    if(r.equivalent){
+      tostVerdict.className = 'callout good';
+      tostVerdict.innerHTML =
+        `<b>TOST result:</b> p_TOST = ${fmtP(r.pTOST)} &lt; 0.05. ` +
+        `The data provide <em>statistical evidence</em> of equivalence at margin Δ = ±${delta.toFixed(3)}. ` +
+        `This is not a proof of exact equality, does not generalize to mango trees at large, and statistical power is limited at n=5. ` +
+        `If Δ was chosen after seeing the data, the result is exploratory rather than confirmatory.`;
+    } else {
+      tostVerdict.className = 'callout warn';
+      tostVerdict.innerHTML =
+        `<b>TOST result:</b> p_TOST = ${fmtP(r.pTOST)} ≥ 0.05. ` +
+        `Equivalence does not hold at Δ = ±${delta.toFixed(3)}; either the margin is too small relative to data dispersion, ` +
+        `or the mean is far enough from the target. The margin must not be changed after seeing the result.`;
+    }
+
+    const { results, tCritCheck } = runTests();
+    const tb = document.querySelector('#tTailTests tbody');
+    if(tb){
+      tb.innerHTML = results.map(x => `
+        <tr>
+          <td>${x.t.toFixed(7)}</td>
+          <td>${x.df}</td>
+          <td>${x.expected}</td>
+          <td>${isFinite(x.actual) ? x.actual.toFixed(7) : '—'}</td>
+          <td>${x.err.toExponential(2)}</td>
+          <td style="color:${x.pass ? 'var(--green)' : 'var(--red)'}">${x.pass ? '✓' : '✗'}</td>
+        </tr>`).join('');
+    }
+    const sm = document.getElementById('tTailSummary');
+    if(sm){
+      const allPass = results.every(x => x.pass) && tCritCheck;
+      sm.style.color = allPass ? 'var(--green)' : 'var(--red)';
+      sm.textContent = allPass
+        ? `All tests pass (4/4 plus tCritical consistency). tTail is reliable to ≥ 1e-6.`
+        : `At least one test failed. Do not rely on p_TOST until the function is corrected.`;
+    }
+  }
+
+  // ============================================================
+  // Geometric simulation
+  // ============================================================
+  const THETA_MIN=5, THETA_MAX=60, ALPHA_MIN=30, ALPHA_MAX=85;
+  const H = document.getElementById('height');
+  const theta = document.getElementById('theta');
+  const sun = document.getElementById('sun');
+  const heightErr = document.getElementById('heightErr');
+  let lastChanged = 'theta';
+
+  function fmt(x,n=5){ return Number.isFinite(x) ? x.toFixed(n) : '—'; }
+  function clamp(v,lo,hi){ return Math.min(hi, Math.max(lo, v)); }
+
+  function checkHeight(commit){
+    const v = parseFloat(H.value);
+    const ok = isFinite(v) && v >= 0.1 && v <= 100;
+    if(ok){
+      H.removeAttribute('aria-invalid');
+      heightErr.classList.remove('info');
+      heightErr.textContent = ''; heightErr.style.display = 'none';
+      return v;
+    }
+    if(commit){
+      const corrected = isFinite(v) ? Math.min(100, Math.max(0.1, v)) : 7.8;
+      H.value = String(corrected);
+      H.removeAttribute('aria-invalid');
+      heightErr.classList.add('info');
+      heightErr.textContent = `Corrected to ${corrected} (allowed range 0.1–100).`;
+      heightErr.style.display = 'block';
+      return corrected;
+    }
+    H.setAttribute('aria-invalid','true');
+    heightErr.classList.remove('info');
+    heightErr.textContent = 'Invalid or out-of-range value (0.1–100).';
+    heightErr.style.display = 'block';
+    return null;
+  }
+
+  function update(which){
+    if(which) lastChanged = which;
+    let t = clamp(Number(theta.value) || 22.5, THETA_MIN, THETA_MAX);
+    let a = clamp(Number(sun.value)   || 67.5, ALPHA_MIN, ALPHA_MAX);
+    const h = parseFloat(H.value);
+    if(!isFinite(h) || h < 0.1 || h > 100) return;
+
+    if(lastChanged === 'theta'){
+      a = clamp(90 - t, ALPHA_MIN, ALPHA_MAX);
+      t = 90 - a;
+      theta.value = t;
+      sun.value = a;
+    } else if(lastChanged === 'sun'){
+      t = clamp(90 - a, THETA_MIN, THETA_MAX);
+      a = 90 - t;
+      sun.value = a;
+      theta.value = t;
+    }
+
+    document.getElementById('thetaVal').textContent = fmt(t,1) + '°';
+    document.getElementById('alphaVal').textContent = fmt(a,1) + '°';
+
+    const ratio = Math.tan(t * Math.PI / 180);
+    const s = h * ratio;
+    document.getElementById('shadowVal').textContent = fmt(s,3) + ' m';
+    document.getElementById('ratioVal').textContent  = fmt(ratio,5);
+    document.getElementById('tanVal').textContent    = fmt(ratio,5);
+
+    const baseY = 240, leftX = 150;
+    const scale = Math.min(185/h, 30);
+    const pxH = Math.min(185, h * scale);
+    const pxS = Math.min(400, pxH * ratio);
+    const x2 = Math.min(650, leftX + pxS);
+    const yTop = baseY - pxH;
+
+    const tree = document.getElementById('treeLine');
+    tree.setAttribute('x1',leftX); tree.setAttribute('x2',leftX);
+    tree.setAttribute('y1',baseY); tree.setAttribute('y2',yTop);
+
+    const ray = document.getElementById('rayLine');
+    ray.setAttribute('x1',leftX); ray.setAttribute('y1',yTop);
+    ray.setAttribute('x2',x2);     ray.setAttribute('y2',baseY);
+
+    document.getElementById('shadowLine').setAttribute('x2',x2);
+    document.getElementById('rightAngle').setAttribute('d',
+      `M${leftX} ${baseY-20} L${leftX+20} ${baseY-20} L${leftX+20} ${baseY}`);
+
+    const rArc = Math.min(26, Math.max(12, pxH * 0.4));
+    const thR = t * Math.PI / 180;
+    document.getElementById('thetaArc').setAttribute('d',
+      `M ${leftX} ${yTop + rArc} A ${rArc} ${rArc} 0 0 0 ${leftX + rArc*Math.sin(thR)} ${yTop + rArc*Math.cos(thR)}`);
+
+    const midHalf = (t/2) * Math.PI/180;
+    const labelR = rArc + 20;
+    const tl = document.getElementById('thetaLabel');
+    tl.setAttribute('x', leftX + labelR*Math.sin(midHalf));
+    tl.setAttribute('y', yTop + labelR*Math.cos(midHalf) + 4);
+    tl.textContent = 'θ = ' + fmt(t,1) + '°';
+
+    const hl = document.getElementById('hLabel');
+    hl.setAttribute('y', yTop + pxH/2 + 5);
+    hl.textContent = 'H = ' + fmt(h,2) + ' m';
+
+    const sl = document.getElementById('sLabel');
+    sl.setAttribute('x', (leftX + x2)/2);
+    sl.textContent = 'S = ' + fmt(s,3) + ' m';
+  }
+
+  // ============================================================
+  // Bar chart
+  // ============================================================
+  const svg = document.getElementById('barChart');
+  const ns = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, text){
+    const e = document.createElementNS(ns, tag);
+    Object.entries(attrs || {}).forEach(([k,v]) => e.setAttribute(k, v));
+    if(text !== undefined) e.textContent = text;
+    svg.appendChild(e);
+    return e;
+  }
+  const left = 72, right = 680, topY = 30, bottom = 275;
+  const vmin = 0.38, vmax = 0.43;
+  const yOf = v => bottom - (v - vmin) / (vmax - vmin) * (bottom - topY);
+
+  [0.38,0.39,0.40,0.41,0.42,0.43].forEach(v => {
+    el('line', {x1:left, y1:yOf(v), x2:right, y2:yOf(v), stroke:'#2b405c', 'stroke-width':1});
+    el('text', {x:left-10, y:yOf(v)+5, fill:'#a8b8ce', 'text-anchor':'end', 'font-size':12}, v.toFixed(2));
+  });
+  const targetY = yOf(TARGET);
+  el('line', {x1:left, y1:targetY, x2:right, y2:targetY, stroke:'#f2c879', 'stroke-width':3, 'stroke-dasharray':'8 5'});
+  el('text', {x:right-2, y:targetY-8, fill:'#f2c879', 'text-anchor':'end', 'font-size':12}, '√2−1 = ' + TARGET.toFixed(5));
+
+  rows.forEach((r, i) => {
+    const val = ratios[i];
+    const x = 130 + i * 112, bw = 48;
+    el('rect', {x:x-bw/2, y:yOf(val), width:bw, height:bottom-yOf(val), rx:4, fill:'#76d6e8'});
+    el('text', {x, y:bottom+23, fill:'#edf4ff', 'text-anchor':'middle', 'font-size':13}, 'Tree ' + r.n);
+    el('text', {x, y:yOf(val)-8, fill:'#edf4ff', 'text-anchor':'middle', 'font-size':12}, val.toFixed(5));
+  });
+  el('line', {x1:left, y1:bottom, x2:right, y2:bottom, stroke:'#a8b8ce', 'stroke-width':2});
+
+  // ============================================================
+  // CSV
+  // ============================================================
+  window.downloadCSV = function(){
+    const meta = [
+      '# Al-Hindara Frame 2 — Tree and Shadow dataset',
+      '# Author: Abdulla Mohammed Nasser Al-Jabri',
+      '# DOI: 10.5281/zenodo.23540796',
+      '# Collected: 2026-10-14',
+      '# Site: Shu\'ub, Sana\'a, Yemen',
+      '# Units: H, h, C in meters; R and target dimensionless',
+      '# Note: R = C/H is a crown/height ratio (C = H - h),',
+      '#       NOT a measured horizontal shadow length.',
+      '# Note: target_sqrt2_minus_1 is a theoretical constant, not fitted.'
+    ];
+    const header = 'tree,H_m,h_m,C_m,R,target_sqrt2_minus_1,difference_from_target';
+    const lines = [header];
+    rows.forEach((r, i) => {
+      const C = r.H - r.h;
+      const R = C / r.H;
+      lines.push([r.n, r.H, r.h, C.toFixed(2), R.toFixed(5), TARGET.toFixed(5), (R - TARGET).toFixed(5)].join(','));
+    });
+    const blob = new Blob(['\ufeff' + meta.join('\r\n') + '\r\n' + lines.join('\r\n')],
+                         {type:'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'frame2-tree-shadow-data.csv';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  // ============================================================
+  // PDF with internal status message
+  // ============================================================
+  window.generateDirectPDF = function(){
+    const status = document.getElementById('pdfStatus');
+    status.style.display = 'block';
+    if(typeof html2pdf === 'undefined'){
+      status.style.color = 'var(--red)';
+      status.textContent = 'PDF generation requires html2pdf.js from CDN. Calculations, plots, and CSV export work offline.';
+      return;
+    }
+    status.style.color = 'var(--muted)';
+    status.textContent = 'Generating PDF…';
+    const element = document.getElementById('pdf-content');
+    const hidden = document.querySelectorAll('.lang-btn, button, .top-nav');
+    hidden.forEach(b => b.style.display = 'none');
+    const opt = {
+      margin: 10,
+      filename: 'Frame2_Tree_and_Shadow_EN.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0b1220' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save()
+      .then(() => { status.style.color = 'var(--green)'; status.textContent = 'PDF generated.'; })
+      .catch(err => {
+        console.error('PDF generation failed:', err);
+        status.style.color = 'var(--red)';
+        status.textContent = 'PDF generation failed. Check network connectivity or host html2pdf.js locally.';
+      })
+      .finally(() => { hidden.forEach(b => b.style.display = ''); });
+  };
+
+  // ============================================================
+  // Event wiring and initialization
+  // ============================================================
+  H.addEventListener('input', () => {
+    if(checkHeight(false) !== null) update();
+  });
+  H.addEventListener('change', () => { checkHeight(true); update(); });
+  H.addEventListener('blur',   () => { checkHeight(true); update(); });
+
+  theta.addEventListener('input', () => update('theta'));
+  sun.addEventListener('input',   () => update('sun'));
+
+  tostDelta.addEventListener('input', () => {
+    if(checkDelta(false) !== null) updateTOST();
+  });
+  tostDelta.addEventListener('change', () => { checkDelta(true); updateTOST(); });
+  tostDelta.addEventListener('blur',   () => { checkDelta(true); updateTOST(); });
+
+  update('theta');
+  updateTOST();
 })();
 </script>
 </body>
