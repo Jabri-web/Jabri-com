@@ -57,9 +57,7 @@
 
         .badge-info { background: rgba(106, 227, 255, 0.1); border-right: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-neutral { background: rgba(255, 255, 255, 0.05); border-right: 4px solid #666; padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-        .badge-reject { background: rgba(229, 115, 115, 0.08); border-right: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-        .badge-caveat { background: rgba(244, 196, 48, 0.08); border-right: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-
+        
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
 
         .opening { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -101,6 +99,7 @@
         .appendix-card h2 { color: var(--purple); border-bottom-color: var(--purple); }
         .appendix-card h3 { color: var(--purple); }
         .appendix-badge { background: rgba(199, 146, 234, 0.1); border-right: 4px solid var(--purple); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        
         .endpoint-result { padding: 10px 14px; margin: 10px 0; border-radius: 6px; font-size: 0.93rem; }
         .endpoint-lc { background: rgba(229, 115, 115, 0.08); border-right: 3px solid var(--red); }
         .endpoint-lp { background: rgba(6, 214, 160, 0.08); border-right: 3px solid var(--green); }
@@ -149,7 +148,7 @@
             body { background: white; color: #111; }
             .card, .opening-col { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; }
             h1, h2, h3, h4 { color: #000; border-color: #aaa; }
-            .math-block, .badge-info, .badge-neutral, .badge-reject, .badge-caveat, .deriv-box, .assessment-content, .appendix-badge, .next-step-box, .plan-box, .summary-section, .legend-box { background: #f5f5f5; color: #111; border-color: #aaa; }
+            .math-block, .badge-info, .badge-neutral, .deriv-box, .assessment-content, .appendix-badge, .next-step-box, .plan-box, .summary-section, .legend-box { background: #f5f5f5; color: #111; border-color: #aaa; }
             .lang-btn, .top-nav, button { display: none; }
             .assessment-content { display: block !important; }
         }
@@ -218,7 +217,7 @@
             \[ Lg = -g'' + \frac{g''}{g}g = 0 \]
             فيكون الغلاف \(g(u)\) حلًا صفريًا شكليًا (formal zero-mode) على المجال المفتوح. أما كونه دالة ذاتية فعلية بقيمة صفرية لتحقيق ذاتي الترافق، فيتطلب تحديد المجال والتحقق من شروط الحدود.
             <br><br>
-            كما يقبل المؤثر التفكيك الجبري:
+            كما يقبل المؤثر التفكيك الجبري الشكلي:
             \[ L = \left(-\frac{d}{du} - p\right)\left(\frac{d}{du} - p\right), \qquad p = \frac{g'}{g} \]
             وهي هوية تفاضلية شكلية على الدوال الملساء داخل المجال. بما أن \(p = g'/g\)، فإن \((\partial_u - p)g=0\)؛ لكن هذا لا يقرر انتماء \(g\) إلى نواة تحقيق ذاتي الترافق محدد، وهو ما يعتمد على المجال وشروط الحدود.
         </div>
@@ -324,7 +323,7 @@
         </div>
         <p>العامل \(4\pi^2/u^4\) أثر مباشر لتغيير المتغير. لاحظ أن \(V_{\mathrm{new}}\) معرّف على \((0,\pi)\cup(\pi,2\pi)\) فقط، لأن \(Q(2)\) غير معرّفة (صفر \(Z\) عند \(x=2\)).</p>
 
-        <div class="badge-caveat">
+        <div class="badge-neutral">
             <strong>تحفّظ على التكافؤ الطيفي.</strong> \(V_{\mathrm{new}}(u) := (4\pi^2/u^4)Q(2\pi/u)\) هو <em>معامل في المعادلة المحوّلة</em> \(-w'' + V_{\mathrm{new}}w=0\)، بعد تغيير المتغير \(x=2\pi/u\) والتعويض \(w=uy\). هذا تطابق بين تعبيرين تفاضليين على \((0,2\pi)\). أما <em>التكافؤ الطيفي</em> بين مؤثرين ذاتيَي الترافق على فضاءَي هيلبرت فيتطلب فوق ذلك مطابقة القياس والمجال وشروط الحدود. إثبات هذا التكافؤ (أو إثبات استحالته) مسألة منفصلة، ولا يُدَّعى هنا.
         </div>
 
@@ -364,8 +363,8 @@
 
         <p>في كلتا الحالتين، لا يمكن أن يساوي \(V_D\) الجهد \(V_{\mathrm{new}}\) (الذي له قطب بسيط بمعامل \(C_\pi\approx 2.96\) عند \(\pi\)). إذن لا وجود لبذرة \(\varphi\) تحقق شرط الداربوكس القياسي وتنتج \(V_{\mathrm{new}}\).</p>
 
-        <div class="badge-reject">
-            <strong>الحكم (مرفوض للصنف القياسي).</strong>
+        <div class="badge-info" style="border-right-color: var(--red);">
+            <strong>الحكم (رفض الصنف القياسي).</strong>
             لا يوجد تحويل داربوكس قياسي من الرتبة الأولى (بأي بذرة \(\varphi\) تحقق \(-\varphi''+V_{\mathrm{eff}}\varphi=\lambda\varphi\)) يربط \(V_{\mathrm{eff}}\) بـ\(V_{\mathrm{new}}\). البرهان محلي عند \(u=\pi\)، ويعتمد فقط على:
             <ul style="margin-top: 8px;">
                 <li>نعومة \(V_{\mathrm{eff}}\) عند \(\pi\)؛</li>
@@ -400,7 +399,7 @@
                     <td>\(u\to 0^+\)</td>
                     <td>\(\sim \dfrac{4\pi^2}{441u^4}\to+\infty\)</td>
                     <td>\(\sim \dfrac{4\pi^2}{441u^4}\to+\infty\)</td>
-                    <td>نفس السلوك القيادي (قطب رتبة 4)</td>
+                    <td>تماثل: قطب رتبة 4، نفس المعامل</td>
                 </tr>
                 <tr>
                     <td>\(u=\pi\)</td>
@@ -505,7 +504,7 @@
             <h3>النتيجة</h3>
             <p><strong>مؤثر Frame 4، \(L = -\partial_u^2 + g''/g\)، ليس مُشتقًا جبريًا من المعادلة الأم في Frame 1.</strong> التحويل الدقيق يعطي \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\)، وهو مختلف عن \(V_{\mathrm{eff}}\):</p>
             <ul>
-                <li>عند \(u\to 0^+\): السلوك القيادي متطابق؛</li>
+                <li>عند \(u\to 0^+\): السلوك القيادي متطابق (قطب رتبة 4)؛</li>
                 <li>عند \(u=\pi\): \(V_{\mathrm{eff}}\) ناعم، \(V_{\mathrm{new}}\) له قطب بسيط بمعامل \(\approx 2.96\)؛</li>
                 <li>عند \(u\to 2\pi^-\): قطب بسيط سالب مقابل قطب مزدوج موجب.</li>
             </ul>
@@ -568,39 +567,31 @@
         </div>
     </div>
 
-    <!-- ==================== §5 (v6) ==================== -->
+    <!-- ==================== §5 (v7) ==================== -->
     <div class="card appendix-card">
         <h2>5. ملحق: السلوك المحلي للحلول وشروط الحدود</h2>
         <p>ينفّذ هذا الملحق الخطوة الأولى من خطة العمل: تحليل السلوك المحلي للحلول قرب الطرفين وتصنيف النهايات.</p>
 
         <h3>أ. الطرف \(u \to 2\pi^-\): Limit Circle</h3>
         <p>نضع \(t = 2\pi - u \to 0^+\). الجهد:</p>
-        <div class="math-block">\[ V_{\mathrm{eff}}(t) \sim -\frac{c}{t}, \qquad c = \frac{191}{42\pi} > 0. \]</div>
-        <p>معادلة القيمة الذاتية قرب \(t=0\)، بإهمال \(\lambda\psi\) في الرتبة الأولى:</p>
-        <div class="math-block">\[ \psi''(t) + \frac{c}{t}\psi(t) \approx 0. \]</div>
+        <div class="math-block">\[ V_{\mathrm{eff}}(u) \sim -\frac{c}{t}, \qquad c = \frac{191}{42\pi} > 0. \]</div>
+        <p>لمعادلة \(L\psi = \lambda\psi\)، وبإهمال حد القيمة الذاتية في الرتبة القيادية، تصبح المعادلة التقاربية:</p>
+        <div class="math-block">\[ \psi_{tt} + \frac{c}{t}\psi \approx 0. \]</div>
 
-        <p><strong>تحليل فروبنيوس.</strong> نكتب \(\psi = t^r\sum_{n\ge 0}a_n t^n\) مع \(a_0 \ne 0\). معادلة الدليل عند الرتبة \(t^0\) تعطي \(r(r-1) = 0\)، إذن \(r\in\{0,1\}\).</p>
+        <p><strong>تحليل فروبنيوس (توسعات محلية).</strong> نكتب \(\psi = t^r\sum_{n\ge 0}a_n t^n\). معادلة الدليل عند الرتبة \(t^0\) تعطي \(r(r-1) = 0\)، إذن \(r\in\{0,1\}\).</p>
 
-        <p><strong>الفرع \(r=1\):</strong> من علاقة التكرار عند الرتبة التالية \(a_1 = -c\,a_0/2\)، ومنه</p>
+        <p><strong>الفرع \(r=1\):</strong> من علاقة التكرار \(a_1 = -c\,a_0/2\)، ومنه التوسع المحلي:</p>
         <div class="math-block">\[ \psi_1(t) = a_0\left(t - \frac{c}{2}t^2 + O(t^3)\right). \]</div>
 
-        <p><strong>الفرع \(r=0\)</strong> جذر رنيني؛ الحل الثاني يتضمن حدودًا لوغاريتمية:</p>
-        <div class="math-block">\[ \psi_2(t) = 1 - c\,t\ln t + O(t^2\ln t) \quad \text{(مع تطبيع مناسب)}. \]</div>
+        <p><strong>الفرع \(r=0\)</strong> (جذر رنيني): يتضمن حداً لوغاريتمياً:</p>
+        <div class="math-block">\[ \psi_2(t) = 1 - c\,t\ln t + O(t). \]</div>
 
-        <p><strong>قابلية التكامل المربع.</strong> \(\int_0^\varepsilon |\psi_1|^2 dt \sim \int_0^\varepsilon t^2 dt < \infty\)، و\(\int_0^\varepsilon |\psi_2|^2 dt \sim \int_0^\varepsilon (1 - ct\ln t)^2 dt < \infty\) (لأن \(t\ln t \to 0\)). كلا الحلين في \(L^2\)؛ الطرف <strong>Limit Circle</strong>.</p>
+        <p><strong>قابلية التكامل المربع.</strong> كلا السلوكين محدود ومتكامل مربعياً قرب \(t=0\) (لأن \(t\ln t \to 0\)). وبالتالي، كلا الحلين المحليين في \(L^2\)؛ الطرف <strong>Limit Circle</strong>.</p>
 
         <div class="badge-neutral">
-            <strong>شروط الحدود عند طرف Limit Circle.</strong> عند طرف Limit Circle، فضاء الحلول المربعة القابلة للتكامل من البعد 2، فلا يختار \(L^2\) حلًا وحيدًا. يُحدَّد التحقيق الذاتي الترافق بـ<em>شرط على أثر الورونسكي الحدّي</em>.
+            <strong>شروط الحدود عند طرف Limit Circle.</strong> عند طرف Limit Circle، فضاء الحلول المربعة القابلة للتكامل من البعد 2، فلا يختار \(L^2\) حلاً وحيداً. يُحدَّد التحقيق الذاتي الترافق بـ<em>شرط على أثر الورونسكي الحدّي</em>.
             <br><br>
-            بتحديد أدق: المجال الأقصى \(\mathcal{D}_{\max}\) يتكون من دوال \(\psi\) بحيث \(\psi, \psi'\in AC_{\mathrm{loc}}\) و\(L\psi\in L^2\) محليًا؛ وعلى هذا المجال توجد صيغة الورونسكي الحدّية
-            \[
-                [\psi, \chi]_0 := \lim_{t\to 0}\left[\psi(t)\overline{\chi'(t)} - \psi'(t)\overline{\chi(t)}\right]
-            \]
-            لكل \(\psi, \chi\in\mathcal{D}_{\max}\) (حقيقة قياسية في نظرية Limit Circle). التحقيقات الذاتية الترافق تُعامَل بعائلة \(U(1)\)؛ شروط الحدود المقابلة تُعبَّر عبر صيغة لاغرانج/الورونسكي، <em>لا</em> عبر شرط روبين مباشر
-            \[
-                \alpha\,\psi(2\pi^-) + \beta\,\psi'(2\pi^-) = 0,
-            \]
-            لأن \(\psi_2'(t) \sim -c\ln t\) يتباعد لوغاريتميًا عند \(t\to 0^+\)، فالنهاية المنتهية \(\psi'(2\pi^-)\) غير موجودة عمومًا.
+            بتحديد أدق: المجال الأقصى \(\mathcal{D}_{\max}\) يتكون من دوال \(\psi\) بحيث \(\psi, \psi'\in AC_{\mathrm{loc}}\) و\(L\psi\in L^2\) محلياً؛ وعلى هذا المجال توجد صيغة الورونسكي الحدّية لكل \(\psi, \chi\in\mathcal{D}_{\max}\). التحقيقات الذاتية الترافق تُعامَل بعائلة \(U(1)\)؛ شروط الحدود المقابلة تُعبَّر عبر صيغة لاغرانج/الورونسكي، <em>لا</em> عبر شرط روبين مباشر، لأن \(\psi_2'(t) \sim -c\ln t\) يتباعد لوغاريتمياً عند \(t\to 0^+\).
             <br><br>
             <strong>ديريكليه كاختيار محدد.</strong> الشرط \(\psi(2\pi^-)=0\) عضو واحد في عائلة \(U(1)\)، لا النتيجة الوحيدة للتصنيف. وهو المرشح الطبيعي للدراسة الأولى، لأن \(g\) يحققه.
         </div>
@@ -611,22 +602,34 @@
 
         <h3>ب. الطرف \(u \to 0^+\): Limit Point</h3>
         <div class="math-block">\[ V_{\mathrm{eff}}(u) \sim +\frac{C}{u^4}, \qquad C = \left(\frac{2\pi}{21}\right)^2 > 0. \]</div>
-        <p>حلان مستقلان تقريبيًا:</p>
-        <div class="math-block">\[ \psi_\pm(u) \sim \exp\!\left(\mp\frac{2\pi}{21u}\right). \]</div>
-        <p>\(\psi_+ \in L^2\) و\(\psi_- \notin L^2\). الطرف <strong>Limit Point</strong>: لا حاجة لشرط حدود إضافي؛ \(L^2\) يختار السلوك المقبول تلقائيًا.</p>
+        <p>لمعادلة \(L\psi = \lambda\psi\)، وبإهمال \(\lambda\psi\) في الرتبة القيادية، يصبح سلوك الحلول تقريباً (WKB):</p>
+        <div class="math-block">\[ \psi_\pm(u) \sim u \exp\!\left(\pm\frac{2\pi}{21u}\right). \]</div>
+        <p>العامل \(u\) هو عامل WKB القيادي. \(\psi_+\) ينمو أسياً ولا ينتمي إلى \(L^2\)، بينما \(\psi_-\) يتلاشى بسرعة وينتمي إلى \(L^2\). الطرف <strong>Limit Point</strong>: لا حاجة لشرط حدود إضافي؛ \(L^2\) يختار السلوك المقبول تلقائياً.</p>
 
         <div class="endpoint-result endpoint-lp">
-            <strong>النتيجة عند \(0^+\):</strong> Limit Point. \(L^2\) يختار السلوك المقبول تلقائيًا.
+            <strong>النتيجة عند \(0^+\):</strong> Limit Point. \(L^2\) يختار السلوك المقبول تلقائياً.
         </div>
 
-        <h3>ج. النتيجة التركيبية</h3>
-        <div class="appendix-badge">
+        <h3>ج. النتيجة التركيبية والوضع الرياضي للتفكيك الشكلي</h3>
+        <div class="appendix-badge" style="margin-bottom: 15px;">
             <ul style="margin: 0; padding-right: 20px;">
-                <li><strong>عند \(u=0^+\):</strong> Limit Point (لا شرط حدود إضافي).</li>
-                <li><strong>عند \(u=2\pi^-\):</strong> Limit Circle (يلزم شرط حدود ذاتي الترافق، يُصاغ عبر لاغرانج/الورونسكي، لا روبين مباشر).</li>
-                <li><strong>الغلاف \(g\)</strong> يتصرف عند \(2\pi^-\) كـ\(\psi_1\)، ويحقق \(g(2\pi^-)=0\). لذلك يحقق شرط ديريكليه، وهو <em>اختيار محدد</em> ضمن التحقيقات الذاتية الترافق، لا النتيجة الوحيدة للتصنيف.</li>
-                <li><strong>سؤال مفتوح:</strong> هل يجعل تحقيق محدد (مثل ديريكليه) المؤثر محدودًا من الأسفل؟ وهل الصفر هو طاقة الحالة الأرضية؟</li>
+                <li><strong>عند \(u=0^+\):</strong> Limit Point (لا شرط حدود إضافي، ولا يضيف أبعاد عجز).</li>
+                <li><strong>عند \(u=2\pi^-\):</strong> Limit Circle (يلزم شرط حدود ذاتي الترافق، ويضيف بعداً واحداً للعجز).</li>
+                <li><strong>الغلاف \(g\)</strong> يتصرف عند \(2\pi^-\) كـ\(\psi_1\)، ويحقق \(g(2\pi^-)=0\). لذلك يحقق شرط ديريكليه، وهو <em>اختيار محدد</em> ضمن التحقيقات الذاتية الترافق.</li>
             </ul>
+        </div>
+
+        <div class="badge-info" style="margin-top: 15px;">
+            <strong>مؤشرات العجز والامتدادات الذاتية الترافق:</strong><br>
+            بناءً على التصنيف المحلي (Limit Point عند 0، وLimit Circle عند \(2\pi\))، فإن مؤشرات العجز الكلية للمؤثر \((n_+, n_-) = (1, 1)\). هذا يعني أن عائلة الامتدادات الذاتية الترافق تُعطى بدالة أحادية \(U(1)\) تعتمد على معامل طوري \(\theta \in [0, 2\pi)\).
+            <br><br>
+            <strong>الوضع الرياضي للتفكيك الشكلي:</strong>
+            <ul style="margin-top: 8px;">
+                <li><strong>التفكيك:</strong> تفكيك تفاضلي شكلي صحيح \(L = A^\dagger A\)، لكنه لا يضمن أن \(A^\dagger\) هو المرافق الفعلي على مجال محدد.</li>
+                <li><strong>التحليل الطرفي:</strong> (Limit-Point عند 0 و Limit-Circle عند 2π) هو تحليل أولي قيد التدقيق النهائي.</li>
+                <li><strong>الحالة الأرضية وطاقة الفراغ:</strong> لم تُثبت بعد. وجود \(g(2\pi^-)=0\) لا يضمن انتماء \(g\) لمجال التحقيق المحدد، ولا يمكن اعتبار طاقة زيتا صفراً لمجرد وجود حل شكلي.</li>
+            </ul>
+            <em>الخلاصة:</em> الإطار الرابع حقق تفكيكاً شكلياً وتحليلاً طرفياً أولياً، لكنه لم يُغلق طيفياً. تبقى الإيجابية، والحالة الأرضية، وطاقة الفراغ، مسائل مفتوحة.
         </div>
     </div>
 
@@ -662,6 +665,31 @@
             <strong>ملاحظة على \(R_{13/12}\):</strong>
             النتيجة العددية \(R_{13/12} \approx 0.60352\) من Frame 3، وليست مشتقة من مسألة زيتا هنا. ضمن اختيار الحالات ومؤثر الانتقال والتكامل المحدد في Frame 3، تُفسَّر بمقارنة نموذج الغلاف غير المتماثل بمرجع متماثل.
         </p>
+    </div>
+
+    <!-- ==================== ملحق التدقيق الرياضي ==================== -->
+    <div class="card" style="border-color: var(--green); margin-top: 20px;">
+        <h2 style="color: var(--green);">ملحق التدقيق الرياضي — الإطار الرابع</h2>
+        <p><strong>الحالة:</strong> تثبيت النتائج المحلية، مع إبقاء التحليل الطيفي مفتوحاً.</p>
+
+        <h3>1. نتائج تم التحقق منها</h3>
+        <ul>
+            <li><strong>الحد التقاربي عند \(u\to0^+\):</strong> بافتراض \(Q(x)=Z''(x)/Z(x)\)، ومع \(Z(x)=e^{-x/21}f(x)\)، فإن \(\frac{Z''}{Z}=\frac1{441}-\frac2{21}r+r'+r^2\) (حيث \(r=f'/f\))، ومن ثم \(\frac{Z''}{Z}\to\frac1{441}\). وبالتالي \(V_{\mathrm{new}}(u)\sim\frac{4\pi^2}{441u^4}\)، وهو يطابق الحد الرئيس لـ \(V_{\mathrm{eff}}\).</li>
+            <li><strong>التمييز عند \(u=\pi\):</strong> يكون \(V_{\mathrm{eff}}\) ناعماً، بينما يظهر في \(V_{\mathrm{new}}\) قطب بسيط بمعامل تقريبي \(2.9619\).</li>
+            <li><strong>الطرف \(u\to2\pi^-\):</strong> حد بسيط سالب لـ \(V_{\mathrm{eff}}\)، وحد مزدوج موجب لـ \(V_{\mathrm{new}}\).</li>
+        </ul>
+
+        <h3>2. مسائل ما تزال مفتوحة</h3>
+        <ul>
+            <li>التحقق المستقل من تصنيف Limit Point / Limit Circle، وتطبيق نظرية ستورم-ليوفيل.</li>
+            <li>اشتقاق مؤشرات العجز الكلية للمؤثر \((n_+, n_-)\) بدقة، وتحديد عائلة الامتدادات الذاتية الترافق (يتوقع أن تكون \(U(1)\) بسبب طرف LC وطرف LP) وشروط الحدود المسموح بها.</li>
+            <li>تحليل تحويلات داربوكس المعممة.</li>
+            <li>تعريف طاقة الفراغ الطيفية وحسابها، إن أمكن، ضمن تنظيم طيفي محدد.</li>
+        </ul>
+
+        <div class="badge-neutral" style="margin-top: 15px;">
+            <strong>تنبيه:</strong> لا يُعد توافق الحد الرئيس عند \(u\to0^+\) برهاناً على تكافؤ الجهدين، ولا يثبت وحده وجود مؤثر ذاتي الترافق محدد أو نتيجة طيفية نهائية.
+        </div>
     </div>
 
     <!-- ==================== §7 ==================== -->
@@ -710,7 +738,7 @@
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v6 (Arabic; corrections to Frobenius notation, Wronskian reference, and spectral-equivalence caveat).
+        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v6.2 (Arabic; verified asymptotic limits, WKB factor, and deficiency indices).
     </div>
 </div>
 

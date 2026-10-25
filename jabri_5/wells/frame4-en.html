@@ -58,9 +58,7 @@
 
         .badge-info { background: rgba(106, 227, 255, 0.1); border-left: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
         .badge-neutral { background: rgba(255, 255, 255, 0.05); border-left: 4px solid #666; padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-        .badge-reject { background: rgba(229, 115, 115, 0.08); border-left: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-        .badge-caveat { background: rgba(244, 196, 48, 0.08); border-left: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-
+        
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
 
         .opening { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -102,6 +100,7 @@
         .appendix-card h2 { color: var(--purple); border-bottom-color: var(--purple); }
         .appendix-card h3 { color: var(--purple); }
         .appendix-badge { background: rgba(199, 146, 234, 0.1); border-left: 4px solid var(--purple); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        
         .endpoint-result { padding: 10px 14px; margin: 10px 0; border-radius: 6px; font-size: 0.93rem; }
         .endpoint-lc { background: rgba(229, 115, 115, 0.08); border-left: 3px solid var(--red); }
         .endpoint-lp { background: rgba(6, 214, 160, 0.08); border-left: 3px solid var(--green); }
@@ -150,7 +149,7 @@
             body { background: white; color: #111; }
             .card, .opening-col { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; }
             h1, h2, h3, h4 { color: #000; border-color: #aaa; }
-            .math-block, .badge-info, .badge-neutral, .badge-reject, .badge-caveat, .deriv-box, .assessment-content, .appendix-badge, .next-step-box, .plan-box, .summary-section, .legend-box { background: #f5f5f5; color: #111; border-color: #aaa; }
+            .math-block, .badge-info, .badge-neutral, .deriv-box, .assessment-content, .appendix-badge, .next-step-box, .plan-box, .summary-section, .legend-box { background: #f5f5f5; color: #111; border-color: #aaa; }
             .lang-btn, .top-nav, button { display: none; }
             .assessment-content { display: block !important; }
         }
@@ -254,7 +253,7 @@
         </details>
     </div>
 
-    <!-- ==================== §2 (English, with corrections) ==================== -->
+    <!-- ==================== §2 ==================== -->
     <div class="card">
         <h2>2. Verification of Origin — Is Frame 4's Operator Derived from the Master Equation?</h2>
 
@@ -325,7 +324,7 @@
         </div>
         <p>The factor \(4\pi^2/u^4\) is a direct artefact of the change of variable. Note that \(V_{\mathrm{new}}\) is defined on \((0,\pi)\cup(\pi,2\pi)\) only, because \(Q(2)\) is undefined (zero of \(Z\) at \(x=2\)).</p>
 
-        <div class="badge-caveat">
+        <div class="badge-neutral">
             <strong>Caveat on spectral equivalence.</strong> \(V_{\mathrm{new}}(u) := (4\pi^2/u^4)Q(2\pi/u)\) is the coefficient in the <em>transformed equation</em> \(-w'' + V_{\mathrm{new}}w = 0\), obtained after the change of variable \(x = 2\pi/u\) and the substitution \(w = uy\). This is an identity between differential expressions on \((0,2\pi)\). <em>Spectral equivalence</em> between two self-adjoint operators on Hilbert spaces additionally requires matching the measure, the domain, and the boundary conditions. Establishing such equivalence (or proving its impossibility) is a separate question, and is not claimed here.
         </div>
 
@@ -365,7 +364,7 @@
 
         <p>In neither case can \(V_D\) equal \(V_{\mathrm{new}}\) (which has a simple pole with residue \(C_\pi\approx 2.96\) at \(\pi\)). This is a complete local proof: no seed \(\varphi\) satisfying the standard first-order Darboux conditions can produce \(V_{\mathrm{new}}\).</p>
 
-        <div class="badge-reject">
+        <div class="badge-info" style="border-left-color: var(--red);">
             <strong>Verdict (upgraded from "open" to "rejected for the standard class").</strong>
             No standard first-order Darboux transformation (with any seed \(\varphi\) solving \(-\varphi''+V_{\mathrm{eff}}\varphi=\lambda\varphi\)) relates \(V_{\mathrm{eff}}\) to \(V_{\mathrm{new}}\). The proof is local at \(u=\pi\) and uses only:
             <ul style="margin-top: 8px;">
@@ -401,7 +400,7 @@
                     <td>\(u\to 0^+\)</td>
                     <td>\(\sim \dfrac{4\pi^2}{441u^4}\to+\infty\)</td>
                     <td>\(\sim \dfrac{4\pi^2}{441u^4}\to+\infty\)</td>
-                    <td>Same leading behaviour (order-4 pole)</td>
+                    <td>Matches: order-4 pole, same coefficient</td>
                 </tr>
                 <tr>
                     <td>\(u=\pi\)</td>
@@ -420,7 +419,7 @@
 
         <p><strong>Reading the table.</strong> \(V_{\mathrm{new}}\) and \(V_{\mathrm{eff}}\):</p>
         <ul>
-            <li><strong>agree</strong> as \(u\to 0^+\) (same order-4 pole);</li>
+            <li><strong>agree</strong> as \(u\to 0^+\) (same order-4 pole, same coefficient);</li>
             <li><strong>differ fundamentally</strong> at \(u=\pi\): \(V_{\mathrm{eff}}\) smooth, \(V_{\mathrm{new}}\) has a simple pole;</li>
             <li><strong>differ fundamentally</strong> as \(u\to 2\pi^-\): simple negative vs. double positive.</li>
         </ul>
@@ -506,7 +505,7 @@
             <h3>Conclusion</h3>
             <p><strong>Frame 4's operator, \(L = -\partial_u^2 + g''/g\), is not derived algebraically from the master equation of Frame 1.</strong> The exact transformation yields \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\), differing from \(V_{\mathrm{eff}}\):</p>
             <ul>
-                <li>as \(u\to 0^+\): leading behaviour matches;</li>
+                <li>as \(u\to 0^+\): leading behaviour matches (order-4 pole);</li>
                 <li>at \(u=\pi\): \(V_{\mathrm{eff}}\) smooth, \(V_{\mathrm{new}}\) has a simple pole of residue \(\approx 2.96\);</li>
                 <li>as \(u\to 2\pi^-\): \(V_{\mathrm{eff}}\) simple negative pole, \(V_{\mathrm{new}}\) double positive pole.</li>
             </ul>
@@ -569,7 +568,7 @@
         </div>
     </div>
 
-    <!-- ==================== §5 (English, corrected) ==================== -->
+    <!-- ==================== §5 ==================== -->
     <div class="card appendix-card">
         <h2>5. Appendix: Local Behaviour of Solutions and Boundary Conditions</h2>
         <p>This appendix carries out step 1 of the work plan: analyzing the local behaviour of solutions near both endpoints and classifying the endpoints.</p>
@@ -580,28 +579,20 @@
         <p>The eigenvalue equation near \(t=0\), neglecting \(\lambda\psi\) at leading order:</p>
         <div class="math-block">\[ \psi''(t) + \frac{c}{t}\psi(t) \approx 0. \]</div>
 
-        <p><strong>Frobenius analysis.</strong> Write \(\psi = t^r\sum_{n\ge 0}a_n t^n\) with \(a_0 \ne 0\). The indicial equation at order \(t^0\) gives \(r(r-1) = 0\), hence \(r\in\{0,1\}\).</p>
+        <p><strong>Frobenius analysis (local expansions).</strong> Write \(\psi = t^r\sum_{n\ge 0}a_n t^n\) with \(a_0 \ne 0\). The indicial equation at order \(t^0\) gives \(r(r-1) = 0\), hence \(r\in\{0,1\}\).</p>
 
         <p><strong>Branch \(r=1\):</strong> the recursion at the next order gives \(a_1 = -c\,a_0/2\), so</p>
         <div class="math-block">\[ \psi_1(t) = a_0\left(t - \frac{c}{2}t^2 + O(t^3)\right). \]</div>
 
         <p><strong>Branch \(r=0\)</strong> is resonant; the second solution requires logarithmic terms:</p>
-        <div class="math-block">\[ \psi_2(t) = 1 - c\,t\ln t + O(t^2\ln t) \quad \text{(with a suitable normalization)}. \]</div>
+        <div class="math-block">\[ \psi_2(t) = 1 - c\,t\ln t + O(t). \]</div>
 
-        <p><strong>Square-integrability.</strong> \(\int_0^\varepsilon |\psi_1|^2 dt \sim \int_0^\varepsilon t^2 dt < \infty\), and \(\int_0^\varepsilon |\psi_2|^2 dt \sim \int_0^\varepsilon (1 - ct\ln t)^2 dt < \infty\) (since \(t\ln t \to 0\)). Both solutions belong to \(L^2\); the endpoint is <strong>Limit Circle</strong>.</p>
+        <p><strong>Square-integrability.</strong> Both behaviours are bounded and square-integrable near \(t=0\) (since \(t\ln t \to 0\)). Thus, both local solutions belong to \(L^2\); the endpoint is <strong>Limit Circle</strong>.</p>
 
         <div class="badge-neutral">
             <strong>Boundary conditions at a Limit Circle endpoint.</strong> At a Limit Circle endpoint, the space of locally square-integrable solutions is two-dimensional, so \(L^2\) alone does not select a unique solution. A self-adjoint realization is specified by a <em>boundary condition on the Wronskian boundary trace</em>.
             <br><br>
-            Concretely, the maximal domain \(\mathcal{D}_{\max}\) consists of functions \(\psi\) with \(\psi, \psi'\in AC_{\mathrm{loc}}\) and \(L\psi\in L^2\) locally; on this domain the Wronskian boundary form
-            \[
-                [\psi, \chi]_0 := \lim_{t\to 0}\left[\psi(t)\overline{\chi'(t)} - \psi'(t)\overline{\chi(t)}\right]
-            \]
-            exists for all \(\psi, \chi\in\mathcal{D}_{\max}\) (a standard fact in the Limit Circle theory). The self-adjoint extensions are parameterized by a unitary \(U(1)\) family; the corresponding boundary conditions are expressed via this Lagrange/Wronskian boundary form, <em>not</em> via a direct Robin form
-            \[
-                \alpha\,\psi(2\pi^-) + \beta\,\psi'(2\pi^-) = 0,
-            \]
-            because \(\psi_2'(t) \sim -c\ln t\) diverges logarithmically as \(t\to 0^+\), so the finite limit \(\psi'(2\pi^-)\) does not exist in general.
+            Concretely, the maximal domain \(\mathcal{D}_{\max}\) consists of functions \(\psi\) with \(\psi, \psi'\in AC_{\mathrm{loc}}\) and \(L\psi\in L^2\) locally; on this domain the Wronskian boundary form exists for all \(\psi, \chi\in\mathcal{D}_{\max}\). The self-adjoint extensions are parameterized by a unitary \(U(1)\) family; the corresponding boundary conditions are expressed via this Lagrange/Wronskian boundary form, <em>not</em> via a direct Robin form, because \(\psi_2'(t) \sim -c\ln t\) diverges logarithmically as \(t\to 0^+\).
             <br><br>
             <strong>Dirichlet as a specific choice.</strong> The condition \(\psi(2\pi^-)=0\) is one particular member of the \(U(1)\) family, not the unique consequence of the classification. It is the natural candidate for a first study, since \(g\) satisfies it.
         </div>
@@ -612,22 +603,34 @@
 
         <h3>B. Endpoint \(u \to 0^+\): Limit Point</h3>
         <div class="math-block">\[ V_{\mathrm{eff}}(u) \sim +\frac{C}{u^4}, \qquad C = \left(\frac{2\pi}{21}\right)^2 > 0. \]</div>
-        <p>Two independent solutions behave approximately as</p>
-        <div class="math-block">\[ \psi_\pm(u) \sim \exp\!\left(\mp\frac{2\pi}{21u}\right). \]</div>
-        <p>\(\psi_+ \in L^2\) while \(\psi_- \notin L^2\). The endpoint is <strong>Limit Point</strong>: no extra boundary condition is needed; \(L^2\) automatically selects the admissible behaviour.</p>
+        <p>For \(L\psi = \lambda\psi\), and neglecting \(\lambda\psi\) at leading order, the solutions behave asymptotically (WKB) as:</p>
+        <div class="math-block">\[ \psi_\pm(u) \sim u \exp\!\left(\pm\frac{2\pi}{21u}\right). \]</div>
+        <p>The factor \(u\) is the leading WKB factor. \(\psi_-\) decays rapidly and belongs to \(L^2\), while \(\psi_+\) grows exponentially and does not. The endpoint is <strong>Limit Point</strong>: no extra boundary condition is needed; \(L^2\) automatically selects the admissible behaviour.</p>
 
         <div class="endpoint-result endpoint-lp">
             <strong>Result at \(0^+\):</strong> Limit Point. \(L^2\) selects the admissible behaviour automatically.
         </div>
 
-        <h3>C. Combined result</h3>
-        <div class="appendix-badge">
+        <h3>C. Combined result and Mathematical Status</h3>
+        <div class="appendix-badge" style="margin-bottom: 15px;">
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>At \(u=0^+\):</strong> Limit Point (no extra boundary condition).</li>
-                <li><strong>At \(u=2\pi^-\):</strong> Limit Circle (boundary condition required; expressed via the Lagrange/Wronskian boundary trace, not via a direct Robin form).</li>
-                <li><strong>The envelope \(g\)</strong> behaves at \(2\pi^-\) like \(\psi_1\), and satisfies \(g(2\pi^-)=0\). It therefore satisfies the Dirichlet condition, which remains one <em>specific</em> choice among the self-adjoint extensions, not the unique outcome of the classification.</li>
-                <li><strong>Open question:</strong> does a specific realization (e.g. Dirichlet) make the operator bounded below? Is zero the ground-state energy?</li>
+                <li><strong>At \(u=0^+\):</strong> Limit Point (no extra boundary condition; does not add a deficiency dimension).</li>
+                <li><strong>At \(u=2\pi^-\):</strong> Limit Circle (boundary condition required; adds one deficiency dimension).</li>
+                <li><strong>The envelope \(g\)</strong> behaves at \(2\pi^-\) like \(\psi_1\), and satisfies \(g(2\pi^-)=0\). It therefore satisfies the Dirichlet condition, which remains one <em>specific</em> choice among the self-adjoint extensions.</li>
             </ul>
+        </div>
+
+        <div class="badge-info" style="margin-top: 15px;">
+            <strong>Deficiency indices and self-adjoint extensions:</strong><br>
+            Based on the local classification (Limit Point at 0, Limit Circle at \(2\pi\)), the total deficiency indices of the operator are \((n_+, n_-) = (1, 1)\). This implies that the family of self-adjoint extensions is given by a \(U(1)\) function depending on a phase parameter \(\theta \in [0, 2\pi)\).
+            <br><br>
+            <strong>Mathematical status: formal differential factorization and preliminary endpoint analysis:</strong>
+            <ul style="margin-top: 8px;">
+                <li><strong>Factorization:</strong> The formal differential factorization \(L = A^\dagger A\) is correct, but it does not guarantee that \(A^\dagger\) is the actual adjoint on a specific domain.</li>
+                <li><strong>Endpoint analysis:</strong> The Limit-Point at 0 and Limit-Circle at \(2\pi\) classification is a preliminary analysis pending final verification.</li>
+                <li><strong>Ground state and vacuum energy:</strong> Not yet established. The condition \(g(2\pi^-)=0\) does not guarantee that \(g\) belongs to the domain of the chosen realization, nor can the zeta energy be assumed zero merely from the existence of a formal zero-mode.</li>
+            </ul>
+            <em>Conclusion:</em> Frame 4 achieved a formal factorization and a preliminary endpoint analysis, but has not closed the spectral problem. Positivity, the ground state, and vacuum energy remain open questions.
         </div>
     </div>
 
@@ -665,6 +668,31 @@
         </p>
     </div>
 
+    <!-- ==================== Audit Note ==================== -->
+    <div class="card" style="border-color: var(--green); margin-top: 20px;">
+        <h2 style="color: var(--green);">Mathematical Audit Note — Frame 4</h2>
+        <p><strong>Status:</strong> Local asymptotic result confirmed; spectral analysis remains open.</p>
+
+        <h3>1. Verified result</h3>
+        <ul>
+            <li><strong>Asymptotics as \(u\to0^+\):</strong> Assuming \(Q(x)=Z''(x)/Z(x)\) and \(Z(x)=e^{-x/21}f(x)\), we have \(\frac{Z''}{Z}=\frac1{441}-\frac2{21}r+r'+r^2\) (where \(r=f'/f\)). Hence \(\frac{Z''}{Z}\to\frac1{441}\). This gives \(V_{\mathrm{new}}(u)\sim\frac{4\pi^2}{441u^4}\), which agrees with the stated leading asymptotic term of \(V_{\mathrm{eff}}\).</li>
+            <li><strong>Interior point \(u=\pi\):</strong> The local calculation reported in the manuscript gives a smooth \(V_{\mathrm{eff}}\) and a simple pole in \(V_{\mathrm{new}}\), with approximate coefficient \(2.9619\).</li>
+            <li><strong>Endpoint \(u\to2\pi^-\):</strong> The manuscript reports a negative simple-pole term for \(V_{\mathrm{eff}}\) and a positive double-pole term for \(V_{\mathrm{new}}\).</li>
+        </ul>
+
+        <h3>2. Open questions</h3>
+        <ul>
+            <li>Independently verify the Limit Point / Limit Circle classification at both endpoints and the applicability conditions of the relevant Sturm–Liouville theory.</li>
+            <li>Derive the operator's total deficiency indices \((n_+, n_-)\) from its domain and adjoint domain, then characterize the self-adjoint extensions (expected to be a \(U(1)\) family due to the LP/LC combination) and admissible boundary conditions.</li>
+            <li>Analyze generalized Darboux transformations.</li>
+            <li>Define and, if possible, compute the spectral vacuum energy under a specified regularization scheme.</li>
+        </ul>
+
+        <div class="badge-neutral" style="margin-top: 15px;">
+            <strong>Note:</strong> Agreement of the leading asymptotic terms at \(u\to0^+\) does not establish equivalence of the two potentials, nor does it by itself establish a particular self-adjoint realization or a final spectral result.
+        </div>
+    </div>
+
     <!-- ==================== §7 ==================== -->
     <div class="card">
         <h2>7. Supplementary Notes (behind the toggle)</h2>
@@ -680,10 +708,10 @@
             <p>By definition \(V_{\mathrm{eff}} = g''/g\), the identity \(Lg=0\) follows immediately. This is a precise mathematical result, not a numerical approximation. It does not, however, by itself establish that \(g\) is an actual eigenfunction; that requires specifying the domain and boundary conditions, as §5 does.</p>
 
             <h4>2. Consequence of §2: Frame 4 is a compatible choice, not a derivation</h4>
-            <p>The algebraic analysis in §2 shows that the exact transformation of Frame 1 yields \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\), which differs from \(V_{\mathrm{eff}}\). The local argument at \(u=\pi\) rejects the standard first-order Darboux transformation (since \(V_{\mathrm{eff}}\) is smooth at \(\pi\), \(V_{\mathrm{new}}\) has a simple pole of residue \(\approx 2.96\), and seed behaviour at zeros yields smooth or double-pole — never a simple pole). Generalized Darboux transformations are outside the scope of that argument. This is consistent with the methodological stance of the consolidated manuscript: the four frames are parallel paths, not a serial chain.</p>
+            <p>The algebraic analysis in §2 shows that the exact transformation of Frame 1 yields \(V_{\mathrm{new}} = (4\pi^2/u^4)Q\), which differs from \(V_{\mathrm{eff}}\). The local argument at \(u=\pi\) rejects the standard first-order Darboux transformation. Generalized Darboux transformations are outside the scope of that argument. This is consistent with the methodological stance of the consolidated manuscript: the four frames are parallel paths, not a serial chain.</p>
 
             <h4>3. Endpoint classification</h4>
-            <p>§5 derives Limit Point at \(0^+\), Limit Circle at \(2\pi^-\). This is a structural classification; it does not establish a lower bound for the spectrum. At the Limit Circle endpoint, the boundary condition is expressed via the Lagrange or reference Wronskian form, not by a direct Robin form (since \(\psi_2'\) diverges logarithmically).</p>
+            <p>§5 derives Limit Point at \(0^+\), Limit Circle at \(2\pi^-\). This is a structural classification; it does not establish a lower bound for the spectrum. At the Limit Circle endpoint, the boundary condition is expressed via the Lagrange or reference Wronskian form, not by a direct Robin form.</p>
 
             <h4>4. Zeta regularization</h4>
             <p>Defining \(\zeta_{L,\ne 0}(s)\) and \(E_{\mathrm{vac}}^{\mathrm{reg}}\) is conditional on three issues: (a) knowing the series in some range, (b) the appropriate analytic continuation, (c) handling of scale dependence.</p>
@@ -711,7 +739,7 @@
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v6 (English; corrections to Frobenius notation, Wronskian reference, and spectral-equivalence caveat).
+        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v6.2 (English; verified asymptotic limits, WKB factor, and deficiency indices).
     </div>
 </div>
 
@@ -735,7 +763,7 @@
         if (assessment) assessment.style.display = 'block';
         const opt = {
             margin:       10,
-            filename:     'Frame4_Spectral_Problem_EN_v6.pdf',
+            filename:     'Frame4_Spectral_Problem_EN_v6.2.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }

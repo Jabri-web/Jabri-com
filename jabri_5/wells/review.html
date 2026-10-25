@@ -35,15 +35,7 @@
         .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
         
         /* Status Badges */
-        .status {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.72rem;
-            font-weight: bold;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
+        .status { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 0.72rem; font-weight: bold; vertical-align: middle; white-space: nowrap; }
         .status-work { background: #333; color: #fff; border: 1px solid #555; }
         .status-work-active { background: rgba(255, 152, 0, 0.2); color: var(--orange); border: 1px solid rgba(255, 152, 0, 0.4); }
         .status-sci-proven { background: rgba(6, 214, 160, 0.15); color: var(--green); border: 1px solid rgba(6, 214, 160, 0.3); }
@@ -99,7 +91,6 @@
         <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
         <a href="frame1.html" class="nav-item">1. الإطار الرياضي</a>
         <a href="bridge.html" class="nav-item">الجسر</a>
-        <!-- تأكد من اسم ملف الإطار الثاني الفعلي في مجلد tree (frame2.html أو tree2.html) -->
         <a href="../tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
         <a href="frame3.html" class="nav-item">3. البنية الدقيقة</a>
         <a href="frame4.html" class="nav-item">4. المسألة الطيفية</a>
@@ -108,7 +99,7 @@
 
     <h1>لوحة الحالة العلمية للمشروع</h1>
     <div class="subtitle">Al-Hindara Research Status & Decision Log</div>
-    <div class="version-badge">Status v2.0 | آخر تحديث: 25 أكتوبر 2026</div>
+    <div class="version-badge">Status v2.1 | آخر تحديث: 25 أكتوبر 2026</div>
 
     <div class="card">
         <h2>📖 كيف تُقرأ هذه اللوحة؟</h2>
@@ -175,10 +166,10 @@
                     <span class="status status-sci-conditional">مشروط</span>
                 </div>
                 <div class="title">الإطار الثالث — البنية والتحويل</div>
-                <div class="desc">تحويل المتغير والمؤثر والقياسات النموذجية</div>
+                <div class="desc">تحويل المتغير، المؤثر، والقياسات النموذجية</div>
                 <div class="last-status">
                     <strong>آخر حالة:</strong>
-                    هوية التحويل صحيحة ضمن شروطها؛ لكن التماثل الذاتي للمؤثر والمجال الطيفي يحتاجان معالجة مستقلة.
+                    الهوية التحليلية \(A_{12}\) مثبتة، وجدول حساسية \(a\) موثق. النسبة \(R_{13/12}\) بصمة عددية للنموذج وليست ثابتاً كونياً.
                 </div>
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
@@ -196,7 +187,7 @@
                 <div class="desc">المؤثر، التحقيق الذاتي الترافق، وطاقة الفراغ</div>
                 <div class="last-status">
                     <strong>آخر حالة:</strong>
-                    هوية تفاضلية شكلية؛ وعدم سلبية الشكل على الدوال الاختبارية نتيجة أولية، لا برهان مكتمل.
+                    تفكيك شكلي وتحليل طرفي (LP/LC) مع مؤشرات عجز \((1,1)\). المسألة الطيفية لم تُغلق بعد.
                 </div>
                 <div class="status-group">
                     <span class="status status-work-active">قيد التنفيذ</span>
@@ -214,7 +205,7 @@
                 <div class="desc">تحويل المقاييس والوحدات</div>
                 <div class="last-status">
                     <strong>آخر حالة:</strong>
-                    الجسر يوضح تحويلًا من متغير لا بُعدي إلى مقياس ذي أبعاد؛ ولا يشكل إثباتًا فيزيائيًا.
+                    التحويل البُعدي صحيح. الصيغة التنبؤية المقترحة \(R_{\mathrm{pred}}=z_1/z_2\) فرضية معلّقة على ثلاثة اختبارات لم تُنجز.
                 </div>
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
@@ -222,6 +213,42 @@
                 </div>
             </a>
         </div>
+    </div>
+
+    <!-- ==================== الحكم العلمي الشامل ==================== -->
+    <div class="card" style="border-color: var(--purple);">
+        <h2 style="color: var(--purple);">📌 الحكم العلمي الشامل للمشروع</h2>
+        <p><strong>حالة مشروع الهندرة: تقدم رياضي موثق، وليس برهانًا موحدًا لاستقرار شامل.</strong></p>
+        <table style="margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th>المكون</th>
+                    <th>الحكم العلمي</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>الإطار الأول (الدالة الأم)</strong></td>
+                    <td>مشروط — حتى يُحسم تعريف \(Z\) وبرهانه بشكل قاطع.</td>
+                </tr>
+                <tr>
+                    <td><strong>الإطار الثاني (الشجرة والظل)</strong></td>
+                    <td>استكشافي — العينة المحدودة لا تثبت قانوناً عاماً.</td>
+                </tr>
+                <tr>
+                    <td><strong>الإطار الثالث (البنية الدقيقة)</strong></td>
+                    <td>الهوية الجبرية مثبتة والنتائج العددية موثقة، ضمن الفرضيات المحددة.</td>
+                </tr>
+                <tr>
+                    <td><strong>الإطار الرابع (المسألة الطيفية)</strong></td>
+                    <td>التفكيك الشكلي والتحليل الطرفي قيد التدقيق النهائي، والمسائل الطيفية لم تُغلق.</td>
+                </tr>
+                <tr>
+                    <td><strong>الجسر (Bridge)</strong></td>
+                    <td>لا يُعامل بوصفه تنبؤاً فيزيائياً مستقلاً قبل اشتقاق العلاقة واختبارها على بيانات مستقلة.</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- ==================== FRAME 1 RECORD ==================== -->
@@ -244,19 +271,18 @@
                 <div class="content">تم تصحيح جدول التقارب وإضافة سطر التوسع التقاربي. الحالة الحالية: الصيغة التحليلية محددة، لكن الجدول العددي يحتاج إلى إعادة إنتاج مستقلة.</div>
             </div>
 
-            <!-- التعديل المطلوب من الرفيق المشاكس هنا -->
             <div class="record-section">
                 <span class="label">✅ ما ثبت</span>
                 <div class="content">
                     <p style="margin-top: 0; color: var(--dim); font-size: 0.85rem;"><strong>ما ثبت تحليليًا:</strong></p>
                     <ul>
                         <li><strong>تحليل الإشارة والجذور:</strong> صحيح (برهان تحليلي مباشر).</li>
-                        <li><strong>\(A_\infty < 0\):</strong> برهان تحليلي باستخدام متباينتين قياسيتين (المتباينة اللوغاريتمية والمتباينة على \(B\)).</li>
-                        <li><strong>\(E(A) > 0\):</strong> برهان تحليلي وفق التعريف والافتراضات المبيّنة في الاشتقاق (المجال المفتوح \((1,2)\)).</li>
+                        <li><strong>\(A_\infty < 0\):</strong> برهان تحليلي باستخدام متباينتين قياسيتين.</li>
+                        <li><strong>\(E(A) > 0\):</strong> برهان تحليلي وفق التعريف والافتراضات المبيّنة في الاشتقاق.</li>
                         <li><strong>الصيغة التقاربية:</strong> \(|\mathcal{Z}| \sim K(21)\ln(t)/t^6\) (مشتقة تحليليًا).</li>
                     </ul>
                     <div class="badge-exploratory" style="margin-top: 10px;">
-                        <strong>حدود التحقق:</strong> النتائج التحليلية أعلاه منفصلة عن إعادة الإنتاج العددية المستقلة. جدول القيم العددية (في §7) يحتاج إلى توثيق طريقة الحساب وإعادة تشغيلها بصورة قابلة للتحقق قبل اعتباره "مُثبتاً خارجياً".
+                        <strong>حدود التحقق:</strong> النتائج التحليلية أعلاه منفصلة عن إعادة الإنتاج العددية المستقلة. جدول القيم العددية (في §7) يحتاج إلى توثيق طريقة الحساب وإعادة تشغيلها بصورة قابلة للتحقق.
                     </div>
                 </div>
             </div>
@@ -351,7 +377,7 @@
                 <span class="status status-sci-conditional">مشروط</span>
                 <span class="status status-work">مغلق</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="frame3.html" style="color: var(--blue);">frame3.html</a></div>
+            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.1 | الملف: <a href="frame3.html" style="color: var(--blue);">frame3.html</a></div>
             
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
@@ -360,7 +386,7 @@
 
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
-                <div class="content">هوية التحويل صحيحة. \(\mathcal{H}_g[gY] = -gY''\) مثبتة. لكن التماثل الذاتي للمؤثر والمجال الطيفي يحتاجان معالجة مستقلة (في الإطار الرابع).</div>
+                <div class="content">هوية التحويل صحيحة. \(\mathcal{H}_g[gY] = -gY''\) مثبتة. الهوية التحليلية لـ \(A_{12}\) مثبتة ومطابقة حتى دقة الآلة. جدول حساسية \(a\) أُضيف ووثق.</div>
             </div>
 
             <div class="record-section">
@@ -369,7 +395,8 @@
                     <ul>
                         <li>التحويل \(Z(2\pi/u) = g(u)\sin(u)\) (جبري).</li>
                         <li>الهوية التفاضلية \(\mathcal{H}_g[gY] = -gY''\) (برهان مباشر).</li>
-                        <li>\(R_{13/12} \approx 0.60351\) (حساب عددي في الإطار الأول).</li>
+                        <li><strong>الهوية التحليلية:</strong> \(A_{12} = \frac{1}{2}\sqrt{N_2/N_1}\) (تطابق مع الحساب العددي حتى \(10^{-16}\)).</li>
+                        <li><strong>حساسية \(R_{13/12}\) للأس \(a\):</strong> موثقة في جدول (تتغير من 0.527 إلى 0.669).</li>
                     </ul>
                 </div>
             </div>
@@ -378,8 +405,9 @@
                 <span class="label">❓ ما لم يُحسم</span>
                 <div class="content">
                     <ul>
-                        <li>اختيار الجداء الداخلي (موزون vs غير موزون).</li>
+                        <li>اختيار الجداء الداخلي (موزون vs غير موزون) في ضوء تفرد \(1/g^2\).</li>
                         <li>العلاقة الطيفية بين \(\mathcal{H}_g\) و \(L\) (تنتقل للإطار الرابع).</li>
+                        <li>إيجاد مقابل رصدي مستقل له نفس البنية الرياضية لـ \(\mathcal{A}_{mn}\).</li>
                     </ul>
                 </div>
             </div>
@@ -388,7 +416,8 @@
                 <span class="label">📝 القرارات والتصحيحات</span>
                 <div class="content">
                     <ul>
-                        <li><strong>v7.0:</strong> فصل الإطار الثالث عن الرابع بوضوح، والتأكيد على أن \(g(u)\) هي الدالة الأم بعد تغيير المتغير (وليس غلافًا مستقلاً).</li>
+                        <li><strong>v7.1 (25/10):</strong> إضافة الهوية التحليلية لـ \(A_{12}\)، وإدراج جدول حساسية \(a\) مع مخرجات Colab، وتصحيح كود التكامل (حماية الحدود + إصلاح `audited_quad`).</li>
+                        <li><strong>v7.0:</strong> فصل الإطار الثالث عن الرابع بوضوح.</li>
                     </ul>
                 </div>
             </div>
@@ -396,7 +425,7 @@
             <div class="record-section">
                 <span class="label">➡️ الخطوة التالية</span>
                 <div class="content">
-                    <strong>تثبيت المجالات وشروط الحدود والتمييز بين الهوية الجبرية والمسألة الطيفية.</strong> معيار الإكمال: تحديد ما إذا كان \(\mathcal{H}_g\) مكافئًا طيفيًا لـ \(L\) (ينتقل للإطار الرابع).
+                    <strong>تحديد ما إذا كان للإطار الثالث مقابل رصدي بنفس البنية التكاملية.</strong> معيار الإكمال: نشر تحليل يحدد إمكانية أو استحالة وجود هذا المقابل.
                 </div>
             </div>
         </details>
@@ -410,16 +439,16 @@
                 <span class="status status-sci-open">مفتوح</span>
                 <span class="status status-work-active">قيد التنفيذ</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="frame4.html" style="color: var(--blue);">frame4.html</a></div>
+            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.2 | الملف: <a href="frame4.html" style="color: var(--blue);">frame4.html</a></div>
             
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
-                <div class="content">تعريف \(V_{\text{eff}} = g''/g\), المؤثر \(L\), إثبات الحالة الصفرية \(Lg = 0\), وتحليل التحلل SUSY.</div>
+                <div class="content">تعريف \(V_{\text{eff}} = g''/g\), المؤثر \(L\), إثبات الحالة الصفرية الشكلية \(Lg = 0\), وتحليل التحلل SUSY والتصنيف الطرفي.</div>
             </div>
 
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
-                <div class="content">الهوية الشكلية \(Lg = 0\) صحيحة. عدم السلبية على الدوال الاختبارية \(q[\psi] \ge 0\) صحيحة (عبر هوية الحالة الأرضية). لكن تحديد التحقيق الذاتي الترافق لا يزال مفتوحًا.</div>
+                <div class="content">التفكيك الشكلي \(L = A^\dagger A\) صحيح. التصنيف الطرفي (Limit Point عند 0، وLimit Circle عند 2π) يحدد مؤشرات العجز \((n_+, n_-) = (1, 1)\). طاقة الفراغ والحالة الأرضية لم تُغلق بعد.</div>
             </div>
 
             <div class="record-section">
@@ -427,7 +456,9 @@
                 <div class="content">
                     <ul>
                         <li>الهوية الشكلية \(Lg = 0\) (حيث \(g \neq 0\)).</li>
-                        <li>عدم السلبية على الدوال الاختبارية: \(q[\psi] = \int g^2 |(\psi/g)'|^2 du \ge 0\).</li>
+                        <li>تصنيف النهايات: Limit Point عند \(0^+\)، Limit Circle عند \(2\pi^-\).</li>
+                        <li>مؤشرات العجز الكلية \((1,1)\)، وعائلة الامتدادات الذاتية الترافق من نوع \(U(1)\).</li>
+                        <li>تحليل WKB عند الصفر يثبت أن حلاً واحداً فقط في \(L^2\).</li>
                     </ul>
                 </div>
             </div>
@@ -436,8 +467,7 @@
                 <span class="label">❓ ما لم يُحسم</span>
                 <div class="content">
                     <ul>
-                        <li><strong>قابلية الإغلاق (Closability):</strong> هل الشكل التربيعي قابل للإغلاق؟ ما هو إغلاقه ومجاله؟</li>
-                        <li><strong>تحديد التحقيق الذاتي الترافق:</strong> هل نستخدم تحقيق فريدريش (Friedrichs extension) أم تحقيقًا آخر بشرط حدود صريح؟</li>
+                        <li><strong>تحديد التحقيق الذاتي الترافق:</strong> اختيار شرط ديريكليه أو غيره من عائلة \(U(1)\).</li>
                         <li><strong>انتماء \(g\) للمجال:</strong> هل \(g \in \text{Domain}(L)\) وأن \(Lg = 0\) بالمعنى القوي؟</li>
                         <li><strong>طاقة الفراغ:</strong> هل الصفر قيمة ذاتية دنيا (Ground State Energy = 0)؟</li>
                     </ul>
@@ -448,8 +478,8 @@
                 <span class="label">📝 القرارات والتصحيحات</span>
                 <div class="content">
                     <ul>
+                        <li><strong>v7.2 (25/10):</strong> إضافة عامل WKB، تصحيح توسعات فروبنيوس، وتحديد مؤشرات العجز \((1,1)\). إدراج ملحق التدقيق الرياضي المستقل.</li>
                         <li><strong>v7.0:</strong> تصحيح صياغة "تطابق التعبيرين التفاضليين" لتوضيح أنه تطابق في المعادلة، وليس تكافؤًا طيفيًا.</li>
-                        <li><strong>v7.0:</strong> إضافة قسم "الحدود المفتوحة" يوضح ما لا يثبته الإطار.</li>
                     </ul>
                 </div>
             </div>
@@ -471,7 +501,7 @@
                 <span class="status status-sci-conditional">مشروط</span>
                 <span class="status status-work">مغلق</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="bridge.html" style="color: var(--blue);">bridge.html</a></div>
+            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v2.1 | الملف: <a href="bridge.html" style="color: var(--blue);">bridge.html</a></div>
             
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
@@ -480,7 +510,7 @@
 
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
-                <div class="content">التحويل البُعدي صحيح رياضيًا. لكن الجسر لا يشكل إثباتًا فيزيائيًا، ولا يقدم تنبؤًا تجريبيًا قابلًا للاختبار.</div>
+                <div class="content">التحويل البُعدي صحيح رياضيًا. الصيغة التنبؤية المقترحة \(R_{\mathrm{pred}}=z_1/z_2\) لم تُتحقق بعد، وتُعرض بوصفها فرضية مشروطة لا تنبؤًا محققًا.</div>
             </div>
 
             <div class="record-section">
@@ -492,8 +522,10 @@
                 <span class="label">❓ ما لم يُحسم</span>
                 <div class="content">
                     <ul>
-                        <li>معنى مقياس التحويل \(\Lambda_{\text{scale}}\): هل هو طول بلانك، طاقة بلانك، أم مقياس آخر؟</li>
-                        <li>الافتراضات اللازمة لأي تفسير فيزيائي.</li>
+                        <li>تعريف \(z_1\) و\(z_2\) تعريفًا رياضيًا صريحًا، مع تحديد مصدر كل منهما.</li>
+                        <li>اشتقاق العلاقة التنبؤية من النموذج، وإثبات شروط إلغاء عامل القياس المشترك.</li>
+                        <li>تحديد معيار مقارنة مستقل مع بيانات مرجعية، وتوثيق نتيجة الاختبار.</li>
+                        <li>معنى مقياس التحويل \(\Lambda_{\text{scale}}\): طول بلانك، طاقة بلانك، أم مقياس آخر.</li>
                     </ul>
                 </div>
             </div>
@@ -502,6 +534,7 @@
                 <span class="label">📝 القرارات والتصحيحات</span>
                 <div class="content">
                     <ul>
+                        <li><strong>v2.1 (25/10):</strong> تعديل مستوى الادعاء للصيغة التنبؤية من "مُدّعى" إلى "مشروط"؛ إغلاق تعارض الإصدارات مع <code>bridge.html</code>.</li>
                         <li><strong>v7.0:</strong> توضيح أن طول بلانك مقياس طبيعي وليس حدًا أدنى للطول ثبت تجريبيًا.</li>
                     </ul>
                 </div>
@@ -510,15 +543,22 @@
             <div class="record-section">
                 <span class="label">➡️ الخطوة التالية</span>
                 <div class="content">
-                    <strong>تحديد معنى مقياس التحويل ومصدره، وبيان الافتراضات اللازمة لأي تفسير فيزيائي.</strong> معيار الإكمال: تحديد ما إذا كان الجسر يقدم تنبؤًا تجريبيًا قابلًا للدحض.
+                    <strong>استكمال الاختبارات الثلاثة لتبرير الصيغة التنبؤية.</strong> معيار الإكمال: توثيق الاختبارات الثلاثة ونتائجها القابلة لإعادة الإنتاج.
                 </div>
+            </div>
+
+            <div class="badge-exploratory" style="margin-top: 15px; border-right-color: var(--purple); background: rgba(186, 104, 200, 0.08);">
+                <strong>🧠 المبدأ المنهجي: إمكان الخطوة مقابل اكتمال الشرط الكلي</strong><br>
+                <em>مثال السيارة (مسألة كلاسيكية):</em> قطعت سيارة 2 كم صعوداً بسرعة 30 كم/س (أي 4 دقائق). يسأل الحدس: "ما السرعة اللازمة للنزول ليكون المتوسط 60؟" فيجيب فوراً: "90 كم/س". لكن الحساب الرياضي يحسم الأمر: لقطع 4 كم بسرعة 60، نحتاج 4 دقائق إجمالاً. وبما أن الـ 4 دقائق استُهلكت في الصعود، فزمن النزول المتبقي = صفر. <strong>المستحيل ليس بدء الرحلة (فالسيارة صعدت بالفعل)، بل إكمال الرحلة بالمتوسط المطلوب.</strong>
+                <br><br>
+                <em>التطبيق في الإطار الثالث:</em> المعادلات تسمح ببدء الحساب والوصول إلى \(R_{13/12} \approx 0.6035\). لكن إكمال الرحلة واعتباره "تنبؤاً فيزيائياً" يتطلب استيفاء شروط (مثل اشتقاق \(a=5\) وإيجاد رصد مستقل). وبدون هذه الشروط، تُعتبر الرحلة غير مكتملة علمياً، ولذلك يبقى الجسر <strong>"مشروطاً"</strong>.
             </div>
         </details>
     </div>
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        لوحة الحالة العلمية · v2.0 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
+        لوحة الحالة العلمية · v2.1 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
         <em>المبدأ الحاكم: لا نرفع نتيجة إلى مرتبة البرهان لمجرد أن الأرقام تبدو متناسقة، ولا نخفض قيمة هوية رياضية صحيحة لمجرد أن المسألة الطيفية الكاملة لم تُحل بعد.</em>
     </div>
 </div>
