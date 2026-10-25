@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشروع الهندرة — الملف الشامل (All Frames)</title>
+    <meta name="description" content="Al-Hindara Project: Complete Numerical, Geometric, Algebraic, and Spectral Framework">
+    
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; 
+            --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; --purple: #c792ea;
+            --orange: #ff9800;
+        }
+        body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
+        
+        /* Navigation */
+        .top-nav { position: sticky; top: 0; z-index: 1000; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; background: rgba(10, 26, 18, 0.95); border-bottom: 1px solid var(--border); padding: 12px; width: 100%; backdrop-filter: blur(5px); box-sizing: border-box; }
+        .nav-btn { background: transparent; color: var(--dim); border: 1px solid transparent; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: inherit; }
+        .nav-btn:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
+        .nav-btn.active { color: #0a1a12; background: var(--gold); border-color: var(--gold); }
+        
+        .container { width: min(1100px, 100%); padding: 20px 12px; box-sizing: border-box; }
+        
+        /* Sections */
+        .frame-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .frame-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Typography & Cards */
+        h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 20px; }
+        .version-badge { display: inline-block; background: rgba(244, 196, 48, 0.15); color: var(--gold); padding: 3px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: bold; border: 1px solid rgba(244, 196, 48, 0.35); direction: ltr; margin-top: 5px; }
+        
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px -15px #000; }
+        .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
+        .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
+        
+        /* Badges */
+        .badge-exact { background: rgba(6, 214, 160, 0.1); border-right: 4px solid var(--green); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-right: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-neutral { background: rgba(255, 255, 255, 0.05); border-right: 4px solid var(--dim); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-red { background: rgba(229, 115, 115, 0.1); border-right: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-info { background: rgba(106, 227, 255, 0.1); border-right: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        
+        /* Math */
+        .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
+        
+        /* Grid Layouts */
+        .opening { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+        .opening-col { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .opening-col strong { display: block; margin-bottom: 8px; font-size: 1rem; }
+        .opening-col p { font-size: 0.88rem; margin: 0; color: var(--text); }
+        @media (max-width: 760px) { .opening { grid-template-columns: 1fr; } }
+
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
+        .summary-card { background: #051009; border: 2px solid var(--border); border-radius: 10px; padding: 18px; text-decoration: none; color: var(--text); transition: 0.3s; display: flex; flex-direction: column; }
+        .summary-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .summary-card .header { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+        .summary-card .num { font-size: 0.75rem; color: var(--gold); font-family: monospace; font-weight: bold; }
+        .summary-card .title { font-size: 1.05rem; font-weight: bold; margin: 8px 0 5px 0; }
+        .summary-card .desc { font-size: 0.85rem; color: var(--dim); margin-bottom: 12px; }
+        .summary-card .last-status { font-size: 0.85rem; color: var(--text); background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; margin-top: auto; }
+        .summary-card .last-status strong { color: var(--gold); font-size: 0.78rem; display: block; margin-bottom: 3px; }
+        .summary-card .status-group { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+        /* Tables & UI */
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        th, td { border: 1px solid var(--border); padding: 10px; text-align: center; }
+        th { background: #132a1d; color: var(--gold); }
+        td.highlight { background: rgba(244, 196, 48, 0.15); color: var(--gold); font-weight: bold; }
+        
+        .status { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 0.72rem; font-weight: bold; vertical-align: middle; white-space: nowrap; }
+        .status-work { background: #333; color: #fff; border: 1px solid #555; }
+        .status-work-active { background: rgba(255, 152, 0, 0.2); color: var(--orange); border: 1px solid rgba(255, 152, 0, 0.4); }
+        .status-sci-proven { background: rgba(6, 214, 160, 0.15); color: var(--green); border: 1px solid rgba(6, 214, 160, 0.3); }
+        .status-sci-conditional { background: rgba(244, 196, 48, 0.15); color: var(--gold); border: 1px solid rgba(244, 196, 48, 0.3); }
+        .status-sci-exploratory { background: rgba(106, 227, 255, 0.15); color: var(--blue); border: 1px solid rgba(106, 227, 255, 0.3); }
+        .status-sci-open { background: rgba(229, 115, 115, 0.15); color: var(--red); border: 1px solid rgba(229, 115, 115, 0.3); }
+        .status-verif-none { background: rgba(229, 115, 115, 0.1); color: var(--red); border: 1px dashed var(--red); }
+        .status-verif-internal { background: rgba(244, 196, 48, 0.1); color: var(--gold); border: 1px dashed var(--gold); }
+        .status-verif-repro { background: rgba(6, 214, 160, 0.1); color: var(--green); border: 1px dashed var(--green); }
+
+        details { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 15px; }
+        details summary { cursor: pointer; outline: none; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-weight: bold; color: var(--blue); }
+        details[open] summary { margin-bottom: 15px; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
+
+        .chart-container { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 10px; position: relative; height: 350px; width: 100%; margin-bottom: 15px; }
+        .controls { background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 15px; justify-content: center; margin-bottom: 15px; }
+        
+        .btn { background: var(--green); color: #0a1a12; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; transition: 0.3s; font-family: inherit; text-align: center; }
+        .btn:hover { opacity: 0.85; }
+        .btn-gold { background: var(--gold); }
+        .btn-blue { background: var(--blue); }
+        .btn-red { background: var(--dim); color: #0a1a12; }
+
+        .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding: 20px 0; border-top: 1px solid var(--border); }
+
+        /* Print Settings */
+        @media print {
+            body { background: white; color: black; }
+            .top-nav, .btn, .controls, .no-print { display: none !important; }
+            .frame-section { display: none !important; }
+            .frame-section.active { display: block !important; }
+            .card { background: white; color: black; box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+            .math-block, .opening-col, .badge-exact, .badge-exploratory, .badge-neutral, th, td { background: #f9f9f9; color: black; border-color: #ccc; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <nav class="top-nav no-print">
+        <button class="nav-btn active" id="btn-f1" onclick="showTab('f1')">1. الإطار العددي</button>
+        <button class="nav-btn" id="btn-br" onclick="showTab('br')">الجسر (Bridge)</button>
+        <button class="nav-btn" id="btn-f2" onclick="showTab('f2')">2. الشجرة والظل</button>
+        <button class="nav-btn" id="btn-f3" onclick="showTab('f3')">3. البنية الدقيقة</button>
+        <button class="nav-btn" id="btn-f4" onclick="showTab('f4')">4. المسألة الطيفية</button>
+        <button class="nav-btn" id="btn-rv" onclick="showTab('rv')">📊 لوحة الحالة</button>
+        <button class="nav-btn" onclick="printActiveFrame()" style="background:var(--blue); color:#000; border-color:var(--blue);">🖨️ طباعة الإطار الحالي</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- ======================================================= -->
+        <!-- FRAME 1: الإطار العددي -->
+        <!-- ======================================================= -->
+        <section id="f1" class="frame-section active">
+            <h1>الإطار العددي — الورقة التفاعلية الشاملة</h1>
+            <div class="subtitle">
+                <strong>The Numerical Framework: Damping Model & Proposed Integer Cutoff \(x_p=21\)</strong><br>
+                Eng. Abdulla M. N. Al-Jabri | v7.1
+                <br><span class="version-badge">v7.1 — 2026-10-25</span>
+            </div>
+
+            <div class="card">
+                <div class="opening">
+                    <div class="opening-col">
+                        <strong style="color: var(--gold);">المشكلة</strong>
+                        <p>كيف تتفاعل البنية التذبذبية مع عامل التخميد في دالة تجمع اللوغاريتم والجيب والأسّ، وما السلوك التراكمي الذي ينتج عن هذا التفاعل؟</p>
+                    </div>
+                    <div class="opening-col">
+                        <strong style="color: var(--green);">الإنجاز</strong>
+                        <p>تعريف \(Z(x;21)=x^{-5}\ln x\sin(2\pi/x)e^{-x/21}\)، وتحليل إشارتها وجذورها (\(x=1\)، \(x=2\))، ودراسة تكاملها التراكمي \(A(x)\) (الذي يبلغ حده الأدنى عند \(x=2\)). اشتقاق الغلاف التقاربي للدالة الحقيقية \(Z(x) \sim \frac{2\pi\ln x}{x^6}e^{-x/21}\).</p>
+                    </div>
+                    <div class="opening-col">
+                        <strong style="color: var(--blue);">نوع الدليل</strong>
+                        <p>برهان تحليلي لإشارة \(Z\) وجذورها، وبرهان تحليلي لـ\(A_\infty<0\)، مع تحقق عددي منفصل (الملحق D) لفحص تنفيذ الصيغ والاتساق العددي.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🔬 المحاكاة التفاعلية (Interactive Simulation)</h2>
+                <p>استخدم شريط التمرير أدناه لتغيير قيمة القطع \(x_p\). تم توسيع نطاق الرسم البياني إلى \(x=50\).</p>
+                <div class="controls no-print">
+                    <div class="slider-wrap" style="display:flex; align-items:center; gap:10px; font-family:monospace; direction:ltr;">
+                        <label>\(x_p\) =</label>
+                        <input type="range" id="xpSlider" min="15" max="45" value="21" step="1" style="accent-color: var(--gold); width: 200px;">
+                        <span class="val-display" id="xpValue" style="color:var(--gold); font-size:1.2rem; font-weight:bold; min-width:40px; text-align:center;">21</span>
+                    </div>
+                    <div style="color:var(--gold); font-size:0.9rem; text-align: center; width: 100%;">
+                        <span style="color:var(--dim); font-size:0.85rem;">ملاحظة: شريط التمرير يغيّر \(x_p\) للاستكشاف البصري فقط. المنحنى عند \(x_p=21\) هو الحالة المستخدمة في البرهان التحليلي.</span>
+                    </div>
+                </div>
+                <div class="dashboard">
+                    <div class="chart-container"><canvas id="zChart"></canvas></div>
+                    <div class="chart-container"><canvas id="aChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>2. تحليل الإشارة (البرهان الرياضي)</h2>
+                <p>من أجل \(x_p>0\)، تحقق الدالة الحقيقية الشروط التالية:</p>
+                <ul>
+                    <li>\(Z(x;x_p) < 0\) من أجل \(1 < x < 2\).</li>
+                    <li>\(Z(1;x_p) = Z(2;x_p) = 0\) (جذرا الدالة في \([1,\infty)\)).</li>
+                    <li>\(Z(x;x_p) > 0\) من أجل \(x > 2\).</li>
+                </ul>
+                <details>
+                    <summary>انقر لعرض البرهان (Proof)</summary>
+                    <p>من أجل \(x>1\)، تكون العوامل \(x^{-5}\) و\(\ln(x)\) و\(e^{-x/x_p}\) موجبة تماماً. لذا تتحدد الإشارة بواسطة \(\sin(2\pi/x)\). إذا كان \(1 < x < 2\)، فإن \(\pi < 2\pi/x < 2\pi\)، وبالتالي تكون دالة الجيب سالبة تماماً. وإذا كان \(x > 2\)، فإن \(0 < 2\pi/x < \pi\)، وبالتالي تكون دالة الجيب موجبة. عند \(x=1\) ينعدم \(\ln x\)، وعند \(x=2\) ينعدم \(\sin(2\pi/x)\)، فهما الجذران الوحيدان في \([1,\infty)\).</p>
+                </details>
+            </div>
+
+            <div class="card">
+                <h2>3. دالة التجميع والبرهان التحليلي</h2>
+                <p>نعرّف دالة التجميع: \(A(x) := \int_1^x Z(t;21)\,dt\).</p>
+                <p>بما أن \(Z(x)\) سالبة على \((1, 2)\) وموجبة على \((2, \infty)\)، فإن \(A(x)\) تتناقص، وتصل إلى <strong>قيمة صغرى مطلقة عند \(x=2\)</strong>، ثم تتزايد.</p>
+                <div class="math-block">\[ A_\infty = \frac{1}{(2\pi)^4} \int_0^\pi \bigl[W(t) - W(2\pi-t)\bigr]\sin(t)\,dt\, \]</div>
+                <details>
+                    <summary>انقر لعرض البرهان التحليلي لـ \(A_\infty < 0\)</summary>
+                    <p>نضع \(\varphi(u) := \log W(\pi+u) - \log W(\pi-u)\). بعد الاشتقاق واستخدام \(B = A/(A-1)\)، نصل إلى:</p>
+                    <div class="math-block">\[ E(A) := 2\pi\varphi'(u) = \frac{3A^2}{A-1} - \frac{A}{\ln A} - \frac{A}{(A-1)\ln B} + \frac{A^2}{21}\!\left(1 + \frac{1}{(A-1)^2}\right). \]</div>
+                    <p>باستخدام متباينة \(\ln A \ge \frac{2(A-1)}{A+1}\) ومتباينة \(\ln B > \ln 2\) على \((1,2)\)، نثبت أن:</p>
+                    <div class="math-block">\[ E(A) > \frac{A}{A-1}\left(\frac{5A-1}{2} - \frac{1}{\ln 2}\right) + \frac{A^2}{21}\!\left(1+\frac{1}{(A-1)^2}\right) > 0. \]</div>
+                    <p>بما أن \(E(A)>0\)، فإن \(\varphi'(u)>0\). مع \(\varphi(0)=0\)، نحصل على \(W(2\pi-t) > W(t)\)، وبالتالي \(A_\infty < 0\).</p>
+                </details>
+            </div>
+
+            <div class="card">
+                <h2>4. الامتداد المركب والغلاف التقاربي</h2>
+                <p>للامتداد المركب على الخط الحرج \(s=1/2+it\)، الغلاف التقاربي هو:</p>
+                <div class="math-block">\[ |\mathcal{Z}(1/2+it; x_p)| \sim K(x_p)\frac{\ln t}{t^6}, \qquad K(x_p) = 2\pi e^{-1/(2x_p)}. \]</div>
+                <div class="badge-exploratory">
+                    <strong>ملاحظة هامة (Audit v1.3):</strong> هذه الصيغة تخص الامتداد المركب فقط. أما الدالة الحقيقية \(Z(x)\) عندما \(x \to \infty\)، فإن العامل الأسي \(e^{-x/21}\) يهيمن ولا يمكن إسقاطه. الصيغة التقاربية الصحيحة للدالة الحقيقية هي:
+                    \[ Z(x) \sim \frac{2\pi\ln x}{x^6}e^{-x/21}, \qquad x\to\infty. \]
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>5. الملحق D — التحقق العددي التفصيلي</h2>
+                <p>لكل \(t \ge 2\)، المتباينة \(|\sin(2\pi/t)| \le 2\pi/t\) صحيحة. بما أن \(\ln t > 0\)، فإن:</p>
+                <div class="math-block">\[ |Z(t;21)| \le 2\pi\, t^{-6}\ln(t)\,e^{-t/21} \]</div>
+                <p>وبالتالي، لكل \(X \ge 2\):</p>
+                <div class="math-block">\[ \left|\int_X^\infty Z(t;21)\,dt\right| \le 42\pi\, X^{-6}\ln X \cdot e^{-X/21}. \]</div>
+                <p>عند \(X=100\)، هذا الحد التحليلي الصارم أقل من \(5.2 \times 10^{-12}\). بينما القيمة العددية \(A(100) \approx -0.0246463895708\).</p>
+                <p>البرهان التحليلي في §3 هو الأساس، بينما التحقق العددي (A(100) ≈ -0.0246 والحد الأقصى للذيل 5.2e-12) يؤكد الاتساق.</p>
+            </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- BRIDGE: الجسر -->
+        <!-- ======================================================= -->
+        <section id="br" class="frame-section">
+            <h1>الجسر — من الرياضيات إلى الفيزياء</h1>
+            <div class="subtitle">
+                <strong>The Scaling Bridge: Translating Dimensionless Quantities into Physically Scaled Values</strong><br>
+                Eng. Abdulla M. N. Al-Jabri | v2.1
+                <br><span class="version-badge">v2.1 — 2026-10-25</span>
+            </div>
+
+            <div class="card">
+                <h2>1. لماذا نحتاج إلى جسر؟</h2>
+                <p>الكون لا يعرف ما هو "المتر" أو "الكيلوجرام". لكي نربط الرياضيات بالفيزياء، نستخدم <strong>عوامل قياس (Scaling Factors)</strong> مشتقة من ثوابت أساسية، مثل طول بلانك \(\ell_P = \sqrt{\hbar G / c^3}\). هذا الجسر هو <strong>عملية تحويل أبعاد</strong> (dimensional scaling)، وليس اشتقاقًا لنموذج فيزيائي جديد.</p>
+                <div class="math-block">\[ Q_{\text{physical}} = \underbrace{z}_{\text{dimensionless}} \times \underbrace{\Lambda_{\text{scale}}}_{\text{units}} \]</div>
+                <table>
+                    <thead><tr><th>الرمز</th><th>ما هو؟</th><th>أبعاده</th></tr></thead>
+                    <tbody>
+                        <tr><td>\(x\)</td><td>متغير مستقل في \(Z(x)\)، \(x \ge 1\) (إحداثي)</td><td>بلا أبعاد</td></tr>
+                        <tr><td>\(Z(x)\)</td><td>قيمة الدالة عند \(x\); قابلة للإشارة (سالبة/موجبة)</td><td>بلا أبعاد</td></tr>
+                        <tr><td>\(\Lambda_{\text{scale}}\)</td><td>عامل تحويل وحدات (طول بلانك أو ما يعادله)</td><td>وحدة فيزيائية</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>2. آلة التحويل الفيزيائي (الحاسبة)</h2>
+                <p>أدخل قيمة عددية (بلا أبعاد)، واختر وحدة فيزيائية. الناتج قيمة عددية مضروبة في وحدة، وليس تنبؤًا فيزيائيًا بذاته.</p>
+                <div class="interactive-box no-print" style="background:#051009; border:1px solid var(--border); padding:20px; border-radius:8px; text-align:center; margin-bottom:15px;">
+                    <div class="input-group" style="margin-bottom:15px; text-align:right;">
+                        <label style="display:block; margin-bottom:5px; color:var(--blue);">القيمة العددية (بلا أبعاد):</label>
+                        <input type="number" id="rawValue" value="2" step="any" style="width:100%; padding:10px; background:var(--bg); border:1px solid var(--border); color:var(--text); border-radius:6px; font-family:monospace;">
+                    </div>
+                    <div class="input-group" style="margin-bottom:15px; text-align:right;">
+                        <label style="display:block; margin-bottom:5px; color:var(--blue);">عامل التحويل الفيزيائي \(\Lambda_{\text{scale}}\):</label>
+                        <select id="scaleSelect" style="width:100%; padding:10px; background:var(--bg); border:1px solid var(--border); color:var(--text); border-radius:6px; font-family:monospace;">
+                            <option value="1.616255e-35" data-ar-name="طول بلانك" data-ar-unit="متر">طول بلانك — متر</option>
+                            <option value="1.956e9" data-ar-name="طاقة بلانك" data-ar-unit="جول">طاقة بلانك — جول</option>
+                            <option value="5.391247e-44" data-ar-name="زمن بلانك" data-ar-unit="ثانية">زمن بلانك — ثانية</option>
+                            <option value="2.176434e-8" data-ar-name="كتلة بلانك" data-ar-unit="كجم">كتلة بلانك — كجم</option>
+                        </select>
+                    </div>
+                    <button onclick="calculateBridge()" class="btn btn-gold">⚡ تطبيق التحويل</button>
+                    <div id="result-box" style="display:none; margin-top:15px; background:rgba(106,227,255,0.1); border:1px solid var(--blue); border-radius:8px; padding:15px; font-family:monospace;">
+                        <p style="margin:6px 0;">المدخل (بلا أبعاد): <span id="resRaw" style="color:var(--blue); font-size:1.15rem; font-weight:bold;">—</span></p>
+                        <p style="margin:6px 0;">عامل التحويل: <span id="resScaleName" style="color:var(--blue); font-size:1.15rem; font-weight:bold;">—</span></p>
+                        <p style="margin:6px 0;">الناتج العددي × الوحدة: <span id="resFinal" style="color:var(--blue); font-size:1.15rem; font-weight:bold;">—</span></p>
+                    </div>
+                    <!-- Added disclaimer as requested by Al-Mushakis -->
+                    <div class="badge-neutral" style="margin-top:15px; text-align:right; font-size:0.85rem;">
+                        <strong>تنبيه هام:</strong> الناتج صحيح حسابيًا بالنسبة إلى عامل التحويل المختار، ولا يكتسب معنى فيزيائيًا قابلًا للاختبار إلا إذا عُرّفت الكمية الأصلية وأُثبتت علاقتها الفيزيائية بالوحدة المستخدمة.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>3. حدود الاستنتاج العلمي</h2>
+                <div class="badge-neutral">
+                    <strong>طول بلانك: مقياس طبيعي، لا حدّ أدنى للوجود.</strong><br>
+                    طول بلانك \(\ell_P \approx 1.616 \times 10^{-35}\,\mathrm{m}\) هو مقياس طبيعي مشتق من ثوابت أساسية. وهو ليس حدًّا أدنى ثبت تجريبيًا للطول، ولا يعني أن المسافات دونه "غير موجودة".
+                </div>
+                <div class="badge-info">
+                    <strong>الاتساق البُعدي ≠ التنبؤ الفيزيائي.</strong><br>
+                    العملية \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\) صحيحة بُعديًا، لكنها لا تُثبت وحدها أن \(Q_{\text{physical}}\) تنبؤ فيزيائي للنموذج، ولا أن \(z\) يمثّل كمية فيزيائية قابلة للقياس.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>4. ما لا يفعله الجسر</h2>
+                <ul>
+                    <li><strong>لا يثبت</strong> أن نموذجًا رياضيًا صحيح.</li>
+                    <li><strong>لا يحوّل</strong> \(Z(x)\) إلى "جهد" أو "حقل" فيزيائي — بل يحوّل <em>قيمة عددية</em> إلى كمية بوحدة.</li>
+                    <li><strong>لا يُنتج</strong> النسبة \(R_{13/12}\) ولا أي نتيجة عددية خاصة بـ Frame 3 أو Frame 4.</li>
+                    <li><strong>لا يعني</strong> أن الكميات المنتمية إلى مقياس بلانك يمكن قياسها تجريبيًا.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- FRAME 2: الشجرة والظل -->
+        <!-- ======================================================= -->
+        <section id="f2" class="frame-section">
+            <h1>الإطار الثاني — الشجرة والظل</h1>
+            <div class="subtitle">
+                <strong>Frame 2: The Tree and Shadow — Geometric Ratio and Field Measurements</strong><br>
+                Eng. Abdulla M. N. Al-Jabri | v7.0
+                <br><span class="version-badge">v7.0 — 2026-10-25</span>
+            </div>
+
+            <div class="card">
+                <h2>1. الهوية الهندسية</h2>
+                <p>نثبت الهوية الهندسية الدقيقة للزاوية \(22.5^\circ\) باستخدام صيغة نصف الزاوية:</p>
+                <div class="math-block">\[ \tan(22.5^\circ) = \sqrt{2} - 1 \approx 0.41421356. \]</div>
+                <p>هذه الهوية صحيحة رياضياً بغض النظر عن أي تطبيق فيزيائي.</p>
+            </div>
+
+            <div class="card">
+                <h2>2. البيانات الميدانية الاستكشافية</h2>
+                <p>في محاولة لربط الهوية الهندسية بالواقع، تم قياس 5 أشجار مانجو. تُعرَّف \(H\) بأنها ارتفاع الشجرة، و\(h\) بأنه ارتفاع بداية التاج عن مستوى القياس، و\(C=H-h\) بأنه الارتفاع الرأسي للتاج. ومن ثم \(R=C/H\). لا تمثل \(C\) طول الظل، ولا تُفسَّر النسبة بوصفها علاقة بالظل.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الشجرة</th>
+                            <th>\(H\) (م)</th>
+                            <th>\(h\) (م)</th>
+                            <th>\(C=H-h\) (م)</th>
+                            <th>\(R=C/H\)</th>
+                            <th>الفرق عن \(\sqrt{2}-1\)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00887</td></tr>
+                        <tr><td>2</td><td>8.50</td><td>5.00</td><td>3.50</td><td>0.41176</td><td>-0.00245</td></tr>
+                        <tr><td>3</td><td>7.20</td><td>4.20</td><td>3.00</td><td>0.41667</td><td>+0.00245</td></tr>
+                        <tr><td>4</td><td>9.00</td><td>5.40</td><td>3.60</td><td>0.40000</td><td>-0.01421</td></tr>
+                        <tr><td>5</td><td>7.50</td><td>4.40</td><td>3.10</td><td>0.41333</td><td>-0.00088</td></tr>
+                        <tr style="background:#132a1d; font-weight:bold; color:var(--gold);">
+                            <td colspan="3">المتوسط \(R\):</td>
+                            <td colspan="3">0.41297</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="badge-exploratory">
+                    <strong>حالة البيانات:</strong> المتوسط (0.41297) قريب جداً من الهوية (0.41421)، لكن العينة صغيرة جداً (N=5). هذه البيانات تُعرض كملاحظة تجريبية استكشافية، ولا تُثبت قانوناً عاماً، وتحتاج إلى عينة أكبر (N>30) وبروتوكول قياس منشور.
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- FRAME 3: البنية الدقيقة -->
+        <!-- ======================================================= -->
+        <section id="f3" class="frame-section">
+            <h1>الإطار الثالث — البنية والتحويل</h1>
+            <div class="subtitle">
+                <strong>Frame 3: Algebraic Transformation & Symmetry-Induced Cancellation Removal</strong><br>
+                Eng. Abdulla M. N. Al-Jabri | v7.3
+                <br><span class="version-badge">v7.3 — 2026-10-25</span>
+            </div>
+
+            <div class="card">
+                <h2>1. التحويل الجبري (Gauging Identity)</h2>
+                <p>نعرّف الغلاف \(g(u) = (u/2\pi)^5 \ln(2\pi/u) e^{-2\pi/(21u)}\)، والمؤثر \(\mathcal{H}_g\).</p>
+                <div class="badge-info">
+                    <strong>الهوية الجبرية المثبتة:</strong>
+                    \[ \mathcal{H}_g[gY] = -gY'' \]
+                    هذه الهوية تفصل الغلاف عن الدالة المتذبذبة، وتُثبت تحليلياً.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>2. اختبار عناصر الانتقال (Removal of Cancellation)</h2>
+                <p>نعرّف عناصر المصفوفة \(\mathcal{A}_{mn} = \int \Psi_m D \Psi_n \, du\)، حيث \(\Psi_n\) هي الحالات المطبعة، و \(D(u) = \cos(u/2)\) هو مؤثر الانتقال.</p>
+                <!-- Added explicit definitions as requested -->
+                <div class="badge-neutral" style="font-size:0.9rem; margin-bottom:15px;">
+                    <strong>تعريفات التطبيع:</strong> نستخدم القياس غير الموزون \(du\). \(N_n = \int_0^{2\pi} g(u)^2 Y_n(u)^2 du\). \(Y_n(u) = \sin(nu/2)\).
+                </div>
+                <p><strong>الهوية التحليلية:</strong> أثبتنا أن \(\mathcal{A}_{12} = \frac{1}{2}\sqrt{N_2/N_1}\). هذه الهوية تربط \(\mathcal{A}_{12}\) مباشرة بالتطبيع، وتُظهر أنه ليس رقماً مستقلاً.</p>
+                <p>بسبب غياب التماثل في الغلاف \(g\)، لا ينعدم \(\mathcal{A}_{13}\) كما كان متوقعاً في الحالة المتماثلة. الحساب العددي يعطي:</p>
+                <div class="math-block">\[ R_{13/12} = \frac{|\mathcal{A}_{13}|^2}{|\mathcal{A}_{12}|^2} \approx 0.6035155248 \]</div>
+                
+                <h3>حساسية النسبة للأس \(a\):</h3>
+                <p>يثبت الجدول التالي حساسية النسبة \(R_{13/12}\) لتغير الأس \(a\) مع تثبيت \(x_p=21\)، ومؤثر الانتقال \(D(u)=\cos(u/2)\)، وشروط التطبيع.</p>
+                <table>
+                    <thead>
+                        <tr><th>\(a\)</th><th>\(R_{13/12}\)</th><th>التغير عن المرجع</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>4.5</td><td>0.5268896810</td><td>−12.69%</td></tr>
+                        <tr><td>4.9</td><td>0.5890815847</td><td>−2.39%</td></tr>
+                        <tr><td class="highlight">5.0</td><td class="highlight">0.6035155248</td><td>المرجع</td></tr>
+                        <tr><td>5.1</td><td>0.6174956097</td><td>+2.32%</td></tr>
+                        <tr><td>5.5</td><td>0.6689137286</td><td>+10.82%</td></tr>
+                    </tbody>
+                </table>
+                <div class="badge-neutral">
+                    <strong>حدود الاستنتاج:</strong> النسبة حساسة للأس \(a\). هي <strong>بصمة عددية</strong> للنموذج عند القيم المختارة، وليست ثابتاً كونياً. لتحويلها إلى "تنبؤ فيزيائي"، يتطلب الأمر اشتقاق \(a=5\) من مبدأ مستقل، وإيجاد مقابل رصدي.
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- FRAME 4: المسألة الطيفية -->
+        <!-- ======================================================= -->
+        <section id="f4" class="frame-section">
+            <h1>الإطار الرابع — المسألة الطيفية</h1>
+            <div class="subtitle">
+                <strong>Frame 4: Towards a Spectral Problem & Zeta Regularization</strong><br>
+                Eng. Abdulla M. N. Al-Jabri | v7.3
+                <br><span class="version-badge">v7.3 — 2026-10-25</span>
+            </div>
+
+            <div class="card">
+                <h2>1. المؤثر والحل الصفري الشكلي</h2>
+                <p>نعرّف مؤثر شرودنغر \(L = -\partial_u^2 + V_{\text{eff}}(u)\)، حيث \(V_{\text{eff}}(u) = g''(u)/g(u)\).</p>
+                <div class="badge-info">
+                    <strong>حل صفري شكلي:</strong> من التعريف، \(Lg = 0\). هذا حل شكلي على المجال المفتوح. لكونه دالة ذاتية فعلية، يجب تحديد المجال وشروط الحدود.
+                    <br><br>
+                    <strong>تفكيك SUSY:</strong> \(L = (-\partial_u - p)(\partial_u - p)\)، حيث \(p = g'/g\).
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>2. تصنيف النهايات (Limit Point / Circle)</h2>
+                <p>لفحص المجال، ندرس سلوك الجهد \(V_{\text{eff}}\) عند الأطراف.</p>
+                <!-- Added explicit qualifications as requested -->
+                <div class="badge-neutral">
+                    <strong>تحفظ على تصنيف النهايات:</strong><br>
+                    وفق تحليل الطرفين للمؤثر التفاضلي المحدد وتحت الفرضيات المناسبة، يشير تصنيف LP عند أحد الطرفين وLC عند الآخر إلى حالة تتطلب تحديد شرط حدود عند طرف LC لاختيار امتداد ذاتي الترافق. وتُعرض مؤشرات العجز \((n_+, n_-) = (1, 1)\) بعد توثيق تحقق هذه الفرضيات. هذا لا ينفي النتيجة، بل يجعلها قابلة للتدقيق.
+                </div>
+                <ul>
+                    <li><strong>عند \(u \to 0^+\):</strong> الجهد يتصرف كـ \(1/u^4\). الطرف <strong>Limit Point (LP)</strong>.</li>
+                    <li><strong>عند \(u \to 2\pi^-\):</strong> الجهد يتصرف كـ \(-1/(2\pi-u)\). الطرف <strong>Limit Circle (LC)</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>3. حدود التحقق العددي</h2>
+                <p>أظهرت الاختبارات العددية سلوكًا يعتمد على طريقة التقطيع وبناء المصفوفة وشروط الحدود. إن بناء مصفوفة على الصورة \(Q^{T}Q\) يجعلها موجبة شبه محددة جبريًا، لكنه لا يثبت وحده أن هذه المصفوفة تمثل المؤثر المستمر الأصلي تمثيلًا متكافئًا، ولا يثبت وجود قيمة ذاتية صفرية على الشبكة.</p>
+                <p>لذلك يجب عرض طيف كل مصفوفة مع تعريفها وشروط حدودها، وفحص تقارب النتائج عند تنقيح الشبكة، ومقارنة الصيغتين بعد توحيد المجال والتطبيع. أما إثبات أن \(Lg=0\) حل ذاتي فعلي، فيتطلب التحقق من أن \(g\) ينتمي إلى مجال التحقيق الذاتي الترافق المختار. وتظل المسألة الطيفية مفتوحة إلى أن تُستكمل هذه الخطوات.</p>
+            </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- REVIEW: لوحة الحالة -->
+        <!-- ======================================================= -->
+        <section id="rv" class="frame-section">
+            <h1>لوحة الحالة العلمية للمشروع</h1>
+            <div class="subtitle">
+                <strong>Al-Hindara Research Status & Decision Log</strong><br>
+                Status v2.1 | آخر تحديث: 25 أكتوبر 2026
+                <br><span class="version-badge">v2.1</span>
+            </div>
+
+            <div class="card">
+                <h2>📋 ملخص حالة الإطارات</h2>
+                <div class="summary-grid">
+                    <div class="summary-card" style="border-color: var(--green);">
+                        <div class="header"><span class="num">FRAME 01</span><span class="status status-sci-proven">مثبت تحليلياً</span></div>
+                        <div class="title">الإطار الأول — الدالة الأم</div>
+                        <div class="desc">الدالة، الغلاف التقاربي، والتحقق العددي</div>
+                        <div class="last-status">
+                            <strong>آخر حالة:</strong> الإشارة، الجذور، وبرهان \(A_\infty<0\) متماسكة تحليلياً. التحقق العددي (A(100) ≈ -0.0246) يؤكد الاتساق.
+                        </div>
+                        <div class="status-group"><span class="status status-verif-internal">تحقق داخلي</span></div>
+                    </div>
+                    <div class="summary-card" style="border-color: var(--blue);">
+                        <div class="header"><span class="num">FRAME 02</span><span class="status status-sci-exploratory">استكشافي</span></div>
+                        <div class="title">الإطار الثاني — الشجرة والظل</div>
+                        <div class="desc">الهندرة والنسبة الفضية</div>
+                        <div class="last-status">
+                            <strong>آخر حالة:</strong> الهوية صحيحة رياضيًا، وقياسات الأشجار (N=5) استكشافية ولا تثبت قانوناً عاماً.
+                        </div>
+                        <div class="status-group"><span class="status status-verif-none">لم يُختبر</span></div>
+                    </div>
+                    <div class="summary-card" style="border-color: var(--gold);">
+                        <div class="header"><span class="num">FRAME 03</span><span class="status status-sci-conditional">مشروط</span></div>
+                        <div class="title">الإطار الثالث — البنية والتحويل</div>
+                        <div class="desc">تحويل المتغير، المؤثر، والقياسات النموذجية</div>
+                        <div class="last-status">
+                            <strong>آخر حالة:</strong> الهوية التحليلية \(A_{12}\) مثبتة. جدول حساسية \(a\) موثق. النسبة \(R_{13/12}\) بصمة عددية وليست ثابتاً.
+                        </div>
+                        <div class="status-group"><span class="status status-verif-internal">تحقق داخلي</span></div>
+                    </div>
+                    <div class="summary-card" style="border-color: var(--red);">
+                        <div class="header"><span class="num">FRAME 04</span><span class="status status-sci-open">مفتوح</span></div>
+                        <div class="title">الإطار الرابع — المسألة الطيفية</div>
+                        <div class="desc">المؤثر، التحقيق الذاتي الترافق، وطاقة الفراغ</div>
+                        <div class="last-status">
+                            <strong>آخر حالة:</strong> تفكيك شكلي وتحليل طرفي (LP/LC) مع مؤشرات عجز (1,1). المسألة الطيفية لم تُغلق.
+                        </div>
+                        <div class="status-group"><span class="status status-work-active">قيد التنفيذ</span></div>
+                    </div>
+                    <div class="summary-card" style="border-color: var(--gold);">
+                        <div class="header"><span class="num">BRIDGE</span><span class="status status-sci-conditional">مشروط</span></div>
+                        <div class="title">الجسر — الربط الفيزيائي</div>
+                        <div class="desc">تحويل المقاييس والوحدات</div>
+                        <div class="last-status">
+                            <strong>آخر حالة:</strong> التحويل البُعدي صحيح. الصيغة التنبؤية \(R_{\mathrm{pred}}=z_1/z_2\) فرضية مشروطة لم تُنجز اختباراتها.
+                        </div>
+                        <div class="status-group"><span class="status status-verif-none">لم يُختبر</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📌 الحكم العلمي الشامل للمشروع</h2>
+                <p><strong>حالة مشروع الهندرة: تقدم رياضي موثق، وليس برهانًا موحدًا لاستقرار شامل.</strong></p>
+                <table style="margin-top: 10px;">
+                    <thead><tr><th>المكون</th><th>الحكم العلمي</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>الإطار الأول</strong></td><td>النتائج التحليلية الأساسية متماسكة (الإشارة، الجذور، \(A_\infty<0\)). التحقق العددي منفصل ولا يُعد حداً صارماً.</td></tr>
+                        <tr><td><strong>الإطار الثاني</strong></td><td>استكشافي — العينة المحدودة لا تثبت قانوناً عاماً.</td></tr>
+                        <tr><td><strong>الإطار الثالث</strong></td><td>الهوية الجبرية مثبتة والنتائج العددية موثقة، ضمن الفرضيات المحددة.</td></tr>
+                        <tr><td><strong>الإطار الرابع</strong></td><td>التفكيك الشكلي والتحليل الطرفي قيد التدقيق النهائي، والمسائل الطيفية لم تُغلق.</td></tr>
+                        <tr><td><strong>الجسر</strong></td><td>لا يُعامل بوصفه تنبؤاً فيزيائياً مستقلاً قبل اشتقاق العلاقة واختبارها.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card" style="border-color: var(--purple);">
+                <h2 style="color: var(--purple);">🧠 المبدأ المنهجي: إمكان الخطوة مقابل اكتمال الشرط الكلي</h2>
+                <em>مثال السيارة (مسألة كلاسيكية):</em> قطعت سيارة 2 كم صعوداً بسرعة 30 كم/س (أي 4 دقائق). يسأل الحدس: "ما السرعة اللازمة للنزول ليكون المتوسط 60؟" فيجيب فوراً: "90 كم/س". لكن الحساب الرياضي يحسم الأمر: لقطع 4 كم بسرعة 60، نحتاج 4 دقائق إجمالاً. وبما أن الـ 4 دقائق استُهلكت في الصعود، فزمن النزول المتبقي = صفر. <strong>المستحيل ليس بدء الرحلة (فالسيارة صعدت بالفعل)، بل إكمال الرحلة بالمتوسط المطلوب.</strong>
+                <br><br>
+                <em>التطبيق في المشروع:</em> المعادلات تسمح ببدء الحساب والوصول إلى \(R_{13/12} \approx 0.6035\). لكن إكمال الرحلة واعتباره "تنبؤاً فيزيائياً" يتطلب استيفاء شروط. وبدون هذه الشروط، تُعتبر الرحلة غير مكتملة علمياً، ولذلك يبقى الجسر <strong>"مشروطاً"</strong>.
+            </div>
+        </section>
+
+    </div>
+
+    <div class="footer no-print">
+        © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
+        <em>المبدأ الحاكم: لا نرفع نتيجة إلى مرتبة البرهان لمجرد أن الأرقام تبدو متناسقة، ولا نخفض قيمة هوية رياضية صحيحة لمجرد أن المسألة الطيفية الكاملة لم تُحل بعد.</em>
+    </div>
+
+    <script>
+        // Tab Logic (Fixed MathJax overlap issue)
+        let mathJaxTypesetQueue = Promise.resolve();
+
+        function showTab(tabId) {
+            const activeSec = document.getElementById(tabId);
+            if (!activeSec) return;
+
+            document.querySelectorAll('.frame-section')
+                .forEach(sec => sec.classList.toggle('active', sec === activeSec));
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.id === 'btn-' + tabId);
+            });
+
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                mathJaxTypesetQueue = mathJaxTypesetQueue
+                    .then(async () => {
+                        if (window.MathJax.typesetClear) {
+                            MathJax.typesetClear([activeSec]);
+                        }
+                        await MathJax.typesetPromise([activeSec]);
+                    })
+                    .catch(err => console.error('MathJax typesetting error:', err));
+            }
+
+            if (tabId === 'f1' && typeof zChart !== 'undefined' && zChart) {
+                zChart.resize();
+                aChart.resize();
+            }
+        }
+
+        // Print function (Fixed MathJax wait issue)
+        async function printActiveFrame() {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                await mathJaxTypesetQueue;
+                await MathJax.typesetPromise([document.querySelector('.frame-section.active')]);
+            }
+            window.print();
+        }
+
+        // Bridge Calculator Logic
+        function calculateBridge() {
+            const rawEl = document.getElementById('rawValue');
+            const sel = document.getElementById('scaleSelect');
+            const opt = sel.options[sel.selectedIndex];
+            const rawValue = parseFloat(rawEl.value);
+            if (!Number.isFinite(rawValue)) { alert("الرجاء إدخال عدد محدود صحيح."); return; }
+            const scaleFactor = parseFloat(sel.value);
+            if (!Number.isFinite(scaleFactor)) { alert("عامل التحويل المختار غير صالح."); return; }
+            const result = rawValue * scaleFactor;
+            if (!Number.isFinite(result)) { alert("الناتج يتجاوز النطاق العددي."); return; }
+            const name = opt.getAttribute('data-ar-name');
+            const unit = opt.getAttribute('data-ar-unit');
+            function fmt(x) {
+                if (x === 0) return "0";
+                const ax = Math.abs(x);
+                if (ax >= 1e-3 && ax < 1e6) return x.toPrecision(8).replace(/\.?0+(e|$)/, '$1');
+                return x.toExponential(6);
+            }
+            document.getElementById('resRaw').innerText = fmt(rawValue);
+            document.getElementById('resScaleName').innerText = `${name} (${unit})`;
+            document.getElementById('resFinal').innerText = `${fmt(result)} ${unit}`;
+            document.getElementById('result-box').style.display = 'block';
+        }
+
+        // Chart.js Logic for Frame 1
+        let zChart, aChart;
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof Chart === 'undefined') return;
+            Chart.defaults.color = '#8aa892'; Chart.defaults.borderColor = '#1f3a2b';
+            
+            function calculateZ(x, xp) {
+                if (x <= 1) return 0;
+                return Math.pow(x, -5) * Math.log(x) * Math.sin(2 * Math.PI / x) * Math.exp(-x / xp);
+            }
+            function generateData(xp) {
+                const labels = [], zData = [], aData = [];
+                const step = 0.05, count = Math.round((50 - 1) / step);
+                let cumulativeA = 0, previousZ = calculateZ(1, xp);
+                for (let i = 0; i <= count; i++) {
+                    const x = 1 + i * step, z = calculateZ(x, xp);
+                    if (i > 0) cumulativeA += (previousZ + z) * step / 2;
+                    labels.push(x.toFixed(2)); zData.push(z); aData.push(cumulativeA);
+                    previousZ = z;
+                }
+                return { labels, zData, aData };
+            }
+            function updateCharts(xp) {
+                const { labels, zData, aData } = generateData(xp);
+                if (zChart) zChart.destroy();
+                zChart = new Chart(document.getElementById('zChart'), {
+                    type: 'line', data: { labels, datasets: [{ label: 'Z(x; x_p)', data: zData, borderColor: '#f4c430', backgroundColor: 'rgba(244, 196, 48, 0.1)', borderWidth: 2, pointRadius: 0, fill: true }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Damping Function Z(x; x_p)', color: '#e8f5e9' }, legend: { display: false } } }
+                });
+                if (aChart) aChart.destroy();
+                aChart = new Chart(document.getElementById('aChart'), {
+                    type: 'line', data: { labels, datasets: [{ label: 'A(x; x_p)', data: aData, borderColor: '#06d6a0', backgroundColor: 'rgba(6, 214, 160, 0.1)', borderWidth: 2, pointRadius: 0, fill: true }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Accumulation Function A(x; x_p)', color: '#e8f5e9' }, legend: { display: false } } }
+                });
+            }
+            updateCharts(21);
+            document.getElementById('xpSlider').addEventListener('input', function() {
+                document.getElementById('xpValue').textContent = this.value;
+                updateCharts(parseInt(this.value));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ═══════════════════════════════════════════════════════════════
      Frame 1 — الإطار العددي | The Numerical Framework
-     VERSION: v7.0 | 2026-10-24
+     VERSION: v7.1 | 2026-10-25
      Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
      DOI: 10.5281/zenodo.23540283
      ═══════════════════════════════════════════════════════════════ -->
@@ -9,18 +9,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="7.0">
-    <title>Frame 1 — الإطار العددي | الورقة التفاعلية (v7.0)</title>
-    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21 — v7.0">
+    <meta name="version" content="7.1">
+    <title>Frame 1 — الإطار العددي | الورقة التفاعلية (v7.1)</title>
+    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21 — v7.1">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame1.html">
 
     <meta name="citation_title" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
-    <!-- تم توحيد تاريخ النشر مع تاريخ الصفحة بناءً على ملاحظة الرفيق -->
-    <meta name="citation_publication_date" content="2026/10/24">
+    <meta name="citation_publication_date" content="2026/10/25">
     <meta name="citation_doi" content="10.5281/zenodo.23540283">
     <meta name="citation_language" content="ar">
-    <!-- تم تحديث رابط الـ PDF ليشير للإصدار v7.0 -->
+    <!-- تم توضيح أن الرابط لنسخة PDF القديمة v7.0 -->
     <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v7.0.0/frame1_tex.pdf">
 
     <script>
@@ -107,7 +106,7 @@
     <div class="subtitle">
         <strong>The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff \(x_p=21\)</strong><br>
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
-        <br><span class="version-badge">v7.0 — 2026-10-24</span>
+        <br><span class="version-badge">v7.1 — 2026-10-25</span>
     </div>
 
     <div class="card">
@@ -118,11 +117,11 @@
             </div>
             <div class="opening-col">
                 <strong style="color: var(--green);">الإنجاز</strong>
-                <p>تعريف \(Z(x;21)=x^{-5}\ln x\sin(2\pi/x)e^{-x/21}\)، وتحليل إشارتها وجذورها (\(x=1\)، \(x=2\))، ودراسة تكاملها التراكمي \(A(x)\)، واشتقاق غلافها التقاربي \(K(x_p)\ln t/t^6\) في امتداد مركب محدد.</p>
+                <p>تعريف \(Z(x;21)=x^{-5}\ln x\sin(2\pi/x)e^{-x/21}\)، وتحليل إشارتها وجذورها (\(x=1\)، \(x=2\))، ودراسة تكاملها التراكمي \(A(x)\) (الذي يبلغ حده الأدنى عند \(x=2\)). اشتقاق الغلاف التقاربي للدالة الحقيقية \(Z(x) \sim \frac{2\pi\ln x}{x^6}e^{-x/21}\)، بالإضافة إلى الغلاف التقاربي للامتداد المركب \(K(x_p)\ln t/t^6\).</p>
             </div>
             <div class="opening-col">
                 <strong style="color: var(--blue);">نوع الدليل</strong>
-                <p>برهان تحليلي لإشارة \(Z\) وجذورها، وبرهان تحليلي لـ\(A_\infty<0\) يعتمد على متباينتين قياسيتين، مع تحقق عددي مستقل (الملحق D). اشتقاق تقاربي للامتداد المركب مع تحقق عددي.</p>
+                <p>برهان تحليلي لإشارة \(Z\) وجذورها، وبرهان تحليلي لـ\(A_\infty<0\) يعتمد على متباينتين قياسيتين (تم فحصهما وإقرارهما)، مع تحقق عددي مستقل (الملحق D). اشتقاق تقاربي للامتداد المركب مع تحقق عددي.</p>
             </div>
         </div>
     </div>
@@ -136,8 +135,10 @@
                 <input type="range" id="xpSlider" min="15" max="45" value="21" step="1">
                 <span class="val-display" id="xpValue">21</span>
             </div>
-            <div style="color:var(--gold); font-size:0.9rem;">
-                * عند \(x=2\): القيمة الصغرى (Minimum) لدالة التجميع. * عند \(x=42\): لا توجد قمة، بل استمرار للصعود.
+            <!-- إضافة توضيح نطاق المحاكاة مقابل البرهان -->
+            <div style="color:var(--gold); font-size:0.9rem; text-align: center; width: 100%;">
+                * عند \(x=2\): القيمة الصغرى (Minimum) لدالة التجميع. * عند \(x=42\): لا توجد قمة، بل استمرار للصعود.<br>
+                <span style="color:var(--dim); font-size:0.85rem;">ملاحظة: شريط التمرير يغيّر \(x_p\) للاستكشاف البصري فقط. البرهان التحليلي في §3 يعتمد حصراً على القيمة \(x_p = 21\).</span>
             </div>
         </div>
         <div class="dashboard">
@@ -174,7 +175,7 @@
         </ul>
         <details>
             <summary>انقر لعرض البرهان (Proof)</summary>
-            <p>من أجل \(x>1\)، تكون العوامل \(x^{-5}\) و\(\ln(x)\) و\(e^{-x/x_p}\) موجبة تماماً. لذا تتحدد الإشارة بواسطة \(\sin(2\pi/x)\). إذا كان \(1 < x < 2\)، فإن \(\pi < 2\pi/x < 2\pi\)، وبالتالي تكون دالة الجيب سالبة. وإذا كان \(x > 2\)، فإن \(0 < 2\pi/x < \pi\)، وبالتالي تكون دالة الجيب موجبة. عند \(x=1\) ينعدم \(\ln x\)، وعند \(x=2\) ينعدم \(\sin(2\pi/x)\)، فهما الجذران الوحيدان في \([1,\infty)\).</p>
+            <p>من أجل \(x>1\)، تكون العوامل \(x^{-5}\) و\(\ln(x)\) و\(e^{-x/x_p}\) موجبة تماماً. لذا تتحدد الإشارة بواسطة \(\sin(2\pi/x)\). إذا كان \(1 < x < 2\)، فإن \(\pi < 2\pi/x < 2\pi\)، وبالتالي تكون دالة الجيب سالبة تماماً. وإذا كان \(x > 2\)، فإن \(0 < 2\pi/x < \pi\)، وبالتالي تكون دالة الجيب موجبة. عند \(x=1\) ينعدم \(\ln x\)، وعند \(x=2\) ينعدم \(\sin(2\pi/x)\)، فهما الجذران الوحيدان في \([1,\infty)\).</p>
         </details>
     </div>
 
@@ -195,7 +196,7 @@
             <p>حيث \(A = 2\pi/(\pi+u)\)، \(B = 2\pi/(\pi-u)\)، و\(g(s) = 3 - 1/\ln s\).</p>
             <p><strong>الخطوة 3.</strong> بضرب في \(2\pi\) والتحويل إلى \(A\) (بحيث \(B = A/(A-1)\)):</p>
             <div class="math-block">\[ E(A) := 2\pi\varphi'(u) = \frac{3A^2}{A-1} - \frac{A}{\ln A} - \frac{A}{(A-1)\ln B} + \frac{A^2}{21}\!\left(1 + \frac{1}{(A-1)^2}\right). \]</div>
-            <p>عند \(u\in(0,\pi)\) يكون \(A = 2\pi/(\pi+u)\) محصورًا بشكل صارم داخل \((1,2)\): عند \(u\to0^+\) يكون \(A\to2^-\)، وعند \(u\to\pi^-\) يكون \(A\to1^+\). فالدالة \(u\mapsto A(u)\) تتناقص بصرامة على \((0,\pi)\) من \(2\) إلى \(1\)، وتبقى \(A(u)\) داخل المجال المفتوح \((1,2)\) طوال المجال.</p>
+            <p>عند \(u\in(0,\pi)\) يكون \(A = 2\pi/(\pi+u)\) محصورًا بشكل صارم داخل \((1,2)\).</p>
             <p><strong>الخطوة 4 (إيجابية \(E(A)\) على \((1,2)\)).</strong> نستخدم متباينتين قياسيتين:</p>
             <ul>
                 <li>لكل \(A>1\): \(\ln A \ge \dfrac{2(A-1)}{A+1}\)، والمتباينة صارمة عند \(A>1\)؛ ومنها \(-\dfrac{A}{\ln A} \ge -\dfrac{A(A+1)}{2(A-1)}\) (صارمة على \((1,2)\)).</li>
@@ -211,27 +212,20 @@
                 \end{aligned}
                 \]
             </div>
-            <p>على \((1,2)\) لدينا \(\dfrac{5A-1}{2} > 2\) (صارمة لأن \(A>1\)، والمساواة تقع عند \(A=1\) خارج المجال)، و\(2 > \dfrac{1}{\ln 2}\approx 1.4427\)، فالقوس الأول موجب. والحد الثاني \(\dfrac{A^2}{21}\!\left(1+\dfrac{1}{(A-1)^2}\right)\) موجب دائمًا. لذلك \(E(A) > 0\) على كامل \((1,2)\).</p>
-            <p><strong>الخطوة 5.</strong> بما أن \(A(u)\) يبقى داخل \((1,2)\) على كامل \((0,\pi)\)، فإيجابية \(E(A)\) على \((1,2)\) تعني \(\varphi'(u) = E(A(u))/(2\pi) > 0\) على كامل \((0,\pi)\). مع \(\lim_{u\to 0^+}\varphi(u)=0\)، نحصل على \(\varphi(u) > 0\) لكل \(u\in(0,\pi)\)، أي \(W(2\pi-t) > W(t)\) على \((0,\pi)\).</p>
+            <p>على \((1,2)\) لدينا \(\dfrac{5A-1}{2} > 2\) (صارمة لأن \(A>1\)، والمساواة تقع عند \(A=1\) خارج المجال)، و\(2 > \dfrac{1}{\ln 2}\approx 1.4427\)، فالقوس الأول موجب. والحد الثاني موجب دائمًا. لذلك \(E(A) > 0\) على كامل \((1,2)\).</p>
+            <p><strong>الخطوة 5.</strong> بما أن \(A(u)\) يبقى داخل \((1,2)\) على كامل \((0,\pi)\)، فإيجابية \(E(A)\) على \((1,2)\) تعني \(\varphi'(u) > 0\). مع \(\lim_{u\to 0^+}\varphi(u)=0\)، نحصل على \(\varphi(u) > 0\) لكل \(u\in(0,\pi)\)، أي \(W(2\pi-t) > W(t)\) على \((0,\pi)\).</p>
             <p><strong>الخطوة 6.</strong> بصيغة التكامل المتناظرة:</p>
             <div class="math-block">\[ A_\infty = \frac{1}{(2\pi)^4}\int_0^\pi \bigl[W(t)-W(2\pi-t)\bigr]\sin t\,dt. \]</div>
-            <p>وبما أن \(W(2\pi-t) > W(t)\) على \((0,\pi)\) و\(\sin t > 0\) على \((0,\pi)\)، يكون المقدار تحت التكامل سالبًا نقطةً بنقطة، ومنه:</p>
+            <p>وبما أن \(W(2\pi-t) > W(t)\) و\(\sin t > 0\)، يكون المقدار تحت التكامل سالبًا، ومنه:</p>
             <div class="math-block">\[ \boxed{\,A_\infty = \frac{1}{(2\pi)^4}\int_0^\pi \bigl[W(t)-W(2\pi-t)\bigr]\sin t\,dt < 0\,} \]</div>
-            <p style="font-size: 0.85rem; color: var(--dim); border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 15px;"><strong>ملاحظة.</strong> البرهان أعلاه يثبت \(A_\infty<0\) تحليليًا، ولا يحتاج إلى تحقق عددي لإتمامه. التحقق العددي في الملحق D يُعرض بوصفه اختبارًا مستقلًا للتنفيذ والحساب، لا كبديل عن البرهان.</p>
+            <p style="font-size: 0.85rem; color: var(--dim); border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 15px;"><strong>ملاحظة.</strong> البرهان أعلاه يثبت \(A_\infty<0\) تحليليًا، ولا يحتاج إلى تحقق عددي لإتمامه. التحقق العددي في الملحق D يُعرض بوصفه اختبارًا مستقلًا للتنفيذ والحساب.</p>
         </details>
-        <p><strong>النتيجة.</strong> بما أن \(A(2)<0\)، و\(A'(x) = Z(x;21) > 0\) على \((2,\infty)\)، و\(A_\infty < 0\)، فإن:</p>
-        <ul>
-            <li>\(A(x) < 0\) لكل \(x > 1\).</li>
-            <li>لا تعود \(A(x)\) إلى الصفر بعد \(x=2\).</li>
-            <li>الجذر الوحيد لـ\(A\) في \([1,\infty)\) هو \(x=1\).</li>
-        </ul>
+        <p><strong>النتيجة.</strong> بما أن \(A(2)<0\)، و\(A'(x) > 0\) على \((2,\infty)\)، و\(A_\infty < 0\)، فإن \(A(x) < 0\) لكل \(x > 1\)، ولا تعود \(A(x)\) إلى الصفر بعد \(x=2\).</p>
         <button class="btn btn-gold" onclick="toggleSection('sec3-note')">📝 ملاحظة رياضية (طريقة التكامل)</button>
         <div id="sec3-note" class="toggle-content badge-exploratory" style="margin-top: 10px;">
             عند \(x=1\)، نهاية الدالة من اليمين هي \(\lim_{x\to 1^+} Z(x) = 0\). لذلك يبدأ التكامل بسلاسة من الصفر دون أي قفزات.
             <br><br>
             <strong>طريقة التكامل العددي.</strong> قاعدة شبه المنحرف بخطوة \(h = 0.05\) على \([1, 50]\). التكامل حتى اللانهاية يُقدَّر بحد صريح لباقي الذيل باستخدام عامل التخميد \(e^{-x/21}\) (انظر الملحق D).
-            <br><br>
-            <strong>ملاحظة.</strong> الرسم البياني يعرض \(A(x)\) حتى \(x=50\) لأغراض الاستكشاف. أما سلوك \(A\) على المجال اللانهائي فمحسوم بالبرهان التحليلي أعلاه، ومدعوم بتحقق عددي مستقل.
         </div>
     </div>
 
@@ -239,8 +233,17 @@
         <h2>4. الامتداد المركب والغلاف التقاربي</h2>
         <p>لفحص السلوك على الخط الحرج \(s=\tfrac12+it\)، نعرّف امتداداً مركباً صريحاً باستخدام <strong>الفرع الرئيسي</strong> للوغاريتم \(\operatorname{Log}(s)\):</p>
         <div class="math-block">\[ \mathcal{Z}(s; x_p) = s^{-5} \operatorname{Log}(s) \sin\!\left(\frac{2\pi}{s}\right) e^{-s/x_p}. \]</div>
-        <p>عندما \(t \to \infty\)، يُعطى الغلاف التقاربي بواسطة:</p>
+        <p>عندما \(t \to \infty\)، يُعطى الغلاف التقاربي للامتداد المركب بواسطة:</p>
         <div class="math-block">\[ |\mathcal{Z}(1/2+it; x_p)| \sim K(x_p)\frac{\ln t}{t^6}, \qquad K(x_p) = 2\pi e^{-1/(2x_p)}. \]</div>
+        
+        <div class="badge-exploratory" style="margin-top: 15px;">
+            <strong>ملاحظة هامة: الفرق بين الدالة الحقيقية والامتداد المركب (Audit v1.3):</strong><br>
+            الصيغة \(K(x_p)\ln t/t^6\) أعلاه تخص <strong>الامتداد المركب فقط</strong> على الخط الحرج \(s=1/2+it\) حيث يتحول العامل الأسي \(e^{-s/x_p}\) إلى ثابت في المقدار \(e^{-1/(2x_p)}\). 
+            <br><br>
+            أما بالنسبة <strong>للدالة الحقيقية</strong> \(Z(x)\) عندما \(x \to \infty\)، فإن العامل الأسي \(e^{-x/21}\) يهيمن ولا يمكن إسقاطه. الصيغة التقاربية الصحيحة للدالة الحقيقية هي:
+            \[ Z(x) \sim \frac{2\pi\ln x}{x^6}e^{-x/21}, \qquad x\to\infty. \]
+        </div>
+
         <div class="badge-exploratory" style="margin-top: 10px;">
             <strong>نطاق الاستنتاج.</strong> الصيغة أعلاه تخص <strong>الامتداد المركب المعرّف في هذه الورقة</strong>، وليست صيغة تقاربية لدالة زيتا الريمانية نفسها. الثابت \(K(x_p)\) مشتق من هذا الامتداد، ولا يُقدَّم كخاصية لدالة زيتا.
         </div>
@@ -294,7 +297,6 @@
             <div class="badge-neutral">
                 <strong>ملاحظة منهجية.</strong> هذا الفعل هو <strong>محاكاة فلسفية</strong>. لا يوجد إثبات رياضي يربط بين معادلات أينشتاين الحقلية وجذور الدالة \(Z(x)\). تُقدَّم هذه الأفكار كبذور للتفكير، وليست حقائق فيزيائية مثبتة.
             </div>
-            <p>لمزيد من التفاصيل، راجع <b>الإطار الثاني (Frame 2)</b> الذي يطبق هذه المنهجية على البرهان الهندسي للشجرة والظل والبيانات الميدانية.</p>
         </div>
     </div>
 
@@ -401,6 +403,11 @@
                         \]
                     </div>
                     <p style="font-size: 0.9rem;">وبالتالي، فإن الانحراف النسبي الرئيسي عن \(K(21)\) يتناقص بمعدل \(1/(\ln t)^2\). هذا التوسع التقاربي مشتق تحليلياً، ويوضح سبب بطء الاقتراب في الجدول.</p>
+                    
+                    <!-- إضافة توضيحية لمساهمة الحدود الأخرى -->
+                    <div class="badge-neutral" style="margin-top: 10px; font-size: 0.9rem;">
+                        <strong>ملاحظة على حدود المفكوك:</strong> الحد \(\frac{\pi^2}{8(\ln t)^2}\) ينشأ من الجزء التخيلي لدالة اللوغاريتم المركب. أما مساهمات العوامل الأخرى (مثل \(s^{-5}\) و \(\sin(2\pi/s)\) و الجزء الحقيقي من الأس) فإنها تتناقص بقوى من \(t\) (مثل \(1/t, 1/t^2\))، وهي أصغر بكثير من رتبة \((1/\ln t)^2\) عند \(t\to\infty\).
+                    </div>
 
                     <div class="badge-exploratory" style="margin-top: 15px;">
                         <strong>تنبيه على نطاق الصيغة.</strong> الصيغة \(|\mathcal{Z}(1/2+it;21)| \sim K(21)\ln(t)/t^6\) تخص الامتداد المركب المعرّف في هذه الورقة، وليست صيغة تقاربية لدالة زيتا الريمانية نفسها.
@@ -420,7 +427,6 @@
         </ol>
 
         <h3>D.1 تقدير باقي الذيل لـ \(A_\infty\)</h3>
-        <!-- التصحيح الرياضي الدقيق: تقييد المجال إلى t >= 2 -->
         <p>لكل \(t \ge 2\)، المتباينة \(|\sin(2\pi/t)| \le 2\pi/t\) صحيحة. بما أن \(\ln t > 0\) على هذا المجال، فإن:</p>
         <div class="math-block">\[
             |Z(t;21)| = t^{-5}\ln(t)\,|\sin(2\pi/t)|\,e^{-t/21}
@@ -508,7 +514,6 @@ for t in [1e2, 1e3, 1e4, 1e5]:
     <div class="links" style="margin-top: 30px;">
         <a href="../index.html" class="btn">🏠 الرئيسية</a>
         <a href="bridge.html" class="btn">← الجسر (Bridge)</a>
-        <!-- تم تحديث رابط الـ PDF ليطابق الإصدار v7.0 -->
         <a href="https://github.com/Jabri-web/Jabri-com/releases/download/v7.0.0/frame1_tex.pdf" target="_blank" class="btn btn-gold">📄 Frame 1 PDF (v7.0)</a>
     </div>
 
@@ -519,7 +524,7 @@ for t in [1e2, 1e3, 1e4, 1e5]:
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        DOI: 10.5281/zenodo.23540283 &nbsp;|&nbsp; النسخة v7.0 — 2026-10-24
+        DOI: 10.5281/zenodo.23540283 &nbsp;|&nbsp; النسخة v7.1 — 2026-10-25
     </div>
 </div>
 
@@ -588,7 +593,7 @@ for t in [1e2, 1e3, 1e4, 1e5]:
         toggles.forEach(t => { t.style.display = 'block'; });
         const opt = {
             margin:       10,
-            filename:     'Frame1_Numerical_Framework_AR_v7.pdf',
+            filename:     'Frame1_Numerical_Framework_AR_v7.1.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }

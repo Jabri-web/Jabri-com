@@ -7,7 +7,6 @@
     <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization — with Algebraic Origin Verification">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame4-en.html">
 
-    <!-- Google Scholar Meta Tags -->
     <meta name="citation_title" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
     <meta name="citation_publication_date" content="2026/10/21">
@@ -100,7 +99,6 @@
         .appendix-card h2 { color: var(--purple); border-bottom-color: var(--purple); }
         .appendix-card h3 { color: var(--purple); }
         .appendix-badge { background: rgba(199, 146, 234, 0.1); border-left: 4px solid var(--purple); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
-        
         .endpoint-result { padding: 10px 14px; margin: 10px 0; border-radius: 6px; font-size: 0.93rem; }
         .endpoint-lc { background: rgba(229, 115, 115, 0.08); border-left: 3px solid var(--red); }
         .endpoint-lp { background: rgba(6, 214, 160, 0.08); border-left: 3px solid var(--green); }
@@ -668,31 +666,6 @@
         </p>
     </div>
 
-    <!-- ==================== Audit Note ==================== -->
-    <div class="card" style="border-color: var(--green); margin-top: 20px;">
-        <h2 style="color: var(--green);">Mathematical Audit Note — Frame 4</h2>
-        <p><strong>Status:</strong> Local asymptotic result confirmed; spectral analysis remains open.</p>
-
-        <h3>1. Verified result</h3>
-        <ul>
-            <li><strong>Asymptotics as \(u\to0^+\):</strong> Assuming \(Q(x)=Z''(x)/Z(x)\) and \(Z(x)=e^{-x/21}f(x)\), we have \(\frac{Z''}{Z}=\frac1{441}-\frac2{21}r+r'+r^2\) (where \(r=f'/f\)). Hence \(\frac{Z''}{Z}\to\frac1{441}\). This gives \(V_{\mathrm{new}}(u)\sim\frac{4\pi^2}{441u^4}\), which agrees with the stated leading asymptotic term of \(V_{\mathrm{eff}}\).</li>
-            <li><strong>Interior point \(u=\pi\):</strong> The local calculation reported in the manuscript gives a smooth \(V_{\mathrm{eff}}\) and a simple pole in \(V_{\mathrm{new}}\), with approximate coefficient \(2.9619\).</li>
-            <li><strong>Endpoint \(u\to2\pi^-\):</strong> The manuscript reports a negative simple-pole term for \(V_{\mathrm{eff}}\) and a positive double-pole term for \(V_{\mathrm{new}}\).</li>
-        </ul>
-
-        <h3>2. Open questions</h3>
-        <ul>
-            <li>Independently verify the Limit Point / Limit Circle classification at both endpoints and the applicability conditions of the relevant Sturm–Liouville theory.</li>
-            <li>Derive the operator's total deficiency indices \((n_+, n_-)\) from its domain and adjoint domain, then characterize the self-adjoint extensions (expected to be a \(U(1)\) family due to the LP/LC combination) and admissible boundary conditions.</li>
-            <li>Analyze generalized Darboux transformations.</li>
-            <li>Define and, if possible, compute the spectral vacuum energy under a specified regularization scheme.</li>
-        </ul>
-
-        <div class="badge-neutral" style="margin-top: 15px;">
-            <strong>Note:</strong> Agreement of the leading asymptotic terms at \(u\to0^+\) does not establish equivalence of the two potentials, nor does it by itself establish a particular self-adjoint realization or a final spectral result.
-        </div>
-    </div>
-
     <!-- ==================== §7 ==================== -->
     <div class="card">
         <h2>7. Supplementary Notes (behind the toggle)</h2>
@@ -727,6 +700,29 @@
         </div>
     </div>
 
+    <!-- ==================== §8 Numerical Audit ==================== -->
+    <div class="card" style="border-color: var(--blue); margin-top: 20px;">
+        <h2 style="color: var(--blue);">Numerical Audit Appendix — Proposed v7.3</h2>
+        <h3>Status: Preliminary test; the spectral problem remains open</h3>
+        
+        <p>Preliminary numerical tests were performed for the operator</p>
+        <div class="math-block">
+            \[ L=-\frac{d^2}{du^2}+V_{\mathrm{eff}}(u), \qquad V_{\mathrm{eff}}(u)=W'(u)+W(u)^2, \qquad W(u)=\frac{g'(u)}{g(u)}. \]
+        </div>
+        
+        <p>A matrix constructed from the discrete factorization \(L_{\mathrm{fact}}=Q^TQ\), with \(Q=-D+W\), was compared with a direct finite-difference matrix for the second derivative and the potential \(V_{\mathrm{eff}}\).</p>
+        
+        <p>On the truncated domain used in the test, the two discrete representations differed substantially in the reported Frobenius-norm comparison. This shows that the current discrete formulations are not identical on the chosen grid. It does not, by itself, establish whether their difference vanishes or persists in the continuum limit. That question requires a separate convergence study and a discretization compatible with the operator and its boundary conditions.</p>
+        
+        <p>The function \(g\) is also nonzero at the right endpoint \(u_{\max}=5.5\). Imposing a Dirichlet condition there changes the boundary-value problem and prevents the sampled vector \(g\) from being treated as an exact zero mode of the discrete matrix. One test returned a smallest eigenvalue of approximately \(5.7\times10^{-4}\); this value alone neither proves nor rules out a zero mode in the continuum limit.</p>
+        
+        <div class="badge-info" style="margin-top: 15px;">
+            <strong>Conclusion:</strong> No spectrally verified zero mode is claimed at this stage, and positivity of the continuum operator across all possible self-adjoint realizations has not been established. The spectral problem remains open pending convergence tests that separate grid refinement from domain truncation, a precise specification of the operator domain and boundary conditions, and verification of compatibility between the analytic factorization and its numerical discretization.
+            <br><br>
+            <em>This appendix documents the limitations of the current test. It does not alter the original operator or assert a definitive spectral result.</em>
+        </div>
+    </div>
+
     <div class="links">
         <a href="frame3-en.html" class="btn">← Frame 3</a>
         <a href="../en/index.html" class="btn">🏠 Home</a>
@@ -739,7 +735,7 @@
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v6.2 (English; verified asymptotic limits, WKB factor, and deficiency indices).
+        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v7.3 (English; updated with Numerical Audit Appendix).
     </div>
 </div>
 
@@ -763,7 +759,7 @@
         if (assessment) assessment.style.display = 'block';
         const opt = {
             margin:       10,
-            filename:     'Frame4_Spectral_Problem_EN_v6.2.pdf',
+            filename:     'Frame4_Spectral_Problem_EN_v7.3.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
