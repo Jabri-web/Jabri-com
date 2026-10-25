@@ -17,6 +17,11 @@
 <meta name="citation_publication_date" content="2026/10/21">
 <meta name="citation_doi" content="10.5281/zenodo.23540796">
 <meta name="citation_language" content="en">
+<!--
+  citation_pdf_url: points to the v6.0.0 release published on GitHub Releases.
+  If a later release with matching content is published, update this tag only.
+  Do not modify the archived release.
+-->
 <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame2_tex.pdf">
 
 <!-- JSON-LD Schema -->
@@ -281,7 +286,7 @@ a{color:var(--cyan)}
           <tr><th scope="col">Tree</th><th scope="col">H (m)</th><th scope="col">h (m)</th><th scope="col">C = H−h (m)</th><th scope="col">R = C/H</th><th scope="col">Difference from √2−1</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">1</th><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00887</td></tr>
+          <tr><th scope="row">1</th><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00886</td></tr>
           <tr><th scope="row">2</th><td>8.50</td><td>5.00</td><td>3.50</td><td>0.41176</td><td>−0.00245</td></tr>
           <tr><th scope="row">3</th><td>7.20</td><td>4.20</td><td>3.00</td><td>0.41667</td><td>+0.00245</td></tr>
           <tr><th scope="row">4</th><td>9.00</td><td>5.40</td><td>3.60</td><td>0.40000</td><td>−0.01421</td></tr>
@@ -289,7 +294,7 @@ a{color:var(--cyan)}
         </tbody>
       </table>
     </div>
-    <p id="dataTableNote" class="muted" style="font-size:.85rem">The sign of row 5 has been corrected (previously +0.00088, now −0.00088). All values are computed from the displayed H and h.</p>
+    <p id="dataTableNote" class="muted" style="font-size:.85rem">Corrections applied: row 5 sign (was +0.00088, now −0.00088) and row 1 rounding (was +0.00887, now +0.00886). All values are computed from the displayed H and h.</p>
 
     <div class="grid" style="margin-top:14px">
       <div class="stat"><span class="muted">Mean R</span><b id="meanVal">—</b></div>
@@ -393,7 +398,7 @@ a{color:var(--cyan)}
     </ul>
     <details>
       <summary>Exported CSV structure</summary>
-      <p>The file begins with <code>#</code>-comment metadata identifying the frame, author, DOI, collection date and site, and units, followed by the column header row:</p>
+      <p>The file begins with <code>#</code>-comment metadata identifying the frame, author, DOI, collection date and site, units, and a summary of descriptive statistics, followed by the column header row:</p>
       <p><code>tree, H_m, h_m, C_m, R, target_sqrt2_minus_1, difference_from_target</code></p>
       <p>Columns <code>tree, H_m, h_m</code> are the measured data; <code>C_m, R, difference_from_target</code> are derived; <code>target_sqrt2_minus_1</code> is a theoretical constant. The file does not contain additional raw measurements or a record of instruments and uncertainty, which must be added before use in a new analysis.</p>
     </details>
@@ -411,7 +416,11 @@ a{color:var(--cyan)}
     </div>
   </section>
 
-  <footer>Al-Hindara · Frame 2 — The Tree and the Shadow<br>Standalone HTML edition for scholarly review and reproduction · October 2026</footer>
+  <footer>
+    Al-Hindara · Frame 2 — The Tree and the Shadow<br>
+    Standalone HTML edition for scholarly review and reproduction · October 2026
+    <div id="linkStatus" style="margin-top:8px;font-size:.8rem;color:var(--muted)" aria-live="polite"></div>
+  </footer>
 </div>
 <script>
 (function(){
@@ -535,6 +544,24 @@ a{color:var(--cyan)}
     '[' + ciLo.toFixed(5) + ', ' + ciHi.toFixed(5) + ']';
 
   // ============================================================
+  // [Regression] Verify the static HTML table matches dynamic computation
+  // ============================================================
+  (function verifyTable(){
+    const trs = document.querySelectorAll('#dataTable tbody tr');
+    const tol = 5e-6;
+    let ok = true;
+    trs.forEach((tr, i) => {
+      const cell = parseFloat(tr.children[5].textContent);
+      const expected = ratios[i] - TARGET;
+      if(Math.abs(cell - expected) > tol){
+        console.warn(`[regression] row ${i+1}: table=${cell}, computed=${expected.toFixed(5)}`);
+        ok = false;
+      }
+    });
+    if(ok) console.info('✓ Table 1 is consistent with dynamic computation');
+  })();
+
+  // ============================================================
   // TOST
   // ============================================================
   const tostDelta = document.getElementById('tostDelta');
@@ -584,6 +611,18 @@ a{color:var(--cyan)}
     deltaErr.textContent = 'Invalid or out-of-range value (0.001–0.1).';
     deltaErr.style.display = 'block';
     return null;
+  }
+
+  // [Patch] Mark the previous TOST result as stale when Δ is invalid
+  function markTOSTStale(){
+    tostBody.innerHTML =
+      '<tr><td colspan="2" style="text-align:center;color:var(--muted);padding:14px">' +
+      'Previous result is no longer valid — enter a valid margin Δ in [0.001, 0.1] to recompute.' +
+      '</td></tr>';
+    tostVerdict.className = 'callout warn';
+    tostVerdict.innerHTML =
+      '<b>Notice:</b> the current margin Δ is outside the allowed range. ' +
+      'The previously displayed result does not reflect the current value.';
   }
 
   function updateTOST(){
@@ -788,7 +827,7 @@ a{color:var(--cyan)}
   el('line', {x1:left, y1:bottom, x2:right, y2:bottom, stroke:'#a8b8ce', 'stroke-width':2});
 
   // ============================================================
-  // CSV
+  // CSV — includes descriptive summary in the comment header
   // ============================================================
   window.downloadCSV = function(){
     const meta = [
@@ -800,7 +839,11 @@ a{color:var(--cyan)}
       '# Units: H, h, C in meters; R and target dimensionless',
       '# Note: R = C/H is a crown/height ratio (C = H - h),',
       '#       NOT a measured horizontal shadow length.',
-      '# Note: target_sqrt2_minus_1 is a theoretical constant, not fitted.'
+      '# Note: target_sqrt2_minus_1 is a theoretical constant, not fitted.',
+      '# Summary — mean_R=' + desc.mean.toFixed(5) +
+        ', SD=' + desc.sd.toFixed(5) +
+        ', SE=' + desc.se.toFixed(5) +
+        ', CI90=[' + ciLo.toFixed(5) + ',' + ciHi.toFixed(5) + ']'
     ];
     const header = 'tree,H_m,h_m,C_m,R,target_sqrt2_minus_1,difference_from_target';
     const lines = [header];
@@ -864,11 +907,40 @@ a{color:var(--cyan)}
   theta.addEventListener('input', () => update('theta'));
   sun.addEventListener('input',   () => update('sun'));
 
+  // [Patch] Invalid Δ input → mark previous TOST result as stale
   tostDelta.addEventListener('input', () => {
     if(checkDelta(false) !== null) updateTOST();
+    else markTOSTStale();
   });
   tostDelta.addEventListener('change', () => { checkDelta(true); updateTOST(); });
   tostDelta.addEventListener('blur',   () => { checkDelta(true); updateTOST(); });
+
+  // ============================================================
+  // [Patch] Navigation link check — reports status in the footer
+  // ============================================================
+  (async function checkLinks(){
+    const st = document.getElementById('linkStatus');
+    if(!st) return;
+    // Skip the check when opened locally (file://)
+    if(location.protocol === 'file:'){
+      st.textContent = 'ℹ️ Page opened locally — link check runs only when served over HTTP.';
+      return;
+    }
+    const links = [...document.querySelectorAll('.top-nav a, .btn-nav, .btn-pdf, .lang-btn')];
+    if(links.length === 0){ st.textContent = ''; return; }
+    st.textContent = 'Checking links…';
+    let broken = 0;
+    await Promise.all(links.map(async a => {
+      try{
+        const r = await fetch(a.href, { method:'HEAD' });
+        if(!r.ok) broken++;
+      }catch{ broken++; }
+    }));
+    st.textContent = broken === 0
+      ? `✓ All navigation links (${links.length}) are reachable.`
+      : `⚠ ${broken} of ${links.length} links may be broken — check deployment structure.`;
+    st.style.color = broken === 0 ? 'var(--green)' : '#ffd77a';
+  })();
 
   update('theta');
   updateTOST();

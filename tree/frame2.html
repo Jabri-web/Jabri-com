@@ -17,6 +17,11 @@
 <meta name="citation_publication_date" content="2026/10/21">
 <meta name="citation_doi" content="10.5281/zenodo.23540796">
 <meta name="citation_language" content="ar">
+<!--
+  citation_pdf_url: يشير إلى الإصدار v6.0.0 المنشور على GitHub Releases.
+  إذا نُشر إصدار لاحق بمحتوى مطابق، يُحدَّث هذا الوسم فقط.
+  لا يُعدَّل الإصدار القديم على Releases.
+-->
 <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame2_tex.pdf">
 
 <!-- JSON-LD Schema -->
@@ -278,7 +283,7 @@ a{color:var(--cyan)}
           <tr><th scope="col">الشجرة</th><th scope="col">H (m)</th><th scope="col">h (m)</th><th scope="col">C = H−h (m)</th><th scope="col">R = C/H</th><th scope="col">الفرق عن √2−1</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">1</th><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00887</td></tr>
+          <tr><th scope="row">1</th><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00886</td></tr>
           <tr><th scope="row">2</th><td>8.50</td><td>5.00</td><td>3.50</td><td>0.41176</td><td>−0.00245</td></tr>
           <tr><th scope="row">3</th><td>7.20</td><td>4.20</td><td>3.00</td><td>0.41667</td><td>+0.00245</td></tr>
           <tr><th scope="row">4</th><td>9.00</td><td>5.40</td><td>3.60</td><td>0.40000</td><td>−0.01421</td></tr>
@@ -286,7 +291,7 @@ a{color:var(--cyan)}
         </tbody>
       </table>
     </div>
-    <p id="dataTableNote" class="muted" style="font-size:.85rem">تم تصحيح إشارة الصف الخامس (كانت +0.00088، والصواب −0.00088). القيم محسوبة من H وh المعروضين.</p>
+    <p id="dataTableNote" class="muted" style="font-size:.85rem">تم تصحيح إشارة الصف الخامس (كانت +0.00088، والصواب −0.00088)، وتصحيح تقريب الصف الأول (كان +0.00887، والصواب +0.00886). القيم محسوبة من H وh المعروضين.</p>
 
     <div class="grid" style="margin-top:14px">
       <div class="stat"><span class="muted">متوسط R</span><b id="meanVal">—</b></div>
@@ -408,7 +413,11 @@ a{color:var(--cyan)}
     </div>
   </section>
 
-  <footer>Al-Hindara · Frame 2 — The Tree and the Shadow<br>نسخة HTML مستقلة للمراجعة العلمية وإعادة الإنتاج · أكتوبر 2026</footer>
+  <footer>
+    Al-Hindara · Frame 2 — The Tree and the Shadow<br>
+    نسخة HTML مستقلة للمراجعة العلمية وإعادة الإنتاج · أكتوبر 2026
+    <div id="linkStatus" style="margin-top:8px;font-size:.8rem;color:var(--muted)" aria-live="polite"></div>
+  </footer>
 </div>
 <script>
 (function(){
@@ -530,6 +539,24 @@ a{color:var(--cyan)}
     '[' + ciLo.toFixed(5) + ', ' + ciHi.toFixed(5) + ']';
 
   // ============================================================
+  // [انحدار] التحقق من أن جدول HTML الثابت متسق مع الحساب الديناميكي
+  // ============================================================
+  (function verifyTable(){
+    const trs = document.querySelectorAll('#dataTable tbody tr');
+    const tol = 5e-6;
+    let ok = true;
+    trs.forEach((tr, i) => {
+      const cell = parseFloat(tr.children[5].textContent);
+      const expected = ratios[i] - TARGET;
+      if(Math.abs(cell - expected) > tol){
+        console.warn(`[انحدار] صف ${i+1}: جدول=${cell}, حساب=${expected.toFixed(5)}`);
+        ok = false;
+      }
+    });
+    if(ok) console.info('✓ جدول القياسات متسق مع الحساب الديناميكي');
+  })();
+
+  // ============================================================
   // TOST
   // ============================================================
   const tostDelta = document.getElementById('tostDelta');
@@ -567,13 +594,25 @@ a{color:var(--cyan)}
     if(commit){
       const corrected = isFinite(v) ? Math.min(0.1, Math.max(0.001, v)) : 0.03;
       tostDelta.value = String(corrected);
-      tostDelta.setAttribute('aria-invalid','true');
+      tostDelta.removeAttribute('aria-invalid');
       deltaErr.textContent = `القيمة يجب أن تكون بين 0.001 و 0.1؛ صُحّحت إلى ${corrected}.`;
       deltaErr.style.display = 'block';
       return corrected;
     }
     tostDelta.setAttribute('aria-invalid','true');
     return null;
+  }
+
+  // [رقعة] عند إدخال غير صالح، علّم النتيجة القديمة كغير صالحة
+  function markTOSTStale(){
+    tostBody.innerHTML =
+      '<tr><td colspan="2" style="text-align:center;color:var(--muted);padding:14px">' +
+      'النتيجة القديمة لم تعد صالحة — أدخل قيمة صحيحة للهامش Δ في النطاق [0.001, 0.1] لإعادة الحساب.' +
+      '</td></tr>';
+    tostVerdict.className = 'callout warn';
+    tostVerdict.innerHTML =
+      '<b>تنبيه:</b> قيمة الهامش Δ الحالية خارج النطاق المسموح. ' +
+      'النتيجة المعروضة قبل هذا التعديل لا تعكس القيمة الحالية.';
   }
 
   function updateTOST(){
@@ -663,7 +702,7 @@ a{color:var(--cyan)}
     if(commit){
       const corrected = isFinite(v) ? Math.min(100, Math.max(0.1, v)) : 7.8;
       H.value = String(corrected);
-      H.setAttribute('aria-invalid','true');
+      H.removeAttribute('aria-invalid');
       heightErr.textContent = `القيمة يجب أن تكون بين 0.1 و 100؛ صُحّحت إلى ${corrected}.`;
       heightErr.style.display = 'block';
       return corrected;
@@ -786,7 +825,11 @@ a{color:var(--cyan)}
       '# Units: H, h, C in meters; R and target dimensionless',
       '# Note: R = C/H is a crown/height ratio (C = H - h),',
       '#       NOT a measured horizontal shadow length.',
-      '# Note: target_sqrt2_minus_1 is a theoretical constant, not fitted.'
+      '# Note: target_sqrt2_minus_1 is a theoretical constant, not fitted.',
+      '# Summary — mean_R=' + desc.mean.toFixed(5) +
+        ', SD=' + desc.sd.toFixed(5) +
+        ', SE=' + desc.se.toFixed(5) +
+        ', CI90=[' + ciLo.toFixed(5) + ',' + ciHi.toFixed(5) + ']'
     ];
     const header = 'tree,H_m,h_m,C_m,R,target_sqrt2_minus_1,difference_from_target';
     const lines = [header];
@@ -850,11 +893,40 @@ a{color:var(--cyan)}
   theta.addEventListener('input', () => update('theta'));
   sun.addEventListener('input',   () => update('sun'));
 
+  // [رقعة] إدخال غير صالح في Δ → علّم النتيجة القديمة كغير صالحة
   tostDelta.addEventListener('input', () => {
     if(checkDelta(false) !== null) updateTOST();
+    else markTOSTStale();
   });
   tostDelta.addEventListener('change', () => { checkDelta(true); updateTOST(); });
   tostDelta.addEventListener('blur',   () => { checkDelta(true); updateTOST(); });
+
+  // ============================================================
+  // [رقعة] فحص روابط التنقل — يُظهر حالة الروابط في التذييل
+  // ============================================================
+  (async function checkLinks(){
+    const st = document.getElementById('linkStatus');
+    if(!st) return;
+    // تجاوز الفحص إن كان الملف يُفتح محليًا (file://)
+    if(location.protocol === 'file:'){
+      st.textContent = 'ℹ️ الصفحة مفتوحة محليًا — فحص الروابط يُنفَّذ فقط عند النشر عبر HTTP.';
+      return;
+    }
+    const links = [...document.querySelectorAll('.top-nav a, .btn-nav, .btn-pdf, .lang-btn')];
+    if(links.length === 0){ st.textContent = ''; return; }
+    st.textContent = 'جارٍ فحص الروابط…';
+    let broken = 0;
+    await Promise.all(links.map(async a => {
+      try{
+        const r = await fetch(a.href, { method:'HEAD' });
+        if(!r.ok) broken++;
+      }catch{ broken++; }
+    }));
+    st.textContent = broken === 0
+      ? `✓ جميع روابط التنقل (${links.length}) تعمل.`
+      : `⚠ ${broken} من ${links.length} روابط قد تكون معطّلة — تحقق من بنية النشر.`;
+    st.style.color = broken === 0 ? 'var(--green)' : 'var(--yellow, #ffd77a)';
+  })();
 
   update('theta');
   updateTOST();
