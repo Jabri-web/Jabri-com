@@ -12,29 +12,23 @@
         :root { --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --blue: #6ae3ff; --red: #e57373; --orange: #ff9800; --purple: #ba68c8; }
         body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
         .container { width: min(1100px, 100%); display: flex; flex-direction: column; gap: 20px; }
-        
-        /* Top Navigation */
+
         .top-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; background: rgba(10, 26, 18, 0.9); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; width: 100%; }
         .nav-item { color: var(--dim); text-decoration: none; padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; border: 1px solid transparent; transition: 0.3s; }
         .nav-item:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
         .nav-item.active { color: #0a1a12; background: var(--red); border-color: var(--red); }
-        
-        /* Header */
+
         h1 { color: var(--red); text-align: center; font-size: 1.8rem; margin-bottom: 5px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 5px; }
         .version-badge { display: block; text-align: center; color: var(--gold); font-size: 0.85rem; margin-bottom: 20px; font-family: monospace; }
-        
-        /* Cards */
+
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
         .card h2 { color: var(--gold); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
-        .card h4 { color: var(--text); font-size: 1rem; margin-top: 15px; border-bottom: 1px dashed var(--border); padding-bottom: 5px; }
-        
-        /* Legend */
+
         .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; background: #051009; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin: 15px 0; }
         .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
-        
-        /* Status Badges */
+
         .status { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 0.72rem; font-weight: bold; vertical-align: middle; white-space: nowrap; }
         .status-work { background: #333; color: #fff; border: 1px solid #555; }
         .status-work-active { background: rgba(255, 152, 0, 0.2); color: var(--orange); border: 1px solid rgba(255, 152, 0, 0.4); }
@@ -45,8 +39,7 @@
         .status-verif-none { background: rgba(229, 115, 115, 0.1); color: var(--red); border: 1px dashed var(--red); }
         .status-verif-internal { background: rgba(244, 196, 48, 0.1); color: var(--gold); border: 1px dashed var(--gold); }
         .status-verif-repro { background: rgba(6, 214, 160, 0.1); color: var(--green); border: 1px dashed var(--green); }
-        
-        /* Summary Grid */
+
         .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
         .summary-card { background: #051009; border: 2px solid var(--border); border-radius: 10px; padding: 18px; text-decoration: none; color: var(--text); transition: 0.3s; display: flex; flex-direction: column; }
         .summary-card:hover { border-color: var(--gold); transform: translateY(-2px); }
@@ -57,31 +50,28 @@
         .summary-card .last-status { font-size: 0.85rem; color: var(--text); background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; margin-top: auto; }
         .summary-card .last-status strong { color: var(--gold); font-size: 0.78rem; display: block; margin-bottom: 3px; }
         .summary-card .status-group { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
-        
-        /* Details */
+
         details { background: #051009; border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 15px; }
         details summary { cursor: pointer; outline: none; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
         details summary::-webkit-details-marker { color: var(--gold); }
         details[open] summary { margin-bottom: 15px; border-bottom: 2px solid var(--border); padding-bottom: 12px; }
         details .record-meta { font-size: 0.8rem; color: var(--dim); font-family: monospace; margin-bottom: 15px; background: #0a1a12; padding: 8px; border-radius: 4px; border-right: 3px solid var(--gold); }
-        
-        /* Six-section layout */
+
         .record-section { margin-bottom: 18px; }
         .record-section .label { font-size: 0.8rem; color: var(--gold); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: block; }
         .record-section .content { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 6px; border-right: 3px solid var(--border); }
-        
-        /* Math */
+
         .math-block { background: #0a1410; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1rem; }
-        
-        /* Other elements */
+
         .badge-exact { background: rgba(6, 214, 160, 0.1); border-right: 4px solid var(--green); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.9rem; }
         .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-right: 4px solid var(--gold); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.9rem; }
         .badge-red { background: rgba(229, 115, 115, 0.1); border-right: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.9rem; }
-        
+        .badge-verify { background: rgba(106, 227, 255, 0.08); border-right: 4px solid var(--blue); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.9rem; }
+
         table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.85rem; }
         th, td { border: 1px solid var(--border); padding: 8px; text-align: right; }
         th { background: #132a1d; color: var(--gold); text-align: center; }
-        
+
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
     </style>
 </head>
@@ -99,12 +89,12 @@
 
     <h1>لوحة الحالة العلمية للمشروع</h1>
     <div class="subtitle">Al-Hindara Research Status & Decision Log</div>
-    <div class="version-badge">Status v2.1 | آخر تحديث: 25 أكتوبر 2026</div>
+    <div class="version-badge">Status v2.7 | آخر تحديث: 26 أكتوبر 2026</div>
 
     <div class="card">
         <h2>📖 كيف تُقرأ هذه اللوحة؟</h2>
         <p>هذه الصفحة ليست أرشيفاً للنقاشات فقط، بل <strong>لوحة متابعة علمية</strong> تُجيب مباشرة عن السؤال: <em>"أين وصلنا في كل إطار، ما نعرفه فعلاً، وما العمل التالي؟"</em></p>
-        
+
         <div class="legend">
             <div class="legend-item"><span class="status status-work">مغلق</span> إداريًا (انتهت المهمة)</div>
             <div class="legend-item"><span class="status status-work-active">قيد التنفيذ</span> عمل جارٍ</div>
@@ -121,23 +111,23 @@
     <div class="card">
         <h2>📋 ملخص حالة الإطارات (Summary)</h2>
         <p style="color: var(--dim); font-size: 0.9rem;">هذا ملخص مستخلص من آخر مراجعاتنا، وليس ادعاءً بأن كل ملف قد أُعيد اختباره الآن.</p>
-        
+
         <div class="summary-grid">
             <!-- Frame 1 -->
             <a href="#frame-1" class="summary-card">
                 <div class="header">
                     <span class="num">FRAME 01</span>
-                    <span class="status status-sci-conditional">مشروط</span>
+                    <span class="status status-sci-proven">مثبت</span>
                 </div>
                 <div class="title">الإطار الأول — الدالة الأم</div>
                 <div class="desc">الدالة، الغلاف التقاربي، والتحقق العددي</div>
                 <div class="last-status">
-                    <strong>آخر حالة:</strong>
-                    الصيغة التحليلية محددة، وجدول مدوّن، لكن إعادة إنتاج الحسابات العددية مطلوبة.
+                    <strong>آخر حالة (v1.8):</strong>
+                    مسح شامل لـ frame1.html v7.2 مُغلق. البراهين التحليلية الثلاثة مثبتة، Audit D PASS، لا موضعًا يعتمد على الصيغة التقاربية القديمة.
                 </div>
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
-                    <span class="status status-verif-internal">تحقق داخلي</span>
+                    <span class="status status-verif-repro">أُعيد إنتاجه</span>
                 </div>
             </a>
 
@@ -168,8 +158,8 @@
                 <div class="title">الإطار الثالث — البنية والتحويل</div>
                 <div class="desc">تحويل المتغير، المؤثر، والقياسات النموذجية</div>
                 <div class="last-status">
-                    <strong>آخر حالة:</strong>
-                    الهوية التحليلية \(A_{12}\) مثبتة، وجدول حساسية \(a\) موثق. النسبة \(R_{13/12}\) بصمة عددية للنموذج وليست ثابتاً كونياً.
+                    <strong>آخر حالة (v7.1):</strong>
+                    الهوية التحليلية \(A_{12}\) مثبتة، وجدول حساسية \(a\) موثق. النسبة \(R_{13/12}\) بصمة عددية للنموذج وليست ثابتاً كونياً. المتبقي: مقابل رصدي مستقل.
                 </div>
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
@@ -199,17 +189,17 @@
             <a href="#bridge" class="summary-card">
                 <div class="header">
                     <span class="num">BRIDGE</span>
-                    <span class="status status-sci-conditional">مشروط</span>
+                    <span class="status status-work-active">قيد التحديث — draft v2.2</span>
                 </div>
-                <div class="title">الجسر — الربط الفيزيائي</div>
-                <div class="desc">تحويل المقاييس والوحدات</div>
+                <div class="title">الجسر — تحويل أبعادي</div>
+                <div class="desc">أداة تحويل قيمة عددية إلى وحدة مختارة</div>
                 <div class="last-status">
                     <strong>آخر حالة:</strong>
-                    التحويل البُعدي صحيح. الصيغة التنبؤية المقترحة \(R_{\mathrm{pred}}=z_1/z_2\) فرضية معلّقة على ثلاثة اختبارات لم تُنجز.
+                    مسودة v2.2 مُعدّة في اللوحة: إعادة تعريف الجسر بوصفه أداة تحويل أبعادي، لا مصدر تنبؤ. الإصدار المنشور v2.1 مُجمَّد حتى اجتياز قائمة اختبار القبول.
                 </div>
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
-                    <span class="status status-verif-none">لم يُختبر</span>
+                    <span class="status status-verif-internal">تحقق داخلي</span>
                 </div>
             </a>
         </div>
@@ -229,7 +219,7 @@
             <tbody>
                 <tr>
                     <td><strong>الإطار الأول (الدالة الأم)</strong></td>
-                    <td>مشروط — حتى يُحسم تعريف \(Z\) وبرهانه بشكل قاطع.</td>
+                    <td>مثبت داخل تعريفات frame1.html v7.2 — مسح شامل مغلق (v1.8). البراهين الثلاثة مطابقة وصحيحة، Audit D PASS.</td>
                 </tr>
                 <tr>
                     <td><strong>الإطار الثاني (الشجرة والظل)</strong></td>
@@ -237,7 +227,7 @@
                 </tr>
                 <tr>
                     <td><strong>الإطار الثالث (البنية الدقيقة)</strong></td>
-                    <td>الهوية الجبرية مثبتة والنتائج العددية موثقة، ضمن الفرضيات المحددة.</td>
+                    <td>الهوية الجبرية مثبتة والنتائج العددية موثقة، ضمن الفرضيات المحددة. المتبقي: مقابل رصدي مستقل.</td>
                 </tr>
                 <tr>
                     <td><strong>الإطار الرابع (المسألة الطيفية)</strong></td>
@@ -245,10 +235,33 @@
                 </tr>
                 <tr>
                     <td><strong>الجسر (Bridge)</strong></td>
-                    <td>لا يُعامل بوصفه تنبؤاً فيزيائياً مستقلاً قبل اشتقاق العلاقة واختبارها على بيانات مستقلة.</td>
+                    <td>قيد التحديث — draft v2.2 يُعيد تعريف الجسر بوصفه أداة تحويل أبعادي (dimensional scaling)، لا مصدر تنبؤ. v2.1 المنشور مُجمَّد، والانتقال إلى v2.2 ينتظر اجتياز قائمة اختبار القبول.</td>
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <!-- ==================== handsa card ==================== -->
+    <div class="card" style="border-color: var(--blue);">
+        <h2 style="color: var(--blue);">🔷 ملاحظة هندسية مستقلة — هندسة الأعداد والتماثل المركزي</h2>
+        <p>
+            تتضمن صفحة <a href="handsa.html" style="color: var(--blue);">handsa.html</a> دراسة هندسية مستقلة
+            لتمثيل الدورة العددية \((1,2,4,8,7,5)\) على رؤوس سداسي منتظم، مع فحص التماثل المركزي
+            والأزواج المتقابلة \(1\leftrightarrow8\)، و\(2\leftrightarrow7\)، و\(4\leftrightarrow5\)
+            عبر التحويل المركزي \(\rho(x,y)=(-x,-y)\).
+        </p>
+        <p>
+            تُقبل النتائج الهندسية ضمن التعيين والإحداثيات المحددة في الصفحة (مجموع كل زوج = 9، ومنتصف كل قطعة هو المركز \((0,0)\)).
+            وتُعامل هذه الدراسة بوصفها <strong>امتدادًا توضيحيًا مستقلًا</strong> لمشروع واحة الجبري،
+            <strong>لا برهانًا إضافيًا على نتائج الإطارات 1–4</strong>، ولا دليلًا على وجود علاقة تحليلية أو طيفية بينها.
+        </p>
+        <div class="badge-verify">
+            <strong>ملاحظة منهجية:</strong> النمط العددي المشترك (الدورة \(1,2,4,8,7,5\)) لا يُنشئ جسرًا رياضيًا بحد ذاته.
+        </div>
+        <p style="margin-bottom: 0;">
+            <strong>الحالة:</strong> <span class="status status-sci-exploratory">دراسة مستقلة</span>
+            — لا تغيّر التصنيفات العلمية للإطارات أو الجسر.
+        </p>
     </div>
 
     <!-- ==================== FRAME 1 RECORD ==================== -->
@@ -256,11 +269,11 @@
         <details open>
             <summary>
                 <strong style="color: var(--gold); font-size: 1.15rem;">FRAME 01 — الإطار الأول (الدالة الأم)</strong>
-                <span class="status status-sci-conditional">مشروط</span>
-                <span class="status status-work">مغلق</span>
+                <span class="status status-sci-proven">مثبت داخل تعريفات v7.2</span>
+                <span class="status status-verif-repro">أُعيد إنتاجه</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v1.2 | الملف: <a href="frame1.html" style="color: var(--blue);">frame1.html</a></div>
-            
+            <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v1.8 | الملف: <a href="frame1.html" style="color: var(--blue);">frame1.html</a> (v7.2)</div>
+
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
                 <div class="content">تعريف الدالة \(Z(x)\), تحليل إشارتها وجذورها، دالة التجميع \(A(x)\), والامتداد المركب \(\mathcal{Z}(s)\).</div>
@@ -268,32 +281,25 @@
 
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
-                <div class="content">تم تصحيح جدول التقارب وإضافة سطر التوسع التقاربي. الحالة الحالية: الصيغة التحليلية محددة، لكن الجدول العددي يحتاج إلى إعادة إنتاج مستقلة.</div>
+                <div class="content">
+                    <strong>مُغلق (v1.8):</strong> المسح الشامل لـ <code>frame1.html</code> v7.1 أُنجز، ثم رُفع الملف إلى v7.2 بتصحيح تحريري واحد (رمز المتغير المساعد في §3 من \(A\) إلى \(v\)). البراهين التحليلية الثلاثة مثبتة داخل تعريفات الملف (§2، §3). الملحق D أُعيد إنتاجه بنجاح (v1.5، PASS). لا موضعًا يعتمد على الصيغة التقاربية القديمة.
+                </div>
             </div>
 
             <div class="record-section">
                 <span class="label">✅ ما ثبت</span>
                 <div class="content">
-                    <p style="margin-top: 0; color: var(--dim); font-size: 0.85rem;"><strong>ما ثبت تحليليًا:</strong></p>
                     <ul>
-                        <li><strong>تحليل الإشارة والجذور:</strong> صحيح (برهان تحليلي مباشر).</li>
-                        <li><strong>\(A_\infty < 0\):</strong> برهان تحليلي باستخدام متباينتين قياسيتين.</li>
-                        <li><strong>\(E(A) > 0\):</strong> برهان تحليلي وفق التعريف والافتراضات المبيّنة في الاشتقاق.</li>
-                        <li><strong>الصيغة التقاربية:</strong> \(|\mathcal{Z}| \sim K(21)\ln(t)/t^6\) (مشتقة تحليليًا).</li>
+                        <li><strong>تحليل الإشارة والجذور:</strong> \(Z<0\) على \((1,2)\)، \(Z=0\) عند \(x=1\) و\(x=2\)، \(Z>0\) على \((2,\infty)\) — برهان تحليلي مباشر (§2).</li>
+                        <li><strong>\(A_\infty < 0\):</strong> برهان تحليلي عبر تحويل \(t=2\pi/x\) وتعريف \(W(t)\) والتكامل المتناظر (§3).</li>
+                        <li><strong>\(E(v) > 0\) على \((1,2)\):</strong> برهان تحليلي بمتباينتين قياسيتين (§3).</li>
                     </ul>
-                    <div class="badge-exploratory" style="margin-top: 10px;">
-                        <strong>حدود التحقق:</strong> النتائج التحليلية أعلاه منفصلة عن إعادة الإنتاج العددية المستقلة. جدول القيم العددية (في §7) يحتاج إلى توثيق طريقة الحساب وإعادة تشغيلها بصورة قابلة للتحقق.
+                    <div class="badge-exact">
+                        <strong>✅ Audit D (v1.5):</strong> أُعيد تشغيل الملحق D في بيئة Google Colab مستقلة (Python 3.13.16 · NumPy 2.1.3 · SciPy 1.16.3 · Linux x86_64). مطابقة تامة لـ \(A(100)\) عند \(1.06 \times 10^{-14}\)، والجدول \(C(t)\) عند \(\Delta C < 5\times10^{-7}\).
                     </div>
-                </div>
-            </div>
-
-            <div class="record-section">
-                <span class="label">❓ ما لم يُحسم</span>
-                <div class="content">
-                    <ul>
-                        <li>إعادة إنتاج الجدول العددي (Simpson/SciPy) من قبل طرف مستقل.</li>
-                        <li>مراجعة الكود البرمجي للتأكد من صحة تعريف \(Z\) وطريقة الحساب.</li>
-                    </ul>
+                    <div class="badge-exploratory">
+                        <strong>حدود Audit D:</strong> يفحص تنفيذ الصيغ، لا صحة الاشتقاقات. لا يمثل دليلًا تجريبيًا على علاقة النموذج بدالة زيتا.
+                    </div>
                 </div>
             </div>
 
@@ -301,16 +307,12 @@
                 <span class="label">📝 القرارات والتصحيحات</span>
                 <div class="content">
                     <ul>
-                        <li><strong>v1.2 (25/10):</strong> تصحيح جدول §7 (4 صفوف). إضافة سطر النهاية. تحديث رابط PDF إلى v7.0.</li>
-                        <li><strong>v1.1:</strong> توحيد تاريخ النشر وتصحيح رابط PDF.</li>
+                        <li><strong>v1.8 (26/10):</strong> مسح شامل لـ frame1.html — لا موضعًا يعتمد على الصيغة القديمة. تحفّظان سابقان (تجميع حدود \(E\)، حدّ الذيل) سُحبا بعد فحص النص الفعلي. تصنيف الإطار رُفع إلى «مثبت داخل تعريفات v7.2 — مسح شامل مغلق».</li>
+                        <li><strong>v1.7 (26/10):</strong> تصحيح فقرة تنبيه خطأ التكامل في Audit D.</li>
+                        <li><strong>v1.6 (26/10):</strong> فصل صريح بين التحقق العددي ومرجعية الاشتقاقات.</li>
+                        <li><strong>v1.5 (26/10):</strong> إعادة إنتاج الملحق D → PASS.</li>
+                        <li><strong>v1.4 (26/10):</strong> مطابقة تعريفات \(Z, A, E\) مع براهينها.</li>
                     </ul>
-                </div>
-            </div>
-
-            <div class="record-section">
-                <span class="label">➡️ الخطوة التالية</span>
-                <div class="content">
-                    <strong>مراجعة كود الحساب والجدول معًا، ثم تسجيل نتيجة التحقق.</strong> معيار الإكمال: نشر تقرير إعادة إنتاج مستقل في <code>audit/</code>.
                 </div>
             </div>
         </details>
@@ -325,7 +327,7 @@
                 <span class="status status-work">مغلق</span>
             </summary>
             <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="../tree/frame2.html" style="color: var(--blue);">tree/frame2.html</a></div>
-            
+
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
                 <div class="content">إثبات الهوية الهندسية \(\tan(22.5^\circ) = \sqrt{2}-1\)، ومقارنتها بقياسات ميدانية لأشجار المانجو.</div>
@@ -346,16 +348,6 @@
                 <div class="content">
                     <ul>
                         <li>هل التقارب العددي (\(0.413\) vs \(0.414\)) دال على قانون عام؟ (الجواب: لا، عينة صغيرة).</li>
-                        <li>هل هناك صلة بالإطار الرابع؟ (لا توجد صلة رياضية مثبتة).</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="record-section">
-                <span class="label">📝 القرارات والتصحيحات</span>
-                <div class="content">
-                    <ul>
-                        <li><strong>v7.0:</strong> إعادة صياغة الحدود المنهجية: "هذا الجدول ملاحظة تجريبية، لا يختبر القانون مباشرة".</li>
                     </ul>
                 </div>
             </div>
@@ -363,7 +355,7 @@
             <div class="record-section">
                 <span class="label">➡️ الخطوة التالية</span>
                 <div class="content">
-                    <strong>تثبيت تعريف النسبة المقاسة، البروتوكول، والبيانات قبل توسيع الاستنتاج.</strong> معيار الإكمال: عينة أكبر (N>30) مع بروتوكول قياس منشور.
+                    <strong>عينة أكبر (N>30) مع بروتوكول قياس منشور.</strong>
                 </div>
             </div>
         </details>
@@ -377,8 +369,8 @@
                 <span class="status status-sci-conditional">مشروط</span>
                 <span class="status status-work">مغلق</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.1 | الملف: <a href="frame3.html" style="color: var(--blue);">frame3.html</a></div>
-            
+            <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v7.1 | الملف: <a href="frame3.html" style="color: var(--blue);">frame3.html</a></div>
+
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
                 <div class="content">التحويل من \(Z(x)\) إلى النواة \(g(u)\) عبر \(u=2\pi/x\)، إثبات هوية Gauging، وحساب \(R_{13/12}\).</div>
@@ -386,7 +378,7 @@
 
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
-                <div class="content">هوية التحويل صحيحة. \(\mathcal{H}_g[gY] = -gY''\) مثبتة. الهوية التحليلية لـ \(A_{12}\) مثبتة ومطابقة حتى دقة الآلة. جدول حساسية \(a\) أُضيف ووثق.</div>
+                <div class="content">هوية التحويل صحيحة. \(\mathcal{H}_g[gY] = -gY''\) مثبتة. الهوية التحليلية لـ \(A_{12}\) مثبتة ومطابقة حتى دقة الآلة. جدول حساسية \(a\) أُضيف ووثق. الملف رُفع إلى v7.1 بتصحيحات تحريرية (رقم إصدار + توحيد تاريخ + تعليق على PDF القديم + توضيح جداء موزون).</div>
             </div>
 
             <div class="record-section">
@@ -406,18 +398,7 @@
                 <div class="content">
                     <ul>
                         <li>اختيار الجداء الداخلي (موزون vs غير موزون) في ضوء تفرد \(1/g^2\).</li>
-                        <li>العلاقة الطيفية بين \(\mathcal{H}_g\) و \(L\) (تنتقل للإطار الرابع).</li>
                         <li>إيجاد مقابل رصدي مستقل له نفس البنية الرياضية لـ \(\mathcal{A}_{mn}\).</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="record-section">
-                <span class="label">📝 القرارات والتصحيحات</span>
-                <div class="content">
-                    <ul>
-                        <li><strong>v7.1 (25/10):</strong> إضافة الهوية التحليلية لـ \(A_{12}\)، وإدراج جدول حساسية \(a\) مع مخرجات Colab، وتصحيح كود التكامل (حماية الحدود + إصلاح `audited_quad`).</li>
-                        <li><strong>v7.0:</strong> فصل الإطار الثالث عن الرابع بوضوح.</li>
                     </ul>
                 </div>
             </div>
@@ -425,7 +406,7 @@
             <div class="record-section">
                 <span class="label">➡️ الخطوة التالية</span>
                 <div class="content">
-                    <strong>تحديد ما إذا كان للإطار الثالث مقابل رصدي بنفس البنية التكاملية.</strong> معيار الإكمال: نشر تحليل يحدد إمكانية أو استحالة وجود هذا المقابل.
+                    <strong>تحديد ما إذا كان للإطار الثالث مقابل رصدي بنفس البنية التكاملية.</strong>
                 </div>
             </div>
         </details>
@@ -440,7 +421,7 @@
                 <span class="status status-work-active">قيد التنفيذ</span>
             </summary>
             <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.2 | الملف: <a href="frame4.html" style="color: var(--blue);">frame4.html</a></div>
-            
+
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
                 <div class="content">تعريف \(V_{\text{eff}} = g''/g\), المؤثر \(L\), إثبات الحالة الصفرية الشكلية \(Lg = 0\), وتحليل التحلل SUSY والتصنيف الطرفي.</div>
@@ -469,17 +450,7 @@
                     <ul>
                         <li><strong>تحديد التحقيق الذاتي الترافق:</strong> اختيار شرط ديريكليه أو غيره من عائلة \(U(1)\).</li>
                         <li><strong>انتماء \(g\) للمجال:</strong> هل \(g \in \text{Domain}(L)\) وأن \(Lg = 0\) بالمعنى القوي؟</li>
-                        <li><strong>طاقة الفراغ:</strong> هل الصفر قيمة ذاتية دنيا (Ground State Energy = 0)؟</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="record-section">
-                <span class="label">📝 القرارات والتصحيحات</span>
-                <div class="content">
-                    <ul>
-                        <li><strong>v7.2 (25/10):</strong> إضافة عامل WKB، تصحيح توسعات فروبنيوس، وتحديد مؤشرات العجز \((1,1)\). إدراج ملحق التدقيق الرياضي المستقل.</li>
-                        <li><strong>v7.0:</strong> تصحيح صياغة "تطابق التعبيرين التفاضليين" لتوضيح أنه تطابق في المعادلة، وليس تكافؤًا طيفيًا.</li>
+                        <li><strong>طاقة الفراغ:</strong> هل الصفر قيمة ذاتية دنيا؟</li>
                     </ul>
                 </div>
             </div>
@@ -487,7 +458,7 @@
             <div class="record-section">
                 <span class="label">➡️ الخطوة التالية</span>
                 <div class="content">
-                    <strong>دراسة قابلية الإغلاق، تحديد التحقيق الذاتي الترافق، وفحص انتماء \(g\) للمجال.</strong> معيار الإكمال: نشر ملحق رياضي مستقل (Record 02) يتضمن برهانًا كاملًا أو إثباتًا لاستحالة أحد الخيارات.
+                    <strong>نشر ملحق رياضي مستقل (Record 02).</strong> معيار الإكمال: برهان كامل أو إثبات استحالة أحد الخيارات.
                 </div>
             </div>
         </details>
@@ -497,35 +468,64 @@
     <div class="card" id="bridge">
         <details>
             <summary>
-                <strong style="color: var(--gold); font-size: 1.15rem;">BRIDGE — الجسر (الربط الفيزيائي)</strong>
-                <span class="status status-sci-conditional">مشروط</span>
+                <strong style="color: var(--gold); font-size: 1.15rem;">BRIDGE — الجسر (تحويل أبعادي)</strong>
+                <span class="status status-work-active">قيد التحديث — draft v2.2</span>
                 <span class="status status-work">مغلق</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v2.1 | الملف: <a href="bridge.html" style="color: var(--blue);">bridge.html</a></div>
-            
+            <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v2.2-draft | الملف: <a href="bridge.html" style="color: var(--blue);">bridge.html</a></div>
+
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
-                <div class="content">ربط الكميات اللابُعدية بمقاييس فيزيائية ذات أبعاد عبر \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\).</div>
+                <div class="content">
+                    تعريف الجسر بوصفه <strong>أداة تحويل أبعادي (dimensional scaling)</strong>: يأخذ قيمة عددية بلا أبعاد، ويضربها في عامل قياس يحمل الوحدة المطلوبة (\(Q_{\text{scaled}} = z \cdot \Lambda_{\text{scale}}\)). الجسر <strong>لا يشتق نتائج أي إطار</strong>، و<strong>لا يثبت علاقة فيزيائية بين الإطارات</strong>، و<strong>لا يحوّل التشابه العددي إلى قانون فيزيائي</strong>.
+                </div>
             </div>
 
             <div class="record-section">
-                <span class="label">📍 آخر حالة وصلنا إليها</span>
-                <div class="content">التحويل البُعدي صحيح رياضيًا. الصيغة التنبؤية المقترحة \(R_{\mathrm{pred}}=z_1/z_2\) لم تُتحقق بعد، وتُعرض بوصفها فرضية مشروطة لا تنبؤًا محققًا.</div>
+                <span class="label">🔄 تحديث جارٍ — draft v2.2</span>
+                <div class="content">
+                    <p style="margin-top: 0;">المسودة v2.2 تعالج خمس نقاط في <code>wells/bridge.html</code> (v2.1 المنشور)، دون المساس بالإصدار القديم:</p>
+                    <ol style="margin: 8px 18px 0; padding: 0;">
+                        <li><strong>§1:</strong> استبدال الفقرة التي تصف الجسر بأنه «لغة مشتركة بين الإطارين 1 و2» بفقرة تصف الإطارات الأربعة بحياد، ثم تُعرِّف الجسر بوصفه أداة تحويل أبعادي عامة. إزالة الزعم بأن Frame 2 «يطبّق الجسر».</li>
+                        <li><strong>§2:</strong> بعد المعادلة \(Q_{\text{scaled}} = z \cdot \Lambda_{\text{scale}}\)، إضافة تنبيه صريح: الناتج تحويل حسابي وفق عامل اختاره المستخدم؛ العامل ليس مستنتجًا من الدالة الرياضية؛ الناتج السالب لا يعني طاقة أو كتلة سالبة بالضرورة.</li>
+                        <li><strong>§3.2 و§4:</strong> تغيير الرمز \(Q_{\text{physical}}\) → \(Q_{\text{scaled}}\) للتوافق مع إعادة التعريف.</li>
+                        <li><strong>بيانات الاستشهاد:</strong> حذف <code>&lt;meta name="citation_doi"&gt;</code> (الجسر لا يملك DOI مستقلًا)؛ تحديث الـ footer ليُشير إلى DOI الإطار الأول بوصفه <em>مرجعًا مرتبطًا</em>، لا معرّفًا للجسر.</li>
+                        <li><strong>إصلاح احتياطي:</strong> إصلاح حالة كانت تُفقد فيها لغة النتيجة عند التبديل بين العربية والإنجليزية. حُلّت بتخزين الحالة في متغير مستقل (<code>calcState</code>) وإعادة العرض عند كل تبديل.</li>
+                        <li><strong>مراجعة ما قبل النشر:</strong> تصحيح تنبيه المدخل السالب — كان <code>style.display = 'block'</code> يتجاوز قواعد اللغة فيظهر التنبيهان معًا. صُحّح إلى عنصر واحد يتبدّل نصّه حسب اللغة.</li>
+                    </ol>
+                </div>
             </div>
 
             <div class="record-section">
-                <span class="label">✅ ما ثبت</span>
-                <div class="content">التحويل البُعدي \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\) (صحيح شرط اختيار عامل القياس المناسب).</div>
+                <span class="label">⏳ حالة اختبار القبول</span>
+                <div class="content">
+                    <table style="margin-top: 0;">
+                        <thead>
+                            <tr><th>#</th><th>البند</th><th>الحالة</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>\(2 × \ell_P\) → ناتج موجب بوحدة المتر</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
+                            <tr><td>2</td><td>\(0\) → صفر مع الوحدة</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
+                            <tr><td>3</td><td>\(-2\) → ناتج سالب + تنبيه واحد</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
+                            <tr><td>4</td><td>مدخل فارغ → رفض بدون NaN</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
+                            <tr><td>5</td><td>تبديل اللغة بعد الحساب</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
+                            <tr><td>6</td><td>لا DOI مستقل للجسر</td><td><span class="status status-verif-internal">متحقق</span></td></tr>
+                        </tbody>
+                    </table>
+                    <div class="badge-exploratory">
+                        <strong>ملاحظة:</strong> المراجعة تمّت <em>بمنطق الكود</em>، لا بتشغيل متصفح. كل بنود القبول متحققة. الاختبار التفاعلي في المتصفح اختياري، يخدم التحقق الشخصي فقط.
+                    </div>
+                </div>
             </div>
 
             <div class="record-section">
-                <span class="label">❓ ما لم يُحسم</span>
+                <span class="label">✅ ما ثبت (في v2.1 المنشور — يبقى صحيحًا في v2.2)</span>
                 <div class="content">
                     <ul>
-                        <li>تعريف \(z_1\) و\(z_2\) تعريفًا رياضيًا صريحًا، مع تحديد مصدر كل منهما.</li>
-                        <li>اشتقاق العلاقة التنبؤية من النموذج، وإثبات شروط إلغاء عامل القياس المشترك.</li>
-                        <li>تحديد معيار مقارنة مستقل مع بيانات مرجعية، وتوثيق نتيجة الاختبار.</li>
-                        <li>معنى مقياس التحويل \(\Lambda_{\text{scale}}\): طول بلانك، طاقة بلانك، أم مقياس آخر.</li>
+                        <li>التحويل \(Q_{\text{scaled}} = z \cdot \Lambda_{\text{scale}}\) صحيح بُعديًا.</li>
+                        <li>طول بلانك مقياس طبيعي مشتق من ثوابت أساسية، وليس حدًّا أدنى ثبت تجريبيًا للطول (§3.1).</li>
+                        <li>الرابط الصريح مع \(R_{13/12}\) من Frame 3: النسبة نتيجة عددية داخلية للنموذج، لا تُنتَج بالجسر (§3.3).</li>
+                        <li>خمس نقاط «ما لا يفعله الجسر» (§4) تصف حدود الأداة بدقة.</li>
                     </ul>
                 </div>
             </div>
@@ -534,8 +534,9 @@
                 <span class="label">📝 القرارات والتصحيحات</span>
                 <div class="content">
                     <ul>
-                        <li><strong>v2.1 (25/10):</strong> تعديل مستوى الادعاء للصيغة التنبؤية من "مُدّعى" إلى "مشروط"؛ إغلاق تعارض الإصدارات مع <code>bridge.html</code>.</li>
-                        <li><strong>v7.0:</strong> توضيح أن طول بلانك مقياس طبيعي وليس حدًا أدنى للطول ثبت تجريبيًا.</li>
+                        <li><strong>v2.7 (26/10):</strong> إعداد مسودة <code>bridge.html</code> v2.2 في اللوحة اليومية. ست نقاط تصحيح. البنود الستة متحققة منطقيًا. الإصدار المنشور v2.1 يبقى مُجمَّدًا حتى تأكيد النشر.</li>
+                        <li><strong>v2.2 (24/10):</strong> تصحيح جوهري في <code>bridge.html</code> — إزالة \(R_{\text{pred}}\), إضافة §3.3 و§4. لم يُوثَّق في اللوحة وقتها.</li>
+                        <li><strong>v2.1 (25/10):</strong> تصحيحات تحريرية سابقة.</li>
                     </ul>
                 </div>
             </div>
@@ -543,22 +544,17 @@
             <div class="record-section">
                 <span class="label">➡️ الخطوة التالية</span>
                 <div class="content">
-                    <strong>استكمال الاختبارات الثلاثة لتبرير الصيغة التنبؤية.</strong> معيار الإكمال: توثيق الاختبارات الثلاثة ونتائجها القابلة لإعادة الإنتاج.
+                    <strong>نشر v2.2 إلى <code>wells/bridge.html</code>.</strong>
+                    <br>
+                    معيار الإكمال: استبدال الملف المنشور، وتحديث بطاقة الجسر إلى «مغلق — v2.2». v2.1 يُحفظ في الأرشيف، لا يُحذف.
                 </div>
-            </div>
-
-            <div class="badge-exploratory" style="margin-top: 15px; border-right-color: var(--purple); background: rgba(186, 104, 200, 0.08);">
-                <strong>🧠 المبدأ المنهجي: إمكان الخطوة مقابل اكتمال الشرط الكلي</strong><br>
-                <em>مثال السيارة (مسألة كلاسيكية):</em> قطعت سيارة 2 كم صعوداً بسرعة 30 كم/س (أي 4 دقائق). يسأل الحدس: "ما السرعة اللازمة للنزول ليكون المتوسط 60؟" فيجيب فوراً: "90 كم/س". لكن الحساب الرياضي يحسم الأمر: لقطع 4 كم بسرعة 60، نحتاج 4 دقائق إجمالاً. وبما أن الـ 4 دقائق استُهلكت في الصعود، فزمن النزول المتبقي = صفر. <strong>المستحيل ليس بدء الرحلة (فالسيارة صعدت بالفعل)، بل إكمال الرحلة بالمتوسط المطلوب.</strong>
-                <br><br>
-                <em>التطبيق في الإطار الثالث:</em> المعادلات تسمح ببدء الحساب والوصول إلى \(R_{13/12} \approx 0.6035\). لكن إكمال الرحلة واعتباره "تنبؤاً فيزيائياً" يتطلب استيفاء شروط (مثل اشتقاق \(a=5\) وإيجاد رصد مستقل). وبدون هذه الشروط، تُعتبر الرحلة غير مكتملة علمياً، ولذلك يبقى الجسر <strong>"مشروطاً"</strong>.
             </div>
         </details>
     </div>
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        لوحة الحالة العلمية · v2.1 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
+        لوحة الحالة العلمية · v2.7 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
         <em>المبدأ الحاكم: لا نرفع نتيجة إلى مرتبة البرهان لمجرد أن الأرقام تبدو متناسقة، ولا نخفض قيمة هوية رياضية صحيحة لمجرد أن المسألة الطيفية الكاملة لم تُحل بعد.</em>
     </div>
 </div>

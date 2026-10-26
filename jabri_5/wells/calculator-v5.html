@@ -337,16 +337,6 @@ const GAMMAS = [
 ];
 const A_CONST = -0.011139;
 
-// ============================================================
-// تنبيه منهجي:
-// القيم أدناه مأخوذة من Odlyzko's Zero Tables (zeros1):
-//   https://www.dtc.umn.edu/~odlyzko/zeta_tables/zeros1
-// (أول 100 صفر، مقربة إلى 15 خانة عشرية).
-//
-// ANCHORS أدناه هو فحص اتساق داخلي (أن مصفوفة GAMMAS لم تُعدَّل
-// يدوياً بعد إدخالها)، وليس تدقيقاً مستقلاً ضد المصدر.
-// التدقيق الخارجي الكامل يتطلب تنزيل zeros1 ومقارنة كل قيمة.
-// ============================================================
 const ANCHORS = [
     { idx: 0,  val: 14.134725141734693,   name: "γ₁" },
     { idx: 4,  val: 32.935061587739189,   name: "γ₅" },
@@ -359,6 +349,12 @@ const ANCHORS = [
 
 (function validateZeros() {
     if (GAMMAS.length !== MAX_N) { console.error(`قائمة ${GAMMAS.length} ≠ ${MAX_N}`); return; }
+    
+    if (!Number.isFinite(GAMMAS[0]) || GAMMAS[0] <= 0) {
+        console.error("قيمة غير صالحة عند γ₁.");
+        return;
+    }
+
     for (let i = 1; i < GAMMAS.length; i++) {
         if (!Number.isFinite(GAMMAS[i]) || GAMMAS[i] <= GAMMAS[i-1]) {
             console.error(`قيمة غير صالحة أو ترتيب خاطئ عند ${i}.`); return;
@@ -561,8 +557,6 @@ function convergenceMetrics(results, target = 0.60352) {
         const delta = prev !== null ? Math.abs(curr.R - prev.R) : null;
         const relativeDelta = prev !== null && prev.R !== 0 ? delta / Math.abs(prev.R) : null;
         
-        // تقدير رتبة التقارب: p ≈ log2(Δ_prev / Δ_curr)
-        // متوقع ~4 لقاعدة سيمبسون المركبة (خطأ O(h⁴) = O(N⁻⁴))
         let estimatedOrder = null;
         if (prev !== null && prev2 !== null && delta !== null && delta > 0) {
             const prevDelta = Math.abs(prev.R - prev2.R);

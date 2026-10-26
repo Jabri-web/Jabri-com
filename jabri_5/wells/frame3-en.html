@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <!-- ═══════════════════════════════════════════════════════════════
-     Frame 3 — corrected draft 2026-10-24 (English mirror)
-     Mirror of the Arabic corrected draft. No official version bump.
-     Changes mirror the Arabic ones:
+     Frame 3 — v7.1 | 2026-10-25 (English mirror)
+     Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
+
+     CHANGELOG v7.1 (2026-10-26):
+       - Version number added (meta + title + subtitle + footer).
+       - citation_publication_date unified to 2026-10-25.
+       - Note added clarifying citation_pdf_url points to legacy v6.0 PDF.
+       - Weighted-inner-product clarification: algebraic cancellation
+         applies to every pair (m,n); the symmetry only kills the
+         (1,3) element specifically.
+       - No mathematical change.
+
+     CHANGELOG v7.0 (2026-10-24/25):
        (1) A_12^(0) unnormalized = π/2 clarified;
        (2) weighted-inner-product claim made conditional;
        (3) var(--cyan) → var(--blue);
@@ -13,15 +23,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame 3 — Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal | Fine Structure</title>
-    <meta name="description" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model">
+    <meta name="version" content="7.1">
+    <title>Frame 3 — Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal | Fine Structure (v7.1)</title>
+    <meta name="description" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model — v7.1">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame3-en.html">
 
     <!-- Google Scholar Meta Tags -->
     <meta name="citation_title" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
-    <meta name="citation_publication_date" content="2026/10/21">
+    <meta name="citation_publication_date" content="2026/10/25">
     <meta name="citation_language" content="en">
+    <!-- NOTE: This URL points to an older PDF (v6.0). The matching PDF for the current text (v7.1) has not been published yet. -->
     <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame3_tex.pdf">
 
     <!-- MathJax -->
@@ -57,6 +69,7 @@
 
         h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 10px; }
+        .version-badge { display: inline-block; background: rgba(244, 196, 48, 0.15); color: var(--gold); padding: 3px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: bold; margin-top: 10px; border: 1px solid rgba(244, 196, 48, 0.35); direction: ltr; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
@@ -158,6 +171,7 @@
     <div class="subtitle">
         <strong>Frame 3: Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal</strong><br>
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+        <br><span class="version-badge">v7.1 — 2026-10-25</span>
     </div>
 
     <!-- ==================== Opening triple ==================== -->
@@ -372,7 +386,7 @@ R_13/12 = 0.59777767</pre>
 
         <div class="badge-neutral" style="margin-top: 20px;">
             <strong>Comparing inner products:</strong><br>
-            The computed transition ratio depends on the inner product used to normalize the states. With the unweighted measure \(du\), the current model gives \(R_{13/12} \approx 0.60352\) at \(x_p = 21\). With the weighted inner product \(\langle f,h\rangle_g = \int_0^{2\pi} f^*(u)h(u)/g(u)^2\,du\), the envelope factors reduce algebraically <strong>in the transition element between \(\Psi_1\) and \(\Psi_3\) specifically</strong> (with states of the form \(gY_n\) re-normalized under this inner product), and the symmetry then forces that element to vanish.
+            The computed transition ratio depends on the inner product used to normalize the states. With the unweighted measure \(du\), the current model gives \(R_{13/12} \approx 0.60352\) at \(x_p = 21\). With the weighted inner product \(\langle f,h\rangle_g = \int_0^{2\pi} f^*(u)h(u)/g(u)^2\,du\), the envelope factors reduce algebraically <strong>in every transition element</strong> (for every pair \((m,n)\); with states of the form \(gY_n\) re-normalized under this inner product), and the symmetry then forces \(\mathcal{A}_{13}\) specifically to vanish — without setting \(\mathcal{A}_{12}\) to zero.
             <br><br>
             <strong>Important qualification.</strong> This reduction is an algebraic consequence <em>conditional</em> on the states being in a domain that is square-integrable and normalizable in the weighted space — a point that has not yet been resolved. Since \(g(u) \to 0\) at the endpoints of the domain, the weight \(1/g(u)^2\) becomes singular there, and treating this inner product as a valid Hilbert space for the problem requires verifying integrability, specifying the appropriate domain, and imposing boundary conditions. The vanishing of \(\mathcal{A}_{13}\) under this inner product is therefore a conditional algebraic result, not a complete result about a Hilbert space that has not yet been defined.
             <br><br>
@@ -406,7 +420,8 @@ R_13/12 = 0.59777767</pre>
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 3: Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal.
+        Frame 3: Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal.<br>
+        Version v7.1 — 2026-10-25
     </div>
 </div>
 
@@ -491,7 +506,7 @@ R_13/12 = 0.59777767</pre>
                 <summary>5. Effect of the normalization scheme</summary>
                 <p>With the unweighted inner product, the envelope factors enter the integral, so the asymmetry of \(g\) affects the transition elements. With the weighted inner product:</p>
                 <div class="math-block">\[ \langle f,h\rangle_g = \int_0^{2\pi} \frac{f^*(u)\,h(u)}{g(u)^2}\,du, \]</div>
-                <p>the envelope factors reduce algebraically <strong>in the transition element between \(\Psi_1\) and \(\Psi_3\) specifically</strong>, and after re-normalizing the states under this new inner product, the symmetry again forces that element to vanish.</p>
+                <p>the envelope factors reduce algebraically <strong>in every transition element</strong> (for every pair \((m,n)\)); after re-normalizing the states under this inner product, the symmetry again forces \(\mathcal{A}_{13}\) specifically to vanish — without setting \(\mathcal{A}_{12}\) to zero.</p>
                 <p><strong>Qualification.</strong> This reduction is an algebraic consequence conditional on the states being in a domain that is square-integrable and normalizable in the weighted space. Since \(g\) is singular near the endpoints of the domain, the weight \(1/g(u)^2\) becomes singular there, and treating this inner product as a valid Hilbert space for the problem requires verifying integrability, specifying the appropriate domain, and imposing boundary conditions.</p>
             </details>
 
@@ -556,12 +571,17 @@ R_13/12 = 0.59777767</pre>
         const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
         const codeContainers = document.querySelectorAll('.code-container');
 
+        const originalDisplays = [];
+        codeContainers.forEach((c, index) => {
+            originalDisplays[index] = c.style.display;
+            c.style.display = 'block';
+        });
+
         buttons.forEach(btn => btn.style.display = 'none');
-        codeContainers.forEach(c => c.style.display = 'block');
 
         const opt = {
             margin:       10,
-            filename:     'Frame3_Algebraic_Transformation_EN.pdf',
+            filename:     'Frame3_Algebraic_Transformation_EN_v7.1.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -571,7 +591,9 @@ R_13/12 = 0.59777767</pre>
             .catch(err => console.error('PDF generation failed:', err))
             .finally(() => {
                 buttons.forEach(btn => btn.style.display = '');
-                codeContainers.forEach(c => c.style.display = 'none');
+                codeContainers.forEach((c, index) => {
+                    c.style.display = originalDisplays[index];
+                });
             });
     };
 

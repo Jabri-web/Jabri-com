@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <!-- ═══════════════════════════════════════════════════════════════
      Frame 1 — الإطار العددي | The Numerical Framework
-     VERSION: v7.1 | 2026-10-25
+     VERSION: v7.2 | 2026-10-26
+     CHANGELOG: v7.2 — §3 proof now uses v (not A) for the auxiliary
+                variable, to distinguish it from the accumulation A(x).
+                No mathematical change.
      Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
      DOI: 10.5281/zenodo.23540283
      ═══════════════════════════════════════════════════════════════ -->
@@ -9,17 +12,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="7.1">
-    <title>Frame 1 — الإطار العددي | الورقة التفاعلية (v7.1)</title>
-    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21 — v7.1">
+    <meta name="version" content="7.2">
+    <title>Frame 1 — الإطار العددي | الورقة التفاعلية (v7.2)</title>
+    <meta name="description" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21 — v7.2">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame1.html">
 
     <meta name="citation_title" content="The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff xp=21">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
-    <meta name="citation_publication_date" content="2026/10/25">
+    <meta name="citation_publication_date" content="2026/10/26">
     <meta name="citation_doi" content="10.5281/zenodo.23540283">
     <meta name="citation_language" content="ar">
-    <!-- تم توضيح أن الرابط لنسخة PDF القديمة v7.0 -->
     <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v7.0.0/frame1_tex.pdf">
 
     <script>
@@ -76,15 +78,13 @@
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
         .toggle-content { display: none; margin-top: 15px; padding: 15px; background: #051009; border: 1px dashed var(--border); border-radius: 8px; }
         pre.code-block { background: #0a1524; border: 1px solid var(--border); border-radius: 8px; padding: 15px; overflow-x: auto; direction: ltr; text-align: left; font-size: 0.85rem; color: #d4d4d4; font-family: 'Courier New', monospace; }
-        
-        /* تحسينات الطباعة لمنع تقطيع المعادلات */
-        @media print { 
-            body { background: white; color: #111; } 
-            .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; page-break-inside: avoid; } 
-            h2 { color: #000; border-color: #aaa; } 
-            .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-neutral, th, .opening-col, pre.code-block { background: #f5f5f5; color: #111; border-color: #aaa; } 
-            .lang-btn, .top-nav, button { display: none; } 
-            .toggle-content { display: block !important; border: none; } 
+        @media print {
+            body { background: white; color: #111; }
+            .card { background: white; color: #111; box-shadow: none; border: 1px solid #aaa; page-break-inside: avoid; }
+            h2 { color: #000; border-color: #aaa; }
+            .math-block, .controls, .chart-container, .badge-exact, .badge-exploratory, .badge-neutral, th, .opening-col, pre.code-block { background: #f5f5f5; color: #111; border-color: #aaa; }
+            .lang-btn, .top-nav, button { display: none; }
+            .toggle-content { display: block !important; border: none; }
         }
     </style>
 </head>
@@ -106,7 +106,7 @@
     <div class="subtitle">
         <strong>The Numerical Framework: A Damping Model, the Riemann Zeta Zeros, and the Proposed Integer Cutoff \(x_p=21\)</strong><br>
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
-        <br><span class="version-badge">v7.1 — 2026-10-25</span>
+        <br><span class="version-badge">v7.2 — 2026-10-26</span>
     </div>
 
     <div class="card">
@@ -121,24 +121,23 @@
             </div>
             <div class="opening-col">
                 <strong style="color: var(--blue);">نوع الدليل</strong>
-                <p>برهان تحليلي لإشارة \(Z\) وجذورها، وبرهان تحليلي لـ\(A_\infty<0\) يعتمد على متباينتين قياسيتين (تم فحصهما وإقرارهما)، مع تحقق عددي مستقل (الملحق D). اشتقاق تقاربي للامتداد المركب مع تحقق عددي.</p>
+                <p>برهان تحليلي لإشارة \(Z\) وجذورها، وبرهان تحليلي لـ\(A_\infty<0\) يعتمد على متباينتين قياسيتين (تم فحصهما وإقرارهما)، مع تحقق عددي منفصل (الملحق D) لفحص تنفيذ الصيغ والاتساق العددي.</p>
             </div>
         </div>
     </div>
 
     <div class="card">
         <h2>🔬 المحاكاة التفاعلية (Interactive Simulation)</h2>
-        <p>استخدم شريط التمرير أدناه لتغيير قيمة القطع \(x_p\). تم توسيع نطاق الرسم البياني إلى \(x=50\) لتأكيد أن دالة التجميع \(A(x)\) مستمرة في الصعود ولا تمتلك قمة عند \(x=42\).</p>
+        <p>استخدم شريط التمرير أدناه لتغيير قيمة القطع \(x_p\). تم توسيع نطاق الرسم البياني إلى \(x=50\) لتأكيد أن دالة التجميع \(A(x; x_p)\) مستمرة في الصعود ولا تمتلك قمة عند \(x=42\).</p>
         <div class="controls">
             <div class="slider-wrap">
                 <label>\(x_p\) =</label>
                 <input type="range" id="xpSlider" min="15" max="45" value="21" step="1">
                 <span class="val-display" id="xpValue">21</span>
             </div>
-            <!-- إضافة توضيح نطاق المحاكاة مقابل البرهان -->
             <div style="color:var(--gold); font-size:0.9rem; text-align: center; width: 100%;">
                 * عند \(x=2\): القيمة الصغرى (Minimum) لدالة التجميع. * عند \(x=42\): لا توجد قمة، بل استمرار للصعود.<br>
-                <span style="color:var(--dim); font-size:0.85rem;">ملاحظة: شريط التمرير يغيّر \(x_p\) للاستكشاف البصري فقط. البرهان التحليلي في §3 يعتمد حصراً على القيمة \(x_p = 21\).</span>
+                <span style="color:var(--dim); font-size:0.85rem;">ملاحظة: شريط التمرير يغيّر \(x_p\) للاستكشاف البصري فقط. المنحنى عند \(x_p=21\) هو الحالة المستخدمة في البرهان التحليلي في §3.</span>
             </div>
         </div>
         <div class="dashboard">
@@ -190,35 +189,36 @@
         <div class="math-block">\[ \boxed{\,A_\infty = \frac{1}{(2\pi)^4} \int_0^\pi \bigl[W(t) - W(2\pi-t)\bigr]\sin(t)\,dt\,} \]</div>
         <details>
             <summary>انقر لعرض البرهان التحليلي لـ \(A_\infty < 0\)</summary>
+            <p style="font-size: 0.9em; color: var(--dim);"><strong>اصطلاح:</strong> في هذا البرهان، نستخدم \(v\) (بدل \(A\)) للمتغير المساعد \(v = 2\pi/(\pi+u)\)، لتفادي الالتباس مع دالة التجميع \(A(x)\).</p>
             <p><strong>الخطوة 1.</strong> نضع \(\varphi(u) := \log W(\pi+u) - \log W(\pi-u)\) على \((0,\pi)\). المطلوب إثبات \(\varphi(u) > 0\)، أي \(W(2\pi-t) > W(t)\) حيث \(t = \pi - u\).</p>
             <p><strong>الخطوة 2.</strong> \(\lim_{u\to 0^+}\varphi(u)=0\). يكفي إثبات \(\varphi'(u) > 0\). باشتقاق \(\log W\):</p>
-            <div class="math-block">\[ \varphi'(u) = \frac{g(A)}{\pi+u} + \frac{g(B)}{\pi-u} + \frac{2\pi}{21}\left(\frac{1}{(\pi-u)^2} + \frac{1}{(\pi+u)^2}\right), \]</div>
-            <p>حيث \(A = 2\pi/(\pi+u)\)، \(B = 2\pi/(\pi-u)\)، و\(g(s) = 3 - 1/\ln s\).</p>
-            <p><strong>الخطوة 3.</strong> بضرب في \(2\pi\) والتحويل إلى \(A\) (بحيث \(B = A/(A-1)\)):</p>
-            <div class="math-block">\[ E(A) := 2\pi\varphi'(u) = \frac{3A^2}{A-1} - \frac{A}{\ln A} - \frac{A}{(A-1)\ln B} + \frac{A^2}{21}\!\left(1 + \frac{1}{(A-1)^2}\right). \]</div>
-            <p>عند \(u\in(0,\pi)\) يكون \(A = 2\pi/(\pi+u)\) محصورًا بشكل صارم داخل \((1,2)\).</p>
-            <p><strong>الخطوة 4 (إيجابية \(E(A)\) على \((1,2)\)).</strong> نستخدم متباينتين قياسيتين:</p>
+            <div class="math-block">\[ \varphi'(u) = \frac{g(v)}{\pi+u} + \frac{g(w)}{\pi-u} + \frac{2\pi}{21}\left(\frac{1}{(\pi-u)^2} + \frac{1}{(\pi+u)^2}\right), \]</div>
+            <p>حيث \(v = 2\pi/(\pi+u)\)، \(w = 2\pi/(\pi-u)\)، و\(g(s) = 3 - 1/\ln s\).</p>
+            <p><strong>الخطوة 3.</strong> بضرب في \(2\pi\) والتحويل إلى \(v\) (بحيث \(w = v/(v-1)\)):</p>
+            <div class="math-block">\[ E(v) := 2\pi\varphi'(u) = \frac{3v^2}{v-1} - \frac{v}{\ln v} - \frac{v}{(v-1)\ln w} + \frac{v^2}{21}\!\left(1 + \frac{1}{(v-1)^2}\right). \]</div>
+            <p>عند \(u\in(0,\pi)\) يكون \(v = 2\pi/(\pi+u)\) محصورًا بشكل صارم داخل \((1,2)\).</p>
+            <p><strong>الخطوة 4 (إيجابية \(E(v)\) على \((1,2)\)).</strong> نستخدم متباينتين قياسيتين:</p>
             <ul>
-                <li>لكل \(A>1\): \(\ln A \ge \dfrac{2(A-1)}{A+1}\)، والمتباينة صارمة عند \(A>1\)؛ ومنها \(-\dfrac{A}{\ln A} \ge -\dfrac{A(A+1)}{2(A-1)}\) (صارمة على \((1,2)\)).</li>
-                <li>على \((1,2)\): \(B = A/(A-1) > 2\)، ومنه \(\ln B > \ln 2\)، وبالتالي \(-\dfrac{A}{(A-1)\ln B} > -\dfrac{A}{(A-1)\ln 2}\).</li>
+                <li>لكل \(v>1\): \(\ln v \ge \dfrac{2(v-1)}{v+1}\)، والمتباينة صارمة عند \(v>1\)؛ ومنها \(-\dfrac{v}{\ln v} \ge -\dfrac{v(v+1)}{2(v-1)}\) (صارمة على \((1,2)\)).</li>
+                <li>على \((1,2)\): \(w = v/(v-1) > 2\)، ومنه \(\ln w > \ln 2\)، وبالتالي \(-\dfrac{v}{(v-1)\ln w} > -\dfrac{v}{(v-1)\ln 2}\).</li>
             </ul>
             <p>بالتعويض:</p>
             <div class="math-block">
                 \[
                 \begin{aligned}
-                E(A) &> \frac{A}{A-1}\left(\frac{5A-1}{2} - \frac{1}{\ln 2}\right)
-                + \frac{A^2}{21}\!\left(1+\frac{1}{(A-1)^2}\right) \\
+                E(v) &> \frac{v}{v-1}\left(\frac{5v-1}{2} - \frac{1}{\ln 2}\right)
+                + \frac{v^2}{21}\!\left(1+\frac{1}{(v-1)^2}\right) \\
                 &> 0.
                 \end{aligned}
                 \]
             </div>
-            <p>على \((1,2)\) لدينا \(\dfrac{5A-1}{2} > 2\) (صارمة لأن \(A>1\)، والمساواة تقع عند \(A=1\) خارج المجال)، و\(2 > \dfrac{1}{\ln 2}\approx 1.4427\)، فالقوس الأول موجب. والحد الثاني موجب دائمًا. لذلك \(E(A) > 0\) على كامل \((1,2)\).</p>
-            <p><strong>الخطوة 5.</strong> بما أن \(A(u)\) يبقى داخل \((1,2)\) على كامل \((0,\pi)\)، فإيجابية \(E(A)\) على \((1,2)\) تعني \(\varphi'(u) > 0\). مع \(\lim_{u\to 0^+}\varphi(u)=0\)، نحصل على \(\varphi(u) > 0\) لكل \(u\in(0,\pi)\)، أي \(W(2\pi-t) > W(t)\) على \((0,\pi)\).</p>
+            <p>على \((1,2)\) لدينا \(\dfrac{5v-1}{2} > 2\) (صارمة لأن \(v>1\)، والمساواة تقع عند \(v=1\) خارج المجال)، و\(2 > \dfrac{1}{\ln 2}\approx 1.4427\)، فالقوس الأول موجب. والحد الثاني موجب دائمًا. لذلك \(E(v) > 0\) على كامل \((1,2)\).</p>
+            <p><strong>الخطوة 5.</strong> بما أن \(v(u)\) يبقى داخل \((1,2)\) على كامل \((0,\pi)\)، فإيجابية \(E(v)\) على \((1,2)\) تعني \(\varphi'(u) > 0\). مع \(\lim_{u\to 0^+}\varphi(u)=0\)، نحصل على \(\varphi(u) > 0\) لكل \(u\in(0,\pi)\)، أي \(W(2\pi-t) > W(t)\) على \((0,\pi)\).</p>
             <p><strong>الخطوة 6.</strong> بصيغة التكامل المتناظرة:</p>
             <div class="math-block">\[ A_\infty = \frac{1}{(2\pi)^4}\int_0^\pi \bigl[W(t)-W(2\pi-t)\bigr]\sin t\,dt. \]</div>
             <p>وبما أن \(W(2\pi-t) > W(t)\) و\(\sin t > 0\)، يكون المقدار تحت التكامل سالبًا، ومنه:</p>
             <div class="math-block">\[ \boxed{\,A_\infty = \frac{1}{(2\pi)^4}\int_0^\pi \bigl[W(t)-W(2\pi-t)\bigr]\sin t\,dt < 0\,} \]</div>
-            <p style="font-size: 0.85rem; color: var(--dim); border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 15px;"><strong>ملاحظة.</strong> البرهان أعلاه يثبت \(A_\infty<0\) تحليليًا، ولا يحتاج إلى تحقق عددي لإتمامه. التحقق العددي في الملحق D يُعرض بوصفه اختبارًا مستقلًا للتنفيذ والحساب.</p>
+            <p style="font-size: 0.85rem; color: var(--dim); border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 15px;"><strong>ملاحظة.</strong> البرهان أعلاه يثبت \(A_\infty<0\) تحليليًا، ولا يحتاج إلى تحقق عددي لإتمامه. التحقق العددي في الملحق D يُعرض بوصفه اختبارًا منفصلًا للتنفيذ والحساب.</p>
         </details>
         <p><strong>النتيجة.</strong> بما أن \(A(2)<0\)، و\(A'(x) > 0\) على \((2,\infty)\)، و\(A_\infty < 0\)، فإن \(A(x) < 0\) لكل \(x > 1\)، ولا تعود \(A(x)\) إلى الصفر بعد \(x=2\).</p>
         <button class="btn btn-gold" onclick="toggleSection('sec3-note')">📝 ملاحظة رياضية (طريقة التكامل)</button>
@@ -235,10 +235,10 @@
         <div class="math-block">\[ \mathcal{Z}(s; x_p) = s^{-5} \operatorname{Log}(s) \sin\!\left(\frac{2\pi}{s}\right) e^{-s/x_p}. \]</div>
         <p>عندما \(t \to \infty\)، يُعطى الغلاف التقاربي للامتداد المركب بواسطة:</p>
         <div class="math-block">\[ |\mathcal{Z}(1/2+it; x_p)| \sim K(x_p)\frac{\ln t}{t^6}, \qquad K(x_p) = 2\pi e^{-1/(2x_p)}. \]</div>
-        
+
         <div class="badge-exploratory" style="margin-top: 15px;">
             <strong>ملاحظة هامة: الفرق بين الدالة الحقيقية والامتداد المركب (Audit v1.3):</strong><br>
-            الصيغة \(K(x_p)\ln t/t^6\) أعلاه تخص <strong>الامتداد المركب فقط</strong> على الخط الحرج \(s=1/2+it\) حيث يتحول العامل الأسي \(e^{-s/x_p}\) إلى ثابت في المقدار \(e^{-1/(2x_p)}\). 
+            الصيغة \(K(x_p)\ln t/t^6\) أعلاه تخص <strong>الامتداد المركب فقط</strong> على الخط الحرج \(s=1/2+it\) حيث يتحول العامل الأسي \(e^{-s/x_p}\) إلى ثابت في المقدار \(e^{-1/(2x_p)}\).
             <br><br>
             أما بالنسبة <strong>للدالة الحقيقية</strong> \(Z(x)\) عندما \(x \to \infty\)، فإن العامل الأسي \(e^{-x/21}\) يهيمن ولا يمكن إسقاطه. الصيغة التقاربية الصحيحة للدالة الحقيقية هي:
             \[ Z(x) \sim \frac{2\pi\ln x}{x^6}e^{-x/21}, \qquad x\to\infty. \]
@@ -390,7 +390,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+
                     <p style="font-size: 0.85rem; color: var(--dim); margin-top: 10px;">
                         <strong>ملاحظة حول الصف الأخير:</strong> القيم 0 في عمودَي التوقع التقاربي و\(|Z|\) تعني أن \(t \to \infty\) تجعلهما يقتربان من الصفر، وليس أن لهما قيمة منتهية تساوي الصفر.
                     </p>
@@ -403,8 +403,7 @@
                         \]
                     </div>
                     <p style="font-size: 0.9rem;">وبالتالي، فإن الانحراف النسبي الرئيسي عن \(K(21)\) يتناقص بمعدل \(1/(\ln t)^2\). هذا التوسع التقاربي مشتق تحليلياً، ويوضح سبب بطء الاقتراب في الجدول.</p>
-                    
-                    <!-- إضافة توضيحية لمساهمة الحدود الأخرى -->
+
                     <div class="badge-neutral" style="margin-top: 10px; font-size: 0.9rem;">
                         <strong>ملاحظة على حدود المفكوك:</strong> الحد \(\frac{\pi^2}{8(\ln t)^2}\) ينشأ من الجزء التخيلي لدالة اللوغاريتم المركب. أما مساهمات العوامل الأخرى (مثل \(s^{-5}\) و \(\sin(2\pi/s)\) و الجزء الحقيقي من الأس) فإنها تتناقص بقوى من \(t\) (مثل \(1/t, 1/t^2\))، وهي أصغر بكثير من رتبة \((1/\ln t)^2\) عند \(t\to\infty\).
                     </div>
@@ -417,10 +416,9 @@
         </div>
     </div>
 
-    <!-- ==================== الملحق D ==================== -->
     <div class="card">
         <h2>8. الملحق D — التحقق العددي التفصيلي</h2>
-        <p>يقدّم هذا الملحق تفاصيل التحقق العددي المستقل الذي يدعم النتائج التحليلية في المتن، دون أن يحل محل البرهان:</p>
+        <p>يقدّم هذا الملحق تفاصيل التحقق العددي المنفصل عن البرهان التحليلي الذي يدعم النتائج، دون أن يحل محل البرهان:</p>
         <ol>
             <li><strong>إشارة \(A_\infty\):</strong> تقدير صريح لباقي الذيل، مع حساب \(A(100)\) بدقة عالية.</li>
             <li><strong>تقارب \(C(t)\):</strong> شيفرة Python لتقييم \(|\mathcal{Z}(1/2+it;21)|\) ومقارنته بالتوقع التقاربي (النتائج في جدول §7).</li>
@@ -448,7 +446,6 @@
             \le 42\pi \cdot 100^{-6} \cdot \ln(100) \cdot e^{-100/21}
             \approx 5.2 \times 10^{-12}.
         \]</div>
-        <p>وبذلك \(A_\infty = A(100) \pm 5.2 \times 10^{-12}\). حساب \(A(100)\) عدديًا يكفي لتحديد إشارة \(A_\infty\) بدقة تتجاوز أي شك معقول، طالما أن \(|A(100)| \gg 5.2 \times 10^{-12}\).</p>
 
         <h3>D.2 الشيفرة (Python — NumPy / SciPy)</h3>
         <pre class="code-block"><code>import numpy as np
@@ -465,8 +462,7 @@ X = 100.0
 tail = 42*np.pi * X**-6 * np.log(X) * np.exp(-X/21.0)
 print(f"A(100)      = {A_100:.12f}   (quad err: {err_A100:.1e})")
 print(f"Tail bound  = {tail:.3e}")
-print(f"A_inf       = {A_100:.12f} +/- {err_A100 + tail:.1e}")
-print(f"A_inf < 0 : {A_100 + err_A100 + tail < 0}")
+print(f"A_inf &lt; 0 (numerically supported): {A_100 + err_A100 + tail &lt; 0}")
 print()
 
 # D.2 — تقييم |Z(1/2+it;21)|
@@ -487,16 +483,9 @@ for t in [1e2, 1e3, 1e4, 1e5]:
           f"{C:>10.6f} {err:>10.6f} {rel:>10.2e}")</code></pre>
 
         <h3>D.3 نتيجة \(A_\infty\)</h3>
-        <p>بتشغيل الشيفرة:</p>
-        <ul>
-            <li><strong>\(A(100) \approx -0.0247\)</strong> (القيمة الفعلية تعتمد على إصدار SciPy، وتختلف في الرقم الأخير).</li>
-            <li><strong>حدّ تحليلي صارم لباقي الذيل</strong> عند \(X=100\): \(\left|\int_{100}^\infty Z\,dt\right| \le 5.2 \times 10^{-12}\). هذا الحد مضبوط رياضيًا في D.1، وليس تقديرًا عدديًا.</li>
-            <li><strong>تقدير خطأ التكامل العددي (`quad`)</strong>: \(\sim 10^{-15}\) عند إعداداتنا. هذا <em>تقدير عملي</em> من مكتبة SciPy، لا حدّ صارم مضمون.</li>
-        </ul>
-        <p>إذن:</p>
-        <div class="math-block">\[ A_\infty \in \bigl[A(100) - \epsilon_{\text{quad}} - 5.2\!\times\!10^{-12},\; A(100) + \epsilon_{\text{quad}} + 5.2\!\times\!10^{-12}\bigr] \]</div>
-        <p>بما أن \(|A(100)| \approx 0.0247\) أكبر باثني عشر ترتيبًا من حدّ الذيل التحليلي، ومن أي تقدير معقول لخطأ `quad`، فإن الإشارة السالبة \(A_\infty < 0\) <strong>محسومة بأي حدّ خطأ يمكن أن ينتج عن التنفيذ العددي الحالي</strong>.</p>
-        <p>هذا التحقق مستقل عن برهان \(E(A) > 0\) في §3. البرهان يثبت الإشارة تحليليًا، والتحقق العددي يؤكد التنفيذ ويتوافق معه.</p>
+        <p><strong>التقييم العددي وحدّ الذيل.</strong> أعطى التكامل العددي \(A(100) \approx -0.0246463895708\)، وأبلغت <code>scipy.integrate.quad</code> عن تقدير خطأ يقارب \(4.3 \times 10^{-16}\) في التنفيذ المرجعي. أما حدّ الذيل التحليلي عند \(X=100\) فهو أقل من \(5.2 \times 10^{-12}\).</p>
+
+        <p>تقدير الخطأ الذي تُرجعه <code>quad</code> ليس حدًا صارمًا مضمونًا؛ لذلك تُعرض هذه النتائج بوصفها تحققًا عدديًا قويًا، لا شهادة احتواء حسابية مضمونة. وبما أن إشارة \(A_\infty < 0\) قد ثبتت بالفعل بالبرهان التحليلي في §3، فإن النتيجة النهائية لا تعتمد على افتراض أن تقدير خطأ التكامل حدّ صارم.</p>
 
         <h3>D.4 ملاحظات إعادة الإنتاج</h3>
         <ul>
@@ -507,7 +496,12 @@ for t in [1e2, 1e3, 1e4, 1e5]:
         </ul>
 
         <div class="badge-exploratory">
-            <strong>حدود التحقق.</strong> التحقق يؤكد تنفيذ الصيغ والتوافق العددي مع التوقع التقاربي. لا يثبت أن الامتداد المركب \(\mathcal{Z}\) مرتبط بدالة زيتا الريمانية، ولا يقدم أي ادعاء حول أصفارها.
+            <strong>حدود التحقق العددي.</strong> يُستخدم هذا التحقق لفحص تنفيذ الصيغ والاتساق العددي مع التوقع التقاربي، ولا يمثل دليلًا تجريبيًا مستقلًا على علاقة النموذج بدالة زيتا الريمانية، ولا يقدم أي ادعاء حول أصفارها.
+        </div>
+
+        <div class="badge-neutral" style="margin-top: 10px;">
+            <strong>سجل التغييرات (v7.2 — 26/10/2026):</strong>
+            تصحيح تحريري في §3: استخدام الرمز \(v\) للمتغير المساعد في برهان \(A_\infty < 0\)، بدلًا من \(A\) الذي كان يلتبس مع دالة التجميع \(A(x)\). تغيير في الترميز فقط، بلا أي تغيير في المضمون الرياضي أو في نتائج البرهان.
         </div>
     </div>
 
@@ -524,7 +518,7 @@ for t in [1e2, 1e3, 1e4, 1e5]:
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        DOI: 10.5281/zenodo.23540283 &nbsp;|&nbsp; النسخة v7.1 — 2026-10-25
+        DOI: 10.5281/zenodo.23540283 &nbsp;|&nbsp; النسخة v7.2 — 2026-10-26
     </div>
 </div>
 
@@ -559,13 +553,13 @@ for t in [1e2, 1e3, 1e4, 1e5]:
             const { labels, zData, aData } = generateData(xp);
             if (zChart) zChart.destroy();
             zChart = new Chart(document.getElementById('zChart'), {
-                type: 'line', data: { labels, datasets: [{ label: 'Z(x)', data: zData, borderColor: '#f4c430', backgroundColor: 'rgba(244, 196, 48, 0.1)', borderWidth: 2, pointRadius: 0, fill: true }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Damping Function Z(x)', color: '#e8f5e9' }, legend: { display: false } } }
+                type: 'line', data: { labels, datasets: [{ label: 'Z(x; x_p)', data: zData, borderColor: '#f4c430', backgroundColor: 'rgba(244, 196, 48, 0.1)', borderWidth: 2, pointRadius: 0, fill: true }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Damping Function Z(x; x_p)', color: '#e8f5e9' }, legend: { display: false } } }
             });
             if (aChart) aChart.destroy();
             aChart = new Chart(document.getElementById('aChart'), {
-                type: 'line', data: { labels, datasets: [{ label: 'A(x)', data: aData, borderColor: '#06d6a0', backgroundColor: 'rgba(6, 214, 160, 0.1)', borderWidth: 2, pointRadius: 0, fill: true }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Accumulation Function A(x)', color: '#e8f5e9' }, legend: { display: false } } }
+                type: 'line', data: { labels, datasets: [{ label: 'A(x; x_p)', data: aData, borderColor: '#06d6a0', backgroundColor: 'rgba(6, 214, 160, 0.1)', borderWidth: 2, pointRadius: 0, fill: true }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Accumulation Function A(x; x_p)', color: '#e8f5e9' }, legend: { display: false } } }
             });
         }
         updateCharts(21);
@@ -593,7 +587,7 @@ for t in [1e2, 1e3, 1e4, 1e5]:
         toggles.forEach(t => { t.style.display = 'block'; });
         const opt = {
             margin:       10,
-            filename:     'Frame1_Numerical_Framework_AR_v7.1.pdf',
+            filename:     'Frame1_Numerical_Framework_AR_v7.2.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }

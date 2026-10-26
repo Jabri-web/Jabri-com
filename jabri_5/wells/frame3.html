@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <!-- ═══════════════════════════════════════════════════════════════
-     Frame 3 — updated draft 2026-10-25
-     Changes: (1) A_12^(0) unnormalized = π/2 clarified;
-              (2) weighted-inner-product claim made conditional;
-              (3) var(--cyan) → var(--blue);
-              (4) sensitivity tables for x_p and a added;
-              (5) analytical identity A_12 = 0.5*sqrt(N2/N1) added;
-              (6) Python code updated (bound protection, scipy 3-tuple fix);
-              (7) Modal updated to match main text;
-              (8) PDF generation preserves display state;
-              (9) "Fine structure" disclaimer added to opening.
+     Frame 3 — v7.1 | 2026-10-25
+     Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
+     
+     CHANGELOG v7.1 (2026-10-26):
+       - Version number added (meta + subtitle + footer).
+       - citation_publication_date unified to 2026-10-25.
+       - Note added clarifying citation_pdf_url points to legacy v6.0 PDF.
+       - Minor clarification added on the weighted inner product: the 
+         algebraic cancellation works for all pairs (m,n); the symmetry 
+         only kills the (1,3) element specifically.
+       - No mathematical change.
+
+     CHANGELOG v7.0 (2026-10-25):
+       (1) A_12^(0) unnormalized = π/2 clarified;
+       (2) weighted-inner-product claim made conditional;
+       (3) var(--cyan) → var(--blue);
+       (4) sensitivity tables for x_p and a added;
+       (5) analytical identity A_12 = 0.5*sqrt(N2/N1) added;
+       (6) Python code updated (bound protection, scipy 3-tuple fix);
+       (7) Modal updated to match main text;
+       (8) PDF generation preserves display state;
+       (9) "Fine structure" disclaimer added to opening.
      ═══════════════════════════════════════════════════════════════ -->
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame 3 - التحويل الجبري وإزالة الإلغاء التناظري | البنية الدقيقة</title>
-    <meta name="description" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model">
+    <meta name="version" content="7.1">
+    <title>Frame 3 - التحويل الجبري وإزالة الإلغاء التناظري | البنية الدقيقة (v7.1)</title>
+    <meta name="description" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model — v7.1">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame3.html">
 
     <!-- Google Scholar Meta Tags -->
     <meta name="citation_title" content="Frame 3: Algebraic Transformation and Symmetry-Induced Cancellation Removal in the Jabri Model">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
-    <meta name="citation_publication_date" content="2026/10/21">
+    <meta name="citation_publication_date" content="2026/10/25">
     <meta name="citation_language" content="ar">
+    <!-- ملاحظة: هذا الرابط يشير إلى نسخة PDF قديمة (v6.0). النسخة المطابقة للنص الحالي (v7.1) لم تُنشر بعد. -->
     <meta name="citation_pdf_url" content="https://github.com/Jabri-web/Jabri-com/releases/download/v6.0.0/frame3_tex.pdf">
 
     <!-- MathJax -->
@@ -59,6 +73,7 @@
 
         h1 { color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 5px; margin-top: 10px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem; margin-bottom: 10px; }
+        .version-badge { display: inline-block; background: rgba(244, 196, 48, 0.15); color: var(--gold); padding: 3px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: bold; margin-top: 10px; border: 1px solid rgba(244, 196, 48, 0.35); direction: ltr; }
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
@@ -160,6 +175,7 @@
     <div class="subtitle">
         <strong>Frame 3: Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal</strong><br>
         Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026
+        <br><span class="version-badge">v7.1 — 2026-10-25</span>
     </div>
 
     <!-- ==================== الافتتاحية الثلاثية ==================== -->
@@ -301,8 +317,8 @@
             </tbody>
         </table>
         <div class="badge-neutral">
-            <strong>حدود الاستنتاج:</strong> النسبة أكثر حساسية لتغير \(a\) منها لتغير \(x_p\). 
-            لذلك هي بصمة عددية للنموذج عند \((a=5, x_p=21)\)، ولا تُوصف بأنها ثابت كوني. 
+            <strong>حدود الاستنتاج:</strong> النسبة أكثر حساسية لتغير \(a\) منها لتغير \(x_p\).
+            لذلك هي بصمة عددية للنموذج عند \((a=5, x_p=21)\)، ولا تُوصف بأنها ثابت كوني.
             التفاصيل الكاملة في <code>audit/sensitivity_a.json</code>.
         </div>
 
@@ -373,7 +389,7 @@ a= 5.5 | R=0.6689137286 | |A12-id|=... (OK)</pre>
 
         <div class="badge-neutral" style="margin-top: 20px;">
             <strong>مقارنة الجداءات الداخلية:</strong><br>
-            تعتمد نسبة عناصر الانتقال المحسوبة على الجداء الداخلي المستخدم في تطبيع الحالات. فمع القياس غير الموزون \(du\)، يعطي النموذج الحالي \(R_{13/12} \approx 0.60352\) عند \(x_p = 21\). أما مع الجداء الداخلي الموزون \(\langle f,h\rangle_g = \int_0^{2\pi} f^*(u)h(u)/g(u)^2\,du\)، فإن عوامل الغلاف تُختزل جبريًا <strong>في عنصر الانتقال بين الحالتين \(\Psi_1\) و\(\Psi_3\) بالتحديد</strong>، ويعود التناظر ليفرض انعدام ذلك العنصر.
+            تعتمد نسبة عناصر الانتقال المحسوبة على الجداء الداخلي المستخدم في تطبيع الحالات. فمع القياس غير الموزون \(du\)، يعطي النموذج الحالي \(R_{13/12} \approx 0.60352\) عند \(x_p = 21\). أما مع الجداء الداخلي الموزون \(\langle f,h\rangle_g = \int_0^{2\pi} f^*(u)h(u)/g(u)^2\,du\)، فإن عوامل الغلاف تُختزل جبريًا <strong>في كل عنصر انتقال</strong> (لكل زوج \((m,n)\))، ويعود التناظر ليفرض انعدام \(\mathcal{A}_{13}\) بالتحديد — دون أن يُصفّر \(\mathcal{A}_{12}\).
             <br><br>
             <strong>تقييد مهم.</strong> هذا الاختزال نتيجة جبرية <em>مشروطة</em> بأن تكون الحالات ضمن مجال قابل للتكامل والتطبيع في الفضاء الموزون — وهو ما لم يُحسم بعد. بما أن \(g(u) \to 0\) عند طرفي المجال، فإن الوزن \(1/g(u)^2\) يصبح مفردًا هناك، ويتطلب اعتبار هذا الجداء فضاءَ هيلبرت صالحًا للمسألة.
         </div>
@@ -403,7 +419,8 @@ a= 5.5 | R=0.6689137286 | |A12-id|=... (OK)</pre>
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 3: Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal.
+        Frame 3: Algebraic Transformation &amp; Symmetry-Induced Cancellation Removal.<br>
+        النسخة v7.1 — 2026-10-25
     </div>
 </div>
 
@@ -458,7 +475,7 @@ a= 5.5 | R=0.6689137286 | |A12-id|=... (OK)</pre>
                     \[ \mathcal A_{12} = \frac{1}{4\sqrt{N_1N_2}} \int g^2(1-\cos 2u)\,du = \frac12\sqrt{\frac{N_2}{N_1}}. \]
                 </div>
                 <p>هذه الهوية تربط \(\mathcal{A}_{12}\) مباشرة بـ \(N_1, N_2\)، وتثبت أن \(\mathcal{A}_{12}\) ليس رقماً مستقلاً.</p>
-                
+
                 <h4>حساسية النسبة للأس \(a\):</h4>
                 <table>
                     <thead><tr><th>\(a\)</th><th>\(R_{13/12}\)</th></tr></thead>
@@ -475,7 +492,7 @@ a= 5.5 | R=0.6689137286 | |A12-id|=... (OK)</pre>
 
             <details>
                 <summary>5. أثر طريقة التطبيع</summary>
-                <p>مع الجداء الداخلي غير الموزون، تؤثر لا متماثلية الغلاف في عناصر الانتقال. أما مع الجداء الموزون \(\langle f,h\rangle_g = \int f^* h/g^2\,du\)، فإن عوامل الغلاف تُختزل جبريًا، ويعود التناظر ليفرض انعدام \(\mathcal{A}_{13}\).</p>
+                <p>مع الجداء الداخلي غير الموزون، تؤثر لا متماثلية الغلاف في عناصر الانتقال. أما مع الجداء الموزون \(\langle f,h\rangle_g = \int f^* h/g^2\,du\)، فإن عوامل الغلاف تُختزل جبريًا في كل عنصر انتقال (لكل زوج \((m,n)\))، ويعود التناظر ليفرض انعدام \(\mathcal{A}_{13}\) بالتحديد.</p>
                 <p><strong>تقييد:</strong> الوزن \(1/g^2\) مفرد عند الأطراف، ويتطلب اعتبار هذا الجداء فضاءَ هيلبرت صالحًا — وهو ما لم يُحسم بعد.</p>
             </details>
 
@@ -539,7 +556,7 @@ a= 5.5 | R=0.6689137286 | |A12-id|=... (OK)</pre>
         const element = document.getElementById('pdf-content');
         const buttons = document.querySelectorAll('.lang-btn, button, .top-nav');
         const codeContainers = document.querySelectorAll('.code-container');
-        
+
         // حفظ الحالة الأصلية للشيفرة قبل إخفائها
         const originalDisplays = [];
         codeContainers.forEach((c, index) => {
@@ -551,7 +568,7 @@ a= 5.5 | R=0.6689137286 | |A12-id|=... (OK)</pre>
 
         const opt = {
             margin:       10,
-            filename:     'Frame3_Algebraic_Transformation_AR.pdf',
+            filename:     'Frame3_Algebraic_Transformation_AR_v7.1.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }

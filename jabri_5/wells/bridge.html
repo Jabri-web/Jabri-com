@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <!-- ═══════════════════════════════════════════════════════════════
      bridge.html — The Scaling Bridge
-     corrected draft 2026-10-24
-     Changes from previous version:
-       (1) MathJax config fixed (correct delimiter pairs);
-       (2) language-toggle button restored;
-       (3) calculator: finite-input validation, no Infinity/NaN,
-           scientific notation, unit shown explicitly;
-       (4) unit extraction via data-unit-* attributes;
-       (5) Planck-length note revised (natural scale, not a
-           proven minimum of length);
-       (6) dimension-vs-prediction clarification (§3);
-       (7) "what the bridge does NOT do" (§4);
+     VERSION: v2.2-draft | 2026-10-26
+     Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
+
+     CHANGELOG v2.2 (2026-10-26):
+       (1) §1 rewritten: Bridge is a dimensional-scaling tool, not a
+           source of physical prediction. Frames 1–4 described neutrally.
+           Removed the claim that Frame 2 "applies the Bridge"
+           (Frame 2's ratios are already dimensionless).
+       (2) §2 clarification added below the formula: result is a numerical
+           scaling per user's chosen factor; factor not inferred from the
+           function; negative result = sign of product only.
+       (3) Symbol Q_physical → Q_scaled throughout (§1, §3.2).
+       (4) Citation data fixed: removed <meta name="citation_doi">.
+           Footer now states the Frame 1 DOI is a related reference,
+           not an independent DOI for the Bridge.
+       (5) Calculator state preservation: result now survives
+           language toggle (bug in v2.1 fixed).
+       (6) Negative-input note shown dynamically in result box.
+
+     CHANGELOG v2.1 (2026-10-24):
+       (1) MathJax config fixed; (2) language toggle restored;
+       (3) calculator input validation; (4) unit extraction via
+       data-attributes; (5) Planck-length note revised;
+       (6) §3 dimension-vs-prediction clarification;
+       (7) §4 "what the bridge does NOT do" added;
        (8) cross-reference to Frame 3's R_13/12;
        (9) display:inline preserved for .lang-* spans;
-      (10) canonical, description, citation meta added.
+      (10) canonical/description/citation meta added.
      ═══════════════════════════════════════════════════════════════ -->
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الجسر — من الرياضيات إلى الفيزياء | The Scaling Bridge</title>
-    <meta name="description" content="The Scaling Bridge: translating dimensionless mathematics into scaled physical quantities. A methodological note distinguishing dimensional consistency from physical prediction.">
+    <meta name="version" content="2.2">
+    <title>الجسر — من الرياضيات إلى الفيزياء | The Scaling Bridge (v2.2)</title>
+    <meta name="description" content="The Scaling Bridge: a dimensional-scaling tool that converts dimensionless numbers into quantities carrying a chosen unit. Not a source of physical prediction.">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/bridge.html">
 
     <meta name="citation_title" content="The Scaling Bridge: From Mathematics to Physics">
     <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
-    <meta name="citation_publication_date" content="2026/10/21">
+    <meta name="citation_publication_date" content="2026/10/26">
     <meta name="citation_language" content="ar">
-    <meta name="citation_doi" content="10.5281/zenodo.23540283">
+    <!-- NOTE: The Bridge does not have its own DOI. Frame 1's DOI is
+         referenced below in the footer as a related publication only. -->
 
     <script>
         MathJax = {
@@ -51,7 +67,6 @@
                position: relative; transition: background 0.3s; }
         .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; }
 
-        /* Language: hide/enable by mode, preserve natural display */
         body:not(.en-mode) .lang-en { display: none; }
         body.en-mode .lang-ar { display: none; }
         body.en-mode { direction: ltr; text-align: left; }
@@ -80,6 +95,10 @@
              margin-bottom: 5px; margin-top: 30px; }
         .subtitle { text-align: center; color: var(--dim); font-size: 1rem;
                     margin-bottom: 20px; }
+        .version-badge { display: inline-block; background: rgba(244, 196, 48, 0.15);
+            color: var(--gold); padding: 3px 12px; border-radius: 6px;
+            font-size: 0.82rem; font-weight: bold; margin-top: 10px;
+            border: 1px solid rgba(244, 196, 48, 0.35); direction: ltr; }
 
         .card { background: var(--panel); border: 1px solid var(--border);
                 border-radius: 12px; padding: 24px;
@@ -140,6 +159,9 @@
         #result-box p { margin: 6px 0; }
         #result-box .val { color: var(--blue); font-size: 1.15rem; font-weight: bold; }
         #result-box .warn { color: var(--gold); font-size: 0.85rem; margin-top: 12px; }
+        #resNegNote { display: none; color: var(--gold); font-size: 0.85rem;
+            margin-top: 12px; border-top: 1px dashed rgba(244, 196, 48, 0.4);
+            padding-top: 10px; }
 
         .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
             margin-top: 25px; padding-top: 20px;
@@ -177,10 +199,12 @@
     <h1 class="lang-ar">الجسر — من الرياضيات إلى الفيزياء</h1>
     <h1 class="lang-en">The Scaling Bridge — From Mathematics to Physics</h1>
     <div class="subtitle">
-        <span class="lang-ar"><strong>تحويل الكميات المجردة إلى كميات مقيسة بوحدات فيزيائية</strong><br>
-        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026</span>
-        <span class="lang-en"><strong>Translating Dimensionless Quantities into Physically Scaled Values</strong><br>
-        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026</span>
+        <span class="lang-ar"><strong>أداة تحويل أبعادي: قيمة عددية بلا أبعاد ← قيمة ذات وحدة مختارة</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026<br>
+        <span class="version-badge">v2.2 — 2026-10-26</span></span>
+        <span class="lang-en"><strong>A dimensional-scaling tool: a dimensionless number → a quantity carrying a chosen unit</strong><br>
+        Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen | October 2026<br>
+        <span class="version-badge">v2.2 — 2026-10-26</span></span>
     </div>
 
     <!-- ==================== §1 ==================== -->
@@ -190,22 +214,26 @@
 
         <div class="badge-info">
             <span class="lang-ar">
-                <strong>🔗 موقع الجسر في التسلسل:</strong><br>
-                <strong>Frame 1</strong> ← يعرّف <em>بنية رياضية مجردة</em> (بلا وحدات).<br>
-                <strong>Bridge</strong> ← الطريقة المتّفق عليها لتحويل القيم العددية الناتجة إلى كميات بأبعاد فيزيائية (طول، طاقة، زمن، كتلة).<br>
-                <strong>Frame 2</strong> ← يطبّق هذا التحويل على ظاهرة محددة (هندسة الشجرة والظل).<br>
-                <strong>Frame 3</strong> ← يستخدم الغلاف \(g(u)\) في بنية جبرية مختلفة (عناصر انتقال ونسب).<br>
-                <strong>Frame 4</strong> ← يستخدم \(g\) لبناء مؤثر تفاضلي.<br>
-                الجسر <strong>لا يُنتج</strong> أي إطار، بل يوفّر <em>لغة مشتركة</em> بين الإطارين 1 و2.
+                <strong>🔗 موقع الجسر وحدوده:</strong><br>
+                <strong>Frame 1:</strong> يعرّف بنية رياضية مجردة ودوالًا بلا أبعاد ضمن تعريفاته.<br>
+                <strong>Frame 2:</strong> يدرس نسبًا هندسية وبيانات رصدية، وتظل نتائجه محكومة بتعريفاته وعينته.<br>
+                <strong>Frame 3:</strong> يدرس بنية جبرية ونسبًا عددية خاصة بتعريفاته.<br>
+                <strong>Frame 4:</strong> يدرس مؤثرًا تفاضليًا ومسائل طيفية ما تزال بعض خصائصها مفتوحة.<br>
+                <br>
+                <strong>الجسر</strong> أداة عامة لتحويل قيمة عددية بلا أبعاد إلى قيمة ذات وحدة مختارة. ولا يثبت وحده وجود علاقة فيزيائية بين الإطارات، ولا يشتق نتائج أي إطار، ولا يحوّل التشابه العددي إلى قانون فيزيائي.<br>
+                <br>
+                وجود قيمة بلا أبعاد في أحد الإطارات لا يكفي لتحديد معناها الفيزيائي أو اختيار عامل تحويل مناسب لها؛ فذلك يحتاج إلى تعريف فيزيائي مستقل ومبرر.
             </span>
             <span class="lang-en">
-                <strong>🔗 Where the Bridge sits:</strong><br>
-                <strong>Frame 1</strong> ← defines a <em>dimensionless mathematical structure</em>.<br>
-                <strong>Bridge</strong> ← the agreed method for turning the resulting numerical values into dimensioned physical quantities (length, energy, time, mass).<br>
-                <strong>Frame 2</strong> ← applies this conversion to a specific phenomenon (tree-and-shadow geometry).<br>
-                <strong>Frame 3</strong> ← uses the envelope \(g(u)\) in a different algebraic structure (transition elements and ratios).<br>
-                <strong>Frame 4</strong> ← uses \(g\) to build a differential operator.<br>
-                The Bridge <strong>does not generate</strong> any frame; it provides a <em>shared language</em> between Frames 1 and 2.
+                <strong>🔗 Position and limits of the Bridge:</strong><br>
+                <strong>Frame 1:</strong> defines an abstract mathematical structure and dimensionless functions within its own definitions.<br>
+                <strong>Frame 2:</strong> studies geometric ratios and observational data; its results remain governed by its own definitions and sample.<br>
+                <strong>Frame 3:</strong> studies an algebraic structure and numerical ratios specific to its own definitions.<br>
+                <strong>Frame 4:</strong> studies a differential operator and spectral problems, some of whose properties remain open.<br>
+                <br>
+                <strong>The Bridge</strong> is a generic tool that converts a dimensionless number into a quantity carrying a chosen unit. By itself it does not establish a physical relationship between the frames, does not derive the results of any frame, and does not turn numerical similarity into a physical law.<br>
+                <br>
+                The presence of a dimensionless value in one of the frames is not sufficient to determine its physical meaning or to choose an appropriate scaling factor; that requires an independent physical definition and justification.
             </span>
         </div>
 
@@ -213,7 +241,16 @@
         <p class="lang-en">The universe does not know what a "meter" or a "kilogram" is; these are human conventions. To connect mathematics with physics, we use <strong>scaling factors</strong> derived from fundamental constants, such as the Planck length \(\ell_P = \sqrt{\hbar G / c^3}\). This bridge is a <strong>dimensional scaling operation</strong>, not the derivation of a new physical model.</p>
 
         <div class="math-block">
-            \[ Q_{\text{physical}} = \underbrace{z}_{\text{dimensionless}} \times \underbrace{\Lambda_{\text{scale}}}_{\text{units}} \]
+            \[ Q_{\text{scaled}} = \underbrace{z}_{\text{dimensionless}} \times \underbrace{\Lambda_{\text{scale}}}_{\text{units}} \]
+        </div>
+
+        <div class="badge-neutral">
+            <span class="lang-ar">
+                <strong>ملاحظة على الحاسبة:</strong> الناتج قيمة محوّلة حسابيًا وفق عامل القياس الذي اختاره المستخدم. اختيار عامل القياس لا يُستنتج من الدالة الرياضية تلقائيًا، ولا يجعل الناتج كمية فيزيائية قابلة للقياس من دون تعريف مستقل. وإذا كانت القيمة المدخلة سالبة، فإن الناتج السالب يعبّر عن إشارة حاصل الضرب رياضيًا؛ ولا يعني تلقائيًا وجود طاقة أو كتلة سالبة بالمعنى الفيزيائي.
+            </span>
+            <span class="lang-en">
+                <strong>Note on the calculator:</strong> the result is a numerically scaled value according to the scaling factor chosen by the user. The choice of scaling factor is not automatically inferred from the mathematical function, and it does not make the result a physically measurable quantity without an independent definition. If the input is negative, the negative result expresses the sign of the product mathematically; it does not automatically imply negative energy or mass in the physical sense.
+            </span>
         </div>
 
         <h3 class="lang-ar">ثلاثة كيانات متمايزة يجب عدم الخلط بينها</h3>
@@ -324,6 +361,8 @@
                 <p class="lang-en">Result (number × unit): <span class="val" id="resFinal-en">—</span></p>
                 <p class="warn lang-ar">تنبيه: الناتج ذو أبعاد فيزيائية، لكن دلالته تعتمد على نموذج فيزيائي مستقل. لا يُفسَّر بوصفه حدًّا أدنى أو قيمة مقاسة.</p>
                 <p class="warn lang-en">Note: the result has physical units, but its meaning depends on an independent physical model. It is not to be interpreted as a minimum or as a measured value.</p>
+                <p id="resNegNote" class="lang-ar">ملاحظة: المدخل سالب، والناتج السالب يعبّر عن إشارة الحاصل رياضيًا. لا يعني بالضرورة طاقة سالبة أو كتلة سالبة بالمعنى الفيزيائي.</p>
+                <p id="resNegNote-en" style="display:none;" class="lang-en">Note: the input is negative; the negative result expresses the sign of the product mathematically. It does not necessarily imply negative energy or mass in the physical sense.</p>
             </div>
         </div>
     </div>
@@ -353,10 +392,10 @@
 
         <div class="badge-info">
             <span class="lang-ar">
-                العملية \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\) <strong>صحيحة بُعديًا</strong> حين يكون \(z\) بلا أبعاد و\(\Lambda_{\text{scale}}\) ذا وحدة الكمية المطلوبة. لكنها <strong>لا تُثبت وحدها</strong> أن \(Q_{\text{physical}}\) تنبؤ فيزيائي للنموذج، ولا أن \(z\) يمثّل كمية فيزيائية قابلة للقياس. هذا يتطلب سياقًا فيزيائيًا مستقلاً: نموذجًا، وشروطًا، وإجراء قياس.
+                العملية \(Q_{\text{scaled}} = z \cdot \Lambda_{\text{scale}}\) <strong>صحيحة بُعديًا</strong> حين يكون \(z\) بلا أبعاد و\(\Lambda_{\text{scale}}\) ذا وحدة الكمية المطلوبة. لكنها <strong>لا تُثبت وحدها</strong> أن \(Q_{\text{scaled}}\) تنبؤ فيزيائي للنموذج، ولا أن \(z\) يمثّل كمية فيزيائية قابلة للقياس. هذا يتطلب سياقًا فيزيائيًا مستقلاً: نموذجًا، وشروطًا، وإجراء قياس.
             </span>
             <span class="lang-en">
-                The operation \(Q_{\text{physical}} = z \cdot \Lambda_{\text{scale}}\) is <strong>dimensionally consistent</strong> whenever \(z\) is dimensionless and \(\Lambda_{\text{scale}}\) carries the unit of the desired quantity. By itself, however, it <strong>does not establish</strong> that \(Q_{\text{physical}}\) is a physical prediction of the model, nor that \(z\) represents a measurable physical quantity. That requires an independent physical context: a model, conditions, and a measurement procedure.
+                The operation \(Q_{\text{scaled}} = z \cdot \Lambda_{\text{scale}}\) is <strong>dimensionally consistent</strong> whenever \(z\) is dimensionless and \(\Lambda_{\text{scale}}\) carries the unit of the desired quantity. By itself, however, it <strong>does not establish</strong> that \(Q_{\text{scaled}}\) is a physical prediction of the model, nor that \(z\) represents a measurable physical quantity. That requires an independent physical context: a model, conditions, and a measurement procedure.
             </span>
         </div>
 
@@ -406,8 +445,9 @@
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        DOI: 10.5281/zenodo.23540283
-        <br><span style="opacity:0.7;">corrected draft — 2026-10-24</span>
+        <span class="lang-ar">المرجع المرتبط: DOI الإطار الأول — 10.5281/zenodo.23540283. لا يوجد DOI مستقل للجسر.</span>
+        <span class="lang-en">Related reference: Frame 1 DOI — 10.5281/zenodo.23540283. No independent DOI exists for the Bridge.</span>
+        <br><span style="opacity:0.7;">v2.2 — 2026-10-26</span>
     </div>
 
 </div>
@@ -425,13 +465,16 @@
         html.setAttribute('lang', isEn ? 'en' : 'ar');
         btn.innerHTML = isEn ? '🌐 العربية' : '🌐 English';
 
-        // Update <select> option labels
+        // Update <select> option labels (values preserved)
         const select = document.getElementById('scaleSelect');
         Array.from(select.options).forEach(opt => {
             const name = isEn ? opt.getAttribute('data-en-name') : opt.getAttribute('data-ar-name');
             const unit = isEn ? opt.getAttribute('data-en-unit') : opt.getAttribute('data-ar-unit');
             opt.text = `${name} — ${unit}`;
         });
+
+        // Re-render calculator result in the new language (bug fix)
+        renderResult();
 
         // Re-typeset MathJax (labels may have changed)
         if (window.MathJax && MathJax.typesetPromise) {
@@ -450,47 +493,59 @@
         return x.toExponential(6);
     }
 
-    /* ---------------- Scaling calculator ---------------- */
+    /* ---------------- Calculation state (for language-toggle persistence) ---------------- */
+    let calcState = null;
+
     function calculateIntegration() {
         const isEn = document.body.classList.contains('en-mode');
         const rawEl = document.getElementById('rawValue');
         const sel = document.getElementById('scaleSelect');
-        const opt = sel.options[sel.selectedIndex];
 
-        // Validate raw input
         const rawValue = parseFloat(rawEl.value);
         if (!Number.isFinite(rawValue)) {
             alert(isEn ? "Please enter a finite number." : "الرجاء إدخال عدد محدود صحيح.");
             return;
         }
 
-        // Read scale factor
         const scaleFactor = parseFloat(sel.value);
         if (!Number.isFinite(scaleFactor)) {
             alert(isEn ? "Selected scaling factor is invalid." : "عامل التحويل المختار غير صالح.");
             return;
         }
 
-        // Compute
         const result = rawValue * scaleFactor;
         if (!Number.isFinite(result)) {
             alert(isEn ? "Result overflows the representable range." : "الناتج يتجاوز النطاق العددي القابل للتمثيل.");
             return;
         }
 
-        // Fetch labels (bilingual)
+        calcState = { rawValue, result, optIndex: sel.selectedIndex };
+        renderResult();
+    }
+
+    function renderResult() {
+        if (!calcState) return;
+        const isEn = document.body.classList.contains('en-mode');
+        const sel = document.getElementById('scaleSelect');
+        const opt = sel.options[calcState.optIndex];
         const name = isEn ? opt.getAttribute('data-en-name') : opt.getAttribute('data-ar-name');
         const unit = isEn ? opt.getAttribute('data-en-unit') : opt.getAttribute('data-ar-unit');
+        const finalText = `${fmt(calcState.result)} ${unit}`;
 
-        const finalText = `${fmt(result)} ${unit}`;
-
-        // Populate both language slots
-        document.getElementById('resRaw-ar').innerText       = fmt(rawValue);
-        document.getElementById('resRaw-en').innerText       = fmt(rawValue);
+        // Both language slots receive identical values
+        document.getElementById('resRaw-ar').innerText       = fmt(calcState.rawValue);
+        document.getElementById('resRaw-en').innerText       = fmt(calcState.rawValue);
         document.getElementById('resScaleName-ar').innerText = `${name} (${unit})`;
         document.getElementById('resScaleName-en').innerText = `${name} (${unit})`;
         document.getElementById('resFinal-ar').innerText     = finalText;
         document.getElementById('resFinal-en').innerText     = finalText;
+
+        // Show negative-input warning conditionally
+        const negAr = document.getElementById('resNegNote');
+        const negEn = document.getElementById('resNegNote-en');
+        const showNeg = calcState.rawValue < 0;
+        negAr.style.display = showNeg ? 'block' : 'none';
+        negEn.style.display = showNeg ? 'block' : 'none';
 
         document.getElementById('result-box').style.display = 'block';
     }
