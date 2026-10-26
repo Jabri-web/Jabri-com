@@ -89,7 +89,7 @@
 
     <h1>لوحة الحالة العلمية للمشروع</h1>
     <div class="subtitle">Al-Hindara Research Status & Decision Log</div>
-    <div class="version-badge">Status v2.7 | آخر تحديث: 26 أكتوبر 2026</div>
+    <div class="version-badge">Status v2.8 | آخر تحديث: 26 أكتوبر 2026</div>
 
     <div class="card">
         <h2>📖 كيف تُقرأ هذه اللوحة؟</h2>
@@ -128,6 +128,24 @@
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
                     <span class="status status-verif-repro">أُعيد إنتاجه</span>
+                </div>
+            </a>
+
+            <!-- Bridge -->
+            <a href="#bridge" class="summary-card">
+                <div class="header">
+                    <span class="num">BRIDGE</span>
+                    <span class="status status-work">مغلق v2.2</span>
+                </div>
+                <div class="title">الجسر — تحويل أبعادي</div>
+                <div class="desc">أداة تحويل قيمة عددية إلى وحدة مختارة</div>
+                <div class="last-status">
+                    <strong>آخر حالة:</strong>
+                    تم تأكيد النشر v2.2. يُعرّف بوضوح كأداة تحويل أبعادي مستقلة، وليس مصدراً للتنبؤات.
+                </div>
+                <div class="status-group">
+                    <span class="status status-work">مغلق</span>
+                    <span class="status status-verif-internal">تحقق داخلي</span>
                 </div>
             </a>
 
@@ -185,21 +203,21 @@
                 </div>
             </a>
 
-            <!-- Bridge -->
-            <a href="#bridge" class="summary-card">
+            <!-- Calculator -->
+            <a href="#calculator-audit" class="summary-card">
                 <div class="header">
-                    <span class="num">BRIDGE</span>
-                    <span class="status status-work-active">قيد التحديث — draft v2.2</span>
+                    <span class="num">TOOLS</span>
+                    <span class="status status-sci-proven">محقق</span>
                 </div>
-                <div class="title">الجسر — تحويل أبعادي</div>
-                <div class="desc">أداة تحويل قيمة عددية إلى وحدة مختارة</div>
+                <div class="title">الحاسبة الشاملة</div>
+                <div class="desc">أداة تحقق حسابي (v5)</div>
                 <div class="last-status">
                     <strong>آخر حالة:</strong>
-                    مسودة v2.2 مُعدّة في اللوحة: إعادة تعريف الجسر بوصفه أداة تحويل أبعادي، لا مصدر تنبؤ. الإصدار المنشور v2.1 مُجمَّد حتى اجتياز قائمة اختبار القبول.
+                    تم التحقق من الكود في المتصفح. المشتقات، التكامل، والغلاف تطابقت مع التحليل الرياضي.
                 </div>
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
-                    <span class="status status-verif-internal">تحقق داخلي</span>
+                    <span class="status status-verif-repro">أُعيد إنتاجه</span>
                 </div>
             </a>
         </div>
@@ -235,13 +253,13 @@
                 </tr>
                 <tr>
                     <td><strong>الجسر (Bridge)</strong></td>
-                    <td>قيد التحديث — draft v2.2 يُعيد تعريف الجسر بوصفه أداة تحويل أبعادي (dimensional scaling)، لا مصدر تنبؤ. v2.1 المنشور مُجمَّد، والانتقال إلى v2.2 ينتظر اجتياز قائمة اختبار القبول.</td>
+                    <td>مغلق (v2.2) — أداة تحويل أبعادي (dimensional scaling)، لا مصدر تنبؤ. تم اختبار الحساب والوحدات بنجاح.</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- ==================== handsa card ==================== -->
+    <!-- ==================== Hands Card ==================== -->
     <div class="card" style="border-color: var(--blue);">
         <h2 style="color: var(--blue);">🔷 ملاحظة هندسية مستقلة — هندسة الأعداد والتماثل المركزي</h2>
         <p>
@@ -469,63 +487,25 @@
         <details>
             <summary>
                 <strong style="color: var(--gold); font-size: 1.15rem;">BRIDGE — الجسر (تحويل أبعادي)</strong>
-                <span class="status status-work-active">قيد التحديث — draft v2.2</span>
-                <span class="status status-work">مغلق</span>
+                <span class="status status-work">مغلق — v2.2</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v2.2-draft | الملف: <a href="bridge.html" style="color: var(--blue);">bridge.html</a></div>
+            <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v2.2 | الملف: <a href="bridge.html" style="color: var(--blue);">bridge.html</a></div>
 
             <div class="record-section">
-                <span class="label">🎯 الهدف</span>
+                <span class="label">📍 آخر حالة وصلنا إليها</span>
                 <div class="content">
-                    تعريف الجسر بوصفه <strong>أداة تحويل أبعادي (dimensional scaling)</strong>: يأخذ قيمة عددية بلا أبعاد، ويضربها في عامل قياس يحمل الوحدة المطلوبة (\(Q_{\text{scaled}} = z \cdot \Lambda_{\text{scale}}\)). الجسر <strong>لا يشتق نتائج أي إطار</strong>، و<strong>لا يثبت علاقة فيزيائية بين الإطارات</strong>، و<strong>لا يحوّل التشابه العددي إلى قانون فيزيائي</strong>.
+                    تم تأكيد النشر (v2.2). الجسر الآن يُعرّف بوضوح كأداة تحويل أبعادي (Dimensional Scaling)، وليس مصدراً للتنبؤات. تم اختبار الحاسبة وتأكيد دقة الضرب (مثال: \(0.56666 \times \ell_P = 9.158671\times 10^{-36}\)).
                 </div>
             </div>
 
             <div class="record-section">
-                <span class="label">🔄 تحديث جارٍ — draft v2.2</span>
-                <div class="content">
-                    <p style="margin-top: 0;">المسودة v2.2 تعالج خمس نقاط في <code>wells/bridge.html</code> (v2.1 المنشور)، دون المساس بالإصدار القديم:</p>
-                    <ol style="margin: 8px 18px 0; padding: 0;">
-                        <li><strong>§1:</strong> استبدال الفقرة التي تصف الجسر بأنه «لغة مشتركة بين الإطارين 1 و2» بفقرة تصف الإطارات الأربعة بحياد، ثم تُعرِّف الجسر بوصفه أداة تحويل أبعادي عامة. إزالة الزعم بأن Frame 2 «يطبّق الجسر».</li>
-                        <li><strong>§2:</strong> بعد المعادلة \(Q_{\text{scaled}} = z \cdot \Lambda_{\text{scale}}\)، إضافة تنبيه صريح: الناتج تحويل حسابي وفق عامل اختاره المستخدم؛ العامل ليس مستنتجًا من الدالة الرياضية؛ الناتج السالب لا يعني طاقة أو كتلة سالبة بالضرورة.</li>
-                        <li><strong>§3.2 و§4:</strong> تغيير الرمز \(Q_{\text{physical}}\) → \(Q_{\text{scaled}}\) للتوافق مع إعادة التعريف.</li>
-                        <li><strong>بيانات الاستشهاد:</strong> حذف <code>&lt;meta name="citation_doi"&gt;</code> (الجسر لا يملك DOI مستقلًا)؛ تحديث الـ footer ليُشير إلى DOI الإطار الأول بوصفه <em>مرجعًا مرتبطًا</em>، لا معرّفًا للجسر.</li>
-                        <li><strong>إصلاح احتياطي:</strong> إصلاح حالة كانت تُفقد فيها لغة النتيجة عند التبديل بين العربية والإنجليزية. حُلّت بتخزين الحالة في متغير مستقل (<code>calcState</code>) وإعادة العرض عند كل تبديل.</li>
-                        <li><strong>مراجعة ما قبل النشر:</strong> تصحيح تنبيه المدخل السالب — كان <code>style.display = 'block'</code> يتجاوز قواعد اللغة فيظهر التنبيهان معًا. صُحّح إلى عنصر واحد يتبدّل نصّه حسب اللغة.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="record-section">
-                <span class="label">⏳ حالة اختبار القبول</span>
-                <div class="content">
-                    <table style="margin-top: 0;">
-                        <thead>
-                            <tr><th>#</th><th>البند</th><th>الحالة</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>1</td><td>\(2 × \ell_P\) → ناتج موجب بوحدة المتر</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
-                            <tr><td>2</td><td>\(0\) → صفر مع الوحدة</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
-                            <tr><td>3</td><td>\(-2\) → ناتج سالب + تنبيه واحد</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
-                            <tr><td>4</td><td>مدخل فارغ → رفض بدون NaN</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
-                            <tr><td>5</td><td>تبديل اللغة بعد الحساب</td><td><span class="status status-verif-internal">متحقق منطقيًا</span></td></tr>
-                            <tr><td>6</td><td>لا DOI مستقل للجسر</td><td><span class="status status-verif-internal">متحقق</span></td></tr>
-                        </tbody>
-                    </table>
-                    <div class="badge-exploratory">
-                        <strong>ملاحظة:</strong> المراجعة تمّت <em>بمنطق الكود</em>، لا بتشغيل متصفح. كل بنود القبول متحققة. الاختبار التفاعلي في المتصفح اختياري، يخدم التحقق الشخصي فقط.
-                    </div>
-                </div>
-            </div>
-
-            <div class="record-section">
-                <span class="label">✅ ما ثبت (في v2.1 المنشور — يبقى صحيحًا في v2.2)</span>
+                <span class="label">✅ ما تم إنجازه في v2.2</span>
                 <div class="content">
                     <ul>
-                        <li>التحويل \(Q_{\text{scaled}} = z \cdot \Lambda_{\text{scale}}\) صحيح بُعديًا.</li>
-                        <li>طول بلانك مقياس طبيعي مشتق من ثوابت أساسية، وليس حدًّا أدنى ثبت تجريبيًا للطول (§3.1).</li>
-                        <li>الرابط الصريح مع \(R_{13/12}\) من Frame 3: النسبة نتيجة عددية داخلية للنموذج، لا تُنتَج بالجسر (§3.3).</li>
-                        <li>خمس نقاط «ما لا يفعله الجسر» (§4) تصف حدود الأداة بدقة.</li>
+                        <li><strong>§1:</strong> إعادة تعريف الجسر كأداة حيادية.</li>
+                        <li><strong>§2:</strong> تنبيه المستخدم أن الناتج مجرد تحويل حسابي بناءً على اختياره.</li>
+                        <li><strong>تصحيح التنبيه السالب:</strong> إصلاح التداخل اللغوي في جافاسكربت ليعرض التنبيه بلغة الواجهة الحالية فقط.</li>
+                        <li><strong>بيانات الاستشهاد:</strong> فصل الجسر عن DOI الإطار الأول.</li>
                     </ul>
                 </div>
             </div>
@@ -534,19 +514,44 @@
                 <span class="label">📝 القرارات والتصحيحات</span>
                 <div class="content">
                     <ul>
-                        <li><strong>v2.7 (26/10):</strong> إعداد مسودة <code>bridge.html</code> v2.2 في اللوحة اليومية. ست نقاط تصحيح. البنود الستة متحققة منطقيًا. الإصدار المنشور v2.1 يبقى مُجمَّدًا حتى تأكيد النشر.</li>
+                        <li><strong>v2.8 (26/10):</strong> إغلاق الإصدار v2.2 رسمياً بعد التحقق من الحساب. تم فصل الجسر عن أي ادعاءات فيزيائية زائدة.</li>
                         <li><strong>v2.2 (24/10):</strong> تصحيح جوهري في <code>bridge.html</code> — إزالة \(R_{\text{pred}}\), إضافة §3.3 و§4. لم يُوثَّق في اللوحة وقتها.</li>
-                        <li><strong>v2.1 (25/10):</strong> تصحيحات تحريرية سابقة.</li>
+                    </ul>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== Calculator Audit ==================== -->
+    <div class="card" id="calculator-audit">
+        <details open>
+            <summary>
+                <strong style="color: var(--gold); font-size: 1.15rem;">🛠️ سجل التحقق الحسابي المعتمد (calculator-v5)</strong>
+                <span class="status status-sci-proven">مغلق — محقق</span>
+                <span class="status status-verif-repro">أُعيد إنتاجه</span>
+            </summary>
+            <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v1.0 | الملف: <a href="calculator-v5.html" style="color: var(--blue);">calculator-v5.html</a></div>
+            
+            <div class="record-section">
+                <span class="label">✅ البراهين الرقمية الموثقة (بناءً على تشغيل المتصفح)</span>
+                <div class="content">
+                    <ul>
+                        <li><strong>الإطار 1 (المشتقات):</strong> تطابق تام بين الفروق المركزية والصيغ التحليلية، مع ظهور خطأ الفاصلة العائمة (Machine Epsilon) عند \(h=10^{-5}\) كسلوك طبيعي، ما يثبت سلامة الخوارزمية.</li>
+                        <li><strong>الجسر (Bridge):</strong> تطابق تام لعملية الضرب الأبعادي (مثال: \(0.56666 \times \ell_P = 9.158671\times 10^{-36}\)).</li>
+                        <li><strong>الإطار 2 (الشجرة):</strong> مطابقة تامة لحساب المثلثات (مثال: \(H=8 \Rightarrow S=3.3137\) عند \(22.5^\circ\)).</li>
+                        <li><strong>الإطار 3 (سيمبسون):</strong> استقر التكامل عند دقة الآلة (\(10^{-15}\)). أظهر اختبار \(x_p=333\) تغير النسبة إلى \(0.5942\)، مما يثبت حساسية النموذج لـ \(x_p\) (حجة ضد كونه ثابتاً كونياً).</li>
+                        <li><strong>الإطار 4 (الغلاف):</strong> تطابقت المشتقة الثانية التحليلية مع العددية بفارق \(2.63\times10^{-10}\).</li>
                     </ul>
                 </div>
             </div>
 
             <div class="record-section">
-                <span class="label">➡️ الخطوة التالية</span>
+                <span class="label">📝 ملاحظات منهجية وحدود الأداة</span>
                 <div class="content">
-                    <strong>نشر v2.2 إلى <code>wells/bridge.html</code>.</strong>
-                    <br>
-                    معيار الإكمال: استبدال الملف المنشور، وتحديث بطاقة الجسر إلى «مغلق — v2.2». v2.1 يُحفظ في الأرشيف، لا يُحذف.
+                    <ul>
+                        <li><strong>حدود الدقة:</strong> الكود يثبت صحة "العمليات الحسابية" ولا يثبت صحة "الفرضيات الفيزيائية".</li>
+                        <li><strong>تأثير الفاصلة العائمة:</strong> في الإطار الثالث، تجاوز الفروق \(\Delta R\) حدود الآلة عند \(N=2000\)، ما يجعل تقدير رتبة التقارب (\(p_{est}\)) غير موثوق في الخطوات اللاحقة، وهو سلوك متوقع في الحسابات العددية.</li>
+                    </ul>
                 </div>
             </div>
         </details>
@@ -554,7 +559,7 @@
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        لوحة الحالة العلمية · v2.7 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
+        لوحة الحالة العلمية · v2.8 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
         <em>المبدأ الحاكم: لا نرفع نتيجة إلى مرتبة البرهان لمجرد أن الأرقام تبدو متناسقة، ولا نخفض قيمة هوية رياضية صحيحة لمجرد أن المسألة الطيفية الكاملة لم تُحل بعد.</em>
     </div>
 </div>
