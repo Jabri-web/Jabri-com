@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame 4 — Towards a Spectral Problem | Zero Mode and Zeta Regularization</title>
+    <title>Frame 4 — Towards a Spectral Problem | Zero Mode and Zeta Regularization (v7.4)</title>
     <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization — with Algebraic Origin Verification">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame4-en.html">
 
@@ -590,7 +590,13 @@
         <div class="badge-neutral">
             <strong>Boundary conditions at a Limit Circle endpoint.</strong> At a Limit Circle endpoint, the space of locally square-integrable solutions is two-dimensional, so \(L^2\) alone does not select a unique solution. A self-adjoint realization is specified by a <em>boundary condition on the Wronskian boundary trace</em>.
             <br><br>
-            Concretely, the maximal domain \(\mathcal{D}_{\max}\) consists of functions \(\psi\) with \(\psi, \psi'\in AC_{\mathrm{loc}}\) and \(L\psi\in L^2\) locally; on this domain the Wronskian boundary form exists for all \(\psi, \chi\in\mathcal{D}_{\max}\). The self-adjoint extensions are parameterized by a unitary \(U(1)\) family; the corresponding boundary conditions are expressed via this Lagrange/Wronskian boundary form, <em>not</em> via a direct Robin form, because \(\psi_2'(t) \sim -c\ln t\) diverges logarithmically as \(t\to 0^+\).
+            Concretely, the maximal domain \(\mathcal{D}_{\max}\) consists of functions \(\psi\) such that:
+            <div class="math-block">
+            \[
+            \mathcal D_{\max}=\{\psi\in L^2(0,2\pi):\; \psi,\psi'\in AC_{\rm loc}(0,2\pi),\; L\psi\in L^2(0,2\pi)\}.
+            \]
+            </div>
+            On this domain the Wronskian boundary form exists for all \(\psi, \chi\in\mathcal{D}_{\max}\). The self-adjoint extensions are parameterized by a unitary \(U(1)\) family; the corresponding boundary conditions are expressed via this Lagrange/Wronskian boundary form, <em>not</em> via a direct Robin form, because \(\psi_2'(t) \sim -c\ln t\) diverges logarithmically as \(t\to 0^+\).
             <br><br>
             <strong>Dirichlet as a specific choice.</strong> The condition \(\psi(2\pi^-)=0\) is one particular member of the \(U(1)\) family, not the unique consequence of the classification. It is the natural candidate for a first study, since \(g\) satisfies it.
         </div>
@@ -601,9 +607,22 @@
 
         <h3>B. Endpoint \(u \to 0^+\): Limit Point</h3>
         <div class="math-block">\[ V_{\mathrm{eff}}(u) \sim +\frac{C}{u^4}, \qquad C = \left(\frac{2\pi}{21}\right)^2 > 0. \]</div>
-        <p>For \(L\psi = \lambda\psi\), and neglecting \(\lambda\psi\) at leading order, the solutions behave asymptotically (WKB) as:</p>
-        <div class="math-block">\[ \psi_\pm(u) \sim u \exp\!\left(\pm\frac{2\pi}{21u}\right). \]</div>
-        <p>The factor \(u\) is the leading WKB factor. \(\psi_-\) decays rapidly and belongs to \(L^2\), while \(\psi_+\) grows exponentially and does not. The endpoint is <strong>Limit Point</strong>: no extra boundary condition is needed; \(L^2\) automatically selects the admissible behaviour.</p>
+        
+        <p><strong>Asymptotic approximation at \(u\to0^+\).</strong></p>
+        <p>Since</p>
+        <div class="math-block">
+            \[
+            V_{\mathrm{eff}}(u)=\frac{c^2}{u^4} + \frac{10c}{u^3} + \text{lower-order terms},
+            \qquad c=\frac{2\pi}{21},
+            \]
+        </div>
+        <p>the exponential growth scale of the solutions is \(\exp\!\left(\pm\frac{c}{u}\right)\). However, this formula alone does not represent the full asymptotic expansion; lower-order terms affect the algebraic and logarithmic factors. Indeed, the known zero-mode \(g\) decays as:</p>
+        <div class="math-block">
+            \[
+            g(u)\propto u^5\ln(2\pi/u)e^{-c/u}.
+            \]
+        </div>
+        <p>Thus, one branch decays exponentially and the other grows exponentially, with the growing branch not belonging to \(L^2\). The endpoint is <strong>Limit Point</strong>: no extra boundary condition is needed; \(L^2\) automatically selects the admissible behaviour.</p>
 
         <div class="endpoint-result endpoint-lp">
             <strong>Result at \(0^+\):</strong> Limit Point. \(L^2\) selects the admissible behaviour automatically.
@@ -702,7 +721,7 @@
 
     <!-- ==================== §8 Numerical Audit ==================== -->
     <div class="card" style="border-color: var(--blue); margin-top: 20px;">
-        <h2 style="color: var(--blue);">Numerical Audit Appendix — Proposed v7.3</h2>
+        <h2 style="color: var(--blue);">Numerical Audit Appendix — Proposed v7.4</h2>
         <h3>Status: Preliminary test; the spectral problem remains open</h3>
         
         <p>Preliminary numerical tests were performed for the operator</p>
@@ -710,11 +729,11 @@
             \[ L=-\frac{d^2}{du^2}+V_{\mathrm{eff}}(u), \qquad V_{\mathrm{eff}}(u)=W'(u)+W(u)^2, \qquad W(u)=\frac{g'(u)}{g(u)}. \]
         </div>
         
-        <p>A matrix constructed from the discrete factorization \(L_{\mathrm{fact}}=Q^TQ\), with \(Q=-D+W\), was compared with a direct finite-difference matrix for the second derivative and the potential \(V_{\mathrm{eff}}\).</p>
+        <p>A matrix constructed from the discrete factorization \(L_{\mathrm{fact}}=Q^TQ\), where \(Q=-D+W\) (\(D\) is a central difference matrix, \(W\) is diagonal with values \(p(u)\)), was compared with a direct finite-difference matrix for the second derivative and the potential \(V_{\mathrm{eff}}\).</p>
         
-        <p>On the truncated domain used in the test, the two discrete representations differed substantially in the reported Frobenius-norm comparison. This shows that the current discrete formulations are not identical on the chosen grid. It does not, by itself, establish whether their difference vanishes or persists in the continuum limit. That question requires a separate convergence study and a discretization compatible with the operator and its boundary conditions.</p>
+        <p>On the truncated domain used in the test, the two discrete representations differed substantially in the reported Frobenius-norm comparison. <strong>These matrices are not expected to match automatically</strong>; they represent two different mathematical approximations (factorization vs. direct evaluation of the potential). This shows that the current discrete formulations are not identical on the chosen grid. It does not, by itself, establish whether their difference vanishes or persists in the continuum limit. That question requires a separate convergence study and a discretization compatible with the operator and its boundary conditions.</p>
         
-        <p>The function \(g\) is also nonzero at the right endpoint \(u_{\max}=5.5\). Imposing a Dirichlet condition there changes the boundary-value problem and prevents the sampled vector \(g\) from being treated as an exact zero mode of the discrete matrix. One test returned a smallest eigenvalue of approximately \(5.7\times10^{-4}\); this value alone neither proves nor rules out a zero mode in the continuum limit.</p>
+        <p>The truncated domain also ends at \(u_{\max}=5.5\) (which is not the true endpoint \(2\pi\)). The function \(g\) is nonzero at \(u_{\max}=5.5\); imposing a Dirichlet condition there changes the boundary-value problem and prevents the sampled vector \(g\) from being treated as an exact zero mode of the discrete matrix. One test returned a smallest eigenvalue of approximately \(5.7\times10^{-4}\); this value alone neither proves nor rules out a zero mode in the continuum limit.</p>
         
         <div class="badge-info" style="margin-top: 15px;">
             <strong>Conclusion:</strong> No spectrally verified zero mode is claimed at this stage, and positivity of the continuum operator across all possible self-adjoint realizations has not been established. The spectral problem remains open pending convergence tests that separate grid refinement from domain truncation, a precise specification of the operator domain and boundary conditions, and verification of compatibility between the analytic factorization and its numerical discretization.
@@ -735,7 +754,7 @@
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v7.3 (English; updated with Numerical Audit Appendix).
+        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v7.4 (English; updated with corrected WKB and Domain Definition).
     </div>
 </div>
 
@@ -759,7 +778,7 @@
         if (assessment) assessment.style.display = 'block';
         const opt = {
             margin:       10,
-            filename:     'Frame4_Spectral_Problem_EN_v7.3.pdf',
+            filename:     'Frame4_Spectral_Problem_EN_v7.4.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
