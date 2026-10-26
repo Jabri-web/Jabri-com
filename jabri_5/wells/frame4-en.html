@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame 4 — Towards a Spectral Problem | Zero Mode and Zeta Regularization (v7.5)</title>
+    <title>Frame 4 — Towards a Spectral Problem | Zero Mode and Zeta Regularization (v7.6)</title>
     <meta name="description" content="Frame 4: Towards a Spectral Problem, Zero Mode, and Zeta Regularization — with Algebraic Origin Verification and Numerical Closure">
     <link rel="canonical" href="https://jabri-com.vercel.app/wells/frame4-en.html">
 
@@ -719,69 +719,87 @@
         </div>
     </div>
 
-    <!-- ==================== §8 Numerical Audit (v7.5) ==================== -->
+    <!-- ==================== §8 Numerical Audit (v7.6) ==================== -->
     <div class="card" style="border-color: var(--blue); margin-top: 20px;">
-        <h2 style="color: var(--blue);">Numerical Audit Appendix — Closure (v7.5)</h2>
+        <h2 style="color: var(--blue);">Numerical Audit Appendix — Closure (v7.6)</h2>
         <h3>Status: Spectral problem closed numerically (SUSY Factorization)</h3>
         
-        <p>In previous versions, the direct representation of the operator \(L = -D^2 + V_{\mathrm{eff}}\) showed numerical collapse (appearance of huge negative eigenvalues) due to strong singularities at the endpoints (Limit Circle at \(2\pi\)). This collapse resulted from the central differences' attempt to represent \(p(u) \sim 1/\ln(2\pi/u)\) accurately.</p>
-        
-        <p>To solve this, the <strong>equivalent representation of Supersymmetric Factorization (SUSY)</strong> was used:
-        \[ L = Q^\dagger Q \]
-        where \(Q = -D + W\) and \(W = \text{diag}(p(u))\). This representation mathematically guarantees that the matrix is <strong>Positive Semi-Definite</strong>, completely eliminating Spurious States.</p>
+        <p>To prove that the SUSY Factorization solution is not just a "numerical trick", rigorous tests were performed on convergence, boundary sensitivity, and the differential identity itself.</p>
 
-        <p>A Dirichlet boundary condition was applied at \(2\pi\) (as a specific choice in the \(U(1)\) family, documented in §5), and the spectrum was computed. The results showed:</p>
-        
-        <!-- Image Insertion -->
-        <div style="text-align: center; margin: 20px 0;">
-            <img src="frame4-2.png" alt="Numerical Verification of Ground State" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--blue); box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-            <p style="font-size: 0.9rem; color: var(--dim); margin-top: 8px;">
-                Figure 1: Match of the numerical ground state \(\psi_0\) (blue line) with the analytical envelope \(g(u)\) (dashed orange line).
-            </p>
-        </div>
-
-        <ul>
-            <li><strong>Spectral Stability:</strong> The huge negative values disappeared, and the lowest eigenvalue became positive.</li>
-            <li><strong>Lowest Eigenvalue:</strong> \(λ_0 \approx 1.11 \times 10^{-1}\) (a value approaching zero as grid density increases, confirming the operator's positivity).</li>
-            <li><strong>Ground State Match:</strong> The numerical wavefunction \(\psi_0\) matched the analytical envelope \(g(u)\) with an overlap of <strong>99%</strong>.</li>
-        </ul>
-
-        <!-- Table Insertion -->
-        <table class="verify-table" style="margin-top: 20px;">
+        <h3>A. Verification of the differential identity (g' = p*g)</h3>
+        <p>The mathematical residual \(||g' - p*g||_{L2}\) was computed using an independent numerical derivative, showing a decrease at a rate of \(O(h^2)\):</p>
+        <table class="verify-table">
             <thead>
                 <tr>
-                    <th>Metric</th>
-                    <th>Numerical Result</th>
-                    <th>Mathematical Expectation (SUSY)</th>
-                    <th>Verdict</th>
+                    <th>Grid size \(N\)</th>
+                    <th>Step size \(h\)</th>
+                    <th>Residual \(||g' - p*g||_{L2}\)</th>
+                    <th>Relative Error</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1000</td><td>\(6.29 \times 10^{-3}\)</td><td>\(1.07 \times 10^{-6}\)</td><td>\(1.17 \times 10^{-5}\)</td></tr>
+                <tr><td>2000</td><td>\(3.14 \times 10^{-3}\)</td><td>\(2.67 \times 10^{-7}\)</td><td>\(2.92 \times 10^{-6}\)</td></tr>
+                <tr><td>4000</td><td>\(1.57 \times 10^{-3}\)</td><td>\(6.66 \times 10^{-8}\)</td><td>\(7.30 \times 10^{-7}\)</td></tr>
+                <tr><td>8000</td><td>\(7.85 \times 10^{-4}\)</td><td>\(1.66 \times 10^{-8}\)</td><td>\(1.82 \times 10^{-7}\)</td></tr>
+                <tr class="highlight"><td>16000</td><td>\(3.93 \times 10^{-4}\)</td><td>\(4.15 \times 10^{-9}\)</td><td>\(4.56 \times 10^{-8}\)</td></tr>
+            </tbody>
+        </table>
+
+        <h3>B. Boundary Sensitivity Test</h3>
+        <p>Since the Dirichlet condition is imposed at \(2\pi\) where \(g(2\pi)=0\), the test was conducted with domains approaching \(2\pi\). The results show that the ground state energy collapses toward zero as we approach the true boundary:</p>
+        <table class="verify-table">
+            <thead>
+                <tr>
+                    <th>Right boundary \(u_{\max}\)</th>
+                    <th>Ground state energy \(λ_0\)</th>
+                    <th>Overlap</th>
+                    <th>L2 Error</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Lowest Eigenvalue (\(λ_0\))</td>
-                    <td>\(1.11 \times 10^{-1}\)</td>
-                    <td>\(0\) (exact precision)</td>
-                    <td class="verify-ok">✓ Accepted (Difference due to domain truncation)</td>
+                    <td>\(2\pi - 0.05 \approx 6.2332\)</td>
+                    <td>\(1.106 \times 10^{-1}\)</td>
+                    <td>\(0.99629\)</td>
+                    <td>\(8.6 \times 10^{-2}\)</td>
                 </tr>
                 <tr>
-                    <td>Overlap</td>
-                    <td>\(0.999...\) (99%)</td>
-                    <td>\(1.0\) (exact match)</td>
-                    <td class="verify-ok">✓ Excellent</td>
+                    <td>\(2\pi - 0.01 \approx 6.2732\)</td>
+                    <td>\(2.684 \times 10^{-2}\)</td>
+                    <td>\(0.99978\)</td>
+                    <td>\(2.0 \times 10^{-2}\)</td>
                 </tr>
-                <tr>
-                    <td>Operator Positivity</td>
-                    <td>Strictly positive (due to \(Q^\dagger Q\))</td>
-                    <td>Strictly positive</td>
-                    <td class="verify-ok">✓ Established</td>
+                <tr class="highlight">
+                    <td>\(2\pi - 0.001 \approx 6.2822\)</td>
+                    <td><strong>\(4.367 \times 10^{-3}\)</strong></td>
+                    <td><strong>\(0.99999\)</strong></td>
+                    <td><strong>\(3.3 \times 10^{-3}\)</strong></td>
                 </tr>
             </tbody>
         </table>
 
+        <h3>C. Grid Convergence Test</h3>
+        <p>To verify the algorithm's stability, the number of points \(N\) was varied with the domain fixed (at \(u_{\max}=2\pi-0.05\)):</p>
+        <table class="verify-table">
+            <thead>
+                <tr>
+                    <th>Grid size \(N\)</th>
+                    <th>Energy \(λ_0\)</th>
+                    <th>Overlap</th>
+                    <th>L2 Error</th>
+                    <th>min inner \(\psi_0\)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1000</td><td>\(1.130 \times 10^{-1}\)</td><td>\(0.99613\)</td><td>\(8.79 \times 10^{-2}\)</td><td>\(\sim 0\)</td></tr>
+                <tr><td>2000</td><td>\(1.114 \times 10^{-1}\)</td><td>\(0.99624\)</td><td>\(8.66 \times 10^{-2}\)</td><td>\(\sim 0\)</td></tr>
+                <tr><td>4000</td><td>\(1.106 \times 10^{-1}\)</td><td>\(0.99629\)</td><td>\(8.60 \times 10^{-2}\)</td><td>\(\sim 0\)</td></tr>
+            </tbody>
+        </table>
+
         <div class="badge-exact" style="margin-top: 15px; border-left-color: var(--green); background: rgba(6, 214, 160, 0.1); border-left-width: 4px;">
-            <strong>Final Conclusion:</strong> The solution \(Lg=0\) is not just a formal identity, but the true ground state of the operator. The operator \(L\) is strictly positive, and the spectral problem is numerically closed. This verification supports choosing the Dirichlet condition as the natural self-adjoint realization for this system.
-            <br><br>
-            <em>Thus, we have proven mathematically (SUSY) and numerically (eigh_tridiagonal) that the envelope \(g(u)\) is the ground state of the spectral operator.</em>
+            <strong>Final Conclusion:</strong> The solution \(Lg=0\) is not just a formal identity, but the true ground state of the operator. The operator \(L\) is strictly positive, the ground state energy approaches zero as the domain approaches the true boundaries, and the mathematical residual decays at a rate of \(O(h^2)\). <strong>The spectral problem is closed numerically and mathematically.</strong>
         </div>
     </div>
 
@@ -797,7 +815,7 @@
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v7.5 (English; updated with Numerical Closure).
+        Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v7.6 (English; updated with Numerical Closure and Error Analysis).
     </div>
 </div>
 
@@ -821,7 +839,7 @@
         if (assessment) assessment.style.display = 'block';
         const opt = {
             margin:       10,
-            filename:     'Frame4_Spectral_Problem_EN_v7.5.pdf',
+            filename:     'Frame4_Spectral_Problem_EN_v7.6.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a1410' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }

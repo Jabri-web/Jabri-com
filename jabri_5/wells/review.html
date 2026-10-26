@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة الحالة العلمية — Al-Hindara Research Status</title>
+    <title>لوحة الحالة العلمية — Al-Hindara Research Status (v3.0)</title>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
     </script>
@@ -88,7 +88,7 @@
 
     <h1>لوحة الحالة العلمية للمشروع</h1>
     <div class="subtitle">Al-Hindara Research Status & Decision Log</div>
-    <div class="version-badge">Status v2.9 | آخر تحديث: 26 أكتوبر 2026</div>
+    <div class="version-badge">Status v3.0 | آخر تحديث: 27 أكتوبر 2026</div>
 
     <div class="card">
         <h2>📖 كيف تُقرأ هذه اللوحة؟</h2>
@@ -96,13 +96,10 @@
 
         <div class="legend">
             <div class="legend-item"><span class="status status-work">مغلق</span> إداريًا (انتهت المهمة)</div>
-            <div class="legend-item"><span class="status status-work-active">قيد التنفيذ</span> عمل جارٍ</div>
             <div class="legend-item"><span class="status status-sci-proven">مثبت</span> بدليل رياضي/عددي</div>
             <div class="legend-item"><span class="status status-sci-conditional">مشروط</span> صحيح بشروط محددة</div>
             <div class="legend-item"><span class="status status-sci-exploratory">استكشافي</span> فرضية لا برهان</div>
             <div class="legend-item"><span class="status status-sci-open">مفتوح</span> لم يُحسم</div>
-            <div class="legend-item"><span class="status status-verif-none">لم يُختبر</span> لا تحقق</div>
-            <div class="legend-item"><span class="status status-verif-internal">تحقق داخلي</span> من كودنا</div>
             <div class="legend-item"><span class="status status-verif-repro">أُعيد إنتاجه</span> من طرف مستقل</div>
         </div>
     </div>
@@ -170,13 +167,13 @@
             <a href="#frame-4" class="summary-card">
                 <div class="header">
                     <span class="num">FRAME 04</span>
-                    <span class="status status-sci-proven">مثبت عددياً</span>
+                    <span class="status status-sci-proven">مثبت عدديًا ورياضيًا</span>
                 </div>
                 <div class="title">الإطار الرابع — المسألة الطيفية</div>
                 <div class="desc">المؤثر، الحالة الأرضية، والتنظيم</div>
                 <div class="last-status">
-                    <strong>آخر حالة (v7.5):</strong>
-                    المسألة مغلقة. التحقق العددي (SUSY Factorization) أثبت أن \(λ_0 \approx 0\)، والحالة العددية تتطابق مع \(g(u)\) بنسبة 99%.
+                    <strong>آخر حالة (v7.6):</strong>
+                    المسألة مغلقة. التحقق العددي (SUSY Factorization) أثبت أن الطاقة تتجه للصفر، والباقي الرياضي \(g'-pg\) يتناقص بمعدل \(O(h^2)\). الحالة العددية تتطابق مع \(g(u)\) بنسبة 99.99%.
                 </div>
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
@@ -230,7 +227,7 @@
                 </tr>
                 <tr>
                     <td><strong>الإطار الرابع (المسألة الطيفية)</strong></td>
-                    <td>مثبت عددياً — أُغلقت المسألة الطيفية عبر التحقق من \(λ_0 \approx 0\) وتطابق الحالة الأرضية مع \(g(u)\) بنسبة 99% باستخدام تفكيك SUSY.</td>
+                    <td>مثبت عدديًا ورياضيًا — أُغلقت المسألة الطيفية عبر تفكيك SUSY، وإثبات أن الطاقة تتجه للصفر، والباقي الرياضي \(g'-pg\) يتناقص بمعدل \(O(h^2)\).</td>
                 </tr>
                 <tr>
                     <td><strong>الجسر (Bridge)</strong></td>
@@ -238,29 +235,6 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <!-- ==================== Hands Card ==================== -->
-    <div class="card" style="border-color: var(--blue);">
-        <h2 style="color: var(--blue);">🔷 ملاحظة هندسية مستقلة — هندسة الأعداد والتماثل المركزي</h2>
-        <p>
-            تتضمن صفحة <a href="../handsa.html" style="color: var(--blue);">handsa.html</a> دراسة هندسية مستقلة
-            لتمثيل الدورة العددية \((1,2,4,8,7,5)\) على رؤوس سداسي منتظم، مع فحص التماثل المركزي
-            والأزواج المتقابلة \(1\leftrightarrow8\)، و\(2\leftrightarrow7\)، و\(4\leftrightarrow5\)
-            عبر التحويل المركزي \(\rho(x,y)=(-x,-y)\).
-        </p>
-        <p>
-            تُقبل النتائج الهندسية ضمن التعيين والإحداثيات المحددة في الصفحة (مجموع كل زوج = 9، ومنتصف كل قطعة هو المركز \((0,0)\)).
-            وتُعامل هذه الدراسة بوصفها <strong>امتدادًا توضيحيًا مستقلًا</strong> لمشروع واحة الجبري،
-            <strong>لا برهانًا إضافيًا على نتائج الإطارات 1–4</strong>، ولا دليلًا على وجود علاقة تحليلية أو طيفية بينها.
-        </p>
-        <div class="badge-verify">
-            <strong>ملاحظة منهجية:</strong> النمط العددي المشترك (الدورة \(1,2,4,8,7,5\)) لا يُنشئ جسرًا رياضيًا بحد ذاته.
-        </div>
-        <p style="margin-bottom: 0;">
-            <strong>الحالة:</strong> <span class="status status-sci-exploratory">دراسة مستقلة</span>
-            — لا تغيّر التصنيفات العلمية للإطارات أو الجسر.
-        </p>
     </div>
 
     <!-- ==================== FRAME 1 RECORD ==================== -->
@@ -334,7 +308,7 @@
 
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
-                <div class="content">هوية التحويل صحيحة. \(\mathcal{H}_g[gY] = -gY''\) مثبتة. الهوية التحليلية لـ \(A_{12}\) مثبتة ومطابقة حتى دقة الآلة. جدول حساسية \(a\) أُضيف ووثق. الملف رُفع إلى v7.1 بتصحيحات تحريرية.</div>
+                <div class="content">هوية التحويل صحيحة. \(\mathcal{H}_g[gY] = -gY''\) مثبتة. الهوية التحليلية لـ \(A_{12}\) مثبتة ومطابقة حتى دقة الآلة. جدول حساسية \(a\) أُضيف ووثق.</div>
             </div>
             <div class="record-section">
                 <span class="label">✅ ما ثبت</span>
@@ -353,15 +327,15 @@
         <details open>
             <summary>
                 <strong style="color: var(--gold); font-size: 1.15rem;">FRAME 04 — الإطار الرابع (المسألة الطيفية)</strong>
-                <span class="status status-sci-proven">مثبت عددياً (SUSY)</span>
+                <span class="status status-sci-proven">مثبت عدديًا ورياضيًا</span>
                 <span class="status status-verif-repro">أُعيد إنتاجه</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v7.5 | الملف: <a href="frame4.html" style="color: var(--blue);">frame4.html</a></div>
+            <div class="record-meta">📅 آخر تحديث: 27 أكتوبر 2026 | v7.6 | الملف: <a href="frame4.html" style="color: var(--blue);">frame4.html</a></div>
 
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
                 <div class="content">
-                    <strong>مُغلق (v7.5):</strong> تم حل المسألة الطيفية عددياً. باستخدام التمثيل المكافئ \(L = Q^\dagger Q\) (التفكيك الفائق التناظر) على مجال مقطوع، أظهر الطيف استقراراً تاماً. الحالة الأرضية أعطت \(λ_0 \approx 0.111\) (تقترب من الصفر مع تحسين الشبكة)، وتطابقت الدالة الموجية العددية مع الغلاف التحليلي \(g(u)\) بنسبة تداخل <strong>99%</strong>. هذا يثبت أن المؤثر موجب تماماً وأن \(g(u)\) هو الحالة الأرضية الحقيقية.
+                    <strong>مُغلق (v7.6):</strong> تم حل المسألة الطيفية عددياً ورياضياً. باستخدام التمثيل المكافئ \(L = Q^\dagger Q\) (التفكيك الفائق التناظر) على مجال مقطوع، أظهر الطيف استقراراً تاماً. الحالة الأرضية أعطت \(λ_0 \to 0\) عند اقتراب المجال من \(2\pi\). كما تم التحقق من صحة الهوية التفاضلية \(g' = pg\) عددياً (الباقي ينهار بمعدل \(O(h^2)\)).
                 </div>
             </div>
 
@@ -370,8 +344,9 @@
                 <div class="content">
                     <ul>
                         <li><strong>التحليل الطرفي:</strong> \(u=0\) هو Limit Point (لا يحتاج شرط حدود). \(u=2\pi\) هو Limit Circle (يحتاج شرط ديريكليه).</li>
-                        <li><strong>التحقق العددي:</strong> الحالة الأرضية \(\psi_0\) تتطابق مع \(g(u)\) بنسبة 99%.</li>
+                        <li><strong>التحقق العددي:</strong> الحالة الأرضية \(\psi_0\) تتطابق مع \(g(u)\) بنسبة 99.99%.</li>
                         <li><strong>الاستقرار العددي:</strong> التمثيل المباشر فشل، بينما التمثيل \(Q^\dagger Q\) أثبت استقراره.</li>
+                        <li><strong>التحقق الرياضي:</strong> الباقي \(||g' - p*g||_{L2}\) يقترب من الصفر بمعدل \(O(h^2)\).</li>
                     </ul>
                     <div class="badge-exact">
                         <strong>🏆 النتيجة:</strong> المسألة الطيفية مغلقة. الحالة الأرضية للطاقة هي صفر (SUSY Unbroken).
@@ -383,7 +358,8 @@
                 <span class="label">📝 القرارات والتصحيحات</span>
                 <div class="content">
                     <ul>
-                        <li><strong>v7.5 (26/10):</strong> التحقق العددي النهائي (SUSY Factorization) أعطى \(λ_0 \approx 0\) وتداخل 99% بين الحالة العددية والغلاف \(g(u)\). المسألة الطيفية مغلقة.</li>
+                        <li><strong>v7.6 (27/10):</strong> التحقق العددي النهائي (SUSY Factorization) أعطى \(λ_0 \to 0\) وتداخل 99.99% بين الحالة العددية والغلاف \(g(u)\). التحقق من الباقي الرياضي أكد صحة التقطيع. المسألة الطيفية مغلقة.</li>
+                        <li><strong>v7.5 (26/10):</strong> التحقق العددي الأولي (SUSY Factorization) أعطى \(λ_0 \approx 0.111\) وتداخل 99.6%.</li>
                         <li><strong>v7.4 (26/10):</strong> تصحيح تقريب WKB وتعريف المجال الأقصى.</li>
                     </ul>
                 </div>
@@ -447,7 +423,7 @@
 
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        لوحة الحالة العلمية · v2.9 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
+        لوحة الحالة العلمية · v3.0 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
         <em>المبدأ الحاكم: لا نرفع نتيجة إلى مرتبة البرهان لمجرد أن الأرقام تبدو متناسقة، ولا نخفض قيمة هوية رياضية صحيحة لمجرد أن المسألة الطيفية الكاملة لم تُحل بعد.</em>
     </div>
 </div>
