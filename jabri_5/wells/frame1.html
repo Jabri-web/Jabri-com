@@ -8,7 +8,8 @@
      Author: Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen
      DOI: 10.5281/zenodo.23540283
      ═══════════════════════════════════════════════════════════════ -->
-    <head>
+<html lang="ar" dir="rtl"> <!-- تمت إضافة هذا السطر هنا -->
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a1410">
@@ -49,7 +50,7 @@
     <meta name="twitter:description" content="نموذج تخميد رياضي وأصفار زيتا الريمانية">
     <meta name="twitter:image" content="https://jabri-com.vercel.app/image/logo1.png">
 
-    <!-- 6. البيانات المنظمة (JSON-LD Schema) - نفس بنية Frame 2 -->
+    <!-- 6. البيانات المنظمة (JSON-LD Schema) - تم تصحيح مسار التنقل -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -109,7 +110,7 @@
           "@type": "BreadcrumbList",
           "@id": "https://jabri-com.vercel.app/jabri_5/wells/frame1.html#breadcrumb",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://jabri-com.vercel.app/" },
+            { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://jabri-com.vercel.app/index.html" },
             { "@type": "ListItem", "position": 2, "name": "الإطار الأول", "item": "https://jabri-com.vercel.app/jabri_5/wells/frame1.html" }
           ]
         }
@@ -117,6 +118,12 @@
     }
     </script>
 
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         :root { --gold: #f4c430; --green: #06d6a0; --bg: #0a1410; --panel: #0a1a12; --border: #1f3a2b; --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; }
