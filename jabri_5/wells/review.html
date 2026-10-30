@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة الحالة العلمية — Al-Hindara Research Status (v3.0)</title>
+    <title>لوحة الحالة العلمية — Al-Hindara Research Status (v3.1)</title>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
     </script>
@@ -88,7 +88,7 @@
 
     <h1>لوحة الحالة العلمية للمشروع</h1>
     <div class="subtitle">Al-Hindara Research Status & Decision Log</div>
-    <div class="version-badge">Status v3.0 | آخر تحديث: 27 أكتوبر 2026</div>
+    <div class="version-badge">Status v3.1 | آخر تحديث: 30 أكتوبر 2026</div>
 
     <div class="card">
         <h2>📖 كيف تُقرأ هذه اللوحة؟</h2>
@@ -167,17 +167,17 @@
             <a href="#frame-4" class="summary-card">
                 <div class="header">
                     <span class="num">FRAME 04</span>
-                    <span class="status status-sci-proven">مثبت عدديًا ورياضيًا</span>
+                    <span class="status status-sci-open">مسائل مفتوحة</span>
                 </div>
                 <div class="title">الإطار الرابع — المسألة الطيفية</div>
                 <div class="desc">المؤثر، الحالة الأرضية، والتنظيم</div>
                 <div class="last-status">
                     <strong>آخر حالة (v7.6):</strong>
-                    المسألة مغلقة. التحقق العددي (SUSY Factorization) أثبت أن الطاقة تتجه للصفر، والباقي الرياضي \(g'-pg\) يتناقص بمعدل \(O(h^2)\). الحالة العددية تتطابق مع \(g(u)\) بنسبة 99.99%.
+                    تم التحقق العددي الداخلي (SUSY Factorization) وأظهر تقارباً للقيمة الذاتية نحو الصفر على المجال المقطوع. المسألة الطيفية الكاملة (الامتداد الذاتي، والحد السفلي للطيف) لا تزال مفتوحة.
                 </div>
                 <div class="status-group">
                     <span class="status status-work">مغلق</span>
-                    <span class="status status-verif-repro">أُعيد إنتاجه</span>
+                    <span class="status status-verif-internal">تحقق داخلي</span>
                 </div>
             </a>
 
@@ -227,7 +227,7 @@
                 </tr>
                 <tr>
                     <td><strong>الإطار الرابع (المسألة الطيفية)</strong></td>
-                    <td>مثبت عدديًا ورياضيًا — أُغلقت المسألة الطيفية عبر تفكيك SUSY، وإثبات أن الطاقة تتجه للصفر، والباقي الرياضي \(g'-pg\) يتناقص بمعدل \(O(h^2)\).</td>
+                    <td>مسائل مفتوحة — تحقق عددي داخلي على مجال مقطوع يظهر تقارب الطاقة نحو الصفر. إثبات وجود حالة أرضية صفرية للمؤثر الكامل والامتداد الذاتي والحد السفلي للطيف لا يزال مفتوحاً.</td>
                 </tr>
                 <tr>
                     <td><strong>الجسر (Bridge)</strong></td>
@@ -236,8 +236,10 @@
             </tbody>
         </table>
     </div>
-
-    <!-- ==================== FRAME 1 RECORD ==================== -->
+    
+    
+    
+        <!-- ==================== FRAME 1 RECORD ==================== -->
     <div class="card" id="frame-1">
         <details>
             <summary>
@@ -246,7 +248,7 @@
                 <span class="status status-verif-repro">أُعيد إنتاجه</span>
             </summary>
             <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v1.8 | الملف: <a href="frame1.html" style="color: var(--blue);">frame1.html</a> (v7.2)</div>
-
+            
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
                 <div class="content">
@@ -262,13 +264,12 @@
                         <li><strong>\(E(v) > 0\) على \((1,2)\):</strong> برهان تحليلي بمتباينتين قياسيتين.</li>
                     </ul>
                     <div class="badge-exact">
-                        <strong>✅ Audit D (v1.5):</strong> أُعيد تشغيل الملحق D في بيئة Google Colab مستقلة. مطابقة تامة لـ \(A(100)\) عند \(1.06 \times 10^{-14}\)، والجدول \(C(t)\) عند \(\Delta C < 5\times10^{-7}\).
+                        <strong>✅ Audit D (v1.5):</strong> أُعيد تشغيل الملحق D في بيئة Google Colab مستقلة. مطابقة تامة لـ \(A(100)\) عند \(1.06 \times 10^{-14}\)، والجدول \(C(t)\) عند \(\Delta C < 5\times10^{-7}\). </div>
                     </div>
                 </div>
-            </div>
         </details>
     </div>
-
+    
     <!-- ==================== FRAME 2 RECORD ==================== -->
     <div class="card" id="frame-2">
         <details>
@@ -278,7 +279,7 @@
                 <span class="status status-work">مغلق</span>
             </summary>
             <div class="record-meta">📅 آخر تحديث: 25 أكتوبر 2026 | v7.0 | الملف: <a href="../tree/frame2.html" style="color: var(--blue);">tree/frame2.html</a></div>
-
+            
             <div class="record-section">
                 <span class="label">🎯 الهدف</span>
                 <div class="content">إثبات الهوية الهندسية \(\tan(22.5^\circ) = \sqrt{2}-1\)، ومقارنتها بقياسات ميدانية لأشجار المانجو.</div>
@@ -295,7 +296,7 @@
             </div>
         </details>
     </div>
-
+    
     <!-- ==================== FRAME 3 RECORD ==================== -->
     <div class="card" id="frame-3">
         <details>
@@ -305,7 +306,7 @@
                 <span class="status status-work">مغلق</span>
             </summary>
             <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v7.1 | الملف: <a href="frame3.html" style="color: var(--blue);">frame3.html</a></div>
-
+            
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
                 <div class="content">هوية التحويل صحيحة. \(\mathcal{H}_g[gY] = -gY''\) مثبتة. الهوية التحليلية لـ \(A_{12}\) مثبتة ومطابقة حتى دقة الآلة. جدول حساسية \(a\) أُضيف ووثق.</div>
@@ -321,52 +322,65 @@
             </div>
         </details>
     </div>
-
+    
     <!-- ==================== FRAME 4 RECORD ==================== -->
     <div class="card" id="frame-4">
         <details open>
             <summary>
                 <strong style="color: var(--gold); font-size: 1.15rem;">FRAME 04 — الإطار الرابع (المسألة الطيفية)</strong>
-                <span class="status status-sci-proven">مثبت عدديًا ورياضيًا</span>
-                <span class="status status-verif-repro">أُعيد إنتاجه</span>
+                <span class="status status-sci-open">مسائل مفتوحة</span>
+                <span class="status status-verif-internal">تحقق داخلي</span>
             </summary>
-            <div class="record-meta">📅 آخر تحديث: 27 أكتوبر 2026 | v7.6 | الملف: <a href="frame4.html" style="color: var(--blue);">frame4.html</a></div>
-
+            <div class="record-meta">📅 آخر تحديث: 30 أكتوبر 2026 | v3.1 (تصحيح علمي) | الملف: <a href="frame4.html" style="color: var(--blue);">frame4.html</a></div>
+            
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
                 <div class="content">
-                    <strong>مُغلق (v7.6):</strong> تم حل المسألة الطيفية عددياً ورياضياً. باستخدام التمثيل المكافئ \(L = Q^\dagger Q\) (التفكيك الفائق التناظر) على مجال مقطوع، أظهر الطيف استقراراً تاماً. الحالة الأرضية أعطت \(λ_0 \to 0\) عند اقتراب المجال من \(2\pi\). كما تم التحقق من صحة الهوية التفاضلية \(g' = pg\) عددياً (الباقي ينهار بمعدل \(O(h^2)\)).
+                    <strong>مُحدَّث (v7.6):</strong> تم اختبار التمثيل \(L=Q^\dagger Q\) عددياً على مجالات مقطوعة. أظهرت النتائج استقراراً عددياً وتقارب القيمة الذاتية المحسوبة نحو الصفر ضمن سلسلة التقطيعات المدروسة (دون أن يشكل ذلك إثباتًا لطبيعة الصفر في طيف المؤثر الكامل). كما لوحظ تطابق عالٍ بين الحالة العددية والغلاف \(g(u)\) ضمن المجال المقطوع.
                 </div>
             </div>
-
+            
             <div class="record-section">
-                <span class="label">✅ ما ثبت</span>
+                <span class="label">✅ ما ثبت (النتائج الموثقة)</span>
                 <div class="content">
                     <ul>
-                        <li><strong>التحليل الطرفي:</strong> \(u=0\) هو Limit Point (لا يحتاج شرط حدود). \(u=2\pi\) هو Limit Circle (يحتاج شرط ديريكليه).</li>
-                        <li><strong>التحقق العددي:</strong> الحالة الأرضية \(\psi_0\) تتطابق مع \(g(u)\) بنسبة 99.99%.</li>
-                        <li><strong>الاستقرار العددي:</strong> التمثيل المباشر فشل، بينما التمثيل \(Q^\dagger Q\) أثبت استقراره.</li>
-                        <li><strong>التحقق الرياضي:</strong> الباقي \(||g' - p*g||_{L2}\) يقترب من الصفر بمعدل \(O(h^2)\).</li>
+                        <li><strong>تعريف المؤثر \(\mathcal{H}_g\):</strong> موثق على المجال المفتوح \((0,2\pi)\).</li>
+                        <li><strong>التفكيك الشكلي \(L = Q^\dagger Q\):</strong> صحيح ضمن الشروط المناسبة (SUSY Factorization).</li>
+                        <li><strong>التحقق العددي للحالة \(g(u)\):</strong> تحقق داخلي — نتيجة عددية مستقرة على المجال المقطوع.</li>
+                        <li><strong>السلوك الطرفي:</strong> تم تحديد أن \(u=0\) هو Limit Point، بينما \(u=2\pi\) هو Limit Circle (يحتاج شرطاً حدياً ديريكليه).</li>
                     </ul>
-                    <div class="badge-exact">
-                        <strong>🏆 النتيجة:</strong> المسألة الطيفية مغلقة. الحالة الأرضية للطاقة هي صفر (SUSY Unbroken).
+                </div>
+            </div>
+            
+            <div class="record-section">
+                <span class="label">🔓 المسائل المفتوحة (لم تُحسم بعد)</span>
+                <div class="content">
+                    <ul>
+                        <li><strong>إثبات وجود حالة أرضية صفرية للمؤثر الكامل:</strong> لم يُحسم (قد يكون الصفر حداً للطيف المستمر، أو قطعة من تقطيع عددي، أو نتيجة لاختيار الامتداد الذاتي).</li>
+                        <li><strong>تحديد الامتداد الذاتي المناسب عند \(u=2\pi\):</strong> مفتوح.</li>
+                        <li><strong>إثبات الحد السفلي للطيف وأنه \(\ge 0\):</strong> مفتوح.</li>
+                        <li><strong>إغلاق المسألة الطيفية بالكامل:</strong> غير محقق بعد.</li>
+                    </ul>
+                    <div class="badge-exploratory" style="margin-top: 15px;">
+                        <strong>⚠️ ملاحظة منهجية:</strong> التفكيك الجبري وحده لا يثبت أن الصفر قيمة ذاتية فعلية للمؤثر في الفضاء \(L^2\) الكامل.
                     </div>
                 </div>
             </div>
-
+            
             <div class="record-section">
                 <span class="label">📝 القرارات والتصحيحات</span>
                 <div class="content">
                     <ul>
-                        <li><strong>v7.6 (27/10):</strong> التحقق العددي النهائي (SUSY Factorization) أعطى \(λ_0 \to 0\) وتداخل 99.99% بين الحالة العددية والغلاف \(g(u)\). التحقق من الباقي الرياضي أكد صحة التقطيع. المسألة الطيفية مغلقة.</li>
-                        <li><strong>v7.5 (26/10):</strong> التحقق العددي الأولي (SUSY Factorization) أعطى \(λ_0 \approx 0.111\) وتداخل 99.6%.</li>
+                        <li><strong>v3.1 (اليوم):</strong> تصحيح علمي في سجل الحالة؛ سحب عبارة "المسألة مغلقة" و"SUSY Unbroken" لعدم كفاية التحقق العددي لإثباتها تحليلياً. المسألة الطيفية الكاملة أُعيد تصنيفها كـ "مفتوحة".</li>
+                        <li><strong>v7.6 (27/10):</strong> التحقق العددي الأولي (SUSY Factorization) أعطى تقارباً نحو الصفر وتداخلاً بنسبة 99.99% (على المجال المقطوع).</li>
+                        <li><strong>v7.5 (26/10):</strong> التحقق العددي الأولي (SUSY Factorization) أعطى \(\lambda_0 \approx 0.111\) وتداخل 99.6%.</li>
                         <li><strong>v7.4 (26/10):</strong> تصحيح تقريب WKB وتعريف المجال الأقصى.</li>
                     </ul>
                 </div>
             </div>
         </details>
     </div>
-
+    
     <!-- ==================== BRIDGE RECORD ==================== -->
     <div class="card" id="bridge">
         <details>
@@ -375,7 +389,7 @@
                 <span class="status status-work">مغلق — v2.2</span>
             </summary>
             <div class="record-meta">📅 آخر تحديث: 26 أكتوبر 2026 | v2.2 | الملف: <a href="bridge.html" style="color: var(--blue);">bridge.html</a></div>
-
+            
             <div class="record-section">
                 <span class="label">📍 آخر حالة وصلنا إليها</span>
                 <div class="content">
@@ -395,7 +409,7 @@
             </div>
         </details>
     </div>
-
+    
     <!-- ==================== Calculator Audit ==================== -->
     <div class="card" id="calculator-audit">
         <details>
@@ -420,12 +434,13 @@
             </div>
         </details>
     </div>
-
+    
     <div class="footer">
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
-        لوحة الحالة العلمية · v3.0 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
+        لوحة الحالة العلمية · v3.1 | سجل ضمان جودة داخلي — ليس منشوراً علمياً محكماً.<br>
         <em>المبدأ الحاكم: لا نرفع نتيجة إلى مرتبة البرهان لمجرد أن الأرقام تبدو متناسقة، ولا نخفض قيمة هوية رياضية صحيحة لمجرد أن المسألة الطيفية الكاملة لم تُحل بعد.</em>
     </div>
-</div>
-</body>
-</html>
+    </div>
+    </body>
+    
+    </html>
