@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>Zx Framework v0.4 — Bounded Interaction Model | واحة الجبري</title>
+<meta name="description" content="الوثيقة الرسمية لنموذج Zx Framework v0.4: نموذج تفاعل محدود، برهان تحليلي للحدود، تحقق عددي، أدلة بصرية، وكود مرجعي قابل للتكرار.">
+<link rel="canonical" href="https://jabri-com.vercel.app/tree/zx-framework.html">
+
+<!-- MathJax for equations -->
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+:root{--bg:#0b1220;--panel:#121e30;--panel2:#17263b;--ink:#edf4ff;--muted:#a8b8ce;--line:#2b405c;--gold:#f2c879;--cyan:#76d6e8;--green:#8bd5a5;--red:#ffb0a8}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#182b43 0,#0b1220 55%);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}
+.wrap{max-width:1000px;margin:auto;padding:20px}
+.hero,.card{border:1px solid var(--line);background:rgba(18,30,48,.94);border-radius:18px;padding:clamp(16px,3vw,28px);margin:14px 0;box-shadow:0 12px 32px #0002;position:relative}
+.hero{background:linear-gradient(135deg,#1b3048,#111d2e 70%);border-top:3px solid var(--gold)}
+.top-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:rgba(18,30,48,.9);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
+.nav-item{color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:8px;font-size:.85rem;font-weight:bold;border:1px solid transparent;transition:.3s}
+.nav-item:hover{color:var(--gold);border-color:var(--gold);background:rgba(242,200,121,.1)}
+.nav-item.active{color:#19202b;background:var(--gold);border-color:var(--gold);cursor:default}
+.kicker{color:var(--gold);font-weight:800;letter-spacing:.04em}
+h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.25;margin:.4rem 0}
+h2{font-size:1.45rem;margin:0 0 12px;color:var(--gold);border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:1.15rem;color:var(--cyan);margin-top:25px}
+p{margin:.5rem 0 1rem}
+ul, ol{margin:0 0 1rem 1.5rem; padding:0;}
+li{margin-bottom:8px;}
+.muted,small{color:var(--muted)}
+.formula{direction:ltr;text-align:center;font-size:clamp(1.1rem,3vw,1.4rem);padding:15px;background:#0b1524;border:1px solid #314966;border-radius:12px;overflow-wrap:anywhere;margin:12px 0}
+.callout{border-right:4px solid var(--gold);background:#2a261b;padding:12px 15px;border-radius:8px;margin:15px 0}
+.callout.good{border-right-color:var(--green);background:#142a25}
+.callout.warn{border-right-color:var(--red);background:#30201f}
+table{width:100%;border-collapse:collapse;min-width:600px;font-variant-numeric:tabular-nums;margin:15px 0;}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:center}
+th{background:#1b2b41;color:var(--gold)}
+td{direction:ltr}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.pill{display:inline-block;border:1px solid var(--line);background:#17263b;border-radius:99px;padding:3px 10px;margin:3px;color:var(--muted);font-size:.85rem}
+footer{text-align:center;color:var(--muted);padding:22px;font-size:.9rem;margin-top:20px;border-top:1px solid var(--line)}
+@media(max-width:600px){.wrap{padding:10px}.hero,.card{padding:15px;border-radius:13px}}
+pre.code-block {
+    background: #0b1524;
+    border: 1px solid #314966;
+    border-radius: 12px;
+    padding: 15px;
+    overflow-x: auto;
+    direction: ltr;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: #edf4ff;
+    margin-top: 15px;
+}
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; border: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Navigation (تم حذف الرابط المكرر) -->
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
+    <a href="frame1.html" class="nav-item">Frame 1</a>
+    <a href="frame2.html" class="nav-item">Frame 2</a>
+    <a href="zx-framework.html" class="nav-item active">Zx Framework v0.4</a>
+    <a href="lab01.html" class="nav-item">🧪 Lab 01</a>
+    <a href="note-21.html" class="nav-item">📝 Note 21</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="kicker">Zx FRAMEWORK · v0.4 · NOVEMBER 2026</div>
+    <h1>Zx Framework v0.4 — Bounded Interaction Model</h1>
+    <p>نموذج تفاعل محدود: برهان تحليلي للحدود، تحقق عددي، أدلة بصرية، وكود مرجعي قابل للتكرار.</p>
+    <div>
+      <span class="pill">المؤلف: م/ عبدالله محمد ناصر الجبري</span><br>
+      <span class="pill" style="color:var(--gold);border-color:var(--gold)">Status: ANALYTICALLY BOUNDED</span>
+      <span class="pill" style="color:var(--green);border-color:var(--green)">Date: 2026-11-01</span>
+      <span class="pill" style="color:var(--cyan);border-color:var(--cyan)">Version: v0.4</span>
+    </div>
+  </header>
+
+  <!-- Section 1: Objective -->
+  <section class="card">
+    <h2>1. Objective</h2>
+    <p>The objective of v0.4 is to investigate a bounded alternative to the oscillatory interaction function used in the earlier Zx model versions.</p>
+    <p>The original interaction function:</p>
+    <div class="formula">\[ C(t) = a\sin(t/x_p) \]</div>
+    <p>can produce values of the residual component outside the prescribed range.</p>
+    <p>Version v0.4 introduces a nonlinear algebraic coupling designed to preserve the numerical range under an analytically specified amplitude constraint.</p>
+    <div class="callout warn">
+      <b>Note:</b> This is a proposed alternative model, not a replacement for the historical v0.1–v0.3 results.
+    </div>
+  </section>
+
+  <!-- Section 2: Mathematical Formulation -->
+  <section class="card">
+    <h2>2. Mathematical Formulation</h2>
+    <p>The model is defined for \(t \ge 0\) and \(x_p > 0\):</p>
+    <div class="formula">\[ Z(t) = e^{-t/x_p} \]</div>
+    <div class="formula">\[ C(t) = aZ(t)(1-Z(t)) \]</div>
+    <div class="formula">\[ A(t) = 1 - Z(t) - C(t) \]</div>
+    <p>The closure identity is:</p>
+    <div class="formula">\[ \boxed{Z(t) + C(t) + A(t) = 1} \]</div>
+    <p>Substituting the interaction function gives:</p>
+    <div class="formula">\[ \boxed{A(t) = (1-Z(t))(1-aZ(t))} \]</div>
+    <p>The parameter \(x_p\) controls the decay timescale. The amplitude \(a\) controls the magnitude of the interaction component.</p>
+  </section>
+
+  <!-- Section 3: Analytical Boundedness -->
+  <section class="card">
+    <h2>3. Analytical Boundedness</h2>
+    <p>The objective is to establish \(0 \le A(t) \le 1\) for every \(t \ge 0\).</p>
+    <p>Since \(0 < Z(t) \le 1\) and the amplitude is restricted to \(a \ge 0\), the condition:</p>
+    <div class="formula">\[ 0 \le a \le 1 \]</div>
+    <p>guarantees:</p>
+    <div class="formula">\[ 1 - aZ(t) \ge 0 \]</div>
+    <p>Therefore, \(A(t) \ge 0\). Furthermore, \(A(t) = (1-Z)(1-aZ) \le 1\), because both factors belong to \([0,1]\).</p>
+    <p>Thus, \(0 \le a \le 1\) is the exact admissible amplitude interval under the nonnegative-amplitude assumption.</p>
+    <p>For \(a>1\), \(A(t)<0\) precisely when \(0<t<x_p\ln(a)\). At \(t=x_p\ln(a)\), \(A(t)=0\); for larger \(t\), \(A(t)\ge0\). Thus, the upper amplitude boundary \(a=1\) is sharp.</p>
+    
+    <h3>Interaction Peak</h3>
+    <p>The interaction function is \(C(t) = aZ(1-Z)\). Its maximum occurs at \(Z = 1/2\). Since \(Z = e^{-t/x_p}\), the peak time and maximum amplitude are:</p>
+    <div class="formula">\[ \boxed{t_{peak} = x_p \ln(2)} \]</div>
+    <div class="formula">\[ \boxed{C_{max} = \frac{a}{4}} \]</div>
+    <p>These results are analytical and independent of numerical sampling.</p>
+    <p class="muted"><b>Note:</b> For \(a=1\), the function \(C(t) = Z(1-Z)\) has a unique maximum \(1/4\) at \(t = x_p \ln 2\), with \(C(0)=0\) and \(C(\infty)=0\). The function is zero at both ends but the peak is unique.</p>
+  </section>
+
+  <!-- Section 4: Numerical Verification -->
+  <section class="card">
+    <h2>4. Numerical Verification</h2>
+    <p>A continuous dense-sampling test was performed over \(0 \le t \le 1000\) using <code>np.linspace(0.0, 1000.0, 1_000_001)</code>. The test evaluated the residual component and measured its range violation \(V = \max(0, -\min A, \max A - 1)\).</p>
+    <p>The results were consistent with the analytical amplitude constraint:</p>
+    
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Amplitude</th><th scope="col">Result</th></tr></thead>
+        <tbody>
+          <tr><td>0.9999</td><td style="color:var(--green)">BOUNDED</td></tr>
+          <tr><td>1.0000</td><td style="color:var(--green)">BOUNDED</td></tr>
+          <tr><td>1.0001</td><td style="color:var(--red)">OUT OF BOUNDS</td></tr>
+          <tr><td>1.0100</td><td style="color:var(--red)">OUT OF BOUNDS</td></tr>
+          <tr><td>1.0480</td><td style="color:var(--red)">OUT OF BOUNDS</td></tr>
+          <tr><td>1.0500</td><td style="color:var(--red)">OUT OF BOUNDS</td></tr>
+          <tr><td>1.1000</td><td style="color:var(--red)">OUT OF BOUNDS</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>For \(a=1.0001\), the numerical violation was approximately \(V \approx 2.49 \times 10^{-9}\). The violation is small but mathematically meaningful.</p>
+    <div class="callout good">
+      Dense sampling is a numerical consistency check, not a substitute for the analytical proof. The exact amplitude boundary is established by the mathematical argument in Section 3.
+    </div>
+  </section>
+
+  <!-- Section 5: Dynamical Stability -->
+  <section class="card">
+    <h2>5. Dynamical Stability — Separate ODE Model</h2>
+    <p>An independent ODE system was investigated in an earlier experiment:</p>
+    <div class="formula">\[ \frac{dZ}{dt} = -\frac{Z}{x_p}, \quad \frac{dC}{dt} = \frac{Z-C}{x_p} \]</div>
+    <p>The corresponding linear system matrix is:</p>
+    <div class="formula">\[ M = \begin{pmatrix} -1/x_p & 0 \\ 1/x_p & -1/x_p \end{pmatrix} \]</div>
+    <p>Its eigenvalues are \(\lambda_1 = \lambda_2 = -1/x_p\). For \(x_p > 0\), both eigenvalues are negative. Consequently, the equilibrium of this specific ODE system is asymptotically stable.</p>
+    <div class="callout warn">
+      <b>Scope limitation:</b> This stability result applies to the independently defined ODE system. It does not establish dynamical stability for the algebraic v0.4 model. The v0.4 model has an algebraic interaction function and does not, by itself, define an independent evolution equation for \(C\).
+    </div>
+  </section>
+
+  <!-- Section 6: Modeling Parameter -->
+  <section class="card">
+    <h2>6. Modeling Parameter</h2>
+    <p>The selected parameter is \(x_p = 21\). The numerical motivation is \(\gamma_2 \approx 21.0220396388\) and \(x_p = \lfloor\gamma_2\rfloor = 21\).</p>
+    <p>This is a modeling choice. The boundedness proof holds for every \(x_p > 0\). Therefore, the proof does not establish a special mathematical or physical property of the value 21.</p>
+  </section>
+
+  <!-- Section 7: Conclusion -->
+  <section class="card">
+    <h2>7. Conclusion</h2>
+    <p>Version v0.4 establishes the following results:</p>
+    <ul>
+      <li>The closure identity is satisfied algebraically.</li>
+      <li>The residual component remains in \([0,1]\) for nonnegative amplitudes \(0 \le a \le 1\).</li>
+      <li>The amplitude boundary \(a = 1\) is analytically sharp.</li>
+      <li>The interaction function has a unique peak at \(t = x_p \ln(2)\), with \(C_{max} = a/4\) for \(0 < a \le 1\).</li>
+      <li>Numerical tests are consistent with the analytical boundedness result.</li>
+      <li>The independent ODE experiment has asymptotically stable dynamics.</li>
+      <li><b>Dynamical stability of the algebraic v0.4 model remains unestablished.</b></li>
+    </ul>
+    <div class="callout">
+      <b>Final Status:</b><br>
+      <code>ANALYTICALLY BOUNDED</code><br>
+      <code>NUMERICALLY VERIFIED</code><br>
+      <code>DYNAMICAL STABILITY OF v0.4: NOT ESTABLISHED</code><br>
+      <code>MODELING CHOICE: xp = 21</code>
+    </div>
+  </section>
+
+  <!-- Section 8: Epistemological Status -->
+  <section class="card">
+    <h2>8. Final Epistemological Status (v0.4)</h2>
+    
+    <h3>A. Analytical Confirmation</h3>
+    <p>For the v0.4 model, the dimensionless finite integral ratio is:</p>
+    <div class="formula">\[ \boxed{\alpha^* = \frac{\int_0^\infty C(t)\,dt}{\int_0^\infty [1-A(t)]\,dt} = \frac{a}{a+2}} \]</div>
+    <p>At the boundary \(a=1\), this yields \(\alpha^* = 1/3\). The numerical integration (\(\approx 0.3333333328\)) matches this analytical result, with an error of \(\sim 5 \times 10^{-10}\) due to truncation.</p>
+    <p><small><i>Note on choice of denominator:</i> The denominator \((1-A)\) was chosen because it provides a positive, finite integral directly tied to the closure identity \(Z+C+A=1\). This is a structural justification, not a claim of mathematical uniqueness. Other finite denominators could exist.</small></p>
+
+    <h3>B. Status Matrix</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Proposition</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td>Range condition \(0 \le a \le 1\)</td><td style="color:var(--green)">Proven (Analytically & Numerically)</td></tr>
+          <tr><td>Ratio formula \(\alpha^* = a/(a+2)\)</td><td style="color:var(--green)">Proven (Analytically)</td></tr>
+          <tr><td>Independence of \(\alpha^*\) from \(x_p\)</td><td style="color:var(--green)">Proven (Cancels out)</td></tr>
+          <tr><td>Value at boundary (\(a=1\)) is \(1/3\)</td><td style="color:var(--green)">Proven</td></tr>
+          <tr><td>Physical interpretation</td><td style="color:var(--red)">Open</td></tr>
+          <tr><td>Connection to Fine-Structure Constant (\(1/137\))</td><td style="color:var(--red)">Unproven</td></tr>
+          <tr><td>Connection to Riemann Critical Line</td><td style="color:var(--red)">Unproven</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>C. Epistemological Conclusion</h3>
+    <p>The Zx Framework v0.4 is an <b>analytically bounded algebraic model</b>. An independently defined ODE system was shown to be asymptotically stable; this result does not establish dynamical stability of the algebraic v0.4 model. Any physical interpretation of \(\alpha^*\) or its connection to other physical constants must emerge from a <b>new testable physical hypothesis</b>, not from mere numerical similarity.</p>
+    <div class="callout good">
+      <b>Final Status:</b> <code>BOUNDED ✅</code> | <code>STABLE (ODE) ✅</code> | <code>DIMENSIONLESS RATIO ✅</code> | <code>PHYSICAL MEANING: OPEN</code>
+    </div>
+  </section>
+
+  <!-- Section 9: Night Session Summary -->
+  <section class="card">
+    <h2>9. Night Session Summary (2026-11-01)</h2>
+    <h3>1. Established Results (v0.4)</h3>
+    <ul>
+      <li><b>Range Condition:</b> The amplitude bound \(0 \le a \le 1\) is analytically proven and numerically verified.</li>
+      <li><b>Dimensionless Ratio:</b> The finite integral ratio \(\alpha^* = a/(a+2)\) is proven analytically.</li>
+      <li><b>Independence of \(x_p\):</b> The ratio \(\alpha^*\) is completely independent of \(x_p\).</li>
+      <li><b>Boundary Value:</b> At the critical limit \(a=1\), \(\alpha^* = 1/3\) exactly.</li>
+      <li><b>ODE Stability:</b> An independent ODE model was shown to have negative eigenvalues (\(-1/x_p\)).</li>
+    </ul>
+    <h3>2. Open Questions</h3>
+    <ul>
+      <li><b>Physical Interpretation:</b> The designation of \(\alpha^*\) as a "Branching Ratio" is a heuristic analogy only.</li>
+      <li><b>Connection to \(1/137\):</b> No established relation to the fine-structure constant.</li>
+      <li><b>Connection to Riemann:</b> No established relation to the critical line \(\text{Re}(s) = 1/2\).</li>
+    </ul>
+    <h3>3. Methodological Choice</h3>
+    <p>The denominator \((1-A)\) in the ratio was chosen because it is positive, finite, and directly tied to the closure identity \(Z+C+A=1\). It is a structural choice, not a claim of mathematical uniqueness.</p>
+    <h3>4. Closing Statement</h3>
+    <div class="callout">
+      "The value of this result lies in its clarity, not in its resemblance to another famous constant."<br><br>
+      We did not force \(x_p=21\) to succeed. We let the mathematics speak, and we documented the boundaries of what is proven and what remains open.
+    </div>
+  </section>
+
+  <!-- Section 10: Numerical Verification Summary -->
+  <section class="card">
+    <h2>10. Numerical Verification Summary & Visual Evidence</h2>
+    <p>While the analytical proofs establish the mathematical properties of the v0.4 model, the following numerical tests were conducted to verify the implementation and confirm the analytical results. <b>These tests provide implementation checks and consistency evidence. They do not establish universal mathematical claims beyond the proven arguments.</b></p>
+    
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Test</th><th scope="col">Description</th><th scope="col">Result</th></tr></thead>
+        <tbody>
+          <tr><td>Test 1</td><td>Basic Implementation & Identity Check</td><td>Identity error \(< 1.11 \times 10^{-16}\).</td></tr>
+          <tr><td>Test 2</td><td>Range Compliance Sweep (30,100 combinations)</td><td>Reported consistency with analytical bound.</td></tr>
+          <tr><td>Test 3</td><td>Sharp Bound Test (\(a = 0.999 \to 1.200\))</td><td>Reported threshold behavior consistent with theory.</td></tr>
+          <tr><td>Test 4</td><td>Exponential Stability (Lyapunov)</td><td>Implementation check of monotonic decay and \(\dot{V} < 0\).</td></tr>
+          <tr><td>Test 5</td><td>Peak Audit</td><td>Numerical peak matches analytical \(t_{peak}\) and \(C_{max}\).</td></tr>
+          <tr><td>Test 6</td><td>Scale Invariance</td><td>Reported bounds of \(A\) independent of \(x_p\).</td></tr>
+          <tr><td>Test 7</td><td>Randomized Property Test (500k samples)</td><td>Consistency evidence for identity and non-negativity.</td></tr>
+          <tr><td>Test 8</td><td>Edge Cases</td><td>Reported no numerical breakdown in tested edge cases.</td></tr>
+          <tr><td>Test 9</td><td>Visualization (4 Plots)</td><td>Visual confirmation of key properties.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <p class="muted" style="font-size:.9rem"><b>Note on Test 8:</b> The earlier observation of \(Z=0\) at \(t=1000\) was a printing format artifact. The actual value is \(\approx 2.57 \times 10^{-21}\).</p>
+
+    <h3>Visual Evidence (Test 9 Plots)</h3>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top:15px;">
+      <div>
+        <p style="text-align:center; font-size:0.9rem;">Figure 1: Time Evolution</p>
+        <img src="https://raw.githubusercontent.com/Jabri-web/Jabri-com/main/jabri_5/wells/21-1.png" alt="Time Evolution" loading="lazy">
+      </div>
+      <div>
+        <p style="text-align:center; font-size:0.9rem;">Figure 2: Phase Portrait</p>
+        <img src="https://raw.githubusercontent.com/Jabri-web/Jabri-com/main/jabri_5/wells/21-2.png" alt="Phase Portrait" loading="lazy">
+      </div>
+      <div>
+        <p style="text-align:center; font-size:0.9rem;">Figure 3: Sharp Threshold</p>
+        <img src="https://raw.githubusercontent.com/Jabri-web/Jabri-com/main/jabri_5/wells/21-3.png" alt="Sharp Threshold" loading="lazy">
+      </div>
+      <div>
+        <p style="text-align:center; font-size:0.9rem;">Figure 4: Scale Invariance</p>
+        <img src="https://raw.githubusercontent.com/Jabri-web/Jabri-com/main/jabri_5/wells/21-4.png" alt="Scale Invariance" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 11: Reference Implementation -->
+  <section class="card">
+    <h2>11. Appendix: Reference Implementation</h2>
+    <p>The following Python code implements the model and reproduces the basic identity and peak checks. The broader numerical audits are documented separately.</p>
+    
+<pre class="code-block"><code>import numpy as np
+
+def zx_v04(t, xp, a):
+    """
+    Zx Framework v0.4 - Bounded Interaction Model
+    
+    Parameters:
+    t  : time (scalar or array, >= 0)
+    xp : decay timescale (> 0)
+    a  : amplitude (0 <= a <= 1 for boundedness)
+    
+    Returns:
+    Z, C, A : arrays of the same shape as t
+    """
+    if xp <= 0:
+        raise ValueError("xp must be positive")
+    if np.any(np.asarray(t) < 0):
+        raise ValueError("t must be non-negative")
+
+    Z = np.exp(-np.asarray(t, dtype=float) / xp)
+    C = a * Z * (1.0 - Z)
+    A = (1.0 - Z) * (1.0 - a * Z)
+    return Z, C, A
+
+
+# --- Example: Basic Verification ---
+if __name__ == "__main__":
+    xp, a = 21, 0.5
+    t = np.linspace(0, 5 * xp, 2000)
+    Z, C, A = zx_v04(t, xp, a)
+
+    # Verify the closure identity
+    identity_error = np.max(np.abs(A - (1 - Z - C)))
+    print(f"Identity error: {identity_error:.2e}")  # Expected ~ 1e-16
+
+    # Verify the analytical peak
+    t_peak_exact = xp * np.log(2)
+    C_peak_exact = a / 4
+    idx = np.argmax(C)
+    print(f"Numerical t_peak: {t[idx]:.10f} (Analytical: {t_peak_exact:.10f})")
+    print(f"Numerical C_peak: {C[idx]:.10f} (Analytical: {C_peak_exact:.10f})")</code></pre>
+  </section>
+
+  <!-- Section 12: Research Integrity Note -->
+  <section class="card">
+    <h2>12. Research Integrity Note</h2>
+    <div class="callout warn">
+      Zx Framework v0.4 is a proposed bounded algebraic model.<br>
+      Its analytical boundedness result does not imply dynamical stability.<br>
+      Historical failures in previous versions remain unchanged.<br>
+      The value \(x_p = 21\) is a modeling choice.<br>
+      No special physical or mathematical status is inferred from the boundedness proof.
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    Al-Hindara · Zx Framework v0.4 — Bounded Interaction Model<br>
+    نسخة HTML مستقلة للمراجعة العلمية · نوفمبر 2026
+    <p style="margin-top:8px">© 2026 م – واحة الجبري | عبدالله محمد ناصر الجبري</p>
+  </footer>
+</div>
+</body>
+</html>
