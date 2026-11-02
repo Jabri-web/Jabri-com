@@ -426,6 +426,66 @@ a{color:var(--cyan)}
     </div>
   </section>
 
+<!-- ==================== Section 8: The Magic Angle ==================== -->
+<section class="card" aria-labelledby="sec8">
+  <h2 id="sec8">8. Geometric Extension: From Plane to Space (The Magic Angle)</h2>
+  <p>After proving in Section 1 that \( \tan(22.5^\circ) = \sqrt{2} - 1 \) in the 2D plane (The Tree and the Shadow), we now transition to 3D geometry. What happens if we move from a right-angled triangle to a cube?</p>
+  
+  <h3>The Magic Angle</h3>
+  <p>In a cube, the angle between the space diagonal (passing through the center) and any of its connecting edges is called the "Magic Angle". It is famous in Nuclear Magnetic Resonance (NMR) because it cancels out specific dipolar interactions in a magnetic field. Its value is:</p>
+  <div class="formula">θ_m = arccos(1/√3) = arctan(√2) ≈ 54.7356103°</div>
+  <p>It can also be expressed using the tangent function (tan):</p>
+  <div class="formula">tan(θ_m) = √2 ≈ 1.41421356</div>
+  
+  <h3>The Exact Mathematical Link with Frame 2</h3>
+  <p>What is the relationship between this angle and 22.5°?<br>
+    In the Tree and Shadow (plane): <span style="color:var(--gold)">\( \tan(22.5^\circ) = \sqrt{2} - 1 \)</span>.<br>
+    In the Cube (space): <span style="color:var(--gold)">\( \tan(54.7356^\circ) = \sqrt{2} \)</span>.<br>
+    This gives us an <strong>exact mathematical identity</strong>:</p>
+  <div class="formula" style="font-size: 1.2rem; color: var(--cyan);">tan(θ_m) = tan(22.5°) + 1</div>
+  <p>Both depend on the square root of 2, but in different dimensions! This proves that the constant \( \sqrt{2} \) plays a pivotal role in both planar and spatial geometry.</p>
+  
+  <div class="callout good">
+    <b>Conclusion:</b> The angle 22.5° is a quarter of a right angle (90°), whereas the Magic Angle 54.7356° is the spatial angle in a cube. The exact mathematical link between them is the identity: \( \tan(\theta_m) = \tan(22.5^\circ) + 1 \).
+  </div>
+  
+  <h3>Comparative Geometric Diagram</h3>
+  <div class="canvas-wrap" style="margin-top:14px; padding: 20px; display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+    
+    <!-- Plane (2D) -->
+    <div style="text-align: center;">
+      <svg viewBox="0 0 200 200" style="width: 180px; height: 180px;">
+        <polygon points="20,180 140,180 140,60" fill="none" stroke="#76d6e8" stroke-width="3" />
+        <path d="M 140 60 A 70 70 0 0 1 140 180" fill="none" stroke="#f2c879" stroke-width="2" />
+        <text x="145" y="120" fill="#f2c879" font-size="12" font-family="monospace">22.5°</text>
+        <text x="70" y="160" fill="#8bd5a5" font-size="11" font-family="monospace">tan(θ) = √2 - 1</text>
+      </svg>
+      <p style="color:var(--muted); font-size:0.85rem; margin-top:10px;">Plane (2D)<br>Tree &amp; Shadow</p>
+    </div>
+    
+    <!-- Space (3D) -->
+    <div style="text-align: center;">
+      <svg viewBox="0 0 200 200" style="width: 180px; height: 180px;">
+        <polygon points="40,140 100,140 100,80 40,80" fill="none" stroke="#76d6e8" stroke-width="2" />
+        <polygon points="40,80 100,80 130,50 70,50" fill="none" stroke="#76d6e8" stroke-width="2" />
+        <polygon points="100,140 130,110 130,50 100,80" fill="none" stroke="#76d6e8" stroke-width="2" />
+        <line x1="40" y1="140" x2="130" y2="50" stroke="#f2c879" stroke-width="2" stroke-dasharray="4 4" />
+        <path d="M 40 140 L 80 120" fill="none" stroke="#f2c879" stroke-width="1" />
+        <text x="80" y="110" fill="#f2c879" font-size="11" font-family="monospace">54.73°</text>
+        <text x="20" y="180" fill="#8bd5a5" font-size="11" font-family="monospace">tan(θ_m) = √2</text>
+      </svg>
+      <p style="color:var(--muted); font-size:0.85rem; margin-top:10px;">Space (3D)<br>Cube Diagonal</p>
+    </div>
+    
+  </div>
+  
+  <div class="callout warn" style="margin-top: 15px;">
+    <b>Methodological Note:</b> This section illustrates an exact mathematical geometric link between the plane and space. However, it <b>does not claim</b> a direct physical link between the shadow phenomenon in nature and the geometric properties of the cube, unless proven by an independent physical experiment.
+  </div>
+</section>
+
+
+
   <footer>
     Al-Hindara · Frame 2 — The Tree and the Shadow<br>
     Standalone HTML edition for scholarly review and reproduction · October 2026

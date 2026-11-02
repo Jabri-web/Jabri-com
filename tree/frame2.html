@@ -388,6 +388,10 @@ a{color:var(--cyan)}
     <div class="callout"><b>الاستنتاج المنضبط:</b> البرهان الهندسي دقيق. أما بيانات المانجو فهي استكشافية وتُظهر تقاربًا عدديًا بين متوسط R والقيمة √2−1، لا إثباتًا بأن الطبيعة تفرض هذه النسبة على الأشجار. لا يوجد في هذه الصفحة برهان على صلة بفرضية ريمان أو على قانون كوني أوسع.</div>
   </section>
 
+
+
+
+
   <section class="card" aria-labelledby="sec7">
     <h2 id="sec7">7. خطوات إعادة الإنتاج والروابط</h2>
     <ul>
@@ -423,6 +427,67 @@ a{color:var(--cyan)}
   
     </div>
   </section>
+
+
+<!-- ==================== القسم الجديد: الزاوية السحرية ==================== -->
+<section class="card" aria-labelledby="sec8">
+  <h2 id="sec8">8. الامتداد الهندسي: من المستوى إلى الفراغ (الزاوية السحرية)</h2>
+  <p>بعد أن أثبتنا في القسم الأول أن \( \tan(22.5^\circ) = \sqrt{2} - 1 \) في المستوى (الشجرة والظل)، ننتقل الآن إلى الهندسة الفراغية. ماذا يحدث إذا انتقلنا من مثلث قائم 2D إلى مكعب 3D؟</p>
+  
+  <h3>الزاوية السحرية (Magic Angle)</h3>
+  <p>في المكعب، الزاوية بين قطر المكعب (الخط المار من مركزه) وأحد أضلاعه المتصلة به تسمى "الزاوية السحرية". وهي مشهورة في تقنيات الرنين المغناطيسي النووي (NMR) لأنها تلغي تأثيرات معينة في المجال المغناطيسي. قيمتها:</p>
+  <div class="formula">θ_m = arccos(1/√3) = arctan(√2) ≈ 54.7356103°</div>
+  <p>ويمكن التعبير عنها باستخدام دالة الظل (tan):</p>
+  <div class="formula">tan(θ_m) = √2 ≈ 1.41421356</div>
+  
+  <h3>الرابط الرياضي الدقيق مع إطارنا (Frame 2)</h3>
+  <p>ما علاقة هذه الزاوية بـ 22.5°؟<br>
+    في الشجرة والظل (مستوى): <span style="color:var(--gold)">\( \tan(22.5^\circ) = \sqrt{2} - 1 \)</span>.<br>
+    في المكعب (فراغ): <span style="color:var(--gold)">\( \tan(54.7356^\circ) = \sqrt{2} \)</span>.<br>
+    هذا يعطينا <strong>هوية رياضية دقيقة</strong>:</p>
+  <div class="formula" style="font-size: 1.2rem; color: var(--cyan);">tan(θ_m) = tan(22.5°) + 1</div>
+  <p>كلتاهما تعتمدان على الجذر التربيعي للرقم 2، لكن في أبعاد مختلفة! هذا يثبت أن الثابت \( \sqrt{2} \) يلعب دوراً محورياً في كل من الهندسة المستوية والهندسة الفراغية.</p>
+  
+  <div class="callout good">
+    <b>الخلاصة:</b> الزاوية 22.5° هي ربع الزاوية القائمة (90°)، بينما الزاوية السحرية 54.7356° هي الزاوية الفراغية في المكعب. الرابط الرياضي الدقيق بينهما هو الهوية: \( \tan(\theta_m) = \tan(22.5^\circ) + 1 \).
+  </div>
+  
+  <h3>الرسم الهندسي المقارن</h3>
+  <div class="canvas-wrap" style="margin-top:14px; padding: 20px; display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+    
+    <!-- المستوى (2D) -->
+    <div style="text-align: center;">
+      <svg viewBox="0 0 200 200" style="width: 180px; height: 180px;">
+        <polygon points="20,180 140,180 140,60" fill="none" stroke="#76d6e8" stroke-width="3" />
+        <path d="M 140 60 A 70 70 0 0 1 140 180" fill="none" stroke="#f2c879" stroke-width="2" />
+        <text x="145" y="120" fill="#f2c879" font-size="12" font-family="monospace">22.5°</text>
+        <text x="70" y="160" fill="#8bd5a5" font-size="11" font-family="monospace">tan(θ) = √2 - 1</text>
+      </svg>
+      <p style="color:var(--muted); font-size:0.85rem; margin-top:10px;">المستوى (2D)<br>الشجرة والظل</p>
+    </div>
+    
+    <!-- الفراغ (3D) -->
+    <div style="text-align: center;">
+      <svg viewBox="0 0 200 200" style="width: 180px; height: 180px;">
+        <polygon points="40,140 100,140 100,80 40,80" fill="none" stroke="#76d6e8" stroke-width="2" />
+        <polygon points="40,80 100,80 130,50 70,50" fill="none" stroke="#76d6e8" stroke-width="2" />
+        <polygon points="100,140 130,110 130,50 100,80" fill="none" stroke="#76d6e8" stroke-width="2" />
+        <line x1="40" y1="140" x2="130" y2="50" stroke="#f2c879" stroke-width="2" stroke-dasharray="4 4" />
+        <path d="M 40 140 L 80 120" fill="none" stroke="#f2c879" stroke-width="1" />
+        <text x="80" y="110" fill="#f2c879" font-size="11" font-family="monospace">54.73°</text>
+        <text x="20" y="180" fill="#8bd5a5" font-size="11" font-family="monospace">tan(θ_m) = √2</text>
+      </svg>
+      <p style="color:var(--muted); font-size:0.85rem; margin-top:10px;">الفراغ (3D)<br>قطر المكعب</p>
+    </div>
+    
+  </div>
+  
+  <div class="callout warn" style="margin-top: 15px;">
+    <b>ملاحظة منهجية:</b> هذا القسم يوضح رابطاً هندسياً رياضياً دقيقاً بين المستوى والفراغ. لكنه <b>لا يدعي</b> وجود رابط فيزيائي مباشر بين ظاهرة الظل في الطبيعة وخصائص المكعب الهندسية، إلا إذا أثبتت تجربة فيزيائية مستقلة ذلك.
+  </div>
+</section>
+
+
 
   <footer>
     Al-Hindara · Frame 2 — The Tree and the Shadow<br>
