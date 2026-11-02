@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>Lab 01 | The Unifying Curve — المختبر الرياضي</title>
+<meta name="description" content="مختبر الواحة: دراسة العلاقة الرياضية α*(θ) = tanθ/(tanθ+2) التي تجمع بين هندسة الشجرة والظل (22.5°)، ونموذج Zx v0.4 (45°)، والزاوية السحرية (54.7°).">
+<link rel="canonical" href="https://jabri-com.vercel.app/tree/lab01.html">
+
+<!-- MathJax for equations -->
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+:root{--bg:#0b1220;--panel:#121e30;--panel2:#17263b;--ink:#edf4ff;--muted:#a8b8ce;--line:#2b405c;--gold:#f2c879;--cyan:#76d6e8;--green:#8bd5a5;--red:#ffb0a8}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#182b43 0,#0b1220 55%);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}
+.wrap{max-width:1120px;margin:auto;padding:20px}
+.hero,.card{border:1px solid var(--line);background:rgba(18,30,48,.94);border-radius:18px;padding:clamp(16px,3vw,28px);margin:14px 0;box-shadow:0 12px 32px #0002;position:relative}
+.hero{background:linear-gradient(135deg,#1b3048,#111d2e 70%);border-top:3px solid var(--gold)}
+.top-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:rgba(18,30,48,.9);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
+.nav-item{color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:8px;font-size:.85rem;font-weight:bold;border:1px solid transparent;transition:.3s}
+.nav-item:hover{color:var(--gold);border-color:var(--gold);background:rgba(242,200,121,.1)}
+.nav-item.active{color:#19202b;background:var(--gold);border-color:var(--gold);cursor:default}
+.kicker{color:var(--gold);font-weight:800;letter-spacing:.04em}
+h1{font-size:clamp(1.8rem,5vw,3.2rem);line-height:1.25;margin:.4rem 0}
+h2{font-size:1.45rem;margin:0 0 12px;color:var(--gold)}
+h3{font-size:1.08rem;color:var(--cyan)}
+p{margin:.5rem 0 1rem}
+.muted,small{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.stat{background:var(--panel2);padding:15px;border-radius:13px;border:1px solid var(--line)}
+.stat b{display:block;font-size:1.45rem;color:var(--cyan);direction:ltr;text-align:right}
+.formula{direction:ltr;text-align:center;font-size:clamp(1.1rem,3vw,1.6rem);padding:15px;background:#0b1524;border:1px solid #314966;border-radius:12px;overflow-wrap:anywhere;margin:12px 0}
+.callout{border-right:4px solid var(--gold);background:#2a261b;padding:12px 15px;border-radius:8px;margin:12px 0}
+.good{border-right-color:var(--green);background:#142a25}
+.warn{border-right-color:var(--red);background:#30201f}
+table{width:100%;border-collapse:collapse;min-width:620px;font-variant-numeric:tabular-nums}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:center}
+th{background:#1b2b41;color:var(--gold)}
+td{direction:ltr}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.btn{display:inline-block;padding:10px 15px;border-radius:9px;font-weight:800;text-decoration:none;margin:5px;transition:.3s;cursor:pointer;border:none;font-family:inherit;font-size:1rem}
+.btn-gold{background:var(--gold);color:#19202b}
+.btn-gold:hover{background:#e0b568}
+.btn-outline{background:transparent;border:1px solid var(--cyan);color:var(--cyan)}
+.btn-outline:hover{background:rgba(118,214,232,.1)}
+.btn-colab{background:#f9ab00;color:#111;font-weight:bold}
+.btn-colab:hover{background:#e09600}
+.btn-toggle{background:#233750;color:var(--ink);border:1px solid var(--line)}
+.btn-toggle:hover{background:#314966}
+.canvas-wrap{background:#0a1422;border:1px solid var(--line);border-radius:12px;padding:8px;overflow:hidden;text-align:center}
+.canvas-wrap img{max-width:100%;height:auto;border-radius:8px}
+.pill{display:inline-block;border:1px solid var(--line);background:#17263b;border-radius:99px;padding:3px 10px;margin:3px;color:var(--muted);font-size:.85rem}
+footer{text-align:center;color:var(--muted);padding:22px;font-size:.9rem}
+@media(max-width:600px){.wrap{padding:10px}.hero,.card{padding:15px;border-radius:13px}}
+
+pre.code-block {
+    background: #0b1524;
+    border: 1px solid #314966;
+    border-radius: 12px;
+    padding: 15px;
+    overflow-x: auto;
+    direction: ltr;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: #edf4ff;
+    display: none;
+    margin-top: 15px;
+}
+pre.code-block.show { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Navigation -->
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
+    <a href="../about-waha.html" class="nav-item">الواحة 🌴</a>
+    <a href="frame2.html" class="nav-item">Frame 2 (الشجرة)</a>
+    <a href="lab01.html" class="nav-item active">🧪 Lab 01 (المختبر)</a>
+    <a href="../jabri_5/wells/frame1.html" class="nav-item">Frame 1</a>
+    <a href="../jabri_5/wells/frame3.html" class="nav-item">Frame 3</a>
+    <a href="../jabri_5/wells/frame4.html" class="nav-item">Frame 4</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="kicker">AL-HINDARA · LAB 01 · NOVEMBER 2026</div>
+    <h1>المنحنى الموحد (The Unifying Curve)</h1>
+    <p>دراسة علاقة رياضية تجمع بين هندسة الشجرة والظل (Frame 2)، والنموذج التكاملي (v0.4)، والزاوية السحرية في الفراغ (Frame 2 §8) — عبر دالة واحدة.</p>
+    <div>
+      <span class="pill">المؤلف: م/ عبدالله محمد ناصر الجبري</span><br>
+      <span class="pill" style="color:var(--gold);border-color:var(--gold)">Primary Ref: Frame 1 DOI 10.5281/zenodo.23540283</span>
+      <span class="pill" style="color:var(--green);border-color:var(--green)">Frame 2 DOI: 10.5281/zenodo.23540796</span>
+    </div>
+  </header>
+
+  <!-- Section 1: Study (Updated per Reviewer) -->
+  <section class="card">
+    <h2>1. الدراسة: ثلاث قيم دقيقة على منحنى مقترح</h2>
+    <p>في المختبر، بدأنا بالدالة البنيوية التالية (والتي تعتمد على تعريف نسبة التكامل في v0.4):</p>
+    <div class="formula">\[ \alpha^*(\theta) = \frac{\tan \theta}{\tan \theta + 2} \]</div>
+    <p>عند تعويض الزوايا المرجعية المرتبطة بالإطارات، نحصل على ثلاث قيم دقيقة للدالة. ويعرض هذا المختبر العلاقة الحسابية بينها، دون افتراض أن المرور بهذه النقاط وحده يثبت اشتقاقًا موحدًا من الإطارات.</p>
+
+    <div class="table-scroll">
+      <table>
+        <caption class="muted" style="caption-side:top;padding:6px;text-align:right;font-size:.9rem">الجدول 1: القيم الثلاث على المنحنى المقترح.</caption>
+        <thead>
+          <tr>
+            <th>الزاوية \(\theta\)</th>
+            <th>\(\tan \theta\)</th>
+            <th>\(\alpha^*(\theta)\)</th>
+            <th>السياق (الإطار)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>\(22.5^\circ\)</td>
+            <td>\(\sqrt{2}-1\)</td>
+            <td>\(3-2\sqrt{2} \approx 0.1716\)</td>
+            <td><b>Frame 2:</b> \(\alpha^* = \tan^2(22.5^\circ)\) (مربع نسبة الظل)</td>
+          </tr>
+          <tr>
+            <td>\(45.0^\circ\)</td>
+            <td>\(1\)</td>
+            <td>\(1/3 \approx 0.3333\)</td>
+            <td><b>v0.4:</b> نسبة التكامل عند الحد الحاد \(a=1\)</td>
+          </tr>
+          <tr>
+            <td>\(\theta_m = \arctan(\sqrt{2})\)<br>\(\approx 54.7356^\circ\)</td>
+            <td>\(\sqrt{2}\)</td>
+            <td>\(\frac{\sqrt{2}}{\sqrt{2}+2} = \sqrt{2}-1 \approx 0.4142\)</td>
+            <td><b>Frame 2 §8:</b> الزاوية السحرية (Magic Angle)<br><small>\(\theta_m = \arccos(1/\sqrt{3})\)</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="callout good" style="margin-top:15px;">
+      <b>الرابط مع Frame 2 §8:</b> الزاوية السحرية \(\theta_m\)، التي تم تقديمها في Frame 2 §8 كزاوية هندسية في الفراغ (بين قطر المكعب وضلعه)، تظهر هنا كنقطة ثالثة دقيقة على المنحنى. هذا يربط رياضياً بين هندسة المستوى (22.5°)، والنموذج التكاملي (45°)، وهندسة الفراغ (54.7°).
+    </div>
+  </section>
+
+  <!-- Section 2: Visual Representation -->
+  <section class="card">
+    <h2>2. التمثيل البصري (Visual Representation)</h2>
+    <p>الرسم التالي يوضح المنحنى \(\alpha^*(\theta)\) مع النقاط الثلاث. تم توليده في Google Colab (رابط قابل لإعادة التشغيل أدناه).</p>
+    <div class="canvas-wrap">
+      <img src="lab01.png" alt="المنحنى الموحد: α*(θ) مع النقاط الثلاث (22.5°, 45°, 54.7°)" loading="lazy">
+      <p class="muted" style="font-size:.85rem;margin-top:8px;">الشكل 1: المنحنى \(\alpha^*(\theta)\) والنقاط الذهبية الثلاث. تم التوليد بواسطة Python/Matplotlib.</p>
+    </div>
+  </section>
+
+  <!-- Section 3: The Mathematical Identity (Updated Wording) -->
+  <section class="card">
+    <h2>3. الهوية الرياضية (The Half-Angle Identity)</h2>
+    <p>العلاقة الحسابية بين قيمة المنحنى عند \(22.5^\circ\) والهوية المثلثية لنصف الزاوية تتبع مباشرة من التعريف المعتمد للدالة:</p>
+    <div class="formula">\[ \alpha^*(22.5^\circ) = \frac{\sqrt{2}-1}{\sqrt{2}-1+2} = \frac{\sqrt{2}-1}{\sqrt{2}+1} = 3-2\sqrt{2} = (\sqrt{2}-1)^2 \]</div>
+    
+    <div class="callout good">
+      <b>النتيجة الدقيقة:</b> هذه هوية جبرية دقيقة ناتجة عن التعريف المعتمد للدالة والتعويض \(r=\tan(22.5^\circ)=\sqrt{2}-1\). التكافؤ عند \(45^\circ\) يعطي الثلث (\(1/3\)) كنتيجة لنفس التعريف.
+    </div>
+  </section>
+
+  <!-- Section 4: Geometric Identification (Updated with Note) -->
+  <section class="card">
+    <h2>4. التعيين الهندسي (Geometric Identification)</h2>
+    
+    <p>شرط الحدود في نموذج Zx v0.4 يتطلب \(0 \le a \le 1\). النسبة الهندسية في Frame 2 هي \(r = \tan(22.5^\circ) = \sqrt{2}-1\).</p>
+    
+    <p>يُعتمد التعيين التالي بوصفه <b>التعيين الهندسي المفضل (Preferred Geometric Identification)</b>:</p>
+    <div class="formula">\[ a(\theta) = \tan \theta \]</div>
+    <p>على المجال \(0^\circ \le \theta \le 45^\circ\)، لأنه يحافظ على التفسير المباشر لنسبة الظل إلى الارتفاع، ويعيد إنتاج نسبة Frame 2 عند \(22.5^\circ\)، ويصل إلى الحد الحاد \(a=1\) عند \(45^\circ\).</p>
+
+    <p>مع ذلك، فإن شرط الحدود \(0 \le a \le 1\) لا يحدد هذا التعيين بصورة فريدة؛ إذ توجد تعيينات بديلة تحقق الشرط نفسه (مثل \(a = \frac{2\tan\theta}{1+\tan\theta}\)). لذلك فإن تفضيل \(a = \tan\theta\) يستند إلى تفسيره الهندسي المباشر، وليس إلى تفرده الناتج عن شرط الحدود وحده.</p>
+
+    <p>أما النقطة \(\theta_m \approx 54.7356^\circ\)، فهي تقع على <b>الامتداد الرياضي</b> للمنحنى \(\alpha^*(\theta)\)، لكنها خارج المجال الزاوي المعتمد لتعيين \(a = \tan\theta\) في نموذج v0.4.</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>التعيين</th>
+            <th>عند \(22.5^\circ\)</th>
+            <th>عند \(45^\circ\)</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>\(a = \tan\theta\)</td>
+            <td>0.414</td>
+            <td>1.000</td>
+            <td><b>مُفضل (Preferred)</b></td>
+          </tr>
+          <tr>
+            <td>\(a = \frac{2\tan\theta}{1+\tan\theta}\)</td>
+            <td>0.586</td>
+            <td>1.000</td>
+            <td>بديل يحقق شرط الحدود</td>
+          </tr>
+          <tr>
+            <td>\(a = 2\tan\theta\)</td>
+            <td>0.828</td>
+            <td>2.000</td>
+            <td>غير صالح (يتجاوز 1)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="muted" style="font-size:.9rem;margin-top:10px;"><b>ملاحظة اصطلاحية:</b> \(a\) هو معامل نموذج Zx v0.4، في حين أن \(\alpha^*\) هي قيمة الدالة المختبرية المعرفة في Section 1. وهما كميتان مختلفتان في التعريف الحالي، ولا يُفترض تساويهما.</p>
+    <p class="muted" style="font-size:.9rem;">الحالة العلمية: تعيين هندسي مفضل؛ أما الاشتقاق الطبيعي الكامل الذي يفرض هذا التعيين دون افتراضه، فما زال هدفاً بحثياً مفتوحاً.</p>
+  </section>
+
+  <!-- Section 5: Reproducibility -->
+  <section class="card">
+    <h2>5. إعادة التشغيل (Reproducibility)</h2>
+    <p>يمكنك إعادة توليد الرسم البياني والتحقق من الأرقام بنفسك عبر Google Colab، أو استعراض الكود مباشرة هنا:</p>
+    
+    <div style="text-align:center;margin:20px 0">
+      <a href="https://colab.research.google.com/drive/12g5BLZi8xv4vtKYR4ejsrXBJz-U53MaE" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn btn-colab">
+         🚀 Open in Google Colab
+      </a>
+      <button onclick="toggleCode()" class="btn btn-toggle" id="toggleBtn">👁️ إظهار الكود</button>
+      <a href="frame2.html" class="btn btn-outline">📄 العودة إلى Frame 2</a>
+    </div>
+
+    <!-- كود بايثون (مخفي افتراضياً) -->
+    <pre class="code-block" id="pythonCode">
+import numpy as np
+import matplotlib.pyplot as plt
+
+# تعريف الدالة
+theta_deg = np.linspace(0.1, 89.9, 1000)
+theta_rad = np.radians(theta_deg)
+tan_theta = np.tan(theta_rad)
+alpha_star = tan_theta / (tan_theta + 2)
+
+# النقاط الذهبية الثلاث
+points = [
+    (22.5, 3 - 2*np.sqrt(2), r"\(22.5^\circ \rightarrow 3-2\sqrt{2}\) (Tree Shadow)"),
+    (45.0, 1/3, r"\(45^\circ \rightarrow 1/3\) (v0.4)"),
+    (54.7356, np.sqrt(2)-1, r"\(54.7356^\circ \rightarrow \sqrt{2}-1\) (Magic Angle)")
+]
+
+# الرسم
+plt.figure(figsize=(10, 6))
+plt.plot(theta_deg, alpha_star, 'b-', linewidth=2, label=r'\(\alpha^*(\theta) = \frac{\tan \theta}{\tan \theta + 2}\)')
+
+# إضافة النقاط
+for x, y, label in points:
+    plt.scatter(x, y, color='red', s=100, zorder=5)
+    plt.annotate(label, (x, y), textcoords="offset points", xytext=(10, 10), ha='left', fontsize=10, bbox=dict(boxstyle="round,pad=0.3", fc="yellow", alpha=0.5))
+
+# تنسيق
+plt.axhline(0, color='black', linewidth=0.5)
+plt.axhline(1/3, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
+plt.axvline(22.5, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
+plt.axvline(45, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
+plt.axvline(54.7356, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
+
+plt.title(r'The Unifying Curve: \(\alpha^*(\theta)\) connecting Frame 2 and v0.4', fontsize=14)
+plt.xlabel(r'Angle \(\theta\) (degrees)', fontsize=12)
+plt.ylabel(r'\(\alpha^*(\theta)\)', fontsize=12)
+plt.legend(fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.xlim(0, 90)
+plt.ylim(0, 0.5)
+
+plt.tight_layout()
+plt.show()
+    </pre>
+
+    <p class="muted" style="font-size:.85rem;text-align:center;margin-top:15px;">الرابط الأصلي: <code style="direction:ltr;display:inline-block">https://colab.research.google.com/drive/12g5BLZi8xv4vtKYR4ejsrXBJz-U53MaE</code></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    Al-Hindara · Lab 01 — The Unifying Curve<br>
+    نسخة HTML مستقلة للمراجعة العلمية · نوفمبر 2026
+    <p style="margin-top:8px">© 2026 م – واحة الجبري | عبدالله محمد ناصر الجبري</p>
+  </footer>
+</div>
+
+<!-- Script for Toggle Button -->
+<script>
+function toggleCode() {
+    const codeBlock = document.getElementById('pythonCode');
+    const btn = document.getElementById('toggleBtn');
+    
+    if (codeBlock.classList.contains('show')) {
+        codeBlock.classList.remove('show');
+        btn.innerHTML = '👁️ إظهار الكود';
+    } else {
+        codeBlock.classList.add('show');
+        btn.innerHTML = '🙈 إخفاء الكود';
+    }
+}
+</script>
+
+</body>
+</html>
