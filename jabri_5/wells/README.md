@@ -240,6 +240,23 @@ Figure 4: Scale Invariance
 Plots A against the normalized time t/x_p for x_p = 5, 21, 100. The curves overlap exactly, proving that the bounds are independent of the timescale parameter.
 https://raw.githubusercontent.com/jabri_5/wells/main/21-4.png
 
+
+
+**Figure 1: Time Evolution of \(Z(t)\), \(C(t)\), and \(A(t)\)**
+*Shows the exponential decay of \(Z\), the transient peak of \(C\) at \(t_{peak} = x_p \ln(2)\), and the monotonic rise of \(A\). The closure identity \(A+Z+C=1\) is visually evident.*
+![Time Evolution](https://raw.githubusercontent.com/Jabri-web/Jabri-com/main/jabri_5/wells/21-1.png)
+
+**Figure 2: Phase Portrait (\(A\) vs \(C\))**
+*Demonstrates the bounded parabolic trajectory in the phase space. The start point is \((C,A)=(0,0)\) and the end point is \((0,1)\).*
+![Phase Portrait](https://raw.githubusercontent.com/Jabri-web/Jabri-com/main/jabri_5/wells/21-2.png)
+
+**Figure 3: Sharp Threshold (\(a \approx 1\))**
+*Highlights the critical boundary. For \(a > 1\) (e.g., \(a=1.001\)), the residual component \(A(t)\) dips below zero, confirming the sharp analytical bound.*
+![Sharp Threshold](https://raw.githubusercontent.com/Jabri-web/Jabri-com/main/jabri_5/wells/21-3.png)
+
+**Figure 4: Scale Invariance**
+*Plots \(A\) against the normalized time \(t/x_p\) for \(x_p = 5, 21, 100\). The curves overlap exactly, proving that the bounds are independent of the timescale parameter.*
+![Scale Invariance](https://raw.githubusercontent.com/Jabri-web/Jabri-com/main/jabri_5/wells/21-4.png)
 ---
 
 11. Appendix: Reference Implementation
@@ -313,8 +330,6 @@ No special physical or mathematical status is inferred from the boundedness proo
 · حدود الصلاحية والمسائل المفتوحة (Sections 8, 9, 12).
 
 بهذا الشكل، لا يمكن لأي مراجع أن يتهم العمل بالمبالغة أو عدم الدقة. لقد تركنا الرياضيات تتحدث، ووثقنا بوضوح ما تم إثباته وما تبقى مفتوحاً.
-
-هل تريد أن نبدأ الآن في مناقشة مقترح v0.5؟ أم تفضل أن نغلق الجلسة هنا ونترك v0.4 موثقاً رسمياً؟
 
 #_______________
 
