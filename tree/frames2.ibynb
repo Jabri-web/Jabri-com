@@ -1,0 +1,302 @@
+import numpy as np
+from scipy.interpolate import BSpline
+from scipy.linalg import eigh, qr
+import matplotlib.pyplot as plt
+import time
+
+# ============================================================
+# 1. تعريفات أساسية (متجهية وآمنة)
+# ============================================================
+PI2 = 2 * np.pi
+XP = 21.0
+
+def g_vector(u, xp=XP):
+    u = np.asarray(u, dtype=float)
+    result = np.zeros_like(u)
+    mask = (u > 0) & (u < PI2)
+    um = u[mask]
+    result[mask] = (um / PI2)**5 * np.log(PI2 / um) * np.exp(-PI2 / (xp * um))
+    return result
+
+def p_vector(u, xp=XP):
+    u = np.asarray(u, dtype=float)
+    result = np.zeros_like(u)
+    mask = (u > 0) & (u < PI2)
+    um = u[mask]
+    result[mask] = 5.0 / um - 1.0 / (um * np.log(PI2 / um)) + PI2 / (xp * um**2)
+    return result
+
+def g_prime_independent(u, xp=XP):
+    u = np.asarray(u, dtype=float)
+    h = 1e-6 * np.minimum(u, PI2 - u)
+    return (g_vector(u + h, xp) - g_vector(u - h, xp)) / (2.0 * h)
+
+# ============================================================
+# 2. بناء أساس B-spline والعقد
+# ============================================================
+def build_bspline_basis(eps, N_internal, degree=3):
+    a, b = eps, PI2 - eps
+    internal = np.linspace(a, b, N_internal + 2)[1:-1]
+    knots = np.concatenate([[a] * (degree + 1), internal, [b] * (degree + 1)])
+    n_basis = len(knots) - degree - 1
+    basis = []
+    for i in range(n_basis):
+        c = np.zeros(n_basis)
+        c[i] = 1.0
+        basis.append(BSpline(knots, c, degree, extrapolate=False))
+    return knots, basis
+
+# ============================================================
+# 3. التكامل القطعي (Piecewise Gauss)
+# ============================================================
+def build_piecewise_gauss(knots, n_local=20):
+    x_local, w_local = np.polynomial.legendre.leggauss(n_local)
+    u_quad, w_quad = [], []
+    for i in range(len(knots) - 1):
+        a, b = knots[i], knots[i+1]
+        if b <= a: continue
+        u_local = 0.5 * (b - a) * x_local + 0.5 * (a + b)
+        w_scaled = 0.5 * (b - a) * w_local
+        u_quad.extend(u_local)
+        w_quad.extend(w_scaled)
+    return np.asarray(u_quad), np.asarray(w_quad)
+
+# ============================================================
+# 4. حساب المصفوفات (الأساس العام B-spline)
+# ============================================================
+def compute_matrices_bspline(basis, u_quad, w_quad):
+    n = len(basis)
+    phi_vals = np.array([bs(u_quad) for bs in basis])
+    phi_prime_vals = np.array([bs.derivative()(u_quad) for bs in basis])
+    p_vals = p_vector(u_quad, XP)
+    
+    # A phi = phi' - p*phi
+    A_phi_vals = phi_prime_vals - p_vals[None, :] * phi_vals
+    g_vals = g_vector(u_quad, XP)
+
+    M = (phi_vals * w_quad) @ phi_vals.T
+    Q = (A_phi_vals * w_quad) @ A_phi_vals.T
+    b_vec = (phi_vals * w_quad) @ g_vals
+    return M, Q, b_vec
+
+# ============================================================
+# 5. حساب المصفوفات (الأساس البديل g*psi)
+# ============================================================
+def compute_matrices_gpsi(basis, u_quad, w_quad):
+    n = len(basis)
+    # psi = B-splines
+    psi_vals = np.array([bs(u_quad) for bs in basis])
+    psi_prime_vals = np.array([bs.derivative()(u_quad) for bs in basis])
+    
+    g_vals = g_vector(u_quad, XP)
+    g2_w = g_vals**2 * w_quad
+    
+    # M_ij = int g^2 psi_i psi_j
+    M = (psi_vals * g2_w) @ psi_vals.T
+    # Q_ij = int g^2 psi_i' psi_j'
+    Q = (psi_prime_vals * g2_w) @ psi_prime_vals.T
+    
+    # القيد: <g*psi, g> = int g^2 psi = 0
+    b_vec = (psi_vals * g2_w) @ np.ones_like(u_quad)
+    return M, Q, b_vec
+
+# ============================================================
+# 6. حل المسألة المقيدة
+# ============================================================
+def solve_constrained_eigen(M, Q, b_vec):
+    n = M.shape[0]
+    # QR للقيد
+    Z, _ = qr(b_vec.reshape(-1, 1), mode='full')
+    Z = Z[:, 1:] # متمم القيد
+    
+    Q_red = Z.T @ Q @ Z
+    M_red = Z.T @ M @ Z
+    eigenvalues, eigenvectors = eigh(Q_red, M_red)
+    
+    lambda_1 = eigenvalues[0]
+    c = Z @ eigenvectors[:, 0]
+    
+    # اختبار رتبة القيد
+    constraint_check = np.linalg.norm(b_vec.T @ Z)
+    return lambda_1, c, constraint_check
+
+# ============================================================
+# 7. تشغيل الاختبار الشامل
+# ============================================================
+def run_test():
+    print("="*70)
+    print("1. اختبار المشتقة المستقلة (||g' - p*g||)")
+    u_test = np.linspace(0.1, PI2 - 0.1, 1000)
+    res = g_prime_independent(u_test) - p_vector(u_test) * g_vector(u_test)
+    print(f"   norm residual = {np.sqrt(np.trapezoid(res**2, u_test)):.4e}")
+
+    print("\n" + "="*70)
+    print("2. اختبار تقارب التكامل (epsilon=1e-3, N_internal=20)")
+    eps, N = 1e-3, 20
+    knots, basis = build_bspline_basis(eps, N)
+    for n_local in [8, 12, 20, 32]:
+        u_q, w_q = build_piecewise_gauss(knots, n_local)
+        M, Q, b = compute_matrices_bspline(basis, u_q, w_q)
+        lam, _, _ = solve_constrained_eigen(M, Q, b)
+        print(f"   n_local={n_local:2d} -> lambda_1 = {lam:.8e}")
+
+    print("\n" + "="*70)
+    print("3. مقارنة الأساسين (epsilon=1e-3, N_internal=20, n_local=20)")
+    u_q, w_q = build_piecewise_gauss(knots, 20)
+    
+    # B-spline العام
+    M_b, Q_b, b_b = compute_matrices_bspline(basis, u_q, w_q)
+    lam_b, _, check_b = solve_constrained_eigen(M_b, Q_b, b_b)
+    print(f"   B-spline (base): lambda_1 = {lam_b:.8e}, ||b^T Z|| = {check_b:.2e}")
+    
+    # الأساس البديل g*psi
+    M_g, Q_g, b_g = compute_matrices_gpsi(basis, u_q, w_q)
+    lam_g, _, check_g = solve_constrained_eigen(M_g, Q_g, b_g)
+    print(f"   g*psi (alt):     lambda_1 = {lam_g:.8e}, ||b^T Z|| = {check_g:.2e}")
+
+    print("\n" + "="*70)
+    print("4. اختبار التقارب (eps=1e-3, n_local=20, B-spline)")
+    for N in [10, 20, 40]:
+        knots_N, basis_N = build_bspline_basis(eps, N)
+        u_qN, w_qN = build_piecewise_gauss(knots_N, 20)
+        M, Q, b = compute_matrices_bspline(basis_N, u_qN, w_qN)
+        lam, _, _ = solve_constrained_eigen(M, Q, b)
+        print(f"   N={N:2d} -> lambda_1 = {lam:.8e}")
+
+if __name__ == '__main__':
+    run_test()
+    
+    
+    
+    //cell2:
+    
+    
+    import numpy as np
+from scipy.interpolate import BSpline
+from scipy.linalg import eigh, qr
+import matplotlib.pyplot as plt
+import time
+
+# ============================================================
+# 1. تعريفات أساسية (متجهية وآمنة)
+# ============================================================
+PI2 = 2 * np.pi
+XP = 21.0
+
+def g_vector(u, xp=XP):
+    u = np.asarray(u, dtype=float)
+    result = np.zeros_like(u)
+    mask = (u > 0) & (u < PI2)
+    um = u[mask]
+    result[mask] = (um / PI2)**5 * np.log(PI2 / um) * np.exp(-PI2 / (xp * um))
+    return result
+
+def p_vector(u, xp=XP):
+    u = np.asarray(u, dtype=float)
+    result = np.zeros_like(u)
+    mask = (u > 0) & (u < PI2)
+    um = u[mask]
+    result[mask] = 5.0 / um - 1.0 / (um * np.log(PI2 / um)) + PI2 / (xp * um**2)
+    return result
+
+# ============================================================
+# 2. بناء أساس B-spline والعقد
+# ============================================================
+def build_bspline_basis(eps, N_internal, degree=3):
+    a, b = eps, PI2 - eps
+    internal = np.linspace(a, b, N_internal + 2)[1:-1]
+    knots = np.concatenate([[a] * (degree + 1), internal, [b] * (degree + 1)])
+    n_basis = len(knots) - degree - 1
+    basis = []
+    for i in range(n_basis):
+        c = np.zeros(n_basis)
+        c[i] = 1.0
+        basis.append(BSpline(knots, c, degree, extrapolate=False))
+    return knots, basis
+
+# ============================================================
+# 3. التكامل القطعي (Piecewise Gauss)
+# ============================================================
+def build_piecewise_gauss(knots, n_local=20):
+    x_local, w_local = np.polynomial.legendre.leggauss(n_local)
+    u_quad, w_quad = [], []
+    for i in range(len(knots) - 1):
+        a, b = knots[i], knots[i+1]
+        if b <= a: continue
+        u_local = 0.5 * (b - a) * x_local + 0.5 * (a + b)
+        w_scaled = 0.5 * (b - a) * w_local
+        u_quad.extend(u_local)
+        w_quad.extend(w_scaled)
+    return np.asarray(u_quad), np.asarray(w_quad)
+
+# ============================================================
+# 4. حساب المصفوفات
+# ============================================================
+def compute_matrices_bspline(basis, u_quad, w_quad):
+    n = len(basis)
+    phi_vals = np.array([bs(u_quad) for bs in basis])
+    phi_prime_vals = np.array([bs.derivative()(u_quad) for bs in basis])
+    p_vals = p_vector(u_quad, XP)
+    A_phi_vals = phi_prime_vals - p_vals[None, :] * phi_vals
+    g_vals = g_vector(u_quad, XP)
+
+    M = (phi_vals * w_quad) @ phi_vals.T
+    Q = (A_phi_vals * w_quad) @ A_phi_vals.T
+    b_vec = (phi_vals * w_quad) @ g_vals
+    return M, Q, b_vec
+
+# ============================================================
+# 5. حل المسألة المقيدة (محسّن بملاحظات المشاكس)
+# ============================================================
+def solve_constrained_eigen(M, Q, b_vec, num_eigs=3):
+    b = np.asarray(b_vec, dtype=float).reshape(-1)
+    if np.linalg.norm(b) < 1e-14:
+        raise ValueError("Constraint vector is numerically zero.")
+        
+    # QR للقيد
+    Z, _ = qr(b[:, None], mode="full")
+    Z = Z[:, 1:] # متمم القيد
+    
+    Q_red = Z.T @ Q @ Z
+    M_red = Z.T @ M @ Z
+    
+    # طلب أول 3 قيم ذاتية لفحص الفجوة بين lambda_1 و lambda_2
+    eigenvalues, eigenvectors = eigh(Q_red, M_red)
+    
+    lambdas = eigenvalues[:num_eigs]
+    c = Z @ eigenvectors[:, 0] # متجه القيمة الأولى فقط
+    
+    # اختبارات المشاكس
+    constraint_residual = abs(b @ c)
+    orthogonality_residual = np.linalg.norm(b @ Z)
+    
+    return lambdas, c, constraint_residual, orthogonality_residual
+
+# ============================================================
+# 6. تشغيل الاختبار الشامل
+# ============================================================
+def run_test():
+    print("="*70)
+    print("5. اختبار تقارب epsilon (N=20, n_local=20)")
+    print("="*70)
+    for eps in [1e-2, 1e-3, 1e-4, 1e-5]:
+        t0 = time.time()
+        knots, basis = build_bspline_basis(eps, 20)
+        u_q, w_q = build_piecewise_gauss(knots, 20)
+        M, Q, b = compute_matrices_bspline(basis, u_q, w_q)
+        lams, c, res, orth = solve_constrained_eigen(M, Q, b, num_eigs=3)
+        t1 = time.time()
+        print(f"eps={eps:1.0e} | lambda_1={lams[0]:.8f} | lambda_2={lams[1]:.8f} | lambda_3={lams[2]:.8f} | |b^Tc|={res:.1e} | t={t1-t0:.1f}s")
+
+    print("\n" + "="*70)
+    print("6. اختبار الاستقرار الطيفي (epsilon=1e-3, n_local=20)")
+    print("="*70)
+    for N in [10, 20, 40]:
+        knots, basis = build_bspline_basis(1e-3, N)
+        u_q, w_q = build_piecewise_gauss(knots, 20)
+        M, Q, b = compute_matrices_bspline(basis, u_q, w_q)
+        lams, c, res, orth = solve_constrained_eigen(M, Q, b, num_eigs=3)
+        print(f"N={N:2d} | lambda_1={lams[0]:.8f} | lambda_2={lams[1]:.8f} | lambda_3={lams[2]:.8f}")
+
+if __name__ == '__main__':
+    run_test()

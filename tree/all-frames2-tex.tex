@@ -1,0 +1,298 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{fancyhdr}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Al-Hindara Project}
+\chead{\small v7.7.2 Audit Draft (Post-\S Z)}
+\rhead{\small Abdulla M. N. Al-Jabri}
+\lfoot{\small ORCID: 0009-0003-3319-3822}
+\cfoot{\small \thepage}
+\rfoot{\small DOI: 10.5281/zenodo.23602940}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\lstset{
+ basicstyle=\footnotesize\ttfamily,
+ breaklines=true,
+ frame=single,
+ backgroundcolor=\color{gray!6},
+ tabsize=4
+}
+
+\title{A Four-Frame Exploratory Framework:\\
+Numerical Damping, Geometric Ratios, Algebraic Symmetry-Breaking,\\
+and Spectral Domain Analysis\\
+\large v7.7.2 Audit Release — Numerical Variational Evidence}
+\author{Abdulla M. N. Al-Jabri\\ Independent Researcher, Sana'a, Yemen\\ ORCID: 0009-0003-3319-3822 --- \href{mailto:jabri62018@gmail.com}{jabri62018@gmail.com}}
+\date{November 3, 2026}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+This paper consolidates four exploratory frameworks of the Al-Hindara project, presented with an explicit methodological audit (\S Z) that distinguishes between what has been proven, what has been numerically verified, what has been chosen as a model, and what remains open. 
+The frameworks are: (1) a numerical damping function; (2) a geometric ratio with exploratory field observations; (3) an algebraic gauging identity; (4) a spectral problem where the kernel $g$ acts as a formal zero mode.
+
+The v7.7.2 corrective path establishes the analytical domain inclusion for the zero mode. Furthermore, it presents a numerical variational audit using a constrained B-spline Rayleigh--Ritz method. The numerical evidence strongly suggests a positive spectral gap ($\lambda_{1,\mathrm{RR}} \approx 1.7685$), but the identification of this value with the continuous self-adjoint realization remains an open analytical question. This document does not claim a mathematical closure of the spectral problem.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Sturm--Liouville theory; spectral domain analysis; Rayleigh--Ritz method; spectral gap; B-splines.
+
+\tableofcontents
+\vspace{0.5cm}
+
+% ============================================================
+\section{Introduction and Methodology}\label{sec:intro}
+% ============================================================
+
+The Al-Hindara project explores mathematical structures across numerical, geometric, and algebraic domains. The methodology of this paper separates claims into four categories:
+\begin{enumerate}
+\item \textbf{Analytically Proven:} Exact identities and algebraic relations derived from explicit definitions, with proof sketches.
+\item \textbf{Numerically Verified:} Reproducible computations (e.g., Rayleigh-Ritz eigenvalues), presented as supporting evidence—not as proof.
+\item \textbf{Empirically Observed:} Exploratory data presented without claims of universal physical laws.
+\item \textbf{Open:} Questions not yet resolved in the current path.
+\end{enumerate}
+
+\textbf{The general status of Frame 4 remains open.}
+
+% ============================================================
+\section{The Numerical Damping Framework (Frame 1)}\label{sec:numerical}
+% ============================================================
+
+\subsection{Definition and Sign Analysis}
+We consider the real function $Z(x; x_p)$ defined on $x \ge 1$:
+\begin{equation}\label{eq:Z}
+Z(x; x_p) = x^{-5} \ln(x) \sin\left(\frac{2\pi}{x}\right) e^{-x/x_p}.
+\end{equation}
+For $x_p > 0$, the sign of $Z(x)$ is dictated by $\sin(2\pi/x)$. Thus, $Z(x) < 0$ on $(1, 2)$, $Z(2) = 0$, and $Z(x) > 0$ on $(2, \infty)$. The roots are $x=1$ and $x=2$.
+
+\subsection{The Accumulation Function}
+Define $A(x) := \int_1^x Z(t; 21)\, dt$. Since $A'(x) = Z(x)$, $A(x)$ strictly decreases on $(1, 2)$, reaches a global minimum at $x=2$, and strictly increases for all $x > 2$.
+
+% ============================================================
+\section{The Scaling Bridge (v2.2)}\label{sec:bridge}
+% ============================================================
+
+The bridge is a \emph{dimensional scaling} operation:
+\begin{equation}\label{eq:bridge}
+Q_{\text{scaled}} = \underbrace{z}_{\text{dimensionless}} \times \underbrace{\Lambda_{\text{scale}}}_{\text{units}}.
+\end{equation}
+It does not prove any mathematical model or convert $Z(x)$ into a physical field.
+
+% ============================================================
+\section{Geometric Ratios (Frame 2)}\label{sec:geometric}
+% ============================================================
+
+At \(\theta = 22.5^\circ\):
+\begin{equation}\label{eq:tan}
+\tan(22.5^\circ) = \sqrt{2} - 1 \approx 0.41421356.
+\end{equation}
+
+\begin{table}[h!]
+\centering
+\caption{Exploratory field measurements of crown ratios.}
+\begin{tabular}{cccccc}
+\toprule
+Tree & \(H\) (m) & \(h\) (m) & \(C=H-h\) (m) & \(R=C/H\) & Deviation from \(\sqrt{2}-1\)\\
+\midrule
+1 & 7.80 & 4.50 & 3.30 & 0.42308 & \(+0.00887\)\\
+2 & 8.50 & 5.00 & 3.50 & 0.41176 & \(-0.00245\)\\
+3 & 7.20 & 4.20 & 3.00 & 0.41667 & \(+0.00245\)\\
+4 & 9.00 & 5.40 & 3.60 & 0.40000 & \(-0.01421\)\\
+5 & 7.50 & 4.40 & 3.10 & 0.41333 & \(-0.00088\)\\
+\midrule
+\multicolumn{3}{r}{\textbf{Mean \(R\):}} & & \textbf{0.41297} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Algebraic Symmetry-Breaking (Frame 3)}\label{sec:algebraic}
+% ============================================================
+
+Let \(u \in (0, 2\pi)\) and define the kernel:
+\begin{equation}\label{eq:g}
+g(u) := \left(\frac{u}{2\pi}\right)^{5} \ln\!\left(\frac{2\pi}{u}\right) e^{-2\pi/(x_p u)}.
+\end{equation}
+Let \(p(u) := g'(u)/g(u)\). Define \(\mathcal{H}_g\):
+\begin{equation}\label{eq:Hg}
+\mathcal{H}_g[f] := -g(u)\frac{d^2}{du^2} \left(\frac{f(u)}{g(u)}\right).
+\end{equation}
+
+\begin{proposition}[Gauging Identity]
+For any \(Y \in C^2(0, 2\pi)\), \(\mathcal{H}_g[gY] = -gY''\).
+\end{proposition}
+
+Define unweighted \(L^2\) normalized states \(\Psi_n(u) = g(u)Y_n(u)/\sqrt{N_n}\), with \(Y_n(u) = \sin(nu/2)\). The numerical integration at \(x_p=21\) yields:
+\begin{equation}\label{eq:R}
+R_{13/12} = \frac{|\mathcal{A}_{13}|^2}{|\mathcal{A}_{12}|^2} \approx 0.6035155248.
+\end{equation}
+This ratio is a numerical fingerprint, not a universal constant.
+
+% ============================================================
+\section{The Spectral Problem (Frame 4)}\label{sec:spectral}
+% ============================================================
+
+\subsection{The Operator and the Formal Zero Mode}
+Define the Schr\"odinger-like operator:
+\begin{equation}\label{eq:L}
+L := -\partial_u^2 + V_{\text{eff}}(u), \qquad V_{\text{eff}}(u) := \frac{g''(u)}{g(u)}.
+\end{equation}
+
+\begin{proposition}[Formal Zero Mode]\label{prop:zero}
+The kernel \(g\) satisfies \(Lg = 0\) on the open interval \((0, 2\pi)\) as a formal identity. To be an actual eigenfunction, the domain and boundary conditions must be specified.
+\end{proposition}
+
+\subsection{Analytical Domain and the Kernel}
+Let \(A = \partial_u - p\) with \(p = g'/g\). The quadratic form is \(q_F[f] = \|Af\|_{L^2}^2\). 
+
+\begin{lemma}[Domain Inclusion]\label{lem:domain}
+The function \(g\) belongs to the closed form domain \(D(q_F)\), and consequently \(g \in \mathcal{D}(L_F)\) with \(L_F g = 0\).
+\end{lemma}
+\begin{proof}[Sketch]
+\(g \in L^2\) and \(Ag = 0 \in L^2\). By using smooth two-sided cutoff functions \(\chi_\epsilon\), we can approximate \(g\) in the form norm. The cutoff errors are \(\int |\chi_\epsilon' g|^2 du \sim \epsilon^9\) at \(0^+\) and \(\sim \epsilon\) at \(2\pi^-\). Thus \(g \in D(q_F)\), and by the definition of the form-associated operator, \(g \in \mathcal{D}(L_F)\) with \(L_F g = 0\).
+\end{proof}
+
+\begin{lemma}[One-Dimensional Kernel]\label{lem:kernel}
+\(\dim \ker L_F = 1\).
+\end{lemma}
+
+\subsection{Numerical Variational Audit}
+A constrained B-spline Rayleigh--Ritz computation was performed for the quadratic form
+\[
+Q[f]=\int_{\varepsilon}^{2\pi-\varepsilon} |f'(u)-p(u)f(u)|^2\,du,
+\]
+subject to the orthogonality constraint \(\int_{\varepsilon}^{2\pi-\varepsilon} f(u)g(u)\,du=0\).
+
+The numerical investigation included piecewise Gauss--Legendre quadrature (8 to 32 local nodes), endpoint truncations from \(10^{-2}\) to \(10^{-5}\), B-spline refinements (10 to 40 internal knots), and a comparison between standard B-splines and the weighted representation \(f=g\psi\).
+
+\begin{table}[h!]
+\centering
+\caption{Constrained Rayleigh--Ritz eigenvalues for $N=40$, $\varepsilon=10^{-3}$.}
+\begin{tabular}{ccc}
+\toprule
+Eigenvalue & Value & Spectral Gap \\
+\midrule
+\(\lambda_{1,\mathrm{RR}}\) & \(1.76852476\) & (Baseline) \\
+\(\lambda_{2,\mathrm{RR}}\) & \(3.91103755\) & \(\Delta_{\mathrm{RR}} \approx 2.14251279\) \\
+\(\lambda_{3,\mathrm{RR}}\) & \(6.55896485\) & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The constraint residuals were at machine precision (\(\sim 10^{-18}\)). The computed eigenvalues showed strong numerical stability under all tested refinements.
+
+\begin{remark}[Numerical vs. Analytical]
+These results provide numerical evidence for a stable, positive first constrained variational eigenvalue. They do not, by themselves, establish the spectrum of the continuous operator \(L\).
+\end{remark}
+
+\subsection{Open Spectral Identification Problem}\label{sec:open}
+
+The constrained Rayleigh--Ritz computation yields a stable first positive variational eigenvalue, \(\lambda_{1,\mathrm{RR}}\approx1.7685248\). The remaining analytical question is whether this value converges to the first positive eigenvalue of a specified self-adjoint realization of \(L\).
+
+In particular, the following questions remain open:
+\begin{enumerate}
+    \item What is the appropriate self-adjoint domain of \(L\) on \((0,2\pi)\)?
+    \item Does the selected realization satisfy \(Lg=0\) with \(g\) belonging to its operator domain?
+    \item Is the kernel strictly one-dimensional in the continuous setting?
+    \item Does the constrained variational problem characterize the first positive eigenvalue of that realization?
+    \item Can the numerical spectral gap be established analytically or through rigorous spectral convergence estimates?
+\end{enumerate}
+
+% ============================================================
+\section{\S Z — Evidence Classification}\label{sec:audit}
+% ============================================================
+
+\begin{longtable}{p{4.5cm}p{6cm}p{3cm}}
+\caption{Classification of Frame 4 Claims.}\label{tab:audit}\\
+\toprule
+Claim & Status & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+Claim & Status & Evidence\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\(Lg = 0\) & Proven (Formal) & Algebraic identity \\
+\(g \in \mathcal{D}(L_F)\) & Proven & Cutoff approximation in form norm \\
+\(\dim \ker L_F = 1\) & Proven & Local uniqueness of ODE solution \\
+\(\lambda_0 = 0\) & Proven & Result of domain inclusion \\
+Compact resolvent & Open & Hardy inequalities failed \\
+Spectral gap (Continuous) & Open & Requires domain analysis \\
+\(\lambda_{1,\mathrm{RR}}\) (Discrete) & Numerically Verified & Rayleigh-Ritz audit \\
+\(R_{13/12} \approx 0.6035\) & Numerically Verified & Quadrature integration \\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\appendix
+\section{Reproducibility — Python Code}\label{app:code}
+% ============================================================
+
+The following Python code reproduces the B-spline Rayleigh-Ritz numerical audit. (Note: See the \texttt{all-frames2.ipynb} notebook for the complete implementation).
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+from scipy.interpolate import BSpline
+from scipy.linalg import eigh, qr
+
+PI2 = 2 * np.pi
+XP = 21.0
+
+def g_vector(u, xp=XP):
+    u = np.asarray(u, dtype=float)
+    result = np.zeros_like(u)
+    mask = (u > 0) & (u < PI2)
+    um = u[mask]
+    result[mask] = (um / PI2)**5 * np.log(PI2 / um) * np.exp(-PI2 / (xp * um))
+    return result
+
+def p_vector(u, xp=XP):
+    u = np.asarray(u, dtype=float)
+    result = np.zeros_like(u)
+    mask = (u > 0) & (u < PI2)
+    um = u[mask]
+    result[mask] = 5.0 / um - 1.0 / (um * np.log(PI2 / um)) + PI2 / (xp * um**2)
+    return result
+
+# [See the ipynb for the full matrix assembly, piecewise Gauss integration, 
+# and constrained eigenvalue solver using QR decomposition]
+\end{lstlisting}
+
+% ============================================================
+% Footer
+% ============================================================
+\vfill
+\begin{center}
+\rule{\linewidth}{0.5pt}
+\vspace{0.2cm}
+\textbf{Al-Hindara Project — Consolidated Draft v7.7.2 (Post-\S Z Audit)}\\
+Author: Abdulla M. N. Al-Jabri\\
+ORCID: 0009-0003-3319-3822\\
+Release status: Audit draft; v7.7.2 corrective path\\
+Archived Publication: Zenodo DOI \href{https://doi.org/10.5281/zenodo.23602940}{10.5281/zenodo.23602940}\\
+License: CC BY 4.0 --- \copyright\ 2026 Abdulla M. N. Al-Jabri\\
+\vspace{0.2cm}
+\rule{\linewidth}{0.5pt}
+\end{center}
+
+\end{document}
