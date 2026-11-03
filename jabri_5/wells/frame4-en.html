@@ -817,6 +817,209 @@
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
         Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v7.6 (English; updated with Numerical Closure and Error Analysis).
     </div>
+    
+    
+    <div class="badge-info" style="border-right-color: var(--gold);">
+    <strong>Methodological note.</strong> This appendix does not present new mathematical results; rather, it reviews the limits of the claims made in v7.6 and distinguishes between what was later established, what was corrected, and what remains open. It is a methodological record of the framework's mathematical development, not a judgment on the value of the earlier exploratory path.
+</div>
+
+<h3>Z.1 Purpose</h3>
+<p>This appendix documents the difference between what v7.6 announced ("the spectral problem is closed numerically and mathematically") and what was actually established after the corrective path. Its purpose is to fix the epistemic boundaries of the current stage and prevent any confusion in future reading. <strong>The general status of Frame 4 remains "open"</strong>; this appendix does not change that.</p>
+
+<h3>Z.2 Comparison Table</h3>
+<table class="verify-table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Status in v7.6</th>
+            <th>Status after Corrective Path</th>
+            <th>Classification</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Root equation</td>
+            <td>Not stated explicitly; an equivalent form was used implicitly</td>
+            <td>\((5x + 1/21)\ln(1/x) - x = 0\) explicitly</td>
+            <td><span class="verify-ok">✓ Established in corrective path</span></td>
+        </tr>
+        <tr>
+            <td>Root \(x_0\)</td>
+            <td>\(0.8282\) (based on an unstated equation)</td>
+            <td>\(0.8206115039\)</td>
+            <td><span class="verify-ok">✓ Corrected</span></td>
+        </tr>
+        <tr>
+            <td>\(u_0\)</td>
+            <td>\(5.2037\)</td>
+            <td>\(5.1560541441\)</td>
+            <td><span class="verify-ok">✓ Corrected</span></td>
+        </tr>
+        <tr>
+            <td>Type of \(u_0\)</td>
+            <td>Not stated explicitly</td>
+            <td>Peak, where \(g'(u_0) = 0\)</td>
+            <td><span class="verify-ok">✓ Established in corrective path</span></td>
+        </tr>
+        <tr>
+            <td>Endpoint \(0^+\)</td>
+            <td>Limit Point (mentioned)</td>
+            <td>Limit Point (with reduction proof)</td>
+            <td><span class="verify-ok">✓ Established</span></td>
+        </tr>
+        <tr>
+            <td>\(L_F\) positivity</td>
+            <td>Mentioned as a property</td>
+            <td>Mentioned with explicit proof</td>
+            <td><span class="verify-ok">✓ Established</span></td>
+        </tr>
+        <tr>
+            <td>Compact resolvent</td>
+            <td>Not mentioned</td>
+            <td>Established (tail control + Rellich)</td>
+            <td><span class="verify-ok">✓ Established in corrective path</span></td>
+        </tr>
+        <tr>
+            <td>Spectrum of \(L_F\) discrete</td>
+            <td>Not mentioned</td>
+            <td>Established</td>
+            <td><span class="verify-ok">✓ Established in corrective path</span></td>
+        </tr>
+        <tr>
+            <td>\(0 \notin \sigma_p(L_F)\)</td>
+            <td>Not mentioned</td>
+            <td>Established</td>
+            <td><span class="verify-ok">✓ Established in corrective path</span></td>
+        </tr>
+        <tr>
+            <td>\(\lambda_0 > 0\)</td>
+            <td>Not mentioned</td>
+            <td>Established (for \(L_F\) only)</td>
+            <td><span class="verify-ok">✓ Established in corrective path</span></td>
+        </tr>
+        <tr>
+            <td>\(g \in \mathcal{D}(L_F)\)</td>
+            <td>Implicit inference in earlier formulation</td>
+            <td>Does not belong: \(g(u_0) \neq 0\)</td>
+            <td><span class="verify-fail">✗ Corrected</span></td>
+        </tr>
+        <tr>
+            <td>\(g\) ground state of \(L_F\)</td>
+            <td>Implicit inference in earlier formulation</td>
+            <td>May not be considered as such</td>
+            <td><span class="verify-fail">✗ Corrected</span></td>
+        </tr>
+        <tr>
+            <td>\(L_N\) Neumann</td>
+            <td>Not studied</td>
+            <td>Open</td>
+            <td><span class="verify-open">○ Open</span></td>
+        </tr>
+        <tr>
+            <td>\(L_N \geq 0\)</td>
+            <td>Not studied</td>
+            <td>Open (does not follow from \(L_F\))</td>
+            <td><span class="verify-open">○ Open</span></td>
+        </tr>
+        <tr>
+            <td>\(g \in \mathcal{D}(L_N)\)</td>
+            <td>Not studied</td>
+            <td>Open</td>
+            <td><span class="verify-open">○ Open</span></td>
+        </tr>
+        <tr>
+            <td>\(0 \in \sigma_p(L_N)\)</td>
+            <td>Not studied</td>
+            <td>Open</td>
+            <td><span class="verify-open">○ Open</span></td>
+        </tr>
+        <tr>
+            <td>Numerical computation of \(\lambda_0\)</td>
+            <td>"Closed numerically" (explicit claim)</td>
+            <td>Not computed</td>
+            <td><span class="verify-open">○ Open</span></td>
+        </tr>
+        <tr>
+            <td>Behavior of \(\lambda_n\)</td>
+            <td>Not studied</td>
+            <td>Open</td>
+            <td><span class="verify-open">○ Open</span></td>
+        </tr>
+        <tr>
+            <td>Connection to zeta</td>
+            <td>"Closed mathematically" (explicit claim in v7.6)</td>
+            <td>Not investigated</td>
+            <td><span class="verify-open">○ Open</span></td>
+        </tr>
+        <tr>
+            <td>"Mathematical closure"</td>
+            <td>Explicitly announced in v7.6</td>
+            <td>Rejected: exceeded what the proofs allow</td>
+            <td><span class="verify-fail">✗ Corrected</span></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Z.3 Reading the Table</h3>
+<p><strong>(a) What the corrective path added:</strong></p>
+<ul>
+    <li>Correction of the root equation and the root itself.</li>
+    <li>Explicit determination of the type of \(u_0\).</li>
+    <li>Proof of compact resolvent, discreteness of the spectrum, and the positive gap \(\lambda_0 > 0\) for \(L_F\). These are <strong>new analytical results</strong> within the current path, not mere editorial additions.</li>
+</ul>
+
+<p><strong>(b) What the corrective path rejected:</strong></p>
+<ul>
+    <li>\(g\) as ground state of \(L_F\): because \(g(u_0) \neq 0\), and \(g \notin \mathcal{D}(L_F)\). <strong>Any earlier suggestion to the contrary is corrected here.</strong></li>
+    <li>"The spectral problem is closed numerically and mathematically": because the numerical computation was not performed, the connection to zeta was not investigated, and \(L_N\) was not studied. <strong>This claim exceeded what the proofs allow and is explicitly rejected.</strong></li>
+</ul>
+
+<p><strong>(c) What the corrective path left open:</strong></p>
+<ul>
+    <li>\(L_N\) in its entirety (positivity, membership of \(g\), spectral theory).</li>
+    <li>Numerical computation of \(\lambda_0\) and the behavior of \(\lambda_n\).</li>
+    <li>The connection to zeta and the physical interpretation.</li>
+</ul>
+
+<h3>Z.4 Methodological Conclusion</h3>
+<div class="summary-section summary-achieved">
+    <h3>What Was Established</h3>
+    <ul>
+        <li>Classification of the endpoint \(0^+\) = Limit Point (via reduction proof + Weyl).</li>
+        <li>\(L_F\) positivity on the initial core.</li>
+        <li>Compact resolvent for \(L_F\).</li>
+        <li>\(\sigma(L_F)\) discrete, \(\lambda_n \to +\infty\).</li>
+        <li>\(0 \notin \sigma_p(L_F)\).</li>
+        <li>\(\lambda_0 > 0\) (positive gap).</li>
+    </ul>
+</div>
+
+<div class="summary-section summary-next">
+    <h3>What Remains Open</h3>
+    <ul>
+        <li>\(L_N\) Neumann: positivity, membership of \(g\), spectral theory — all open.</li>
+        <li>Numerical computation of \(\lambda_0\) and the behavior of \(\lambda_n\).</li>
+        <li>The connection to zeta.</li>
+        <li>The physical interpretation.</li>
+    </ul>
+</div>
+
+<div class="badge-neutral">
+    <strong>What is <em>not</em> claimed in this path:</strong>
+    <ul style="margin-top: 8px;">
+        <li>A "complete spectral solution" of Frame 4,</li>
+        <li>A "discovery connected to zeta",</li>
+        <li>A "physical interpretation" of the model,</li>
+        <li>A "mathematical closure" of Frame 4.</li>
+    </ul>
+    All of these <strong>were not established</strong> in this path. What was established are the specific \(L_F\) results above, within the stated assumptions and domain. <strong>This is the limit of the achievement.</strong>
+</div>
+
+<h3>Z.5 Structural Note: The Model on the Critical Line</h3>
+<p>Most of the results established in this path — correction of the root, classification of the endpoint, proof of the gap \(\lambda_0 > 0\), determination of the difference between \(L_F\) and \(L_N\) — are results of <strong>locating a critical line</strong> that separates two mathematically distinct behaviors. This is not a coincidence: the structure of the model (a function \(g\) with a single peak and vanishing at both endpoints, an operator with strong singularity at \(0^+\) and regularity at \(u_0\)) makes <strong>the critical line the subject</strong>, not merely a tool.</p>
+<p>The open question that this appendix leaves behind: <strong>Is the central critical line in Frame 4 the boundary between \(L_F\) and \(L_N\)?</strong> And if so, what are the precise conditions that place the model on one side or the other of this boundary? This is a question for the next stage, not the current one.</p>
+    
+    
 </div>
 
 <script>

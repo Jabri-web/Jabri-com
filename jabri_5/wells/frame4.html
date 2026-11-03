@@ -818,6 +818,213 @@
         © 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project.<br>
         Frame 4: Towards a Spectral Problem &amp; Zeta Regularization — v7.6 (Arabic; updated with Numerical Closure and Error Analysis).
     </div>
+    
+    <!-- ==================== §Z Comparative Audit (v7.7) ==================== -->
+<div class="card" style="border-color: var(--gold); margin-top: 20px;">
+    <h2 style="color: var(--gold);">§Z — تقييم مقارن: من v7.6 إلى الإغلاق المرحلي الموثق</h2>
+    
+    <div class="badge-info" style="border-right-color: var(--gold);">
+        <strong>ملاحظة منهجية.</strong> لا يقدّم هذا الملحق نتائج رياضية جديدة؛ بل يراجع حدود الادعاءات الواردة في v7.6، ويميّز بين ما ثبت لاحقاً، وما صُحّح، وما بقي مفتوحاً. وهو سجل منهجي للتطور الرياضي للإطار، لا حكم على قيمة المسار الاستكشافي السابق.
+    </div>
+    
+    <h3>Z.1 الغرض</h3>
+    <p>يوثّق هذا الملحق الفرق بين ما أعلنته النسخة v7.6 ("المسألة الطيفية مغلقة عددياً ورياضياً") وما ثبت فعلياً بعد المسار التصحيحي. الغرض تثبيت الحدود المعرفية للمرحلة الحالية، ومنع أي التباس في القراءة المستقبلية. <strong>الحالة العامة للإطار الرابع تبقى "مفتوحة"</strong>؛ هذا الملحق لا يغيّرها.</p>
+    
+    <h3>Z.2 جدول المقارنة</h3>
+    <table class="verify-table">
+        <thead>
+            <tr>
+                <th>البند</th>
+                <th>الحالة في v7.6</th>
+                <th>الحالة بعد المسار التصحيحي</th>
+                <th>التصنيف</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>معادلة الجذر</td>
+                <td>لم تُصرَّح صراحةً؛ استُخدمت صيغة مكافئة ضمنياً</td>
+                <td>\((5x + 1/21)\ln(1/x) - x = 0\) صراحةً</td>
+                <td><span class="verify-ok">✓ مثبت في المسار التصحيحي</span></td>
+            </tr>
+            <tr>
+                <td>الجذر \(x_0\)</td>
+                <td>\(0.8282\) (مبني على معادلة غير مصرَّح بها)</td>
+                <td>\(0.8206115039\)</td>
+                <td><span class="verify-ok">✓ مصحح</span></td>
+            </tr>
+            <tr>
+                <td>\(u_0\)</td>
+                <td>\(5.2037\)</td>
+                <td>\(5.1560541441\)</td>
+                <td><span class="verify-ok">✓ مصحح</span></td>
+            </tr>
+            <tr>
+                <td>نوع \(u_0\)</td>
+                <td>لم يُصرَّح به صراحةً</td>
+                <td>قمة، حيث \(g'(u_0) = 0\)</td>
+                <td><span class="verify-ok">✓ مثبت في المسار التصحيحي</span></td>
+            </tr>
+            <tr>
+                <td>الطرف \(0^+\)</td>
+                <td>Limit Point (مذكور)</td>
+                <td>Limit Point (ببرهان الاختزال)</td>
+                <td><span class="verify-ok">✓ مثبت</span></td>
+            </tr>
+            <tr>
+                <td>\(L_F\) positivity</td>
+                <td>مذكور كخاصية</td>
+                <td>مذكور ببرهان صريح</td>
+                <td><span class="verify-ok">✓ مثبت</span></td>
+            </tr>
+            <tr>
+                <td>Compact resolvent</td>
+                <td>لم يُذكر</td>
+                <td>مثبت (التحكم في الذيل + Rellich)</td>
+                <td><span class="verify-ok">✓ مثبت في المسار التصحيحي</span></td>
+            </tr>
+            <tr>
+                <td>طيف \(L_F\) منفصل</td>
+                <td>لم يُذكر</td>
+                <td>مثبت</td>
+                <td><span class="verify-ok">✓ مثبت في المسار التصحيحي</span></td>
+            </tr>
+            <tr>
+                <td>\(0 \notin \sigma_p(L_F)\)</td>
+                <td>لم يُذكر</td>
+                <td>مثبت</td>
+                <td><span class="verify-ok">✓ مثبت في المسار التصحيحي</span></td>
+            </tr>
+            <tr>
+                <td>\(\lambda_0 > 0\)</td>
+                <td>لم يُذكر</td>
+                <td>مثبت (لـ \(L_F\) فقط)</td>
+                <td><span class="verify-ok">✓ مثبت في المسار التصحيحي</span></td>
+            </tr>
+            <tr>
+                <td>\(g \in \mathcal{D}(L_F)\)</td>
+                <td>استنتاج ضمني في الصياغة السابقة</td>
+                <td>لا ينتمي: \(g(u_0) \neq 0\)</td>
+                <td><span class="verify-fail">✗ مصحح</span></td>
+            </tr>
+            <tr>
+                <td>\(g\) حالة أرضية لـ \(L_F\)</td>
+                <td>استنتاج ضمني في الصياغة السابقة</td>
+                <td>لا يجوز اعتباره كذلك</td>
+                <td><span class="verify-fail">✗ مصحح</span></td>
+            </tr>
+            <tr>
+                <td>\(L_N\) Neumann</td>
+                <td>لم يُدرس</td>
+                <td>مفتوح</td>
+                <td><span class="verify-open">○ مفتوح</span></td>
+            </tr>
+            <tr>
+                <td>\(L_N \geq 0\)</td>
+                <td>لم يُدرس</td>
+                <td>مفتوح (لا يتبع من \(L_F\))</td>
+                <td><span class="verify-open">○ مفتوح</span></td>
+            </tr>
+            <tr>
+                <td>\(g \in \mathcal{D}(L_N)\)</td>
+                <td>لم يُدرس</td>
+                <td>مفتوح</td>
+                <td><span class="verify-open">○ مفتوح</span></td>
+            </tr>
+            <tr>
+                <td>\(0 \in \sigma_p(L_N)\)</td>
+                <td>لم يُدرس</td>
+                <td>مفتوح</td>
+                <td><span class="verify-open">○ مفتوح</span></td>
+            </tr>
+            <tr>
+                <td>حساب \(\lambda_0\) عددياً</td>
+                <td>"مغلق عددياً" (ادعاء صريح)</td>
+                <td>لم يُحسب</td>
+                <td><span class="verify-open">○ مفتوح</span></td>
+            </tr>
+            <tr>
+                <td>سلوك \(\lambda_n\)</td>
+                <td>لم يُدرس</td>
+                <td>مفتوح</td>
+                <td><span class="verify-open">○ مفتوح</span></td>
+            </tr>
+            <tr>
+                <td>الصلة بزيتا</td>
+                <td>"مغلق رياضياً" (ادعاء صريح في v7.6)</td>
+                <td>لم تُبحث</td>
+                <td><span class="verify-open">○ مفتوح</span></td>
+            </tr>
+            <tr>
+                <td>"الإغلاق الرياضي"</td>
+                <td>مُعلَن صراحةً في v7.6</td>
+                <td>مرفوض: تجاوز ما تسمح به البراهين</td>
+                <td><span class="verify-fail">✗ مصحح</span></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>Z.3 قراءة الجدول</h3>
+    <p><strong>(أ) ما أضافه المسار التصحيحي:</strong></p>
+    <ul>
+        <li>تصحيح معادلة الجذر والجذر نفسه.</li>
+        <li>تحديد نوع \(u_0\) صراحةً.</li>
+        <li>إثبات compact resolvent، انفصال الطيف، والفجوة الموجبة \(\lambda_0 > 0\) لـ \(L_F\). هذه <strong>نتائج تحليلية جديدة</strong> ضمن المسار الحالي، وليست مجرد إضافات تحريرية.</li>
+    </ul>
+    
+    <p><strong>(ب) ما رفضه المسار التصحيحي:</strong></p>
+    <ul>
+        <li>\(g\) حالة أرضية لـ \(L_F\): لأن \(g(u_0) \neq 0\)، و\(g \notin \mathcal{D}(L_F)\). <strong>أي إيحاء سابق بخلاف ذلك يُصحَّح هنا.</strong></li>
+        <li>"المسألة الطيفية مغلقة عددياً ورياضياً": لأن الحساب العددي لم يُجرَ، والصلة بزيتا لم تُبحث، و\(L_N\) لم يُدرس. <strong>هذا الادعاء تجاوز ما تسمح به البراهين، ويُرفض صراحةً.</strong></li>
+    </ul>
+    
+    <p><strong>(ج) ما تركه المسار التصحيحي مفتوحاً:</strong></p>
+    <ul>
+        <li>\(L_N\) بكامل براهينه (positivity، انتماء \(g\)، طيفية).</li>
+        <li>الحساب العددي لـ \(\lambda_0\) وسلوك \(\lambda_n\).</li>
+        <li>الصلة بزيتا والتفسير الفيزيائي.</li>
+    </ul>
+    
+    <h3>Z.4 الخلاصة المنهجية</h3>
+    <div class="summary-section summary-achieved">
+        <h3>ما ثبت</h3>
+        <ul>
+            <li>تصنيف الطرف \(0^+\) = Limit Point (ببرهان الاختزال + ويل).</li>
+            <li>\(L_F\) positivity على النواة الابتدائية.</li>
+            <li>Compact resolvent لـ \(L_F\).</li>
+            <li>\(\sigma(L_F)\) منفصل، \(\lambda_n \to +\infty\).</li>
+            <li>\(0 \notin \sigma_p(L_F)\).</li>
+            <li>\(\lambda_0 > 0\) (فجوة موجبة).</li>
+        </ul>
+    </div>
+    
+    <div class="summary-section summary-next">
+        <h3>ما بقي مفتوحاً</h3>
+        <ul>
+            <li>\(L_N\) Neumann: positivity، انتماء \(g\)، طيفية — كلها مفتوحة.</li>
+            <li>الحساب العددي لـ \(\lambda_0\) وسلوك \(\lambda_n\).</li>
+            <li>الصلة بزيتا.</li>
+            <li>التفسير الفيزيائي.</li>
+        </ul>
+    </div>
+    
+    <div class="badge-neutral">
+        <strong>ما لا يُدَّعى في هذا المسار:</strong>
+        <ul style="margin-top: 8px;">
+            <li>"حل طيفي كامل" للإطار الرابع،</li>
+            <li>"اكتشاف مرتبط بزيتا"،</li>
+            <li>"تفسير فيزيائي" للنموذج،</li>
+            <li>"إغلاق رياضي" لـ Frame 4.</li>
+        </ul>
+        كل هذه <strong>لم تثبت</strong> في هذا المسار. ما ثبت هو نتائج \(L_F\) المحددة أعلاه، ضمن الفرضيات والمجال المحددين. <strong>هذا هو حدّ الإنجاز.</strong>
+    </div>
+    
+    <h3>Z.5 ملاحظة بنيوية: النموذج على الخط الحرج</h3>
+    <p>معظم النتائج المثبتة في هذا المسار — تصحيح الجذر، تصنيف الطرف، إثبات الفجوة \(\lambda_0 > 0\)، تحديد الفرق بين \(L_F\) و\(L_N\) — هي نتائج <strong>تحديد موقع خط حرج</strong> يفصل بين سلوكين رياضيًا متمايزين. هذا ليس مصادفة: بنية النموذج (دالة \(g\) ذات قمة واحدة وتلاشٍ عند طرفين، مؤثر بتفرد قوي عند \(0^+\) وانتظام عند \(u_0\)) تجعل <strong>الخط الحرج هو الموضوع</strong>، لا مجرد أداة.</p>
+    <p>السؤال المفتوح الذي يتركه هذا الملحق: <strong>هل الخط الحرج المركزي في Frame 4 هو الحد بين \(L_F\) و\(L_N\)؟</strong> وإذا كان كذلك، فما الشروط الدقيقة التي تجعل النموذج يقع على أحد جانبي هذا الحد؟ هذا سؤال للمرحلة القادمة، لا للمرحلة الحالية.</p>
+</div>
+    
+    
 </div>
 
 <script>
