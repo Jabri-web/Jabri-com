@@ -1,0 +1,144 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Al-Hindara Project}
+\chead{\small Frame 5: Analytical Foundation}
+\rhead{\small Abdulla M. N. Al-Jabri}
+\lfoot{\small ORCID: 0009-0003-3319-3822}
+\cfoot{\small \thepage}
+\rfoot{\small DOI: 10.5281/zenodo.23924915}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{challenge}{Analytical Challenge}
+
+\begin{document}
+
+\section{Frame 5 — Analytical Foundation for the Weighted Spectral Gap}\label{sec:frame5}
+
+This section establishes the analytical foundation for the spectral problem. It transitions from the formal identity of the zero mode (Frame 4) to a rigorous analysis of the weighted Poincaré inequality associated with the operator \(L_F\).
+
+\subsection{Factorization of the Operator}\label{subsec:5.1}
+
+Let \(u \in (0, 2\pi)\). Define the ground-state kernel \(g(u)\) as:
+\begin{equation}\label{eq:g_frame5}
+g(u) = \left(\frac{u}{2\pi}\right)^5 \log\left(\frac{2\pi}{u}\right) \exp\left(-\frac{2\pi}{21u}\right).
+\end{equation}
+
+Define the first-order differential operator \(A\):
+\begin{equation}\label{eq:A_frame5}
+A = \frac{d}{du} - p(u), \qquad \text{where } p(u) = \frac{g'(u)}{g(u)}.
+\end{equation}
+
+The form-associated operator \(L_F\) is given by the formal factorization:
+\begin{equation}\label{eq:LF_frame5}
+L_F = A^* A = -\frac{d^2}{du^2} + V_{\text{eff}}(u), \qquad V_{\text{eff}}(u) = \frac{g''(u)}{g(u)}.
+\end{equation}
+
+\begin{remark}[Formal Expression]
+The differential expression in \eqref{eq:LF_frame5} is formal until the operator domain and boundary realization are specified. The identification of the appropriate weighted Sobolev space is a necessary condition for the operator to be self-adjoint.
+\end{remark}
+
+\subsection{Ground-State Transformation}\label{subsec:5.2}
+
+We transform the problem by setting \(f = g\psi\). Applying the operator \(A\):
+\begin{equation}\label{eq:Af}
+Af = (g\psi)' - \frac{g'}{g}(g\psi) = g'\psi + g\psi' - g'\psi = g\psi'.
+\end{equation}
+
+Thus, the quadratic form \(\mathcal{Q}_F[f] = \langle L_F f, f \rangle\) transforms to:
+\begin{equation}\label{eq:Q_frame5}
+\mathcal{Q}_F[f] = \int_0^{2\pi} |Af|^2 \, du = \int_0^{2\pi} g(u)^2 |\psi'(u)|^2 \, du.
+\end{equation}
+
+The orthogonality condition \(\langle f, g \rangle_{L^2} = 0\) translates to a zero-mean condition with respect to the weight \(w = g^2\):
+\begin{equation}\label{eq:orthogonality}
+\int_0^{2\pi} g(u)^2 \psi(u) \, du = 0.
+\end{equation}
+
+\subsection{Weighted Variational Problem}\label{subsec:5.3}
+
+Define the weight function \(w(u) = g(u)^2\). The variational problem for the first positive eigenvalue is:
+\begin{equation}\label{eq:lambda1}
+\lambda_1 = \inf_{\substack{\psi \not\equiv 0 \\ \int_0^{2\pi} w\psi \, du = 0}} \frac{\int_0^{2\pi} w(u) |\psi'(u)|^2 \, du}{\int_0^{2\pi} w(u) |\psi(u)|^2 \, du}.
+\end{equation}
+
+\begin{remark}[Degeneracy of the Weight]
+The weight \(w(u)\) degenerates at both endpoints:
+\begin{itemize}
+    \item At \(u \to 0^+\), \(w(u) \sim C u^{10} e^{-\frac{4\pi}{21u}}\) (super-exponential decay).
+    \item At \(u \to 2\pi^-\), \(w(u) \sim C' (2\pi - u)^2\) (quadratic decay).
+\end{itemize}
+The precise weighted Sobolev space and the associated boundary realization remain to be identified.
+\end{remark}
+
+\subsection{Numerical Evidence}\label{subsec:5.4}
+
+We solve the variational problem numerically using a Galerkin finite element method (P1 elements). To avoid numerical underflow near the origin, the domain is truncated to \([\varepsilon, 2\pi - \varepsilon]\). The results below must be interpreted with caution, as the artificial Dirichlet boundary conditions at \(\varepsilon\) affect the eigenvalue.
+
+\begin{table}[h!]
+\centering
+\caption{Grid convergence of the first excited eigenvalue \(\lambda_1\) (with truncation parameter \(\varepsilon = 0.15\)).}
+\begin{tabular}{lcc}
+\toprule
+Mesh Points (\(N\)) & Ground State (\(\lambda_0\)) & First Excited State (\(\lambda_1\)) \\
+\midrule
+200 & \(0.265987\) & \(2.080044\) \\
+400 & \(0.265989\) & \(2.079566\) \\
+800 & \(0.265990\) & \(2.079446\) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Sensitivity of \(\lambda_1\) to the truncation parameter \(\varepsilon\) at \(N=400\). The monotonic behavior indicates the domain dependence of the truncated problem.}
+\begin{tabular}{lc}
+\toprule
+Truncation \(\varepsilon\) & Eigenvalue \(\lambda_1\) \\
+\midrule
+0.10 & \(1.988164\) \\
+0.15 & \(2.079567\) \\
+0.20 & \(2.166058\) \\
+0.25 & \(2.249464\) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}[Pending Validation]
+The numerical results demonstrate internal consistency under mesh refinement. However, the continuous limit as \(\varepsilon \to 0\) and the corresponding boundary conditions must be formally established to confirm the exact value of \(\lambda_1\).
+\end{remark}
+
+\subsection{Analytical Challenge}\label{subsec:5.5}
+
+To close Frame 5, one must establish the Weighted Poincaré Inequality for the specific weight \(w(u) = g(u)^2\):
+\begin{equation}\label{eq:poincare_challenge}
+\exists c > 0 : \quad \int_0^{2\pi} w(u) |\psi'(u)|^2 \, du \ge c \int_0^{2\pi} w(u) |\psi(u)|^2 \, du,
+\end{equation}
+for every \(\psi\) in the appropriate weighted Sobolev space satisfying \(\int_0^{2\pi} w\psi \, du = 0\).
+
+\begin{challenge}
+The proof must achieve the following:
+\begin{enumerate}
+    \item \textbf{Integral Condition:} Formulate the precise 1D integral condition for the degenerate weight \(w(u)\) (avoiding classical \(A_2\) assumptions which may not hold globally).
+    \item \textbf{Domain Identification:} Determine the correct function space that reflects the boundary conditions of the original operator \(L_F\).
+    \item \textbf{Limit as \(\varepsilon \to 0\):} Prove that the numerical truncation converges to the continuous spectrum, rather than being an artifact of the Dirichlet boundary.
+\end{enumerate}
+\end{challenge}
+
+\begin{remark}[Status of Frame 5]
+\textbf{Open — Under Validation.} While the 1D mass-resistance integrals vanish at the boundaries, the classical Muckenhoupt \(A_2\) condition does not strictly apply. The analytical proof requires a careful treatment of degenerate weights. The numerical results are consistent but have not yet been validated against the continuous limit.
+\end{remark}
+
+\end{document}
