@@ -243,23 +243,18 @@
                 </div>
             </a>
 
-            <!-- Bridge -->
-            <a href="#bridge" class="summary-card">
-                <div class="header">
-                    <span class="num">BRIDGE</span>
-                    <span class="status status-work">مغلق v2.2</span>
-                </div>
-                <div class="title">الجسر — تحويل أبعادي</div>
-                <div class="desc">أداة تحويل قيمة عددية إلى وحدة مختارة</div>
-                <div class="last-status">
-                    <strong>آخر حالة:</strong>
-                    تم تأكيد النشر v2.2. يُعرّف بوضوح كأداة تحويل أبعادي مستقلة، وليس مصدراً للتنبؤات.
-                </div>
-                <div class="status-group">
-                    <span class="status status-work">مغلق</span>
-                    <span class="status status-verif-internal">تحقق داخلي</span>
-                </div>
-            </a>
+           <a href="#frame-2" class="summary-card" style="border-color: var(--blue);"> <div class="header"> <span class="num">FRAME 02</span> <span class="status status-sci-exploratory">استكشافي — موثق</span> </div><div class="title">الإطار الثاني — الشجرة والظل</div><div class="desc">برهان tan(22.5°)=√2−1 ونموذج الظل، مع قياسات ميدانية استكشافية</div><div class="last-status"> <strong>آخر حالة (v6.0.0):</strong>
+        برهان مثلثي دقيق + محاكاة تفاعلية + TOST محسوب في الصفحة مع تحقق آلي من دالة t. متوسط R=0.41297 لـ N=5 قريب من √2−1 لكنه وصف عددي لا تعميم.
+        <br><em>DOI: 10.5281/zenodo.23540796</em>
+    </div>
+    <div class="status-group">
+        <span class="status status-work">مغلق</span>
+        <span class="status status-verif-repro">أُعيد إنتاجه</span>
+        <span class="status status-sci-exploratory">القسم 8: الزاوية السحرية tan(θ_m)=tan(22.5°)+1</span>
+    </div>
+</a>
+
+
 
             <!-- Frame 3 -->
             <a href="#frame-3" class="summary-card">
@@ -297,6 +292,45 @@
                 </div>
             </a>
 
+
+<a href="#frame-5" class="summary-card" style="border-color: var(--purple);">
+    <div class="header">
+        <span class="num">FRAME 05</span>
+        <span class="status status-sci-conditional">دليل عددي قوي</span>
+    </div>
+    <div class="title">الإطار الخامس — الفجوة الطيفية الموزونة</div>
+    <div class="desc">Weighted Spectral Gap — تحويل الحالة الأرضية والوزن w(u)=g²(u)</div>
+    <div class="last-status">
+        <strong>آخر حالة (v5.1):</strong>
+        NUMERICAL EVIDENCE STRONG. تقارب شبكي FEM: λ₁ → 1.76852571 عند N=1600 (Neumann/Mean-Zero). تقدير B₋≈0.308029 → حد سفلي تقديري 0.811. الشهادة الصارمة والامتداد الذاتي وإثبات الانتقال للمجال الكامل لا تزال مفتوحة.
+    </div>
+    <div class="status-group">
+        <span class="status status-work-active">قيد العمل</span>
+        <span class="status status-verif-internal">تحقق داخلي</span>
+        <span class="status status-sci-open">حد سفلي مضمون: غير منجز</span>
+    </div>
+</a>
+
+            <!-- Bridge -->
+            <a href="#bridge" class="summary-card">
+                <div class="header">
+                    <span class="num">BRIDGE</span>
+                    <span class="status status-work">مغلق v2.2</span>
+                </div>
+                <div class="title">الجسر — تحويل أبعادي</div>
+                <div class="desc">أداة تحويل قيمة عددية إلى وحدة مختارة</div>
+                <div class="last-status">
+                    <strong>آخر حالة:</strong>
+                    تم تأكيد النشر v2.2. يُعرّف بوضوح كأداة تحويل أبعادي مستقلة، وليس مصدراً للتنبؤات.
+                </div>
+                <div class="status-group">
+                    <span class="status status-work">مغلق</span>
+                    <span class="status status-verif-internal">تحقق داخلي</span>
+                </div>
+            </a>
+
+
+
             <!-- Calculator -->
             <a href="#calculator-audit" class="summary-card">
                 <div class="header">
@@ -318,41 +352,49 @@
     </div>
 
     <!-- ==================== الحكم العلمي الشامل ==================== -->
-    <div class="card" style="border-color: var(--purple);">
-        <h2 style="color: var(--purple);">📌 الحكم العلمي الشامل للمشروع</h2>
-        <p><strong>حالة مشروع الهندرة: تقدم رياضي وعددي موثق، وأغلب الإطارات أصبحت مغلقة.</strong></p>
-        <table style="margin-top: 10px;">
-            <thead>
-                <tr>
-                    <th>المكون</th>
-                    <th>الحكم العلمي</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>الإطار الأول (الدالة الأم)</strong></td>
-                    <td>مثبت داخل تعريفات frame1.html v7.2 — مسح شامل مغلق (v1.8). البراهين الثلاثة مطابقة وصحيحة، Audit D PASS.</td>
-                </tr>
-                <tr>
-                    <td><strong>الإطار الثاني (الشجرة والظل)</strong></td>
-                    <td>استكشافي — العينة المحدودة لا تثبت قانوناً عاماً (ينتظر بيانات N>30).</td>
-                </tr>
-                <tr>
-                    <td><strong>الإطار الثالث (البنية الدقيقة)</strong></td>
-                    <td>الهوية الجبرية مثبتة والنتائج العددية موثقة، ضمن الفرضيات المحددة. المتبقي: مقابل رصدي مستقل.</td>
-                </tr>
-                <tr>
-                    <td><strong>الإطار الرابع (المسألة الطيفية)</strong></td>
-                    <td>مسائل مفتوحة — تحقق عددي داخلي على مجال مقطوع يظهر تقارب الطاقة نحو الصفر. إثبات وجود حالة أرضية صفرية للمؤثر الكامل والامتداد الذاتي والحد السفلي للطيف لا يزال مفتوحاً.</td>
-                </tr>
-                <tr>
-                    <td><strong>الجسر (Bridge)</strong></td>
-                    <td>مغلق (v2.2) — أداة تحويل أبعادي (dimensional scaling)، لا مصدر تنبؤ. تم اختبار الحساب والوحدات بنجاح.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
+
+
+<div class="card" style="border-color: var(--purple);">
+    <h2 style="color: var(--purple);">📌 الحكم العلمي العام للمشروع</h2>
+    <p><strong>حالة مشروع الحندرة: تقدم رياضي وعددي موثق؛ معظم الأطر مغلقة. الإطار الخامس قوي عددياً، مفتوح تحليلياً.</strong></p>
+    <table style="margin-top: 10px;">
+        <thead>
+            <tr>
+                <th>المكون</th>
+                <th>الحكم العلمي</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>الإطار الأول (الدالة الأم)</strong></td>
+                <td>مثبت ضمن تعريفات frame1.html v7.2 — المسح الشامل مغلق (v1.8). البراهين الثلاثة صحيحة، تدقيق الملحق D ناجح PASS.</td>
+            </tr>
+            <tr>
+                <td><strong>الإطار الثاني (الشجرة والظل)</strong></td>
+                <td>استكشافي — العينة المحدودة لا تثبت قانوناً عاماً (بانتظار بيانات N>30). المتطابقة tan(22.5°)=√2−1 مثبتة. توسعة الزاوية السحرية tan(θ_m)=tan(22.5°)+1 موثقة. DOI: 10.5281/zenodo.23540796</td>
+            </tr>
+            <tr>
+                <td><strong>الإطار الثالث (البنية الدقيقة)</strong></td>
+                <td>المتطابقة الجبرية مثبتة، النتائج العددية موثقة تحت فرضيات محددة. المتبقي: مقارنة رصدية مستقلة.</td>
+            </tr>
+            <tr>
+                <td><strong>الإطار الرابع (المسألة الطيفية)</strong></td>
+                <td>مسائل مفتوحة — تحقق عددي داخلي على مجال مبتور يظهر تقارب الطاقة نحو الصفر. إثبات وجود حالة أرضية صفرية للمؤثر الكامل، والامتداد ذاتي الترافق، والحد الأدنى للطيف، لا يزال مفتوحاً.</td>
+            </tr>
+            <tr style="background: rgba(186, 104, 200, 0.08); border-right: 3px solid var(--purple);">
+                <td><strong>الإطار الخامس (الفجوة الطيفية الموزونة) — جديد</strong></td>
+                <td><strong>دليل عددي قوي — برهان تحليلي غير مكتمل.</strong> تقارب شبكي على مجال مبتور (نيومان/متوسط-صفر، الخلايا [12][13]) مستقر: λ₁ = 1.76858932 → 1.76852571 (N=200→1600). القيم المرصودة B₋ ذروة 0.308029 عند 4.105296، B₊ ذروة 0.192532 عند 5.401665 → حد أدنى مقدر 1/(4B_obs)≈0.811611. ليس حداً شاملاً معتمداً. المتبقي: حد علوي معتمد لـ B، تبرير متراجحة هاردي، الإغلاق ذاتي الترافق، ونهاية المجال الكامل عند ε→0.</td>
+            </tr>
+            <tr>
+                <td><strong>الجسر</strong></td>
+                <td>مغلق (v2.2) — أداة تحويل أبعاد، ليس مصدر تنبؤات. الحساب والوحدات تم اختبارهما بنجاح.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
     
     
         <!-- ==================== FRAME 1 RECORD ==================== -->
@@ -496,6 +538,65 @@
             </div>
         </details>
     </div>
+    
+    <!-- ==================== سجل الإطار الخامس - عربي ==================== -->
+<div class="card" id="frame-5">
+    <details open>
+        <summary>
+            <strong style="color: var(--gold); font-size: 1.15rem;">الإطار الخامس — الفجوة الطيفية الموزونة</strong>
+            <span class="status status-sci-conditional">دليل عددي قوي</span>
+            <span class="status status-verif-internal">تحقق داخلي</span>
+        </summary>
+        <div class="record-meta">📅 آخر تحديث: 30 أكتوبر 2026 | v5.1 | الملف: <a href="frame5.html" style="color: var(--blue);">frame5.html</a> | الحالة: دليل عددي قوي — برهان تحليلي غير مكتمل</div>
+        
+        <div class="record-section">
+            <span class="label">📍 الحالة الأخيرة</span>
+            <div class="content">
+                <strong>تحديث (v5.1):</strong> تحويل الحالة الأرضية <code>f=gψ</code> صحيح جبرياً. الصيغة الموزونة <code>ℰ[ψ]=∫ w|ψ'|²</code> موثقة. طريقة العناصر المنتهية FEM على المجال المبتور [ε, L-ε] (نيومان/متوسط-صفر، الخلايا [12][13]) تظهر تقارب شبكي λ₁ → 1.76852571 عند N=1600. هذا لا يثبت التقارب للمجال الكامل (ε→0).
+            </div>
+        </div>
+        
+        <div class="record-section">
+            <span class="label">✅ ما هو مثبت (موثق)</span>
+            <div class="content">
+                <ul>
+                    <li><strong>تعريف g(u) و w(u)=g²(u):</strong> صريح على المجال (0, 2π).</li>
+                    <li><strong>هوية الحالة الأرضية:</strong> <code>Af = -gψ'</code> و <code>𝒬_F[f]=∫ w|ψ'|²</code> — جبر دقيق.</li>
+                    <li><strong>المؤثر الصوري:</strong> <code>H_w ψ = -(1/w)(wψ')'</code> — صيغة صورية.</li>
+                    <li><strong>الاستقرار العددي:</strong> تقارب شبكي 200→1600: 1.76858932 → 1.76852571 (فرق < 1e-4).</li>
+                    <li><strong>قيم B المرصودة:</strong> ذروة B₋ = 0.308029 عند 4.105296، ذروة B₊ = 0.192532 عند 5.401665 (مرصودة، ليست حد أقصى شامل معتمد).</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="record-section">
+            <span class="label">🔓 المسائل المفتوحة</span>
+            <div class="content">
+                <ul>
+                    <li><strong>حد علوي شامل معتمد لـ B:</strong> الذروات المرصودة لا تثبت أنها القيمة القصوى العالمية. يحتاج مفكوك تقاربي مع باقي صريح قرب الصفر وتغطية فترية على [δ, 0.5].</li>
+                    <li><strong>تطبيق متراجحة هاردي:</strong> تطبيق 1/(4B) كحد أدنى يتطلب إثبات تحقق الفرضيات في هذا الفضاء الموزون.</li>
+                    <li><strong>الإغلاق ذاتي الترافق:</strong> إغلاق الصيغة، تحديد المجال، ومبرهنة التمثيل لم تكتمل.</li>
+                    <li><strong>نهاية المجال الكامل:</strong> إثبات أن λ₁(ε) → λ₁(0) عندما ε→0.</li>
+                    <li><strong>الحد المعتمد:</strong> <code>mp.quad(error=True)</code> استرشادي، ليس معتمد فترياً. يحتاج حساب فتري حقيقي.</li>
+                </ul>
+                <div class="badge-exploratory" style="margin-top: 15px;">
+                    <strong>⚠️ ملاحظة منهجية:</strong> التحليل الصوري والتقارب العددي على مجال مبتور لا يشكلان حداً أدنى معتمداً للمؤثر الكامل.
+                </div>
+            </div>
+        </div>
+        
+        <div class="record-section">
+            <span class="label">📝 القرارات وخارطة الطريق</span>
+            <div class="content">
+                <ul>
+                    <li><strong>v5.1 (اليوم):</strong> تحديد الحالة إلى "دليل عددي قوي". إضافة مخطط مرئي لـ log₁₀(w(u)). توضيح الفرق بين خلايا ديريشليه [8][9] وخلايا نيومان [12][13].</li>
+                    <li><strong>التالي:</strong> 1) تقارب متحكم به لـ wB₋' قرب الصفر، 2) تغطية فترية لـ [δ,0.5]، 3) برهان إغلاق H¹_w، 4) تقارب ε→0، 5) حد B_upper معتمد.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+</div>
+    
     
     <!-- ==================== BRIDGE RECORD ==================== -->
     <div class="card" id="bridge">

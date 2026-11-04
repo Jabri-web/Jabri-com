@@ -206,23 +206,25 @@
                     <span class="status status-verif-repro">Reproduced</span>
                 </div>
             </a>
-
-            <a href="#bridge" class="summary-card">
+            
+            
+            
+            <a href="#frame-2" class="summary-card" style="border-color: var(--blue);">
                 <div class="header">
-                    <span class="num">BRIDGE</span>
-                    <span class="status status-work">Closed v2.2</span>
-                </div>
-                <div class="title">Bridge — Dimensional Transform</div>
-                <div class="desc">Tool for converting a numerical value to a chosen unit</div>
-                <div class="last-status">
-                    <strong>Last Status:</strong>
-                    Publication v2.2 confirmed. Clearly defined as an independent dimensional scaling tool, not a source of predictions.
-                </div>
-                <div class="status-group">
-                    <span class="status status-work">Closed</span>
-                    <span class="status status-verif-internal">Internal Verification</span>
-                </div>
+                <span class="num">FRAME 02</span>
+                <span class="status status-sci-exploratory">Exploratory — Documented</span>
+                 </div>
+                 <div class="title">Frame 2 — The Tree and the Shadow</div>
+                 <div class="desc">Exact proof tan(22.5°)=√2−1 and shadow model, with exploratory field data</div>
+                 <div class="last-status">
+                 <strong>Last status (v6.0.0):</strong>
+                 Exact trigonometric proof + interactive simulation + in-page TOST with automated t-distribution verification. Mean R=0.41297 for N=5 close to √2−1, descriptive only, not generalizable.
+                 <br><em>DOI: 10.5281/zenodo.23540796</em>
+                 </div> <div class="status-group">
+                 <span class="status status-work">Closed</span>
+                 <span class="status status-verif-repro">Reproduced</span> <span class="status status-sci-exploratory">Sec 8: Magic Angle tan(θ_m)=tan(22.5°)+1</span></div>
             </a>
+            
 
             <a href="#frame-3" class="summary-card">
                 <div class="header">
@@ -257,6 +259,31 @@
                     <span class="status status-verif-internal">Internal Verification</span>
                 </div>
             </a>
+            
+            <a href="#frame-5" class="summary-card" style="border-color: var(--purple);">
+                <div class="header"><span class="num">FRAME 05</span><span class="status status-sci-conditional">Strong Numerical Evidence</span></div> <div class="title">Frame 5 — Weighted Spectral Gap</div> <div class="desc">Ground-state transformation, weight w(u)=g²(u), self-adjoint operator</div><div class="last-status"><strong>Last status (v5.1):</strong> NUMERICAL EVIDENCE STRONG — ANALYTICAL PROOF INCOMPLETE. FEM convergence: λ₁ → 1.76852571 at N=1600 (Neumann/Mean-Zero). Observed B₋≈0.308029 → estimated lower bound 0.811. Certified bound, self-adjoint extension, and full-domain limit remain open.</div><div class="status-group"><span class="status status-work-active">In Progress</span><span class="status status-verif-internal">Internal Verification</span><span class="status status-sci-open">Certified Lower Bound: Open</span></div>
+            </a>
+            
+            <a href="#bridge" class="summary-card">
+                <div class="header">
+                    <span class="num">BRIDGE</span>
+                    <span class="status status-work">Closed v2.2</span>
+                </div>
+                <div class="title">Bridge — Dimensional Transform</div>
+                <div class="desc">Tool for converting a numerical value to a chosen unit</div>
+                <div class="last-status">
+                    <strong>Last Status:</strong>
+                    Publication v2.2 confirmed. Clearly defined as an independent dimensional scaling tool, not a source of predictions.
+                </div>
+                <div class="status-group">
+                    <span class="status status-work">Closed</span>
+                    <span class="status status-verif-internal">Internal Verification</span>
+                </div>
+            </a>
+
+
+
+            
 
             <a href="#calculator-audit" class="summary-card">
                 <div class="header">
@@ -277,40 +304,50 @@
         </div>
     </div>
 
-    <div class="card" style="border-color: var(--purple);">
-        <h2 style="color: var(--purple);">📌 Overall Scientific Judgment of the Project</h2>
-        <p><strong>Status of Al-Hindara Project: Documented mathematical and numerical progress; most frames are now closed.</strong></p>
-        <table style="margin-top: 10px;">
-            <thead>
-                <tr>
-                    <th>Component</th>
-                    <th>Scientific Judgment</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Frame 1 (Mother Function)</strong></td>
-                    <td>Proven within the definitions of frame1.html v7.2 — comprehensive scan closed (v1.8). The three proofs are correct, Audit D PASS.</td>
-                </tr>
-                <tr>
-                    <td><strong>Frame 2 (Tree & Shadow)</strong></td>
-                    <td>Exploratory — the limited sample does not prove a general law (awaiting N>30 data).</td>
-                </tr>
-                <tr>
-                    <td><strong>Frame 3 (Fine Structure)</strong></td>
-                    <td>Algebraic identity proven, numerical results documented under specified assumptions. Remaining: independent observational comparison.</td>
-                </tr>
-                <tr>
-                    <td><strong>Frame 4 (Spectral Problem)</strong></td>
-                    <td>Open problems — internal numerical verification on a truncated domain shows energy convergence toward zero. Proving the existence of a zero ground state for the full operator, the self-adjoint extension, and the lower spectral bound remains open.</td>
-                </tr>
-                <tr>
-                    <td><strong>Bridge</strong></td>
-                    <td>Closed (v2.2) — a dimensional scaling tool, not a source of predictions. Calculation and units tested successfully.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+
+<div class="card" style="border-color: var(--purple);">
+    <h2 style="color: var(--purple);">📌 Overall Scientific Judgment of the Project</h2>
+    <p><strong>Status of Al-Hindara Project: Documented mathematical and numerical progress; most frames are now closed. Frame 5 is strong numerically, open analytically.</strong></p>
+    <table style="margin-top: 10px;">
+        <thead>
+            <tr>
+                <th>Component</th>
+                <th>Scientific Judgment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Frame 1 (Mother Function)</strong></td>
+                <td>Proven within the definitions of frame1.html v7.2 — comprehensive scan closed (v1.8). The three proofs are correct, Audit D PASS.</td>
+            </tr>
+            <tr>
+                <td><strong>Frame 2 (Tree & Shadow)</strong></td>
+                <td>Exploratory — the limited sample does not prove a general law (awaiting N>30 data). Identity tan(22.5°)=√2−1 proven. Magic Angle extension tan(θ_m)=tan(22.5°)+1 documented. DOI: 10.5281/zenodo.23540796</td>
+            </tr>
+            <tr>
+                <td><strong>Frame 3 (Fine Structure)</strong></td>
+                <td>Algebraic identity proven, numerical results documented under specified assumptions. Remaining: independent observational comparison.</td>
+            </tr>
+            <tr>
+                <td><strong>Frame 4 (Spectral Problem)</strong></td>
+                <td>Open problems — internal numerical verification on a truncated domain shows energy convergence toward zero. Proving the existence of a zero ground state for the full operator, the self-adjoint extension, and the lower spectral bound remains open.</td>
+            </tr>
+            <tr style="background: rgba(186, 104, 200, 0.08); border-right: 3px solid var(--purple);">
+                <td><strong>Frame 5 (Weighted Spectral Gap) — NEW</strong></td>
+                <td><strong>NUMERICAL EVIDENCE STRONG — ANALYTICAL PROOF INCOMPLETE.</strong> Grid convergence on truncated domain (Neumann/Mean-Zero, cells [12][13]) stable: λ₁ = 1.76858932 → 1.76852571 (N=200→1600). Observed B₋ peak 0.308029 at 4.105296, B₊ peak 0.192532 at 5.401665 → estimated lower bound 1/(4B_obs)≈0.811611. Not a certified global bound. Remaining: certified upper bound for B, Hardy inequality justification, self-adjoint closure, and ε→0 full-domain limit.</td>
+            </tr>
+            <tr>
+                <td><strong>Bridge</strong></td>
+                <td>Closed (v2.2) — a dimensional scaling tool, not a source of predictions. Calculation and units tested successfully.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
     
     <!-- ==================== FRAME 1 RECORD ==================== -->
 <div class="card" id="frame-1">
@@ -397,6 +434,9 @@
     </details>
 </div>
 
+
+
+
 <!-- ==================== FRAME 4 RECORD ==================== -->
 <div class="card" id="frame-4">
     <details open>
@@ -454,6 +494,67 @@
         </div>
     </details>
 </div>
+
+<!-- ==================== FRAME 5 RECORD ==================== -->
+<div class="card" id="frame-5">
+    <details open>
+        <summary>
+            <strong style="color: var(--gold); font-size: 1.15rem;">FRAME 05 — Weighted Spectral Gap</strong>
+            <span class="status status-sci-conditional">Strong Numerical Evidence</span>
+            <span class="status status-verif-internal">Internal Verification</span>
+        </summary>
+        <div class="record-meta">📅 Last Updated: October 30, 2026 | v5.1 | File: <a href="frame5-en.html" style="color: var(--blue);">frame5-en.html</a> | Status: NUMERICAL EVIDENCE STRONG — ANALYTICAL PROOF INCOMPLETE</div>
+        
+        <div class="record-section">
+            <span class="label">📍 Last Status</span>
+            <div class="content">
+                <strong>Updated (v5.1):</strong> Ground-state transformation \(f=g\psi\) is algebraically exact. Weighted form \(\mathcal{E}[\psi]=\int w|\psi'|^2\) documented. FEM on truncated domain [ε,L-ε] (Neumann/Mean-Zero, cells [12][13]) shows grid convergence λ₁ → 1.76852571 at N=1600. This does not prove convergence to full domain (ε→0).
+            </div>
+        </div>
+        
+        <div class="record-section">
+            <span class="label">✅ What is Proven (Documented)</span>
+            <div class="content">
+                <ul>
+                    <li><strong>Definition of g(u) and w(u)=g²(u):</strong> Explicit on (0,2π).</li>
+                    <li><strong>Ground-state identity:</strong> \(Af = -g\psi'\) and \(\mathcal{Q}_F[f]=\int w|\psi'|^2\) — exact algebra.</li>
+                    <li><strong>Formal operator:</strong> \(H_w\psi = -(1/w)(w\psi')'\) — formal expression.</li>
+                    <li><strong>Numerical stability:</strong> Grid convergence 200→1600: 1.76858932 → 1.76852571 (Δ<1e-4).< /li>
+                    <li><strong>Observed B values:</strong> B₋ peak 0.308029 at 4.105296, B₊ peak 0.192532 at 5.401665 (observed, not certified global max).</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="record-section">
+            <span class="label">🔓 Open Problems</span>
+            <div class="content">
+                <ul>
+                    <li><strong>Certified global upper bound for B:</strong> Observed peaks are not proof of global max. Needs asymptotic expansion with explicit remainder near 0 and interval arithmetic on [δ,0.5].</li>
+                    <li><strong>Hardy inequality application:</strong> Applying 1/(4B) as lower bound requires proving hypotheses hold in this weighted space.</li>
+                    <li><strong>Self-adjoint closure:</strong> Form closure, domain identification, and representation theorem not completed.</li>
+                    <li><strong>Full-domain limit:</strong> Prove λ₁(ε) → λ₁(0) as ε→0.</li>
+                    <li><strong>Certified bound:</strong> `mp.quad(error=True)` is indicative, not interval-certified. Needs true interval arithmetic.</li>
+                </ul>
+                <div class="badge-exploratory" style="margin-top: 15px;">
+                    <strong>⚠️ Methodological Note:</strong> Formal factorization and numerical convergence on a truncated domain do not constitute a certified lower bound for the full operator.
+                </div>
+            </div>
+        </div>
+        
+        <div class="record-section">
+            <span class="label">📝 Decisions & Roadmap</span>
+            <div class="content">
+                <ul>
+                    <li><strong>v5.1 (Today):</strong> Status set to NUMERICAL EVIDENCE STRONG. Added visual chart for log₁₀(w(u)) decay. Clarified distinction between Dirichlet cells [8][9] vs Neumann cells [12][13].</li>
+                    <li><strong>Next:</strong> 1) Controlled asymptotic for wB₋' near 0, 2) Interval covering of [δ,0.5], 3) Closure proof for H¹_w, 4) ε→0 convergence, 5) Certified B_upper.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+</div>
+
+
+
 
     <!-- ==================== BRIDGE RECORD ==================== -->
     <div class="card" id="bridge">
