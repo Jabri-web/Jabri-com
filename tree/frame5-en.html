@@ -100,6 +100,14 @@
         </div>
 
         <div class="card">
+            <h2>5.0.1. Conceptual Note: Why is the Gap "Weighted"?</h2>
+            <p>We call it the weighted spectral gap because the weight enters the definition of the function space, the energy, and the Laplace operator itself, and not merely as a descriptive label for the gap.</p>
+            <p>Initially, we had a standard spectral problem for a differential operator. The pivotal step was applying the <strong>Ground-State Transformation</strong> by substituting \(f = g \cdot \psi\). This transformation completely eliminated the potential term \(V\) (thanks to integration by parts and the properties of the ground state \(g\)), leaving us with a simplified quadratic form:</p>
+            <div class="math-block">\[ \mathcal{Q}[f] = \int w(u) |\psi'(u)|^2 du \]</div>
+            <p>The weight was thus born from the square of the ground state: <strong>\(w(u) = g^2(u)\)</strong>. Here, the weight is no longer just a numerical factor; it becomes a <strong>Metric</strong> that redefines how mass, variance, and energy are measured. The new space \(L^2(0, 2\pi; w\,du)\) possesses a distinct geometry, and the operator \(H_w = -\frac{1}{w}(w\psi')'\) is the natural operator within this weighted space, rather than a standard Laplacian. This mathematical structure is what makes Frame 5 an independent study, rather than a mere numerical computation of a conventional spectral gap.</p>
+        </div>
+
+        <div class="card">
             <h2>5.1. Initial Form Space</h2>
             <p>We define the base function $g(u)$ on the open interval $(0, 2\pi)$:</p>
             <div class="math-block">\[ g(u) = \left(\frac{u}{2\pi}\right)^5 \log\left(\frac{2\pi}{u}\right) \exp\left(-\frac{2\pi}{21u}\right) \]</div>
