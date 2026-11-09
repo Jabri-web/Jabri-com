@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الملحق الجامع — كل العلاقات | واحة الجبري</title>
+<meta name="description" content="ملحق جامع: handsa + char-balance + frame2 + tree2 + tree3 + lab01. الحروف أرقام، المتمم، فيثاغورس، الزاوية السحرية، المنحنى الموحد، وقياس المانجو.">
+<link rel="canonical" href="https://jabri-com.vercel.app/tree/appendix.html">
+<style>
+:root{--gold:#f4c430;--green:#7fb08a;--cyan:#76d6e8;--violet:#cc44ff;--bg:#0a1410;--panel:#0a1a12;--border:#1f3a2b;--dim:#8aa892}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:#e8f5e9;font-family:'Segoe UI',Tahoma,sans-serif;line-height:1.9;padding:16px}
+.wrap{max-width:960px;margin:auto}
+h1{color:var(--gold);text-align:center;font-size:1.5rem}
+.sub{text-align:center;color:var(--dim);margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;margin:14px 0}
+.card h2{color:var(--gold);margin:0 0 10px;font-size:1.15rem;border-bottom:1px solid var(--border);padding-bottom:8px}
+.formula{direction:ltr;text-align:center;background:#08140d;border:1px solid var(--border);border-radius:10px;padding:12px;margin:12px 0;font-family:'Courier New',monospace;font-size:1.02rem;color:var(--gold);overflow-x:auto;white-space:pre-line}
+.note{border-right:3px solid var(--gold);background:#1a1508;padding:10px 14px;border-radius:8px;font-size:.9rem;color:#d4c8a0;margin:10px 0}
+.warn{border-right-color:#e57373;background:#2a1212}
+.good{border-right-color:var(--green);background:#122a1a}
+.cyan{border-right-color:var(--cyan);background:#0d1a22}
+table{width:100%;border-collapse:collapse;font-size:.92rem} th,td{padding:9px;border-bottom:1px solid var(--border);text-align:center} th{color:var(--gold)}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.72rem;font-weight:700;border:1px solid var(--border)}
+.tag.p{background:#123a1a;color:#8bd5a5;border-color:#2e6b45} .tag.e{background:#1a1508;color:var(--gold);border-color:var(--gold)} .tag.s{background:#241a2e;color:#d8a8ff;border-color:#6a3a8a}
+code{background:#132a1d;padding:2px 6px;border-radius:4px;color:var(--gold);direction:ltr}
+a{color:var(--cyan)}
+.nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#0a1a12;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}
+.nav a{background:#132a1d;color:#a5d6a7;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:.85rem}
+.nav a.here{background:var(--gold);color:#0a1a12;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- الملف هنا: /tree/appendix.html -->
+<nav class="nav">
+  <a href="../index.html">🏠 الرئيسية</a>
+  <a href="../handsa.html">📐 handsa — المتمم</a>
+  <a href="../char-balance.html">⚖️ char-balance — الحروف أرقام</a>
+  <a href="../tree/frame2.html">🌳 frame2 — الشجرة والظل</a>
+  <a href="../tree/tree2.html">🌀 tree2 — المحاكاة</a>
+  <a href="../tree/tree3.html">📏 tree3 — القياس</a>
+  <a href="../tree/lab01.html">🧪 lab01 — المنحنى + Frame 5</a>
+  <a href="../tree/appendix.html" class="here">📜 الملحق الجامع</a>
+  
+  <a href="../jabri_5/wells/review.html" class="here">📜 اللوحة</a>
+
+</nav>
+
+<h1>📜 الملحق الجامع — كل العلاقات</h1>
+<div class="sub">handsa.html · char-balance.html · frame2.html · tree2.html · tree3.html · lab01.html<br>م/ عبدالله محمد ناصر الجبري — واحة الجبري</div>
+
+<div class="card">
+<h2>0. القاعدة الأولى: الحروف هي الأرقام</h2>
+<p>مش "الحروف بتوصف أرقام". في نظامك الحرف <b>هو</b> قيمته في أبجد هوز. فالكلمة هي عدد، والجملة هي مجموع أعداد.</p>
+<p>ونفس الشيء في <code>Z , C , A</code>:</p>
+<table>
+<tr><th>الملف</th><th>Z</th><th>C</th><th>A</th><th>القانون</th></tr>
+<tr><td><code>handsa.html</code></td><td>369 — عدد</td><td>124 — عدد</td><td>875 — عدد</td><td>C + A = 999</td></tr>
+<tr><td><code>tree2.html</code> / <code>frame2.html</code></td><td>الارتفاع — عدد</td><td>الأفقي — عدد</td><td>الوتر — عدد</td><td>Z² + C² = A²</td></tr>
+<tr><td><code>char-balance.html</code></td><td>—</td><td>الذكاء = 753</td><td>الاصطناعي = 262</td><td>المجموع = 1015</td></tr>
+</table>
+<div class="note">الجسر مش "حروف"، الجسر <b>عددي</b>. الحروف أرقام، والأرقام بتتقابل في <code>mod 9</code> وفي فيثاغورس.</div>
+</div>
+
+
+<div class="card">
+  <h2>0ب. هوية الجبري الأصلية — من tree.html <span class="tag e">تعريف</span></h2>
+  <p>في <code>tree.html</code>، الهوية <code>Z + C + A = 1</code> محفوظة، وهي <b>تطبيع</b>، مش جمع أعداد المتمم.</p>
+  <div class="formula">Z = C · A = Z·C · Z + C + A = 1
+    x + x + x² = 1 → x² + 2x − 1 = 0 → x = √2 − 1 ≈ 0.41421356</div>
+  <div class="note"><b>تمييز مهم:</b> هنا Z,C,A نسب مُطبّعة بين 0 و 1. في handsa، Z=369 و C=124 و A=875 أعداد متمم، وجمعهم مش 1. الصح هناك: <code>C/999 + A/999 = 1</code>. المعنيان مختلفان، والخلط بينهم هو اللي كان هيضيّع الهوية.</div>
+  <p><b>في tree2 / tree3:</b> حذفنا الصيغة صح، لأن هناك Z,C,A هندسة: ارتفاع / أفقي / وتر، والقانون هناك <code>Z² + C² = A²</code>.</p>
+</div>
+
+
+<div class="card">
+<h2>1. ميزان الحروف — أبجد هوز <span class="tag p">حساب</span> <span style="color:var(--dim);font-size:.8rem">من char-balance.html</span></h2>
+<table>
+<tr><th>المجموعة</th><th>الحروف</th><th>القيم</th></tr>
+<tr><td>أبجد</td><td>أ ب ج د</td><td>1, 2, 3, 4</td></tr>
+<tr><td>هوز</td><td>ه و ز</td><td>5, 6, 7</td></tr>
+<tr><td>حطي</td><td>ح ط ي</td><td>8, 9, 10</td></tr>
+<tr><td>كلمن</td><td>ك ل م ن</td><td>20, 30, 40, 50</td></tr>
+<tr><td>سعفص</td><td>س ع ف ص</td><td>60, 70, 80, 90</td></tr>
+<tr><td>قرشت</td><td>ق ر ش ت</td><td>100, 200, 300, 400</td></tr>
+<tr><td>ثخذ</td><td>ث خ ذ</td><td>500, 600, 700</td></tr>
+<tr><td>ضظغ</td><td>ض ظ غ</td><td>800, 900, 1000</td></tr>
+</table>
+<div class="note"><b>قواعد الاصطلاح في ملفك:</b> ء = 1 · أ إ آ = 1 · ة = 400 · ى = 10 · ؤ = 6 · ئ = 10. مدارس الجُمّل تختلف فيها، فأنت صرّحت بها بدل افتراضها.</div>
+<div class="formula">الذكاء = 1+30+700+20+1+1 = 753 → 7+5+3=15 → جذر 6
+الاصطناعي = 1+30+1+90+9+50+1+70+10 = 262 → 2+6+2=10 → جذر 1
+المجموع = 753 + 262 = 1015 → 1+0+1+5 = 7</div>
+<table>
+<tr><th>العملية</th><th>الناتج</th><th>الجذر الرقمي</th><th>الباقي mod 9</th></tr>
+<tr><td>الذكاء</td><td>753</td><td>6</td><td>6</td></tr>
+<tr><td>الاصطناعي</td><td>262</td><td>1</td><td>1</td></tr>
+<tr><td>المجموع</td><td>1015</td><td>7</td><td>7</td></tr>
+</table>
+<div class="note"><b>تمييز اصطلاحي من ملفك:</b> الجذر الرقمي 1-9، والباقي mod 9 هو 0-8. الفرق يظهر في مضاعفات 9 فقط: 1872 باقيه 0، وجذره 9.</div>
+</div>
+
+<div class="card">
+<h2>2. الجسر: الحروف → هندسة الأعداد <span class="tag p">حساب</span></h2>
+<p>الجسر مش إن الحروف "بتنتج" الصورة والظل. هو <b>توافق في الباقي mod 9</b>، حقيقة حسابية، مش برهان سببية:</p>
+<table>
+<tr><th>الطرف في ميزان الحروف</th><th>الباقي mod 9</th><th>يقابله في هندسة الأعداد</th><th>الباقي mod 9</th></tr>
+<tr><td>الذكاء + الاصطناعي = 1015</td><td>7</td><td>الصورة C = 124</td><td>7</td></tr>
+<tr><td>المجموع + 733 = 1748</td><td>2</td><td>الظل A = 875</td><td>2</td></tr>
+<tr><td>1748 + 124 = 1872</td><td>0</td><td>الوحدة 999 ≡ 0</td><td>0</td></tr>
+<tr><td>المصدر Z = 369</td><td>0</td><td>يشارك الوحدة في الباقي 0</td><td>0</td></tr>
+</table>
+<div class="note warn"><b>مسألة 733:</b> 733 مش فريد ولا مشتق. أي عدد ≡ 4 (mod 9) يوفي بالغرض: 4، 13، 22، 103، 733... المبرر الأدبي المحتمل: جذره 7+3+3=13→4، والـ 4 يرمز للأركان الأربعة. ده <b>تأويل</b>، مش استنتاج. توصية ملفك: إما حذفه والاكتفاء بجسر 1015، أو إعلانه "ثابت اصطلاحي".</div>
+<p><b>القراءة الرمزية في ملفك (تأويل، مش حساب):</b> 1=التوحيد، 2=الظل/الازدواج، 4=الأركان الأربعة، 5=الإنسان، 6=الوعي الإنساني، 7=الكمال/الصورة، 8=التوازن، 9=التمام. دي مفاتيح دلالية، مش نتائج حسابية.</p>
+</div>
+
+<div class="card">
+<h2>3. عائلة المتمم — هندسة الأعداد <span class="tag p">مثبت</span> <span style="color:var(--dim);font-size:.8rem">من handsa.html</span></h2>
+<div class="formula">σk(n) = (10^k − 1) − n · n + σk(n) = 10^k − 1
+σ(σ(n)) = n</div>
+<table>
+<tr><th>الطابق</th><th>الوحدة</th><th>الصورة</th><th>الظل</th><th>الشقيق</th></tr>
+<tr><td>k=3</td><td>999</td><td>124</td><td>875</td><td>—</td></tr>
+<tr><td>k=3</td><td>999</td><td>369</td><td>630</td><td>—</td></tr>
+<tr><td>k=5</td><td>99999</td><td>369</td><td>99630</td><td>271</td></tr>
+<tr><td>k=6</td><td>999999</td><td>142857</td><td>857142</td><td>7</td></tr>
+</table>
+<div class="formula">369 × 271 = 99999 · 99999 = 3² × 41 × 271 = 9 × 41 × 271
+142857 × 7 = 999999
+124 + 875 = 999 · 142 + 857 = 999
+1/271 = 0.0036900369… · 1/7 = 0.142857142857…
+369/99999 = 1/271 · 142857/999999 = 1/7
+1/41 = 0.0243902439… · 41 × 271 = 11111</div>
+<p><b>ليه كلها بتطلع 9؟</b> لأن <code>10 ≡ 1 (mod 9)</code>. أي عدد كله 9ات هو مضاعف لـ 9، فمجموع أرقامه يرجع لـ 9. المتمم من 9 هو مراية النظام العشري.</p>
+<div class="note"><b>السداسي:</b> 1↔8 ، 2↔7 ، 4↔5. كل زوج مجموع 9، ويفصله 180°. لذلك ρ(△124) = △875 بالإحداثيات: 1=(1,0)→8=(-1,0) ، 2=(½,√3/2)→7=(-½,-√3/2) ، 4=(-½,√3/2)→5=(½,-√3/2). و 3↔6 و 9→9 مسار مغلق خارج الدورة. والمستطيلات R1,R2,R3 متماثلة مع نفسها: ρ(Ri)=Ri. اللي بيتبادل هو المثلثات، مش المستطيلات.</div>
+<p><b>الصياغة المثبتة فقط:</b> <code>C/999 + A/999 = 1</code>. و Z=369 هو المولد، مش جزء من الجمع العددي، وظله في k=5 هو 99630.</p>
+</div>
+
+<div class="card">
+<h2>4. عائلة فيثاغورس — الشجرة والظل <span class="tag p">مثبت</span> <span style="color:var(--dim);font-size:.8rem">من tree2.html + frame2.html</span></h2>
+<div class="formula">Z² + C² = A² · C / Z = tan(θ) · A = √(Z² + C²)
+S / H = cot(α) = tan(θ) · θ من الرأسي ، α = 90° − θ من الأفق</div>
+<p><b>المثال العام — 56.54°:</b> مثال توضيحي مستقل في <code>tree2.html</code>، مش من رسم 22.5°:</p>
+<div class="formula">Z = 192 , C = 290.74
+Z² + C² = 192² + 290.74² = 36864 + 84529.75 = 121393.75
+A = √121393.75 ≈ 348.42
+C/Z = 290.74/192 = 1.51427 · θ = tan⁻¹(1.51427) ≈ 56.54°</div>
+<p><b>الحالة الخاصة الذهبية — 22.5°:</b></p>
+<div class="formula">tan(22.5°) = tan(45°/2) = √2 − 1 ≈ 0.4142135624
+البرهان: x = tan(22.5°) ، 1 = tan(45°) = 2x/(1−x²) → x²+2x−1=0 → x = √2−1
+أو: (1−cos45°)/sin45° = (1−√2/2)/(√2/2) = (2−√2)/√2 = √2−1</div>
+<div class="note">الخلاصة كما في <code>tree2.html</code>: قانون واحد — مثال عام عند 56.54°، وحالة خاصة ذهبية عند 22.5°.</div>
+</div>
+
+<div class="card">
+<h2>5. من المستوى إلى الفراغ — الزاوية السحرية <span class="tag p">مثبت</span></h2>
+<div class="formula">θm = arccos(1/√3) = arctan(√2) ≈ 54.7356103°
+tan(θm) = √2 ≈ 1.41421356
+tan(θm) = tan(22.5°) + 1</div>
+<p>22.5° هي ربع القائمة في المستوى 2D. 54.7356° هي زاوية قطر المكعب في الفراغ 3D. الرابط هو <code>√2</code>، مش رابط فيزيائي بين الظل والمكعب.</p>
+<div class="note warn"><b>تصحيح:</b> الزاوية السحرية 54.7356°، مش 56.54°. 56.54° هي مثال فيثاغورس في القسم 4.</div>
+</div>
+
+<div class="card">
+<h2>6. تاج المانجو — القياس الميداني <span class="tag e">استكشافي</span> <span style="color:var(--dim);font-size:.8rem">من frame2.html + tree3.html</span></h2>
+<p>5 أشجار مانجو، شعوب — صنعاء، 14 أكتوبر 2026. النسبة المدروسة <code>R = (H−h)/H</code>، وهي نسبة تاج/ارتفاع، مش طول ظل أفقي <code>S/H</code>. والمسح الكامل كان 30 شجرة، والمانجو 5 منهم.</p>
+<table>
+<tr><th>الشجرة</th><th>H</th><th>h</th><th>C=H−h</th><th>R</th><th>الفرق عن √2−1</th></tr>
+<tr><td>1</td><td>7.80</td><td>4.50</td><td>3.30</td><td>0.42308</td><td>+0.00886</td></tr>
+<tr><td>2</td><td>8.50</td><td>5.00</td><td>3.50</td><td>0.41176</td><td>−0.00245</td></tr>
+<tr><td>3</td><td>7.20</td><td>4.20</td><td>3.00</td><td>0.41667</td><td>+0.00245</td></tr>
+<tr><td>4</td><td>9.00</td><td>5.40</td><td>3.60</td><td>0.40000</td><td>−0.01421</td></tr>
+<tr><td>5</td><td>7.50</td><td>4.40</td><td>3.10</td><td>0.41333</td><td>−0.00088</td></tr>
+</table>
+<div class="formula">Mean R = 0.41297 · SD = 0.00845 · SE = 0.00378
+90% CI = [0.40491 , 0.42102] · TOST p = 0.000801 عند Δ = ±0.03
+الفرق = 0.41421 − 0.41297 = 0.00124</div>
+<p><b>بروتوكول <code>tree3.html</code> (ZX):</b> 6 نسب بتتحسب: h/H ، r/H ، 2r/H ، d/H ، (H−h)/H ، h/(H−h). و <code>L/H</code> مستبعد من الفحص لأنه يعتمد على زاوية الشمس، مش على شكل الشجرة. وقفل الفرضية المسبقة عند أول شجرة يمنع p-hacking. ولو مفيش فرضية مسبقة، بيطبق Bonferroni: α/6 = 0.0083. وبيقترح حجم عينة ≈ 15-25 للوصول لقدرة 80% عند Δ=0.03.</p>
+<div class="note"><b>حدود الاستدلال في ملفاتك نفسها:</b> عينة صغيرة، موقع واحد، لم تُسجّل مسبقا. النتيجة تشابه عددي، مش قانون عام. "هذا ليس فشلاً — هذا نتيجة" لو طلع مختلف، و "غير حاسم" لو البيانات مش كافية.</div>
+</div>
+
+<div class="card">
+<h2>7. المنحنى الموحد — Lab 01 <span class="tag p">حساب</span> <span style="color:var(--dim);font-size:.8rem">من tree/lab01.html v2.0</span></h2>
+<p>الدالة البنيوية في المختبر، من تعريف نسبة التكامل في v0.4:</p>
+<div class="formula">α*(θ) = tan θ / (tan θ + 2)</div>
+<p>ثلاث قيم دقيقة على نفس المنحنى، مش ثلاث قوانين منفصلة:</p>
+<table>
+<tr><th>الزاوية θ</th><th>tan θ</th><th>α*(θ)</th><th>السياق</th></tr>
+<tr><td>22.5°</td><td>√2 − 1</td><td>3 − 2√2 ≈ 0.1716</td><td>Frame 2: α* = tan²(22.5°)</td></tr>
+<tr><td>45.0°</td><td>1</td><td>1/3 ≈ 0.3333</td><td>v0.4: نسبة التكامل عند الحد الحاد a=1</td></tr>
+<tr><td>θm = arctan(√2) ≈ 54.7356°</td><td>√2</td><td>√2/(√2+2) = √2 − 1 ≈ 0.4142</td><td>Frame 2 §8: الزاوية السحرية، θm = arccos(1/√3)</td></tr>
+</table>
+<div class="formula">α*(22.5°) = (√2−1)/(√2+1) = (√2−1)² = 3 − 2√2</div>
+<p><b>الهوية الهندسية في الملف:</b> <code>a(θ) = tan θ</code>. في النطاق <code>0° &lt; θ &lt; 45°</code>، النسبة <code>a</code> تكون <b>مفضلة (Preferred)</b> لأنها أقل من 1. وده بيخلي 22.5° هي النقطة المفضلة، مش 45°.</p>
+<table>
+<tr><th>التعريف</th><th>عند 22.5°</th><th>عند 45°</th><th>النتيجة</th></tr>
+<tr><td><code>a = tan θ</code></td><td>0.414</td><td>1.000</td><td><b>مفضل (Preferred)</b></td></tr>
+<tr><td><code>a = 2 tan θ / (1+tan θ)</code></td><td>0.586</td><td>1.000</td><td>متناقص في 22.5°</td></tr>
+<tr><td><code>a = 2 tan θ</code></td><td>0.828</td><td>2.000</td><td>متناقص</td></tr>
+</table>
+<div class="note"><b>حد الملف نفسه:</b> المرور بالنقاط الثلاث وحده لا يثبت اشتقاقا موحدا من الإطارات. المنحنى مقترح، والقيم الثلاث دقيقة حسابيا، والربط بينهم رياضي، مش برهان على أن الإطارات مشتقة منه.</div>
+<div class="note cyan"><b>الربط مع اللي فات:</b> عند θm، المنحنى بيرجع نفس القيمة اللي بدأنا بيها في Frame 2: <code>√2 − 1 ≈ 0.4142</code>. يعني الدورة بتقفل: 22.5° في المستوى → 45° في التكامل → 54.7356° في الفراغ → ترجع لـ 0.4142.</div>
+</div>
+
+<div class="card">
+<h2>8. ملحق الإطار الخامس — Frame 5 <span class="tag e">ادعاء في الملف</span> <span style="color:var(--dim);font-size:.8rem">من tree/lab01.html §6</span></h2>
+<p>الملحق ده منقول من ملفك كما هو، بثوابته وتعريفاته. بنعرضه هنا كـ <b>ادعاء داخل ملفك</b>، مش كبرهان مستقل تم التحقق منه هنا.</p>
+<p><b>الثوابت:</b></p>
+<div class="formula">M = 2π , n = 4π/21 ≈ 0.598399
+w(x) = (x/L)^10 ln²(L/x) , e^{−a/x}
+M(x) = ∫₀ˣ w , R(x) = ∫ₓ^∞ dt/w(t) , B₋(x) = S(x)R(x)
+B₋ = M ⋅ R</div>
+<p><b>المشتقات:</b></p>
+<div class="formula">n(x) = w²R − M , n'(x) = 2w(x)S(x) , S(x) = w'(x)R(x) − 1
+p = w'/w = 10/x − 2/(x ln) + a/x²
+S(x) = w^{1/2} R − 1 , S'(x) = w/(p²+p') R − p</div>
+<p><b>الحركة:</b> <code>B₋ → h → S → S'</code>، حيث <code>h' = 2wS</code>.</p>
+<p><b>الأطياف في الملف:</b></p>
+<table>
+<tr><th>النطاق</th><th>الحالة</th></tr>
+<tr><td><code>(0, a/40]</code></td><td><b>متصل — ذهبي صغير (S&lt;0)</b> ، حيث <code>T = a/x</code> و <code>C₀ &gt; 0</code> و <code>C(T) &gt; 0</code></td></tr>
+<tr><td><code>(a/40, 0.5]</code></td><td><b>منفصل — "مفصول" (S&lt;0)</b></td></tr>
+<tr><td><code>(0.5, m]</code></td><td><b>منفصل</b></td></tr>
+</table>
+<p><b>نقطة X₁:</b></p>
+<div class="formula">X₁ = [0.01496 , 0.0172] , S(0.01496) ≈ 0.03834 , S(0.0172) ≈ 0.04253
+S ≈ w(u)p(v)R(u)−1 = −0.9985 — في نص الملف</div>
+<p><b>الكمية C₀ والتقدير السفلي:</b></p>
+<div class="formula">X₁ ∋ T ∈ [34.79 , 40] , q₀ = T⁸ / r² , r = ln(LT/a) , c = 8 − 2/r
+S(T) = (T+10−2/r)/T ⋅ e^{−T} I(T)/q₀(T) − 1
+C₀ = I(T₀) − e^{T₀}(q₀ − q₀')(T₀) ≈ 0.0058 — ثابت في الملف
+E(T) ≥ (1−n)^{−1} e^{−1} q₀'(T−1)/q₀(T)</div>
+<div class="formula">C(34.79) ≈ 0.00696 , C(40) ≈ 0.01165
+inf_{T∈[34.79,40]} S(T) &gt; 0 — في نص الملف</div>
+<p><b>النتيجة المعلنة في الملف:</b></p>
+<div class="formula">(i) q₀' موجود · (ii) C₀ موجود · (iii) S(T) موجود
+المرجع: X₁ موجود ، C₀ ≈ 0.0058 ، inf S &gt; 0</div>
+<div class="note warn"><b>حدود العرض هنا:</b> الأرقام أعلاه منقولة من <code>lab01.html §6</code> كما هي، بما فيها التناقض الظاهري في الملف بين S سالب في الجدول وموجب في التقدير السفلي. الملحق الجامع لا يحسم هذا التناقض، بل يعرضه كما هو في مصدره، ويترك التحقق المستقل لملف Frame 5 نفسه.</div>
+<div class="note"><b>كود إعادة الإنتاج في الملف:</b> الملف فيه كود بايثون كامل لـ α*(θ) ولـ S(x) في النطاق المتوسط (frame5.py، 50 رقم عشري)، مع زر Google Colab. الملحق هنا يلخص النتائج، والتحقق الكامل يحتاج تشغيل الكود الأصلي.</div>
+</div>
+
+<div class="card">
+<h2>9. جدول الأدلة — النسخة الكاملة (6 ملفات)</h2>
+<table>
+<tr><th>الادعاء</th><th>الحالة</th><th>المصدر</th></tr>
+<tr><td>الذكاء=753 ، الاصطناعي=262 ، المجموع=1015</td><td><span class="tag p">مثبت</span></td><td>char-balance §2</td></tr>
+<tr><td>1015 ≡ 124 (mod 9) ، 1748 ≡ 875 (mod 9)</td><td><span class="tag p">مثبت</span></td><td>char-balance §3</td></tr>
+<tr><td>124+875=999 ، 369×271=99999 ، 142857×7=999999</td><td><span class="tag p">مثبت</span></td><td>handsa</td></tr>
+<tr><td>tan(22.5°) = √2−1</td><td><span class="tag p">مثبت</span></td><td>frame2 §1 / tree2</td></tr>
+<tr><td>مثال 56.54°: 192 / 290.74 / 348.42</td><td><span class="tag p">مثبت</span></td><td>tree2 §2</td></tr>
+<tr><td>tan(θm)=√2 ، θm≈54.7356°</td><td><span class="tag p">مثبت</span></td><td>frame2 §8</td></tr>
+<tr><td>α*(22.5°)=3−2√2≈0.1716 ، α*(45°)=1/3 ، α*(θm)=√2−1</td><td><span class="tag p">مثبت حسابيا</span></td><td>lab01 §1</td></tr>
+<tr><td>المنحنى الموحد يشتق الإطارات</td><td><span class="tag e">مقترح</span></td><td>lab01 — المرور بالنقاط لا يكفي</td></tr>
+<tr><td>متوسط مانجو ≈ √2−1</td><td><span class="tag e">استكشافي</span></td><td>frame2 §3 / tree3</td></tr>
+<tr><td>Frame 5: C₀≈0.0058 ، inf S&gt;0 ، X₁ موجود</td><td><span class="tag e">ادعاء في الملف</span></td><td>lab01 §6 — يحتاج تشغيل الكود</td></tr>
+<tr><td>دلالات الجذور (وعي، توحيد...)</td><td><span class="tag s">تأويل</span></td><td>char-balance §5</td></tr>
+<tr><td>رابط مع فرضية ريمان</td><td><span class="tag s">غير مثبت</span></td><td>frame2 §5</td></tr>
+<tr><td>999999 = 21 × 47619 ، n = 4π/21</td><td><span class="tag p">مثبت</span></td><td>lab01 §6</td></tr>
+<tr><td>توافق الأعداد في mod 21</td><td><span class="tag e">استكشافي</span></td><td>ملاحظة جديدة §10</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>10. ملاحظة على 21 — <span class="tag e">استكشافي</span></h2>
+<p><b>المثبت:</b> في Frame 5: <code>n = 4π / 21 ≈ 0.598399</code>. و <code>999999 = 21 × 47619</code> بالظبط.</p>
+<p><b>التوافق في الباقي mod 21:</b> 1015 ≡ 7 ، 369 ≡ 999 ≡ 12 ، 124 ≡ 271 ≡ 19 ، 875 ≡ 14 ، 142857 ≡ 15.</p>
+<div class="note"><b>حد الاستدلال:</b> التوافق في الباقي mod 21 حساب صحيح، بس مش برهان سببية. 21 هنا ملاحظة، مش قانون موحد زي 9 و √2. ولا يوجد في الملفات رابط مثبت بين 21 وبين 22.5° أو المنحنى الموحد.</div>
+<p><b>التأويل فقط:</b> 21 = 3 × 7، و 21 = 1+2+3+4+5+6. أي قراءة رمزية لـ 3 و 7 هنا تأويل، مش نتيجة حسابية.</p>
+<div class="note"><b>ملاحظة تحليلية:</b> 999999 = 3³ × 7 × 11 × 13 × 37. فالـ 21 هنا عامل من عوامل كثيرة، مش العامل الوحيد المميز. و mod 9 أقوى بنيويا لأن 10 ≡ 1 (mod 9)، بينما لا يوجد رابط بنيوي مماثل لـ 21 في الملفات مع 22.5° أو المنحنى الموحد أو فيثاغورس.</div>
+</div>
+
+
+<div class="card">
+<h2>11. الخلاصة النهائية — 6 ملفات في سطرين</h2>
+<div class="formula">الحروف أرقام: 753 + 262 = 1015 ≡ 124 (mod 9)
+عائلة 9: 369 → 99999 ، 1/7 → 999999 ، 124+875=999
+عائلة √2: 56.54° مثال عام ، 22.5° حالة ذهبية ، 54.7356° زاوية سحرية
+المنحنى الموحد: α* = tanθ/(tanθ+2) → 0.1716 → 1/3 → 0.4142 → تقفل الدورة
+الميدان: مانجو 0.41297 استكشافي · Frame 5: ادعاء في الملف يحتاج تشغيل الكود · 21: ملاحظة استكشافية
+999999 = 3³ × 7 × 11 × 13 × 37 — فـ 21 عامل واحد من عوامل كثيرة، مش سر 999999</div>
+<p style="text-align:center">قانون المتمم يشرح ليه 9 بتتكرر. قانون فيثاغورس يشرح ليه 22.5° بتدي √2−1. المنحنى الموحد بيربط الثلاث زوايا في دالة واحدة. والمانجو بتقول: القياس قريب، بس لسه محتاج تحقق مستقل.<br><a href="../handsa.html">handsa</a> · <a href="../char-balance.html">char-balance</a> · <a href="./frame2.html">frame2</a> · <a href="./tree2.html">tree2</a> · <a href="./tree3.html">tree3</a> · <a href="./lab01.html">lab01</a></p>
+<div class="note">© 2026 م/ عبدالله محمد ناصر الجبري — واحة الجبري. الملحق ده تلخيص منضبط لملفاتك، مش ملف جديد بيدعي برهان جديد.</div>
+</div>
+
+</div>
+</body>
+</html>
+

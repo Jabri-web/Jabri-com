@@ -49,7 +49,7 @@
        ═══════════════════════════════════════════════════════ -->
   <title>بروتوكول القياس الميداني ZX — أداة TOST لفحص √2−1 في الأشجار | واحة الجبري</title>
   <meta name="description" content="أداة إحصائية تفاعلية لفحص فرضية النسبة الفضية √2−1 ≈ 0.414 في الأشجار. إدخال H, h, r, d, L — حساب تلقائي لست نسب هندسية — اختبار تكافؤ TOST مع CI و p-value وحجم عينة مقترح. قفل الفرضية المسبقة لمنع p-hacking. تصدير CSV. م/ عبدالله الجبري." />
-  <meta name="keywords" content="بروتوكول القياس, ZX, TOST, اختبار التكافؤ, √2−1, النسبة الفضية, نسبة التاج, أشجار المانجو, tree3, إحصاء تطبيقي, قفل الفرضية, p-hacking, عبدالله الجبري, Z+C+A=1" />
+  <meta name="keywords" content="بروتوكول القياس, ZX, TOST, اختبار التكافؤ, √2−1, النسبة الفضية, نسبة التاج, أشجار المانجو, tree3, إحصاء تطبيقي, قفل الفرضية, p-hacking, عبدالله الجبري, Z²+C²=A²" />
 
   <link rel="canonical" href="https://jabri-com.vercel.app/tree/tree3.html" />
   <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/tree3.html" />
@@ -535,6 +535,14 @@
 <h1>🌳 بروتوكول القياس الميداني</h1>
 <h2>اختبار الفرضية: هل توجد نسبة في الشجرة ≈ √2 − 1 ≈ 0.414 ؟</h2>
 
+
+<div class="hint info" style="text-align:center; font-size:0.85rem;">
+  <b>هوية الجبري المفاهيمية:</b> Z + C + A = 1 — هندسة + إدارة + هندرة = وحدة واحدة.
+  <br>هنا في الأداة نستخدم نفس الحروف بمعنى هندسي مختلف: قياسات شجرة <code>H, h, r, d, L</code>.
+  الهوية الأصلية في الإطار الكامل: <a href="/tree/tree.html" style="color:var(--gold);">tree.html</a>
+</div>
+
+
 <!-- ═══════════ الفرضية المسبقة ═══════════ -->
 <div class="panel hypo" id="preHypoPanel">
   <div class="lock-banner hidden" id="lockBanner">
@@ -569,7 +577,7 @@
   <div class="row full">
     <div>
       <label>السبب الهندسي / البيولوجي للتوقع</label>
-      <textarea id="preReason" placeholder="مثال: نظرية Z+C+A تقترح أن تقسيم الكتلة بين الجذع والتاج يتبع النسبة الفضية..."></textarea>
+      <textarea id="preReason" placeholder="مثال: أتوقع أن نسبة التاج (H−h)/H تقترب من √2−1 لأن ..."></textarea>
     </div>
   </div>
 

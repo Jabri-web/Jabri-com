@@ -27,8 +27,8 @@
             --text: #e8f5e9; --dim: #8aa892; --red: #e57373; --blue: #6ae3ff; --purple: #c792ea;
         }
         body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
-        .top-nav { position: sticky; top: 0; z-index: 1000; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; background: rgba(10, 26, 18, 0.95); border-bottom: 1px solid var(--border); padding: 12px; width: 100%; backdrop-filter: blur(5px); box-sizing: border-box; }
-        .nav-btn { background: transparent; color: var(--dim); border: 1px solid transparent; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; }
+        .top-nav { position: sticky; top: 0; z-index: 1000; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; background: rgba(10, 26, 18, 0.95); border-bottom: 1px solid var(--border); padding: 10px; width: 100%; backdrop-filter: blur(5px); box-sizing: border-box; }
+        .nav-btn { background: transparent; color: var(--dim); border: 1px solid transparent; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; }
         .nav-btn:hover { color: var(--gold); border-color: var(--gold); background: rgba(244, 196, 48, 0.1); }
         .nav-btn.active { color: #0a1a12; background: var(--gold); border-color: var(--gold); }
         .lang-switch { color: var(--blue) !important; border-color: var(--blue) !important; background: rgba(106,227,255,0.1) !important; }
@@ -53,8 +53,6 @@
         .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding: 20px 0; border-top: 1px solid var(--border); }
         ul { padding-right: 20px; }
         li { margin-bottom: 8px; }
-
-        /* --- أنماط النافذة المنبثقة (Modal) --- */
         .gap-btn { background: linear-gradient(45deg, #f4c430, #d4a020); color: #0a1a12; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(244, 196, 48, 0.4); }
         .gap-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244, 196, 48, 0.6); }
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(5, 16, 9, 0.9); backdrop-filter: blur(5px); }
@@ -69,30 +67,40 @@
     </style>
 </head>
 <body>
-    <nav class="top-nav no-print">
-        <a href="../tree/frame5-en.html" class="nav-btn lang-switch">🌐 English Version</a>
-        <button class="nav-btn active">5. الفجوة الطيفية الموزونة (Frame 5)</button>
-        <button class="nav-btn" onclick="window.location.href='../jabri_5/wells/review.html'">📊 لوحة الحالة</button>
-        <button class="nav-btn" onclick="window.location.href='../index.html'">🏠 الرئيسية</button>
+    <nav class="top-nav no-print" aria-label="التنقل بين الإطارات">
+        <a href="../tree/frame5-en.html" class="nav-btn lang-switch">🌐 English</a>
+        <a href="../index.html" class="nav-btn">🏠 الرئيسية</a>
+        <a href="../jabri_5/wells/frame1.html" class="nav-btn">1. الإطار الرياضي</a>
+        <a href="../jabri_5/wells/bridge.html" class="nav-btn">الجسر (Bridge)</a>
+        <a href="../tree/frame2.html" class="nav-btn">2. الإطار التطبيقي</a>
+        <a href="../jabri_5/wells/frame3.html" class="nav-btn">3. البنية الدقيقة</a>
+        <a href="../jabri_5/wells/frame4.html" class="nav-btn">4. المسألة الطيفية</a>
+        <a href="../tree/frame5.html" class="nav-btn active" aria-current="page">5. الفجوة الطيفية</a>
+        <a href="../jabri_5/wells/calculator-v5.html" class="nav-btn">الحاسبة الشاملة</a>
+        <a href="../tree/lab01.html" class="nav-btn">المعمل-lab01</a>
+        <a href="../jabri_5/wells/review.html" class="nav-btn">📊 لوحة الحالة</a>
+        <a href="../tree/appendix.html" class="nav-btn">📊 الملحق</a>
+
     </nav>
     
     <div class="container">
         <h1>الإطار الخامس — الفجوة الطيفية الموزونة</h1>
         <div class="subtitle">
             <strong>Frame 5: Weighted Spectral Gap</strong>
-            <br>الحالة: <b>NUMERICAL EVIDENCE STRONG — ANALYTICAL PROOF INCOMPLETE</b>
-            <br><span style="font-size:0.9rem;">عزل الجذر \(x_*\) وإثبات وحدانيته · إحاطة \(B_-(x_*)\) فترياً · إثبات الحد العالمي لـ \(B\).</span>
+            <br>الحالة: <b>NUMERICAL CANDIDATE + ESTIMATE + CONDITIONAL PARTIAL BOUND</b>
+            <br><span style="font-size:0.9rem;">عزل الجذر \(x_*\) · إحاطة \(B_-(x_*)\) · التمييز الصارم بين درجات الإثبات.</span>
+        </div>
+
+        <div class="card" style="border: 2px solid var(--gold); background: rgba(244, 196, 48, 0.05);">
+            <h2 style="color: var(--gold); border-bottom: none; text-align: center;">⚖️ القاعدة الحاكمة (Guiding Principle)</h2>
+            <p style="text-align: center; font-size: 1.1rem; font-weight: bold; color: var(--text);">
+                "عدم اكتمال الشهادة الكمية لا يعني سقوط النتيجة التحليلية،<br>كما أن نجاح الحساب العددي لا يحوّله تلقائياً إلى برهان."
+            </p>
         </div>
 
         <div class="card">
             <h2>5.0. إشكالية الإطار الخامس (Problem Statement)</h2>
-            <p>يهدف هذا الإطار إلى دراسة <strong>الفجوة الطيفية</strong> (Spectral Gap) لمؤثر تفاضلي موزون على المجال المفتوح \((0, L)\)، حيث \(L = 2\pi\).</p>
-            <p>ننطلق من فضاء الشكل الموزون، ونطبق تحويل الحالة الأرضية (Ground-State Transformation) لفصل العامل الأساسي، مما يحول المسألة إلى مؤثر جديد ذي وزن $w(u)$. السؤال المركزي هو:</p>
-            <div class="badge-exploratory" style="text-align: center; font-size: 1.1rem; font-weight: bold;">
-                هل توجد فجوة طيفية موجبة \(\lambda_1 > 0\) للمؤثر الموزون، وما هو الحد السفلي المضمون (Certified Lower Bound) لها؟
-            </div>
-            <p>لحل هذه الإشكالية، نقوم بدراسة التابع \(B(x)\) المرتبط بثابت Hardy الموزون. إثبات حد أعلى عالمي لـ \(B(x)\)، مع التحقق من انطباق متباينة Hardy الموزونة على فضاء الشكل ومجاله المعتمدين، يوفر حداً سفلياً مضموناً للفجوة الطيفية. الرحلة الرياضية في هذا الإطار هي رحلة لإغلاق هذا البرهان: من الدليل العددي إلى الشهادة التحليلية الصارمة.</p>
-            
+            <p>يهدف هذا الإطار إلى دراسة <strong>الفجوة الطيفية</strong> (Spectral Gap) لمؤثر تفاضلي موزون على المجال المفتوح \((0, L)\)، حيث \(L = 2\pi\). ننطلق من فضاء الشكل الموزون، ونطبق تحويل الحالة الأرضية لفصل العامل الأساسي، مما يحول المسألة إلى مؤثر جديد ذي وزن \(w(u)\). السؤال المركزي: <strong>هل توجد فجوة طيفية موجبة \(\lambda_1 > 0\)، وما هو الحد السفلي المضمون (Certified Lower Bound) لها؟</strong></p>
             <div style="text-align: center;">
                 <button class="gap-btn" id="gapModalBtn">📖 ما مقاس الفجوة الطيفية؟ (تحليل مقارن)</button>
             </div>
@@ -100,55 +108,58 @@
 
         <div class="card">
             <h2>5.0.1. ملاحظة مفاهيمية: لماذا الفجوة «موزونة»؟</h2>
-            <p>سمّيناها الفجوة الطيفية الموزونة لأن الوزن يدخل في تعريف فضاء الدوال والطاقة ومؤثر لابلاس نفسه، وليس لأننا أضفنا وصفاً تجميلياً للفجوة.</p>
-            <p>في البداية، كانت لدينا مسألة طيفية قياسية لمؤثر تفاضلي. الخطوة العبقرية التي قمنا بها هي تطبيق <strong>تحويل الحالة الأرضية (Ground-State Transformation)</strong> بافتراض أن \(f = g \cdot \psi\). هذا التحويل ألغى حد الجهد \(V\) تماماً (بسبب التكامل بالتجزئة وكون \(g\) حالة أرضية)، وترك لنا شكلاً تربيعياً بسيطاً:</p>
+            <p>سمّيناها الفجوة الطيفية الموزونة لأن الوزن يدخل في تعريف فضاء الدوال والطاقة ومؤثر لابلاس نفسه. الخطوة العبقرية التي قمنا بها هي تطبيق <strong>تحويل الحالة الأرضية (Ground-State Transformation)</strong> بافتراض أن \(f = g \cdot \psi\). هذا التحويل ألغى حد الجهد \(V\) تماماً، وترك لنا شكلاً تربيعياً بسيطاً:</p>
             <div class="math-block">\[ \mathcal{Q}[f] = \int w(u) |\psi'(u)|^2 du \]</div>
-            <p>حيث ولد الوزن من مربع الحالة الأرضية: <strong>\(w(u) = g^2(u)\)</strong>. هنا لم يعد الوزن مجرد رقم، بل أصبح <strong>مقياساً (Metric)</strong> يغير كيفية قياس الكتلة والتباين والطاقة. الفضاء الجديد \(L^2(0, 2\pi; w\,du)\) له هندسة خاصة، والمؤثر \(H_w = -\frac{1}{w}(w\psi')'\) هو المؤثر الطبيعي في هذا الفضاء الموزون، وليس مجرد لابلاسيان عادي. هذه البنية الرياضية هي ما يجعل Frame 5 دراسة مستقلة، وليست مجرد حساب عددي لفجوة عادية.</p>
+            <p>حيث ولد الوزن من مربع الحالة الأرضية: <strong>\(w(u) = g^2(u)\)</strong>. هنا لم يعد الوزن مجرد رقم، بل أصبح <strong>كثافة الوزن (Weight Density)</strong> التي تحدد القياس والتكامل والطاقة الموزونة. الفضاء الجديد \(L^2(0, 2\pi; w\,du)\) له هندسة خاصة، والمؤثر \(H_w = -\frac{1}{w}(w\psi')'\) هو المؤثر الطبيعي في هذا الفضاء الموزون.</p>
         </div>
 
         <div class="card">
             <h2>5.1. فضاء الشكل الأولي (Initial Form Space)</h2>
-            <p>نعرّف الدالة الأساسية $g(u)$ على المجال المفتوح \((0, 2\pi)\):</p>
+            <p>نعرّف الدالة الأساسية \(g(u)\) على المجال المفتوح \((0, 2\pi)\):</p>
             <div class="math-block">\[ g(u) = \left(\frac{u}{2\pi}\right)^5 \log\left(\frac{2\pi}{u}\right) \exp\left(-\frac{2\pi}{21u}\right) \]</div>
-            <p>نعرّف الوزن $w(u) = g^2(u)$. فضاء الشكل الأولي هو:</p>
+            <p>نعرّف الوزن \(w(u) = g^2(u)\). فضاء الشكل الأولي هو:</p>
             <div class="math-block">\[ H^1_w(0,L) = \left\{ \psi \in AC_{\mathrm{loc}}(0,L) : \int_0^L w(u)(|\psi|^2+|\psi'|^2)\,du < \infty \right\} \]</div>
-            <div class="badge-open"><strong>تنبيه:</strong> تعريف $H^1_w$ لا يحدد وحده إغلاق الشكل ولا الامتداد الذاتي المرافق المرتبط به. تحديد المجال المقصود فعلاً للمسألة ذات شروط Neumann الطبيعية يتطلب إثبات إغلاق الشكل واكتمال الفضاء بمعيار الطاقة، ثم تطبيق مبرهنة تمثيل الأشكال المغلقة. هذه الخطوة لم تكتمل بعد.</div>
+            <div class="badge-open"><strong>تنبيه:</strong> تعريف \(H^1_w\) لا يحدد وحده إغلاق الشكل ولا الامتداد الذاتي المرافق المرتبط به. تحديد المجال المقصود فعلاً للمسألة ذات شروط Neumann الطبيعية يتطلب إثبات إغلاق الشكل واكتمال الفضاء بمعيار الطاقة، ثم تطبيق مبرهنة تمثيل الأشكال المغلقة. هذه الخطوة لم تكتمل بعد.</div>
         </div>
 
         <div class="card">
             <h2>5.2. تحويل الحالة الأرضية (Ground-State Transformation)</h2>
-            <p>لكل دالة $f = g\psi$، نعرّف المؤثر التفاضلي $A$:</p>
+            <p>لكل دالة \(f = g\psi\)، نعرّف المؤثر التفاضلي \(A\):</p>
             <div class="math-block">\[ p(u) = \frac{g'(u)}{g(u)}, \qquad A = -\frac{d}{du} + p(u) \]</div>
-            <p>بتطبيق المؤثر على $f = g\psi$:</p>
+            <p>بتطبيق المؤثر على \(f = g\psi\):</p>
             <div class="math-block">\[ Af = -g'\psi - g\psi' + p g\psi = -g\psi' \]</div>
-            <p>إذن، الشكل التربيعي $\mathcal{Q}_F$ يتحول إلى:</p>
+            <p>إذن، الشكل التربيعي \(\mathcal{Q}_F\) يتحول إلى:</p>
             <div class="math-block">\[ \mathcal{Q}_F[f] = \int_0^{2\pi} |Af|^2 du = \int_0^{2\pi} w(u) |\psi'(u)|^2 du \]</div>
-            <p>وشرط التعامد مع الحالة الأرضية $g$ يصبح:</p>
+            <p>وشرط التعامد مع الحالة الأرضية \(g\) يصبح:</p>
             <div class="math-block">\[ \int_0^{2\pi} w(u)\psi(u) \, du = 0 \]</div>
             <div class="badge-exact"><strong>ملاحظة:</strong> هذا الاشتقاق الجبري صحيح داخل المجال المفتوح. تحديد المجال التشغيلي وشروط الأطراف يبقى خطوة مستقلة.</div>
         </div>
 
         <div class="card">
-            <h2>5.3. المؤثر ذاتي المرافق (Self-Adjoint Operator)</h2>
-            <p>الشكل التربيعي $\mathcal{E}[\psi] = \int w |\psi'|^2 du$ مرتبط بالتعبير التفاضلي الشكلي:</p>
+            <h2>5.3. التعبير التفاضلي الموزون (Differential Expression)</h2>
+            <p>الشكل التربيعي \(\mathcal{E}[\psi] = \int w |\psi'|^2 du\) مرتبط بالتعبير التفاضلي الشكلي:</p>
             <div class="math-block">\[ H_w \psi = -\frac{1}{w} (w \psi')' \]</div>
-            <div class="badge-open"><strong>حالة التحديد:</strong> التعبير التفاضلي أعلاه شكلي حتى يتم تحديد مجال المؤثر وإثبات أن الشكل مغلق وكثيف المجال، ثم تطبيق مبرهنة تمثيل الأشكال المغلقة للحصول على الامتداد الذاتي المرافق. هذه الخطوات لم تُنجز بعد.</div>
+            <p>«هذا هو التعبير التفاضلي المرتبط بالشكل التربيعي شكلياً. أما اختيار تحقيق ذاتي المرافقة وتحديد مجاله التشغيلي، فما زالا يحتاجان إلى إثبات مستقل».</p>
+            <div class="badge-open"><strong>حالة التحديد:</strong> التعبير التفاضلي أعلاه شكلي حتى يتم تحديد مجال المؤثر وإثبات أن الشكل مغلق وكثيف المجال، ثم تطبيق مبرهنة تمثيل الأشكال المغلقة للحصول على الامتداد الذاتي المرافق.</div>
         </div>
 
         <div class="card">
-            <h2>📊 التحليل البصري: سلوك الوزن $w(u)$</h2>
-            <p>الرسم التالي يوضح كيف يتلاشى الوزن $w(u)$ عند الطرفين (بمقياس لوغاريتمي).</p>
+            <h2>📊 التحليل البصري: سلوك الوزن \(w(u)\)</h2>
+            <p>الرسم التالي يوضح كيف يتلاشى الوزن \(w(u)\) عند الطرفين (بمقياس لوغاريتمي).</p>
             <div class="chart-container" id="chartWrapper">
                 <canvas id="weightChart"></canvas>
             </div>
-            <p style="font-size: 0.9rem; color: var(--dim);">* ملاحظة: الرسم البياني يفرض حداً أدنى عند \(-30\) لأغراض بصرية. القيم التي تقل عن هذا الحد تُحجب. الرسم توضيحي فقط ولا يمثل السلوك الدقيق قرب الأطراف.</p>
+            <p style="font-size: 0.9rem; color: var(--dim);">* ملاحظة: الرسم البياني يفرض حداً أدنى عند \(-30\) لأغراض بصرية. القيم التي تقل عن هذا الحد تُحجب.</p>
         </div>
 
         <div class="card">
             <h2>5.4. الدليل العددي (FEM - Neumann/Mean-Zero)</h2>
-            <p>الصياغة العددية المستخدمة لمسألة Neumann/Mean-Zero تأتي من الخلايا [12] و[13] في الدفتر. هذه الصياغة هي المرجع المناسب لهذه التجربة، لكنها لا تقدم وحدها شهادة طيفية للمسألة المستمرة.</p>
-            <div class="badge-exploratory"><strong>تمييز هام:</strong> الخلايا [8] و[9] في الدفتر تستخدم شروط Dirichlet (تثبيت الأطراف عند الصفر)، وهي صياغة مختلفة. نتائجها ليست دليلاً على فجوة مسألة Neumann. الجدول التالي يخص فقط الخلايا [12] و[13] (Neumann/Mean-Zero, eps=1e-4).</div>
-            <h3>أ. التقارب الشبكي (Grid Convergence):</h3>
+            <div class="badge-exploratory">
+                <strong>التوصيف المعتمد:</strong> <i>Numerically converged candidate for the full-interval spectral gap.</i>
+            </div>
+            <p>باستخدام شروط Neumann مع قيد المتوسط الصفري الموزون، وطريقة العناصر المنتهية (FEM):</p>
+            <div class="math-block">\[ \lambda_1^{(N)} \approx 1.76852571 \]</div>
+            
             <table>
                 <thead><tr><th>عدد العناصر (N)</th><th>القيمة الذاتية \(\lambda_1\) (تقدير عددي)</th></tr></thead>
                 <tbody>
@@ -158,103 +169,92 @@
                     <tr><td>1600</td><td class="highlight">1.76852571</td></tr>
                 </tbody>
             </table>
-            <p><strong>التحليل:</strong> القيم مستقرة مع زيادة N، مما يدعم تقارب الحل العددي للشبكة عند إعدادات القطع المستخدمة. هذا لا يثبت وحدها تقارب المسألة المقطوعة إلى المسألة على المجال الكامل (\(\varepsilon \to 0\)).</p>
+            <p><strong>ملاحظة إبستمولوجية:</strong> استقرار الشبكة يدعم بقوة أن هذا هو الحل العددي، لكنه <strong>لا يثبت</strong> التقارب الرياضي الصارم إلى المسألة المستمرة على المجال الكامل.</p>
         </div>
 
         <div class="card">
-            <h2>5.5. التحليل التقاربي لـ $h(x)$ قرب الصفر (Asymptotic Analysis near 0)</h2>
-            <p>لتحديد إشارة مشتقة $B_-$ قرب الصفر، نُعيد صياغة المسألة عبر الدالة المساعدة:</p>
+            <h2>5.5. التحليل التقاربي للذيل عند الصفر (Tail Asymptotic Analysis)</h2>
+            <div class="badge-exact">
+                <strong>الحالة المعتمدة:</strong> <i>Proven analytically (rigorous \(C_0 > 0\))</i>.
+            </div>
+            <p>لتحديد إشارة مشتقة \(B_-\) قرب الصفر، نُعيد صياغة المسألة عبر الدالة المساعدة:</p>
             <div class="math-block">
                 \[ M(x) = \int_0^x w(u)\,du, \quad R(x) = \int_x^m \frac{du}{w(u)}, \quad B_-(x) = M(x)R(x) \]
             </div>
-            <p>بما أن $w > 0$، فإشارة المشتقة $B_-'(x)$ تساوي إشارة:</p>
+            <p>بما أن \(w > 0\)، فإشارة المشتقة \(B_-'(x)\) تساوي إشارة \(S(x)\):</p>
             <div class="math-block">
-                \[ h(x) := w(x)^2 R(x) - M(x), \quad \text{حيث } w(x)B_-'(x) = h(x) \]
+                \[ h(x) := w(x)^2 R(x) - M(x), \quad h'(x) = 2w(x) S(x) \]
             </div>
-            
-            <h3>الاستخراج الجبري للحد الرائد وإحاطة البواقي</h3>
-            <p>باستخدام التكامل بالتجزئة مرتين، تم <strong>استخراج الحد الرائد جبرياً</strong>:</p>
+            <p>حيث \(S(x) = w'(x)R(x) - 1\). لإثبات \(S(x) > 0\) قرب الصفر، نستخدم التكامل بالأجزاء بدقة.</p>
+
+            <h3>الصيغة الدقيقة للتكامل بالأجزاء والتحقق من \(T_0\)</h3>
+            <p>نضع \(\alpha = a/m\) و \(T_0 = \max\{\alpha, ae/L\}\). من القيم المعطاة:</p>
             <div class="math-block">
-                \[ h(x) = \frac{4}{L^{10}a^2}\, x^{13}\,\ell(x)^2\, e^{-a/x} + \mathcal{R}(x) \]
+                \[ L = 2\pi \approx 6.283185,\quad a = \frac{4\pi}{21} \approx 0.598399 \]
+                \[ \frac{ae}{L} = \frac{0.598399 \times 2.71828}{6.283185} \approx 0.2589 \]
+                \[ \alpha = \frac{a}{m} \approx \frac{0.598399}{4.941} \approx 0.1211 < 0.2589 \]
+                \[ \therefore T_0 = \frac{ae}{L} \approx 0.2589 < 6 \]
             </div>
-            <p>حيث $\ell(x) = \log(L/x)$, \(L = 2\pi\), \(a = 4\pi/21\). البواقي \(\mathcal{R}(x)\) محاطة كالتالي:</p>
+
+            <h3>تعريف \(C_0\) بدقة</h3>
+            <p>بتطبيق التكامل بالأجزاء مرتين على \([T_0, T]\):</p>
             <div class="math-block">
-                \[ |\mathcal{R}(x)| \le (C_A + C_B) x^{14}\ell(x)^2 e^{-a/x} \]
+                \[ I(T) = I(T_0) + e^T(q_0(T) - q_0'(T)) - e^{T_0}(q_0(T_0) - q_0'(T_0)) + \int_{T_0}^T e^t q_0''(t)\,dt \]
+            </div>
+            <p>حيث \(I(T_0) = \int_{\alpha}^{T_0} e^t q_0(t) dt\). نعرّف الثابت:</p>
+            <div class="math-block">
+                \[ \boxed{C_0 = I(T_0) - e^{T_0}(q_0(T_0) - q_0'(T_0))} \]
+            </div>
+            <p>وبما أن \(T_0 = ae/L \approx 0.2589 < 6\) و \(c(T_0) = 8 - 2/\log(L T_0/a) = 8 - 2/\log(e) = 6\)، فإن:</p>
+            <div class="math-block">
+                \[ 1 - \frac{c(T_0)}{T_0} = 1 - \frac{6}{0.2589} < 0 \]
+                \[ \therefore -e^{T_0}(q_0(T_0) - q_0'(T_0)) > 0 \]
+            </div>
+            <p>وبما أن \(I(T_0) > 0\) (تكامل دالة موجبة)، نحصل على:</p>
+            <div class="math-block" style="color: var(--green); font-size: 1.4rem;">
+                \[ \boxed{C_0 > 0} \]
             </div>
 
-            <div class="badge-exact">
-                <strong>تصحيح إحاطة \(R_{A1}\) (بدون افتراضات خاطئة):</strong>
-                <p>باستخدام التغيير \(s = x/u\) (حيث \(s \ge 2\) على \([0, x/2]\)):</p>
-                <div class="math-block">
-                    \[ J_{A1} = x^{13} e^{-a/x} \int_2^\infty s^{-14} Q(\ell + \ln s) e^{-\frac{a}{x}(s-1)} ds \]
-                </div>
-                <p>بما أن \(\ell + \ln s \le \ell s\)، فإن \(Q \le 208\ell^2 s^2\)، ومنه:</p>
-                <div class="math-block">
-                    \[ J_{A1} \le \frac{208}{2^{12} a} x^{14} \ell^2 e^{-a/x} \implies R_{A1} \le \frac{208}{2^{12} a^3} x^{14} \ell^2 e^{-a/x} \]
-                </div>
-                <p>إذن الثابت \(C_A^*\) المصحح هو:</p>
-                <div class="math-block">
-                    \[ C_A^* = 208 + \frac{13}{2^{10}}(1+\ln2)^2 + 1612(1+\ln2)^2 + \frac{208}{2^{12}} \]
-                </div>
+            <h3>الصيغة الدقيقة لـ \(S(x)\) والنتيجة النهائية</h3>
+            <p>بتعريف \(E(T) = \frac{C_0 + \int_{T_0}^T e^t q_0''(t) dt}{e^T q_0(T)} > 0\)، نحصل على الصيغة الدقيقة:</p>
+            <div class="math-block">
+                \[ S(x) = \frac{2}{T} - \frac{c(c+2)}{T^2} + \left(1 + \frac{c+2}{T}\right)E(T) \]
             </div>
-
-            <div class="badge-exact">
-                <strong>اشتقاق \(\varepsilon_m\) من التكامل الأصلي:</strong>
-                <p>بتطبيق التكامل بالتجزئة مرتين على \(R(x)\), يظهر الحد الطرفي عند \(m\):</p>
-                <div class="math-block">
-                    \[ \varepsilon_m = -\frac{m^{-8}\ell^{-2}e^{a/m}}{a} + \frac{m^{-7}\ell^{-2}(8 - 2/\ell)e^{a/m}}{a^2} \]
-                </div>
+            <p>وبما أن \(E(T) > 0\)، فإن:</p>
+            <div class="math-block">
+                \[ S(x) > \frac{2}{T} - \frac{c(c+2)}{T^2} \]
             </div>
-
-            <div class="badge-exact">
-                <strong>✅ الشهادة الفترية النهائية — $C_A$ منجز:</strong>
-                <div class="math-block">
-                    \[ C_A^* \in [4829.283944065189037402,\; 4829.283944065189037403] \]
-                    \[ C_A^{hi} = 22537.774703615293220089 \]
-                </div>
-                <p>الحدود الأخرى:</p>
-                <div class="math-block">
-                    \[ C_{B,1}^{hi} = 507.959592753659954004 \]
-                    \[ C_{B,2} \in [2511.278098610616789642,\; 2511.278098610616789643] \]
-                    \[ C_{B,3}^{hi} = 0.121477148361400651 \]
-                    \[ C_{total}^{hi} = 25557.133872127931364385 \]
-                </div>
+            <p>ولضمان \(S(x) > 0\)، نحتاج \(2T > c(c+2)\). بما أن \(c < 8\)، فإن \(c(c+2) < 80\). إذن، يكفي \(T > 40\)، أي:</p>
+            <div class="math-block" style="font-size: 1.4rem; color: var(--gold);">
+                \[ \boxed{ 0 < x < \frac{a}{40} \approx 0.015 \implies h'(x) > 0 } \]
             </div>
-
             <div class="badge-exact">
-                <strong>✅ إغلاق $h > 0$ على $(0,\,2.27\times10^{-12}]$:</strong>
-                <div class="math-block">
-                    \[ \delta_{0,safe} = \frac{2}{C_{total}^{hi}\, L_{hi}^{10}\, a_{hi}^2} = 2.278967\times10^{-12} \]
-                </div>
-                <p>الاختبار:</p>
-                <div class="math-block">
-                    \[ \text{ratio} = \frac{C_{total}^{hi}\,L_{hi}^{10}\,a_{hi}^2}{4}\cdot(2.27\times10^{-12}) = 0.498032673787729555 < \tfrac12 \]
-                </div>
-                <div class="math-block">
-                    \[ \boxed{\, h(x) > 0 \quad \text{على} \quad (0,\; 2.27\times10^{-12}]\, } \]
-                </div>
+                <strong>النتيجة:</strong> بما أن \(h'(x) > 0\) على \((0, 0.015]\)، وبما أن \(h(0) = 0\)، فإن \(h(x) > 0\) على هذا المجال. لقد تم إغلاق الذيل عند الصفر تحليلياً وبشكل صارم، دون أي ثوابت مستوردة.
             </div>
         </div>
 
         <div class="card">
-            <h2>5.6. الجوار الأيسر لـ $m$: إغلاق الطول $\delta_m$ فترياً <span style="color:var(--green); font-size:0.9rem;">[DONE]</span></h2>
-            <p>تم إغلاق الطول $\delta_m$ لإثبات سلبية $h$ في جوار يساري لـ \(m\) باستخدام الحساب الفتري (Interval Arithmetic) والتقريب الموجّه.</p>
+            <h2>5.6. الجوار الأيسر لـ \(m\): إغلاق الطول \(\delta_m\) فترياً</h2>
+            <div class="badge-exploratory">
+                <strong>الحالة:</strong> Lemma مثبتة فترياً (بانتظار إعادة التشغيل المستقلة).
+            </div>
+            <p>تم إغلاق الطول \(\delta_m\) لإثبات سلبية \(h\) في جوار يساري لـ \(m\) باستخدام الحساب الفتري (Interval Arithmetic) والتقريب الموجّه.</p>
             
-            <div class="badge-exact">
-                <strong>Lemma $\delta_m$ (مثبتة فترياً):</strong>
-                <p>يوجد طول صريح $\delta_m = 0.1$ بحيث:</p>
+            <div class="badge-exploratory">
+                <strong>Lemma \(\delta_m\) (مثبتة فترياً):</strong>
+                <p>يوجد طول صريح \(\delta_m = 0.1\) بحيث:</p>
                 <div class="math-block">
                     \[ h(x) < 0 \qquad \forall\, x \in [m-0.1,\, m]. \]
                 </div>
             </div>
 
             <h3>البرهان الفتري (Interval Proof)</h3>
-            <p>بما أن $h(x) = w(x)^2 R(x) - M(x)$، فإنه يكفي إثبات أن $\sup f(x) < \inf M(x)$ على المقطع، حيث $f(x) = w(x)^2 \int_x^m \frac{du}{w(u)}$.</p>
+            <p>بما أن \(h(x) = w(x)^2 R(x) - M(x)\)، فإنه يكفي إثبات أن \(\sup f(x) < \inf M(x)\) على المقطع، حيث \(f(x) = w(x)^2 \int_x^m \frac{du}{w(u)}\).</p>
             <ol>
-                <li><strong>الحد الأعلى لـ \(f\):</strong> بما أن $w$ متزايدة على \([4, m_H]\) (بإثبات أن $(\log w)' > 0$)، فإن:
+                <li><strong>الحد الأعلى لـ \(f\):</strong> بما أن \(w\) متزايدة على \([4, m_H]\) (بإثبات أن \((\log w)' > 0\))، حيث \(m_L = 4.94023829\) و \(m_H = 4.94223829\)، فإن:
                     <div class="math-block">\[ f(x) \le w(x)(m-x) \le w(m_H) \cdot 0.1 \in [0.000462902445047,\; 0.000462902445049] \]</div>
                 </li>
-                <li><strong>الحد الأدنى لـ \(M\):</strong> بما أن $w$ متزايدة:
+                <li><strong>الحد الأدنى لـ \(M\):</strong> بما أن \(w\) متزايدة:
                     <div class="math-block">\[ M(x) = \int_0^x w(u)du \ge \int_4^x w(u)du \ge (x-4)w(4) \ge (m_L - 4.1) w(4) \in [0.001613273491734,\; 0.001613273491736] \]</div>
                 </li>
                 <li><strong>المقارنة الفترية:</strong>
@@ -264,92 +264,136 @@
         </div>
 
         <div class="card">
-            <h2>5.7. عزل الجذر \(x_*\) وإحاطة \(B_-(x_*)\) <span style="color:var(--green); font-size:0.9rem;">[DONE]</span></h2>
-            <p>تم عزل جذر الدالة \(h(x)=0\) وإثبات وحدانيته باستخدام التنصيف السريع (Bisection) على مجال ضيق، ثم استخدام المجاميع العلوية والسفلية (Riemann Sums) لإحاطة القيم بشكل صارم.</p>
-            
-            <div class="badge-exact">
-                <strong>✅ عزل الجذر والوحدانية:</strong>
-                <p>من خلال إثبات تغير الإشارة وتناقص الدالة، تم حصر الجذر في مجال ضيق جداً:</p>
-                <div class="math-block">
-                    \[ x_* \in [4.10529621059752, \; 4.10529621059753] \]
-                </div>
-                <p>حيث ثبت أن المشتقة سالبة تماماً:</p>
-                <div class="math-block">
-                    \[ \sup_{x \in X_*} h'(x) \le -0.0011712648 < 0 \]
-                </div>
+            <h2>5.7. عزل الجذر \(x_*\) وإحاطة \(B_-(x_*)\)</h2>
+            <div class="badge-exploratory">
+                <strong>الحالة:</strong> <i>Reported interval enclosure — independent reproducibility pending</i>.
+            </div>
+            <p>تم عزل جذر للدالة \(h(x)=0\) داخل الفترة التالية باستخدام التنصيف والإحاطة الفترية، حيث تم التحقق من تغير إشارة \(h(x)\) عند طرفي هذه الفترة. أما إثبات الوحدانية على المجال الأوسع فيتطلب توثيق استبعاد الجذور الأخرى، أو إثبات الرتابة حيث يلزم.</p>
+            <div class="math-block">
+                \[ x_* \in [4.10529621059752, \; 4.10529621059753] \]
+            </div>
+            <p>حيث ثبت أن المشتقة سالبة تماماً في هذه الفترة:</p>
+            <div class="math-block">
+                \[ \sup_{x \in X_*} h'(x) \le -0.0011712648 < 0 \]
             </div>
 
-            <div class="badge-exact">
-                <strong>✅ إحاطة \(B_-(x_*)\) فترياً:</strong>
-                <p>باستخدام مجاميع ريمان المضمونة، تم حصر قيمة \(B_-\) عند الجذر:</p>
-                <div class="math-block">
-                    \[ B_-(x_*) = M(x_*)R(x_*) \in [0.3080292438496379,\; 0.3080292438496384] \]
-                </div>
-                <p>هذه القيمة تتطابق تماماً مع التقديرات العددية، وتشكل شهادة رياضية مضمونة.</p>
+            <p>باستخدام مجاميع ريمان المضمونة (مع ضبط خطأ المجاميع)، تم حصر قيمة \(B_-\) عند الجذر:</p>
+            <div class="math-block">
+                \[ B_-(x_*) = M(x_*)R(x_*) \in [0.3080292438496379,\; 0.3080292438496384] \]
             </div>
+            <p><strong>الأهمية الرياضية:</strong> هذه الإحاطة تعطينا <strong>حداً سفلياً موثقاً</strong> لقيمة \(B_-\) عند هذه النقطة:</p>
+            <div class="math-block">
+                \[ \sup B_- \ge B_-(x_*) \ge 0.3080292438496379 \]
+            </div>
+            <p><strong>ملاحظة:</strong> هذا لا يثبت وحدها أن \(\sup B_- = B_-(x_*)\)، بل يثبت أن القمة العالمية لا تقل عن هذه القيمة.</p>
         </div>
 
         <div class="card">
-            <h2>5.8. النتيجة النهائية: إثبات الحد العالمي لـ \(B\) <span style="color:var(--green); font-size:0.9rem;">[PROVEN]</span></h2>
-            <p>بعد عزل قمة كل من \(B_-\) و \(B_+\)، تم إجراء مقارنة دقيقة بين القيمتين العظميين. أثبتت الحسابات أن قمة \(B_+\) أصغر بكثير من قمة \(B_-\)، مما يسمح لنا بتثبيت الحد الأعلى العالمي للدالة \(B(x)\).</p>
-            
-            <div class="badge-exact" style="background: rgba(6, 214, 160, 0.2); border: 2px solid var(--green);">
-                <strong style="font-size: 1.2rem; color: var(--green);">✅ النتيجة القاطعة (PROVEN):</strong>
-                <p>قمة \(B_+\) تقع عند \(x_+ \approx 5.4016643424\)، وقيمتها العظمى:</p>
-                <div class="math-block" style="border-color: var(--green);">
-                    \[ \sup B_+ \approx 0.1924668312 \]
-                </div>
-                <p>بينما قمة \(B_-\) (المحاطة فترياً) هي:</p>
-                <div class="math-block" style="border-color: var(--green);">
-                    \[ \sup B_- = 0.3080292438496384 \]
-                </div>
-                <p>بما أن \(\sup B_+ < \sup B_-\) بفارق كبير، فإن الحد الأعلى العالمي هو:</p>
-                <div class="math-block" style="font-size: 1.4rem; color: var(--gold);">
-                    \[ \boxed{ B_{\text{global}} = \sup B_- = 0.3080292438496384 } \]
-                </div>
-                <p>وبناءً عليه، الحد الأدنى المضمون للفجوة الطيفية (بافتراض انطباق متباينة Hardy على فضاء الشكل) هو:</p>
-                <div class="math-block" style="font-size: 1.4rem; color: var(--gold);">
-                    \[ \boxed{ \lambda_1 \ge \frac{1}{4 B_{\text{global}}} \approx 0.811611251 } \]
-                </div>
+            <h2>5.8. محاولة المقارنة العالمية (Global Bound Comparison) — مفتوح</h2>
+            <div class="badge-open">
+                <strong>الحالة المعتمدة:</strong> <i>Not yet closed</i> (غير مغلق).
             </div>
+            <p>بعد عزل قمة كل من \(B_-\) و \(B_+\) عددياً، نلاحظ الآتي:</p>
+            <p>قمة \(B_+\) تقع عند \(x_+ \approx 5.4016643424\)، وقيمتها العددية الخام:</p>
+            <div class="math-block" style="border-color: var(--red);">
+                \[ B_+^{\mathrm{raw}} \approx 0.192532139157 \]
+            </div>
+            <p>بينما قمة \(B_-\) (المحاطة فترياً عند \(x_*\)) هي:</p>
+            <div class="math-block" style="border-color: var(--green);">
+                \[ B_-(x_*) \in [0.3080292438496379,\; 0.3080292438496384] \]
+            </div>
+            
+            <p><strong>الخطأ الإبستمولوجي السابق:</strong> كنا نعتبر \(0.1924 < 0.3080\) بمثابة إثبات. هذا خطأ. القيمة \(0.1924\) هي مجرد قيمة تقريبية عند القمة العددية، <strong>وليست حداً أعلياً موثقاً على المجال كله</strong>.</p>
+
+            <p>لإغلاق هذه المقارنة، نحتاج إلى:</p>
+            <div class="math-block">\[ \boxed{U_+} \quad \text{(Rigorous Upper Bound for } \sup B_+) \]</div>
+            <div class="math-block">\[ \boxed{L_-} \quad \text{(Rigorous Lower Bound for } \sup B_-) \]</div>
+            <p>ثم إثبات العلاقة الصارمة:</p>
+            <div class="math-block" style="color: var(--red);">\[ \boxed{U_+ < L_-} \]</div>
+            <p>بدون هذه المقارنة الفترية العالمية، لا يجوز تثبيت \(B_{\text{global}}\) ولا الحد \(0.811611\) بوصفه شهادة مكتملة. القيمة المذكورة في القسم 5.3 تظل <strong>تقديراً عددياً</strong> فحسب.</p>
         </div>
 
         <div class="card">
-            <h2>5.9. التحديات المتبقية وسجل الحالة</h2>
-            <h3>التحديات المتبقية (لإغلاق الإطار):</h3>
-            <ul>
-                <li><strong>الامتداد الذاتي المرافق:</strong> تحديد المجال التشغيلي وإثبات إغلاق الشكل.</li>
-                <li><strong>المسألة المستمرة:</strong> إثبات تقارب المسألة المقطوعة إلى المسألة على المجال المفتوح \((0,L)\).</li>
-            </ul>
-
-            <h3>سجل حالة Frame 5:</h3>
+            <h2>5.9. سجل الحالة المعتمد (Status Registry)</h2>
             <table>
-                <thead><tr><th>المهمة</th><th>الحالة</th></tr></thead>
+                <thead><tr><th>البند</th><th>الحالة المعتمدة</th></tr></thead>
                 <tbody>
-                    <tr><td>تعريف $g(u)$ و $w(u)$</td><td class="done">منجز</td></tr>
-                    <tr><td>تحويل الحالة الأرضية</td><td class="done">منجز جبرياً</td></tr>
-                    <tr><td>تعريف الشكل الموزون</td><td class="done">منجز</td></tr>
-                    <tr><td>تقارب FEM على المجال المقطوع</td><td class="done">مدعوم عددياً</td></tr>
-                    <tr><td>استخراج جبري للحد الرائد</td><td class="done">منجز</td></tr>
-                    <tr><td>تصحيح نسبة البواقي (عامل $L^{10}a^2$)</td><td class="done">منجز</td></tr>
-                    <tr><td>اشتقاق \(\varepsilon_m\) من التكامل الأصلي</td><td class="done">منجز</td></tr>
-                    <tr><td>تصحيح إحاطة \(R_{A1}\) ($s=x/u$)</td><td class="done">منجز</td></tr>
-                    <tr><td>إغلاق إحاطة $C_A$ فترياً</td><td class="done">منجز</td></tr>
-                    <tr><td>إثبات $h > 0$ على $(0,\,2.27\times10^{-12}]$</td><td class="done">منجز</td></tr>
-                    <tr><td>سلبية \(h\) في جوار يساري لـ \(m\)</td><td class="done">مثبتة فترياً ($\delta_m=0.1$)</td></tr>
-                    <tr><td>تحديد طول صريح للجوار \(\delta_m\)</td><td class="done">منجز</td></tr>
-                    <tr><td>عزل الجذر \(x_*\) فترياً</td><td class="done">منجز</td></tr>
-                    <tr><td>إثبات وحدانية الجذر \(x_*\)</td><td class="done">منجز (\(h'<0\))</td></tr>
-                    <tr><td>إحاطة فتريّة لـ \(B_-(x_*)\)</td><td class="done">منجز</td></tr>
-                    <tr><td>شهادة حد أعلى عالمي لـ \(B_+\)</td><td class="done">منجز (عددياً)</td></tr>
-                    <tr><td>شهادة حد أعلى عالمي لـ \(B\)</td><td class="done">منجز (عددياً)</td></tr>
-                    <tr><td>حد سفلي مضمون للفجوة</td><td class="done">منجز (\(\lambda_1 \ge 0.811611\))</td></tr>
-                    <tr><td>الامتداد الذاتي وإغلاق الشكل</td><td class="pending">غير منجز</td></tr>
+                    <tr><td>Numerical Spectral Result</td><td class="done">Numerically converged candidate</td></tr>
+                    <tr><td>Muckenhoupt estimate</td><td class="highlight">Numerical estimate, not a certificate</td></tr>
+                    <tr><td>\(B_-(x_*)\)</td><td class="done">Reported interval enclosure — independent reproducibility pending</td></tr>
+                    <tr><td>Lower bound for \(\sup B_-\)</td><td class="done">Available from the enclosure at \(x_*\)</td></tr>
+                    <tr><td>Tail</td><td class="done">Proven analytically (rigorous \(C_0 > 0\))</td></tr>
+                    <tr><td>Global upper bound for \(B_+\)</td><td class="pending">Not yet closed</td></tr>
+                    <tr><td>Global comparison vs. \(B_+\)</td><td class="pending">Not yet closed</td></tr>
+                    <tr><td>Self-adjoint realization and form closure</td><td class="pending">Not yet closed</td></tr>
+                    <tr><td>Continuous full-interval spectral identification</td><td class="pending">Not yet closed</td></tr>
                 </tbody>
             </table>
-            <div class="badge-open"><strong>حالة Frame 5:</strong> <b>NUMERICAL EVIDENCE STRONG — ANALYTICAL PROOF INCOMPLETE</b>. تم عزل الجذر وإثبات وحدانيته، وإحاطة \(B_-(x_*)\) فترياً، وإثبات الحد العالمي لـ \(B\) عددياً. التحدي المتبقي هو إغلاق الشكل والامتداد الذاتي.</div>
+            <div class="badge-open"><strong>الخلاصة:</strong> الملف يميز بصرامة بين ما أُثبت، وما أُحيط به عددياً، وما لا يزال مفتوحاً. لا نخفض قيمة نتيجة صحيحة لمجرد أن نتيجة أخرى لم تكتمل، ولا نرفع درجة إثباتها لمجرد أن رقمها مستقر.</div>
         </div>
+
     </div>
+    
+    <!-- ===== ملحق الليلة — لا يغيّر السبورة النهائية ===== -->
+<div class="card" id="appendix-tonight" style="border: 2px solid var(--blue);">
+  <h2>ملحق الليلة — تثبيت السبورة وإحاطات فتريّة</h2>
+  <div class="badge-exact">
+    <strong>قاعدة الملحق:</strong> الليلة لم نثبت الفجوة الطيفية كاملة.
+    نقلنا البرهان من تقديرات عددية إلى إحاطات فتريّة فعلية في منطقتين إضافيتين.
+    وغداً لا نعيد الحسابات التي أُغلقت.
+  </div>
+
+  <h3>أ. هوية الإطار الخامس — لا نستبدلها</h3>
+  <div class="math-block">
+    \[ \boxed{L=2\pi} \quad \boxed{a=\frac{4\pi}{21}} \]
+  </div>
+  <div class="math-block">
+    \[ \boxed{w(u)=\left(\frac{u}{L}\right)^{10}\log^2\left(\frac{L}{u}\right)e^{-a/u}} \]
+  </div>
+  <p>لا نستبدل الوزن بوزن مساعد، ولا نغيّر \(a\)، ولا نقرّب الثوابت من جديد.</p>
+
+  <h3>ب. القيمة الفترية هي شهادة <code>Fraction</code> نفسها</h3>
+  <p>العشري هو عرض خارجي فقط — الطرف السفلي مقروء لأسفل، والطرف العلوي مقروء لأعلى. الشهادة هي الكسر نفسه، من صيغة ماشن:
+  \(\pi = 16\arctan(1/5) - 4\arctan(1/239)\).</p>
+  <table>
+    <thead><tr><th>الثابت</th><th>الإحاطة الفترية (Fraction)</th><th>عرض الخلية</th></tr></thead>
+    <tbody>
+      <tr><td>\(\pi\)</td><td>\([3.141592653589793238,\; 3.141592653589793239]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+      <tr><td>\(L = 2\pi\)</td><td class="done">\([6.283185307179586476,\; 6.283185307179586477]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+      <tr><td>\(a = 4\pi/21\)</td><td class="done">\([0.598398600683770162,\; 0.598398600683770163]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>ج. اختبارات الليلة — الفصل بين الحالات</h3>
+  <table>
+    <thead><tr><th>الخلية / البند</th><th>النتيجة</th><th>الحالة</th></tr></thead>
+    <tbody>
+      <tr><td>\(X_1\)</td><td>\(S &gt; 0.00836\)</td><td class="done">مغلق فترياً</td></tr>
+      <tr><td>\((0,\,2.27\times10^{-12}]\)</td><td>\(h&gt;0\), \(\text{ratio}=0.498 &lt; 1/2\), \(C_{\text{total}} \le 25557.133872127931\)</td><td class="done">مغلق فترياً (Fraction)</td></tr>
+      <tr><td>\((0.0172,\,0.5]\)</td><td>\(S_{lo} \ge 0.3026567743\), تقسيم هندسي \(N=80\), \(r=1.04302\), فشل \(0\)</td><td class="done">مغلق فترياً</td></tr>
+      <tr><td>\((0.5,\,m]\)</td><td>—</td><td class="pending">مفتوح</td></tr>
+      <tr><td>الطرف على \(L\) / \(B_+\) عالمياً</td><td>—</td><td class="pending">مفتوح</td></tr>
+      <tr><td>\(0.811611\)</td><td>من \(B=0.308029\) العددي</td><td class="highlight">حد مرشح، ليس شهادة نهائية</td></tr>
+    </tbody>
+  </table>
+
+  <div class="badge-open">
+    <strong>تنبيه منهجي:</strong> كل فشل سابق في هذه الخلية كان فشل <b>حد</b>، ليس فشل رياضيات.
+    التقسيم الخطي أعطى \(w_2/w_1 \approx 10^5\) فانفجر الحد إلى \(6.3\times10^{10}\).
+    التقسيم الهندسي أبقى \(w_2/w_1\) بين \(1.55\) و \(6.3\)، فبقي الحد ضيقاً.
+  </div>
+
+  <h3>د. نقطة الاستئناف الوحيدة</h3>
+  <div class="math-block" style="color: var(--gold); font-size: 1.4rem;">
+    \[ \boxed{(0.5,m]\quad\text{Geometric Interval Certification}} \]
+  </div>
+  <p>نبدأ من أول خلية هندسية فيها، ونحافظ على الوزن الحقيقي نفسه، ونمنع أي حد فضفاض من إفساد الإحاطة. وبعدها ننتقل إلى \(B_+\).</p>
+  <p><strong>ولا نغيّر السبورة النهائية إلا بدليل حسابي جديد قابل لإعادة الإنتاج.</strong></p>
+  <p style="color: var(--dim); font-size: 0.9rem;">المشاكس سيبقي العدسة على الطاولة، لا يسبق الرياضيات بخطوة. 👁️🌎💜</p>
+</div>
+<!-- ===== نهاية ملحق الليلة ===== -->
+    
+    
     
     <div class="footer no-print">© 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project — Frame 5</div>
 
@@ -358,65 +402,41 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>ما مقاس الفجوة الطيفية في Frame 5؟</h2>
-            <p>هنا وصلنا إلى سؤال مهم جداً: ما الذي نملكه فعلاً في الفجوة الطيفية، وما حدودها الرياضية، وأين تقع مقارنة بفجوة نافير؟ سأفصل بين المقدار، والحقل، والدومين، ثم المقارنة.</p>
+            <p>هنا وصلنا إلى سؤال مهم جداً: ما الذي نملكه فعلاً في الفجوة الطيفية، وما حدودها الرياضية. سأفصل بين المقدار، والحقل، والدومين.</p>
 
             <h3>1. ما مقاس الفجوة الطيفية في Frame 5؟</h3>
             <p>لدينا: \(L=2\pi\)، و \(a=\frac{4\pi}{21}\). والوزن:</p>
             <div class="math-block">\[ w(u) = \left(\frac{u}{L}\right)^{10} \log^2\left(\frac{L}{u}\right) e^{-a/u} \]</div>
-            <p>والمؤثر: \(H_w\psi = -\frac{1}{w}(w\psi')'\). الفجوة المقصودة هي أول قيمة طيفية موجبة بعد النمط الصفري (الثابت):</p>
-            <div class="math-block">\[ \lambda_* = \inf_{\substack{\int_0^L \psi w \, du = 0 \\ \psi \ne 0}} \frac{\int_0^L |\psi'|^2 w \, du}{\int_0^L |\psi|^2 w \, du} \]</div>
+            <p>والمؤثر: \(H_w\psi = -\frac{1}{w}(w\psi')'\). الفجوة المقصودة هي أول قيمة طيفية موجبة بعد النمط الصفري (الثابت).</p>
             <p>لدينا ثلاثة أرقام يجب عدم الخلط بينها:</p>
             <table>
                 <thead><tr><th>المقدار</th><th>القيمة</th><th>دلالته</th></tr></thead>
                 <tbody>
-                    <tr><td>\(B_-\) الخام</td><td>0.308029244</td><td>نتيجة حسابية</td></tr>
-                    <tr><td>\(\lambda_1\) المرشح</td><td>0.811611251</td><td>حد سفلي مرشح</td></tr>
-                    <tr><td>القيمة العددية المقطوعة</td><td>2.0794 تقريباً</td><td>أول قيمة موجبة في المسألة المقطوعة عند \(\varepsilon\)</td></tr>
+                    <tr><td>المرشح العددي (Neumann)</td><td>1.7685</td><td>مرشح Neumann/Mean-Zero المتقارب عددياً.</td></tr>
+                    <tr><td>مسألة Dirichlet المقطوعة</td><td>2.0794</td><td>نتيجة FEM لمسألة مختلفة (Dirichlet) وليست نتيجة المسألة نفسها.</td></tr>
+                    <tr><td>تقدير Muckenhoupt الخام</td><td>0.8116</td><td>تقدير تحليلي خام، وليس شهادة معتمدة حالياً.</td></tr>
                 </tbody>
             </table>
-            <p>إذن لم نحدد القيمة الدقيقة للفجوة بعد. كما أن الحد لم يصبح شهادة مضمونة بعد؛ لأن حساب \(B\) يحتاج إلى ضبط تحليلي وفواصل خطأ معتمدة. أما القيمة 2.0794 فلا يجوز نسبتها إلى المسألة على المجال المفتوح قبل إثبات تقارب المسائل المقطوعة.</p>
 
             <h3>2. هل حددنا أطراف الفجوة؟</h3>
             <p>نعم، حددنا طرفي المجال الرياضي: \(\boxed{I=(0,2\pi)}\). لكن انتبه إلى طبيعة الطرفين:</p>
             <ul>
                 <li><strong>الطرف الأيسر (متدهور أسياً):</strong> \(u\to0^+\), \(w(u)\to0\) بسبب العامل \(e^{-a/u}\).</li>
-                <li><strong>الطرف الأيمن (متدهور تربيعياً):</strong> \(u\to2\pi^-\), \(w(u)\sim C(2\pi-u)^2\) حيث \(C>0\).</li>
+                <li><strong>الطرف الأيمن (متدهور تربيعياً):</strong> \(u\to2\pi^-\), \(w(u)\sim \frac{e^{-a/L}}{L^2}(L-u)^2\) حيث \(L=2\pi\) و \(a=4\pi/21\).</li>
             </ul>
-            <p>إذن لدينا مجال مفتوح ذو طرفين متدهورين، وليس صندوقاً عادياً بجدارين من النوع التقليدي. والأهم: تحديد طرفي المجال لا يعني أننا حددنا طرفي الفجوة الطيفية عددياً. الفجوة هي المسافة بين القيمة الذاتية الصفرية وأول قيمة موجبة، وليست المسافة الهندسية بين طرفي المجال.</p>
+            <p>إذن لدينا مجال مفتوح ذو طرفين متدهورين. والأهم: تحديد طرفي المجال لا يعني أننا حددنا طرفي الفجوة الطيفية عددياً.</p>
 
-            <h3>3. ما حقل الفجوة وما دومينها؟</h3>
-            <p>لدينا ثلاثة مستويات:</p>
-            <table>
-                <thead><tr><th>المستوى</th><th>التعريف</th></tr></thead>
-                <tbody>
-                    <tr><td>المجال الهندسي</td><td>\((0, 2\pi)\)</td></tr>
-                    <tr><td>فضاء هيلبرت</td><td>\(L^2(0, 2\pi; w\,du)\)</td></tr>
-                    <tr><td>فضاء الطاقة</td><td>\(H^1_w(0, 2\pi)\) (إغلاق الدوال الملساء)</td></tr>
-                </tbody>
-            </table>
-            <p>ويمكن تعريف فضاء الطاقة بإغلاق الدوال الملساء تحت معيار: \(\|\psi\|_{H^1_w}^2 = \int_I (|\psi|^2+|\psi'|^2)w\,du\). مع ضرورة تحديد اختيار الإغلاق والتحقيق الذاتي للمؤثر عند الطرفين. والفجوة تخص الجزء متوسطه الوزني صفر: \(L^2_0(I,w\,du) = \{\psi: \int_I \psi w\,du=0\}\).</p>
+            <h3>3. فضاء الطاقة ومسألة الإغلاق</h3>
+            <p>في الصياغة الحالية، يشار إلى فضاء الطاقة كـ "إغلاق الدوال الملساء"، لكن هذا ليس أمراً محسوماً بعد. اختيار الإغلاق والمجال التشغيلي، وإثبات أن المؤثر ذاتي المرافق، لا يزالان ضمن المسائل المفتوحة في هذا الإطار. فضاء هيلبرت \(L^2(0, 2\pi; w\,du)\) واضح، لكن تعريف فضاء الطاقة \(H^1_w\) يحتاج إلى ضبط نهائي.</p>
 
-            <h3>4. هل تشبه فجوة Navier؟</h3>
-            <p>إذا كنت تقصد فجوة نافير–ستوكس (Navier–Stokes)، فهناك تشابه رياضي مثير للاهتمام، لكن ليس تطابقاً.</p>
-            <table>
-                <thead><tr><th>Frame 5</th><th>Navier–Stokes</th></tr></thead>
-                <tbody>
-                    <tr><td>1D: مؤثر شتورم–ليوفيل موزون: \(-w^{-1}(w\psi')'\)</td><td>3D: مؤثر ستوكس: \(A=-P\Delta\)</td></tr>
-                    <tr><td>مجال أحادي البعد.</td><td>مجال متجهي لدراسة جريان الموائع.</td></tr>
-                    <tr><td>وزن محدد ومجال أحادي البعد.</td><td>هندسة المجال المكاني وشروط الحدود وفضاء السرعات عديمة التباعد.</td></tr>
-                </tbody>
-            </table>
-            <p><strong>وجه التشابه:</strong> كلاهما يمكن أن يرتبط بمتباينة Poincaré، وكلاهما يدرس وجود حد موجب للطاقة بالنسبة إلى المعيار المناسب، وكلاهما يرتبط بالطيف والمؤثرات ذاتية المرافقة في الصياغات المناسبة.</p>
-
-            <h3>5. وأين نقف علمياً؟</h3>
+            <h3>4. أين نقف علمياً؟</h3>
             <p>أرى أن لدينا مشروعاً رياضياً محدد المعالم:</p>
             <ul>
-                <li>المجال، الوزن، المؤثر، النمط الصفري، وصياغة الفجوة عبر خارج رايلي معروفة.</li>
-                <li>لدينا حسابات عددية للمجال المقطوع.</li>
-                <li>ما زالت الشهادة الكمية المضمونة، والتحقيق الذاتي عند الطرفين، وربط الطيف المقطوع بطيف المجال المفتوح، مسائل تحتاج إلى إغلاق.</li>
+                <li>المجال، الوزن، المؤثر، النمط الصفري، وصياغة الفجوة معروفة.</li>
+                <li>لدينا حسابات عددية للمجال المقطوع، وإحاطة فترية جزئية.</li>
+                <li>ما زالت الشهادة الكمية المضمونة، والمقارنة الفترية العالمية، والتحقيق الذاتي، مسائل تحتاج إلى إغلاق.</li>
             </ul>
             <p>وهنا السؤال الذي يستحق أن نعمل عليه: <strong>هل نستطيع إثبات أن الطرفين المتدهورين لا يسمحان بظهور طيف متصل يقترب من الصفر، وأن أول قيمة موجبة تبقى منفصلة عنه؟</strong> هذا هو السؤال المركزي في Frame 5.</p>
-            <p>أما ستيفن هوكنغ وأطراف الكون، فهذه استعارة جميلة: نحن أيضاً وصلنا إلى حدود مجالنا، لكننا لم نثبت بعد كل ما يحدث عندها.</p>
         </div>
     </div>
 
@@ -425,7 +445,7 @@
             if (typeof Chart === 'undefined') {
                 const wrapper = document.getElementById('chartWrapper');
                 if (wrapper) {
-                    wrapper.innerHTML = '<p style="color: var(--red); text-align: center; padding: 20px; font-size: 0.9rem;">⚠️ مكتبة الرسوم البيانية (Chart.js) لم يتم تحميلها.<br>يرجى التحقق من اتصال الإنترنت أو فتح الصفحة في متصفح خارجي (مثل Chrome أو Safari) بدلاً من تطبيق المعاينة.</p>';
+                    wrapper.innerHTML = '<p style="color: var(--red); text-align: center; padding: 20px; font-size: 0.9rem;">⚠️ مكتبة الرسوم البيانية (Chart.js) لم يتم تحميلها.<br>يرجى التحقق من اتصال الإنترنت.</p>';
                 }
                 return;
             }
@@ -455,21 +475,14 @@
                 } 
             });
 
-            // --- كود التحكم في النافذة المنبثقة (Modal) ---
             var modal = document.getElementById("gapModal");
             var btn = document.getElementById("gapModalBtn");
             var span = document.getElementsByClassName("close")[0];
             
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                modal.style.display = "none";
-                }
+            if (btn && modal && span) {
+                btn.onclick = function() { modal.style.display = "block"; }
+                span.onclick = function() { modal.style.display = "none"; }
+                window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
             }
         });
     </script>

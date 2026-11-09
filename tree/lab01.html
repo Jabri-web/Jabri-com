@@ -5,12 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#101827">
 <title>Lab 01 | The Unifying Curve — المختبر الرياضي</title>
-<meta name="description" content="مختبر الواحة: دراسة العلاقة الرياضية α*(θ) = tanθ/(tanθ+2) التي تجمع بين هندسة الشجرة والظل (22.5°)، ونموذج Zx v0.4 (45°)، والزاوية السحرية (54.7°).">
+<meta name="description" content="مختبر الواحة: دراسة العلاقة الرياضية α*(θ) = tanθ/(tanθ+2) + ملحق الإطار الخامس Frame 5. نسخة موحدة.">
 <link rel="canonical" href="https://jabri-com.vercel.app/tree/lab01.html">
-
-<!-- MathJax for equations -->
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
 <style>
 :root{--bg:#0b1220;--panel:#121e30;--panel2:#17263b;--ink:#edf4ff;--muted:#a8b8ce;--line:#2b405c;--gold:#f2c879;--cyan:#76d6e8;--green:#8bd5a5;--red:#ffb0a8}
 *{box-sizing:border-box}
@@ -18,6 +15,8 @@ body{margin:0;background:radial-gradient(ellipse at top,#182b43 0,#0b1220 55%);c
 .wrap{max-width:1120px;margin:auto;padding:20px}
 .hero,.card{border:1px solid var(--line);background:rgba(18,30,48,.94);border-radius:18px;padding:clamp(16px,3vw,28px);margin:14px 0;box-shadow:0 12px 32px #0002;position:relative}
 .hero{background:linear-gradient(135deg,#1b3048,#111d2e 70%);border-top:3px solid var(--gold)}
+.version-banner{background:#2a261b;border:1px solid var(--gold);border-radius:12px;padding:14px 18px;margin:14px 0;text-align:center}
+.version-banner b{color:var(--gold)}
 .top-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:rgba(18,30,48,.9);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
 .nav-item{color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:8px;font-size:.85rem;font-weight:bold;border:1px solid transparent;transition:.3s}
 .nav-item:hover{color:var(--gold);border-color:var(--gold);background:rgba(242,200,121,.1)}
@@ -54,28 +53,13 @@ td{direction:ltr}
 .pill{display:inline-block;border:1px solid var(--line);background:#17263b;border-radius:99px;padding:3px 10px;margin:3px;color:var(--muted);font-size:.85rem}
 footer{text-align:center;color:var(--muted);padding:22px;font-size:.9rem}
 @media(max-width:600px){.wrap{padding:10px}.hero,.card{padding:15px;border-radius:13px}}
-
-pre.code-block {
-    background: #0b1524;
-    border: 1px solid #314966;
-    border-radius: 12px;
-    padding: 15px;
-    overflow-x: auto;
-    direction: ltr;
-    text-align: left;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9rem;
-    color: #edf4ff;
-    display: none;
-    margin-top: 15px;
-}
-pre.code-block.show { display: block; }
+pre.code-block{background:#0b1524;border:1px solid #314966;border-radius:12px;padding:15px;overflow-x:auto;direction:ltr;text-align:left;font-family:'Courier New',Courier,monospace;font-size:.9rem;color:#edf4ff;display:none;margin-top:15px}
+pre.code-block.show{display:block}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- Navigation -->
   <nav class="top-nav">
     <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
     <a href="../about-waha.html" class="nav-item">الواحة 🌴</a>
@@ -84,13 +68,21 @@ pre.code-block.show { display: block; }
     <a href="../jabri_5/wells/frame1.html" class="nav-item">Frame 1</a>
     <a href="../jabri_5/wells/frame3.html" class="nav-item">Frame 3</a>
     <a href="../jabri_5/wells/frame4.html" class="nav-item">Frame 4</a>
+    <a href="frame5.html" class="nav-item">Frame 5</a>
   </nav>
 
-  <!-- Hero -->
+  <!-- ===== Version Banner — النسخة الجديدة تذكر هنا فقط ===== -->
+  <div class="version-banner">
+    <b>📌 النسخة الحالية: Lab 01 — v2.0 | 7 نوفمبر 2026</b><br>
+    <span>ما الجديد في هذه النسخة؟ أضفنا <b>ملحق الإطار الخامس Frame 5</b> في نهاية نفس الملف (قسم 6)، وجمعنا كل الاشتقاقات + كل بايثون في نفس الاسم <code style="direction:ltr">/tree/lab01.html</code>.</span><br>
+    <span class="muted" style="font-size:.9rem">قاعدة الملف الواحد: لا نفتح ملفاً جديداً لنفس الموضوع. كل تحديث يذكر هنا في البداية فقط.</span><br>
+    <span class="muted" style="font-size:.85rem">النسخة السابقة: v1.0 — المنحنى الموحد فقط. النسخة الحالية: v2.0 — المنحنى الموحد + ملحق Frame 5.</span>
+  </div>
+
   <header class="hero">
     <div class="kicker">AL-HINDARA · LAB 01 · NOVEMBER 2026</div>
     <h1>المنحنى الموحد (The Unifying Curve)</h1>
-    <p>دراسة علاقة رياضية تجمع بين هندسة الشجرة والظل (Frame 2)، والنموذج التكاملي (v0.4)، والزاوية السحرية في الفراغ (Frame 2 §8) — عبر دالة واحدة.</p>
+    <p>دراسة علاقة رياضية تجمع بين هندسة الشجرة والظل (Frame 2)، والنموذج التكاملي (v0.4)، والزاوية السحرية في الفراغ (Frame 2 §8) — عبر دالة واحدة. + ملحق الإطار الخامس في نفس الملف.</p>
     <div>
       <span class="pill">المؤلف: م/ عبدالله محمد ناصر الجبري</span><br>
       <span class="pill" style="color:var(--gold);border-color:var(--gold)">Primary Ref: Frame 1 DOI 10.5281/zenodo.23540283</span>
@@ -98,210 +90,281 @@ pre.code-block.show { display: block; }
     </div>
   </header>
 
-  <!-- Section 1: Study (Updated per Reviewer) -->
   <section class="card">
     <h2>1. الدراسة: ثلاث قيم دقيقة على منحنى مقترح</h2>
     <p>في المختبر، بدأنا بالدالة البنيوية التالية (والتي تعتمد على تعريف نسبة التكامل في v0.4):</p>
     <div class="formula">\[ \alpha^*(\theta) = \frac{\tan \theta}{\tan \theta + 2} \]</div>
     <p>عند تعويض الزوايا المرجعية المرتبطة بالإطارات، نحصل على ثلاث قيم دقيقة للدالة. ويعرض هذا المختبر العلاقة الحسابية بينها، دون افتراض أن المرور بهذه النقاط وحده يثبت اشتقاقًا موحدًا من الإطارات.</p>
-
     <div class="table-scroll">
       <table>
         <caption class="muted" style="caption-side:top;padding:6px;text-align:right;font-size:.9rem">الجدول 1: القيم الثلاث على المنحنى المقترح.</caption>
-        <thead>
-          <tr>
-            <th>الزاوية \(\theta\)</th>
-            <th>\(\tan \theta\)</th>
-            <th>\(\alpha^*(\theta)\)</th>
-            <th>السياق (الإطار)</th>
-          </tr>
-        </thead>
+        <thead><tr><th>الزاوية \(\theta\)</th><th>\(\tan \theta\)</th><th>\(\alpha^*(\theta)\)</th><th>السياق (الإطار)</th></tr></thead>
         <tbody>
-          <tr>
-            <td>\(22.5^\circ\)</td>
-            <td>\(\sqrt{2}-1\)</td>
-            <td>\(3-2\sqrt{2} \approx 0.1716\)</td>
-            <td><b>Frame 2:</b> \(\alpha^* = \tan^2(22.5^\circ)\) (مربع نسبة الظل)</td>
-          </tr>
-          <tr>
-            <td>\(45.0^\circ\)</td>
-            <td>\(1\)</td>
-            <td>\(1/3 \approx 0.3333\)</td>
-            <td><b>v0.4:</b> نسبة التكامل عند الحد الحاد \(a=1\)</td>
-          </tr>
-          <tr>
-            <td>\(\theta_m = \arctan(\sqrt{2})\)<br>\(\approx 54.7356^\circ\)</td>
-            <td>\(\sqrt{2}\)</td>
-            <td>\(\frac{\sqrt{2}}{\sqrt{2}+2} = \sqrt{2}-1 \approx 0.4142\)</td>
-            <td><b>Frame 2 §8:</b> الزاوية السحرية (Magic Angle)<br><small>\(\theta_m = \arccos(1/\sqrt{3})\)</small></td>
-          </tr>
+          <tr><td>\(22.5^\circ\)</td><td>\(\sqrt{2}-1\)</td><td>\(3-2\sqrt{2} \approx 0.1716\)</td><td><b>Frame 2:</b> \(\alpha^* = \tan^2(22.5^\circ)\)</td></tr>
+          <tr><td>\(45.0^\circ\)</td><td>\(1\)</td><td>\(1/3 \approx 0.3333\)</td><td><b>v0.4:</b> نسبة التكامل عند الحد الحاد \(a=1\)</td></tr>
+          <tr><td>\(\theta_m = \arctan(\sqrt{2})\) \(\approx 54.7356^\circ\)</td><td>\(\sqrt{2}\)</td><td>\(\frac{\sqrt{2}}{\sqrt{2}+2} = \sqrt{2}-1 \approx 0.4142\)</td><td><b>Frame 2 §8:</b> الزاوية السحرية<br><small>\(\theta_m = \arccos(1/\sqrt{3})\)</small></td></tr>
         </tbody>
       </table>
     </div>
-    
-    <div class="callout good" style="margin-top:15px;">
-      <b>الرابط مع Frame 2 §8:</b> الزاوية السحرية \(\theta_m\)، التي تم تقديمها في Frame 2 §8 كزاوية هندسية في الفراغ (بين قطر المكعب وضلعه)، تظهر هنا كنقطة ثالثة دقيقة على المنحنى. هذا يربط رياضياً بين هندسة المستوى (22.5°)، والنموذج التكاملي (45°)، وهندسة الفراغ (54.7°).
-    </div>
+    <div class="callout good" style="margin-top:15px;"><b>الرابط مع Frame 2 §8:</b> الزاوية السحرية \(\theta_m\) تظهر هنا كنقطة ثالثة دقيقة على المنحنى. هذا يربط رياضياً بين هندسة المستوى (22.5°)، والنموذج التكاملي (45°)، وهندسة الفراغ (54.7°).</div>
   </section>
 
-  <!-- Section 2: Visual Representation -->
   <section class="card">
     <h2>2. التمثيل البصري (Visual Representation)</h2>
-    <p>الرسم التالي يوضح المنحنى \(\alpha^*(\theta)\) مع النقاط الثلاث. تم توليده في Google Colab (رابط قابل لإعادة التشغيل أدناه).</p>
+    <p>الرسم التالي يوضح المنحنى \(\alpha^*(\theta)\) مع النقاط الثلاث. تم توليده في Google Colab.</p>
     <div class="canvas-wrap">
-      <img src="lab01.png" alt="المنحنى الموحد: α*(θ) مع النقاط الثلاث (22.5°, 45°, 54.7°)" loading="lazy">
-      <p class="muted" style="font-size:.85rem;margin-top:8px;">الشكل 1: المنحنى \(\alpha^*(\theta)\) والنقاط الذهبية الثلاث. تم التوليد بواسطة Python/Matplotlib.</p>
+      <img src="lab01.png" alt="المنحنى الموحد" loading="lazy">
+      <p class="muted" style="font-size:.85rem;margin-top:8px;">الشكل 1: المنحنى \(\alpha^*(\theta)\) والنقاط الذهبية الثلاث.</p>
     </div>
   </section>
 
-  <!-- Section 3: The Mathematical Identity (Updated Wording) -->
   <section class="card">
     <h2>3. الهوية الرياضية (The Half-Angle Identity)</h2>
-    <p>العلاقة الحسابية بين قيمة المنحنى عند \(22.5^\circ\) والهوية المثلثية لنصف الزاوية تتبع مباشرة من التعريف المعتمد للدالة:</p>
     <div class="formula">\[ \alpha^*(22.5^\circ) = \frac{\sqrt{2}-1}{\sqrt{2}-1+2} = \frac{\sqrt{2}-1}{\sqrt{2}+1} = 3-2\sqrt{2} = (\sqrt{2}-1)^2 \]</div>
-    
-    <div class="callout good">
-      <b>النتيجة الدقيقة:</b> هذه هوية جبرية دقيقة ناتجة عن التعريف المعتمد للدالة والتعويض \(r=\tan(22.5^\circ)=\sqrt{2}-1\). التكافؤ عند \(45^\circ\) يعطي الثلث (\(1/3\)) كنتيجة لنفس التعريف.
-    </div>
+    <div class="callout good"><b>النتيجة الدقيقة:</b> هوية جبرية دقيقة ناتجة عن التعريف المعتمد للدالة والتعويض \(r=\tan(22.5^\circ)=\sqrt{2}-1\).</div>
   </section>
 
-  <!-- Section 4: Geometric Identification (Updated with Note) -->
   <section class="card">
     <h2>4. التعيين الهندسي (Geometric Identification)</h2>
-    
     <p>شرط الحدود في نموذج Zx v0.4 يتطلب \(0 \le a \le 1\). النسبة الهندسية في Frame 2 هي \(r = \tan(22.5^\circ) = \sqrt{2}-1\).</p>
-    
     <p>يُعتمد التعيين التالي بوصفه <b>التعيين الهندسي المفضل (Preferred Geometric Identification)</b>:</p>
     <div class="formula">\[ a(\theta) = \tan \theta \]</div>
-    <p>على المجال \(0^\circ \le \theta \le 45^\circ\)، لأنه يحافظ على التفسير المباشر لنسبة الظل إلى الارتفاع، ويعيد إنتاج نسبة Frame 2 عند \(22.5^\circ\)، ويصل إلى الحد الحاد \(a=1\) عند \(45^\circ\).</p>
-
-    <p>مع ذلك، فإن شرط الحدود \(0 \le a \le 1\) لا يحدد هذا التعيين بصورة فريدة؛ إذ توجد تعيينات بديلة تحقق الشرط نفسه (مثل \(a = \frac{2\tan\theta}{1+\tan\theta}\)). لذلك فإن تفضيل \(a = \tan\theta\) يستند إلى تفسيره الهندسي المباشر، وليس إلى تفرده الناتج عن شرط الحدود وحده.</p>
-
+    <p>على المجال \(0^\circ \le \theta \le 45^\circ\). مع ذلك، فإن شرط الحدود وحده لا يحدد هذا التعيين بصورة فريدة؛ إذ توجد تعيينات بديلة تحقق الشرط نفسه. لذلك فإن تفضيل \(a = \tan\theta\) يستند إلى تفسيره الهندسي المباشر، وليس إلى تفرده.</p>
     <p>أما النقطة \(\theta_m \approx 54.7356^\circ\)، فهي تقع على <b>الامتداد الرياضي</b> للمنحنى \(\alpha^*(\theta)\)، لكنها خارج المجال الزاوي المعتمد لتعيين \(a = \tan\theta\) في نموذج v0.4.</p>
-
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>التعيين</th>
-            <th>عند \(22.5^\circ\)</th>
-            <th>عند \(45^\circ\)</th>
-            <th>الحالة</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>\(a = \tan\theta\)</td>
-            <td>0.414</td>
-            <td>1.000</td>
-            <td><b>مُفضل (Preferred)</b></td>
-          </tr>
-          <tr>
-            <td>\(a = \frac{2\tan\theta}{1+\tan\theta}\)</td>
-            <td>0.586</td>
-            <td>1.000</td>
-            <td>بديل يحقق شرط الحدود</td>
-          </tr>
-          <tr>
-            <td>\(a = 2\tan\theta\)</td>
-            <td>0.828</td>
-            <td>2.000</td>
-            <td>غير صالح (يتجاوز 1)</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="muted" style="font-size:.9rem;margin-top:10px;"><b>ملاحظة اصطلاحية:</b> \(a\) هو معامل نموذج Zx v0.4، في حين أن \(\alpha^*\) هي قيمة الدالة المختبرية المعرفة في Section 1. وهما كميتان مختلفتان في التعريف الحالي، ولا يُفترض تساويهما.</p>
-    <p class="muted" style="font-size:.9rem;">الحالة العلمية: تعيين هندسي مفضل؛ أما الاشتقاق الطبيعي الكامل الذي يفرض هذا التعيين دون افتراضه، فما زال هدفاً بحثياً مفتوحاً.</p>
+    <div class="table-scroll"><table><thead><tr><th>التعيين</th><th>عند \(22.5^\circ\)</th><th>عند \(45^\circ\)</th><th>الحالة</th></tr></thead><tbody>
+      <tr><td>\(a = \tan\theta\)</td><td>0.414</td><td>1.000</td><td><b>مُفضل (Preferred)</b></td></tr>
+      <tr><td>\(a = \frac{2\tan\theta}{1+\tan\theta}\)</td><td>0.586</td><td>1.000</td><td>بديل يحقق شرط الحدود</td></tr>
+      <tr><td>\(a = 2\tan\theta\)</td><td>0.828</td><td>2.000</td><td>غير صالح</td></tr>
+    </tbody></table></div>
+    <p class="muted" style="font-size:.9rem;margin-top:10px;"><b>ملاحظة اصطلاحية مهمة:</b> \(a\) هنا هو معامل نموذج Zx v0.4، في حين أن \(\alpha^*\) هي قيمة الدالة المختبرية. وهما كميتان مختلفتان. وهذا \(a\) <b>ليس</b> نفس \(a = 4\pi/21\) في الإطار الخامس (قسم 6). لا نخلط بينهما أبداً.</p>
   </section>
 
-  <!-- Section 5: Reproducibility -->
   <section class="card">
-    <h2>5. إعادة التشغيل (Reproducibility)</h2>
+    <h2>5. إعادة التشغيل (Reproducibility) — Lab 01</h2>
     <p>يمكنك إعادة توليد الرسم البياني والتحقق من الأرقام بنفسك عبر Google Colab، أو استعراض الكود مباشرة هنا:</p>
-    
     <div style="text-align:center;margin:20px 0">
-      <a href="https://colab.research.google.com/drive/12g5BLZi8xv4vtKYR4ejsrXBJz-U53MaE" 
-         target="_blank" 
-         rel="noopener noreferrer" 
-         class="btn btn-colab">
-         🚀 Open in Google Colab
-      </a>
+      <a href="https://colab.research.google.com/drive/12g5BLZi8xv4vtKYR4ejsrXBJz-U53MaE" target="_blank" rel="noopener noreferrer" class="btn btn-colab">🚀 Open in Google Colab</a>
       <button onclick="toggleCode()" class="btn btn-toggle" id="toggleBtn">👁️ إظهار الكود</button>
       <a href="frame2.html" class="btn btn-outline">📄 العودة إلى Frame 2</a>
     </div>
-
-    <!-- كود بايثون (مخفي افتراضياً) -->
-    <pre class="code-block" id="pythonCode">
-import numpy as np
+    <pre class="code-block" id="pythonCode">import numpy as np
 import matplotlib.pyplot as plt
-
-# تعريف الدالة
 theta_deg = np.linspace(0.1, 89.9, 1000)
 theta_rad = np.radians(theta_deg)
 tan_theta = np.tan(theta_rad)
 alpha_star = tan_theta / (tan_theta + 2)
-
-# النقاط الذهبية الثلاث
-points = [
-    (22.5, 3 - 2*np.sqrt(2), r"\(22.5^\circ \rightarrow 3-2\sqrt{2}\) (Tree Shadow)"),
-    (45.0, 1/3, r"\(45^\circ \rightarrow 1/3\) (v0.4)"),
-    (54.7356, np.sqrt(2)-1, r"\(54.7356^\circ \rightarrow \sqrt{2}-1\) (Magic Angle)")
-]
-
-# الرسم
-plt.figure(figsize=(10, 6))
-plt.plot(theta_deg, alpha_star, 'b-', linewidth=2, label=r'\(\alpha^*(\theta) = \frac{\tan \theta}{\tan \theta + 2}\)')
-
-# إضافة النقاط
-for x, y, label in points:
+points = [(22.5, 3-2*np.sqrt(2)), (45.0, 1/3), (54.7356, np.sqrt(2)-1)]
+plt.figure(figsize=(10,6))
+plt.plot(theta_deg, alpha_star, 'b-', linewidth=2, label=r'alpha*(theta)')
+for x, y in points:
     plt.scatter(x, y, color='red', s=100, zorder=5)
-    plt.annotate(label, (x, y), textcoords="offset points", xytext=(10, 10), ha='left', fontsize=10, bbox=dict(boxstyle="round,pad=0.3", fc="yellow", alpha=0.5))
-
-# تنسيق
-plt.axhline(0, color='black', linewidth=0.5)
-plt.axhline(1/3, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
-plt.axvline(22.5, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
-plt.axvline(45, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
-plt.axvline(54.7356, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
-
-plt.title(r'The Unifying Curve: \(\alpha^*(\theta)\) connecting Frame 2 and v0.4', fontsize=14)
-plt.xlabel(r'Angle \(\theta\) (degrees)', fontsize=12)
-plt.ylabel(r'\(\alpha^*(\theta)\)', fontsize=12)
-plt.legend(fontsize=12)
-plt.grid(True, alpha=0.3)
-plt.xlim(0, 90)
-plt.ylim(0, 0.5)
-
-plt.tight_layout()
-plt.show()
-    </pre>
-
-    <p class="muted" style="font-size:.85rem;text-align:center;margin-top:15px;">الرابط الأصلي: <code style="direction:ltr;display:inline-block">https://colab.research.google.com/drive/12g5BLZi8xv4vtKYR4ejsrXBJz-U53MaE</code></p>
+plt.axhline(1/3, color='gray', linestyle='--', alpha=0.5)
+plt.title('The Unifying Curve')
+plt.xlabel('Angle theta (degrees)'); plt.ylabel('alpha*(theta)')
+plt.legend(); plt.grid(True, alpha=0.3); plt.xlim(0,90); plt.ylim(0,0.5)
+plt.tight_layout(); plt.show()</pre>
   </section>
 
-  <!-- Footer -->
+  <!-- ===== Section 6: Appendix Frame 5 — السابق في اللاحق، في نفس الملف ===== -->
+  <section class="card" style="border:2px solid var(--gold)">
+    <h2>6. ملحق الإطار الخامس — Frame 5: الفجوة الطيفية الموزونة (Appendix)</h2>
+    <p class="muted">هذا الملحق هو <b>السابق</b> مجمعاً في <b>اللاحق</b>، في نفس الاسم <code style="direction:ltr">/tree/lab01.html</code>. لا نفتح ملفاً جديداً. القاعدة: تعريف، اشتقاق، ودليل. لا نرفع الاستكشاف إلى مرتبة الإثبات.</p>
+
+    <h3>6.1 التعريفات — Canonical</h3>
+    <div class="formula">\[ L = 2\pi,\quad a = \frac{4\pi}{21} \approx 0.598399,\quad w(x) = (x/L)^{10}\log^2(L/x)\,e^{-a/x} \]</div>
+    <div class="formula">\[ M(x)=\int_0^x w,\quad R(x)=\int_x^m \frac{dt}{w(t)},\quad B_-(x)=M(x)R(x) \]</div>
+    <p class="muted"><b>تنبيه:</b> تعريف \(B_- = R/w\) في مسودة سابقة <b>ملغي</b>. نلتزم بـ \(B_- = M \cdot R\). وهذا \(a\) هنا ليس \(a\) في قسم 4.</p>
+
+    <h3>6.2 الاشتقاق — سطراً بسطر</h3>
+    <div class="formula">\[ h(x)=w^2 R - M,\quad h'(x)=2w(x)S(x),\quad S(x)=w'(x)R(x)-1 \]</div>
+    <div class="formula">\[ S'(x)=w''R - w'/w,\quad p=w'/w=10/x-2/(x\,\ell)+a/x^2 \]</div>
+    <div class="formula">\[ S(x)=w\,p\,R-1,\quad S'(x)=w\,(p^2+p')\,R-p \]</div>
+    <p>السلسلة المغلقة: \(B_- \to h \to S \to S'\). إثبات \(h'=2wS\) لا يثبت إشارة \(S\). الإشارة مسألة منفصلة.</p>
+
+    <h3>6.3 المجالات — الفصل الصارم</h3>
+    <div class="table-scroll"><table><thead><tr><th>المجال</th><th>الحالة</th></tr></thead><tbody>
+      <tr><td>\((0, a/40]\)</td><td><b>مغلق تحليلياً</b> عبر \(T=a/x\) و \(C_0&gt;0\) و \(E(T)&gt;0\)</td></tr>
+      <tr><td>\((a/40, 0.5]\)</td><td><b>مفتوح</b> — يحتاج إحاطة فترية لـ \(S\)</td></tr>
+      <tr><td>\((0.5, m]\)</td><td><b>مفتوح</b></td></tr>
+    </tbody></table></div>
+
+    <h3>6.4 الخلية الأولى \(X_1\) — فشل الإحاطة المباشرة</h3>
+    <div class="formula">\[ X_1=[0.01496,\,0.0172],\quad S(0.01496)\approx 0.03834,\; S(0.0172)\approx 0.04253 \]</div>
+    <div class="formula">\[ S \ge w(u)p(v)R(v)-1 = -0.9985 \quad \text{(غير كافية)} \]</div>
+    <p><b>الفصل الحاسم:</b> فشل الإحاطة ≠ فشل المتباينة. السبب: \(w(v)/w(u) \approx 731\) داخل الخلية. \(w\) صغيرة جداً عند \(u\) و \(R\) كبيرة جداً عند \(u\)، وعندما نفصلهما نخسر الإلغاء. <b>الخلية الأولى: مفتوحة.</b></p>
+
+    <h3>6.5 التحويل \(T=a/x\) و \(C_0\) و \(E(T)\)</h3>
+    <div class="formula">\[ X_1 \iff T\in[34.79,\,40],\quad q_0=T^8/r^2,\; r=\log(LT/a),\; c=8-2/r \]</div>
+    <div class="formula">\[ S(T)=(T+10-2/r)/T \cdot e^{-T} I(T)/q_0(T)-1 \]</div>
+    <div class="formula">\[ C_0=I(T_0)-e^{T_0}(q_0-q_0')(T_0)\approx 0.00058 \ \text{(استكشافية)} \]</div>
+    <div class="formula">\[ E(T)\ge (1-e^{-1})e^{-1}\cdot q_0''(T-1)/q_0(T) \]</div>
+    <p>قيم استكشافية (ليست شهادة): \(E(34.79)\approx 0.00696\) إلى \(E(40)\approx 0.01165\). معيار الإغلاق: \(\inf_{T\in[34.79,40]} S(T) &gt; 0\) على المجال كله، ليس نقاطاً مختارة.</p>
+
+    <h3>6.6 الخطوة التالية على السبورة</h3>
+    <p><b>(أ)</b> إثبات رتابة \(q_0''\) بفواصل. <b>(ب)</b> شهادة فترية لـ \(C_0\) مع \(C_{0,lo}&gt;0\). <b>(ج)</b> حساب \(\inf S\) على \(X_1\). إذا أغلقنا \(X_1\)، ننتقل للخلية الثانية فقط. خلية خلية.</p>
+
+    <h3>6.7 كل بايثون المستخدم — Frame 5 (قابل للنسخ)</h3>
+    <p>بايثون 1: \(B_+\) مقابل \(B_-\) — بايثون 2: \(S(x)\) في المجال الأوسط — بايثون 3: \(C_0\) و \(E(T)\). اضغط لإظهار الكود الكامل:</p>
+    <div style="text-align:center"><button onclick="toggleCode2()" class="btn btn-toggle" id="toggleBtn2">👁️ إظهار بايثون Frame 5</button></div>
+    <pre class="code-block" id="pythonCode2">import mpmath as mp
+mp.mp.dps = 50
+L = 2*mp.pi
+a = 4*mp.pi/21
+m = mp.mpf('4.94123829')
+def w(u):
+    ell = mp.log(L/u)
+    return mp.exp(10*mp.log(u/L) + 2*mp.log(ell) - a/u)
+def r_of_T(T): return mp.log(L*T/a)
+def q0(T):
+    r = r_of_T(T); return T**8 / r**2
+def c_of_T(T):
+    r = r_of_T(T); return 8 - 2/r
+def q0_prime(T): return q0(T)*c_of_T(T)/T
+def q0_double_prime(T):
+    r = r_of_T(T); c = c_of_T(T)
+    return q0(T)/T**2 * (c**2 - c + 2/r**2)
+# C0 exploratory
+T0 = max(a/m, a*mp.e/L)
+Tm = a/m
+I_T0 = mp.quad(lambda s: mp.exp(s)*q0(s), [Tm, T0])
+C0 = I_T0 - mp.exp(T0)*(q0(T0)-q0_prime(T0))
+print("C0 exploratory =", mp.nstr(C0, 20))
+def E_lower(T):
+    return (1-mp.exp(-1))*mp.exp(-1) * q0_double_prime(T-1)/q0(T)
+for T in [mp.mpf('34.7906163'), mp.mpf('35'), mp.mpf('36'), mp.mpf('37'), mp.mpf('38'), mp.mpf('39'), mp.mpf('40')]:
+    print(f"T={mp.nstr(T,8)} E_lower={mp.nstr(E_lower(T),8)}")
+# --- S(x) in middle domain (frame5.ipynb, 50 digits) ---
+from mpmath import mpf, log, exp, quad
+a2 = mpf('0.5985')  # مركزية، الفتري يستخدم [0.598,0.599]
+def ell(x): return log(L/x)
+def I_of_T(T, T0):
+    def q0m(t):
+        r = log(L*t/a2); c = 8-2/r; return q0(t)*(1-c/t)
+    def integrand(t):
+        r = log(L*t/a2); c = 8-2/r
+        return exp(t)*q0(t)*(c**2-c+2/r**2)/t**2
+    I_T0 = quad(lambda t: exp(t)*q0(t), [a2/mpf('4.942'), T0])
+    return I_T0 - exp(T)*q0m(T) - exp(T0)*q0m(T0) - quad(integrand, [T0, T])
+def S_of_x(x):
+    T = a2/x; T0 = max(a2/mpf('4.942'), a2*mp.e/L)
+    Q = ell(x); I = I_of_T(T, T0)
+    wr = a2 * Q**2 * exp(-T) * I / T**10
+    return (wr/x)*(10-2/ell(x)+a2/x)-1
+for x in [0.015,0.02,0.03,0.05,0.1,0.2,0.3,0.5]:
+    print(x, S_of_x(mpf(str(x))))</pre>
+    <p class="muted" style="font-size:.85rem">ملاحظة: طباعة PROVEN في كود \(B_+\) هي تسمية استكشافية، ليست شهادة فترية. القيم العددية كلها استكشافية ما لم يذكر أنها فترية.</p>
+  </section>
+
   <footer>
-    Al-Hindara · Lab 01 — The Unifying Curve<br>
-    نسخة HTML مستقلة للمراجعة العلمية · نوفمبر 2026
+    Al-Hindara · Lab 01 — The Unifying Curve + Frame 5 Appendix<br>
+    نسخة موحدة v2.0 · 7 نوفمبر 2026 · نفس الاسم: /tree/lab01.html<br>
     <p style="margin-top:8px">© 2026 م – واحة الجبري | عبدالله محمد ناصر الجبري</p>
   </footer>
 </div>
-
-<!-- Script for Toggle Button -->
 <script>
-function toggleCode() {
-    const codeBlock = document.getElementById('pythonCode');
-    const btn = document.getElementById('toggleBtn');
-    
-    if (codeBlock.classList.contains('show')) {
-        codeBlock.classList.remove('show');
-        btn.innerHTML = '👁️ إظهار الكود';
-    } else {
-        codeBlock.classList.add('show');
-        btn.innerHTML = '🙈 إخفاء الكود';
-    }
+function toggleCode(){
+  const c=document.getElementById('pythonCode'); const b=document.getElementById('toggleBtn');
+  if(c.classList.contains('show')){c.classList.remove('show'); b.innerHTML='👁️ إظهار الكود';} else {c.classList.add('show'); b.innerHTML='🙈 إخفاء الكود';}
+}
+function toggleCode2(){
+  const c=document.getElementById('pythonCode2'); const b=document.getElementById('toggleBtn2');
+  if(c.classList.contains('show')){c.classList.remove('show'); b.innerHTML='👁️ إظهار بايثون Frame 5';} else {c.classList.add('show'); b.innerHTML='🙈 إخفاء بايثون Frame 5';}
+}
+</script>
+
+
+<!-- ===== الخلاصة الجامعة — مخفية حتى الضغط ===== -->
+<section class="card" id="summarySection" style="border:2px solid var(--gold)">
+  <h2>📌 الخلاصة الجامعة — مسودة عمل داخلية فقط</h2>
+  <p class="muted">لا إعلان، لا نشر، لا اعتماد نهائي قبل المراجعة والاتفاق. الحساب أولاً، التدقيق ثانياً، والاتفاق قبل الإعلان.</p>
+
+  <div style="text-align:center;margin:16px 0">
+    <button onclick="toggleSummary()" class="btn btn-toggle" id="summaryBtn">👁️ اضغط لعرض الخلاصة</button>
+  </div>
+
+  <div id="summaryContent" style="display:none">
+
+    <h3>1. مساران لا نخلط بينهما</h3>
+    <ul>
+      <li><b>Frame 5:</b> فجوة طيفية موزونة من وزن \(w\)، وإغلاق إحاطة فترية.</li>
+      <li><b>اشتقاق \(L\) + المصدر الرابع:</b> مقياس مكاني من الحصر والطاقة والجاذبية، ثم اختبار التشكّل الذاتي والارتداد.</li>
+    </ul>
+
+    <h3>2. Frame 5 — خلاصة</h3>
+    <p><b>اشتُق تحليلياً:</b> السلسلة \(B_- \to h \to S \to S'\). التمييز: \(h>0 \iff B_-' >0\) ، و \(S>0 \iff h'>0\). إشارتان لمستويين مختلفين.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>الطرف</th><th>الحالة</th></tr></thead>
+      <tbody>
+        <tr><td>\((0,a/40]\)</td><td><b>مغلق تحليلياً</b> عبر \(T=a/x\) و \(C_0>0\) و \(E(T)>0\)</td></tr>
+        <tr><td>\((a/40,0.5]\)</td><td><b>مفتوح</b> — \(X_1=[0.01496,0.0172]\) مفتوحة. الإحاطة \(S\ge -0.9985\) غير كافية. فشل الإحاطة ≠ فشل المتباينة</td></tr>
+        <tr><td>\((0.5,m]\)</td><td><b>مفتوح</b></td></tr>
+      </tbody>
+    </table></div>
+    <p><b>حُسب عددياً، ليس شهادة:</b> \(m\approx 4.94123829\) ، \(B_-^{\max}\approx 0.308\) ، \(C_0\approx 0.0005806\) ، \(E(T)\) من \(0.00696\) إلى \(0.01165\).</p>
+    <p class="muted">\(B_+\) مقابل \(B_-\) استكشاف فقط. طباعة `PROVEN` في الكود تسمية استكشافية، ليست شهادة فترية. ادعاء إغلاق \(X_1\) بـ \(S>0.00836\) ليس داخل الوثيقة الموحدة حتى يُدمج ببرهانه الفتري الكامل.</p>
+
+    <h3>3. اشتقاق \(L\) — خلاصة</h3>
+    <p><b>اشتُق تحليلياً:</b> \(M(L)\) ليست واحدة. ثلاثة أطوال لا تدمج: \(L\) مقياس الحصر، \(\bar{\lambda}_C\) و \(r_s\) مشتقان من \(M\).</p>
+    <p><b>\(\kappa\) من الحالة:</b> بئر لا نهائي 1D: \(\kappa_n=n\pi\) ، \(L_{*,n}=\sqrt{2}\,n\pi\,\ell_P\). عاماً: \(x=Ly\) ، \(\hat{H}_L=(\hbar c/L)\hat{h}\) ، \(E_n=\varepsilon_n\,\hbar c/L\).</p>
+    <p><b>قانون ويل — مصحّح:</b> المقصود <b>ويل Weyl</b>، لا «فيل». \(p\) ليست بالبُعد وحده، بل بالبُعد والتشتت والحصر. تشتت غير نسبي: \(\varepsilon_n\sim n^{2/d}\) ، تشتت خطي: \(\varepsilon_n\sim n^{1/d}\).</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>الحالة</th><th>\(p\)</th><th>\(\mathcal{D}_n\)</th></tr></thead>
+      <tbody>
+        <tr><td>بئر 1D خطي</td><td>1</td><td>\(2/n\)</td></tr>
+        <tr><td>بئر 1D غير نسبي</td><td>2</td><td>\(4/n\)</td></tr>
+        <tr><td>بئر كروي 3D خطي</td><td>\(1/3\)</td><td>\(2/(3n)\)</td></tr>
+        <tr><td>بئر كروي 3D غير نسبي</td><td>\(2/3\)</td><td>\(4/(3n)\)</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>ثبات \(p\) عبر \(L_{*,n}\):</b> داخل فرضية التحجيم الثابتة \(\hat{H}_L=(\hbar c/L)\hat{h}\) ، \(\varepsilon_n\) لا تتغير مع \(L\) ، إذن \(p(L_{*,n})=p(L)\). أي تغير في \(p\) يتطلب \(\hat{h}(\eta(L))\).</p>
+
+    <h3>4. مصادر كسر التحجيم — أربعة، مستقلة</h3>
+    <p>\[L_{*,n}=\sqrt{2}\,\varepsilon_n(\eta(L_{*,n}))\,\ell_P \quad \text{— معادلة ضمنية}\]</p>
+    <ul>
+      <li><b>الكتلة:</b> \(\eta_m=mcL/\hbar\) ، \(\varepsilon_n=\sqrt{(n\pi)^2+\eta_m^2}\). عتبة: موجودة فقط لـ \(m<m_P/\sqrt{2}\). عند المساواة أو فوقها لا حل. نتيجة جبرية، لا تقريبية.</li>
+      <li><b>الحدود:</b> روبن \(\tan\zeta=-\zeta/\eta_b\) ، \((n-\tfrac12)\pi<\zeta_n<n\pi\). تصحيح الاتجاه: \(d\zeta_n/d\eta_b>0\). شريط: \(\sqrt{2}(n-\tfrac12)\pi\ell_P < L_{*,n} < \sqrt{2}\,n\pi\ell_P\). وجود وحيد لكل \(\beta>0\) عبر \(-\cot\zeta_n=\beta c\). لا عتبة. القيد: \(\beta>0\) فقط.</li>
+      <li><b>الجهد:</b> \(V=\alpha x^q\) ، \(\eta_V=\alpha L^{q+1}/\hbar c\). \(n\pi\le\varepsilon_n\le n\pi+\eta\) ، \(p=1\) عند \(\eta\) مثبّت. تصحيح الإزاحة: ادعاء \(O(\eta/n)\) <b>غير معتمد</b>. المعتمد \(O(\eta)\). تصحيح الرتبة الأولى \(\to \eta/(q+1)\). عتبة: \(\alpha_c = \hbar c/(\sqrt{2}\,\ell_P)^{q+1} \cdot \sup[\eta/\varepsilon_n^{q+1}]\). \(\alpha<\alpha_c\): توجد قيمة. \(\alpha=\alpha_c\): يلزم فحص تحقق supremum. \(\alpha>\alpha_c\): لا توجد نقطة. السلوك القوي \(\varepsilon_n\sim C\eta^{1/(q+1)}\) فرضية تحتاج برهاناً.</li>
+      <li><b>الارتداد:</b> انظر القسم 5. القاعدة: لا نسمح لشرط الموازنة بأن يصنع الارتداد، ثم نقدّم الارتداد دليلاً على صحة شرط الموازنة.</li>
+    </ul>
+
+    <h3>5. المصدر الرابع — الارتداد البنيوي</h3>
+    <p><b>اختبار الاستقلال:</b> إذا حذفنا الموازنة تماماً، هل تبقى معادلة اتساق ذاتي تنتج \(\eta(L)\)؟ المؤثر وحده ينتج \(\eta_m,\eta_b,\eta_V\) وكسر تحجيم، <b>لا ارتداد</b>.</p>
+    <p>\[\eta_{\text{self}}=\kappa\,\ell_P^2\varepsilon_n^2/L^2 \quad \text{— مشتق جبرياً داخل فرضية } U_{\text{self}}\]</p>
+    <p><b>ما لم يُشتق بعد:</b> أن تكون \(U_{\text{self}}=-\kappa GM^2/L\) للحالة المدروسة فعلاً. يحتاج اشتقاق \(\kappa\) من توزيع \(|\psi_n|^2\) ونواة الجاذبية.</p>
+    <p><b>\(\kappa\) لكرة منتظمة، \(n=1\):</b> \(U_{\text{self}}=-3/5\,GM_1^2/L\) ، إذن \(\kappa_{\text{uniform}}=3/5\) اشتقاقاً، لا افتراضاً. صالح فقط للتوزيع المنتظم.</p>
+    <p><b>تصحيح الكرة المجمّدة:</b> تجميد التوزيع لا يجمّد القيمة الذاتية. \(\varepsilon_1(\eta)\) تتناقص مع \(\eta\)، تعبر الصفر وتصبح سالبة. لا \(L_{\min}>0\) في النموذج المجمد، بل انهيار القيمة الذاتية.</p>
+    <p><b>تحرير التوزيع — شرودنغر-بواسون غير النسبي:</b> \(\kappa[\phi]\) دالية، ليست \(3/5\) إلا للتوزيع المنتظم. تنبيه: \(m=0\) تحتاج صياغة نسبية، مصدرها كثافة الطاقة لا كتلة السكون.</p>
+    <p><b>اختبار التحجيم:</b> \(\mathcal{E}(\lambda)=A\lambda^2-B\lambda\) ، \(\lambda_*=B/2A\) ، \(\mathcal{E}_{\min}=-B^2/4A<0\). \(L_{\text{char}}\sim\hbar^2/Gm^3\) — مقياس توازن لهذا النموذج فقط. يثبت حداً أدنى على عائلة التحجيم فقط.</p>
+    <p><b>النتيجة الحسابية — \(\hbar=1,m=1,G=1\):</b> \(E=-0.166353\) ، \(T=0.058996\) ، \(U=-0.112675\) ، \(E_{\text{tot}}=-0.053679\) ، \(R_{\text{rms}}=4.414879\) ، \(\kappa[\phi]=0.497447\) ، \(\lambda_*=0.954932\) ، فيريال \(2T+U=0.005318\) — المثالي \(0\).</p>
+
+    <h3>6. الخلاصة الجامعة — الفصل المطلوب</h3>
+    <div class="table-scroll"><table>
+      <thead><tr><th>المستوى</th><th>المحتوى</th></tr></thead>
+      <tbody>
+        <tr><td><b>اشتُق تحليلياً</b></td><td>Frame 5 سلسلة \(B_-\to h\to S\) ، المسار الثاني \(\mathcal{O},\kappa\) ، ويل ، \(\eta_m,\eta_b,\eta_V\) ، عتبة الكتلة ، شريط الحدود ، تعريف \(\alpha_c\) ، \(\eta_{\text{self}},E_{\text{tot}}\) ، \(\kappa[\phi]\) ، شرودنغر-بواسون ، \(E(\lambda)=A\lambda^2-B\lambda\)</td></tr>
+        <tr><td><b>حُسب عددياً</b></td><td>Frame 5 \(m,B_-^{\max},S,C_0,E(T)\) استكشافية ؛ المصدر الرابع حل شرودنغر-بواسون أعلاه</td></tr>
+        <tr><td><b>ثبت ضمن النموذج</b></td><td>الطرف في Frame 5 ، ويل \(p=1\) عند \(\eta\) مثبّت ، عتبة الكتلة ، شريط الحدود وحل وحيد لـ \(\beta>0\) ، إحاطة الجهد ، مقياس مستقر للتشكّل الذاتي في النموذج غير النسبي ، حل أرضي كروي متسق ، فيريال تقريباً</td></tr>
+        <tr><td><b>لا يزال مفتوحاً</b></td><td>Frame 5 الأوسط والعالمي و \(B_+\) ، المختبر الثالث السلوك القوي و \(\alpha_c\) الفعلية وعدد حلول الموازنة ، المصدر الرابع صياغة نسبية \(m=0\) والارتداد الكوني</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>ولا نخلط نجاح التشكّل الذاتي بإثبات ارتداد كوني.</b></p>
+    <p class="muted">المسودة تبقى مسودة عمل داخلية فقط. غداً نراجعها كاملة، ثم نتفق جميعاً على الخطوة التالية. لا هروب ولا احتفال مبكر. 👁️🌎💜</p>
+
+  </div>
+</section>
+
+<script>
+function toggleSummary(){
+  var c = document.getElementById('summaryContent');
+  var b = document.getElementById('summaryBtn');
+  if(c.style.display === 'none' || c.style.display === ''){
+    c.style.display = 'block';
+    b.innerHTML = '🙈 إخفاء الخلاصة';
+    if(window.MathJax && window.MathJax.typesetPromise){ MathJax.typesetPromise([c]); }
+  } else {
+    c.style.display = 'none';
+    b.innerHTML = '👁️ اضغط لعرض الخلاصة';
+  }
 }
 </script>
 
