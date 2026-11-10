@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jabri Total Z v3 | Proposed Unification Framework</title>
+    <meta name="description" content="Jabri Total Z v3: A Proposed Unification Framework (RiemannOS v1.0). An exploratory baseline for mathematical and physical research.">
+    <link rel="canonical" href="https://jabri-com.vercel.app/wells/riemannos.html">
+    
+    <!-- Google Scholar Meta Tags -->
+    <meta name="citation_title" content="Jabri Total Z v3: A Proposed Unification Framework (RiemannOS v1.0)">
+    <meta name="citation_author" content="Al-Jabri, Abdulla Mohammed Nasser">
+    <meta name="citation_publication_date" content="2026/04/22">
+    <meta name="citation_doi" content="10.5281/zenodo.19700735">
+    <meta name="citation_language" content="en">
+    
+    <!-- MathJax for Equations -->
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        :root { 
+            --gold: #f4c430; --green: #06d6a0; --bg: #0a0a0f; --panel: #11131a; 
+            --border: #2b2b3b; --text: #e8e8f0; --dim: #8a8a9e; --blue: #6ae3ff; --red: #ff6b6b;
+        }
+        body { margin: 0; padding: 20px 12px; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.8; display: flex; flex-direction: column; align-items: center; }
+        .container { width: min(1000px, 100%); display: flex; flex-direction: column; gap: 20px; position: relative; }
+        
+        h1 { color: var(--gold); text-align: center; font-size: 2rem; margin-bottom: 5px; margin-top: 20px; text-shadow: 0 0 20px rgba(244,196,48,0.3); }
+        .subtitle { text-align: center; color: var(--blue); font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; }
+        
+        /* Scorecard Styles */
+        .scorecard { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .score-item { text-align: center; }
+        .score-item .lbl { color: var(--dim); font-size: 0.85rem; display: block; margin-bottom: 5px; }
+        .score-item .val { font-size: 1.5rem; font-weight: bold; color: var(--gold); }
+        .score-item .val.low { color: var(--red); }
+        .score-note { grid-column: 1 / -1; text-align: center; font-size: 0.8rem; color: var(--dim); margin-top: 10px; font-style: italic; }
+
+        .equation-banner { text-align: center; background: rgba(212,175,55,0.1); border: 1px solid var(--gold); border-radius: 12px; padding: 15px; font-family: 'Courier New', monospace; font-size: 1.4rem; color: var(--gold); margin-bottom: 20px; direction: ltr; }
+        
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px -15px #000; }
+        .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.3rem; }
+        .card h3 { color: var(--gold); font-size: 1.1rem; margin-top: 20px; }
+        
+        .badge-exact { background: rgba(6, 214, 160, 0.1); border-left: 4px solid var(--green); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+        .badge-conjectural { background: rgba(255, 107, 107, 0.1); border-left: 4px solid var(--red); padding: 12px; border-radius: 4px; margin: 15px 0; font-size: 0.95rem; }
+
+        .math-block { background: #05050a; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.1rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+        th, td { border: 1px solid var(--border); padding: 10px; text-align: center; }
+        th { background: #1a1a2e; color: var(--gold); }
+        td { direction: ltr; text-align: left; }
+        td.ar { direction: rtl; text-align: right; }
+        
+        .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; }
+        .btn { background: var(--green); color: #0a0a0f; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; }
+        .btn-gold { background: var(--gold); }
+        .btn-blue { background: var(--blue); }
+        .footer { text-align: center; color: var(--dim); font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+        
+        .ar-text { direction: rtl; text-align: right; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        
+        /* Print Settings - Forced White Background for PDF */
+        @media print { 
+            body { background: #ffffff !important; color: #000000 !important; padding: 0; } 
+            .container { width: 100%; }
+            .card { background: #ffffff !important; color: #000000 !important; box-shadow: none; border: 1px solid #aaaaaa; }
+            h1, h2, h3 { color: #000000 !important; border-color: #aaaaaa; } 
+            .math-block, th, .scorecard { background: #f5f5f5 !important; color: #000000 !important; border-color: #aaaaaa; } 
+            .badge-exact, .badge-conjectural { border: 1px solid #cccccc; background: #fafafa !important; color: #000000 !important; }
+            .btn, .lang-btn, button { display: none !important; } 
+            .links { display: none; }
+            a { text-decoration: none; color: #000000; }
+            .page-break { page-break-before: always; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="pdf-content">
+
+    <h1>Jabri Total Z v3</h1>
+    <div class="subtitle">The Proposed Unification Framework: RiemannOS v1.0</div>
+    
+    <!-- Editorial Scorecard -->
+    <div class="scorecard">
+        <div class="score-item">
+            <span class="lbl">Structure & Design</span>
+            <span class="val">8.5/10</span>
+        </div>
+        <div class="score-item">
+            <span class="lbl">Scientific Transparency</span>
+            <span class="val">8/10</span>
+        </div>
+        <div class="score-item">
+            <span class="lbl">Mathematical Completeness</span>
+            <span class="val low">3/10</span>
+        </div>
+        <div class="score-item">
+            <span class="lbl">Publishability</span>
+            <span class="val">6/10</span>
+        </div>
+        <div class="score-note">Preliminary editorial assessment of code and content. Not a peer-reviewed validation of the theory or its results.</div>
+    </div>
+
+    <div class="equation-banner">
+        Z_t = Z + C + A<br>
+        <span style="font-size: 1rem; color: var(--dim);">Conceptual Unification (Riemann 1859 + Einstein 1915 → Proposed Framework 2026)</span>
+    </div>
+
+    <div class="card">
+        <h2>📜 Executive Summary</h2>
+        <p>This document proposes a conceptual framework unifying three mathematical kernels (Z, C, A) under the equation \(Z_t = Z+C+A\).</p>
+        <ul>
+            <li><b>Z = Jabri Z Kernel:</b> Number Theory mapped to Physics.</li>
+            <li><b>C = Jabri C Kernel:</b> Spacetime modeled as an execution of \(Z(x)\).</li>
+            <li><b>A = Jabri A Kernel:</b> Dark Energy linked to field zeros.</li>
+        </ul>
+        <div class="badge-exact">
+            <b>Conceptual Definition:</b> The equation \(Z_t = Z+C+A\) is a conceptual normalization proposal, not yet a proven physical law. Deriving Einstein's equations from \(Z(x)\) requires a rigorous mathematical derivation that is currently incomplete. The variables \(Z, C, A\) currently lack formal units and domains.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🛡️ Response to Anticipated Objections</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Potential Criticism</th>
+                    <th>Concise Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Origin of large coupling constants</td>
+                    <td class="ar"><b>تصحيح علمي:</b> المسودات السابقة ادعت قيماً مثل \(10^{15}\). التقييم الرياضي الصارم للمعادلة \(A = e^{2\pi/\gamma_1}\) يعطي قيمة صغيرة جداً \(A \approx 1.56\). هذا يثبت أن الثوابت الكبيرة تحتاج إلى صيغة أسية مختلفة ولم يتم إثباتها.</td>
+                </tr>
+                <tr>
+                    <td>Truncation at \(N=5\) zeros seems arbitrary</td>
+                    <td class="ar"><b>توضيح:</b> القطع عند \(N=5\) مبرر بافتراض أن المودات \(k \ge 6\) لها طول موجي أقل من طول بلانك. <strong>ولكن،</strong> حساب \(\lambda_6 \approx 0.167\) لا يثبت وحده أنها تساوي \(0.167 L_p\) دون تعريف الوحدات. يُعتبر هذا القطع <em>فرضية استكشافية</em>.</td>
+                </tr>
+                <tr>
+                    <td>2.31 TeV prediction excluded by LHC</td>
+                    <td class="ar"><b>تحليل كمي مطلوب:</b> إن غياب رنين كتلي مباشر لا يثبت تلقائياً أن تأثيراً مفترضاً في \(G_{eff}(s)\) غير قابل للكشف. لإثبات هذا الادعاء، يجب تقديم مرجع تجريبي وتحليل كمي دقيق.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>🌌 Part A: Dark Energy</h2>
+        <p>Using the Jabri Z series from 1859, we evaluate the second derivative at the 5th root:</p>
+        <div class="math-block">
+            \[ t_5 \approx 32.935 \]
+            \[ Z''(t_5) \approx 3.7 \times 10^{-123} \]
+            \[ \Rightarrow \Lambda \approx 1.1 \times 10^{-122} M_p^2 \]
+        </div>
+        <p>This produces a numerical value close to observation.</p>
+        
+        <h3>Predictions to Be Tested</h3>
+        <ul>
+            <li><b>Dark Energy is Not Constant:</b> May jump if \(Z(x)\) transitions to \(t_6\). (Derivation missing).</li>
+            <li><b>Coincidence Problem:</b> May explain why we live when \(V''(t_5)\) dominates. (Philosophical claim).</li>
+            <li><b>Testable:</b> Gravitational waves should have spectral lines at \(f_k \propto \sqrt{V''(t_k)}\).</li>
+        </ul>
+
+        <div class="badge-conjectural">
+            <strong>⚠️ Missing Derivation (فجوة الاشتقاق):</strong> The values for \(Z''(t_5)\) and \(\Lambda\) require four missing elements before they can be considered validated:
+            <ol>
+                <li>The exact analytical definition of the field \(Z(x)\) and the potential \(V(Z)\).</li>
+                <li>The specific definition of the root \(t_5\) (where \(Z'(t_5) = 0\)).</li>
+                <li>The step-by-step calculation of the second derivative \(Z''(t_5)\) with numerical precision.</li>
+                <li>The derivation of the unit conversion from \(Z''(t_5)\) to the cosmological constant \(\Lambda\) in Planck units.</li>
+            </ol>
+            Without these, the numerical match remains an unverified coincidence.
+        </div>
+    </div>
+
+    <div class="card page-break">
+        <h2>📐 Appendices</h2>
+        
+        <h3>Appendix A: Explicit Definitions</h3>
+        <p>To address the low mathematical completeness score, we explicitly state the assumed functions:</p>
+        <div class="math-block">
+            \[ Z(x) = x^{-5} \ln(x) \sin\left(\frac{2\pi}{x}\right) e^{-x/21} \]
+            \[ V(Z) = \frac{1}{2} m^2 Z^2 + \frac{\lambda}{4} Z^4 \quad \text{(Assumed Polynomial Form)} \]
+        </div>
+        <div class="badge-conjectural">
+            <b>Note on \(V(Z)\):</b> The exact form of the potential is currently assumed. Without a rigorous derivation of \(V(Z)\), the calculation of \(Z''(t_5)\) remains a model-dependent estimate.
+        </div>
+
+        <h3>Appendix B: Derivation of Coupling Constants</h3>
+        <p>The stability condition \(V''(Z)>0\) for all \(Z\) leads to the following exponential terms using \(\gamma_1 = 14.1347\):</p>
+        <div class="math-block">
+            \[ A = \exp\left(\frac{2\pi}{\gamma_1}\right) = \exp\left(\frac{2\pi}{14.1347}\right) \approx 1.559 \]
+            \[ B = \exp\left(\frac{\pi}{\gamma_1}\right) = \exp\left(\frac{\pi}{14.1347}\right) \approx 1.249 \]
+        </div>
+        <div class="badge-conjectural">
+            <b>Correction Note:</b> The numerical evaluation yields \(1.559\) and \(1.249\). However, the claim that these formulas are a direct consequence of \(V''(Z) > 0\) lacks a step-by-step proof. We present them as a <strong>heuristic proposal</strong>.
+        </div>
+
+        <h3>Appendix C: Exploratory Cutoff at N=5</h3>
+        <p>For \(\gamma_6 \approx 37.586\), the dimensionless quantity \(2\pi/\gamma_6 \approx 0.167\). This does not establish a physical Planck-length cutoff. A dimensional mapping is required.</p>
+        <p>Truncation at \(N=5\) is an <strong>exploratory assumption</strong>. A sensitivity analysis comparing \(N=4\), \(N=5\), and \(N=6\) is required to justify this choice scientifically.</p>
+        
+        <div class="badge-conjectural">
+            <b>Correction Note:</b> The dimensionless ratio \(0.167\) cannot be equated directly to \(0.167 L_p\). The UV cutoff at \(N=5\) remains a heuristic hypothesis.
+        </div>
+
+        <h3>Appendix H: Standard Model Parameter Map (Conjectural)</h3>
+        <p>RiemannOS v1.0 attempts to derive fundamental constants using residues \(\lambda_{nm}\). <em>This is an exploratory numerical fit.</em></p>
+        <table>
+            <thead>
+                <tr><th>SM Constant</th><th>RiemannOS Formula</th><th>Accuracy</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Fine structure \(\alpha\)</td><td>\(\alpha^{-1} = 4\pi/\lambda_{79}^2\)</td><td>99.8%</td></tr>
+                <tr><td>Electron mass \(m_e\)</td><td>\(m_e = \lambda_{99} M_p\)</td><td>99.7%</td></tr>
+                <tr><td>Muon mass \(m_\mu\)</td><td>\(m_\mu = \lambda_{88} M_p\)</td><td>99.2%</td></tr>
+                <tr><td>Proton/Electron</td><td>\(m_p/m_e = |\lambda_{23}/\lambda_{99}|\)</td><td>99.96%</td></tr>
+                <tr><td>Weinberg angle</td><td>\(\sin^2\theta_W = \lambda_{79}^2/(\lambda_{78}^2+\lambda_{79}^2)\)</td><td>99.5%</td></tr>
+            </tbody>
+        </table>
+        <div class="badge-conjectural">
+            <strong>⚠️ Important Caveat:</strong> The accuracy percentages shown above cannot be relied upon without publishing the exact method for calculating \(\lambda_{nm}\), the reference values, and the error scale. Furthermore, fitting known values after selecting multiple parameters does not constitute a first-principles prediction. These are unverified numerical fits.
+        </div>
+    </div>
+
+    <!-- NEW SECTION: References -->
+    <div class="card">
+        <h2>📚 References</h2>
+        <ul style="direction: ltr; text-align: left; font-size: 0.9rem;">
+            <li>Riemann, B. (1859). On the Number of Primes Less Than a Given Magnitude.</li>
+            <li>Einstein, A. (1915). The Field Equations of Gravitation.</li>
+            <li>Al-Jabri, A. M. (2026). Jabri-Z: The Zeta-Generated Field. Zenodo. DOI: 10.5281/zenodo.19645066</li>
+            <li>Al-Jabri, A. M. (2026). Jabri-A: Dark Energy as a Riemann Eigenvalue. Zenodo. DOI: 10.5281/zenodo.19700735</li>
+            <li>Al-Jabri, A. M. (2026). Jabri-C: Spacetime is Not a Stage. Zenodo. DOI: 10.5281/zenodo.19645066</li>
+        </ul>
+    </div>
+
+    <!-- FINAL VERDICT SECTION -->
+    <div class="card" style="border: 2px solid var(--gold); background: linear-gradient(180deg, rgba(212,175,55,0.05) 0%, var(--panel) 100%);">
+        <h2 style="color: var(--gold);">🔬 Critical Review & Future Roadmap</h2>
+        <p>While this document introduces a bold conceptual framework, it is <strong>not yet a final scientific proof</strong>. The following steps are strictly required before the claims can be fully validated:</p>
+        <ul>
+            <li><strong>Complete Mathematical Definitions:</strong> Define the field \(Z(x)\), the potential \(V(Z)\), and the residues \(\lambda_{nm}\) from first principles.</li>
+            <li><strong>Derivation of Numerical Values:</strong> Provide step-by-step analytical derivations for \(Z''(t_5)\) and \(\Lambda\).</li>
+            <li><strong>Documentation of Accuracy:</strong> Fully document the calculations, reference values, and error scales for the Standard Model Parameter Map.</li>
+        </ul>
+        <div class="badge-exact" style="border-left-color: var(--gold); background: rgba(212,175,55,0.1);">
+            <b>Final Verdict:</b> This document is preserved as an <strong>exploratory baseline</strong> to guide future rigorous mathematical and physical research. It serves as a conceptual foundation, not a completed proof.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📂 Official Archive & Downloads</h2>
+        <div class="links" style="margin-bottom: 15px;">
+            <a href="https://doi.org/10.5281/zenodo.19700735" target="_blank" rel="noopener noreferrer" class="btn btn-gold">📄 DOI v3: 19700735</a>
+            <a href="https://github.com/Jabri62018/Zx_Mother_Function_Jabri" target="_blank" rel="noopener noreferrer" class="btn">🐙 Source Code</a>
+            <a href="https://orcid.org/0009-0003-3319-3822" target="_blank" rel="noopener noreferrer" class="btn btn-blue">🆔 ORCID</a>
+        </div>
+        <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <button onclick="window.print()" class="btn btn-blue">🖨️ Print / Save (White PDF)</button>
+            <button onclick="generateDirectPDF()" class="btn btn-gold">📥 Direct PDF</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Eng. Abdulla M. N. Al-Jabri — Sana'a, Yemen<br>
+        Version 1.0 (Proposed Framework) | Last Updated: 2026-04-22
+    </div>
+</div>
+
+<script>
+    window.generateDirectPDF = async function() {
+        // Check if html2pdf exists
+        if (typeof html2pdf === 'undefined') {
+            alert("⚠️ PDF library failed to load. Please use the 'Print / Save (White PDF)' button instead.");
+            return;
+        }
+
+        // Wait for MathJax to finish rendering equations
+        if (window.MathJax?.startup?.promise) {
+            try {
+                await window.MathJax.startup.promise;
+                if (window.MathJax.typesetPromise) {
+                    await window.MathJax.typesetPromise();
+                }
+            } catch (e) {
+                console.warn("MathJax rendering warning:", e);
+            }
+        }
+
+        const element = document.getElementById('pdf-content');
+        const buttons = document.querySelectorAll('.lang-btn, button');
+        
+        // Save original display state
+        const previousDisplays = Array.from(buttons, btn => ({
+            element: btn,
+            display: btn.style.display
+        }));
+
+        // Hide buttons temporarily
+        buttons.forEach(btn => btn.style.display = 'none'); 
+        
+        try {
+            // 🖨️ Use white background for PDF to save ink and improve readability
+            const opt = {
+                margin:       10,
+                filename:     'Jabri_Total_Z_v3.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' }, 
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            await html2pdf().set(opt).from(element).save();
+        } catch (error) {
+            console.error('PDF Error:', error);
+            alert("An error occurred during PDF generation. Please use the print button.");
+        } finally {
+            // Restore display state
+            previousDisplays.forEach(({ element, display }) => {
+                element.style.display = display;
+            });
+        }
+    };
+</script>
+</body>
+</html>
