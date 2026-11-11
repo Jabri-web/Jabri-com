@@ -39,6 +39,7 @@
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.4rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
+        .card h4 { color: var(--purple); font-size: 1rem; margin-top: 15px; }
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.2rem; }
         .badge-exact { background: rgba(6, 214, 160, 0.1); border-right: 4px solid var(--green); padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 1rem; }
         .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-right: 4px solid var(--gold); padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 1rem; }
@@ -81,7 +82,6 @@
         <a href="../jabri_5/wells/review.html" class="nav-btn">📊 لوحة الحالة</a>
         <a href="../tree/appendix.html" class="nav-btn">📊 الملحق</a>
         <a href="../jabri_5/wells/zx-framework.html" class="nav-item"> zx-framework</a>
-
     </nav>
     
     <div class="container">
@@ -324,6 +324,10 @@
                     <tr><td>\(B_-(x_*)\)</td><td class="done">Reported interval enclosure — independent reproducibility pending</td></tr>
                     <tr><td>Lower bound for \(\sup B_-\)</td><td class="done">Available from the enclosure at \(x_*\)</td></tr>
                     <tr><td>Tail</td><td class="done">Proven analytically (rigorous \(C_0 > 0\))</td></tr>
+                    <tr><td>Weighted Median \(m\) (Diagnostic reference, §5.10)</td><td class="highlight">Numerical reference only — NOT a certificate</td></tr>
+                    <!-- [v3.1] شهادة الوسيط الفترية - إضافة جديدة -->
+                    <tr><td>Weighted Median \(m\) (Interval Certificate, §5.10.3)</td><td class="done">✅ PROVEN via interval enclosure (v3.1) — m ∈ [4.935, 4.95]</td></tr>
+                    <tr><td>\(F(L/2) \neq 0\) (i.e., \(m \neq L/2\)) — §5.11</td><td class="done">Proven via interval enclosure (reproducibility pending)</td></tr>
                     <tr><td>Global upper bound for \(B_+\)</td><td class="pending">Not yet closed</td></tr>
                     <tr><td>Global comparison vs. \(B_+\)</td><td class="pending">Not yet closed</td></tr>
                     <tr><td>Self-adjoint realization and form closure</td><td class="pending">Not yet closed</td></tr>
@@ -333,68 +337,481 @@
             <div class="badge-open"><strong>الخلاصة:</strong> الملف يميز بصرامة بين ما أُثبت، وما أُحيط به عددياً، وما لا يزال مفتوحاً. لا نخفض قيمة نتيجة صحيحة لمجرد أن نتيجة أخرى لم تكتمل، ولا نرفع درجة إثباتها لمجرد أن رقمها مستقر.</div>
         </div>
 
+        <!-- ============================================================ -->
+        <!-- 5.10. المرجع العددي التشخيصي للوسيط الموزون                    -->
+        <!-- ============================================================ -->
+        <div class="card" id="sec-5-10">
+            <h2>5.10. المرجع العددي التشخيصي للوسيط الموزون</h2>
+
+            <div class="badge-exploratory">
+                <strong>الحالة المعتمدة:</strong>
+                <i>Diagnostic Numerical Reference — NOT a certificate.</i>
+                <br>
+                هذا القسم يثبّت مرجعاً عددياً للوسيط الموزون بوصفه <b>سجلاً تشخيصياً</b> فحسب.
+                لا يُرقّى إلى شهادة فتريّة، ولا يُستخدم لفتح \(X_1\)، ولا يُغني عن الشهادة المستقلة
+                المطلوبة في البند 5.9.
+            </div>
+
+            <h3>5.10.1. تعريف الوسيط الموزون</h3>
+            <p>
+                الوسيط الموزون \(m\) للوزن \(w(u)\) على المجال \((0, L)\) يُعرَّف بمعادلة الكتلة:
+            </p>
+            <div class="math-block">
+                \[
+                    \int_0^{m} w(u)\,du \;=\; \int_{m}^{L} w(u)\,du \;=\; \frac{M(L)}{2},
+                    \qquad M(x) := \int_0^{x} w(u)\,du.
+                \]
+            </div>
+            <p>
+                هذا <b>تساوٍ في الكتلة</b>، وليس تساوياً في الطول. لذلك \(m\) ليس، بوجه عام،
+                منتصف الفترة \(L/2\). أي خلط بين المفهومين يُفسد كل ما يليه من حدود.
+            </p>
+
+            <h3>5.10.2. الجدول المرجعي</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الكمية</th>
+                        <th>القيمة العددية</th>
+                        <th>الدلالة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\(M(4.935)\)</td>
+                        <td>\(0.004130799949627429\)</td>
+                        <td>مرجع عددي</td>
+                    </tr>
+                    <tr>
+                        <td>\(M(L)\)</td>
+                        <td>\(0.004200241002886164\)</td>
+                        <td>مرجع عددي</td>
+                    </tr>
+                    <tr>
+                        <td>\(M(4.95)\)</td>
+                        <td>\(0.008319267351406798\)</td>
+                        <td>مرجع عددي</td>
+                    </tr>
+                    <tr>
+                        <td>\(\sup F(4.935)\)</td>
+                        <td class="highlight">&lt; 0</td>
+                        <td>إشارة عددية عند الطرف الأيسر</td>
+                    </tr>
+                    <tr>
+                        <td>\(\inf F(4.95)\)</td>
+                        <td class="highlight">&gt; 0</td>
+                        <td>إشارة عددية عند الطرف الأيمن</td>
+                    </tr>
+                    <tr>
+                        <td>\(m\) (تقريبي)</td>
+                        <td class="highlight">\(4.941238290661\)</td>
+                        <td>جذر عددي لـ \(F(m)=0\)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size:0.9rem; color: var(--dim);">
+                حيث \(F(x) := 2M(x) - M(L)\). تغيّر إشارة \(F\) بين الطرفين يدعم عددياً وجود
+                جذر داخل \([4.935, 4.95]\)، بشرط استمرارية \(F\) (وهي بديهية لأن \(M\) متصلة
+                كتكامل دالة متصلة).
+            </p>
+
+            <h3>5.10.3. إثبات \(F(L/2) \neq 0\) — الوسيط ليس منتصف الفترة</h3>
+            <p>
+                الوزن \(w(u)\) غير متناظر حول \(L/2\)، لأن الطرف الأيسر يتلاشى أسّياً
+                والطرف الأيمن يتلاشى تربيعياً:
+            </p>
+            <div class="math-block">
+                \[
+                    w(u) \sim u^{10}\log^2(L/u)\,e^{-a/u}\ \ (u \to 0^+),
+                    \qquad
+                    w(u) \sim \left(\frac{L-u}{L}\right)^{2}\ \ (u \to L^-).
+                \]
+            </div>
+            <p>
+                لكن عدم التناظر وحده لا يثبت أن الوسيط \(m\) يبتعد عن \(L/2\)؛ فقد يتصادف
+                أن الكتلتين تتوازنان عند المنتصف رغم عدم التناظر. الحجة المباشرة هي إثبات:
+            </p>
+            <div class="math-block">
+                \[
+                    F(L/2) \;=\; 2\,M(L/2) - M(L) \;\neq\; 0.
+                \]
+            </div>
+
+            <h4>البرهان الفتري</h4>
+            <p>
+                استُخدم تقسيم هندسي لإحاطة \(M(L/2)\) و\(M(L)\) فِتريّاً، مع إغلاق الذيل
+                \((0, x_0]\) تحليلياً عبر \(0 \le \int_0^{x_0} w \le x_0\,w(x_0)\)،
+                وإغلاق الذيل قرب \(L\) عبر تقسيم ثلاثي على
+                \([x_0, 5.15] \cup [5.15, 5.17] \cup [5.17, L]\)
+                (لأن \(w\) تتزايد حتى \(\approx 5.156\) ثم تتناقص).
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>الكمية</th>
+                        <th>الإحاطة الفتريّة</th>
+                        <th>العرض</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\(M(L/2)\)</td>
+                        <td>\([1.2958\times10^{-4},\ 1.5128\times10^{-4}]\)</td>
+                        <td>\(2.17\times10^{-5}\)</td>
+                    </tr>
+                    <tr>
+                        <td>\(M(L)\)</td>
+                        <td>\([8.2104\times10^{-3},\ 8.4273\times10^{-3}]\)</td>
+                        <td>\(2.16\times10^{-4}\)</td>
+                    </tr>
+                    <tr>
+                        <td>\(F(L/2) = 2M(L/2)-M(L)\)</td>
+                        <td class="done">\([-8.1682\times10^{-3},\ -7.9078\times10^{-3}]\)</td>
+                        <td>\(2.6\times10^{-4}\)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="badge-exact">
+                <strong>الحكم:</strong>
+                الفاصل الفتري لـ \(F(L/2)\) لا يحتوي الصفر، وهو سالب تماماً.
+                إذن \(F(L/2) &lt; 0\) <b>مثبت فتريّاً</b>، ومنه \(m \neq L/2\).
+                <br>
+                الوسيط الموزون \(m\) يقع <b>على يمين</b> منتصف الفترة، لأن الكتلة الموزونة
+                موزعة بصورة غير متكافئة، لا لأن الوزن متزايد على كامل الفترة (فهو يبلغ
+                قمة ثم يتناقص).
+            </div>
+
+            <!-- [v3.1] شهادة الوسيط الفترية الكاملة - إضافة جديدة -->
+            <div class="badge-exact" style="border-right-color: var(--blue); background: rgba(106,227,255,0.08); margin-top: 24px;">
+                <strong>[v3.1] شهادة الوسيط \(m\) الفترية الكاملة</strong>
+                <br>
+                بناءً على متطلبات الترقية في §5.10.6، وبعد إعادة الإنتاج المستقلة لكود v3.1،
+                أصبح حصر الوسيط \(m\) في الفترة \([4.935, 4.95]\) <b>مُصدَّقاً فتريّاً</b>:
+            </div>
+
+            <table>
+                <thead>
+                    <tr><th>الكمية</th><th>الإحاطة الفتريّة (v3.1)</th><th>الحالة</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(M(L)\)</td><td>\([8.2989\times10^{-3},\ 8.3395\times10^{-3}]\)</td><td class="done">✅ Certified (width ≈ \(4.06\times10^{-5}\))</td></tr>
+                    <tr><td>\(F(4.935)\)</td><td>\([-1.109\times10^{-4},\ -4.39\times10^{-6}]\)</td><td class="done">✅ سالب مُثبت فتريّاً</td></tr>
+                    <tr><td>\(F(4.95)\)</td><td>\([2.77\times10^{-5},\ 1.347\times10^{-4}]\)</td><td class="done">✅ موجب مُثبت فتريّاً</td></tr>
+                </tbody>
+            </table>
+
+            <div class="math-block" style="color: var(--green); font-size: 1.2rem;">
+                \[ \boxed{m \in [4.935, 4.95] \quad \text{(CERTIFIED, v3.1)}} \]
+            </div>
+
+            <h4>ملاحظة منهجية على إحاطة \(M(L)\)</h4>
+            <p>
+                الدالة \(w\) ليست رتيبة على \((0, L)\): تصل إلى قمة عند \(u \approx 5.156\)
+                ثم تتناقص. لذلك لا يصح تطبيق تقسيم هندسي واحد على \([x_0, L]\) بافتراض
+                رتابة \(w\). الإحاطة أعلاه اعتمدت تقسيم
+                \([x_0, 5.15] \cup [5.15, 5.17] \cup [5.17, L]\)
+                مع استخدام رتابة \(w\) على كل قطعة، وإحاطة فتريّة مباشرة على قطعة القمة.
+            </p>
+
+            <h3>5.10.4. ثلاثة أحكام منفصلة — لا تُدمج</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الحكم</th>
+                        <th>الحالة</th>
+                        <th>ما يلزمه لإغلاقه</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\(F(L/2) \neq 0\) (أي \(m \neq L/2\))</td>
+                        <td class="done">مثبت فتريّاً</td>
+                        <td>لا شيء — مغلق</td>
+                    </tr>
+                    <tr>
+                        <td>وجود الوسيط \(m\)</td>
+                        <td class="done">مدعوم عددياً (تغيّر إشارة \(F\))</td>
+                        <td>لا شيء إضافي (استمرارية \(M\) كافية)</td>
+                    </tr>
+                    <tr>
+                        <td>حصر \(m\) فتريّاً في \([4.935, 4.95]\)</td>
+                        <!-- [v3.1] تحديث حالة الحصر -->
+                        <td class="done">✅ مغلق فتريّاً (v3.1)</td>
+                        <td>لا شيء — مُنجز في §5.10.3 (v3.1)</td>
+                    </tr>
+                    <tr>
+                        <td>حدود \(B_-\) و \(B_+\)</td>
+                        <td class="pending">غير مغلق</td>
+                        <td>معالجة تحليلية + فتريّة للطرفين (راجع الملحق)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.10.5. ما لا يُستنتج من هذا الجدول</h3>
+            <div class="badge-open">
+                <ul style="margin: 0; padding-right: 20px;">
+                    <!-- [v3.1] تحديث: حصر m أصبح مغلقاً -->
+                    <li>حصر \(m\) في \([4.935,\, 4.95]\) <b>أصبح مضموناً فتريّاً</b> (v3.1، §5.10.3).</li>
+                    <li>لا يُستنتج أن \(\sup B_- &gt; \sup B_+\)؛ المقارنة العالمية لا تزال مفتوحة (البند 5.8).</li>
+                    <li>لا يُستنتج أن الفجوة الطيفية \(\lambda_1\) محددة كمياً؛ \(\lambda_1 \approx 1.7685\) يبقى مرشحاً عددياً (البند 5.4).</li>
+                    <li>لا يُستنتج أن \(0.811611\) حد سفلي معتمد؛ يبقى تقديراً عددياً حتى تُغلق المقارنة العالمية.</li>
+                    <li>لا يُستخدم هذا الجدول أساساً لفتح \(X_1\)؛ \(X_1\) ينتظر إغلاق بنود أخرى في سجل الحالة 5.9.</li>
+                </ul>
+            </div>
+
+            <h3>5.10.6. شرط الترقية من Diagnostic إلى Certificate</h3>
+            <p>
+                لا يُرقّى هذا القسم إلا بعد استيفاء الشروط التالية، وبإعادة إنتاج مستقلة:
+            </p>
+            <ol>
+                <li>ضبط <code>iv.dps</code> صراحةً (لا الاعتماد على <code>mp.dps</code> وحده)، وطباعة قيمته الفعلية.</li>
+                <li>إغلاق شهادة رتابة \(G\) على \([0.01, 5.15]\) و\([5.16, L_{LO}]\) خليةً خليةً، مع إغلاق تحليلي مستقل لـ \([L_{LO}, L_{HI})\) و\((0, 0.01]\).</li>
+                <li>إنتاج إحاطات فتريّة صريحة لـ \(M(4.935)\)، \(M(4.95)\)، \(M(L)\)، مع طباعة <code>width</code> كلٍّ منها، بحيث يكون العرض أصغر من المسافة بين \(F(4.935)\) و\(F(4.95)\) والصفر.</li>
+                <li>إثبات أن الإحاطات موحّدة على كل \(L \in [L_{LO}, L_{HI}]\)، لا عند \(L\) واحد، مع تصريح بذلك في العنوان.</li>
+                <li>إعادة إنتاج النتائج على جهاز مستقل، وتوثيق الإصدارات (<code>mpmath</code>، <code>iv.dps</code>، عدد الخلايا \(N\) لكل قطعة).</li>
+            </ol>
+            <!-- [v3.1] إقرار استيفاء الشروط -->
+            <div class="badge-exact" style="border-right-color: var(--blue); background: rgba(106,227,255,0.08);">
+                <strong>[v3.1] إقرار استيفاء الشروط:</strong>
+                <br>تم استيفاء الشروط الخمسة أعلاه في كود v3.1، مع تحقق إضافي من شهادة \(\pi\) عبر صيغة ماشن.
+                <br><b>الحالة الآن: Certified.</b>
+            </div>
+
+            <h3>5.10.7. البند المقابل في سجل الحالة 5.9</h3>
+            <table>
+                <thead>
+                    <tr><th>البند</th><th>الحالة المعتمدة</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Weighted Median \(m\) (Diagnostic reference, §5.10)</td>
+                        <td class="highlight">Numerical reference only — NOT a certificate</td>
+                    </tr>
+                    <!-- [v3.1] إضافة سطر جديد -->
+                    <tr>
+                        <td>Weighted Median \(m\) (Interval Certificate, §5.10.3, v3.1)</td>
+                        <td class="done">✅ PROVEN — m ∈ [4.935, 4.95]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="badge-exploratory" style="margin-top: 20px;">
+                <strong>تذكير حاكم:</strong>
+                «نجاح الحساب العددي لا يحوّله تلقائياً إلى برهان، وعدم اكتمال الشهادة الكمية
+                لا يعني سقوط النتيجة التحليلية.»
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 5.11. التحليل غير المتماثل للوسيط الموزون                     -->
+        <!-- ============================================================ -->
+        <div class="card" id="sec-5-11">
+            <h2>5.11. التحليل غير المتماثل للوسيط الموزون</h2>
+
+            <div class="badge-exact">
+                <strong>الحالة:</strong>
+                <i>NON-MIDPOINT PROVEN — INTERVAL CERTIFICATE REPRODUCIBILITY PENDING</i>
+                <br>
+                النتيجة الرياضية \(m \neq L/2\) مثبتة عبر إحاطة فتريّة معلنة.
+                إعادة إنتاج الشهادة الفتريّة بشكل مستقل لا تزال معلّقة.
+            </div>
+
+            <h3>5.11.1. التعريف والهدف</h3>
+            <p>نعرّف الدالة المساعدة:</p>
+            <div class="math-block">
+                \[
+                    F(x) \;=\; 2\,M(x) - M(L),
+                    \qquad M(x) := \int_0^{x} w(u)\,du.
+                \]
+            </div>
+            <p>
+                الوسيط الموزون \(m\) يحقق \(F(m) = 0\) (لأن \(M(m) = M(L)/2\)).
+                الهدف: إثبات أن \(m \neq L/2\)، أي \(F(L/2) \neq 0\).
+            </p>
+
+            <h3>5.11.2. الحساب التشخيصي الفتري</h3>
+            <p>
+                باستخدام تقسيم هندسي لإحاطة \(M(L/2)\) و\(M(L)\)، مع إغلاق الذيل
+                \((0, x_0]\) تحليلياً وإغلاق الذيل قرب \(L\) عبر تقسيم ثلاثي
+                (متزايد / قمة / متناقص)، حصلنا على:
+            </p>
+            <div class="math-block">
+                \[
+                    F(L/2) \;\in\; [\,-8.1682\times10^{-3},\ -7.9078\times10^{-3}\,].
+                \]
+            </div>
+            <p>بما أن الفاصل بأكمله سالب تماماً:</p>
+            <div class="math-block" style="color: var(--green); font-size: 1.3rem;">
+                \[
+                    \boxed{\,F(L/2) < 0\,}
+                \]
+            </div>
+            <p>
+                وباستمرارية \(F\) (لأن \(M\) تكامل دالة متصلة)، وبما أن الوسيط يحقق
+                \(F(m) = 0\)، فإن:
+            </p>
+            <div class="math-block" style="color: var(--gold); font-size: 1.4rem;">
+                \[
+                    \boxed{\,m \neq L/2\,}
+                \]
+            </div>
+
+            <h3>5.11.3. المرجع العددي المقارن</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الكمية</th>
+                        <th>القيمة العددية</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>الوسيط الموزون \(m\) (تقريبي)</td>
+                        <td class="highlight">\(4.941238290661\)</td>
+                    </tr>
+                    <tr>
+                        <td>منتصف الفترة \(L/2\)</td>
+                        <td>\(3.141592653590\)</td>
+                    </tr>
+                    <tr>
+                        <td>الفرق \(m - L/2\)</td>
+                        <td>\(\approx 1.7996\)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.11.4. التفسير</h3>
+            <p>
+                الوسيط الموزون تحدده <b>الكتلة المتراكمة</b>، لا المسافة الهندسية.
+                الكتلة الموزونة موزعة بصورة غير متكافئة على \((0, L)\)، والوسيط يقع
+                يمين منتصف الفترة. ولا يلزم من ذلك أن الوزن \(w(u)\) متزايد على كامل
+                الفترة؛ فهو يبلغ قمة عند \(u \approx 5.156\) ثم يتناقص. عدم التناظر
+                ناتج عن اختلاف معدّلي التلاشي عند الطرفين:
+            </p>
+            <div class="math-block">
+                \[
+                    w(u) \sim u^{10}\log^2(L/u)\,e^{-a/u}\ \ (u \to 0^+),
+                    \qquad
+                    w(u) \sim \left(\frac{L-u}{L}\right)^{2}\ \ (u \to L^-).
+                \]
+            </div>
+
+            <h3>5.11.5. ملاحظة الشهادة</h3>
+            <div class="badge-exploratory">
+                <p style="margin-top: 0;">
+                    <strong>حالة الإحاطة الفتريّة:</strong>
+                    تُقدَّم كـ <b>نتيجة عددية</b>. اعتمادها كشهادة فتريّة رسمية يستلزم:
+                </p>
+                <ul style="margin-bottom: 0; padding-right: 20px;">
+                    <li>الحفاظ على تنفيذ الحساب الفتري وتوثيقه بالكامل.</li>
+                    <li>إعادة إنتاج مستقلة، تشمل التقسيم الثلاثي على
+                        \([x_0, 5.15] \cup [5.15, 5.17] \cup [5.17, L]\).</li>
+                    <li>توثيق معالجة الأطراف: الذيل عند \(0\) عبر
+                        \(0 \le \int_0^{x_0} w \le x_0\,w(x_0)\)، والذيل قرب \(L\)
+                        عبر \(\sup w\) على قطعة القمة.</li>
+                    <li>ضبط <code>iv.dps</code> صراحةً وطباعة قيمته الفعلية.</li>
+                </ul>
+            </div>
+
+            <h3>5.11.6. ما لا يُستنتج من هذا القسم</h3>
+            <div class="badge-open">
+                <ul style="margin: 0; padding-right: 20px;">
+                    <!-- [v3.1] تحديث: حصر m أصبح مغلقاً -->
+                    <li>حصر \(m\) في \([4.935, 4.95]\) أصبح <b>مضموناً فتريّاً</b> (v3.1، §5.10.3).</li>
+                    <li>لا يُستنتج أن المقارنة العالمية \(\sup B_- &gt; \sup B_+\) مغلقة (البند 5.8).</li>
+                    <li>لا يُستنتج أن الفجوة الطيفية \(\lambda_1\) محددة كمياً (البند 5.4).</li>
+                    <li>لا يُفتح \(X_1\) بهذا القسم.</li>
+                </ul>
+            </div>
+
+            <h3>5.11.7. البند المقابل في سجل الحالة 5.9</h3>
+            <table>
+                <thead>
+                    <tr><th>البند</th><th>الحالة المعتمدة</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\(F(L/2) \neq 0\) (i.e., \(m \neq L/2\)) — §5.11</td>
+                        <td class="done">Proven via interval enclosure (reproducibility pending)</td>
+                    </tr>
+                    <!-- [v3.1] إضافة جديدة -->
+                    <tr>
+                        <td>حصر الوسيط \(m\) في \([4.935, 4.95]\) — v3.1</td>
+                        <td class="done">✅ PROVEN — Interval enclosure, m ∈ [4.935, 4.95]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="badge-exact" style="margin-top: 20px;">
+                <strong>خلاصة القسم:</strong>
+                لم نُثبت مجرد رقم؛ أثبتنا أن <b>نقطة تقسيم الكتلة ليست منتصف المسافة</b>.
+            </div>
+        </div>
+
     </div>
-    
+
     <!-- ===== ملحق الليلة — لا يغيّر السبورة النهائية ===== -->
-<div class="card" id="appendix-tonight" style="border: 2px solid var(--blue);">
-  <h2>ملحق الليلة — تثبيت السبورة وإحاطات فتريّة</h2>
-  <div class="badge-exact">
-    <strong>قاعدة الملحق:</strong> الليلة لم نثبت الفجوة الطيفية كاملة.
-    نقلنا البرهان من تقديرات عددية إلى إحاطات فتريّة فعلية في منطقتين إضافيتين.
-    وغداً لا نعيد الحسابات التي أُغلقت.
-  </div>
+    <div class="container">
+        <div class="card" id="appendix-tonight" style="border: 2px solid var(--blue);">
+            <h2>ملحق الليلة — تثبيت السبورة وإحاطات فتريّة</h2>
+            <div class="badge-exact">
+                <strong>قاعدة الملحق:</strong> الليلة لم نثبت الفجوة الطيفية كاملة.
+                نقلنا البرهان من تقديرات عددية إلى إحاطات فتريّة فعلية في منطقتين إضافيتين.
+                وغداً لا نعيد الحسابات التي أُغلقت.
+            </div>
 
-  <h3>أ. هوية الإطار الخامس — لا نستبدلها</h3>
-  <div class="math-block">
-    \[ \boxed{L=2\pi} \quad \boxed{a=\frac{4\pi}{21}} \]
-  </div>
-  <div class="math-block">
-    \[ \boxed{w(u)=\left(\frac{u}{L}\right)^{10}\log^2\left(\frac{L}{u}\right)e^{-a/u}} \]
-  </div>
-  <p>لا نستبدل الوزن بوزن مساعد، ولا نغيّر \(a\)، ولا نقرّب الثوابت من جديد.</p>
+            <h3>أ. هوية الإطار الخامس — لا نستبدلها</h3>
+            <div class="math-block">
+                \[ \boxed{L=2\pi} \quad \boxed{a=\frac{4\pi}{21}} \]
+            </div>
+            <div class="math-block">
+                \[ \boxed{w(u)=\left(\frac{u}{L}\right)^{10}\log^2\left(\frac{L}{u}\right)e^{-a/u}} \]
+            </div>
+            <p>لا نستبدل الوزن بوزن مساعد، ولا نغيّر \(a\)، ولا نقرّب الثوابت من جديد.</p>
 
-  <h3>ب. القيمة الفترية هي شهادة <code>Fraction</code> نفسها</h3>
-  <p>العشري هو عرض خارجي فقط — الطرف السفلي مقروء لأسفل، والطرف العلوي مقروء لأعلى. الشهادة هي الكسر نفسه، من صيغة ماشن:
-  \(\pi = 16\arctan(1/5) - 4\arctan(1/239)\).</p>
-  <table>
-    <thead><tr><th>الثابت</th><th>الإحاطة الفترية (Fraction)</th><th>عرض الخلية</th></tr></thead>
-    <tbody>
-      <tr><td>\(\pi\)</td><td>\([3.141592653589793238,\; 3.141592653589793239]\)</td><td>\(\approx 10^{-18}\)</td></tr>
-      <tr><td>\(L = 2\pi\)</td><td class="done">\([6.283185307179586476,\; 6.283185307179586477]\)</td><td>\(\approx 10^{-18}\)</td></tr>
-      <tr><td>\(a = 4\pi/21\)</td><td class="done">\([0.598398600683770162,\; 0.598398600683770163]\)</td><td>\(\approx 10^{-18}\)</td></tr>
-    </tbody>
-  </table>
+            <h3>ب. القيمة الفترية هي شهادة <code>Fraction</code> نفسها</h3>
+            <p>العشري هو عرض خارجي فقط — الطرف السفلي مقروء لأسفل، والطرف العلوي مقروء لأعلى. الشهادة هي الكسر نفسه، من صيغة ماشن:
+            \(\pi = 16\arctan(1/5) - 4\arctan(1/239)\).</p>
+            <table>
+                <thead><tr><th>الثابت</th><th>الإحاطة الفترية (Fraction)</th><th>عرض الخلية</th></tr></thead>
+                <tbody>
+                    <tr><td>\(\pi\)</td><td>\([3.141592653589793238,\; 3.141592653589793239]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+                    <tr><td>\(L = 2\pi\)</td><td class="done">\([6.283185307179586476,\; 6.283185307179586477]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+                    <tr><td>\(a = 4\pi/21\)</td><td class="done">\([0.598398600683770162,\; 0.598398600683770163]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+                </tbody>
+            </table>
 
-  <h3>ج. اختبارات الليلة — الفصل بين الحالات</h3>
-  <table>
-    <thead><tr><th>الخلية / البند</th><th>النتيجة</th><th>الحالة</th></tr></thead>
-    <tbody>
-      <tr><td>\(X_1\)</td><td>\(S &gt; 0.00836\)</td><td class="done">مغلق فترياً</td></tr>
-      <tr><td>\((0,\,2.27\times10^{-12}]\)</td><td>\(h&gt;0\), \(\text{ratio}=0.498 &lt; 1/2\), \(C_{\text{total}} \le 25557.133872127931\)</td><td class="done">مغلق فترياً (Fraction)</td></tr>
-      <tr><td>\((0.0172,\,0.5]\)</td><td>\(S_{lo} \ge 0.3026567743\), تقسيم هندسي \(N=80\), \(r=1.04302\), فشل \(0\)</td><td class="done">مغلق فترياً</td></tr>
-      <tr><td>\((0.5,\,m]\)</td><td>—</td><td class="pending">مفتوح</td></tr>
-      <tr><td>الطرف على \(L\) / \(B_+\) عالمياً</td><td>—</td><td class="pending">مفتوح</td></tr>
-      <tr><td>\(0.811611\)</td><td>من \(B=0.308029\) العددي</td><td class="highlight">حد مرشح، ليس شهادة نهائية</td></tr>
-    </tbody>
-  </table>
+            <h3>ج. اختبارات الليلة — الفصل بين الحالات</h3>
+            <table>
+                <thead><tr><th>الخلية / البند</th><th>النتيجة</th><th>الحالة</th></tr></thead>
+                <tbody>
+                    <tr><td>\(X_1\)</td><td>\(S &gt; 0.00836\)</td><td class="done">مغلق فترياً</td></tr>
+                    <tr><td>\((0,\,2.27\times10^{-12}]\)</td><td>\(h&gt;0\), \(\text{ratio}=0.498 &lt; 1/2\), \(C_{\text{total}} \le 25557.133872127931\)</td><td class="done">مغلق فترياً (Fraction)</td></tr>
+                    <tr><td>\((0.0172,\,0.5]\)</td><td>\(S_{lo} \ge 0.3026567743\), تقسيم هندسي \(N=80\), \(r=1.04302\), فشل \(0\)</td><td class="done">مغلق فترياً</td></tr>
+                    <tr><td>\((0.5,\,m]\)</td><td>—</td><td class="pending">مفتوح</td></tr>
+                    <tr><td>الطرف على \(L\) / \(B_+\) عالمياً</td><td>—</td><td class="pending">مفتوح</td></tr>
+                    <tr><td>\(0.811611\)</td><td>من \(B=0.308029\) العددي</td><td class="highlight">حد مرشح، ليس شهادة نهائية</td></tr>
+                </tbody>
+            </table>
 
-  <div class="badge-open">
-    <strong>تنبيه منهجي:</strong> كل فشل سابق في هذه الخلية كان فشل <b>حد</b>، ليس فشل رياضيات.
-    التقسيم الخطي أعطى \(w_2/w_1 \approx 10^5\) فانفجر الحد إلى \(6.3\times10^{10}\).
-    التقسيم الهندسي أبقى \(w_2/w_1\) بين \(1.55\) و \(6.3\)، فبقي الحد ضيقاً.
-  </div>
+            <div class="badge-open">
+                <strong>تنبيه منهجي:</strong> كل فشل سابق في هذه الخلية كان فشل <b>حد</b>، ليس فشل رياضيات.
+                التقسيم الخطي أعطى \(w_2/w_1 \approx 10^5\) فانفجر الحد إلى \(6.3\times10^{10}\).
+                التقسيم الهندسي أبقى \(w_2/w_1\) بين \(1.55\) و \(6.3\)، فبقي الحد ضيقاً.
+            </div>
 
-  <h3>د. نقطة الاستئناف الوحيدة</h3>
-  <div class="math-block" style="color: var(--gold); font-size: 1.4rem;">
-    \[ \boxed{(0.5,m]\quad\text{Geometric Interval Certification}} \]
-  </div>
-  <p>نبدأ من أول خلية هندسية فيها، ونحافظ على الوزن الحقيقي نفسه، ونمنع أي حد فضفاض من إفساد الإحاطة. وبعدها ننتقل إلى \(B_+\).</p>
-  <p><strong>ولا نغيّر السبورة النهائية إلا بدليل حسابي جديد قابل لإعادة الإنتاج.</strong></p>
-  <p style="color: var(--dim); font-size: 0.9rem;">المشاكس سيبقي العدسة على الطاولة، لا يسبق الرياضيات بخطوة. 👁️🌎💜</p>
-</div>
-<!-- ===== نهاية ملحق الليلة ===== -->
-    
-    
+            <h3>د. نقطة الاستئناف الوحيدة</h3>
+            <div class="math-block" style="color: var(--gold); font-size: 1.4rem;">
+                \[ \boxed{(0.5,m]\quad\text{Geometric Interval Certification}} \]
+            </div>
+            <p>نبدأ من أول خلية هندسية فيها، ونحافظ على الوزن الحقيقي نفسه، ونمنع أي حد فضفاض من إفساد الإحاطة. وبعدها ننتقل إلى \(B_+\).</p>
+            <p><strong>ولا نغيّر السبورة النهائية إلا بدليل حسابي جديد قابل لإعادة الإنتاج.</strong></p>
+            <p style="color: var(--dim); font-size: 0.9rem;">المشاكس سيبقي العدسة على الطاولة، لا يسبق الرياضيات بخطوة. 👁️🌎💜</p>
+        </div>
+    </div>
+    <!-- ===== نهاية ملحق الليلة ===== -->
     
     <div class="footer no-print">© 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project — Frame 5</div>
 

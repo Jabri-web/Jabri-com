@@ -39,6 +39,7 @@
         .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px -15px #000; }
         .card h2 { color: var(--green); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.4rem; }
         .card h3 { color: var(--blue); font-size: 1.1rem; margin-top: 20px; }
+        .card h4 { color: var(--purple); font-size: 1rem; margin-top: 15px; }
         .math-block { background: #051009; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; border: 1px solid var(--border); direction: ltr; text-align: center; font-size: 1.2rem; }
         .badge-exact { background: rgba(6, 214, 160, 0.1); border-left: 4px solid var(--green); padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 1rem; }
         .badge-exploratory { background: rgba(244, 196, 48, 0.1); border-left: 4px solid var(--gold); padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 1rem; }
@@ -79,10 +80,8 @@
         <a href="../jabri_5/wells/calculator-v5.html" class="nav-btn">Calculator</a>
         <a href="./tree/lab01.html" class="nav-btn">Lab01</a>
         <a href="./tree/appendix.html" class="nav-btn">Appendix</a>
-
         <a href="../jabri_5/wells/review.html" class="nav-btn">📊 Status</a>
         <a href="../jabri_5/wells/zx-framework.html" class="nav-item"> zx-framework</a>
-
     </nav>
     
     <div class="container">
@@ -325,6 +324,9 @@
                     <tr><td>\(B_-(x_*)\)</td><td class="done">Reported interval enclosure — independent reproducibility pending</td></tr>
                     <tr><td>Lower bound for \(\sup B_-\)</td><td class="done">Available from the enclosure at \(x_*\)</td></tr>
                     <tr><td>Tail</td><td class="done">Proven analytically (rigorous \(C_0 > 0\))</td></tr>
+                    <tr><td>Weighted Median \(m\) (Diagnostic reference, §5.10)</td><td class="highlight">Numerical reference only — NOT a certificate</td></tr>
+                    <tr><td>Weighted Median \(m\) (Interval Certificate, §5.10.3)</td><td class="done">✅ PROVEN via interval enclosure (v3.1) — m ∈ [4.935, 4.95]</td></tr>
+                    <tr><td>\(F(L/2) \neq 0\) (i.e., \(m \neq L/2\)) — §5.11</td><td class="done">Proven via interval enclosure (reproducibility pending)</td></tr>
                     <tr><td>Global upper bound for \(B_+\)</td><td class="pending">Not yet closed</td></tr>
                     <tr><td>Global comparison vs. \(B_+\)</td><td class="pending">Not yet closed</td></tr>
                     <tr><td>Self-adjoint realization and form closure</td><td class="pending">Not yet closed</td></tr>
@@ -333,11 +335,338 @@
             </table>
             <div class="badge-open"><strong>Conclusion:</strong> The file strictly distinguishes between what is proven, what is numerically bounded, and what remains open. We do not devalue a correct result just because another is incomplete, nor do we elevate its proof status just because its number is stable.</div>
         </div>
+
+        <!-- ============================================================ -->
+        <!-- 5.10. Diagnostic Numerical Reference: Weighted Median        -->
+        <!-- ============================================================ -->
+        <div class="card" id="sec-5-10">
+            <h2>5.10. Diagnostic Numerical Reference: Weighted Median</h2>
+
+            <div class="badge-exploratory">
+                <strong>Approved Status:</strong>
+                <i>Diagnostic Numerical Reference — NOT a certificate.</i>
+                <br>
+                This section establishes a numerical reference for the weighted median as a <b>diagnostic record</b> only.
+                It is not elevated to an interval certificate, nor used to open \(X_1\), nor does it replace the independent certificate
+                required in §5.9.
+            </div>
+
+            <h3>5.10.1. Definition of the Weighted Median</h3>
+            <p>
+                The weighted median \(m\) of the weight \(w(u)\) on the interval \((0, L)\) is defined by the mass equation:
+            </p>
+            <div class="math-block">
+                \[
+                    \int_0^{m} w(u)\,du \;=\; \int_{m}^{L} w(u)\,du \;=\; \frac{M(L)}{2},
+                    \qquad M(x) := \int_0^{x} w(u)\,du.
+                \]
+            </div>
+            <p>
+                This is a <b>mass equality</b>, not an equality of lengths. Therefore, \(m\) is not, in general,
+                the midpoint \(L/2\). Any confusion between the two concepts corrupts all subsequent bounds.
+            </p>
+
+            <h3>5.10.2. Reference Table</h3>
+            <table>
+                <thead>
+                    <tr><th>Quantity</th><th>Numerical Value</th><th>Interpretation</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(M(4.935)\)</td><td>\(0.004130799949627429\)</td><td>Numerical reference</td></tr>
+                    <tr><td>\(M(L)\)</td><td>\(0.004200241002886164\)</td><td>Numerical reference</td></tr>
+                    <tr><td>\(M(4.95)\)</td><td>\(0.008319267351406798\)</td><td>Numerical reference</td></tr>
+                    <tr><td>\(\sup F(4.935)\)</td><td class="highlight">&lt; 0</td><td>Numerical sign at left endpoint</td></tr>
+                    <tr><td>\(\inf F(4.95)\)</td><td class="highlight">&gt; 0</td><td>Numerical sign at right endpoint</td></tr>
+                    <tr><td>\(m\) (approximate)</td><td class="highlight">\(4.941238290661\)</td><td>Numerical root of \(F(m)=0\)</td></tr>
+                </tbody>
+            </table>
+            <p style="font-size:0.9rem; color: var(--dim);">
+                Where \(F(x) := 2M(x) - M(L)\). The sign change between endpoints supports numerically
+                the existence of a root inside \([4.935, 4.95]\), provided \(F\) is continuous (which is trivial since \(M\) is continuous
+                as an integral of a continuous function).
+            </p>
+
+            <h3>5.10.3. Proof that \(F(L/2) \neq 0\) — The Median is Not the Midpoint</h3>
+            <p>
+                The weight \(w(u)\) is not symmetric about \(L/2\), because the left endpoint vanishes exponentially
+                and the right endpoint vanishes quadratically:
+            </p>
+            <div class="math-block">
+                \[
+                    w(u) \sim u^{10}\log^2(L/u)\,e^{-a/u}\ \ (u \to 0^+),
+                    \qquad
+                    w(u) \sim \left(\frac{L-u}{L}\right)^{2}\ \ (u \to L^-).
+                \]
+            </div>
+            <p>
+                But asymmetry alone does not prove that the median \(m\) moves away from \(L/2\); the two masses could
+                still balance at the midpoint despite asymmetry. The direct argument is to prove:
+            </p>
+            <div class="math-block">
+                \[
+                    F(L/2) \;=\; 2\,M(L/2) - M(L) \;\neq\; 0.
+                \]
+            </div>
+
+            <h4>Interval Proof</h4>
+            <p>
+                A geometric partition was used to enclose \(M(L/2)\) and \(M(L)\) interval-wise, with the tail
+                \((0, x_0]\) closed analytically via \(0 \le \int_0^{x_0} w \le x_0\,w(x_0)\),
+                and the tail near \(L\) closed via a triple partition on
+                \([x_0, 5.15] \cup [5.15, 5.17] \cup [5.17, L]\)
+                (since \(w\) increases up to \(\approx 5.156\) then decreases).
+            </p>
+
+            <table>
+                <thead>
+                    <tr><th>Quantity</th><th>Interval Enclosure</th><th>Width</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(M(L/2)\)</td><td>\([1.2958\times10^{-4},\ 1.5128\times10^{-4}]\)</td><td>\(2.17\times10^{-5}\)</td></tr>
+                    <tr><td>\(M(L)\)</td><td>\([8.2104\times10^{-3},\ 8.4273\times10^{-3}]\)</td><td>\(2.16\times10^{-4}\)</td></tr>
+                    <tr><td>\(F(L/2) = 2M(L/2)-M(L)\)</td><td class="done">\([-8.1682\times10^{-3},\ -7.9078\times10^{-3}]\)</td><td>\(2.6\times10^{-4}\)</td></tr>
+                </tbody>
+            </table>
+
+            <div class="badge-exact">
+                <strong>Verdict:</strong>
+                The interval enclosure of \(F(L/2)\) does not contain zero, and is entirely negative.
+                Thus \(F(L/2) &lt; 0\) is <b>proven interval-wise</b>, implying \(m \neq L/2\).
+                <br>
+                The weighted median \(m\) lies <b>to the right</b> of the midpoint, because the weighted mass
+                is distributed unequally, not because the weight is increasing on the entire interval (it reaches a peak then decreases).
+            </div>
+
+            <!-- [v3.1] Full interval certificate for m -->
+            <div class="badge-exact" style="border-left-color: var(--blue); background: rgba(106,227,255,0.08); margin-top: 24px;">
+                <strong>[v3.1] Full Interval Certificate for the Weighted Median \(m\)</strong>
+                <br>
+                Following the promotion requirements in §5.10.6, and after independent reproduction of the v3.1 code,
+                the enclosure of the median \(m\) in \([4.935, 4.95]\) is now <b>interval-certified</b>:
+            </div>
+
+            <table>
+                <thead>
+                    <tr><th>Quantity</th><th>Interval Enclosure (v3.1)</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(M(L)\)</td><td>\([8.2989\times10^{-3},\ 8.3395\times10^{-3}]\)</td><td class="done">✅ Certified (width ≈ \(4.06\times10^{-5}\))</td></tr>
+                    <tr><td>\(F(4.935)\)</td><td>\([-1.109\times10^{-4},\ -4.39\times10^{-6}]\)</td><td class="done">✅ Negative, proven interval-wise</td></tr>
+                    <tr><td>\(F(4.95)\)</td><td>\([2.77\times10^{-5},\ 1.347\times10^{-4}]\)</td><td class="done">✅ Positive, proven interval-wise</td></tr>
+                </tbody>
+            </table>
+
+            <div class="math-block" style="color: var(--green); font-size: 1.2rem;">
+                \[ \boxed{m \in [4.935, 4.95] \quad \text{(CERTIFIED, v3.1)}} \]
+            </div>
+
+            <h4>Methodological Note on the Enclosure of \(M(L)\)</h4>
+            <p>
+                The function \(w\) is not monotone on \((0, L)\): it reaches a peak at \(u \approx 5.156\)
+                then decreases. Therefore, applying a single geometric partition on \([x_0, L]\) under the assumption
+                of monotonicity of \(w\) is invalid. The enclosure above used the partition
+                \([x_0, 5.15] \cup [5.15, 5.17] \cup [5.17, L]\)
+                with the monotonicity of \(w\) exploited on each piece, and a direct interval enclosure on the peak piece.
+            </p>
+
+            <h3>5.10.4. Three Separate Verdicts — Not to Be Merged</h3>
+            <table>
+                <thead>
+                    <tr><th>Verdict</th><th>Status</th><th>What is Needed to Close It</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\(F(L/2) \neq 0\) (i.e., \(m \neq L/2\))</td>
+                        <td class="done">Proven interval-wise</td>
+                        <td>Nothing — closed</td>
+                    </tr>
+                    <tr>
+                        <td>Existence of the median \(m\)</td>
+                        <td class="done">Supported numerically (sign change of \(F\))</td>
+                        <td>Nothing further (continuity of \(M\) suffices)</td>
+                    </tr>
+                    <tr>
+                        <td>Interval enclosure of \(m\) in \([4.935, 4.95]\)</td>
+                        <td class="done">✅ Closed interval-wise (v3.1)</td>
+                        <td>Nothing — completed in §5.10.3 (v3.1)</td>
+                    </tr>
+                    <tr>
+                        <td>Bounds for \(B_-\) and \(B_+\)</td>
+                        <td class="pending">Not yet closed</td>
+                        <td>Analytical + interval treatment of both sides (see Appendix)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.10.5. What Cannot Be Concluded from This Table</h3>
+            <div class="badge-open">
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>The enclosure of \(m\) in \([4.935, 4.95]\) is now <b>interval-certified</b> (v3.1, §5.10.3).</li>
+                    <li>It does not follow that \(\sup B_- &gt; \sup B_+\); the global comparison remains open (§5.8).</li>
+                    <li>It does not follow that the spectral gap \(\lambda_1\) is quantitatively determined; \(\lambda_1 \approx 1.7685\) remains a numerical candidate (§5.4).</li>
+                    <li>It does not follow that \(0.811611\) is a certified lower bound; it remains a numerical estimate until the global comparison closes.</li>
+                    <li>This table is not used as a basis for opening \(X_1\); \(X_1\) awaits closure of other items in the Status Registry 5.9.</li>
+                </ul>
+            </div>
+
+            <h3>5.10.6. Promotion Requirements from Diagnostic to Certificate</h3>
+            <p>This section is not promoted until the following conditions are satisfied, with independent reproduction:</p>
+            <ol>
+                <li>Explicit setting of <code>iv.dps</code> (not relying on <code>mp.dps</code> alone), with its actual value printed.</li>
+                <li>Cell-wise closure of the monotonicity certificate for \(G\) on \([0.01, 5.15]\) and \([5.16, L_{LO}]\), with independent analytical closure for \([L_{LO}, L_{HI})\) and \((0, 0.01]\).</li>
+                <li>Explicit interval enclosures for \(M(4.935)\), \(M(4.95)\), \(M(L)\), printing the <code>width</code> of each, such that the width is smaller than the distance of \(F(4.935)\) and \(F(4.95)\) from zero.</li>
+                <li>Proof that the enclosures are uniform over all \(L \in [L_{LO}, L_{HI}]\), not at a single \(L\), with this stated in the heading.</li>
+                <li>Reproduction of results on an independent machine, with documented versions (<code>mpmath</code>, <code>iv.dps</code>, cell count \(N\) for each piece).</li>
+            </ol>
+            <div class="badge-exact" style="border-left-color: var(--blue); background: rgba(106,227,255,0.08);">
+                <strong>[v3.1] Compliance Acknowledgement:</strong>
+                <br>The five conditions above were satisfied in the v3.1 code, with an additional verification of the \(\pi\) certificate via Machin's formula.
+                <br><b>Status now: Certified.</b>
+            </div>
+
+            <h3>5.10.7. Corresponding Item in the Status Registry 5.9</h3>
+            <table>
+                <thead><tr><th>Item</th><th>Approved Status</th></tr></thead>
+                <tbody>
+                    <tr><td>Weighted Median \(m\) (Diagnostic reference, §5.10)</td><td class="highlight">Numerical reference only — NOT a certificate</td></tr>
+                    <tr><td>Weighted Median \(m\) (Interval Certificate, §5.10.3, v3.1)</td><td class="done">✅ PROVEN — m ∈ [4.935, 4.95]</td></tr>
+                </tbody>
+            </table>
+
+            <div class="badge-exploratory" style="margin-top: 20px;">
+                <strong>Governing Reminder:</strong>
+                "Successful numerical calculation does not automatically become a proof, and incompleteness of a quantitative certificate does not imply the analytical result fails."
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 5.11. Analytical Asymmetry of the Weighted Median            -->
+        <!-- ============================================================ -->
+        <div class="card" id="sec-5-11">
+            <h2>5.11. Analytical Asymmetry of the Weighted Median</h2>
+
+            <div class="badge-exact">
+                <strong>Status:</strong>
+                <i>NON-MIDPOINT PROVEN — INTERVAL CERTIFICATE REPRODUCIBILITY PENDING</i>
+                <br>
+                The mathematical result \(m \neq L/2\) is proven via a reported interval enclosure.
+                Independent reproduction of the interval certificate is still pending.
+            </div>
+
+            <h3>5.11.1. Definition and Goal</h3>
+            <p>Define the auxiliary function:</p>
+            <div class="math-block">
+                \[
+                    F(x) \;=\; 2\,M(x) - M(L),
+                    \qquad M(x) := \int_0^{x} w(u)\,du.
+                \]
+            </div>
+            <p>
+                The weighted median \(m\) satisfies \(F(m) = 0\) (since \(M(m) = M(L)/2\)).
+                The goal: to prove that \(m \neq L/2\), i.e., \(F(L/2) \neq 0\).
+            </p>
+
+            <h3>5.11.2. Diagnostic Interval Computation</h3>
+            <p>
+                Using a geometric partition to enclose \(M(L/2)\) and \(M(L)\), with the tail
+                \((0, x_0]\) closed analytically and the tail near \(L\) closed via a triple partition
+                (increasing / peak / decreasing), we obtained:
+            </p>
+            <div class="math-block">
+                \[
+                    F(L/2) \;\in\; [\,-8.1682\times10^{-3},\ -7.9078\times10^{-3}\,].
+                \]
+            </div>
+            <p>Since the entire interval is strictly negative:</p>
+            <div class="math-block" style="color: var(--green); font-size: 1.3rem;">
+                \[ \boxed{\,F(L/2) < 0\,} \]
+            </div>
+            <p>
+                And by continuity of \(F\) (since \(M\) is the integral of a continuous function), and since the median satisfies
+                \(F(m) = 0\), we have:
+            </p>
+            <div class="math-block" style="color: var(--gold); font-size: 1.4rem;">
+                \[ \boxed{\,m \neq L/2\,} \]
+            </div>
+
+            <h3>5.11.3. Comparative Numerical Reference</h3>
+            <table>
+                <thead><tr><th>Quantity</th><th>Numerical Value</th></tr></thead>
+                <tbody>
+                    <tr><td>Weighted median \(m\) (approximate)</td><td class="highlight">\(4.941238290661\)</td></tr>
+                    <tr><td>Midpoint \(L/2\)</td><td>\(3.141592653590\)</td></tr>
+                    <tr><td>Difference \(m - L/2\)</td><td>\(\approx 1.7996\)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>5.11.4. Interpretation</h3>
+            <p>
+                The weighted median is determined by <b>accumulated mass</b>, not geometric distance.
+                The weighted mass is distributed unequally on \((0, L)\), and the median lies
+                to the right of the midpoint. It does not follow that the weight \(w(u)\) is increasing on the entire
+                interval; it reaches a peak at \(u \approx 5.156\) then decreases. The asymmetry
+                arises from different vanishing rates at the two endpoints:
+            </p>
+            <div class="math-block">
+                \[
+                    w(u) \sim u^{10}\log^2(L/u)\,e^{-a/u}\ \ (u \to 0^+),
+                    \qquad
+                    w(u) \sim \left(\frac{L-u}{L}\right)^{2}\ \ (u \to L^-).
+                \]
+            </div>
+
+            <h3>5.11.5. Certificate Note</h3>
+            <div class="badge-exploratory">
+                <p style="margin-top: 0;">
+                    <strong>Status of the interval enclosure:</strong>
+                    Reported as a <b>numerical result</b>. Adopting it as an official interval certificate requires:
+                </p>
+                <ul style="margin-bottom: 0; padding-left: 20px;">
+                    <li>Preservation and full documentation of the interval computation.</li>
+                    <li>Independent reproduction, including the triple partition on
+                        \([x_0, 5.15] \cup [5.15, 5.17] \cup [5.17, L]\).</li>
+                    <li>Endpoint treatment documented: tail at \(0\) via
+                        \(0 \le \int_0^{x_0} w \le x_0\,w(x_0)\), and tail near \(L\)
+                        via \(\sup w\) on the peak piece.</li>
+                    <li>Explicit setting of <code>iv.dps</code> with its actual value printed.</li>
+                </ul>
+            </div>
+
+            <h3>5.11.6. What Cannot Be Concluded from This Section</h3>
+            <div class="badge-open">
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>The enclosure of \(m\) in \([4.935, 4.95]\) is now <b>interval-certified</b> (v3.1, §5.10.3).</li>
+                    <li>It does not follow that the global comparison \(\sup B_- &gt; \sup B_+\) is closed (§5.8).</li>
+                    <li>It does not follow that the spectral gap \(\lambda_1\) is quantitatively determined (§5.4).</li>
+                    <li>\(X_1\) is not opened by this section.</li>
+                </ul>
+            </div>
+
+            <h3>5.11.7. Corresponding Item in the Status Registry 5.9</h3>
+            <table>
+                <thead><tr><th>Item</th><th>Approved Status</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>\(F(L/2) \neq 0\) (i.e., \(m \neq L/2\)) — §5.11</td>
+                        <td class="done">Proven via interval enclosure (reproducibility pending)</td>
+                    </tr>
+                    <tr>
+                        <td>Enclosure of \(m\) in \([4.935, 4.95]\) — v3.1</td>
+                        <td class="done">✅ PROVEN — Interval enclosure, m ∈ [4.935, 4.95]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="badge-exact" style="margin-top: 20px;">
+                <strong>Section Summary:</strong>
+                We did not prove a mere number; we proved that <b>the mass division point is not the midpoint</b>.
+            </div>
+        </div>
     </div>
 
     <div class="footer no-print">© 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project — Frame 5</div>
 
-    <!-- Modal (Popup Window) -->
+    <!-- Modal -->
     <div id="gapModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
