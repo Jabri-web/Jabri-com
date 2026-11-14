@@ -246,5 +246,51 @@ function calcAlpha(){
   document.getElementById('outAlpha').textContent = 'θ = '+deg+'°\n tan θ = '+t.toFixed(6)+'\n α*(θ) = tan/(tan+2) = '+a.toFixed(6)+'\n\nالقيم المرجعية: 22.5°→0.1716 ، 45°→0.3333 ، 54.7356°→0.4142';
 }
 </script>
+
+
+<!-- ===== زر الصور الثلاث + ملف الكود ===== -->
+<div class="card">
+  <h2>🖼️ صور المنحنى + ملف الكود</h2>
+
+  <!-- زر الصور -->
+  <button class="btn" onclick="toggleImages()">🖼️ إظهار / إخفاء الصور</button>
+
+  <div id="imgBox" style="display:none; margin-top:14px;">
+    <img src="/tree/sqr-2.png" style="width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:12px;" alt="sqr-2">
+    <img src="/tree/sqr-2-2.png" style="width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:12px;" alt="sqr-2-2">
+    <img src="/tree/lab01.png" style="width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:12px;" alt="lab01">
+    <img src="/tree/3-point.png" style="width:100%; border:1px solid var(--border); border-radius:10px;" alt="3-point">
+  </div>
+
+  <br><br>
+
+  <!-- زر ملف الكود -->
+  <button class="btn btn2" onclick="toggleCode()">📄 إظهار / إخفاء ملف الكود</button>
+
+  <div id="codeBox" style="display:none; margin-top:14px;">
+    <p>ملف النوت بوك:</p>
+    <a href="/tree/appendix-clarifier-v1.2.ipynb" download style="color:var(--gold); font-weight:700;">
+      ⬇️ تحميل appendix-clarifier-v1.2.ipynb
+    </a>
+    <br><br>
+    <!-- إذا بدك يظهر داخل الصفحة كـ iframe -->
+    <iframe src="/tree/appendix-clarifier-v1.2.ipynb" style="width:100%; height:500px; background:#08140d; border:1px solid var(--border); border-radius:10px;"></iframe>
+  </div>
+</div>
+
+<script>
+function toggleImages(){
+  const b = document.getElementById('imgBox');
+  b.style.display = (b.style.display === 'none') ? 'block' : 'none';
+}
+function toggleCode(){
+  const b = document.getElementById('codeBox');
+  b.style.display = (b.style.display === 'none') ? 'block' : 'none';
+}
+</script>
+
+
+
+
 </body>
 </html>
