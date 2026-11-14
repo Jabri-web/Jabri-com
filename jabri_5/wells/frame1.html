@@ -148,16 +148,16 @@
     <a href="frame1-en.html" class="lang-btn">🌐 English</a>
 
     <nav class="top-nav">
-        <a href="../index.html" class="nav-item">🏠 الرئيسية</a>
-        <a href="../jabri_5/wells/frame1.html" class="nav-item active">1. الإطار الرياضي</a>
-        <a href="../jabri_5/wells/bridge.html" class="nav-item">الجسر (Bridge)</a>
-        <a href="../tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
-        <a href="../jabri_5/wells/frame3.html" class="nav-item">3. البنية الدقيقة</a>
-        <a href="../jabri_5/wells/frame4.html" class="nav-item">4. المسألة الطيفية</a>
-        <a href="../tree/frame5.html" class="nav-item">5. الفجوة الطيفية</a>
-        <a href="../jabri_5/wells/review.html" class="nav-item">اللوحة</a>
-        <a href="../jabri_5/wells/calculator-v5.html" class="nav-item"> الحاسبة الشاملة</a>
-        <a href="../jabri_5/wells/zx-framework.html" class="nav-item"> zx-framework</a>
+        <a href="/index.html" class="nav-item">🏠 الرئيسية</a>
+        <a href="/jabri_5/wells/frame1.html" class="nav-item active">1. الإطار الرياضي</a>
+        <a href="/jabri_5/wells/bridge.html" class="nav-item">الجسر (Bridge)</a>
+        <a href="/tree/frame2.html" class="nav-item">2. الإطار التطبيقي</a>
+        <a href="/jabri_5/wells/frame3.html" class="nav-item">3. البنية الدقيقة</a>
+        <a href="/jabri_5/wells/frame4.html" class="nav-item">4. المسألة الطيفية</a>
+        <a href="/tree/frame5.html" class="nav-item">5. الفجوة الطيفية</a>
+        <a href="/jabri_5/wells/review.html" class="nav-item">اللوحة</a>
+        <a href="/jabri_5/wells/calculator-v5.html" class="nav-item"> الحاسبة الشاملة</a>
+        <a href="/jabri_5/wells/zx-framework.html" class="nav-item"> zx-framework</a>
 
     </nav>
 
@@ -727,6 +727,13 @@ for t in [1e2, 1e3, 1e4, 1e5]:
                 toggles.forEach((t, i) => { t.style.display = toggleStates[i]; });
             });
         };
-        </script> <
-        /body> <
-        /html>
+        </script> 
+        
+    <!-- في كل صفحة HTML -->
+    
+    <div id="header-placeholder"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/js/init-page-root.js" defer></script>
+    
+    </body>
+    </html>
