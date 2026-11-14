@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frame 5 — v3.3 Checklist | واحة الجبري</title>
+<style>
+body{margin:0;background:#0a1410;color:#e8f5e9;font-family:'Segoe UI',Tahoma,sans-serif;line-height:1.9;padding:16px}
+.wrap{max-width:920px;margin:auto}
+h1{color:#f4c430;font-size:1.4rem;text-align:center}
+.card{background:#0a1a12;border:1px solid #1f3a2b;border-radius:14px;padding:18px;margin:14px 0}
+h2{color:#f4c430;font-size:1.05rem;margin:0 0 10px}
+label{display:block;padding:8px 10px;border-bottom:1px solid #1f3a2b;cursor:pointer}
+label:last-child{border-bottom:none}
+input{margin-left:10px;transform:scale(1.25)}
+.note{border-right:3px solid #e57373;background:#2a1212;padding:10px 14px;border-radius:8px;font-size:.9rem}
+.ok{border-right-color:#7fb08a;background:#122a1a}
+code{background:#132a1d;color:#f4c430;padding:2px 6px;border-radius:4px;direction:ltr}
+.small{color:#8aa892;font-size:.88rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>✅ Frame 5 — قائمة تحقق الدمج v3.3</h1>
+<p class="small" style="text-align:center">سطر واحد لكل تعديل. علّم بعد النسخ الموضعي في نسختك الأصلية فقط. هذه القائمة ليست دمجاً — الدمج يتم يدوياً في <code>frame5-en.html</code> عندك.</p>
+
+<div class="card">
+<h2>0. قاعدة الدمج</h2>
+<div class="note">لا تحذف أي قسم. لا تعيد بناء الصفحة. §5.8 و §5.9 يبقيان ببنيتهما، مع تحديث سطرين فقط فيهما (موضحان أدناه). <code>canonical</code> لا يتغير.</div>
+</div>
+
+<div class="card">
+<h2>1. تسميات الإصدار</h2>
+<label><input type="checkbox"> ☐ غيّرت <code>title</code> من v3.2 إلى v3.3.</label>
+<label><input type="checkbox"> ☐ غيّرت <code>meta description</code> إلى v3.3.</label>
+<label><input type="checkbox"> ☐ غيّرت العنوان الفرعي <code>subtitle</code> إلى v3.3.</label>
+<label><input type="checkbox"> ☐ غيّرت عنوان الملحق والـ <code>footer</code> إلى v3.3.</label>
+<label><input type="checkbox"> ☐ أبقيت <code>canonical URL</code> كما هو دون تغيير.</label>
+</div>
+
+<div class="card">
+<h2>2. الروابط</h2>
+<label><input type="checkbox"> ☐ صححت <code>../tree/lab01.html</code> إلى <code>./lab01.html</code>.</label>
+<label><input type="checkbox"> ☐ صححت <code>../tree/appendix.html</code> إلى <code>./appendix.html</code>.</label>
+<label><input type="checkbox"> ☐ وحّدت صنف زر <code>zx-framework</code> من <code>nav-item</code> إلى <code>nav-btn</code>.</label>
+</div>
+
+<div class="card">
+<h2>3. §5.5 — تصحيح سلسلة المشتقات + استكمال التعريفات</h2>
+<label><input type="checkbox"> ☐ حذفت جملة "إشارة B₋′ تساوي إشارة S" واستبدلتها بـ: <code>sign(B₋′) = sign(h)</code> و <code>sign(h′) = sign(S)</code>.</label>
+<label><input type="checkbox"> ☐ أدرجت: <code>B₋′(x) = h(x)/w(x)</code> و <code>h′(x) = 2w(x)S(x)</code> والسلسلة <code>S → h′ → h → B₋′</code>.</label>
+<label><input type="checkbox"> ☐ أدرجت تعريفات: <code>r(T) = log(LT/a)</code> و <code>q₀(T) = T⁸/r(T)²</code> و <code>c(T) = 8 − 2/r(T)</code> و <code>q₀′(T) = c(T)q₀(T)/T</code>.</label>
+<label><input type="checkbox"> ☐ أدرجت تعريف الباقي <code>E(T)</code> صراحة قبل استعماله.</label>
+<label><input type="checkbox"> ☐ بررت <code>C₀ &gt; 0</code> من التعريف: <code>I(T₀) &gt; 0</code> (تكامل دالة موجبة) و <code>q₀′(T₀)/q₀(T₀) = 6/T₀ &gt; 1</code>.</label>
+<label><input type="checkbox"> ☐ لم أدّع أن <code>S &gt; 0</code> يثبت <code>B₋′ &gt; 0</code> مباشرة — بل عبر <code>h</code>.</label>
+</div>
+
+<div class="card">
+<h2>4. §5.6 — توحيد مجال الوسيط (التعديل الجوهري)</h2>
+<label><input type="checkbox"> ☐ حذفت <code>m_L = 4.94023829</code> و <code>m_H = 4.94223829</code> من البرهان.</label>
+<label><input type="checkbox"> ☐ استبدلت مجال الوسيط بمجال الشهادة المعتمد: <code>m ∈ [4.935, 4.95]</code>.</label>
+<label><input type="checkbox"> ☐ أدرجت جدول إحاطة <code>w′/w</code> على 8 خلايا في <code>[4, 4.95]</code>، بأصغر حد سفلي <code>&gt; 0.30881774</code>.</label>
+<label><input type="checkbox"> ☐ أدرجت: <code>sup f ≤ 0.0004641843993</code>.</label>
+<label><input type="checkbox"> ☐ أدرجت: <code>inf M ≥ 0.00160321587488</code>.</label>
+<label><input type="checkbox"> ☐ أدرجت النسبة الجديدة: <code>sup f / inf M ≤ 0.2895333102 &lt; 1</code>.</label>
+<label><input type="checkbox"> ☐ كتبت جملة التوحيد: البرهان موحّد على كل <code>m</code> في مجال الشهادة، لا عند قيمة عددية واحدة.</label>
+<label><input type="checkbox"> ☐ غيّرت شارة §5.6 إلى: مغلق بعد التصحيح بشرط إدراج جدول الإحاطة في النص.</label>
+</div>
+
+<div class="card">
+<h2>5. §5.7 — عزل x* (مشروط، لا يُغلق بادعاء)</h2>
+<label><input type="checkbox"> ☐ أبقيت فترة <code>x*</code> المنشورة كما هي، دون ادعاء أنها شهادة بذاتها.</label>
+<label><input type="checkbox"> ☐ أدرجت زوج التضييق الأوسع: <code>h(4.105196211) ≈ +1.1704×10⁻⁷ &gt; 0</code> و <code>h(4.105396211) ≈ −1.1710×10⁻⁷ &lt; 0</code>.</label>
+<label><input type="checkbox"> ☐ كتبت التنبيه الصريح: قيمتا الطرفين الضيقين كلتاهما <code>≈ +7.04×10⁻¹³</code>، فلا تثبتان تغير إشارة.</label>
+<label><input type="checkbox"> ☐ أبقيت شرط <code>sup h′ ≤ −0.0011712648</code> كادعاء مستقل يحتاج إحاطة فترية، لا كنتيجة من قيم الطرفين.</label>
+<label><input type="checkbox"> ☐ استبدلت ملاحظة v3.2 بملاحظة v3.3: <code>s*</code> مرشح عددي مشروط بـ <code>m</code>، ومداه العددي على مجال الشهادة <code>[3.749, 3.762]</code>.</label>
+</div>
+
+<div class="card">
+<h2>6. §5.7-bis — جديد (دليل عددي فقط)</h2>
+<label><input type="checkbox"> ☐ أدرجت القسم بعد §5.7 وقبل §5.8.</label>
+<label><input type="checkbox"> ☐ وصفت شارة القسم صراحة: دليل عددي فقط — العزل الفتري والشهادة العالمية مفتوحان.</label>
+<label><input type="checkbox"> ☐ أدرجت الصيغة التحليلية: <code>w′/w = 10/x − 2/(x·log(L/x)) + a/x²</code>.</label>
+<label><input type="checkbox"> ☐ أدرجت: <code>s* ≈ 3.754074114986</code> عند <code>m</code> العددي <code>4.941238290661</code>، و <code>h(s*) ≈ 0.0001645208827</code>.</label>
+<label><input type="checkbox"> ☐ لم أكتب "h تزداد على (0,s*] وتنخفض على [s*,m]" كحقيقة مثبتة.</label>
+</div>
+
+<div class="card">
+<h2>7. Appendix C — تعريف أو تخفيض</h2>
+<label><input type="checkbox"> ☐ غيّرت صف <code>X₁</code> إلى: إحاطة غير قابلة للتدقيق المستقل حتى تُعرَّف أطرافه بالضبط.</label>
+<label><input type="checkbox"> ☐ غيّرت صف <code>C_total</code> إلى: سجل حسابي تاريخي حتى تُعرَّف صيغته ومجاله ومكونات حدّه.</label>
+<label><input type="checkbox"> ☐ لم أخترع أي تعريف لـ <code>X₁</code> أو <code>C_total</code>.</label>
+<label><input type="checkbox"> ☐ أضفت ملاحظة التدقيق أسفل الجدول بنفس المعنى.</label>
+</div>
+
+<div class="card">
+<h2>8. §5.9 والملحق — تحديث سطرين فقط</h2>
+<label><input type="checkbox"> ☐ صححت سطر §5.9 من "<code>h′(x) &lt; 0</code> على <code>[m−0.1,m]</code>" إلى "<code>h(x) &lt; 0</code> على <code>[m−0.1,m]</code> — مغلق بعد التصحيح (v3.3)".</label>
+<label><input type="checkbox"> ☐ خفّضت سطر <code>s*</code> في الملحق من "مغلق عددياً" إلى "مرشح عددي مشروط بـ <code>m</code>، بانتظار إحاطة فترية".</label>
+<label><input type="checkbox"> ☐ أبقيت بنية §5.9 كما هي دون تغيير آخر.</label>
+</div>
+
+<div class="card">
+<h2>9. ما يبقى مفتوحاً — لا تضع عليه CLOSED</h2>
+<label><input type="checkbox"> ☐ §5.8 (المقارنة العالمية): مفتوح — حتى <code>U₊</code> و <code>L₋</code> والمقارنة الصارمة.</label>
+<label><input type="checkbox"> ☐ رتابة <code>S</code> عبر <code>(0.5,m]</code> كقطعة واحدة: مرفوضة — استُبدلت بقطعتي <code>S &gt; 0</code> قبل <code>s*</code> و <code>S &lt; 0</code> بعده، وكلتاهما مفتوحتان فترياً.</label>
+<label><input type="checkbox"> ☐ عزل <code>s*</code> فترياً مع <code>m</code> الفتري: مفتوح.</label>
+<label><input type="checkbox"> ☐ ربط <code>λ₁ ≈ 1.7685 (FEM)</code> بالمسألة المستمرة: مرشح عددي — يحتاج شهادة إحاطة.</label>
+<label><input type="checkbox"> ☐ <code>0.811611</code>: حد مرشح، ليس شهادة.</label>
+</div>
+
+<div class="card">
+<h2>10. تحقق أخير قبل النشر</h2>
+<label><input type="checkbox"> ☐ فتحت الصفحة في المتصفح وتأكدت أن كل الروابط تعمل ولا يوجد <code>/tree/tree/</code>.</label>
+<label><input type="checkbox"> ☐ بحثت في الصفحة عن بقايا <code>m_L</code> / <code>m_H</code> الضيقين — يجب أن تكون صفراً.</label>
+<label><input type="checkbox"> ☐ بحثت عن جملة "إشارة B₋′ تساوي إشارة S" — يجب أن تكون صفراً.</label>
+<label><input type="checkbox"> ☐ بحثت عن "s* مغلق عددياً" — يجب أن تكون صفراً.</label>
+<label><input type="checkbox"> ☐ تأكدت أن كلمة CLOSED لا تظهر إلا على §5.6 بعد التصحيح — لا على §5.7 ولا §5.8 ولا رتابة S.</label>
+</div>
+
+<div class="card ok">
+<h2>حكم v3.3 بعد الدمج الصحيح</h2>
+<p>سجل بحثي سليم. §5.6 مغلق بعد التصحيح. عزل <code>x*</code> له شهادة مشروطة بصحة إحاطات الأطراف. رتابة <code>S</code> عبر <code>(0.5,m]</code> والمقارنة العالمية في §5.8 ما زالتا مفتوحتين.<br>الحساب شيء، والتفسير شيء آخر، والبرهان شيء ثالث.</p>
+<p class="small">ملاحظة أمانة: <code>bridge.html</code> و <code>frame5-en.html</code> وملف الباتش لم يصلوا لمساحة العمل في هذه الرسالة — القائمة أعلاه للدمج اليدوي في نسختك الأصلية، وليست ادعاء دمج.</p>
+</div>
+
+</div>
+</body>
+</html>

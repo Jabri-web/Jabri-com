@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>odd-even — الملف الأساسي</title>
+<script>
+  window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }, svg: { fontCache: 'global' } };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;max-width:1000px;margin:0 auto;padding:20px 15px 60px;line-height:1.8;color:#1a1a1a;background:#fff}
+  h1{font-size:26px;line-height:1.4} h2{margin-top:38px;border-bottom:2px solid #111;padding-bottom:6px;font-size:20px} h3{margin-top:26px;font-size:18px}
+  .badge{display:inline-block;background:#111;color:#fff;padding:2px 10px;border-radius:999px;font-size:13px;margin-bottom:15px}
+  .warn{background:#fff7e6;border:1px solid #f0c36b;padding:12px 14px;border-radius:10px;margin:15px 0}
+  .ok{background:#eef7ee;border:1px solid #9ccf9c;padding:12px 14px;border-radius:10px;margin:15px 0}
+  .gold{background:#fdf6e3;border:1px solid #e0c068;padding:12px 14px;border-radius:10px;margin:15px 0}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid #ddd;padding:8px 10px;text-align:center}
+  th{background:#f4f4f4}
+  pre{background:#0f1115;color:#e8e8e8;padding:14px;border-radius:10px;overflow:auto;white-space:pre-wrap;font-size:13px;direction:ltr;text-align:left;}
+  .muted{color:#666;font-size:14px}
+  .toc a{color:#111}
+  .toggle-btn{display:block;width:100%;background:#0d47a1;color:#fff;border:none;padding:15px;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;margin:20px 0;text-align:center}
+  .toggle-btn:hover{background:#1565c0}
+  .hidden-content{display:none;background:#fafafa;border:2px dashed #0d47a1;border-radius:10px;padding:20px;margin-bottom:20px}
+  .hidden-content.show{display:block}
+  .hidden-content details{margin:10px 0;background:#fff;border:1px solid #ddd;border-radius:6px;padding:12px}
+  .hidden-content summary{font-weight:bold;cursor:pointer;color:#0d47a1;font-size:16px}
+  .img-container{text-align:center;margin:20px 0}
+  .img-container img{max-width:100%;border-radius:10px;border:1px solid #ddd}
+</style>
+</head>
+<body>
+<h1>المنحنى \(y^2 = x^3 + 17\) — سجل T1 والإغلاق الكامل</h1>
+<p><span class="badge">سجل عمل — T1..T9 مغلقة</span> <a class="badge" href="zx_summary.md" style="text-decoration:none;background:#0d47a1;">المسار Z — خلاصة B₋ و B₊ (zx_summary.md)</a></p>
+<div class="ok"><b>الملف الأساسي: odd-even.html</b><br>يجمع كل ملفات odd-even* في ملف واحد. المصادر المدمجة: odd-eve.html + odd-even2.html + odd-even-t1.html + odd-even-t1.md + odd-even-t2-9.md + README.md + README2.md + الصورتان odd-even.png و odd-even2.png (تبقيان ملفين خارجيين بنفس الاسمين).<br>كتابة ملف .tex مؤجلة: لا تُكتب إلا بعد إغلاق odd-even.html المرجعي بشكل تام.<br>التحقق المستقل: PARI/GP 2.17.3 في Termux — T2..T6 و T8..T9 مطابقة حرفياً.</div>
+
+<p>هذا الملف يوثّق <b>الإغلاق الكامل للمعادلات T1..T9</b>، مع الحفاظ على كل التصحيحات المنهجية السابقة (تصحيح الإشارة، فصل الحالات، تمايز الحقول، شهادات PARI/GP). <b>T1 مغلقة بالكامل</b> (Matveev ثم LLL ثم فحص منتهٍ)، و <b>T7 مغلقة</b>، و <b>T2..T6 و T8..T9 مغلقة حسابياً بمحلّل Thue</b>.</p>
+
+<div class="img-container"><img src="odd-even.png" alt="Odd-Even Figure 1"></div>
+<div class="img-container"><img src="odd-even2.png" alt="Odd-Even Figure 2"></div>
+<button class="toggle-btn" id="toggleSimBtn" onclick="toggleSim()">عرض / إخفاء المحاكاة الكاملة (جميع التفاصيل) ▼</button>
+<div class="hidden-content" id="simulationContent">
+  <h3 style="margin-top:0;color:#0d47a1;">📚 المحاكاة الكاملة — جميع التفاصيل</h3>
+  <details><summary>1. الحقل التربيعي والوحدات</summary><p>\(K=\mathbb{Q}(\sqrt{17})\)، \(\omega=(1+\sqrt{17})/2\)، \(\mathcal{O}_K=\mathbb{Z}[\omega]\)، \(\omega^2=\omega+4\).</p><p>الوحدة الأساسية: \(\varepsilon = 4+\sqrt{17}=3+2\omega\)، \(N(\varepsilon)=-1\). عدد الصفوف \(=1\).</p></details>
+  <details><summary>2. فصل الحالتين وتصحيح القاسم</summary><p>التباين الأولي الصحيح هو <b>بعد إخراج العامل \(2\)</b>: \(\gcd\big((v+\omega),(v+1-\omega)\big)=(1).\)</p></details>
+  <details><summary>3. معادلات ثو التسع</summary><p>\(T_1\) إلى \(T_9\) موثقة في الجداول أدناه.</p><ul><li><b>y فردي:</b> T1, T2, T3, T4, T5, T6</li><li><b>y زوجي:</b> T7, T8, T9</li></ul></details>
+  <details><summary>4. حل T7 بالكامل</summary><p>المعادلة \(b(3a^2+3ab+5b^2)=2\) لا حلول لها لأن \(3(a+\frac b2)^2+\frac{17}{4}b^2 \ge \frac{17}{4}>4\).</p></details>
+  <details><summary>5. حل T1 بالكامل (الشهادة)</summary><p>الاتجاه السالب مغلق بمتباينة عقلانية. الاتجاه الموجب مغلق بـ Matveev \(\to\) LLL \(\to\) فحص منتهٍ. الحلان الوحيدان: \((a,b)=(1,0)\) و \((-6,1)\).</p></details>
+  <details><summary>6. شهادات PARI/GP للوحدات</summary><p>الوحدات الأساسية لكل حقل: \(K_A\): \(-(6+r_1)\)، \(K_C\): \(-980-11\theta-2\alpha\)، \(K_B\): \(55+15\theta+\theta^2\)، \(K_E\): \(7+2\theta\).</p></details>
+  <details><summary>7. Frame 5 — الفجوة الطيفية</summary><p>سلسلة \(B_- \to h \to S \to S'\). الطرف \((0, a/40]\) مغلق تحليلياً. الأوسط \((a/40, 0.5]\) مفتوح، الخلية الأولى \(X_1\) مفتوحة. \(B_+\) مقابل \(B_-\) استكشافي فقط.</p></details>
+  <details><summary>8. المسار الثاني — اشتقاق L</summary><p>\(\kappa_n = \varepsilon_n\) من الحالة. \(L_{*,n} \propto \varepsilon_n \ell_P\). قانون ويل \(p\) يعتمد على البعد والتشتت. \(L_{*,n}\) ليس مستقلاً عن \(n\).</p></details>
+  <details><summary>9. المصدر الرابع — الارتداد</summary><p>\(\eta_{\text{self}} = \kappa \ell_P^2 \varepsilon_n^2 / L^2\). \(E_{\text{tot}} = (\hbar c / L)(\varepsilon_n - \eta_{\text{self}})\). شرط الارتداد: \(\inf \varepsilon_n / \sqrt{\eta} > 0\). النموذج المجمد لا ينتج ارتداداً. شرودنغر-بواسون غير النسبي ينتج مقياساً مستقراً (حل عددي: \(E_{\text{tot}}=-0.053679\), \(R_{\text{rms}}=4.414879\)).</p></details>
+</div>
+<h2>المحتويات</h2>
+<ol class="toc"><li><a href="#quad">الحقل التربيعي</a></li><li><a href="#parity">فصل الحالتين وتصحيح القاسم المشترك</a></li><li><a href="#thue">معادلات ثو التسع</a></li><li><a href="#t7">حل T7 بالكامل</a></li><li><a href="#t1">حل T1 بالكامل</a></li><li><a href="#closures">إغلاقات Thue: T2..T6 و T8..T9</a></li><li><a href="#fields">الحقول الأربعة وتمايزها</a></li><li><a href="#bases">الأسس الصحيحة ومميزات الحقول</a></li><li><a href="#units">الوحدات — مغلقة بشهادات PARI/GP</a></li><li><a href="#bnf">شهادات bnfinit</a></li><li><a href="#norms">جدول \(N(a+b\theta)\) الصريح</a></li><li><a href="#baker">خريطة عمل بيكر</a></li><li><a href="#frame5">Frame 5 — الفجوة الطيفية</a></li><li><a href="#path2">المسار الثاني — اشتقاق L</a></li><li><a href="#source4">المصدر الرابع — الارتداد</a></li><li><a href="#remain">ما تبقى — جدول الحالة</a></li></ol>
+<h2 id="quad">1. الحقل التربيعي</h2>
+<p>\(K=\mathbb{Q}(\sqrt{17})\)، \(\omega=(1+\sqrt{17})/2\)، \(\mathcal{O}_K=\mathbb{Z}[\omega]\)، \(\omega^2=\omega+4\).</p>
+<p>الوحدة الأساسية: \(\varepsilon = 4+\sqrt{17}=3+2\omega\)، \(N(\varepsilon)=-1\). عدد الصفوف \(=1\).</p>
+<h2 id="parity">2. فصل الحالتين وتصحيح القاسم المشترك</h2>
+<p>من \(y^2\equiv x+1 \pmod 2\): \(y\) فردي \(\iff x\) زوجي، و \(y\) زوجي \(\iff x\) فردي.</p>
+<div class="warn"><b>تصحيح مهم:</b> ليس صحيحًا عمومًا أن \((\alpha)\) و \((\bar\alpha)\) أوليان نسبيًا، حيث \(\alpha=y+\sqrt{17}\).</div>
+<h2 id="thue">3. معادلات ثو التسع</h2>
+<p>نكتب \(\gamma=a+b\omega\)، إذن:</p>
+<p>\[\gamma^3=(a^3+12ab^2+4b^3)+(3a^2b+3ab^2+5b^3)\omega.\]</p>
+<h3>حالة \(y\) فردي</h3>
+<table><tr><th>المعادلة</th><th>الصورة</th><th>=</th><th>الحلول</th></tr>
+<tr><td>T1</td><td>\(a^3+9a^2b+21ab^2+19b^3\)</td><td>1</td><td>\((1,0), (-6,1)\)</td></tr>
+<tr><td>T2</td><td>\(9a^3+69a^2b+177ab^2+151b^3\)</td><td>1</td><td>\((-2,1)\)</td></tr>
+<tr><td>T3</td><td>\(73a^3+561a^2b+1437ab^2+1227b^3\)</td><td>1</td><td>\((-8,3), (-5,2), (193,-72)\)</td></tr>
+<tr><td>T4</td><td>\(-a^3+6a^2b-6ab^2+6b^3\)</td><td>1</td><td>\((-1,0), (5,1)\)</td></tr>
+<tr><td>T5</td><td>\(a^3+6a^2b+18ab^2+14b^3\)</td><td>1</td><td>\((-1,1), (1,0), (29,-26)\)</td></tr>
+<tr><td>T6</td><td>\(7a^3+54a^2b+138ab^2+118b^3\)</td><td>1</td><td>\((-3,1)\)</td></tr></table>
+<h3>حالة \(y\) زوجي</h3>
+<table><tr><th>المعادلة</th><th>الصورة</th><th>=</th><th>الحلول</th></tr>
+<tr><td>T7</td><td>\(3a^2b+3ab^2+5b^3\)</td><td>2</td><td>لا حلول</td></tr>
+<tr><td>T8</td><td>\(2a^3+15a^2b+39ab^2+33b^3\)</td><td>2</td><td>\((1,0), (7,-4)\)</td></tr>
+<tr><td>T9</td><td>\(16a^3+123a^2b+315ab^2+269b^3\)</td><td>2</td><td>\((-5,2), (17,-6)\)</td></tr></table>
+<h2 id="t7">4. حل T7 بالكامل</h2>
+<div class="ok"><b>T7 لا حلول صحيحة لها.</b></div>
+<p>\[b(3a^2+3ab+5b^2)=2.\]</p>
+<p>\[3a^2+3ab+5b^2 = 3\Bigl(a+\frac b2\Bigr)^2+\frac{17}{4}b^2 \ge \frac{17}{4}>4.\]</p>
+<h2 id="t1">4ب. حل T1 بالكامل</h2>
+<div class="ok"><b>T1 مغلقة. حلولها هي $(a,b)=(1,0)$ و $(-6,1)$ فقط.</b></div>
+<p>الاتجاه السالب: مغلق بمتباينة عقلانية. الاتجاه الموجب: Matveev \(\to\) LLL \(\to\) فحص منتهٍ. الحلان الوحيدان: \((1,0)\) و \((-6,1)\).</p>
+<h2 id="closures">4ج. إغلاقات Thue: T2..T6 و T8..T9</h2>
+<div class="ok"><b>كلها مغلقة حسابياً بمحلّل Thue: اكتمال القوائم بحسب محلّل Thue. التحقق بالتعويض المباشر خطوة منفصلة: نتائجه الـ 14 موثقة في <a href="pari-verification-log.txt">pari-verification-log.txt</a>.</b><br>التحقق المستقل: PARI/GP إصدار 2.17.3 في Termux، كل معادلة بسطر مستقل: poldisc + polisirreducible + thue(thueinit(P,1),R). المخرجات مطابقة للقوائم أدناه حرفياً.</div>
+<table><tr><th>المعادلة</th><th>Disc(P)</th><th>عدم اختزال</th><th>عدد الحلول</th><th>القائمة الكاملة</th></tr>
+<tr><td>T2</td><td>-1836</td><td>1 — غير قابل للاختزال على Q</td><td>1</td><td>[[-2,1]]</td></tr>
+<tr><td>T3</td><td>-1836</td><td>1 — غير قابل للاختزال على Q</td><td>3</td><td>[[-8,3],[-5,2],[193,-72]]</td></tr>
+<tr><td>T4</td><td>-1836</td><td>1 — غير قابل للاختزال على Q</td><td>2</td><td>[[-1,0],[5,1]]</td></tr>
+<tr><td>T5</td><td>-1836</td><td>1 — غير قابل للاختزال على Q</td><td>3</td><td>[[-1,1],[1,0],[29,-26]]</td></tr>
+<tr><td>T6</td><td>-1836</td><td>1 — غير قابل للاختزال على Q</td><td>1</td><td>[[-3,1]]</td></tr>
+<tr><td>T8</td><td>-459</td><td>1 — غير قابل للاختزال على Q</td><td>2</td><td>[[1,0],[7,-4]]</td></tr>
+<tr><td>T9</td><td>-459</td><td>1 — غير قابل للاختزال على Q</td><td>2</td><td>[[-5,2],[17,-6]]</td></tr></table>
+<p class="muted">ملاحظة: مميز كثير الحدود ليس مميز الحقل. لكل معادلة حُسب المميز وعدم الاختزال من كثير حدودها نفسه، ولم يُنقل أي أساس أو وحدة بين المعادلات. T2: هوية النورم \(N(3a-b\theta)=3(9a^3+69a^2b+177ab^2+151b^3)\) مع شرط \(A\equiv0\pmod3\)، والحل \((-2,1)\) يعطي \(N(-6-\theta)=3\).</p>
+<h3>بروتوكول الفحص المعتمد (Python / cypari2)</h3>
+<pre># فحص معادلة Thue: Ti — مثال T8 (الهدف 2)
+from cypari2 import Pari
+pari = Pari()
+print("Discriminant =", pari("poldisc(2*x^3 + 15*x^2 + 39*x + 33)"))
+print("Irreducible =", pari("polisirreducible(2*x^3 + 15*x^2 + 39*x + 33)"))
+S = pari("thue(thueinit(2*x^3 + 15*x^2 + 39*x + 33, 1), 2)")
+print("T8 exact solutions:", S)
+for sol in S:
+    a, b = int(sol[0]), int(sol[1])
+    print(a, b, "verified", 2*a**3 + 15*a**2*b + 39*a*b**2 + 33*b**3)</pre>
+
+<p class="muted">سجل PARI: <a href="pari-verification-log.txt">pari-verification-log.txt</a> — يعرض أوامر المميز وعدم الاختزال وحلول Thue، + نتائج التعويض المباشر للـ 14 زوجاً.</p>
+<h2 id="verify">سجل التحقق — مجموعتا المميز</h2>
+<h3>1. المجموعة الأولى: المميز -1836 — الأس 1 — 5 اختبارات</h3>
+<table><tr><th>المعادلة</th><th>كثيرة الحدود P</th><th>poldisc</th><th>polisirreducible</th><th>حلول Thue</th></tr>
+<tr><td>T2</td><td>9x^3+69x^2+177x+151</td><td>-1836</td><td>1</td><td>[[-2, 1]]</td></tr>
+<tr><td>T3</td><td>73x^3+561x^2+1437x+1227</td><td>-1836</td><td>1</td><td>[[-8, 3], [-5, 2], [193, -72]]</td></tr>
+<tr><td>T4</td><td>-x^3+6x^2-6x+6</td><td>-1836</td><td>1</td><td>[[-1, 0], [5, 1]]</td></tr>
+<tr><td>T5</td><td>x^3+6x^2+18x+14</td><td>-1836</td><td>1</td><td>[[-1, 1], [1, 0], [29, -26]]</td></tr>
+<tr><td>T6</td><td>7x^3+54x^2+138x+118</td><td>-1836</td><td>1</td><td>[[-3, 1]]</td></tr></table>
+<h3>2. المجموعة الثانية: المميز -459 — الأس 2 — اختباران</h3>
+<table><tr><th>المعادلة</th><th>كثيرة الحدود P</th><th>poldisc</th><th>polisirreducible</th><th>حلول Thue</th></tr>
+<tr><td>T8</td><td>2x^3+15x^2+39x+33</td><td>-459</td><td>1</td><td>[[1, 0], [7, -4]]</td></tr>
+<tr><td>T9</td><td>16x^3+123x^2+315x+269</td><td>-459</td><td>1</td><td>[[-5, 2], [17, -6]]</td></tr></table>
+<h3>3. سجل التحقق</h3>
+<div class="ok"><b>المجموع: 7 كثيرات حدود — 5 بالمميز -1836 و 2 بالمميز -459.</b><br>جميعها أعادت irreducible = 1. لم يظهر خطأ حسابي في المخرجات المعروضة. PARI/GP 2.17.3 في Termux.</div>
+<h2 id="fields">5. الحقول الأربعة وتمايزها</h2>
+<p>مميزات الصور غير القابلة للاختزال: \(\Delta(T_8)=\Delta(T_9)=-459\)، و \(\Delta(T_1)=\cdots=\Delta(T_6)=-1836\).</p>
+<p>التحويلات الصريحة تعطي الأزواج:</p>
+<p>\(K(T_1)=K(T_4)=:K_A\)، \(K(T_2)=K(T_6)=:K_B\)، \(K(T_3)=K(T_5)=:K_C\)، \(K(T_8)=K(T_9)=:K_E\).</p>
+<p class="muted">T7 حالة منفصلة ذات صورة تكعيبية قابلة للتحليل، ولا تدخل ضمن الحقول التكعيبية الأربعة. صورتها: \(3a^2b+3ab^2+5b^3=b(3a^2+3ab+5b^2)\). لذلك لا يُسند إليها حقل تكعيبي ولا مميز حقل، ولا يُكتب \(\Delta(T_7)=-459\).</p>
+<h2 id="bases">6. الأسس الصحيحة ومميزات الحقول</h2>
+<table><tr><th>الحقل</th><th>المعادلات</th><th>المؤشر</th><th>مميز الحقل</th><th>الأساس الصحيح</th></tr>
+<tr><td>\(K_A\)</td><td>T1, T4</td><td>1</td><td>\(-1836\)</td><td>\(\{1,r_1,r_1^2\}\)</td></tr>
+<tr><td>\(K_B\)</td><td>T2, T6</td><td>1</td><td>\(-204\)</td><td>\(\{1,\theta,\theta^2\}\)، \(\theta=3r_2\)</td></tr>
+<tr><td>\(K_C\)</td><td>T3, T5</td><td>73</td><td>\(-1836\)</td><td>\(\{1,\theta,(\theta^2-23\theta)/73\}\)، \(\theta=73r_3\)</td></tr>
+<tr><td>\(K_E\)</td><td>T8, T9</td><td>2</td><td>\(-459\)</td><td>\(\{1,\theta,(\theta^2+3\theta-2)/2\}\)، \(\theta=2r_8\)</td></tr></table>
+<h2 id="units">7. الوحدات — مغلقة بشهادات PARI/GP</h2>
+<div class="ok"><b>الأربعة مغلقة. كل مرشح ثبت أنه هو الوحدة الأساسية نفسها.</b></div>
+<table><tr><th>الحقل</th><th>الوحدة الأساسية</th><th>النورم</th><th>المنظم</th><th>bnfisunit</th></tr>
+<tr><td>\(K_A\)</td><td>\(-(6+r_1)\)</td><td>\(-1\)</td><td>\(3.0644...\)</td><td>\([1,1]\)</td></tr>
+<tr><td>\(K_C\)</td><td>\(-980-11\theta-2\alpha\)</td><td>\(1\)</td><td>\(2.1595...\)</td><td>\([1,0]\)</td></tr>
+<tr><td>\(K_B\)</td><td>\(55+15\theta+\theta^2\)</td><td>\(-1\)</td><td>\(2.3546...\)</td><td>\([1,0]\)</td></tr>
+<tr><td>\(K_E\)</td><td>\(7+2\theta\)</td><td>\(1\)</td><td>\(3.6694...\)</td><td>\([1,0]\)</td></tr></table>
+<h2 id="bnf">8. شهادات bnfinit</h2>
+<pre>K_A = bnfinit(x^3 + 9*x^2 + 21*x + 19, 1);
+A disc = -1836
+A fu = [Mod(-x - 6, x^3 + 9*x^2 + 21*x + 19)]
+A reg = 3.0644325274998790594092637614753694380</pre>
+<h2 id="norms">9. جدول \(N(a+b\theta)\) الصريح</h2>
+<table><tr><th>الحقل</th><th>\(f\)</th><th>\(N(a+b\theta)\) الصريح</th></tr>
+<tr><td>\(K_A\)</td><td>\(x^3+9x^2+21x+19\)</td><td>\(a^3-9a^2b+21ab^2-19b^3\)</td></tr>
+<tr><td>\(K_B\)</td><td>\(z^3+23z^2+177z+453\)</td><td>\(a^3-23a^2b+177ab^2-453b^3\)</td></tr>
+<tr><td>\(K_C\)</td><td>\(y^3+561y^2+104901y+6538683\)</td><td>\(a^3-561a^2b+104901ab^2-6538683b^3\)</td></tr>
+<tr><td>\(K_E\)</td><td>\(w^3+15w^2+78w+132\)</td><td>\(a^3-15a^2b+78ab^2-132b^3\)</td></tr></table>
+<h2 id="baker">10. خريطة عمل بيكر</h2>
+<p>T1 منجزة. T2..T6 و T8..T9 منجزة حسابياً بمحلّل Thue. يبقى توثيق الشهادة المستقلة فقط.</p>
+<h2 id="frame5">11. Frame 5 — الفجوة الطيفية</h2>
+<p>سلسلة \(B_- \to h \to S \to S'\). الطرف \((0, a/40]\) مغلق تحليلياً. الأوسط \((a/40, 0.5]\) مفتوح.</p>
+<h2 id="path2">12. المسار الثاني — اشتقاق L</h2>
+<p>\(\kappa_n = \varepsilon_n\) من الحالة. \(L_{*,n} \propto \varepsilon_n \ell_P\).</p>
+<h2 id="source4">13. المصدر الرابع — الارتداد</h2>
+<p>\(\eta_{\text{self}} = \kappa \ell_P^2 \varepsilon_n^2 / L^2\). \(E_{\text{tot}} = (\hbar c / L)(\varepsilon_n - \eta_{\text{self}})\). شرط الارتداد: \(\inf \varepsilon_n / \sqrt{\eta} > 0\).</p>
+<h2 id="zpath">15. المسار Z — الحالة النهائية (ملخص؛ التفاصيل في zx_summary.md)</h2>
+<div class="ok"><b>الصيغ والجدول الصحيح موثقة في zx_summary.md — القسم 7.</b> هذا القسم ملخص فقط، ولا يعيد تعريف أي شيء.</div>
+<table><tr><th>البند</th><th>الحالة</th></tr>
+<tr><td>صيغ Z</td><td><b>مثبت</b> — Z′ و Z″ تحليليًا = عدديًا (~10⁻¹⁴)</td></tr>
+<tr><td>Z + A + R = 1</td><td><b>مثبت بالتعريف</b></td></tr>
+<tr><td>m ≈ 4.9412382907</td><td><b>جذر M₅(x) − M₅(L)/2 = 0</b> — توثيق حد خطأ التكامل ناقص (فجوة توثيقية، لا رياضية)</td></tr>
+<tr><td>B₋ القمة = 0.308029244 عند 4.105296218</td><td><b>قمة محلية مؤكدة</b> (B″ ≈ −0.53)</td></tr>
+<tr><td>B₊ القمة = 0.192532139 عند 5.401664358</td><td><b>قمة محلية مؤكدة</b> (B″ ≈ −1.49)</td></tr>
+<tr><td>الترتيب B₋^max &gt; B₊^max</td><td><b>استكشافي</b> — ثابت عدديًا (B₋ &gt; 0.30 على [4.0, 4.2]، B₊ &lt; 0.20 على [m, L))، بلا حصر فتري</td></tr>
+<tr><td>جدول 7.3 في zx_summary.md</td><td><b>يُعتمد</b> — بتكامل quad على المجالين الصحيحين</td></tr>
+<tr><td>جدول Gaussian المرفوض</td><td><b>مرفوض — لا يُعتمد</b></td></tr>
+<tr><td>الهدف 0.0072973525</td><td><b>مرفوض</b> (خطأ 64.4%)</td></tr>
+<tr><td>سرج 28 و 30</td><td><b>مرفوض</b> (ضوضاء)</td></tr>
+<tr><td>F₋ ، F₊</td><td><b>غير معرّفتين</b> — لا ادعاء حولهما</td></tr>
+<tr><td>الجسر إلى y² = x³ + 17</td><td><b>مفتوح</b></td></tr>
+</table>
+<h2 id="remain">14. ما تبقى</h2>
+<table><tr><th>الخطوة</th><th>الحالة</th></tr>
+<tr><td>T1 بالكامل</td><td><b>مغلقة</b></td></tr>
+<tr><td>T7 بالكامل</td><td><b>مغلقة</b></td></tr>
+<tr><td>T2..T6 و T8..T9</td><td><b>مغلقة حسابياً بمحلّل Thue</b></td></tr>
+<tr><td>التحقق المستقل في PARI 2.17.3</td><td><b>مُنجز</b> — T2..T6 و T8..T9 أُعيد تشغيلها سطراً سطراً، والمخرجات مطابقة</td></tr>
+<tr><td>تصحيح تصنيف T7</td><td><b>مُنجز</b> — T7 قابلة للتحليل، لا حقل تكعيبي لها</td></tr>
+<tr><td>توثيق اختبارات التعويض</td><td><b>مُنجز</b> — الـ 14 زوجاً موثقة في pari-verification-log.txt</td></tr>
+<tr><td>كتابة odd-even.tex</td><td><b>مؤجلة</b> — لا تُكتب إلا بعد إغلاق odd-even.html المرجعي بشكل تام</td></tr>
+<tr><td>المسار Z (zx_summary.md)</td><td><b>موثق</b> — قسم 15 يلخص الحالة النهائية ويربط للملف الكامل</td></tr>
+<tr><td>أرشفة مخرجات PARI كنص</td><td><b>مُنجز جزئياً</b> — الجلسة منقولة نصياً في pari-verification-log.txt؛ اللصق الخام للقطة T2 أُضيف (مع شرح أن أسطر syntax error هي أخطاء إدخال، لا فشل PARI)؛ اللصق الخام لـ T3..T6 و T8..T9 لا يزال متبقياً</td></tr></table>
+<script>
+  function toggleSim(){var c=document.getElementById("simulationContent");var b=document.getElementById("toggleSimBtn");if(c.classList.contains("show")){c.classList.remove("show");b.innerHTML="عرض / إخفاء المحاكاة الكاملة (جميع التفاصيل) ▼";}else{c.classList.add("show");b.innerHTML="عرض / إخفاء المحاكاة الكاملة (جميع التفاصيل) ▲";}}
+</script>
+
+
+    <!-- في كل صفحة HTML -->
+    
+    <div id="header-placeholder"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/js/init-page-root.js" defer></script>
+
+</body>
+</html>
+

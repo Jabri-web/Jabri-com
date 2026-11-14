@@ -457,20 +457,76 @@
       </p>
     </div>
 
-    <!-- Conclusion -->
-    <div class="proof-block" style="background: #1a1508; border: 1px solid var(--noor); border-left: 6px solid var(--noor); text-align: center; margin-top: 10px;">
-      <h4 style="color: var(--noor); font-size: 1.1rem; margin-bottom: 10px;">Conclusion: each level serves its purpose</h4>
-      <p style="font-size: 1.1rem; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; direction: ltr;">
-        Z' + C' + A' = 1
-      </p>
-      <p>
-        where <code style="direction:ltr">Z' = Z/(Z+C+A)</code>, <code style="direction:ltr">C' = C/(Z+C+A)</code>, and <code style="direction:ltr">A' = A/(Z+C+A)</code>.<br>
-        Z and C are the Pythagorean legs, A is the hypotenuse. This is a normalized representation, not a direct consequence of Pythagoras alone.
-      </p>
-      <p style="color: var(--dim); font-size: 0.85rem; margin-top: 8px;">
-        Level 1 gives the exact value — Level 2 shows it visually — Level 3 suggests a preliminary numerical similarity.
-      </p>
-    </div>
+
+<!-- Corrected Summary - Linked to the 56.54° Example -->
+<div class="proof-block" style="background:#1a1508; border:1px solid var(--noor); border-right:6px solid var(--noor); text-align:center; margin-top:10px;">
+  
+  <h4 style="color:var(--noor); font-size:1.1rem; margin-bottom:14px;">
+    Scientific Summary - Three Levels Linked by One Law
+  </h4>
+  
+  <p style="color:#fff; font-weight:bold;">
+    Level One - The Exact Mathematical Identity
+  </p>
+  <div class="math-box">
+    tan(22.5°) = √2 - 1
+    ≈ 0.4142135624
+  </div>
+  
+  <p style="color:#fff; font-weight:bold;">
+    Level Two - The General Geometric Relation
+  </p>
+  <div class="math-box">
+    Z² + C² = A²<br>
+    C / Z = tan(θ)<br>
+    A = √(Z² + C²)
+  </div>
+  <p>
+    Where Z is the height, C is the horizontal side,
+    A is the hypotenuse, and θ is the angle measured from the vertical.
+  </p>
+  
+  <p style="color:#fff; font-weight:bold;">
+    The Link: The Same Law Applied to the Level Two Example
+  </p>
+  <div class="math-box">
+    Z = 192 , C = 290.74<br>
+    C / Z = 290.74 / 192 = 1.51427<br>
+    θ = tan⁻¹(1.51427) ≈ 56.54°<br>
+    A = √(192² + 290.74²) = √121394.74 ≈ 348.42
+  </div>
+  <p>
+    This proves that the law is general: any angle gives a ratio,
+    and when the angle is exactly <b>22.5°</b>,
+    the ratio becomes <b>√2 - 1 ≈ 0.41421</b>,
+    which is the golden special case of the same law, not a different law.
+  </p>
+  
+  <p style="color:#fff; font-weight:bold;">
+    Level Three - The Exploratory Field Result
+  </p>
+  <div class="math-box">
+    n = 5 mango trees<br>
+    Mean (H-h)/H = 0.41297<br>
+    tan(22.5°) ≈ 0.41421<br>
+    Numerical difference ≈ 0.00124
+  </div>
+  
+  <p>
+    The exploratory sample indicates numerical proximity between
+    the measurement and the theoretical value, but it does not prove
+    a general geometric law for trees. Independent verification with
+    a larger sample and a documented measurement protocol is required.
+  </p>
+  
+  <p style="color:var(--noor); font-weight:bold; margin-top:14px;">
+    Conclusion: One law - a general example at 56.54°,
+    a golden special case at 22.5°,
+    and a field observation requiring independent testing.
+  </p>
+</div>
+
+
 
   </div>
 </div>
@@ -818,5 +874,12 @@ resetBtn.addEventListener('click', () => {
 resize();
 requestAnimationFrame(loop);
 </script>
-</body>
-</html>
+
+    <!-- في كل صفحة HTML -->
+    
+    <div id="header-placeholder"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/js/init-page-root.js" defer></script>
+    
+  </body>
+  </html>

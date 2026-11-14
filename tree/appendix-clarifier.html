@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مُزيل الالتباسات v1.2 — كل سياق في مكانه | واحة الجبري</title>
+<meta name="description" content="clarifier.html v1.2 مطابق لـ jabri_clarifier_v1.2.py: كل نتيجة قابلة للفحص أمام القارئ.">
+<style>
+:root{--gold:#f4c430;--green:#7fb08a;--cyan:#76d6e8;--bg:#0a1410;--panel:#0a1a12;--border:#1f3a2b;--dim:#8aa892}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:#e8f5e9;font-family:'Segoe UI',Tahoma,sans-serif;line-height:1.9;padding:16px}
+.wrap{max-width:960px;margin:auto}
+h1{color:var(--gold);text-align:center;font-size:1.5rem}
+.sub{text-align:center;color:var(--dim);margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;margin:14px 0}
+.card h2{color:var(--gold);margin:0 0 10px;font-size:1.15rem;border-bottom:1px solid var(--border);padding-bottom:8px}
+.formula{direction:ltr;text-align:center;background:#08140d;border:1px solid var(--border);border-radius:10px;padding:12px;margin:12px 0;font-family:'Courier New',monospace;font-size:1.02rem;color:var(--gold);overflow-x:auto;white-space:pre-line}
+.note{border-right:3px solid var(--gold);background:#1a1508;padding:10px 14px;border-radius:8px;font-size:.9rem;color:#d4c8a0;margin:10px 0}
+.warn{border-right-color:#e57373;background:#2a1212}
+.good{border-right-color:var(--green);background:#122a1a}
+table{width:100%;border-collapse:collapse;font-size:.92rem} th,td{padding:9px;border-bottom:1px solid var(--border);text-align:center} th{color:var(--gold)}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.72rem;font-weight:700;border:1px solid var(--border)}
+.tag.p{background:#123a1a;color:#8bd5a5;border-color:#2e6b45} .tag.e{background:#1a1508;color:var(--gold);border-color:var(--gold)} .tag.s{background:#241a2e;color:#d8a8ff;border-color:#6a3a8a}
+code{background:#132a1d;padding:2px 6px;border-radius:4px;color:var(--gold);direction:ltr}
+a{color:var(--cyan)}
+.nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#0a1a12;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}
+.nav a{background:#132a1d;color:#a5d6a7;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:.85rem}
+.nav a.here{background:var(--gold);color:#0a1a12;font-weight:700}
+.btn{display:inline-block;background:var(--gold);color:#0a1a12;font-weight:700;border:none;padding:10px 18px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.95rem}
+.btn2{background:#132a1d;color:#a5d6a7;border:1px solid var(--border)}
+.out{background:#08140d;border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:12px;font-family:'Courier New',monospace;font-size:.88rem;white-space:pre-line;direction:ltr;text-align:left;overflow-x:auto;min-height:60px;color:#d4e8d4}
+input[type=number]{background:#08140d;color:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 10px;width:110px;font-family:inherit}
+label{font-size:.9rem;color:#d4c8a0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav">
+  <a href="/index.html">🏠 الرئيسية</a>
+  <a href="/handsa.html">📐 handsa</a>
+  <a href="/char-balance.html">⚖️ char-balance</a>
+  <a href="/tree/frame2.html">🌳 frame2</a>
+  <a href="/tree/tree.html">🌀 tree</a>
+  <a href="/tree/tree2.html">🌀 tree2</a>
+  <a href="/tree/tree3.html">📏 tree3</a>
+  <a href="/tree/lab01.html">🧪 lab01</a>
+  <a href="/tree/appendix.html">📜 الملحق</a>
+  <a href="/tree/clarifier.html" class="here">✅ مُزيل الالتباسات v1.2</a>
+</nav>
+
+<h1>✅ مُزيل الالتباسات v1.2 — كل سياق في مكانه</h1>
+<div class="sub">clarifier.html v1.2 · مطابق حرفياً لـ <code>jabri_clarifier_v1.2.py</code><br>م/ عبدالله محمد ناصر الجبري — واحة الجبري</div>
+
+<div class="card">
+<h2>مبدأ v1.2 — يُثبّت في واحة الجبري: الحساب شيء، والتفسير شيء آخر، والبرهان شيء ثالث</h2>
+<div class="note warn"><b>نجاح جميع اختبارات <code>assert</code> يعني أن العلاقات التي اختبرها البرنامج تحققت ضمن شروطه؛ لا يعني أن كل تفسير أو رابط هندسي أو فيزيائي في المشروع قد ثبت.</b><br>لذلك كل قسم هنا يعرض: المعادلة، والاختبار، ودرجة الدليل — ولا يُنقل رقم من قسم لآخر.</div>
+<p>ترتيب الأقسام هنا هو نفسه ترتيب دوال البايثون تماماً. شغّل للمطابقة:</p>
+<div class="formula">python jabri_clarifier_v1.2.py</div>
+<table>
+<tr><th>القسم</th><th>دالة الفحص في v1.2</th><th>ماذا تفحص؟</th></tr>
+<tr><td>0. الجذر ≠ mod 9</td><td><code>check_root_vs_mod9()</code></td><td>1872 جذره 9 وباقيه 0 · mod9(-5)=4</td></tr>
+<tr><td>1. الثلاثة سياقات</td><td><code>check_three_contexts()</code></td><td>متمم / تطبيع / هندسة — فاحص وتر حقيقي</td></tr>
+<tr><td>2. حساب أبجدي</td><td><code>check_char_balance()</code></td><td>753 + 262 = 1015 وفق جدول المشروع</td></tr>
+<tr><td>3. 733</td><td><code>check_733()</code></td><td>أي n ≡ 4 (mod 9) يوفي — باقي موحد</td></tr>
+<tr><td>4. الزوايا الثلاث</td><td><code>check_angles()</code></td><td>22.5° · 56.56° · 54.7356°</td></tr>
+<tr><td>5. المنحنى الموحد</td><td><code>check_unified_curve()</code></td><td>القيم الثلاث · الحالة: فرضية مقترحة</td></tr>
+<tr><td>6. المانجو</td><td><code>check_mango()</code></td><td>CI و TOST معاد حسابهما من البيانات الخام</td></tr>
+<tr><td>7. ملاحظة 21</td><td><code>check_21()</code></td><td>999999 = 3³ × 7 × 11 × 13 × 37</td></tr>
+<tr><td>8. Frame 5</td><td><code>check_frame5_status()</code></td><td>غير مثبت · قائمة تحقق معلّقة</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>0. الجذر الرقمي ≠ باقي mod 9 <span class="tag p">مثبت</span></h2>
+<div class="formula">1872 -> الجذر الرقمي = 9
+1872 -> باقي mod 9 = 0
+mod9(n) = ((n % 9) + 9) % 9  — موحد، يعمل للأعداد السالبة أيضاً</div>
+<table><tr><th>العدد</th><th>الجذر 1-9</th><th>الباقي mod 9</th></tr>
+<tr><td>753</td><td>6</td><td>6</td></tr>
+<tr><td>262</td><td>1</td><td>1</td></tr>
+<tr><td>1015</td><td>7</td><td>7</td></tr>
+<tr><td><b>1872</b></td><td><b>9</b></td><td><b>0</b></td></tr>
+<tr><td><b>-5</b></td><td>5</td><td><b>4</b></td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>1. الثلاثة سياقات — لا تخلط بينها أبداً</h2>
+<table>
+<tr><th>السياق</th><th>القانون</th><th>مثال صحيح</th></tr>
+<tr><td><b>متمم</b> (handsa)</td><td>C + A = 999</td><td>124 + 875 = 999</td></tr>
+<tr><td><b>تطبيع</b> (tree.html)</td><td>Z + C + A = 1</td><td>0.414 + 0.414 + 0.172 = 1</td></tr>
+<tr><td><b>هندسة</b> (tree2)</td><td>Z² + C² = A²</td><td>192² + 290.74² = (348.41606…)²</td></tr>
+</table>
+<div class="note warn"><b>الخطأ الشائع:</b> 369 + 124 + 875 = 1368 ≠ 1 — لأنها أعداد متمم، مش نسباً مطبّعة. الصياغة الصحيحة: <code>C/999 + A/999 = 1</code>.</div>
+<div class="formula">الهندسة (فاحص حقيقي): check_pythagoras(Z,C,A) يرفض غير المنتهي والسالب،
+ويقبل فقط إذا كان |Z²+C²-A²| < 1e-6
+A_exact = hypot(192, 290.74) = 348.41606 ينجح
+residual للوتر المقرب يُحسب في الكود (لا يُكتب يدوياً) · الفاحص يرفض النص و None و NaN و inf
+A = 348.42 (المقرب) يفشل — الباقي 2.7488 > 1e-6</div>
+<div style="background:#08140d;border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:12px">
+<p style="margin:0 0 8px"><b>🧪 جرّب بنفسك — الفاحص يختبر A المدخل فعلاً:</b></p>
+<label>Z <input type="number" id="zIn" value="192"></label>
+<label>C <input type="number" id="cIn" value="290.74"></label>
+<label>A <input type="number" id="aIn" value="348.41606"></label><br><br>
+<button class="btn" onclick="checkAll()">افحص الثلاثة سياقات</button>
+<button class="btn btn2" onclick="loadComplement()">مثال المتمم</button>
+<button class="btn btn2" onclick="loadNorm()">مثال التطبيع</button>
+<button class="btn btn2" onclick="loadRounded()">جرّب المقرب 348.42 (يجب أن يفشل)</button>
+<div id="checkOut" class="out">اضغط "افحص"...</div>
+</div>
+</div>
+
+<div class="card">
+<h2>2. حساب أبجدي وفق جدول المشروع <span class="tag p">تحقق حسابي</span></h2>
+<div class="note"><b>تسمية دقيقة:</b> القيم صحيحة وفق جدول الترميز الذي اعتمده المشروع، وليست قاعدة لغوية أو رياضية عامة.</div>
+<div class="formula">الذكاء = 753 · الاصطناعي = 262 · المجموع = 1015
+الجسر: 1015 mod 9 = 7 ، 124 mod 9 = 7 -> توافق، مش مساواة</div>
+</div>
+
+<div class="card">
+<h2>3. مسألة 733 — ليس فريداً <span class="tag p">مثبت</span></h2>
+<div class="formula">الشرط: n ≡ 4 (mod 9) — بالباقي الموحد
+n = 4, 13, 22, ..., 733, ... كلها توفي بالغرض</div>
+<div style="background:#08140d;border:1px solid var(--border);border-radius:10px;padding:14px">
+<label>جرّب n = <input type="number" id="n733" value="733"></label>
+<button class="btn" onclick="check733()">هل يوفي بالغرض؟</button>
+<div id="out733" class="out">...</div>
+</div>
+<div class="note warn">لا تقل: 733 مشتق أو فريد. أعلنه ثابتاً اصطلاحياً أو احذفه واكتفِ بجسر 1015.</div>
+</div>
+
+<div class="card">
+<h2>4. الزوايا الثلاث — لا تخلط بينها <span class="tag p">علاقات هندسية دقيقة</span></h2>
+<table>
+<tr><th>الزاوية</th><th>القيمة</th><th>دورها</th></tr>
+<tr><td><b>22.5°</b></td><td>tan = √2-1 ≈ 0.4142</td><td>حالة ذهبية</td></tr>
+<tr><td><b>56.56°</b></td><td>arctan(290.74/192)</td><td>مثال عام في tree2 فقط</td></tr>
+<tr><td><b>54.7356°</b></td><td>arccos(1/√3) = arctan(√2)</td><td>زاوية قطر المكعب</td></tr>
+</table>
+<div class="formula">tan(θm) = √2 = tan(22.5°) + 1
+في v1.2: assert مستقل يتحقق من tan(θm) = √2، لا طباعة فقط</div>
+</div>
+
+<div class="card">
+<h2>5. المنحنى الموحد — فرضية، لا برهان <span class="tag e">فرضية مقترحة</span></h2>
+<div class="formula">α*(θ) = tan θ / (tan θ + 2)
+α*(22.5°) = 3 - 2√2 ≈ 0.1716
+α*(45°) = 1/3 ≈ 0.3333
+α*(54.7356°) = √2 - 1 ≈ 0.4142</div>
+<div class="note warn"><b>القرار المعتمد:</b> القيم الثلاث متحققة عددياً، لكن تحققها لا يثبت اشتقاقاً من نظرية هندسية موحدة. يبقى مقترحاً حتى يوجد اشتقاق مستقل.</div>
+<div style="background:#08140d;border:1px solid var(--border);border-radius:10px;padding:14px">
+<label>θ = <input type="number" id="thetaIn" value="22.5"> °</label>
+<button class="btn" onclick="calcAlpha()">احسب α*</button>
+<div id="outAlpha" class="out">...</div>
+</div>
+</div>
+
+<div class="card">
+<h2>6. المانجو — إعادة حساب الإحصاءات المعلنة من البيانات الخام <span class="tag e">استكشافية</span></h2>
+<div class="formula">البيانات الخام (H,h): (7.80,4.50) (8.50,5.00) (7.20,4.20) (9.00,5.40) (7.50,4.40)
+R = (H-h)/H لكل شجرة: 0.42308 · 0.41176 · 0.41667 · 0.40000 · 0.41333
+n=5 · المتوسط = 0.41297 · الانحراف المعياري = 0.00845 · الخطأ المعياري = 0.00378
+90% CI المحسوب = [0.40491 , 0.42102]  — مطابق للمعلن
+TOST بهامش ±0.03: t_low = 7.6090 · t_up = 8.2681 · p = 0.000801  — مطابق للمعلن</div>
+<div class="note warn"><b>القرار المعتمد:</b> أُعيد حساب المتوسط وفاصل الثقة و TOST من البيانات الخام. لكن: التكافؤ مشروط بهامش ±0.03 وافتراضات الاختبار، ولا يثبت قانوناً هندسياً، ولا يعني أن المتوسط يساوي √2-1. الهامش غير موثّق كمسجّل مسبقاً، فيُعامل كنتيجة استكشافية. ولا توجد هنا اختبارات للبيانات الخام نفسها، ولا توثيق لمصدر القياسات أو طريقة أخذ العينة أو استقلال الأشجار.</div>
+</div>
+
+<div class="card">
+<h2>7. ملاحظة 21 — عامل واحد، مش السر <span class="tag e">استكشافية</span></h2>
+<div class="formula">999999 = 21 × 47619
+999999 = 3³ × 7 × 11 × 13 × 37 (التحليل الكامل)</div>
+<div class="note">توافق mod 21 صحيح، لكنه ليس برهان سببية. لـ mod 9 أساس بنيوي مباشر في النظام العشري: 10 ≡ 1 (mod 9)، ومن ثم العدد ≡ مجموع أرقامه (mod 9). أما mod 21 فلا توجد هذه الخاصية نفسها: 10 ≢ 1 (mod 21)، فيبقى توافقه ملاحظة حسابية استكشافية في هذا السياق.</div>
+</div>
+
+<div class="card">
+<h2>8. Frame 5 — غير مثبت حتى التحقق المستقل <span class="tag e">يحتاج تحققاً مستقلاً</span></h2>
+<div class="formula">M = 2π , n = 4π/21 ≈ 0.598399
+C₀ ≈ 0.0058 ، X₁ = [0.01496 , 0.0172]</div>
+<div class="note warn"><b>حالة Frame 5 في v1.2 — غير مثبت:</b><br>☐ تشغيل ملفه الأصلي <code>frame5.py</code> (50 رقم عشري)<br>☐ مراجعة وحل التناقض الظاهري: الجدول يقول S &lt; 0، والتقدير يقول inf S &gt; 0<br>حتى تكتمل القائمتان، لا يوصف بأنه مثبت، ولا يُنقل منه أي رقم على أنه نتيجة نهائية.</div>
+</div>
+
+<div class="card">
+<h2>9. جدول التصنيف الرسمي المعتمد v1.2</h2>
+<table>
+<tr><th>العائلة</th><th>الحالة المعتمدة</th><th>الدليل</th></tr>
+<tr><td><b>أبجد هوز</b></td><td><span class="tag p">تحقق حسابي</span></td><td>وفق جدول المشروع: 753 + 262 = 1015</td></tr>
+<tr><td><b>المتممات</b></td><td><span class="tag p">مثبتة رياضياً</span></td><td>124+875=999 · 369×271=99999</td></tr>
+<tr><td><b>فيثاغورس</b></td><td><span class="tag p">مثبتة رياضياً</span></td><td>فاحص وتر حقيقي · A_exact · شرط &lt; 1e-6</td></tr>
+<tr><td><b>الزوايا</b></td><td><span class="tag p">علاقات هندسية دقيقة</span></td><td>22.5° · 56.56° · 54.7356°</td></tr>
+<tr><td><b>المنحنى الموحد</b></td><td><span class="tag e">فرضية مقترحة</span></td><td>القيم متحققة · الاشتقاق غير موجود</td></tr>
+<tr><td><b>قياسات المانجو</b></td><td><span class="tag e">نتيجة استكشافية</span></td><td>CI و TOST معاد حسابهما · التكافؤ مشروط بهامش ±0.03 غير موثّق كمسجّل مسبقاً</td></tr>
+<tr><td><b>Frame 5</b></td><td><span class="tag e">يحتاج تحققاً مستقلاً</span></td><td>غير مثبت · تناقض S معروض كما هو</td></tr>
+<tr><td><b>فرضية ريمان</b></td><td><span class="tag s">غير مثبتة</span></td><td>لا رابط مثبت</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>10. الخلاصة</h2>
+<div class="formula">المتمم يشرح تكرار 9: C + A = 999
+فيثاغورس يشرح 22.5°: Z² + C² = A²
+المنحنى يربط الزوايا الثلاث: α* = tanθ / (tanθ + 2) — فرضية
+والمانجو تقول: القياس قريب، بس لسه محتاج تحقق مستقل.</div>
+<div class="note">© 2026 م/ عبدالله محمد ناصر الجبري — واحة الجبري · v1.2 — مطابقة لـ jabri_clarifier_v1.2.py · الحساب شيء، والتفسير شيء آخر، والبرهان شيء ثالث. نجاح assert = تحقق العلاقات المختبرة ضمن شروطها.</div>
+</div>
+
+</div>
+<script>
+function mod9(n){ return ((n % 9) + 9) % 9; }
+function checkAll(){
+  const Z = Number(document.getElementById('zIn').value);
+  const C = Number(document.getElementById('cIn').value);
+  const A = Number(document.getElementById('aIn').value);
+  const outEl = document.getElementById('checkOut');
+  if (![Z,C,A].every(Number.isFinite)) {
+    outEl.textContent = 'أدخل ثلاثة أعداد صحيحة أو عشرية صالحة.';
+    return;
+  }
+  let out = '';
+  const comp = Number.isInteger(C) &&
+               Number.isInteger(A) &&
+               C + A === 999;
+  out += `[متمم] C + A = ${C+A} مقابل 999 -> ${comp ? '✓ ينطبق' : '✗ لا ينطبق'}\n`;
+  const norm = Math.abs(Z+C+A-1) < 1e-9;
+  out += `[تطبيع] Z + C + A = ${(Z+C+A).toFixed(9)} مقابل 1 -> ${norm ? '✓ ينطبق' : '✗ لا ينطبق'}\n`;
+  const residual = Math.abs(Z*Z + C*C - A*A);
+  const Aexact = Math.hypot(Z,C);
+  out += `[هندسة] A المدخل = ${A.toFixed(8)}\n`;
+  out += `[هندسة] A المحسوب = ${Aexact.toFixed(8)}\n`;
+  out += `[هندسة] |Z²+C²-A²| = ${residual.toExponential(3)} -> ${residual < 1e-6 ? '✓ ينطبق' : '✗ لا ينطبق'}\n`;
+  out += '\nكل سياق يُفحص بقانونه المستقل.';
+  outEl.textContent = out;
+}
+function loadComplement(){ document.getElementById('zIn').value=369; document.getElementById('cIn').value=124; document.getElementById('aIn').value=875; checkAll(); }
+function loadNorm(){ document.getElementById('zIn').value=0.41421356; document.getElementById('cIn').value=0.41421356; document.getElementById('aIn').value=0.17157288; checkAll(); }
+function loadRounded(){ document.getElementById('zIn').value=192; document.getElementById('cIn').value=290.74; document.getElementById('aIn').value=348.42; checkAll(); }
+function check733(){
+  const n = Number(document.getElementById('n733').value);
+  const ok = mod9(n) === 4;
+  const mod = mod9(1015 + n);
+  document.getElementById('out733').textContent = 'n = '+n+'\n n mod 9 = '+mod9(n)+'  (المطلوب 4)\n (1015+n) mod 9 = '+mod+'  vs  875 mod 9 = 2\n -> '+(ok && mod===2 ? '✓ يوفي بالغرض، مثل 733 تماماً' : '✗ لا يوفي بالغرض')+'\n\nالخلاصة: أي عدد ≡ 4 (mod 9) يوفي، 733 ليس فريداً.';
+}
+function calcAlpha(){
+  const deg=parseFloat(document.getElementById('thetaIn').value);
+  const t=Math.tan(deg*Math.PI/180);
+  const a=t/(t+2);
+  document.getElementById('outAlpha').textContent = 'θ = '+deg+'°\n tan θ = '+t.toFixed(6)+'\n α*(θ) = tan/(tan+2) = '+a.toFixed(6)+'\n\nالقيم المرجعية: 22.5°→0.1716 ، 45°→0.3333 ، 54.7356°→0.4142';
+}
+</script>
+</body>
+</html>

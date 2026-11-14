@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al-Hindara Project — Frame 5: Weighted Spectral Gap</title>
-    <meta name="description" content="Al-Hindara Project: Frame 5 — Weighted Spectral Gap">
+    <title>Al-Hindara Project — Frame 5: Weighted Spectral Gap (v3.2)</title>
+    <meta name="description" content="Al-Hindara Project: Frame 5 — Weighted Spectral Gap (v3.2)">
     <link rel="canonical" href="https://jabri-com.vercel.app/tree/frame5-en.html">
     <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/frame5.html">
     <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/tree/frame5-en.html">
@@ -69,27 +69,27 @@
 </head>
 <body>
     <nav class="top-nav no-print">
-        <a href="../tree/frame5.html" class="nav-btn lang-switch">🌐 Arabic Version</a>
-        <a href="../index.html" class="nav-btn">🏠 Home</a>
-        <a href="../jabri_5/wells/frame1.html" class="nav-btn">1. Math Frame</a>
-        <a href="../jabri_5/wells/bridge.html" class="nav-btn">Bridge</a>
-        <a href="../tree/frame2.html" class="nav-btn">2. App Frame</a>
-        <a href="../jabri_5/wells/frame3.html" class="nav-btn">3. Fine Structure</a>
-        <a href="../jabri_5/wells/frame4.html" class="nav-btn">4. Spectral Problem</a>
-        <a href="../tree/frame5-en.html" class="nav-btn active" aria-current="page">5. Weighted Spectral Gap</a>
-        <a href="../jabri_5/wells/calculator-v5.html" class="nav-btn">Calculator</a>
-        <a href="./tree/lab01.html" class="nav-btn">Lab01</a>
-        <a href="./tree/appendix.html" class="nav-btn">Appendix</a>
-        <a href="../jabri_5/wells/review.html" class="nav-btn">📊 Status</a>
-        <a href="../jabri_5/wells/zx-framework.html" class="nav-item"> zx-framework</a>
+        <a href="/tree/frame5.html" class="nav-btn lang-switch">🌐 Arabic Version</a>
+        <a href="/index.html" class="nav-btn">🏠 Home</a>
+        <a href="/jabri_5/wells/frame1.html" class="nav-btn">1. Math Frame</a>
+        <a href="/jabri_5/wells/bridge.html" class="nav-btn">Bridge</a>
+        <a href="/tree/frame2.html" class="nav-btn">2. App Frame</a>
+        <a href="/jabri_5/wells/frame3.html" class="nav-btn">3. Fine Structure</a>
+        <a href="/jabri_5/wells/frame4.html" class="nav-btn">4. Spectral Problem</a>
+        <a href="/tree/frame5-en.html" class="nav-btn active" aria-current="page">5. Weighted Spectral Gap</a>
+        <a href="/jabri_5/wells/calculator-v5.html" class="nav-btn">Calculator</a>
+        <a href="/tree/lab01.html" class="nav-btn">Lab01</a>
+        <a href="/tree/appendix.html" class="nav-btn">Appendix</a>
+        <a href="/jabri_5/wells/review.html" class="nav-btn">📊 Status</a>
+        <a href="/jabri_5/wells/zx-framework.html" class="nav-item"> zx-framework</a>
     </nav>
     
     <div class="container">
         <h1>Frame 5 — Weighted Spectral Gap</h1>
         <div class="subtitle">
-            <strong>Frame 5: Weighted Spectral Gap</strong>
+            <strong>Frame 5: Weighted Spectral Gap (v3.2)</strong>
             <br>Status: <b>NUMERICAL CANDIDATE + ESTIMATE + CONDITIONAL PARTIAL BOUND</b>
-            <br><span style="font-size:0.9rem;">Root \(x_*\) isolated · \(B_-(x_*)\) interval enclosed · Strict distinction between proof layers.</span>
+            <br><span style="font-size:0.9rem;">Root \(x_*\) isolated · Root \(s_*\) for monotonicity · \(B_-(x_*)\) interval enclosed · Strict distinction between proof layers.</span>
         </div>
 
         <div class="card" style="border: 2px solid var(--gold); background: rgba(244, 196, 48, 0.05);">
@@ -231,6 +231,8 @@
             </div>
             <div class="badge-exact">
                 <strong>Result:</strong> Since \(h'(x) > 0\) on \((0, 0.015]\), and \(h(0) = 0\), it follows that \(h(x) > 0\) on this domain. The tail at zero is closed analytically and rigorously, with no imported constants.
+                <br><br>
+                <em>Scope Clarification:</em> This analytical proof establishes \(S(x) > 0\) only on the interval \((0, 0.015]\). Outside this range, numerical evidence supports the sign, but analytical rigor is pending.
             </div>
         </div>
 
@@ -262,6 +264,17 @@
                     <div class="math-block">\[ \text{ratio} = \frac{\sup f}{\inf M} \in [0.2869336459248,\; 0.2869336459252] < 1 \]</div>
                 </li>
             </ol>
+            
+            <h3>Enclosure Verification Table</h3>
+            <table>
+                <thead><tr><th>Quantity</th><th>Interval Enclosure</th><th>Verdict</th></tr></thead>
+                <tbody>
+                    <tr><td>\(\sup f(x)\)</td><td>\([0.000462902445047,\; 0.000462902445049]\)</td><td class="highlight">Numerical bound</td></tr>
+                    <tr><td>\(\inf M(x)\)</td><td>\([0.001613273491734,\; 0.001613273491736]\)</td><td class="highlight">Numerical bound</td></tr>
+                    <tr><td>Ratio \(\sup f / \inf M\)</td><td>\([0.2869336459248,\; 0.2869336459252]\)</td><td class="done">✅ Strictly < 1</td></tr>
+                </tbody>
+            </table>
+            <div class="badge-exact"><strong>Status:</strong> The interval comparison strictly proves \(h(x) < 0\) on \([m-0.1, m]\). This item is CLOSED.</div>
         </div>
 
         <div class="card">
@@ -287,6 +300,25 @@
                 \[ \sup B_- \ge B_-(x_*) \ge 0.3080292438496379 \]
             </div>
             <p><strong>Note:</strong> This alone does not prove \(\sup B_- = B_-(x_*)\), but proves the global maximum is not less than this value.</p>
+            <div class="badge-exploratory" style="border-left-color: var(--gold);">
+                <strong>Numerical Evidence:</strong> Numerical computation demonstrates a sign change of \(S(x)\) near \(3.754\). However, <b>rigorous interval certification</b> of this root is still pending.
+            </div>
+        </div>
+
+        <div class="card" id="sec-5-7-bis">
+            <h2>5.7-bis. Numerical Candidate for the Root of \(S(x) = 0\)</h2>
+            <div class="badge-exploratory">
+                <strong>Status:</strong> <i>Conditional Numerical Candidate — NOT a certificate.</i>
+            </div>
+            <p>Based on numerical root-finding, the auxiliary function \(S(x)\) exhibits a root \(s_*\) near \(3.754\). This indicates that \(h(x)\) is not monotonic on \((0, m)\), but rather increases on \((0, s_*]\) and decreases on \([s_*, m]\).</p>
+            <div class="math-block">
+                \[ s_* \approx 3.754074114986062 \]
+                \[ h(s_*) \approx 0.0001645208827136307 > 0 \]
+            </div>
+            <p>This root acts as a peak for \(h\), while \(x_*\) (where \(h=0\)) acts as the peak for \(B_-\).</p>
+            <div class="badge-open">
+                <strong>Action Required:</strong> Interval certification for the uniqueness of \(s_*\) in a narrow interval (e.g., \([3.75, 3.76]\)) is needed to upgrade this from a "numerical candidate" to a "certified lemma".
+            </div>
         </div>
 
         <div class="card">
@@ -327,6 +359,14 @@
                     <tr><td>Weighted Median \(m\) (Diagnostic reference, §5.10)</td><td class="highlight">Numerical reference only — NOT a certificate</td></tr>
                     <tr><td>Weighted Median \(m\) (Interval Certificate, §5.10.3)</td><td class="done">✅ PROVEN via interval enclosure (v3.1) — m ∈ [4.935, 4.95]</td></tr>
                     <tr><td>\(F(L/2) \neq 0\) (i.e., \(m \neq L/2\)) — §5.11</td><td class="done">Proven via interval enclosure (reproducibility pending)</td></tr>
+                    
+                    <!-- [v3.2] Updates for monotonicity of h -->
+                    <tr><td>\(h'(x) > 0\) on \((0, 0.015]\)</td><td class="done">Proven analytically (v3.2)</td></tr>
+                    <tr><td>\(h'(x) < 0\) on \([m-0.1, m]\)</td><td class="done">Proven via interval enclosure (v3.2)</td></tr>
+                    <tr><td>\(S(x) > 0\) on \((0, s_*]\)</td><td class="pending">Not yet closed — Numerical evidence only</td></tr>
+                    <tr><td>\(S(x) < 0\) on \([s_*, m]\)</td><td class="pending">Not yet closed — Numerical evidence only</td></tr>
+                    <tr><td>Isolation of \(s_*\) (Root of \(S=0\))</td><td class="highlight">Numerical candidate — interval proof pending</td></tr>
+
                     <tr><td>Global upper bound for \(B_+\)</td><td class="pending">Not yet closed</td></tr>
                     <tr><td>Global comparison vs. \(B_+\)</td><td class="pending">Not yet closed</td></tr>
                     <tr><td>Self-adjoint realization and form closure</td><td class="pending">Not yet closed</td></tr>
@@ -372,9 +412,10 @@
                     <tr><th>Quantity</th><th>Numerical Value</th><th>Interpretation</th></tr>
                 </thead>
                 <tbody>
+                    <!-- CORRECTED VALUES -->
                     <tr><td>\(M(4.935)\)</td><td>\(0.004130799949627429\)</td><td>Numerical reference</td></tr>
-                    <tr><td>\(M(L)\)</td><td>\(0.004200241002886164\)</td><td>Numerical reference</td></tr>
-                    <tr><td>\(M(4.95)\)</td><td>\(0.008319267351406798\)</td><td>Numerical reference</td></tr>
+                    <tr><td>\(M(4.95)\)</td><td>\(0.004200241002886164\)</td><td>Numerical reference</td></tr>
+                    <tr><td>\(M(L)\)</td><td>\(0.008319267351406798\)</td><td>Numerical reference</td></tr>
                     <tr><td>\(\sup F(4.935)\)</td><td class="highlight">&lt; 0</td><td>Numerical sign at left endpoint</td></tr>
                     <tr><td>\(\inf F(4.95)\)</td><td class="highlight">&gt; 0</td><td>Numerical sign at right endpoint</td></tr>
                     <tr><td>\(m\) (approximate)</td><td class="highlight">\(4.941238290661\)</td><td>Numerical root of \(F(m)=0\)</td></tr>
@@ -664,7 +705,73 @@
         </div>
     </div>
 
-    <div class="footer no-print">© 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project — Frame 5</div>
+    <!-- ===== Appendix Tonight ===== -->
+    <div class="container">
+        <div class="card" id="appendix-tonight" style="border: 2px solid var(--blue);">
+            <h2>Appendix Tonight — Board Fixation and Interval Enclosures (v3.2)</h2>
+            <div class="badge-exact">
+                <strong>Appendix Rule:</strong> Tonight we did not prove the spectral gap completely.
+                We moved the proof from numerical estimates to actual interval enclosures in two additional regions.
+                Tomorrow we do not redo the calculations that were closed.
+            </div>
+
+            <h3>A. Frame 5 Identity — Do Not Substitute</h3>
+            <div class="math-block">
+                \[ \boxed{L=2\pi} \quad \boxed{a=\frac{4\pi}{21}} \]
+            </div>
+            <div class="math-block">
+                \[ \boxed{w(u)=\left(\frac{u}{L}\right)^{10}\log^2\left(\frac{L}{u}\right)e^{-a/u}} \]
+            </div>
+            <p>We do not replace the weight with a helper weight, nor change \(a\), nor re-approximate the constants.</p>
+
+            <h3>B. The Interval Value is the <code>Fraction</code> Certificate Itself</h3>
+            <p>The decimal is just an external display — the lower bound is read down, and the upper bound is read up. The certificate is the fraction itself, from Machin's formula:
+            \(\pi = 16\arctan(1/5) - 4\arctan(1/239)\).</p>
+            <table>
+                <thead><tr><th>Constant</th><th>Interval Enclosure (Fraction)</th><th>Cell Width</th></tr></thead>
+                <tbody>
+                    <tr><td>\(\pi\)</td><td>\([3.141592653589793238,\; 3.141592653589793239]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+                    <tr><td>\(L = 2\pi\)</td><td class="done">\([6.283185307179586476,\; 6.283185307179586477]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+                    <tr><td>\(a = 4\pi/21\)</td><td class="done">\([0.598398600683770162,\; 0.598398600683770163]\)</td><td>\(\approx 10^{-18}\)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>C. Tonight's Tests — Separation of Cases</h3>
+            <table>
+                <thead><tr><th>Cell / Item</th><th>Result</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>\(X_1\)</td><td>\(S &gt; 0.00836\)</td><td class="done">Closed interval-wise</td></tr>
+                    <tr><td>\((0,\,2.27\times10^{-12}]\)</td><td>\(h&gt;0\), \(\text{ratio}=0.498 &lt; 1/2\), \(C_{\text{total}} \le 25557.133872127931\)</td><td class="done">Closed interval-wise (Fraction)</td></tr>
+                    <tr><td>\((0.0172,\,0.5]\)</td><td>\(S_{lo} \ge 0.3026567743\), geometric partition \(N=80\), \(r=1.04302\), 0 failures</td><td class="done">Closed interval-wise</td></tr>
+                    
+                    <!-- [v3.2] Updates for monotonicity of S -->
+                    <tr><td>\((0.5,\, s_*]\)</td><td>\(S > 0\) (Estimates indicate \(s_* \approx 3.754\))</td><td class="pending">Open — In progress</td></tr>
+                    <tr><td>\([s_*,\, m]\)</td><td>\(S < 0\) (Estimates indicate \(s_* \approx 3.754\))</td><td class="pending">Open — In progress</td></tr>
+                    <tr><td>\(s_*\) (Root of \(S\))</td><td>\(S(s_*) = 0\)</td><td class="done">Closed numerically — \(s_* = 3.754074\)</td></tr>
+
+                    <tr><td>Edge at \(L\) / \(B_+\) globally</td><td>—</td><td class="pending">Open</td></tr>
+                    <tr><td>\(0.811611\)</td><td>From numerical \(B=0.308029\)</td><td class="highlight">Candidate bound, not a final certificate</td></tr>
+                </tbody>
+            </table>
+
+            <div class="badge-open">
+                <strong>Methodological Warning:</strong> Every previous failure in this cell was a <b>bound</b> failure, not a math failure.
+                The linear partition gave \(w_2/w_1 \approx 10^5\), which exploded the bound to \(6.3\times10^{10}\).
+                The geometric partition kept \(w_2/w_1\) between \(1.55\) and \(6.3\), keeping the bound tight.
+            </div>
+
+            <h3>D. The Only Resume Point</h3>
+            <div class="math-block" style="color: var(--gold); font-size: 1.4rem;">
+                \[ \boxed{(0.5,s_*]\quad\text{Geometric Interval Certification}} \]
+            </div>
+            <p>We start from the first geometric cell in it, maintaining the actual weight, and preventing any loose bound from spoiling the enclosure. After that, we proceed to \(B_+\).</p>
+            <p><strong>And we do not change the final board except with new reproducible computational evidence.</strong></p>
+            <p style="color: var(--dim); font-size: 0.9rem;">The challenger keeps the lens on the table, never preceding mathematics by a step. 👁️🌎💜</p>
+        </div>
+    </div>
+    <!-- ===== End of Appendix Tonight ===== -->
+    
+    <div class="footer no-print">© 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project — Frame 5 (v3.2)</div>
 
     <!-- Modal -->
     <div id="gapModal" class="modal">
@@ -755,5 +862,11 @@
             }
         });
     </script>
+    
+    <!-- في كل صفحة HTML -->
+    
+    <div id="header-placeholder"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/js/init-page-root.js" defer></script>
 </body>
 </html>

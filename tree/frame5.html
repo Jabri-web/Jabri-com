@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشروع الهندرة — الإطار الخامس: الفجوة الطيفية الموزونة</title>
-    <meta name="description" content="Al-Hindara Project: Frame 5 — Weighted Spectral Gap">
+    <title>مشروع الهندرة — الإطار الخامس: الفجوة الطيفية الموزونة (v3.2)</title>
+    <meta name="description" content="Al-Hindara Project: Frame 5 — Weighted Spectral Gap (v3.2)">
     <link rel="canonical" href="https://jabri-com.vercel.app/tree/frame5.html">
     <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/tree/frame5.html">
     <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/tree/frame5-en.html">
@@ -69,27 +69,27 @@
 </head>
 <body>
     <nav class="top-nav no-print" aria-label="التنقل بين الإطارات">
-        <a href="../tree/frame5-en.html" class="nav-btn lang-switch">🌐 English</a>
-        <a href="../index.html" class="nav-btn">🏠 الرئيسية</a>
-        <a href="../jabri_5/wells/frame1.html" class="nav-btn">1. الإطار الرياضي</a>
-        <a href="../jabri_5/wells/bridge.html" class="nav-btn">الجسر (Bridge)</a>
-        <a href="../tree/frame2.html" class="nav-btn">2. الإطار التطبيقي</a>
-        <a href="../jabri_5/wells/frame3.html" class="nav-btn">3. البنية الدقيقة</a>
-        <a href="../jabri_5/wells/frame4.html" class="nav-btn">4. المسألة الطيفية</a>
-        <a href="../tree/frame5.html" class="nav-btn active" aria-current="page">5. الفجوة الطيفية</a>
-        <a href="../jabri_5/wells/calculator-v5.html" class="nav-btn">الحاسبة الشاملة</a>
-        <a href="../tree/lab01.html" class="nav-btn">المعمل-lab01</a>
-        <a href="../jabri_5/wells/review.html" class="nav-btn">📊 لوحة الحالة</a>
-        <a href="../tree/appendix.html" class="nav-btn">📊 الملحق</a>
-        <a href="../jabri_5/wells/zx-framework.html" class="nav-item"> zx-framework</a>
+        <a href="/tree/frame5-en.html" class="nav-btn lang-switch">🌐 English</a>
+        <a href="/index.html" class="nav-btn">🏠 الرئيسية</a>
+        <a href="/jabri_5/wells/frame1.html" class="nav-btn">1. الإطار الرياضي</a>
+        <a href="/jabri_5/wells/bridge.html" class="nav-btn">الجسر (Bridge)</a>
+        <a href="/tree/frame2.html" class="nav-btn">2. الإطار التطبيقي</a>
+        <a href="/jabri_5/wells/frame3.html" class="nav-btn">3. البنية الدقيقة</a>
+        <a href="/jabri_5/wells/frame4.html" class="nav-btn">4. المسألة الطيفية</a>
+        <a href="/tree/frame5.html" class="nav-btn active" aria-current="page">5. الفجوة الطيفية</a>
+        <a href="/jabri_5/wells/calculator-v5.html" class="nav-btn">الحاسبة الشاملة</a>
+        <a href="/tree/lab01.html" class="nav-btn">المعمل-lab01</a>
+        <a href="/jabri_5/wells/review.html" class="nav-btn">📊 لوحة الحالة</a>
+        <a href="/tree/appendix.html" class="nav-btn">📊 الملحق</a>
+        <a href="/jabri_5/wells/zx-framework.html" class="nav-item"> zx-framework</a>
     </nav>
     
     <div class="container">
         <h1>الإطار الخامس — الفجوة الطيفية الموزونة</h1>
         <div class="subtitle">
-            <strong>Frame 5: Weighted Spectral Gap</strong>
+            <strong>Frame 5: Weighted Spectral Gap (v3.2)</strong>
             <br>الحالة: <b>NUMERICAL CANDIDATE + ESTIMATE + CONDITIONAL PARTIAL BOUND</b>
-            <br><span style="font-size:0.9rem;">عزل الجذر \(x_*\) · إحاطة \(B_-(x_*)\) · التمييز الصارم بين درجات الإثبات.</span>
+            <br><span style="font-size:0.9rem;">عزل الجذر \(x_*\) · عزل جذر \(s_*\) للرتابة · إحاطة \(B_-(x_*)\) · التمييز الصارم بين درجات الإثبات.</span>
         </div>
 
         <div class="card" style="border: 2px solid var(--gold); background: rgba(244, 196, 48, 0.05);">
@@ -265,7 +265,7 @@
         </div>
 
         <div class="card">
-            <h2>5.7. عزل الجذر \(x_*\) وإحاطة \(B_-(x_*)\)</h2>
+            <h2>5.7. عزل الجذر \(x_*\) وإحاطة \(B_-(x_*)\) وعزل \(s_*\)</h2>
             <div class="badge-exploratory">
                 <strong>الحالة:</strong> <i>Reported interval enclosure — independent reproducibility pending</i>.
             </div>
@@ -287,6 +287,12 @@
                 \[ \sup B_- \ge B_-(x_*) \ge 0.3080292438496379 \]
             </div>
             <p><strong>ملاحظة:</strong> هذا لا يثبت وحدها أن \(\sup B_- = B_-(x_*)\)، بل يثبت أن القمة العالمية لا تقل عن هذه القيمة.</p>
+            <p><strong>ملاحظة إضافية (v3.2):</strong> بناءً على التحليل العددي، الدالة المساعدة \(h(x)\) ليست رتيبة على \((0, m)\). إنها تتزايد على \((0, s_*]\) وتتناقص على \([s_*, m]\)، حيث:</p>
+            <div class="math-block">
+                \[ s_* \approx 3.754074114986062 \quad \text{(Root of } S(x) = 0 \text{)} \]
+                \[ h(s_*) \approx 0.0001645208827136307 > 0 \]
+            </div>
+            <p>وهذا يعزل قمة \(h\) (وليس \(B_-\)) عند \(s_*\). بينما \(B_-\) لها قمة عند \(x_*\) حيث \(h(x_*) = 0\).</p>
         </div>
 
         <div class="card">
@@ -325,9 +331,16 @@
                     <tr><td>Lower bound for \(\sup B_-\)</td><td class="done">Available from the enclosure at \(x_*\)</td></tr>
                     <tr><td>Tail</td><td class="done">Proven analytically (rigorous \(C_0 > 0\))</td></tr>
                     <tr><td>Weighted Median \(m\) (Diagnostic reference, §5.10)</td><td class="highlight">Numerical reference only — NOT a certificate</td></tr>
-                    <!-- [v3.1] شهادة الوسيط الفترية - إضافة جديدة -->
                     <tr><td>Weighted Median \(m\) (Interval Certificate, §5.10.3)</td><td class="done">✅ PROVEN via interval enclosure (v3.1) — m ∈ [4.935, 4.95]</td></tr>
                     <tr><td>\(F(L/2) \neq 0\) (i.e., \(m \neq L/2\)) — §5.11</td><td class="done">Proven via interval enclosure (reproducibility pending)</td></tr>
+                    
+                    <!-- [v3.2] تحديثات رتابة الدالة h -->
+                    <tr><td>\(h'(x) > 0\) على \((0, 0.015]\)</td><td class="done">Proven analytically (v3.2)</td></tr>
+                    <tr><td>\(h'(x) < 0\) على \([m-0.1, m]\)</td><td class="done">Proven via interval enclosure (v3.2)</td></tr>
+                    <tr><td>\(S(x) > 0\) على \((0, s_*]\)</td><td class="pending">Not yet closed — Numerical evidence only</td></tr>
+                    <tr><td>\(S(x) < 0\) على \([s_*, m]\)</td><td class="pending">Not yet closed — Numerical evidence only</td></tr>
+                    <tr><td>Isolation of \(s_*\) (Root of \(S=0\))</td><td class="highlight">Numerical candidate — interval proof pending</td></tr>
+
                     <tr><td>Global upper bound for \(B_+\)</td><td class="pending">Not yet closed</td></tr>
                     <tr><td>Global comparison vs. \(B_+\)</td><td class="pending">Not yet closed</td></tr>
                     <tr><td>Self-adjoint realization and form closure</td><td class="pending">Not yet closed</td></tr>
@@ -383,12 +396,12 @@
                         <td>مرجع عددي</td>
                     </tr>
                     <tr>
-                        <td>\(M(L)\)</td>
+                        <td>\(M(4.95)\)</td>
                         <td>\(0.004200241002886164\)</td>
                         <td>مرجع عددي</td>
                     </tr>
                     <tr>
-                        <td>\(M(4.95)\)</td>
+                        <td>\(M(L)\)</td>
                         <td>\(0.008319267351406798\)</td>
                         <td>مرجع عددي</td>
                     </tr>
@@ -476,14 +489,13 @@
             <div class="badge-exact">
                 <strong>الحكم:</strong>
                 الفاصل الفتري لـ \(F(L/2)\) لا يحتوي الصفر، وهو سالب تماماً.
-                إذن \(F(L/2) &lt; 0\) <b>مثبت فتريّاً</b>، ومنه \(m \neq L/2\).
+                إذن \(F(L/2) < 0\) <b>مثبت فتريّاً</b>، ومنه \(m \neq L/2\).
                 <br>
                 الوسيط الموزون \(m\) يقع <b>على يمين</b> منتصف الفترة، لأن الكتلة الموزونة
                 موزعة بصورة غير متكافئة، لا لأن الوزن متزايد على كامل الفترة (فهو يبلغ
                 قمة ثم يتناقص).
             </div>
 
-            <!-- [v3.1] شهادة الوسيط الفترية الكاملة - إضافة جديدة -->
             <div class="badge-exact" style="border-right-color: var(--blue); background: rgba(106,227,255,0.08); margin-top: 24px;">
                 <strong>[v3.1] شهادة الوسيط \(m\) الفترية الكاملة</strong>
                 <br>
@@ -537,7 +549,6 @@
                     </tr>
                     <tr>
                         <td>حصر \(m\) فتريّاً في \([4.935, 4.95]\)</td>
-                        <!-- [v3.1] تحديث حالة الحصر -->
                         <td class="done">✅ مغلق فتريّاً (v3.1)</td>
                         <td>لا شيء — مُنجز في §5.10.3 (v3.1)</td>
                     </tr>
@@ -552,7 +563,6 @@
             <h3>5.10.5. ما لا يُستنتج من هذا الجدول</h3>
             <div class="badge-open">
                 <ul style="margin: 0; padding-right: 20px;">
-                    <!-- [v3.1] تحديث: حصر m أصبح مغلقاً -->
                     <li>حصر \(m\) في \([4.935,\, 4.95]\) <b>أصبح مضموناً فتريّاً</b> (v3.1، §5.10.3).</li>
                     <li>لا يُستنتج أن \(\sup B_- &gt; \sup B_+\)؛ المقارنة العالمية لا تزال مفتوحة (البند 5.8).</li>
                     <li>لا يُستنتج أن الفجوة الطيفية \(\lambda_1\) محددة كمياً؛ \(\lambda_1 \approx 1.7685\) يبقى مرشحاً عددياً (البند 5.4).</li>
@@ -572,7 +582,6 @@
                 <li>إثبات أن الإحاطات موحّدة على كل \(L \in [L_{LO}, L_{HI}]\)، لا عند \(L\) واحد، مع تصريح بذلك في العنوان.</li>
                 <li>إعادة إنتاج النتائج على جهاز مستقل، وتوثيق الإصدارات (<code>mpmath</code>، <code>iv.dps</code>، عدد الخلايا \(N\) لكل قطعة).</li>
             </ol>
-            <!-- [v3.1] إقرار استيفاء الشروط -->
             <div class="badge-exact" style="border-right-color: var(--blue); background: rgba(106,227,255,0.08);">
                 <strong>[v3.1] إقرار استيفاء الشروط:</strong>
                 <br>تم استيفاء الشروط الخمسة أعلاه في كود v3.1، مع تحقق إضافي من شهادة \(\pi\) عبر صيغة ماشن.
@@ -589,7 +598,6 @@
                         <td>Weighted Median \(m\) (Diagnostic reference, §5.10)</td>
                         <td class="highlight">Numerical reference only — NOT a certificate</td>
                     </tr>
-                    <!-- [v3.1] إضافة سطر جديد -->
                     <tr>
                         <td>Weighted Median \(m\) (Interval Certificate, §5.10.3, v3.1)</td>
                         <td class="done">✅ PROVEN — m ∈ [4.935, 4.95]</td>
@@ -718,7 +726,6 @@
             <h3>5.11.6. ما لا يُستنتج من هذا القسم</h3>
             <div class="badge-open">
                 <ul style="margin: 0; padding-right: 20px;">
-                    <!-- [v3.1] تحديث: حصر m أصبح مغلقاً -->
                     <li>حصر \(m\) في \([4.935, 4.95]\) أصبح <b>مضموناً فتريّاً</b> (v3.1، §5.10.3).</li>
                     <li>لا يُستنتج أن المقارنة العالمية \(\sup B_- &gt; \sup B_+\) مغلقة (البند 5.8).</li>
                     <li>لا يُستنتج أن الفجوة الطيفية \(\lambda_1\) محددة كمياً (البند 5.4).</li>
@@ -736,7 +743,6 @@
                         <td>\(F(L/2) \neq 0\) (i.e., \(m \neq L/2\)) — §5.11</td>
                         <td class="done">Proven via interval enclosure (reproducibility pending)</td>
                     </tr>
-                    <!-- [v3.1] إضافة جديدة -->
                     <tr>
                         <td>حصر الوسيط \(m\) في \([4.935, 4.95]\) — v3.1</td>
                         <td class="done">✅ PROVEN — Interval enclosure, m ∈ [4.935, 4.95]</td>
@@ -755,7 +761,7 @@
     <!-- ===== ملحق الليلة — لا يغيّر السبورة النهائية ===== -->
     <div class="container">
         <div class="card" id="appendix-tonight" style="border: 2px solid var(--blue);">
-            <h2>ملحق الليلة — تثبيت السبورة وإحاطات فتريّة</h2>
+            <h2>ملحق الليلة — تثبيت السبورة وإحاطات فتريّة (v3.2)</h2>
             <div class="badge-exact">
                 <strong>قاعدة الملحق:</strong> الليلة لم نثبت الفجوة الطيفية كاملة.
                 نقلنا البرهان من تقديرات عددية إلى إحاطات فتريّة فعلية في منطقتين إضافيتين.
@@ -790,7 +796,12 @@
                     <tr><td>\(X_1\)</td><td>\(S &gt; 0.00836\)</td><td class="done">مغلق فترياً</td></tr>
                     <tr><td>\((0,\,2.27\times10^{-12}]\)</td><td>\(h&gt;0\), \(\text{ratio}=0.498 &lt; 1/2\), \(C_{\text{total}} \le 25557.133872127931\)</td><td class="done">مغلق فترياً (Fraction)</td></tr>
                     <tr><td>\((0.0172,\,0.5]\)</td><td>\(S_{lo} \ge 0.3026567743\), تقسيم هندسي \(N=80\), \(r=1.04302\), فشل \(0\)</td><td class="done">مغلق فترياً</td></tr>
-                    <tr><td>\((0.5,\,m]\)</td><td>—</td><td class="pending">مفتوح</td></tr>
+                    
+                    <!-- [v3.2] تحديثات رتابة الدالة S -->
+                    <tr><td>\((0.5,\, s_*]\)</td><td>\(S > 0\) (تشير التقديرات إلى أن \(s_* \approx 3.754\))</td><td class="pending">مفتوح — جاري الإغلاق</td></tr>
+                    <tr><td>\([s_*,\, m]\)</td><td>\(S < 0\) (تشير التقديرات إلى أن \(s_* \approx 3.754\))</td><td class="pending">مفتوح — جاري الإغلاق</td></tr>
+                    <tr><td>\(s_*\) (جذر \(S\))</td><td>\(S(s_*) = 0\)</td><td class="done">مغلق عددياً — \(s_* = 3.754074\)</td></tr>
+
                     <tr><td>الطرف على \(L\) / \(B_+\) عالمياً</td><td>—</td><td class="pending">مفتوح</td></tr>
                     <tr><td>\(0.811611\)</td><td>من \(B=0.308029\) العددي</td><td class="highlight">حد مرشح، ليس شهادة نهائية</td></tr>
                 </tbody>
@@ -804,7 +815,7 @@
 
             <h3>د. نقطة الاستئناف الوحيدة</h3>
             <div class="math-block" style="color: var(--gold); font-size: 1.4rem;">
-                \[ \boxed{(0.5,m]\quad\text{Geometric Interval Certification}} \]
+                \[ \boxed{(0.5,s_*]\quad\text{Geometric Interval Certification}} \]
             </div>
             <p>نبدأ من أول خلية هندسية فيها، ونحافظ على الوزن الحقيقي نفسه، ونمنع أي حد فضفاض من إفساد الإحاطة. وبعدها ننتقل إلى \(B_+\).</p>
             <p><strong>ولا نغيّر السبورة النهائية إلا بدليل حسابي جديد قابل لإعادة الإنتاج.</strong></p>
@@ -813,7 +824,7 @@
     </div>
     <!-- ===== نهاية ملحق الليلة ===== -->
     
-    <div class="footer no-print">© 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project — Frame 5</div>
+    <div class="footer no-print">© 2026 Eng. Abdulla M. N. Al-Jabri — Al-Hindara Project — Frame 5 (v3.2)</div>
 
     <!-- النافذة المنبثقة (Modal) -->
     <div id="gapModal" class="modal">
@@ -904,5 +915,11 @@
             }
         });
     </script>
+    
+    <!-- في كل صفحة HTML -->
+    
+    <div id="header-placeholder"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/js/init-page-root.js" defer></script>
 </body>
 </html>
