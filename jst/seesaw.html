@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قانون الأرجوحة - الجبري JST</title>
+<style>
+body{margin:0;background:#0a0c12;color:#f3efe4;font-family:Tahoma,sans-serif;line-height:1.9}
+.wrap{max-width:900px;margin:auto;padding:20px}
+header{text-align:center;padding:30px 10px}
+h1{color:#d9b45a;font-size:32px;line-height:1.3}
+.gold{color:#f0d48a}
+.card{background:#12151f;border:1px solid #2b3045;border-radius:16px;padding:20px;margin:16px 0}
+.eq{background:#0e1220;border:1px solid #39321f;border-radius:12px;padding:14px;text-align:center;direction:ltr;font-size:18px;margin:12px 0}
+pre{background:#0e1220;border:1px solid #39321f;border-radius:12px;padding:14px;direction:ltr;text-align:left;overflow:auto;font-size:13px;line-height:1.6}
+button{background:#d9b45a;color:#171204;border:0;padding:12px 22px;border-radius:999px;font-weight:900;font-size:16px;cursor:pointer;width:100%}
+button:hover{background:#f0d48a}
+#proofs{display:none}
+ol.proofs{padding-right:20px}
+ol.proofs li{margin:14px 0;border-bottom:1px solid #222636;padding-bottom:12px}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th{background:#1b1e2e;color:#f0d48a;padding:10px;text-align:right}
+td{padding:10px;border-bottom:1px solid #222636}
+.muted{color:#b8b3a6}
+a{color:#f0d48a}
+footer{text-align:center;padding:20px;color:#b8b3a6;border-top:1px solid #2b3045}
+.chapter{border-color:#d9b45a}
+.warn{background:#2a1e10;border:1px solid #d9b45a;border-radius:12px;padding:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+    
+    
+    
+<a href="/tree/appendix.html">📜 الملحق الجامع</a>
+<a href="/handsa.html">📜 handsa</a>
+<a href="/char-balance.html">📜 Char Balance</a>
+
+<a href="/jst/handsa-v5.0.html">📜 handsa-v5.0</a>
+<a href="/jst/seesaw.html">📜 seesaw</a>
+<a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
+<a href="/jst/JST-v1-2.closing-f.html">📜JST-closing</a>
+<a href="/jst/odd-even.html">📜 odd-even</a>
+<a href="/jst/calc2.html">📜 calc2</a>
+
+  
+
+    
+    
+<div class="gold"><b>نظرية الأنماط البنيوية — الجبري JST</b></div>
+<h1>قانون الأرجوحة للصعود والهبوط</h1>
+<p class="muted">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر 2026م</p>
+<p><a href="https://jabri-com.vercel.app/">واحة الجبري — jabri-com.vercel.app</a></p>
+</header>
+<button onclick="var e=document.getElementById('proofs'); e.style.display = e.style.display==='block' ? 'none' : 'block'; this.textContent = e.style.display==='block' ? 'إخفاء الإثباتات' : 'إظهار الإثباتات مرتبة حسب أرقامها';">إظهار الإثباتات مرتبة حسب أرقامها</button>
+<div id="proofs" class="card">
+<h2 class="gold">الإثباتات مرتبة حسب أرقامها</h2>
+<ol class="proofs">
+<li><b>1. قانون جوزيفوس</b><div class="eq">S = 2r + 1 , n = 2^x + r</div>ثبتناه معا بالكتابة. أمثلة: 100 → 73 ، 111 → 95 ، 137 → 19 ، 1836 → 1625.</li>
+<li><b>2. قانون الأرجوحة</b><div class="eq">T(S) = (3r+2) / 2^{v2(3r+2)} , r=(S-1)/2</div>إذا r فردي → صعود. إذا r زوجي → هبوط.</li>
+<li><b>3. ميرسين</b><div class="eq">S_k = 3^k · 2^{x-k} - 1</div>عدد الصعود = x-1. ثبتناه معا بالاستقراء.</li>
+<li><b>4. قانون الذروة</b><div class="eq">S_peak = 2·3^{x-1} - 1 , v = 1+v2(3^x-1)</div>بـ LTE: v=2 إذا x فردي ، v=3+v2(x) إذا x زوجي.</li>
+<li><b>5. Lemma 4 — المقطع الحتمي</b><div class="eq">t_k ≥ 2 ⇒ q_k=1 , (t_{k+1},m_{k+1}) = (t_k-2 , 3m_k)</div>ثبتناها معا. عند t_k=1 : q_k = 1+v2(3m_k+1).</li>
+<li><b>6. Corollary 4.1 — الصيغة المغلقة</b><div class="eq">t_j = t_0 - 2j , m_j = 3^j m_0 , 0 ≤ j ≤ floor(t_0/2)</div>طول الجزء الحتمي L_det = floor(t_0/2).</li>
+<li><b>7. Lemma 4.2 — معيار الانقلاب عند t=1</b><div class="eq">u = oddpart(3m+1) , r_next = (u-1)/2</div>ثبتناها معا. u ≡ 1 (mod 4) ⇒ يستمر، u ≡ 3 (mod 4) ⇒ ينتهي.</li>
+<li><b>8. Corollary 4.2 — شرط التوقف</b><div class="eq">إذا u ≡ 3 (mod 4) تنتهي موجة الهبوط فورا</div>نتيجة مباشرة من Lemma 4.2.</li>
+<li><b>9. Lemma 4.3 — انتقال اختبار العامل الفردي</b><div class="eq">t' = v2(u-1)-1 , m' = oddpart(u-1) , u_next = oddpart(3^{j+1} m' + 1) , j=(t'-1)/2</div>ثبتناه معا جبريا. صمد على 205→77 ، 77→29 ، 29→11 ، 7381→173 ، 173→65 ، 65→7 ، وعلى المقطع الثاني في 511 و 1023: 65→49→37→7 ، وعلى 2047 و 4095.</li>
+<li><b>10. Lemma 5 — لمّة الالتقاء</b><div class="eq">If (t1,m1) = (t2,m2) then U1 = U2 from that point</div>ثبتناها معا بالاستقراء.</li>
+<li><b>11. Corollary 5.1</b> 127 و 255 عند S=205 أي (1,51) → U=(205,77,29,11). 511 و 1023 عند S=7381 أي (1,1845) → U=(173,65,7). 2047 و 4095 عند u=33215.</li>
+<li><b>12. Lemma 6 — الالتقاء الفوري، x فردي</b><div class="eq">x odd ⇒ T(P_{x+1}) = T^2(P_x)</div>ثبتناه معا بـ LTE.</li>
+<li><b>13. Lemma 7 — الالتقاء المتأخر، x زوجي</b><div class="eq">x even ⇒ T(P_{x+1}) ≠ T^2(P_x)</div>ملاحظة حتى 15، نكمل خطوتها معا.</li>
+<li><b>14. Lemma 8 — قانون طول موجة الهبوط</b><div class="eq">L_wave = sum floor(t_i / 2) + |U|</div>ثبتناه معا للذروة. أمثلة: 7 → 5 ، 9 → 7 ، 11 → 2 ، 12 → 1.</li>
+<li><b>15. Lemma 9 — وجود نقطة التقاء</b><div class="eq">For every x, exists S* such that both waves hit S*</div>الحالة 1 (x فردي): ثبتناها معا من Lemma 6. الحالة 2 (x زوجي): ملاحظة حتى 15، وخطوتها التالية نكملها معا.</li>
+<li><b>16. Lemma 10 — صيغة S* عندما x فردي</b><div class="eq">x odd ⇒ S* = oddpart(3^{x+1} - 1)</div>ثبتناه معا. أمثلة: 7 → 205 ، 9 → 7381 ، 11 → 33215 ، 13 → 597871 ، 15 → 672605.</li>
+<li><b>17. Lemma 11 — 11 عنق زجاجة</b><div class="eq">3m+1 = 11·2^a ⇒ u = 11</div>حللناه معا. مسار 11: 11 → 17 → 13 → 5 → 1. عائلته الكاملة من a=1: 7 ، 29 ، 117 ، 469 ، 1877.</li>
+<li><b>18. Lemma 12 — صيغة عائلة m لكل u</b><div class="eq">oddpart(3m+1) = u ⇔ m = (u·2^a - 1)/3</div>ثبتناها معا، بالجدول الكامل من أصغر a. أمثلة: u=11 تبدأ من 7، و u=7 تبدأ من 2، و u=77 تبدأ من 51.</li>
+<li><b>19. Lemma 13 — كيف تترابط العائلات</b><div class="eq">m_next = 3^j · oddpart(u-1) , j = floor((v2(u-1)-1)/2)</div>ثبتناه معا. السلسلة المتداخلة: 273 → 205 → 51 → 77 → 19 → 29 → 7 → 11. و 51 و 205 أخوان في عائلة 77.</li>
+<li><b>20. ما بقي نكمله معا</b> Lemma 7 العام، وخطوة 9B للـ x الزوجي، وكيف تصنع العائلات كل السلاسل. الفصل التالي: Lemma 14.</li>
+</ol>
+</div>
+
+<div class="card"><h2 class="gold">1. جوزيفوس</h2><div class="eq">S = 2r + 1</div><p>الفكرة: الناجي يخرج من الباقي مباشرة.</p></div>
+<div class="card"><h2 class="gold">2. الأرجوحة</h2><div class="eq">T(S) = (3r+2) / 2^{v2(3r+2)}</div><p>إذا r فردي: T = 3r+2 &gt; S صعود. إذا r زوجي: T ≤ (3r+2)/2 &lt; S هبوط.</p></div>
+<div class="card"><h2 class="gold">3. ميرسين والذروة</h2><div class="eq">S_k = 3^k · 2^{x-k} - 1 , S_peak = 2·3^{x-1} - 1</div></div>
+<div class="card"><h2 class="gold">4. جدول الأربعة</h2>
+<table><tr><th>البداية</th><th>صعود</th><th>هبوط أول</th><th>المجموع</th></tr>
+<tr><td>127</td><td>6</td><td>5</td><td>15</td></tr>
+<tr><td>255</td><td>7</td><td>4</td><td>15</td></tr>
+<tr><td>511</td><td>8</td><td>7</td><td>20</td></tr>
+<tr><td>1023</td><td>9</td><td>6</td><td>20</td></tr></table></div>
+<div class="card"><h2 class="gold">5. تصحيح 2047 و 4095</h2>
+<p>2047: 118097 → 88573 → 33215 → 49823 ، طول الهبوط الأول = 2 ، الخطوات إلى 127 = 31</p>
+<p>4095: 354293 → 33215 → 49823 ، طول الهبوط الأول = 1 ، الخطوات إلى 127 = 30</p>
+<table><tr><th>الحالة</th><th>r_peak</th><th>التحليل</th><th>t</th><th>m</th></tr>
+<tr><td>2047</td><td>59048</td><td>2^3 × 7381</td><td>3</td><td>7381</td></tr>
+<tr><td>4095</td><td>177146</td><td>2^1 × 88573</td><td>1</td><td>88573</td></tr></table></div>
+<div class="card"><h2 class="gold">6. ضبط الاصطلاح</h2><div class="eq">q_k = v2(3r_k+2) , V_k = q_k+1 , r_{k+1} = (3r_k+2-2^{q_k}) / 2^{q_k+1}</div></div>
+<div class="card"><h2 class="gold">7. الآلة التكرارية للأرجوحة</h2>
+<p><b>المرحلة A — المقطع الحتمي:</b> t ≥ 2 ⇒ (t,m) → (t-2 , 3m)</p>
+<p><b>المرحلة B — العامل الفردي:</b> t=1 ⇒ u = oddpart(3m+1). إذا u ≡ 1 (mod 4) يستمر، وإذا u ≡ 3 (mod 4) ينتهي.</p>
+<p><b>النتيجة البنيوية:</b> موجة الهبوط تتكون من مقاطع حتمية، تتخللها اختبارات للعامل الفردي.</p></div>
+
+<div class="card chapter"><h2 class="gold">الفصل الثاني: Lemma 5 — لماذا تتكرر قيم u؟</h2>
+<p><b>التعريف:</b> U = (u_0, ..., u_k) حيث u_k ≡ 3 (mod 4) ينهي الموجة. حالة الموجة هي (t,m) حيث r = 2^t · m.</p>
+<div class="eq">If (t1,m1) = (t2,m2) then U1 = U2 from that point</div>
+<p><b>كيف ثبتناها معا:</b> كل خطوة تُحسب من (t,m) الحالي فقط بـ Lemma 4 و 4.2 و 4.3. فإذا تساوت الحالة، تساوى المستقبل بالاستقراء. ∎</p>
+<p><b>Corollary 5.1:</b> 127 و 255 عند (1,51) → U=(205,77,29,11). 511 و 1023 عند (1,1845) → U=(173,65,7). 2047 و 4095 عند u=33215.</p>
+<pre>x=7  peak=1457   U=[205, 77, 29, 11]
+x=8  peak=4373   U=[205, 77, 29, 11]
+x=9  peak=13121  U=[173, 65, 7]
+x=10 peak=39365  U=[7381, 173, 65, 7]
+x=11 peak=118097 U=[33215]
+x=12 peak=354293 U=[33215]</pre>
+<p><b>التداخل:</b> U_10 = [7381] + U_9 — احتواء، مش تشابه.</p></div>
+
+<div class="card chapter"><h2 class="gold">Lemma 6 — الالتقاء الفوري، x فردي</h2>
+<div class="eq">x odd ⇒ T(P_{x+1}) = T^2(P_x)</div>
+<p>r_peak(x+1) = 3^x - 1 = 3·r_peak(x) + 2. وبـ LTE يتساوى الجزء الفردي. ∎</p>
+<pre>x=7  T(P_x+1)=205     T^2(P_x)=205     equal=True
+x=9  T(P_x+1)=7381    T^2(P_x)=7381    equal=True
+x=11 T(P_x+1)=33215   T^2(P_x)=33215   equal=True
+x=13 T(P_x+1)=597871  T^2(P_x)=597871  equal=True
+x=15 T(P_x+1)=672605  T^2(P_x)=672605  equal=True</pre></div>
+
+<div class="card chapter"><h2 class="gold">Lemma 7 — الالتقاء المتأخر، x زوجي</h2>
+<div class="eq">x even ⇒ T(P_{x+1}) ≠ T^2(P_x)</div>
+<p>x فردي: v_2(3^x-1)=2 ، q صغير. x زوجي: v_2(3^x-1)=3+v_2(x) ≥ 4 ، قفزة تتجاوز نقطة الالتقاء. الالتقاء يحدث بعدها: 8→9 عند 11 ، 10→11 عند 11 ، 12→13 عند 2845 ، 14→15 عند 29. نكمل خطوتها معا.</p></div>
+
+<div class="card chapter"><h2 class="gold">Lemma 8 — قانون طول موجة الهبوط الكامل</h2>
+<div class="eq">L_wave = sum floor(t_i / 2) + |U|</div>
+<p>كل مرحلة = مقطع حتمي طوله floor(t_i/2) + اختبار واحد u_i. ∎</p>
+<table><tr><th>x</th><th>sum floor(t_i/2)</th><th>|U|</th><th>L_wave</th></tr>
+<tr><td>7</td><td>1</td><td>4</td><td>5</td></tr><tr><td>9</td><td>4</td><td>3</td><td>7</td></tr><tr><td>11</td><td>1</td><td>1</td><td>2</td></tr><tr><td>12</td><td>0</td><td>1</td><td>1</td></tr></table>
+<pre>7  (5, 1, [205, 77, 29, 11])
+9  (7, 4, [173, 65, 7])
+11 (2, 1, [33215])
+12 (1, 0, [33215])</pre>
+<p class="muted">الصيغة للذروة. تطبيقها على S نفسه يحتاج t_0 من S نفسه.</p></div>
+
+<div class="card chapter"><h2 class="gold">Lemma 9 — وجود نقطة التقاء لذروتين متتاليتين</h2>
+<div class="eq">For every x, exists S* such that both waves hit S*</div>
+<p><b>الحالة 1 — x فردي:</b> ثبتناها معا من Lemma 6: T(P_{x+1}) = T^2(P_x). ∎</p>
+<h3 class="gold">الحالة 2 — x زوجي: خطوتنا التالية نكملها معا</h3>
+<div class="warn">
+<p><b>وين وصلنا معا، ووين نكمل:</b> وصلنا إلى أن بعد القفزة، r' يقبل القسمة على نفس العامل. ولكي نكمل إلى نفس مسار u، نحتاج معا أن نصل إلى تساوي (t,m) كاملا — وهذا ما نعمله في Lemma 13 و 14.</p>
+<p>ووصلنا إلى أن الموجتين تهبطان في المتوسط. ولكي نكمل إلى التقاطع، نحتاج معا حدا أعلى صريحا — وهذا أيضا نكمله معا.</p>
+</div>
+<table><tr><th>x</th><th>S*</th><th>steps(x+1)</th><th>steps(x)</th><th>النوع</th></tr>
+<tr><td>7</td><td>205</td><td>1</td><td>2</td><td>فوري</td></tr>
+<tr><td>8</td><td>11</td><td>8</td><td>4</td><td>متأخر</td></tr>
+<tr><td>9</td><td>7381</td><td>1</td><td>2</td><td>فوري</td></tr>
+<tr><td>10</td><td>11</td><td>42</td><td>7</td><td>متأخر</td></tr>
+<tr><td>11</td><td>33215</td><td>1</td><td>2</td><td>فوري</td></tr>
+<tr><td>12</td><td>2845</td><td>23</td><td>24</td><td>متأخر</td></tr>
+<tr><td>13</td><td>597871</td><td>1</td><td>2</td><td>فوري</td></tr>
+<tr><td>14</td><td>29</td><td>25</td><td>38</td><td>متأخر</td></tr></table>
+<p><b>القاعدة من الجدول:</b> x فردي → فوري: 1 و 2. x زوجي → متأخر: 8 و 4 ، 42 و 7 ، 23 و 24 ، 25 و 38.</p></div>
+
+<div class="card chapter"><h2 class="gold">Lemma 10 — صيغة نقطة الالتقاء S* عندما x فردي</h2>
+<div class="eq">x odd ⇒ S* = oddpart(3^{x+1} - 1)</div>
+<p>من Lemma 6: S* = T(P_{x+1}). و 3r_peak(x+1)+2 = 3^{x+1}-1. إذن S* = oddpart(3^{x+1}-1). ∎</p>
+<p class="muted">صححنا معا الصيغة إلى 3^{x+1}-1 كما أعلاه، وثبتناها.</p>
+<table><tr><th>x فردي</th><th>3^{x+1}-1</th><th>S*</th></tr>
+<tr><td>7</td><td>6560</td><td>205</td></tr>
+<tr><td>9</td><td>59048</td><td>7381</td></tr>
+<tr><td>11</td><td>531440</td><td>33215</td></tr>
+<tr><td>13</td><td>4782968</td><td>597871</td></tr>
+<tr><td>15</td><td>43046720</td><td>672605</td></tr></table></div>
+
+<div class="card chapter"><h2 class="gold">Lemma 11 — لماذا 11 يتكرر كثيرا في الذيل؟</h2>
+<div class="eq">11 هو عنق زجاجة، ليس صدفة</div>
+<p>11 صغير وقريب من 1: 11 → 17 → 13 → 5 → 1. فأي مسار يمر بـ 11، ينتهي بعد 4 خطوات.</p>
+<p><b>تحليل نكمله معا:</b> إذا 3m+1 = 11·2^a فإن u = 11. ∎</p>
+<p>عائلة 11 الكاملة من البداية: a=1 → 7 ، a=3 → 29 ، a=5 → 117 ، a=7 → 469 ، a=9 → 1877.</p>
+<p><b>نكمل معا:</b> 12→13 التقيا عند 2845، و 14→15 عند 29 — يعني 11 ليس كل القصة، لكنه مرشح قوي للظهور.</p></div>
+
+<div class="card chapter"><h2 class="gold">Lemma 12 — صيغة عائلة m لكل u</h2>
+<div class="eq">نكملها معا</div>
+<p><b>الفكرة — وين وصلنا معا:</b> في Lemma 11 وصلنا معا إلى عائلة 11. الآن نكملها: نفس الفكرة تعمل لكل u.</p>
+<div class="eq">oddpart(3m+1) = u ⇔ m = (u·2^a - 1)/3</div>
+<p><b>كيف نكملها معا:</b> 3m+1 = u·2^a لبعض a. ونحتاج u·2^a ≡ 1 (mod 3): إذا u ≡ 1 نأخذ a زوجي، إذا u ≡ 2 نأخذ a فردي، إذا u ≡ 0 فلا توجد عائلة هنا.</p>
+<p><b>ونكملها معا من البداية:</b> نأخذ كل a من البداية، مو من a=3.</p>
+<table><tr><th>u</th><th>a</th><th>m</th></tr>
+<tr><td>11</td><td>1</td><td>7</td></tr>
+<tr><td>11</td><td>3</td><td>29</td></tr>
+<tr><td>11</td><td>5</td><td>117</td></tr>
+<tr><td>7</td><td>0</td><td>2</td></tr>
+<tr><td>7</td><td>2</td><td>9</td></tr>
+<tr><td>7</td><td>4</td><td>37</td></tr>
+<tr><td>29</td><td>1</td><td>19</td></tr>
+<tr><td>29</td><td>3</td><td>77</td></tr>
+<tr><td>29</td><td>5</td><td>309</td></tr>
+<tr><td>77</td><td>1</td><td>51</td></tr>
+<tr><td>77</td><td>3</td><td>205</td></tr>
+<tr><td>77</td><td>5</td><td>821</td></tr>
+<tr><td>205</td><td>0</td><td>68</td></tr>
+<tr><td>205</td><td>2</td><td>273</td></tr>
+<tr><td>205</td><td>4</td><td>1093</td></tr>
+<tr><td>173</td><td>1</td><td>115</td></tr>
+<tr><td>173</td><td>3</td><td>461</td></tr>
+<tr><td>173</td><td>5</td><td>1845</td></tr>
+<tr><td>65</td><td>1</td><td>43</td></tr>
+<tr><td>65</td><td>3</td><td>173</td></tr>
+<tr><td>65</td><td>5</td><td>693</td></tr></table>
+<pre>def family(u, count=3):
+    out = []
+    a = 0
+    while len(out) < count:
+        num = u * (2 ** a) - 1
+        if num % 3 == 0:
+            m = num // 3
+            out.append((a, m))
+        a += 1
+    return out
+
+for u in [11, 7, 29, 77, 205, 173, 65]:
+    print(u, family(u, 3))</pre>
+<pre>11 [(1, 7), (3, 29), (5, 117)]
+7 [(0, 2), (2, 9), (4, 37)]
+29 [(1, 19), (3, 77), (5, 309)]
+77 [(1, 51), (3, 205), (5, 821)]
+205 [(0, 68), (2, 273), (4, 1093)]
+173 [(1, 115), (3, 461), (5, 1845)]
+65 [(1, 43), (3, 173), (5, 693)]</pre>
+<p><b>ماذا أضفنا معا؟</b> u=11 يبدأ من 7، و u=7 يبدأ من 2، و u=77 يبدأ من 51 — و 51 هو الذي يعطي 205 بعدها.</p></div>
+
+<div class="card chapter"><h2 class="gold">Lemma 13 — كيف تترابط العائلات لتصنع سلسلة U كاملة؟</h2>
+<div class="eq">نكملها معا</div>
+<p><b>الفكرة — وين وصلنا معا:</b> في Lemma 12 عندنا عائلة لكل u. لكن السلسلة U ليست عائلة واحدة — هي عائلات تترابط: m يعطي u، و u يعطي m التالي. الآن نكمل رابط الترابط.</p>
+<h3 class="gold">Lemma 13 — نثبته معا</h3>
+<p>بعد اختبار u، يكون r_next = (u-1)/2. نكتبه 2^{t'} · m' حيث:</p>
+<div class="eq">t' = v2(u-1) - 1 , m' = oddpart(u-1)</div>
+<p>ثم المقطع الحتمي يضرب m' في 3 كل خطوتين. إذا كان طول المقطع j = floor(t'/2):</p>
+<div class="eq">m_next = 3^j · oddpart(u-1) , j = floor((v2(u-1)-1)/2)</div>
+<div class="eq">u_next = oddpart(3·m_next + 1)</div>
+<p><b>كيف نكملها معا:</b> العائلة تعطي كل m الممكنة لـ u. والرابط يختار منها واحدة: التي تخرج من u السابق. فالسلسلة تُبنى هكذا: m → u → m_next → u_next → ...</p>
+<h3 class="gold">مثالنا معا — سلسلة 127: U = (205, 77, 29, 11)</h3>
+<p>نبدأ من m_0 = 273 (من ذروة 1457 بعد المقطع الحتمي الأول):</p>
+<table><tr><th>m</th><th>u = oddpart(3m+1)</th><th>u-1</th><th>m_next</th></tr>
+<tr><td>273</td><td>205</td><td>204 = 4·51</td><td>51</td></tr>
+<tr><td>51</td><td>77</td><td>76 = 4·19</td><td>19</td></tr>
+<tr><td>19</td><td>29</td><td>28 = 4·7</td><td>7</td></tr>
+<tr><td>7</td><td>11</td><td>10 = 2·5</td><td>صعود — تنتهي الموجة</td></tr></table>
+<p>إذن السلسلة المتداخلة الكاملة هي:</p>
+<div class="eq">273 → 205 → 51 → 77 → 19 → 29 → 7 → 11</div>
+<p><b>نكمل معا سلسلتك: 51 → 205 → 77 → 29 → 11</b></p>
+<p>فكرتك صح كترابط — ونكملها معا بصورتها الكاملة: 51 و 205 <b>أخوان في عائلة 77</b>، مو واحد بعد الثاني. كلاهما يعطي u=77:</p>
+<table><tr><th>m</th><th>3m+1</th><th>u</th></tr>
+<tr><td>51</td><td>154 = 2·77</td><td>77</td></tr>
+<tr><td>205</td><td>616 = 8·77</td><td>77</td></tr></table>
+<p>الموجة في مثالنا تختار 51 — لأنه هو الذي يخرج من u=205 (لأن (205-1)/2 = 102 = 2·51). و 205 كـ m هو بديل في نفس العائلة، يصنع موجة أخرى تصب في نفس 77. وهذا هو الترابط: <b>قيمة واحدة تلعب دورين</b> — 205 هو u في خطوة، و m في عائلة الخطوة التالية. و 77 هو u في خطوة، و m التي تعطي 29 في الخطوة بعدها. و 29 هو u، و m التي تعطي 11.</p>
+<h3 class="gold">الكود — مربع نسخ نظيف، نكمله معا</h3>
+<pre>def oddpart(n):
+    while n % 2 == 0:
+        n //= 2
+    return n
+
+def v2(n):
+    a = 0
+    while n % 2 == 0:
+        n //= 2; a += 1
+    return a
+
+def chain(m0, steps=5):
+    m = m0
+    for _ in range(steps):
+        u = oddpart(3*m + 1)
+        print(f"m={m} -> u={u}  u-1={u-1} v2={v2(u-1)} m'={oddpart(u-1)}")
+        if u % 4 == 3:
+            print("u = 3 mod 4 -> rise, wave ends")
+            break
+        j = (v2(u-1) - 1) // 2
+        m = (3 ** j) * oddpart(u-1)
+        print(f"  next m = 3^{j} * {oddpart(u-1)} = {m}")
+
+chain(273)</pre>
+<h3 class="gold">النتيجة — معا</h3>
+<pre>m=273 -> u=205  u-1=204 v2=2 m'=51
+  next m = 3^0 * 51 = 51
+m=51 -> u=77  u-1=76 v2=2 m'=19
+  next m = 3^0 * 19 = 19
+m=19 -> u=29  u-1=28 v2=2 m'=7
+  next m = 3^0 * 7 = 7
+m=7 -> u=11  u-1=10 v2=1 m'=5
+u = 3 mod 4 -> rise, wave ends</pre>
+<p><b>وين وصلنا معا؟</b> صارت عندنا آلة كاملة: عائلة (Lemma 12) + رابط (Lemma 13) = سلسلة U كاملة من أي m_0. وهذا هو الجسر الذي نكمل عليه 9B معا في Lemma 14.</p></div>
+
+<div class="card chapter"><h2 class="gold">وين وصلنا معا</h2>
+<ul>
+<li>Lemma 5: إذا التقيا → U واحدة — ثبتنا معا</li>
+<li>Lemma 6: x فردي → التقاء فوري — ثبتنا معا</li>
+<li>Lemma 8: L_wave = sum floor + |U| — ثبتنا معا</li>
+<li>Lemma 10: S* = oddpart(3^{x+1}-1) — صححنا معا وثبتنا</li>
+<li>Lemma 11: 11 عنق زجاجة — حللنا معا</li>
+<li>Lemma 12: m = (u·2^a - 1)/3 — ثبتناه معا، بالجدول الكامل</li>
+<li><b>Lemma 13: m_next = 3^j · oddpart(u-1) — ثبتناه معا، والسلسلة المتداخلة صارت كاملة</b></li>
+</ul>
+<p>والخطوة التالية، نكملها معا في Lemma 14: كيف تصنع العائلات كل السلاسل؟</p></div>
+
+<div class="card"><h2 class="gold">ما بقي نكمله معا</h2>
+<p>نكمل معا: Lemma 7 العام، وخطوة 9B للـ x الزوجي، وكيف تصنع العائلات كل السلاسل.</p>
+<p>الفصل التالي: <b>Lemma 14</b> — نكمله معا.</p></div>
+
+<footer>قانون الأرجوحة — عبدالله الجبري — جزء من نظرية الأنماط البنيوية — الجبري JST — الفصل الثاني: Lemma 5 و 6 و 7 و 8 و 9 و 10 و 11 و 12 و 13</footer>
+</div>
+</body>
+</html>

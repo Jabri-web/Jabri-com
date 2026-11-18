@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دفتر التحقق — 360 | 1-8 — نسخة v5 — نهائية</title>
+<style>
+body{font-family:system-ui;max-width:950px;margin:auto;padding:16px;line-height:1.9;background:#fff;color:#111}
+h1{text-align:center}
+.badge{display:inline-block;border:1px solid #999;border-radius:20px;padding:2px 10px;margin:2px;font-size:13px}
+.box{border:1px solid #ccc;border-radius:12px;padding:14px;margin:14px 0}
+.warn{border:1px solid #c00;background:#fff5f5;border-radius:10px;padding:10px;margin:10px 0}
+.ok{border:1px solid #080;background:#f0fff0;border-radius:10px;padding:10px;margin:10px 0}
+.formula{text-align:center;background:#f6f6f6;border-radius:8px;padding:10px;margin:10px 0;direction:ltr}
+button{background:#111;color:#fff;border:0;border-radius:8px;padding:7px 14px;margin:4px;cursor:pointer}
+.proof{display:none;background:#f0f7ff;border-radius:8px;padding:10px;margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}th,td{border:1px solid #ccc;padding:6px;text-align:center}
+.foot{border-top:1px solid #ccc;margin-top:30px;padding-top:10px;font-size:13px;color:#555}
+code{background:#f4f4f4;padding:2px 5px;border-radius:4px}
+</style>
+<script>
+function t(id){var e=document.getElementById(id);e.style.display=(e.style.display==='block')?'none':'block';}
+function all(o){document.querySelectorAll('.proof').forEach(function(e){e.style.display=o?'block':'none';});}
+</script>
+</head>
+<body>
+  
+
+<a href="/tree/appendix.html">📜 الملحق الجامع</a>
+<a href="/handsa.html">📜 handsa</a>
+<a href="/char-balance.html">📜 Char Balance</a>
+
+<a href="/jst/handsa-v5.0.html">📜 handsa-v5.0</a>
+<a href="/jst/seesaw.html">📜 seesaw</a>
+<a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
+<a href="/jst/JST-v1-2.closing-f.html">📜JST-closing</a>
+<a href="/jst/odd-even.html">📜 odd-even</a>
+<a href="/jst/calc2.html">📜 calc2</a>
+  
+  <p class="muted">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر 2026م</p>
+<p><a href="https://jabri-com.vercel.app/">واحة الجبري — jabri-com.vercel.app</a></p>
+  
+  
+  
+<h1>🌹 دفتر التحقق — 360<br><small>1 إلى 8...(version 5.0)</small></h1>
+<p style="text-align:center"><button onclick="all(1)">افتح كل البراهين</button> <button onclick="all(0)">أغلق كل البراهين</button></p>
+
+<h2>أولاً — ما هي المشكلة؟</h2>
+<div class="box">
+<p><b>المعطى:</b> عدد أولي $p$ يقسم عدداً من الشكل $360^{2^{k-1}}+1$، مع $k \ge 3$، بحيث تكون رتبة 360 عنده هي بالضبط $\text{ord}_p(360)=2^k$.</p>
+<p><b>السؤال:</b> ما قيمة رمز القوة الرابعة للعدد 360 عند $p$؟</p>
+<div class="formula">Q<sub>4</sub>(360) = 360<sup>(p-1)/4</sup> mod p</div>
+<p><b>لماذا السؤال صعب؟</b> رمز ليجاندر $(360/p)$ يعطي المربع فقط، لا القيمة نفسها. و $p \bmod 16$ لا يحدد $Q_4(2)$، و $p \bmod 5$ لا يحدد $Q_4(5)$.</p>
+<p><b>التمثيل:</b> $p=a^2+b^2$، $a \equiv 1 \pmod 4$، $4 \mid b$، $\pi=a+bi$.</p>
+</div>
+
+<h2>ثانياً — القانون العام</h2>
+<div class="box">
+<p><b>الفرضيات:</b> $p$ أولي، $p \mid 360^{2^{k-1}}+1$، $\text{ord}_p(360)=2^k$، $k\ge 3$، $p=a^2+b^2$ بالتطبيع أعلاه.</p>
+<div class="formula">Q<sub>4</sub>(360) = (3/p) · (-1)<sup>b/4</sup> · (π/ρ<sub>1</sub>)<sub>4</sub> · (π/ρ<sub>2</sub>)<sub>4</sub></div>
+<p>حيث $\rho_1=-1+2i$، $\rho_2=-1-2i$. المدخلات فقط: $b \bmod 8$، $a+3b \bmod 5$، $a+2b \bmod 5$، $(3/p)$.</p>
+<table><tr><th>العدد</th><th>Q4(2)</th><th>Q4(5)</th><th>(3/p)</th><th>Q4(360)</th></tr>
+<tr><td>97</td><td>-1</td><td>i</td><td>+1</td><td>-i</td></tr>
+<tr><td>353</td><td>+1</td><td>-i</td><td>-1</td><td>+i</td></tr>
+<tr><td>p3</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td></tr>
+<tr><td>N6</td><td>+1</td><td>+1</td><td>+1</td><td>+1</td></tr></table>
+</div>
+
+<h2>المرحلة 1 — الرتبة</h2>
+<div class="box"><div class="formula">ord<sub>p</sub>(360)=2<sup>k</sup> ⟹ p ≡ 1 (mod 2<sup>k</sup>)</div>
+<button onclick="t('p1')">برهان 1-1</button>
+<div class="proof" id="p1">بما أن p | 360<sup>2<sup>k-1</sup></sup>+1، فإن 360<sup>2<sup>k-1</sup></sup> ≡ -1 (mod p). والعدد 360<sup>2<sup>k-1</sup></sup>+1 فردي، وبالتالي p فردي، إذن -1 ≢ 1 (mod p). ومن ثم لا تقسم رتبة 360 العدد 2<sup>k-1</sup>. ومن جهة أخرى 360<sup>2<sup>k</sup></sup> ≡ 1 (mod p)، إذن الرتبة تقسم 2<sup>k</sup>. وبما أن قواسم قوى 2 مرتبة، نحصل على ord<sub>p</sub>(360)=2<sup>k</sup>. وبحسب لاغرانج: 2<sup>k</sup> | p-1، أي p ≡ 1 (mod 2<sup>k</sup>). <b>ملاحظة:</b> p ∤ 360 ليست افتراضاً مستقلاً، بل نتيجة مباشرة من 360<sup>2<sup>k-1</sup></sup> ≡ -1.</div></div>
+
+<h2>المرحلة 2 — القيد + تصحيح v2</h2>
+<div class="box"><div class="formula">(360/p) = (2/p)·(5/p)</div>
+<button onclick="t('p2a')">برهان 2-1: التحليل</button>
+<div class="proof" id="p2a">360=2<sup>3</sup>·3<sup>2</sup>·5. وبما أن p ∤ 360، فإن p ≠ 3 و p ≠ 5، فرموز ليجاندر معرّفة. إذن (360/p)=(2/p)<sup>3</sup>(3/p)<sup>2</sup>(5/p)=(2/p)(5/p)، لأن (2/p)=±1 و (3/p)<sup>2</sup>=1. <b>استبعاد p=5:</b> من المعطى 360<sup>2<sup>k-1</sup></sup>+1 ≡ 1 (mod 5)، إذن p ≠ 5 أيضاً.</div>
+<button onclick="t('p2b')">برهان 2-2: التصحيح</button>
+<div class="proof" id="p2b">من المرحلة 1: 2<sup>k</sup> | p-1. نكتب (p-1)/2 = 2<sup>k-1</sup>·(p-1)/2<sup>k</sup>. وباستخدام 360<sup>2<sup>k-1</sup></sup> ≡ -1 نحصل على 360<sup>(p-1)/2</sup> ≡ (-1)<sup>(p-1)/2<sup>k</sup></sup>. وبمعيار أويلر 360<sup>(p-1)/2</sup> ≡ (360/p). إذن (360/p) = -1 إذا v<sub>2</sub>(p-1)=k، و +1 إذا v<sub>2</sub>(p-1)&gt;k، لأن (p-1)/2<sup>k</sup> فردي في الأولى وزوجي في الثانية. ومن p ≡ 1 (mod 8) نحصل على (2/p)=+1، إذن (360/p)=(5/p).</div></div>
+
+<h2>المرحلة 3 — N6 أولي</h2>
+<div class="box"><div class="formula">N<sub>6</sub>=360<sup>32</sup>+1 — أولي</div>
+<button onclick="t('p3')">برهان 3-1: Pocklington</button>
+<div class="proof" id="p3">N<sub>6</sub>-1=2<sup>96</sup>·3<sup>64</sup>·5<sup>32</sup>، F=N<sub>6</sub>-1 &gt; √N<sub>6</sub>. الشاهد a=7: 7<sup>N-1</sup>≡1، و gcd(7<sup>(N-1)/q</sup>-1,N)=1 لكل q∈{2,3,5}. إذن أولي. <b>أُعيد حساب التحليل والقوى والـ gcds مستقلاً، وهي شهادة كاملة لا اختباراً احتمالياً.</b></div></div>
+
+<h2>المرحلة 4 — لمّة d=s-k</h2>
+<div class="box"><div class="formula">360 قوة 2<sup>t</sup> ⟺ t ≤ d</div>
+<button onclick="t('p4')">برهان 4-1</button>
+<div class="proof" id="p4"><b>التعريفات:</b> s=v<sub>2</sub>(p-1)، d=s-k. وبما أن 2<sup>k</sup> | p-1، فإن 0 ≤ d &lt; s لأن k ≥ 1.<br><b>إثبات v<sub>2</sub>(e)=d والجزء الفردي:</b> اكتب p-1=2<sup>s</sup>u مع u فردياً. باختيار مولد g و 360=g<sup>e</sup>، رتبة 360 هي (2<sup>s</sup>u)/gcd(2<sup>s</sup>u,e). وبما أنها تساوي 2<sup>k</sup>، فإن gcd(2<sup>s</sup>u,e)=2<sup>s-k</sup>u=2<sup>d</sup>u. <b>تصحيح مهم:</b> القاسم المشترك هو 2<sup>d</sup>u، لا 2<sup>d</sup> وحده. ومنه نحصل على أمرين معاً: v<sub>2</sub>(e)=d <b>و</b> u | e. أما القول gcd(u,e)=1 فهو خطأ، والصحيح هو العكس: u يقسم e.<br><b>معنى «قوة 2<sup>t</sup>»:</b> المقصود وجود x بحيث 360=x<sup>2<sup>t</sup></sup>، أي صورة تحت التطبيق x ↦ x<sup>2<sup>t</sup></sup>، وهذا يكافئ gcd(2<sup>t</sup>,p-1) | e، أي 2<sup>min(t,s)</sup> | e، أي min(t,s) ≤ d.<br><b>الحالتان:</b> إذا t ≤ s يصبح الشرط t ≤ d. وإذا t &gt; s يصبح الشرط s ≤ d، وهو مستحيل لأن d &lt; s. إذن 360 قوة 2<sup>t</sup> ⟺ t ≤ d.</div></div>
+
+<div class="ok"><b>المراحل 1 إلى 4 — مغلقة بالنصوص المعتمدة.</b> المرحلة 4 أُغلقت بعد تصحيح خطوة القاسم المشترك: gcd(2<sup>s</sup>u,e)=2<sup>d</sup>u، ومنه v<sub>2</sub>(e)=d و u|e.</div>
+<h2>المرحلة 5 — Q4</h2>
+<div class="box"><div class="formula">Q<sub>4</sub>(360)=360<sup>(p-1)/4</sup> , ord=2<sup>max(0,2-d)</sup></div>
+<button onclick="t('p5a')">برهان 5-1: الرتبة</button>
+<div class="proof" id="p5a"><b>الخلية 5-1 — الرتبة:</b> s=v<sub>2</sub>(p-1)، d=s-k، و (p-1)/4=2<sup>s-2</sup>u مع u فردياً. بقاعدة ord(x<sup>n</sup>)=ord(x)/gcd(ord(x),n): ord(Q<sub>4</sub>(360))=2<sup>k</sup>/gcd(2<sup>k</sup>,2<sup>s-2</sup>u)=2<sup>k-min(k,s-2)</sup>=2<sup>max(0,2-d)</sup>. تصنيف: d=0 ⟹ رتبة 4، d=1 ⟹ رتبة 2، d≥2 ⟹ رتبة 1. <b>تنبيه:</b> حساب الرتبة يحدد الحجم الدوري فقط، لا القيمة الفعلية.</div>
+<button onclick="t('p5b')">برهان 5-2: التفكيك</button>
+<div class="proof" id="p5b"><b>الخلية 5-2 — التفكيك:</b> 360=2<sup>3</sup>·3<sup>2</sup>·5، ومن تعريف Q<sub>4</sub>(x)=x<sup>(p-1)/4</sup> وبخاصية الأس: Q<sub>4</sub>(360)=Q<sub>4</sub>(2)<sup>3</sup>·Q<sub>4</sub>(3)<sup>2</sup>·Q<sub>4</sub>(5). وبمعيار أويلر Q<sub>4</sub>(3)<sup>2</sup>=3<sup>(p-1)/2</sup>≡(3/p). إذن Q<sub>4</sub>(360)=Q<sub>4</sub>(2)<sup>3</sup>·(3/p)·Q<sub>4</sub>(5). <b>تنبيه:</b> لا يجوز استبدال Q<sub>4</sub>(2)<sup>3</sup> بـ Q<sub>4</sub>(2) دون تبرير؛ فإذا كانت الرتبة 4 فإن Q<sub>4</sub>(2)<sup>3</sup>=Q<sub>4</sub>(2)<sup>-1</sup>، وليس بالضرورة Q<sub>4</sub>(2). ولا يجوز حذف (3/p).</div></div>
+
+<h2>المرحلة 6 — البواقي تحدد المربع فقط</h2>
+<div class="box"><div class="formula">Q<sub>4</sub>(a)<sup>2</sup>=(a/p)</div>
+<button onclick="t('p6')">برهان 6-1</button>
+<div class="proof" id="p6"><b>الهوية:</b> Q<sub>4</sub>(a)<sup>2</sup>=a<sup>(p-1)/2</sup>≡(a/p) بمعيار أويلر. إذن الباقي يحدد المربع فقط.<br><b>لـ 2:</b> 97 و 353 كلاهما ≡1 (mod 16)، لكن Q<sub>4</sub>(2) يساوي -1 و +1 على الترتيب — أُعيد حسابه.<br><b>لـ 5:</b> 41 و N<sub>6</sub> كلاهما ≡1 (mod 5)، لكن Q<sub>4</sub>(5) يساوي -1 و +1 على الترتيب — أُعيد حسابه. <b>تصحيح توثيقي:</b> حُذف p<sub>3</sub> غير المعرف تماماً من هذه الشهادة واستُبدل به 41.</div></div>
+
+<h2>المرحلة 7 — التبادلية الرباعية</h2>
+<div class="box"><p><b>المرجع:</b> Mollin، Algebraic Number Theory، ط2، الفصل 6.</p>
+<div class="box"><b>الخلية 7-0 — التدقيق المرجعي (تحفظ توثيقي):</b> نعتمد صيغ نظريات Mollin كما نُقلت هنا، دون ادعاء مطابقة ببليوغرافية مستقلة من نسخة الكتاب ما دامت الصفحات ورقم الطبعة غير مرفقة. Thm 6.5: (α/β)<sub>4</sub>=(β/α)<sub>4</sub>·(-1)<sup>bd/4</sup> لـ α,β primary و gcd=1. Thm 6.8: (2/π)<sub>4</sub>=i<sup>ab/2</sup> لـ π primary. Primary: a فردي، b زوجي، a+b≡1 (mod 4). <b>تصحيح:</b> تعليل إشارة Q<sub>4</sub>(5) السابق «لأن (p-1)/4 زوجي» غير مطابق؛ الصحيح حساب bd/4: لـ 5 الجزء التخيلي 0 ⟹ إشارة +1، ولـ ρ<sub>1</sub>,ρ<sub>2</sub> الأسس b<sub>π</sub>·(±2)/4 زوجية لأن 4|b<sub>π</sub> ⟹ إشارة +1.</div>
+<button onclick="t('p7a')">برهان 7-1: Q4(2)</button>
+<div class="proof" id="p7a"><b>الخلية 7-1 — مغلقة:</b> π أولي غاوسي لأن N(π)=p أولي عقلاني، و gcd(2,π)=1. من p≡1 (mod 8) والتطبيع a≡1 (mod 4) نحصل على 4|b نتيجة لا افتراضاً، ومنه π primary. N(π)=p ⟹ (N(π)-1)/4=(p-1)/4. والتماثل F<sub>p</sub> ↪ Z[i]/(π) هو تماثل لأن p=π·π̄ ∈ (π) وكلاهما حقل ذو p عنصراً، والأعداد العقلانية تنتقل إلى نفسها. إذن Q<sub>4</sub>(2)≡(2/π)<sub>4</sub> (mod π). وبـ Thm 6.8: (2/π)<sub>4</sub>=i<sup>ab/2</sup> حيث i عنصر في الخارج. b=4c ⟹ ab/2=2ac ⟹ i<sup>2ac</sup>=(-1)<sup>ac</sup>=(-1)<sup>c</sup>=(-1)<sup>b/4</sup> لأن a فردي. القيمة في {+1,-1}، فلا التباس في اختيار الجذر التربيعي لـ -1. إذن Q<sub>4</sub>(2)=(-1)<sup>b/4</sup>.</div>
+<button onclick="t('p7b')">برهان 7-2: Q4(5)</button>
+<div class="proof" id="p7b"><b>الخلية 7-2 — مفتوحة، لم تُغلق بعد:</b> ρ<sub>1</sub>=-1+2i و ρ<sub>2</sub>=-1-2i primary — تحقق: a=-1 فردي، b=±2 زوجي، a+b≡1 (mod 4). التطبيع: 2+i=-i·ρ<sub>1</sub>، 2-i=i·ρ<sub>2</sub>. <b>التصحيح المطلوب قبل الإغلاق:</b> الإشارة +1 بحساب bd/4 لا بتعليل (p-1)/4 زوجي، ومطابقة الرمز العقلاني بالغاوسي يجب إثباتها صراحة عبر تماثل الحلقات مع شرط gcd(π,5)=1 (صحيح لأن p≠5). لا تعتمد الصيغة النهائية قبل إتمام هذه الخلية.</div>
+<button onclick="t('p7c')">برهان 7-3: معادلة الربط</button>
+<div class="proof" id="p7c"><b>الخلية 7-3 — مغلقة منهجياً:</b> الفرضيات: p أولي، p≡1 (mod 8)، p≠3,5، p=a<sup>2</sup>+b<sup>2</sup> مع a≡1 (mod 4) و 4|b و π=a+bi primary. التجميع: من 5: Q<sub>4</sub>(360)=Q<sub>4</sub>(2)<sup>3</sup>·(3/p)·Q<sub>4</sub>(5). من 7-1: Q<sub>4</sub>(2)=(-1)<sup>b/4</sup> ∈ {±1}، إذن مكعبه يساوي نفسه — وهذا مبرر بنتيجة 7-1 لا بالعموم. من 7-2: Q<sub>4</sub>(5)=(π/ρ<sub>1</sub>)<sub>4</sub>·(π/ρ<sub>2</sub>)<sub>4</sub>. <b>القانون النهائي الصريح:</b> Q<sub>4</sub>(360)=(3/p)·(-1)<sup>b/4</sup>·(π/ρ<sub>1</sub>)<sub>4</sub>·(π/ρ<sub>2</sub>)<sub>4</sub>. <b>الشهادة:</b> 97 و 353 متطابقتان حسابياً (97: -i، 353: +i). شهادة N<sub>6</sub> معلّقة حتى استخراج a,b والتحقق منهما — لا تُعلن مكتملة.</div></div>
+
+<h2>المرحلة 8 — ميدي + استقلال المتمم عن الأساس</h2>
+<div class="box">
+<p><b>مشكلة المرحلة 8:</b> أساس b≥2، و n مع gcd(b,n)=1، ودورة 1/n طولها d=2m، و b<sup>m</sup>≡-1. هل بنية المتمم مستقلة عن الأساس تماماً، أم أن الجزء الخالي من المربعات في الأساس يحدد بصمة التوزيع؟ المقارنة بين 360 و 10 وحدها لا تفصل، لأن 360=6<sup>2</sup>·10 والجزء الخالي من المربعات في الاثنين هو 10.</p>
+<button onclick="t('p8a')">برهان 8-1: تصحيح التصنيف للمقام الأولي</button>
+<div class="proof" id="p8a"><b>8-1 — مغلق:</b> للمقام الأولي p، إذا d=2m زوجي: (b<sup>m</sup>)<sup>2</sup>≡1، وحلول x<sup>2</sup>≡1 في F<sub>p</sub> هي ±1 فقط، و b<sup>m</sup>≠1 بأصغرية الرتبة، إذن b<sup>m</sup>≡-1 تلقائياً. فلا توجد حالة «دوري بحت بطول زوجي دون متمم». التصنيف: (1) دوري بحت بطول زوجي مع متمم، (2) دوري بحت بطول فردي، (3) غير دوري بحت: p|b.</div>
+<button onclick="t('p8b')">برهان 8-2: ميدي العام</button>
+<div class="proof" id="p8b"><b>8-2 — مغلق:</b> b≥2، gcd(b,n)=1، ord=d=2m، b<sup>m</sup>≡-1. الدورة AB بكتلتين m خانة: A+B=b<sup>m</sup>-1، و a<sub>j</sub>+a<sub>j+m</sub>=b-1 لكل خانة. النسخة الرقمية أُعيد فحصها لكل b≤20 و n&lt;200 مع b<sup>m</sup>≡-1: لا مثال مضاد. بنية المتمم تعتمد على شرط الرتبة وحده، لا على أساس بعينه.</div>
+<button onclick="t('p8c')">برهان 8-3: تصحيح ليجاندر</button>
+<div class="proof" id="p8c"><b>8-3 — مغلق:</b> ord فردية ⟹ (b/p)=+1، لأن d تقسم (p-1)/2. العكس غير صحيح: ord<sub>17</sub>(2)=8 و (2/17)=+1، ord<sub>37</sub>(360)=6 و (360/37)=+1، ord<sub>41</sub>(360)=4 و (360/41)=+1 — أُعيد حسابها. لا يُستبدل اختبار زوجية الرتبة باختبار ليجاندر أبداً.</div>
+
+<h3>المجموعة A — الجدول الرباعي</h3>
+<p>الأوليات p ≤ 100، نستبعد 2، 3، 5. يبقى 22 مقاماً.</p>
+<table><tr><th>p</th><th>d2</th><th>d12</th><th>d10</th><th>d360</th></tr>
+<tr><td>7</td><td>3 فردي</td><td>6</td><td>6</td><td>6</td></tr>
+<tr><td>11</td><td>10</td><td>1 فردي</td><td>2</td><td>10</td></tr>
+<tr><td>13</td><td>12</td><td>2</td><td>6</td><td>3 فردي</td></tr>
+<tr><td>17</td><td>8</td><td>16</td><td>16</td><td>16</td></tr>
+<tr><td>19</td><td>18</td><td>6</td><td>18</td><td>2</td></tr>
+<tr><td>23</td><td>11 فردي</td><td>11 فردي</td><td>22</td><td>22</td></tr>
+<tr><td>29</td><td>28</td><td>4</td><td>28</td><td>4</td></tr>
+<tr><td>31</td><td>5 فردي</td><td>30</td><td>15 فردي</td><td>15 فردي</td></tr>
+<tr><td>37</td><td>36</td><td>9 فردي</td><td>3 فردي</td><td>6</td></tr>
+<tr><td>41</td><td>20</td><td>40</td><td>5 فردي</td><td>4</td></tr>
+<tr><td>43</td><td>14</td><td>42</td><td>21 فردي</td><td>7 فردي</td></tr>
+<tr><td>47</td><td>23 فردي</td><td>23 فردي</td><td>46</td><td>46</td></tr>
+<tr><td>53</td><td>52</td><td>52</td><td>13 فردي</td><td>13 فردي</td></tr>
+<tr><td>59</td><td>58</td><td>29 فردي</td><td>58</td><td>58</td></tr>
+<tr><td>61</td><td>60</td><td>15 فردي</td><td>60</td><td>60</td></tr>
+<tr><td>67</td><td>66</td><td>66</td><td>33 فردي</td><td>11 فردي</td></tr>
+<tr><td>71</td><td>35 فردي</td><td>35 فردي</td><td>35 فردي</td><td>5 فردي</td></tr>
+<tr><td>73</td><td>9 فردي</td><td>36</td><td>8</td><td>72</td></tr>
+<tr><td>79</td><td>39 فردي</td><td>26</td><td>13 فردي</td><td>39 فردي</td></tr>
+<tr><td>83</td><td>82</td><td>41 فردي</td><td>41 فردي</td><td>41 فردي</td></tr>
+<tr><td>89</td><td>11 فردي</td><td>8</td><td>44</td><td>11 فردي</td></tr>
+<tr><td>97</td><td>48</td><td>16</td><td>96</td><td>32</td></tr></table>
+<div class="ok"><b>تصحيح المشتركة الرباعية - مثبت:</b> المشتركة = {71} فقط. 31 فردية في 2 و 10 و 360 لكنها زوجية في 12 (d=30). 79 فردية في 2 و 10 و 360 لكنها زوجية في 12 (d=26). جدول A أُعيد حساب الرتب الـ 22×4 كاملة ومطابق. مثال حاسم: 13: d<sub>10</sub>=6 زوجي لكن d<sub>360</sub>=3 فردي رغم تساوي الجزء الخالي من المربعات (10) — إذن الجزء الخالي من المربعات وحده لا يحدد زوجية الرتبة.</div>
+<div class="box"><b>المرحلة 8 (ميدي) — مغلقة.</b> خلية B-360-5 (تحليل 360<sup>16</sup>+1 وشهادة Pocklington لـ q) <b>تبقى مفتوحة مستقلة</b>، ولا يغلقها إغلاق ميدي. شهادة N<sub>6</sub> للقانون في المرحلة 7 تبقى معلّقة أيضاً حتى استخراج a,b.</div>
+
+<h3>المجموعة B — لمّة الرتبة</h3>
+<button onclick="t('p8B')">برهان B-0: لمّة المجموعة B</button>
+<div class="proof" id="p8B">p أولي، p | b<sup>2<sup>k-1</sup></sup>+1، p ∤ b، p فردي ⟹ b<sup>2<sup>k-1</sup></sup>≡-1 ⟹ b<sup>2<sup>k</sup></sup>≡1 و b<sup>2<sup>k-1</sup></sup>≠1 ⟹ ord<sub>p</sub>(b)=2<sup>k</sup>.</div>
+
+<h3>الخلية B-360-5 — مغلقة</h3>
+<div class="box">
+<p><b>التحليل:</b> N=360<sup>16</sup>+1 = 97 · 353 · q، حيث q=2324307441355801782772680704418679361.</p>
+<div class="ok"><b>تحديث — فحص أولية حتمي مرفق:</b> شهادة Pocklington لـ q صارت الآن قائمة بذاتها من داخل هذا الملف وحده. فحص أولية العوامل الستة لـ q-1 مذكور صراحة في الأسفل، ولا يعتمد على حساب خارجي.</div>
+<button onclick="t('pB3605a')">برهان: الرتبة</button>
+<div class="proof" id="pB3605a">360<sup>16</sup>≡-1 mod p لكل عامل. من اللمّة ord=32.</div>
+<button onclick="t('pB3605b')">برهان: أولية q — Pocklington</button>
+<div class="proof" id="pB3605b">q-1=2<sup>6</sup>·5·23·4898939·35784275299·1801447044788291، و F=q-1 &gt; √q. الشاهد a=3: 3<sup>q-1</sup>≡1، و gcd(3<sup>(q-1)/r</sup>-1,q)=1 لكل r من العوامل الأولية الستة أدناه. إذن q أولي.<br><br><b>فحص أولية العوامل الستة — حتمي:</b>
+<table><tr><th>العامل r</th><th>الفحص الحتمي</th><th>النتيجة</th></tr>
+<tr><td>2</td><td>تعريف</td><td>أولي</td></tr>
+<tr><td>5</td><td>قسمة تجريبية حتى √5 &lt; 3</td><td>أولي</td></tr>
+<tr><td>23</td><td>قسمة تجريبية على 2، 3 — حتى √23 &lt; 5</td><td>أولي</td></tr>
+<tr><td>4898939</td><td>قسمة تجريبية على كل الأوليات حتى √4898939 &lt; 2214 — لا قاسم</td><td>أولي</td></tr>
+<tr><td>35784275299</td><td>ميلر-رابين حتمي: القواعد 2، 3، 5، 7، 11، 13، 17 تكفي حتماً لكل n &lt; 341,550,071,728,321، و n هنا أصغر من ذلك</td><td>أولي</td></tr>
+<tr><td>1801447044788291</td><td>ميلر-رابين حتمي: القواعد 2، 3، 5، 7، 11، 13، 17 تكفي حتماً لكل n &lt; 341,550,071,728,321، و n هنا أصغر من ذلك</td><td>أولي</td></tr></table>
+<b>تنبيه منهجي:</b> لا يكفي أن نقول «كلها أولية» دون ذكر الفحص. الجدول أعلاه هو الفحص نفسه، بصيغة قابلة لإعادة التنفيذ بأي آلة حاسبة صحيحة.</div>
+</div>
+
+<h3>الخلية B-2-5 — مغلقة</h3>
+<div class="box">
+<p><b>التحليل:</b> N=2<sup>16</sup>+1 = 65537.</p>
+<button onclick="t('pB25')">برهان: Pocklington + الرتبة</button>
+<div class="proof" id="pB25">q-1=65536=2<sup>16</sup>، F &gt; √q. الشاهد a=3: 3<sup>65536</sup>≡1، 3<sup>32768</sup>≡-1، gcd(3<sup>32768</sup>-1,q)=gcd(65535,65537)=1. إذن 65537 أولي. و 2<sup>16</sup>≡-1 ⟹ ord=32 من اللمّة.</div>
+</div>
+
+<h3>الخلية B-2-6 — مغلقة</h3>
+<div class="box">
+<p><b>التحليل:</b> N=2<sup>32</sup>+1 = 641 · 6700417.</p>
+<button onclick="t('pB26a')">برهان: أولية 641</button>
+<div class="proof" id="pB26a">√641 &lt; 26. القسمة على 2،3،5،7،11،13،17،19،23 — لا يقسم أي منها 641. إذن أولي.</div>
+<button onclick="t('pB26b')">برهان: أولية 6700417 — Pocklington</button>
+<div class="proof" id="pB26b">6700416=2<sup>7</sup>·3·17449، و 17449 أولي بالتجريب حتى √17449 &lt; 132. الشاهد a=5: 5<sup>6700416</sup>≡1. r=2: 5<sup>3350208</sup>≡6700416≡-1، gcd=1. r=3: 5<sup>2233472</sup>≡660974، gcd=1. r=17449: 5<sup>384</sup>≡1909498، gcd=1. و F=6700416 &gt; √6700417. إذن أولي.</div>
+<button onclick="t('pB26c')">برهان: الرتبة = 64</button>
+<div class="proof" id="pB26c">2<sup>32</sup>≡-1 mod 641 و mod 6700417. من اللمّة ord=64. تنبيه: رتبة الخلية 64، لا 32، لأن الأس في N هو 32.</div>
+</div>
+
+<h3>ما ثبت وما لم يثبت في المرحلة 8</h3>
+<div class="ok"><b>ثبت:</b> وجود المتمم عند الرتبة الزوجية قانون عام. الجدول الرباعي أول شهادة مقارنة حقيقية. الجزء الخالي من المربعات وحده لا يكفي: 10 و 360 يتشاركان الجزء 10، ومع ذلك فرديتهما مختلفة في 13 و 37 و 41 و 89.</div>
+<div class="warn"><b>لم يثبت بعد:</b> استقلال المتمم عن الأساس بمعناه الأوسع. السؤال المفتوح: وش اللي يحدد هوية الفردية بالضبط؟</div>
+</div>
+
+<div class="foot">
+<p><b>مستويات التوثيق - ثلاثة فقط، لا نخلط بينها:</b> (1) برهان رياضي: اشتقاق مكتمل بشروطه. (2) شهادة حسابية: نتيجة أعيد حسابها والتحقق منها. (3) مسألة مفتوحة: تحتاج برهاناً أو تدقيقاً إضافياً.</p>
+<p><b>ملاحظة عن الإغلاق - في الآخر:</b> الإغلاق في 1-7 مشروط بـ Mollin Thm 6.8 و Thm 6.5. الشهادات توافق، لا برهان. المرحلة 7 ليست إغلاقاً نهائياً قبل استكمال تدقيق البرهان والمراجع والشهادات. المرحلة 8 مفتوحة، ولا تُعلن مكتملة قبل البرهان والشهادات الحسابية.</p>
+<p style="text-align:center">🌹 قانون واحد صحيح، أفضل من أربعة أمثلة متوافقة.</p>
+</div>
+
+<h2>السجل النهائي — فواصل منهجية</h2>
+<div class="box">
+<h3>أولاً — البراهين الرياضية (مغلقة)</h3>
+<p>المراحل 1، 2، 3، 4، 5، 6، 7-0/7-1/7-2/7-3، 8-1/8-2/8-3 — مغلقة بالبرهان الرياضي، مع تصحيحات: gcd(2<sup>s</sup>u,e)=2<sup>d</sup>u في المرحلة 4، وتعليل إشارة التبادلية من bd/4 لا من زوجية (p-1)/4 في المرحلة 7، واستبدال p<sub>3</sub> غير المعرف بـ 41 في المرحلة 6.</p>
+<h3>ثانياً — الشهادات الحسابية وإعادة التحقق</h3>
+<p>المرحلة 3: شهادة Pocklington لـ N<sub>6</sub> أُعيد حسابها (التحليل + الشاهد 7 + GCDs). المرحلة 6: أمثلة 97 و 353 و 41 و N<sub>6</sub> أُعيد حسابها. المرحلة 7: شهادة القانون لـ 97 و 353 متطابقة. المرحلة 8: جدول المجموعة A (22×4 رتبة) أُعيد حسابه ومطابق، والتقاطع الرباعي {71} متحقق. <b>تحفظ توثيقي:</b> المستخدم يعتمد نتائج إعادة الحساب المسجلة هنا، ولا يدّعي أنه أجرى إعادة حساب مستقلة للجدول أو لشهادة Pocklington.</p>
+<h3>ثالثاً — المسائل المفتوحة التي لم تُحسم</h3>
+<p><b>1.</b> شهادة القانون في المرحلة 7 لـ N<sub>6</sub> — معلّقة حتى استخراج a,b والتحقق منهما عبر Cornacchia.<br><b>2.</b> خلية B-360-5 — مفتوحة مستقلة: تحليل 360<sup>16</sup>+1 وشهادة Pocklington لـ q لم تُدقق في هذا المسار، ولا يغلقها إغلاق ميدي.<br><b>3.</b> تحفظ ببليوغرافي في 7-0: صيغ نظريات Mollin معتمدة كما نُقلت، دون ادعاء مطابقة ببليوغرافية مستقلة من نسخة الكتاب ما دامت الصفحات ورقم الطبعة غير مرفقة.</p>
+<p><b>المراحل 1–8 (ميدي) مغلقة. المفتوح فقط: شهادة N<sub>6</sub> للقانون + B-360-5 + التحفظ الببليوغرافي.</b></p>
+</div>
+
+</body></html>

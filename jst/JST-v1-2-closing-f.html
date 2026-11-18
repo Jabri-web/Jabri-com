@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JST v1.2 — إغلاق مرحلة التحقق العددي لصيغة التغير الأول (منقح)</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0f172a;color:#e2e8f0;margin:0;padding:24px;line-height:1.8}
+.wrap{max-width:860px;margin:0 auto}
+.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:22px;margin:16px 0}
+h1{font-size:25px;margin:0 0 8px}.sub{color:#94a3b8}
+h2{color:#facc15;font-size:19px;margin:0 0 10px}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{border:1px solid #334155;padding:9px;text-align:center;font-size:14px}
+th{background:#0f172a;color:#facc15}
+.badge{display:inline-block;background:#14532d;color:#dcfce7;padding:4px 10px;border-radius:999px;font-size:13px}
+.open{background:#451a03;color:#ffedd5;padding:4px 10px;border-radius:999px;display:inline-block;margin:4px 0}
+.fix{background:#172554;color:#dbeafe;padding:10px 12px;border-radius:12px;margin:10px 0}
+.formula{background:#0f172a;border-radius:12px;padding:14px;direction:ltr;text-align:center;font-size:17px}
+.small{color:#94a3b8;font-size:13px}
+li{margin:6px 0}
+</style>
+</head>
+<body><div class="wrap">
+  
+  
+  
+  <a href="/tree/appendix.html">📜 الملحق الجامع</a>
+<a href="/handsa.html">📜 handsa</a>
+<a href="/jst/handsa-v5.0.html">📜 handsa-v5.0</a>
+<a href="/jst/seesaw.html">📜 seesaw</a>
+<a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
+<a href="/jst/JST-v1-2.closing-f.html">📜JST-closing</a>
+<a href="/jst/odd-even.html">📜 odd-even</a>
+  
+
+
+  
+  
+<h1>JST v1.2 — إغلاق مرحلة التحقق العددي لصيغة التغير الأول</h1>
+<p class="sub">نسخة منقحة — تم إصلاح البعد، وإشارة المترية، ووصف التكرار. لا تغيير في النتائج، ولا ادعاءات جديدة.</p>
+<span class="badge">✓ مرحلة v1.2 مغلقة بنتائجها وحدودها</span>
+
+<div class="card"><h2>تصحيحات الختم (قبل الاعتماد)</h2>
+<div class="fix"><b>1. اتساق البعد:</b> الصيغة العامة مكتوبة في 4 أبعاد، والاختبار العددي جرى في 1+1 بعد (t,x). الملف يوثق الاختبار فقط، ولا يدعي أن اختبار 1+1 يثبت الصيغة في 4 أبعاد.</div>
+<div class="fix"><b>2. تعريف المؤثر □:</b> في هذا الاختبار، إشارة المترية محددة صراحة: □Z = Z<sub>tt</sub> − Z<sub>xx</sub>، والكثافة الحركية هي Z<sub>t</sub>² − Z<sub>x</sub>². لا نترك الرمز العام دون تعريف.</div>
+<div class="fix"><b>3. التكرار:</b> تطابق النتائج على جهازين هو «إعادة تشغيل مستقلة للكود»، تعزز قابلية إعادة الإنتاج، وليست تحققاً مستقلاً من صحة الاشتقاق.</div>
+</div>
+
+<div class="card"><h2>1. الصيغة</h2>
+<p><b>الصيغة العامة المفترضة (4 أبعاد):</b></p>
+<div class="formula">S[Z] = ∫<sub>Ω</sub> d⁴x [ (∂Z)² − V(Z) ] &nbsp; , &nbsp; Z : Ω → ℝ &nbsp; , &nbsp; V ∈ C²</div>
+<p><b>الاختبار العددي الحالي (1+1 بعد):</b> Ω = [0,2] × [0,1] في (t,x)، والكثافة = Z<sub>t</sub>² − Z<sub>x</sub>² − V(Z)</p>
+<div class="formula">2 □ Z + V′(Z) = 0 &nbsp; , &nbsp; □Z = Z<sub>tt</sub> − Z<sub>xx</sub> &nbsp; — علاقة مشتقة، ليست تعريفاً للجهد</div>
+<div class="formula">δS = − ∫<sub>Ω</sub> η · EL dx dt + B<sub>∂Ω</sub></div>
+<div class="formula">B = 2∫ [Z<sub>t</sub> η]<sub>tmin</sub><sup>tmax</sup> dx − 2∫ [Z<sub>x</sub> η]<sub>xmin</sub><sup>xmax</sup> dt</div>
+<p><b>الجهد في هذه المرحلة:</b> V(Z) = ½ Z² اختباري فقط، خارج تعريف JST. حالة الاشتقاق: <b>NOT_DERIVED</b></p>
+</div>
+
+<div class="card"><h2>2. ما تحقق عددياً</h2>
+<table><tr><th>الحقل / الاتجاه</th><th>قبل حد الحدود</th><th>بعد حد الحدود</th></tr>
+<tr><td>gauss_poly / اتجاه مكاني</td><td>1.071e-01</td><td><b>1.131e-06</b></td></tr>
+<tr><td>gauss_poly / اتجاه زمني</td><td>1.292e-02</td><td><b>7.352e-06</b></td></tr>
+<tr><td>field_sin / eta_sin</td><td>2.776e-12</td><td>2.776e-12</td></tr>
+<tr><td>field_sin / eta_sin2</td><td>8.327e-12</td><td>8.327e-12</td></tr>
+</table>
+<p><b>تقارب الشبكة:</b> 201×151 → 3.693e-06 &nbsp; | &nbsp; 401×301 → 1.131e-06 &nbsp; | &nbsp; 801×601 → 3.087e-07</p>
+<p><b>إعادة التشغيل المستقلة:</b> نفس الأرقام في Colab وعلى جهاز ثانٍ، باختلاف تقريب عائم فقط. هذا يعزز قابلية إعادة الإنتاج، ولا يثبت الاشتقاق وحده.</p>
+</div>
+
+<div class="card"><h2>3. النتيجة المنهجية المثبتة</h2>
+<p>في النموذج العددي المختبر، أظهر إدراج حد الحدود في صيغة التغير الأول توافقاً أفضل بكثير بين التغير العددي والتنبؤ النظري. كما انخفض باقي التوافق عند زيادة دقة الشبكة. تدعم هذه النتائج الاتساق العددي لصيغة التغير مع حد الحدود، ضمن الحقول والاتجاهات والشبكات المختبرة.</p>
+<p class="small">اختلاف التغير العددي عن التنبؤ الداخلي ليس بالضرورة خطأ في الفعل أو في معادلة أويلر–لاغرانج؛ فقد يكون ناتجاً عن شروط الحدود، أو عن عدم التطابق بين المؤثرات العددية والتكامل العددي.</p>
+</div>
+
+<div class="card"><h2>4. ثلاثة أمور مفتوحة بوضوح</h2>
+<p><span class="open">مفتوح 1 — المجال الرياضي الأصلي لـ JST</span><br>هل Ω مستطيل محدود؟ أم ℝ⁴؟ أم طوروس؟ الاختيار يحدد كل ما بعده.</p>
+<p><span class="open">مفتوح 2 — فضاء الحقول وشروط الحدود</span><br>ما فضاء Z المقبول؟ C²؟ H¹؟ H²؟ وما شروط الحدود: ديريشليه؟ نيومان؟ دورية؟ متى يختفي B؟</p>
+<p><span class="open">مفتوح 3 — اشتقاق الجهد</span><br>هل JST تحدد V وحيداً؟ أم عائلة جهود؟ أم لا يوجد اشتقاق كافٍ بعد؟ لا نملأ الفراغ بجهد جميل لأنه مألوف.</p>
+</div>
+
+<div class="card"><h2>5. عبارة الإغلاق المعتمدة</h2>
+<p><b>أُغلقت مرحلة v1.2 بوصفها تحققاً عددياً لصيغة التغير الأول مع حد الحدود، ضمن النموذج والحقول والشبكات المختبرة. ولا يمتد هذا الإغلاق إلى تعريف JST العام أو اشتقاق الجهد أو إثبات النظرية.</b></p>
+<ul>
+<li>لا نكتب أن JST اكتملت أو أُثبتت.</li>
+<li>لا تتحول النتائج العددية إلى براهين تحليلية.</li>
+<li>لا نربط JST بفرضية ريمان دون رابط رياضي مستقل.</li>
+<li>المرحلة التالية تبدأ من تحديد المجال، لا من إضافة معادلات جديدة.</li>
+</ul>
+<p class="small">JST v1.2 — إغلاق مرحلة التحقق العددي لصيغة التغير الأول (منقح ومختوم).</p>
+</div>
+</div></body></html>

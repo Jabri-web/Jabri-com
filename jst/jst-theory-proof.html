@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Jabri Structural Theory | Theoretical Basis, Research Hypotheses, and Numerical Validation</title>
+<style>body{font-family:Georgia,serif;max-width:860px;margin:40px auto;padding:0 20px;line-height:1.65;color:#111}h1{font-size:28px}h2{font-size:21px;margin-top:32px;border-bottom:1px solid #ddd;padding-bottom:6px}h3{font-size:17px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:8px;text-align:left}th{background:#f5f5f5}pre{background:#f7f7f7;padding:14px;overflow-x:auto;font-size:13px}code{background:#f0f0f0;padding:2px 5px}.box{background:#f9f9f9;border-left:4px solid #111;padding:12px 16px;margin:16px 0}</style>
+
+<a href="/tree/appendix.html">📜 الملحق الجامع</a>
+<a href="/handsa.html">📜 handsa</a>
+
+<a href="/char-balance.html">📜 Char Balance</a>
+
+<a href="/jst/handsa-v5.0.html">📜 handsa-v5.0</a>
+<a href="/jst/seesaw.html">📜 seesaw</a>
+<a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
+<a href="/jst/JST-v1-2.closing-f.html">📜JST-closing</a>
+<a href="/jst/odd-even.html">📜 odd-even</a>
+  
+
+<p class="muted">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر 2026م</p>
+<p><a href="https://jabri-com.vercel.app/">واحة الجبري — jabri-com.vercel.app</a></p>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head><body>
+<h1>Jabri Structural Theory<br>Theoretical Basis, Research Hypotheses, and Numerical Validation</h1><p><i>Not understood until understood.</i></p>
+<h2>1. Model</h2>
+<p>Response matrix \(S \in \mathbb{R}^{N \times 16}\) with</p>
+<p>\[ r_{ij} = \sqrt{(x_i-x_{s,j})^2 + (z_i-z_{s,j})^2}, \qquad S_{ij} = \frac{e^{-\alpha r_{ij}}}{r_{ij}+\epsilon}. \]</p>
+<p>Fixed: \(\alpha=0.8\), \(\epsilon=0.1\), \(X=[0,1]\), \(Z=[0,1]\). 16 sources on a \(4\times 4\) grid in \([0.1,0.9]\times[0.1,0.9]\). The kernel is called Green-like. It is not claimed to be the exact physical Green's function of a specified PDE unless that PDE is stated separately.</p>
+<p>Effective rank at 1% threshold: \(\#\{i : \sigma_i > 0.01\,\sigma_{\max}\}\). Condition numbers: \(\kappa_{\mathrm{reduced}} = \sigma_{\max}/\sigma_r\), \(\kappa_{\mathrm{full}} = \sigma_{\max}/\sigma_{16}\).</p>
+<h2>2. Theoretical Basis</h2>
+<h3>2.1 Unique Linear Recovery</h3>
+<p>For \(|I|=16\), \(S_I \in \mathbb{R}^{16\times 16}\). Then \(\det(S_I) \ne 0 \iff \mathrm{rank}(S_I)=16\), and \(S_I q = y\) has a unique solution for every \(y\). This is general linear algebra. Computed values support it numerically: \(\sigma_{\min}=1.877629 > 0\).</p>
+<h3>2.2 Greedy Selection and Full-Rank Recovery</h3>
+<div class="box"><b>Proposition.</b> Let \(V_k\) be the span of the \(k\) selected rows and \(P_{V_k}\) the orthogonal projection onto \(V_k\). Adding a row \(s_i\) increases rank by one iff \(\|(I-P_{V_k})s_i\|_2 > 0\).</div>
+<p>Since the response space is \(\mathbb{R}^{16}\), rank cannot exceed 16. At \(k=16\), the selected space is \(\mathbb{R}^{16}\) and residuals are zero in exact arithmetic. Stopping at 16 is a consequence of dimension, not an arbitrary programming choice. This proves independence, not global optimality.</p>
+<h3>2.3 Singular Value Stability</h3>
+<p>Weyl: \(|\sigma_i(A+E)-\sigma_i(A)| \le \|E\|_2\). Full rank is preserved if \(\|E\|_2 < \sigma_{\min}(A)\). With \(\sigma_{\min}=1.877629\), this is the precise stability statement. Orthogonality loss is a separate diagnostic of reorthogonalization quality, not by itself a measure of perturbation of the response matrix.</p>
+<h2>3. Research Hypotheses</h2>
+<h3>H1: Effect of Depth Distribution</h3>
+<p>Distribution along \(Z\) affects independence of response vectors, hence effective rank and singular values. Status: numerically supported. Clearest evidence: F vs D — same \(N=32\), same Chebyshev in \(X\), different \(Z\). F rank 12, D rank 16.</p>
+<h3>H2: Uniform Depth in This Model</h3>
+<p>With Chebyshev fixed in \(X\), replacing logarithmic nodes in \(Z\) by uniform nodes can restore full rank in D. Status: numerically supported. Evidence: F vs D. Restricted to tested kernel, constants, domain, grids. No claim that uniform depth is always better.</p>
+<h2>4. Numerical Designs</h2>
+<table><tr><th>Design</th><th>N</th><th>Nx / Nz</th><th>Rank</th><th>κ reduced</th><th>κ full</th></tr>
+<tr><td>A</td><td>16</td><td>4 uniform / 4 uniform</td><td>16</td><td>12.94</td><td>12.94</td></tr>
+<tr><td>C</td><td>16</td><td>8 Chebyshev / 2 logarithmic</td><td>10</td><td>93.21</td><td>418.01</td></tr>
+<tr><td>F</td><td>32</td><td>8 Chebyshev / 4 logarithmic</td><td>12</td><td>14.24</td><td>219.25</td></tr>
+<tr><td>D</td><td>32</td><td>8 Chebyshev / 4 uniform</td><td>16</td><td>14.65</td><td>14.65</td></tr>
+<tr><td><b>D-Greedy-16</b></td><td>16</td><td>selected from D</td><td><b>16</b></td><td><b>11.73</b></td><td><b>11.73</b></td></tr></table>
+<p>A: economical full-rank reference. D: geometric full-rank reference. D-Greedy-16: greedy-selected candidate.</p>
+<h2>5. Greedy Selection: Two Distinct Criteria</h2>
+<h3>Greedy-Residual</h3><p>\[ i_k = \arg\max_{i \in R_k} \|(I-Q_kQ_k^T)s_i\|_2. \]</p><p>Row-pivoted Gram–Schmidt selection.</p>
+<h3>Greedy-SVD</h3><p>\[ i_k = \arg\max_{i \in R_k} \sigma_{\min}^{+}(S_{I_k \cup \{i\}}), \]</p><p>where \(\sigma_{\min}^{+}\) is the smallest nonzero singular value of the rectangular matrix in intermediate stages. Code:</p>
+<pre>s = np.linalg.svd(S[sel + [i]], compute_uv=False)
+smin = s[-1]</pre>
+<p>Before 16 rows, the matrix is rectangular, so <code>s[-1]</code> is the smallest computed singular value, not an artificial zero.</p>
+<p><b>The two criteria are distinct.</b> They are not two names for one algorithm.</p>
+<h3>Greedy-SVD Result</h3>
+<pre>[14, 25, 5, 13, 18, 17, 26, 6, 19, 12, 7, 24, 4, 27, 15, 16]</pre>
+<p>Sorted subset: \(I = \{4,5,6,7,12,13,14,15,16,17,18,19,24,25,26,27\}\). Same subset as Greedy-Residual, different order.</p>
+<p>Final: rank 16, \(\sigma_{\min}=1.877629\), \(\kappa_2=11.7293\), \(|\det(S_I)| \approx 1.4977376915\times 10^{10}\). Orthogonality loss after reorthogonalization: \(7.78\times 10^{-13}\), set unchanged.</p>
+<h2>6. D-Greedy-16: Full-Precision Coordinates</h2>
+<pre>sensor  4: X=0.950484433951210  Z=0.000000000000000
+sensor  5: X=0.950484433951210  Z=0.333333333333333
+sensor  6: X=0.950484433951210  Z=0.666666666666667
+sensor  7: X=0.950484433951210  Z=1.000000000000000
+sensor 12: X=0.611260466978157  Z=0.000000000000000
+sensor 13: X=0.611260466978157  Z=0.333333333333333
+sensor 14: X=0.611260466978157  Z=0.666666666666667
+sensor 15: X=0.611260466978157  Z=1.000000000000000
+sensor 16: X=0.388739533021843  Z=0.000000000000000
+sensor 17: X=0.388739533021843  Z=0.333333333333333
+sensor 18: X=0.388739533021843  Z=0.666666666666667
+sensor 19: X=0.388739533021843  Z=1.000000000000000
+sensor 24: X=0.049515566048790  Z=0.000000000000000
+sensor 25: X=0.049515566048790  Z=0.333333333333333
+sensor 26: X=0.049515566048790  Z=0.666666666666667
+sensor 27: X=0.049515566048790  Z=1.000000000000000</pre>
+<p>Ordering inside the 16 is not unique because symmetric pairs give equal residual norms. The subset \(I\) is the reference definition, not a single ordering.</p>
+<h2>7. Scope of Conclusions</h2>
+<div class="box">Two distinct greedy selection criteria, Greedy-Residual and Greedy-SVD, independently produced the same 16-sensor subset in the tested configuration. The selected response matrix achieved full numerical rank, with a reported smallest singular value of 1.877629 and condition number of 11.7293. This agreement provides numerical cross-validation of the selected subset, but does not establish global optimality.</div>
+<p>Global optimality, \(\min_{|I|=16}\kappa_2(S_I)\), is not proved. Generalization outside the tested kernel, constants, domain, and grids is not claimed.</p>
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <img src="jst-theory-proof1.png"
+            <img src="jst-theory-proof2.png"
+            <img src="jst-theory-proof3.png"
+            <img src="jst-theory-proof4.png"
+            <img src="jst-theory-proof5.png"
+            <img src="jst-theory-proof6.png"
+        </div>
+       <a href="https://jabri-com.vercel.app/Page11.html" class="nav-item">📝 Waha</a>
+       <a href="https://jabri-com.vercel.app/" class="nav-item">🏛️ Heaven Al-Jabri</h1>
+        </div>
+        
+        
+        
+        
+            <!-- في كل صفحة HTML -->
+    
+    <div id="header-placeholder"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/js/init-page-root.js" defer></script>
+
+</body>
+</html>
