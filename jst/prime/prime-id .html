@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prime — محاكاة تبدأ بالبطاقة</title>
+<style>
+body{font-family:system-ui;max-width:900px;margin:auto;padding:16px;line-height:1.9;background:#fbfbfc;color:#111}
+.card{background:#111;color:#fff;border-radius:16px;padding:20px;text-align:center}
+.box{background:#fff;border:1px solid #eee;border-radius:16px;padding:20px;margin:14px 0}
+input{padding:10px;font-size:16px;width:160px;text-align:center}
+button{padding:10px 18px;font-size:16px;background:#C0392B;color:#fff;border:0;border-radius:10px;cursor:pointer}
+table{width:100%;border-collapse:collapse;direction:ltr;text-align:center;font-size:13px}
+th{background:#111;color:#fff;padding:8px}td{padding:8px;border-bottom:1px solid #eee}
+canvas{width:100%;border:1px solid #eee;border-radius:12px;background:#fff}
+.muted{color:#666;font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+  
+  
+  <a href="/tree/appendix.html">📜 الملحق الجامع</a>
+<a href="/handsa.html">📜 handsa</a>
+
+<a href="/char-balance.html">📜 Char Balance</a>
+
+<a href="/jst/handsa-v5.0.html">📜 handsa-v5.0</a>
+<a href="/jst/seesaw.html">📜 seesaw</a>
+<a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
+<a href="/jst/JST-v1-2.closing-f.html">📜JST-closing</a>
+<a href="/jst/odd-even.html">📜 odd-even</a>
+ <a href="/jst/prime/prime-v3.html">📜 prime</a>
+ <a href="/jst/prime/prime-id.html">📜 prime-id</a>
+
+
+
+<p class="muted">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر 2026م</p>
+<p><a href="https://jabri-com.vercel.app/">واحة الجبري — jabri-com.vercel.app</a></p>
+
+
+  
+  
+  
+  
+
+<!-- 1) البطاقة -->
+<div class="card">
+<h2>🌹 حواف العدّ والحساب — Prime</h2>
+<p><b>الصيغة:</b> S(x) = π(x) &nbsp;|&nbsp; D₁ = π − Li₂ &nbsp;|&nbsp; R = |D₁|/π</p>
+<p><b>النتيجة:</b> π(10⁹) = 50,847,534 &nbsp;|&nbsp; D₁ = −1,699.912 &nbsp;|&nbsp; R = 0.0033%</p>
+<p><b>ما ثبت:</b> الكثافة تنخفض بتباطؤ، D₁ سالب في 40 نقطة</p>
+<p><b>ما لم يثبت:</b> أي قانون للتذبذب بعد المليار</p>
+<p>عبدالله الجبري — 21 نوفمبر 2026 🇾🇪</p>
+</div>
+
+<!-- 2) الإدخال -->
+<div class="box" style="text-align:center">
+<h3>2) أدخل الحدّ N</h3>
+<input id="N" type="number" value="1000000" min="100" max="10000000" step="100000">
+<button onclick="run()">شغّل المحاكاة</button>
+<p class="muted">جرّب 100,000 ثم 1,000,000 — فوق 10 مليون قد يثقل المتصفح.</p>
+</div>
+
+<!-- 3) الجدول -->
+<div class="box">
+<h3>3) الجدول</h3>
+<div id="table"></div>
+<div id="summary" style="margin-top:12px;font-weight:700"></div>
+</div>
+
+<!-- 4) الرسم -->
+<div class="box">
+<h3>4) الرسم — الفجوات</h3>
+<canvas id="chart" width="860" height="320"></canvas>
+</div>
+
+<script>
+function Li2(x){
+  // تكامل عددي لـ ∫₂ˣ dt/ln t
+  const n = 8000, h = (x-2)/n; let s = 0;
+  for(let i=0;i<=n;i++){
+    let t = 2 + i*h, w = (i==0||i==n)?1:(i%2?4:2);
+    s += w / Math.log(t);
+  }
+  return s * h / 3;
+}
+function sieve(n){
+  const is = new Uint8Array(n+1).fill(1);
+  is[0]=is[1]=0;
+  for(let i=2;i*i<=n;i++) if(is[i]) for(let j=i*i;j<=n;j+=i) is[j]=0;
+  const p=[]; for(let i=2;i<=n;i++) if(is[i]) p.push(i);
+  return p;
+}
+function run(){
+  const N = parseInt(document.getElementById('N').value);
+  const primes = sieve(N);
+  const gaps = []; for(let i=1;i<primes.length;i++) gaps.push(primes[i]-primes[i-1]);
+  let maxGap = Math.max(...gaps), mi = gaps.indexOf(maxGap);
+
+  // جدول عند قوى 10
+  let rows = `<table><tr><th>x</th><th>π(x)</th><th>D₁</th><th>R</th></tr>`;
+  for(let k=5; Math.pow(10,k) <= N; k++){
+    let x = Math.pow(10,k);
+    let pi = primes.filter(p=>p<=x).length;
+    let d1 = pi - Li2(x);
+    rows += `<tr><td>${x.toLocaleString()}</td><td>${pi.toLocaleString()}</td><td>${d1.toFixed(1)}</td><td>${(Math.abs(d1)/pi*100).toFixed(4)}%</td></tr>`;
+  }
+  rows += `</table>`;
+  document.getElementById('table').innerHTML = rows;
+  document.getElementById('summary').innerHTML =
+    `أكبر فجوة حتى ${N.toLocaleString()}: ${maxGap} بين ${primes[mi].toLocaleString()} و ${primes[mi+1].toLocaleString()} — متوسط الفجوة: ${(gaps.reduce((a,b)=>a+b,0)/gaps.length).toFixed(2)}`;
+
+  // رسم
+  const c = document.getElementById('chart'), ctx = c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.beginPath();
+  const W=c.width, H=c.height, step=Math.max(1, Math.floor(gaps.length/800));
+  for(let i=0;i<gaps.length;i+=step){
+    let x = i/gaps.length*W, y = H - (gaps[i]/maxGap)*(H-20) - 10;
+    i==0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.strokeStyle='#C0392B'; ctx.lineWidth=1; ctx.stroke();
+  ctx.fillStyle='#666'; ctx.font='13px system-ui';
+  ctx.fillText(`p →`, 10, H-4); ctx.fillText(`gap ↑ (max ${maxGap})`, 10, 16);
+}
+run();
+</script>
+</body>
+</html>

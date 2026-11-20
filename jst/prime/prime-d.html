@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prime D — 100M → 1B · VERIFIED</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:980px;margin:24px auto;padding:0 16px;line-height:1.8;color:#111;background:#fff}
+  nav{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;margin-bottom:20px}
+  nav a{color:#111;text-decoration:none;border:1px solid #ddd;padding:4px 10px;border-radius:999px}
+  header{border-bottom:3px solid #111;padding-bottom:14px;margin-bottom:10px}
+  h1{font-size:28px;margin:10px 0 6px}
+  h2{margin-top:34px;border-bottom:2px solid #111;padding-bottom:6px;font-size:20px}
+  h3{margin-top:22px}
+  table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+  th,td{border:1px solid #ccc;padding:7px 8px;text-align:center}
+  th{background:#111;color:#fff}
+  .note{background:#f6f6f6;border:1px solid #ddd;padding:12px 14px;border-radius:10px}
+  .badge{display:inline-block;background:#0a7a42;color:#fff;padding:6px 12px;border-radius:999px;font-weight:700;font-size:14px}
+  .author{color:#555;font-size:14px}
+  .ok{color:#0a7a42;font-weight:700}
+  .muted{color:#555;font-size:13px}
+  ul,ol{padding-right:20px}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="/tree/appendix.html">📜 الملحق الجامع</a>
+    <a href="/handsa.html">📜 handsa</a>
+    <a href="/char-balance.html">📜 Char Balance</a>
+    <a href="/jst/handsa-v5..0.html">📜 handsa-v5.0</a>
+    <a href="/jst/seesaw.html">📜 seesaw</a>
+    <a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
+    <a href="/jst/JST-v1-2.closing-f.html">📜 JST-closing</a>
+    <a href="/jst/odd-even.html">📜 odd-even</a>
+    <a href="/jst/calc2.html">📜 calc2</a>
+    <a href="/jst/prime/prime-a.html">📜 prime-a</a>
+    <a href="/jst/prime/prime-b.html">📜 prime-b</a>
+    <a href="/jst/prime/prime-c.html">📜 prime-c</a>
+    <a href="/jst/prime/prime-d.html">📜 prime-d</a>
+  </nav>
+
+  <h1>🌹🌎 Stage D — مكتملة ومغلقة</h1>
+  <p>S(x) = π(x) &nbsp;·&nbsp; النطاق: 10⁸ → 10⁹ &nbsp;·&nbsp; نفس المنهج تمامًا، دون تغيير تعريف</p>
+  <div class="badge">PRIME — STAGE D VERIFIED · π(10⁹) = 50,847,534</div>
+  <p class="author">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر 2026م<br>
+  <a href="https://jabri-com.vercel.app/">واحة الجبري — jabri-com.vercel.app</a></p>
+</header>
+
+<!-- ============ التعريف ============ -->
+<section>
+  <h1>Prime D — 100,000,000 → 1,000,000,000</h1>
+  <p><b>PRIME D — VERIFIED</b> · النتائج الأصلية اجتازت التحقق المستقل. لا تعديلات عددية معتمدة. التعديل +1 مرفوض. المنهج لم يتغير.</p>
+  <p>نافذة = 100,000,000 · عد تراكمي · البروتوكول مثبّت قبل الحساب ولم يُغيَّر بعده.</p>
+
+  <div class="note"><b>التعريفات المثبتة:</b><br>
+  π(x) = عدد الأوليات ≤ x &nbsp;·&nbsp; Li(x) = Ei(ln x) − Ei(ln 2) = ∫₂ˣ dt/ln t &nbsp;·&nbsp; المرجع الثاني = x/ln x<br>
+  D₁(x) = π(x) − Li(x) &nbsp;·&nbsp; D₂(x) = π(x) − x/ln x &nbsp;·&nbsp; R(x) = |D₁(x)| / π(x)<br>
+  ρ<sub>k</sub> = (π(b<sub>k</sub>)−π(a<sub>k</sub>)) / 100,000,000 &nbsp;·&nbsp; ḡ<sub>k</sub> = 1/ρ<sub>k</sub> &nbsp;·&nbsp; ΔD₁ = تغيّر D₁ عن نقطة القياس السابقة<br>
+  الفجوات في جدول D تُحسب داخل D فقط: فجوة تُعدّ إذا كان طرفها العلوي &gt; 100M.</div>
+</section>
+
+<!-- ============ 1 · التراكمي ============ -->
+<section>
+  <h2>1 · الجدول التراكمي — كل 100 مليون</h2>
+  <table>
+    <tr><th>x</th><th>π(x)</th><th>Li(x)</th><th>D₁</th><th>ΔD₁</th><th>D₂</th><th>R(x)=|D₁|/π</th></tr>
+    <tr><td>100,000,000</td><td>5,761,455</td><td>5,762,208.3</td><td>-753.3</td><td>-753.3</td><td>332,774.0</td><td>0.000131</td></tr>
+    <tr><td>200,000,000</td><td>11,078,937</td><td>11,079,973.8</td><td>-1,036.8</td><td>-283.5</td><td>615,308.2</td><td>0.000094</td></tr>
+    <tr><td>300,000,000</td><td>16,252,325</td><td>16,253,408.1</td><td>-1,083.1</td><td>-46.3</td><td>882,915.9</td><td>0.000067</td></tr>
+    <tr><td>400,000,000</td><td>21,336,326</td><td>21,337,377.0</td><td>-1,051.0</td><td>+32.1</td><td>1,141,420.0</td><td>0.000049</td></tr>
+    <tr><td>500,000,000</td><td>26,355,867</td><td>26,356,831.1</td><td>-964.1</td><td>+86.9</td><td>1,393,458.7</td><td>0.000037</td></tr>
+    <tr><td>600,000,000</td><td>31,324,703</td><td>31,326,044.207</td><td>-1,341.207</td><td>-377.103</td><td>1,640,014.082</td><td>0.000042816</td></tr>
+    <tr><td>700,000,000</td><td>36,252,931</td><td>36,254,240.999</td><td>-1,309.999</td><td>+31.208</td><td>1,882,917.694</td><td>0.000036135</td></tr>
+    <tr><td>800,000,000</td><td>41,146,179</td><td>41,147,861.2</td><td>-1,682.2</td><td>-372.2</td><td>2,122,021.5</td><td>0.000041</td></tr>
+    <tr><td>900,000,000</td><td>46,009,215</td><td>46,011,647.6</td><td>-2,432.6</td><td>-750.4</td><td>2,357,836.0</td><td>0.000053</td></tr>
+    <tr><td>1,000,000,000</td><td>50,847,534</td><td>50,849,233.912</td><td>-1,699.912</td><td>+732.688</td><td>2,592,591.566</td><td>0.000033432</td></tr>
+  </table>
+</section>
+
+<!-- ============ 2 · الكثافة ============ -->
+<section>
+  <h2>2 · الكثافة المحلية في نوافذ D التسع</h2>
+  <table>
+    <tr><th>النافذة</th><th>أوليات النافذة</th><th>ρ<sub>k</sub></th><th>ḡ<sub>k</sub> = 1/ρ<sub>k</sub></th></tr>
+    <tr><td>100,000,000 – 200,000,000</td><td>5,317,482</td><td>0.053175</td><td>18.806</td></tr>
+    <tr><td>200,000,000 – 300,000,000</td><td>5,173,388</td><td>0.051734</td><td>19.330</td></tr>
+    <tr><td>300,000,000 – 400,000,000</td><td>5,084,001</td><td>0.050840</td><td>19.670</td></tr>
+    <tr><td>400,000,000 – 500,000,000</td><td>5,019,541</td><td>0.050195</td><td>19.922</td></tr>
+    <tr><td>500,000,000 – 600,000,000</td><td>4,968,836</td><td>0.049688</td><td>20.125</td></tr>
+    <tr><td>600,000,000 – 700,000,000</td><td>4,928,228</td><td>0.049282</td><td>20.291</td></tr>
+    <tr><td>700,000,000 – 800,000,000</td><td>4,893,248</td><td>0.048932</td><td>20.436</td></tr>
+    <tr><td>800,000,000 – 900,000,000</td><td>4,863,036</td><td>0.048630</td><td>20.563</td></tr>
+    <tr><td>900,000,000 – 1,000,000,000</td><td>4,838,319</td><td>0.048383</td><td>20.668</td></tr>
+  </table>
+  <p>الكثافة تنخفض في كل نافذة من D: من 0.053175 عند 100–200M إلى 0.048383 عند 900M–1B. الانخفاض مستمر لكنه يتباطأ: الفرق بين أول نافذتين ≈ 0.00144، وبين آخر نافذتين ≈ 0.00025.</p>
+</section>
+
+<!-- ============ 3 · الفجوات ============ -->
+<section>
+  <h2>3 · الفجوات داخل D فقط (100M → 1B)</h2>
+  <p>إجمالي الفجوات المحسوبة في D = 45,086,079. الترتيب لم يبقَ كما في A–C.</p>
+  <table>
+    <tr><th>المرتبة</th><th>الفجوة</th><th>التكرار في D</th></tr>
+    <tr><td>1</td><td>6</td><td>5,321,039</td></tr>
+    <tr><td>2</td><td>12</td><td>3,930,575</td></tr>
+    <tr><td>3</td><td>10</td><td>3,054,751</td></tr>
+    <tr><td>4</td><td>4</td><td>2,984,422</td></tr>
+    <tr><td>5</td><td>2</td><td>2,984,194</td></tr>
+    <tr><td>6</td><td>18</td><td>2,966,294</td></tr>
+    <tr><td>7</td><td>8</td><td>2,360,929</td></tr>
+    <tr><td>8</td><td>14</td><td>2,171,364</td></tr>
+    <tr><td>9</td><td>24</td><td>2,109,926</td></tr>
+    <tr><td>10</td><td>30</td><td>1,955,144</td></tr>
+    <tr><td>11</td><td>16</td><td>1,630,293</td></tr>
+    <tr><td>12</td><td>20</td><td>1,621,121</td></tr>
+    <tr><td>13</td><td>22</td><td>1,393,734</td></tr>
+    <tr><td>14</td><td>28</td><td>1,089,676</td></tr>
+    <tr><td>15</td><td>36</td><td>1,057,496</td></tr>
+  </table>
+  <p><b>الترتيب الجديد في D:</b> 6، 12، 10، 4، 2، 18، 8، 14، 24، 30 …</p>
+  <p><b>ملاحظات بلا تفسير قسري:</b> 12 بقيت في المرتبة الثانية. 10 تقدّمت من المرتبة الخامسة (في الترتيب التراكمي حتى 100M: 6، 12، 2، 4، 10، 18) إلى الثالثة في D. المسافة بين تكرار 2 و 4 تقلّصت جدًا في D: 2,984,194 مقابل 2,984,422 — فرق 228 فقط، بعد أن كان 4 متقدمًا بوضوح أكبر في التراكمي. لم تظهر فجوة جديدة في قائمة الأكثر تكرارًا؛ القائمة العليا نفسها، لكن ترتيبها تغيّر.</p>
+  <p><b>أكبر Gap في D:</b> 282، بين 436,273,009 و 436,273,291، داخل النافذة الخامسة (400M–500M).</p>
+</section>
+
+<!-- ============ 4 · القراءة ============ -->
+<section>
+  <h2>4 · قراءة D بمسطرة D</h2>
+  <ul>
+    <li><b>الانحراف النسبي R:</b> عند 100M كان 0.000131. في D تذبذب بين 0.000033 و 0.000094، وأغلق عند 1B على 0.000033 — الأدنى في السلسلة كلها. التذبذب لم يختفِ (ارتفع عند 200M و 900M)، لكن القيم في D كلها دون قيمة مرجع C، والاتجاه العام هابط مع تذبذب غير رتيب.</li>
+    <li><b>D₁:</b> بقي سالبًا في كل نقاط D (π أقل من Li). ΔD₁ تذبذب بين −750.4 و +732.7، ولم يغيّر إشارة D₁.</li>
+    <li><b>الكثافة:</b> انخفاض مستمر ومتباطئ، كما في A–C.</li>
+    <li><b>الفجوات:</b> الترتيب تغيّر — وهذه هي النقطة التي كان D مصممًا لاختبارها. لا نفترض ثبات الترتيب بعد D.</li>
+  </ul>
+  <p><b>إغلاق D:</b> π(1,000,000,000) = 50,847,534 · Li(1B) = 50,849,233.912 · D₁ = −1,699.912 · D₂ = 2,592,591.566 · R = 0.000033432.</p>
+</section>
+
+<!-- ============ 5 · التحقق ============ -->
+<section>
+  <h2>5 · Prime D — Independent Verification Record</h2>
+  <p><b>Status: <span class="ok">VERIFIED</span></b></p>
+  <p>An independent segmented-sieve implementation was used to verify the original Prime D results. The verification implementation explicitly excludes 1 from the set of primes.</p>
+  <ul>
+    <li>All 10 cumulative prime-counting checkpoints matched.</li>
+    <li>All 9 window counts matched.</li>
+    <li>Total prime count across the 9 windows: 45,086,079.</li>
+    <li>The previously reported +1 corrections at 600M and 700M were rejected.</li>
+    <li>The top 15 gap-frequency rankings matched.</li>
+    <li>The maximum gap was confirmed as 282, occurring between 436,273,009 and 436,273,291.</li>
+    <li>Original cumulative counts, window boundaries, and computational protocol were retained.</li>
+  </ul>
+  <p>The earlier discrepancy was caused by an error in the independent verification sieve, which incorrectly included 1. It was not a defect in the Prime D counting protocol.</p>
+  <p><b>No numerical corrections were adopted.</b></p>
+  <p>Verification is recorded separately from the original computation to preserve the audit trail.</p>
+
+  <h3>سلسلة اكتشاف الخطأ</h3>
+  <ol>
+    <li>الحساب الأصلي: الغربال الأول أعطى نتائج Prime D.</li>
+    <li>تحقق مستقل معيب: احتُسب العدد 1 ضمن الأعداد الأولية، وظهرت زيادة +1 عند نقطتين.</li>
+    <li>إصلاح الغربال المستقل: استبعاد 1 صراحةً، وإعادة الاختبار.</li>
+    <li>عودة المطابقة: القيم الأصلية تطابقت، والتصحيح +1 أُسقط.</li>
+  </ol>
+
+  <p><b>قرار الإغلاق:</b> Prime A: CLOSED. Prime D: VERIFIED — نتائجها الأصلية مؤكدة وفق التحقق المستقل. التعديل +1: مرفوض. المنهج: لم يتغير.</p>
+  <p>درس المشروع: التحقق المستقل لا يُقاس باختلاف الكود فقط، بل بصحة شروطه الرياضية، واستقلال التنفيذ، ومطابقة نتائجه.</p>
+  <p class="muted">طريقة الحساب: غربال مجزّأ بعرض 100M، أوليات حتى 31,623 للغربلة، Li عبر Ei. لم تُغيَّر أي تعريفات أو نوافذ بعد رؤية النتائج.</p>
+</section>
+
+</body>
+</html>

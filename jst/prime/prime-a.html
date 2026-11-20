@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prime A — Stage A Closed | S(x)=π(x) حتى 1,000,000</title>
+<style>
+  :root{--red:#C0392B;--blue:#2E86C1;--green:#27AE60;--orange:#E67E22;--bg:#fbfbfc;--card:#fff;--mut:#666}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:#1a1a1a;line-height:1.75}
+  header{background:#111;color:#fff;padding:36px 20px 28px;text-align:center}
+  header h1{margin:0;font-size:30px}
+  header p{margin:8px 0 0;opacity:.85}
+  .badge{display:inline-block;background:#fff;color:#111;border-radius:999px;padding:4px 14px;font-weight:700;margin-top:12px}
+  main{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+  .card{background:var(--card);border:1px solid #eee;border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+  h2{margin:0 0 10px;font-size:22px;color:var(--red)}
+  h3{margin:22px 0 8px;font-size:18px}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;direction:ltr;text-align:center}
+  th{background:#111;color:#fff;padding:9px 6px}
+  td{padding:8px 6px;border-bottom:1px solid #eee}
+  tr:nth-child(even) td{background:#fafafa}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:700px){.grid{grid-template-columns:1fr}}
+  .kpi{background:#f7f9fb;border:1px solid #e8eef3;border-radius:12px;padding:14px;text-align:center}
+  .kpi b{font-size:24px;display:block}
+  .kpi span{color:var(--mut);font-size:13px}
+  img{width:100%;border-radius:12px;border:1px solid #eee;display:block}
+  figcaption{color:var(--mut);font-size:13px;margin-top:8px;text-align:center}
+  .note{background:#fff8e6;border:1px solid #ffe9a8;border-radius:12px;padding:14px}
+  .ok{color:#1e7a34;font-weight:700}
+  code{background:#f2f2f2;padding:2px 6px;border-radius:6px}
+  footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
+  .formula{text-align:center;direction:ltr;font-size:18px;margin:10px 0}
+  nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 14px}
+  nav a{color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:5px 10px;border-radius:999px;text-decoration:none;font-size:13px}
+  nav a:hover{background:rgba(255,255,255,.25)}
+  .author{font-size:13px;opacity:.75;margin-top:10px}
+  .author a{color:#fff}
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/tree/appendix.html">📜 الملحق الجامع</a>
+    <a href="/handsa.html">📜 handsa</a>
+    <a href="/char-balance.html">📜 Char Balance</a>
+    <a href="/jst/handsa-v5..0.html">📜 handsa-v5.0</a>
+    <a href="/jst/seesaw.html">📜 seesaw</a>
+    <a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
+    <a href="/jst/JST-v1-2.closing-f.html">📜 JST-closing</a>
+    <a href="/jst/odd-even.html">📜 odd-even</a>
+    <a href="/jst/calc2.html">📜 calc2</a>
+    <a href="/jst/prime/prime-a.html">📜 prime-a</a>
+    <a href="/jst/prime/prime-b.html">📜 prime-b</a>
+    <a href="/jst/prime/prime-c.html">📜 prime-c</a>
+    <a href="/jst/prime/prime-d.html">📜 prime-d</a>
+    
+  </nav>
+  
+  <!-- ملاحظة فنية: نُقل التنقل وبيانات الموقع من head إلى داخل header في body لإصلاح بنية HTML. مسار handsa-v5..0.html أُبقي كما هو دون تغيير، لحين التحقق من المسار الصحيح حتى لا يُكسر رابط قائم. -->
+  <h1>🌹🌎 المرحلة A — مغلقة مع التصحيحات</h1>
+  <p>S(x) = π(x) &nbsp;·&nbsp; النطاق: 2 → 1,000,000 &nbsp;·&nbsp; غربال إراتوستينس فقط</p>
+  <div class="badge">Stage A — Closed with numerical corrections</div>
+  <p class="author">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر 2026م<br><a href="https://jabri-com.vercel.app/">واحة الجبري — jabri-com.vercel.app</a></p>
+</header>
+
+<main>
+  <div class="card">
+    <h2>1. قرار الإغلاق</h2>
+    <p>تم تثبيت جدول المليون أولًا، <b>ليس بإعادة التجربة كاملة</b>، بل بتدقيق إغلاق حسابي قصير. النسخة القديمة تُحفظ كأرشيف، والنسخة المصححة هنا هي <b>خط الأساس الرسمي للمرحلة B</b>.</p>
+    <div class="grid">
+      <div class="kpi"><b>78,498</b><span>π(10⁶) — العدّ النهائي المعتمد</span></div>
+      <div class="kpi"><b>100,000</b><span>عرض النافذة الثابت في كل الجدول</span></div>
+      <div class="kpi"><b>114</b><span>أكبر فجوة — بين 492113 و 492227</span></div>
+      <div class="kpi"><b>−128.504</b><span>D₁ عند المليون — القيمة المصححة</span></div>
+    </div>
+    <p style="color:var(--mut)">منهج ثابت: التراكم، الكثافة المحلية، الفجوات، الانحراف عن مرجعين. لا تغيير في التعريفات عند الانتقال إلى المرحلة B.</p>
+  </div>
+
+  <div class="card">
+    <h2>2. تدقيق الإغلاق — التحقق المستقل</h2>
+    <p>أُعيد حساب العدّ مباشرة بغربال مستقل حتى مليون، وتأكدت نقاط التراكم الرئيسية وتوزيع الفجوات. العدّ الأساسي سليم.</p>
+    <table>
+      <tr><th>المؤشر</th><th>نتيجة التحقق</th><th>الحالة</th></tr>
+      <tr><td>π(100,000)</td><td>9,592</td><td class="ok">✓ مطابق</td></tr>
+      <tr><td>π(200,000)</td><td>17,984</td><td class="ok">✓ مطابق</td></tr>
+      <tr><td>π(500,000)</td><td>41,538</td><td class="ok">✓ مطابق</td></tr>
+      <tr><td>π(1,000,000)</td><td>78,498</td><td class="ok">✓ مطابق</td></tr>
+      <tr><td>الفجوة 6 — الأكثر تكرارًا</td><td>13,549</td><td class="ok">✓</td></tr>
+      <tr><td>الفجوة 2</td><td>8,169</td><td class="ok">✓</td></tr>
+      <tr><td>الفجوة 4</td><td>8,143</td><td class="ok">✓</td></tr>
+      <tr><td>الفجوة 12</td><td>8,005</td><td class="ok">✓</td></tr>
+      <tr><td>أكبر فجوة</td><td>114</td><td class="ok">✓</td></tr>
+    </table>
+    <div class="note"><b>تصحيح موقع أكبر فجوة:</b> الفجوة 114 ظهرت بين <code>492113</code> و <code>492227</code>. لذلك ظهورها الأول ليس في نافذة 300–400 ألف، بل في نافذة <b>400–500 ألف</b>. القيمة لم تتغير، لكن سجل الظهور الأول تصحح.</div>
+  </div>
+
+  <div class="card">
+    <h2>3. التصحيح المرجعي المهم — Li₂(x)</h2>
+    <p>أُعيد حساب التكامل نفسه:</p>
+    <div class="formula">Li<sub>2</sub>(x) = ∫<sub>2</sub><sup>x</sup> dt / ln t</div>
+    <p>وظهرت فروق صغيرة في القيم السابقة. لذلك تُعتمد القيم التالية بدلًا منها. التصحيح لا يغير الصورة العامة، لكنه يغير مقادير الانحراف ومراحل التذبذب.</p>
+    <table>
+      <tr><th>x</th><th>π(x)</th><th>Li₂(x) المصححة</th><th>D₁ = π − Li₂ المصحح</th><th>D₁ %</th><th>ΔD₁</th></tr>
+      <tr><td>100,000</td><td>9,592</td><td>9,628.764</td><td>−36.764</td><td>−0.3833%</td><td>—</td></tr>
+      <tr><td>200,000</td><td>17,984</td><td>18,035.007</td><td>−51.007</td><td>−0.2836%</td><td>−14.243</td></tr>
+      <tr><td>300,000</td><td>25,997</td><td>26,085.647</td><td>−88.647</td><td>−0.3410%</td><td>−37.640</td></tr>
+      <tr><td>400,000</td><td>33,860</td><td>33,921.577</td><td>−61.577</td><td>−0.1819%</td><td>+27.070</td></tr>
+      <tr><td>500,000</td><td>41,538</td><td>41,605.244</td><td>−67.244</td><td>−0.1619%</td><td>−5.667</td></tr>
+      <tr><td>600,000</td><td>49,098</td><td>49,171.782</td><td>−73.782</td><td>−0.1503%</td><td>−6.538</td></tr>
+      <tr><td>700,000</td><td>56,543</td><td>56,643.618</td><td>−100.618</td><td>−0.1780%</td><td>−26.836</td></tr>
+      <tr><td>800,000</td><td>63,951</td><td>64,036.252</td><td>−85.252</td><td>−0.1333%</td><td>+15.366</td></tr>
+      <tr><td>900,000</td><td>71,274</td><td>71,361.009</td><td>−87.009</td><td>−0.1221%</td><td>−1.757</td></tr>
+      <tr><td>1,000,000</td><td>78,498</td><td>78,626.504</td><td><b>−128.504</b></td><td>−0.1637%</td><td>−41.495</td></tr>
+    </table>
+    <p><b>مثال عند المليون:</b> D₁ = 78498 − 78626.504 = <b>−128.504</b> وليس −128.5 التقريبي. الانحراف ما زال سالبًا، لكنه أقرب إلى الصفر مما كان سيظهر من القيمة القديمة.</p>
+    <p><b>الخلاصة المنهجية:</b> D₁ لا يُعامل باعتباره رتيبًا؛ بل نحتفظ بتذبذباته. ΔD₁ موجب في نافذتين (+27.07 ، +15.37) وسالب في الباقي — هذا هو التذبذب المحلي رغم استمرار الاتجاه العام.</p>
+  </div>
+
+  <div class="card">
+    <h2>4. الكثافة المحلية — نوافذ متساوية 100,000</h2>
+    <table>
+      <tr><th>النافذة [a,b)</th><th>العدد</th><th>ρ(a,b)</th><th>ḡ = 1/ρ</th></tr>
+      <tr><td>0 – 100,000</td><td>9,592</td><td>0.09592</td><td>10.43</td></tr>
+      <tr><td>100,000 – 200,000</td><td>8,392</td><td>0.08392</td><td>11.92</td></tr>
+      <tr><td>200,000 – 300,000</td><td>8,013</td><td>0.08013</td><td>12.48</td></tr>
+      <tr><td>300,000 – 400,000</td><td>7,863</td><td>0.07863</td><td>12.72</td></tr>
+      <tr><td>400,000 – 500,000</td><td>7,678</td><td>0.07678</td><td>13.02</td></tr>
+      <tr><td>500,000 – 600,000</td><td>7,560</td><td>0.07560</td><td>13.23</td></tr>
+      <tr><td>600,000 – 700,000</td><td>7,445</td><td>0.07445</td><td>13.43</td></tr>
+      <tr><td>700,000 – 800,000</td><td>7,408</td><td>0.07408</td><td>13.50</td></tr>
+      <tr><td>800,000 – 900,000</td><td>7,323</td><td>0.07323</td><td>13.66</td></tr>
+      <tr><td>900,000 – 1,000,000</td><td>7,224</td><td>0.07224</td><td>13.84</td></tr>
+    </table>
+    <figure><img src="prime1.png" alt="Local density"><figcaption>prime1.png — الكثافة المحلية تنخفض في كل نافذة بدون استثناء، والانخفاض يتباطأ.</figcaption></figure>
+  </div>
+
+  <div class="card">
+    <h2>5. الانحرافات — الصورة المصححة</h2>
+    <figure><img src="Prime2.png" alt="Deviations"><figcaption>Prime2.png — D₁ سالب دائمًا هنا، لكن ΔD₁ يكشف التذبذب. D₂ ينمو باستمرار لأنه مرجع أخشن.</figcaption></figure>
+    <p>نسبة الانحراف D₁% تحسنت إجمالًا من −0.383% إلى −0.164% رغم التذبذب في القيمة المطلقة.</p>
+  </div>
+
+  <div class="card">
+    <h2>6. الفجوات</h2>
+    <div class="grid">
+      <figure><img src="Prime3.png" alt="Max gap"><figcaption>Prime3.png — أكبر فجوة تراكمية: 72 → 86 → 112 → 114 ثم استقرار.</figcaption></figure>
+      <figure><img src="Prime4.png" alt="Mean gap"><figcaption>Prime4.png — متوسط الفجوة: 10.425 → 12.739 نمو سلس بدون قفزات.</figcaption></figure>
+    </div>
+    <p><b>أكبر فجوة:</b> 114 بين 492113 و 492227 — في نافذة 400–500 ألف. لم تتغير في آخر 500 ألف كاملة.</p>
+    <p><b>الفجوات الأكثر تكرارًا:</b> 6 (13,549) ، 2 (8,169) ، 4 (8,143) ، 12 (8,005).</p>
+  </div>
+
+  <div class="card">
+    <h2>7. المرحلة B — ما الذي سنراقبه؟</h2>
+    <div class="formula">10⁶ ⟶ 10⁷</div>
+    <p>بنفس غربال إراتوستينس، ونفس تعريفات الكثافة والفجوات، ونفس المرجعين. المتغير الذي يستحق التركيز الآن هو:</p>
+    <div class="formula">ΔD₁ = D₁(x₂) − D₁(x₁)</div>
+    <p>لأننا اكتشفنا أن D₁ ليس مسارًا هابطًا منتظمًا، وإنما مسار ذو تذبذبات محلية، وأن تصحيح القيم عند المليون غيّر مقدار الانحراف النهائي.</p>
+    <p><b>قاعدة الاستقلال:</b> البيانات = العدّ الفعلي. المقاييس = الكثافة والفجوات. المراجع = Li₂ و x/ln x. الاستنتاج يُكتب بعد ظهور النتائج، وليس قبلها.</p>
+    <div class="note">🌹🌎 لا نتمسك بالجدول لأنه جميل، بل نصححه حين تكشف إعادة الحساب شيئًا أدق. المرحلة A مغلقة منهجيًا الآن.</div>
+  </div>
+
+</main>
+<footer>prime-a.html — Stage A Closed with corrections · تم إصلاح بنية HTML: التنقل داخل header في body · S(x)=π(x) · جميع الصور في نفس المجلد: prime1.png, Prime2.png, Prime3.png, Prime4.png</footer>
+</body>
+</html>

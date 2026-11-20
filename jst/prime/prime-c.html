@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prime C — Stage C Closed | S(x)=π(x) من 10⁷ إلى 10⁸</title>
+<style>
+  :root{--red:#C0392B;--blue:#2E86C1;--bg:#fbfbfc;--card:#fff;--mut:#666}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:#1a1a1a;line-height:1.75}
+  header{background:#111;color:#fff;padding:28px 20px 28px;text-align:center}
+  header h1{margin:10px 0 0;font-size:30px}
+  header p{margin:8px 0 0;opacity:.85}
+  .badge{display:inline-block;background:#fff;color:#111;border-radius:999px;padding:4px 14px;font-weight:700;margin-top:12px}
+  nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 14px}
+  nav a{color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:5px 10px;border-radius:999px;text-decoration:none;font-size:13px}
+  nav a:hover{background:rgba(255,255,255,.25)}
+  .author{font-size:13px;opacity:.75;margin-top:10px}
+  .author a{color:#fff}
+  main{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+  .card{background:var(--card);border:1px solid #eee;border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+  h2{margin:0 0 10px;font-size:22px;color:var(--red)}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;direction:ltr;text-align:center}
+  th{background:#111;color:#fff;padding:9px 6px}
+  td{padding:8px 6px;border-bottom:1px solid #eee}
+  tr:nth-child(even) td{background:#fafafa}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:700px){.grid{grid-template-columns:1fr}}
+  .kpi{background:#f7f9fb;border:1px solid #e8eef3;border-radius:12px;padding:14px;text-align:center}
+  .kpi b{font-size:24px;display:block}
+  .kpi span{color:#666;font-size:13px}
+  img{width:100%;border-radius:12px;border:1px solid #eee;display:block}
+  figcaption{color:#666;font-size:13px;margin-top:8px;text-align:center}
+  .note{background:#fff8e6;border:1px solid #ffe9a8;border-radius:12px;padding:14px}
+  .formula{text-align:center;direction:ltr;font-size:18px;margin:10px 0}
+  footer{text-align:center;color:#666;font-size:13px;padding:20px}
+  .pos{color:#1e7a34;font-weight:700}
+  .neg{color:#C0392B;font-weight:700}
+  .muted{color:#666}
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/tree/appendix.html">📜 الملحق الجامع</a>
+    <a href="/handsa.html">📜 handsa</a>
+    <a href="/char-balance.html">📜 Char Balance</a>
+    <a href="/jst/handsa-v5..0.html">📜 handsa-v5.0</a>
+    <a href="/jst/seesaw.html">📜 seesaw</a>
+    <a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
+    <a href="/jst/JST-v1-2.closing-f.html">📜 JST-closing</a>
+    <a href="/jst/odd-even.html">📜 odd-even</a>
+    <a href="/jst/calc2.html">📜 calc2</a>
+    <a href="/jst/prime/prime-a.html">📜 prime-a</a>
+    <a href="/jst/prime/prime-b.html">📜 prime-b</a>
+    <a href="/jst/prime/prime-c.html">📜 prime-c</a>
+    
+    
+    <a href="/jst/prime/prime-c.html">📜 prime</a>
+
+    <a href="/jst/prime/prime-d.html">📜 prime-d</a>
+
+  </nav>
+  <h1>🌹🌎 Stage C — مكتملة ومغلقة</h1>
+  <p>S(x) = π(x) &nbsp;·&nbsp; النطاق: 10⁷ → 10⁸ &nbsp;·&nbsp; نفس المنهج تمامًا، دون تغيير تعريف</p>
+  <div class="badge">PRIME — STAGE C CLOSED · π(10⁸) = 5,761,455</div>
+  <p class="author">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر 2026م<br><a href="https://jabri-com.vercel.app/">واحة الجبري — jabri-com.vercel.app</a></p>
+  <!-- ملاحظة فنية: تم نقل التنقل وبيانات الموقع من head إلى داخل header في body لإصلاح بنية HTML. مسار handsa-v5..0.html أُبقي كما هو دون تغيير، لحين التحقق من المسار الصحيح حتى لا يُكسر رابط قائم. -->
+</header>
+<main>
+  <div class="card">
+    <h2>الإغلاق التراكمي</h2>
+    <div class="grid">
+      <div class="kpi"><b>5,761,455</b><span>π(100,000,000) — العدد النهائي عند مئة مليون</span></div>
+      <div class="kpi"><b>220</b><span>Maximum observed gap — 47,326,693 → 47,326,913</span></div>
+      <div class="kpi"><b>−753.330</b><span>D₁ at 10⁸ — الانحراف المطلق</span></div>
+      <div class="kpi"><b>0.0131%</b><span>|D₁|/π(10⁸) — Relative deviation</span></div>
+    </div>
+    <p>المشهد الذي بدأ في A واستمر في B لا يزال قائمًا في C: كثافة الأوليات في النوافذ تتراجع. متوسط الفجوة يرتفع. D₁ يبقى سالبًا عند نقاط القياس. يتذبذب محليًا. الانحراف النسبي أقل من بدايته، لكنه غير رتيب.</p>
+  </div>
+
+  <div class="card">
+    <h2>1. نقاط رئيسية حتى 10⁸ — القيم المثبتة</h2>
+    <table>
+      <tr><th>x</th><th>π(x)</th><th>Li₂(x)</th><th>D₁</th><th>|D₁|/π</th><th>D₂</th></tr>
+      <tr><td>10,000,000</td><td>664,579</td><td>664,917.360</td><td>−338.360</td><td>0.0509%</td><td>+44,158.3</td></tr>
+      <tr><td>20,000,000</td><td>1,270,607</td><td>1,270,903.991</td><td>−296.991</td><td>0.0234%</td><td>+80,927.0</td></tr>
+      <tr><td>30,000,000</td><td>1,857,859</td><td>1,858,212.052</td><td>−353.052</td><td>0.0190%</td><td>+115,365.6</td></tr>
+      <tr><td>40,000,000</td><td>2,433,654</td><td>2,434,015.394</td><td>−361.394</td><td>0.0148%</td><td>+148,513.0</td></tr>
+      <tr><td>50,000,000</td><td>3,001,134</td><td>3,001,556.382</td><td>−422.382</td><td>0.0141%</td><td>+180,662.7</td></tr>
+      <tr><td>60,000,000</td><td>3,562,115</td><td>3,562,682.432</td><td>−567.432</td><td>0.0159%</td><td>+212,004.1</td></tr>
+      <tr><td>70,000,000</td><td>4,118,064</td><td>4,118,583.884</td><td>−519.884</td><td>0.0126%</td><td>+242,954.5</td></tr>
+      <tr><td>80,000,000</td><td>4,669,382</td><td>4,670,089.700</td><td>−707.700</td><td>0.0152%</td><td>+273,182.7</td></tr>
+      <tr><td>90,000,000</td><td>5,216,954</td><td>5,217,809.179</td><td>−855.179</td><td>0.0164%</td><td>+303,035.0</td></tr>
+      <tr><td>100,000,000</td><td><b>5,761,455</b></td><td>5,762,208.330</td><td><b>−753.330</b></td><td>0.0131%</td><td>+332,774.0</td></tr>
+    </table>
+    <figure><img src="primeC1.png" alt="Accumulation and deviations"><figcaption>primeC1.png — التراكم والانحرافات: π(x) مقابل Li₂(x) في الأعلى، و D₁ في الأسفل — سالب دائمًا، متذبذب باتساع أكبر.</figcaption></figure>
+  </div>
+
+  <div class="card">
+    <h2>2. ΔD₁ — تدقيق في المرحلة C</h2>
+    <div class="formula">ΔD₁ = D₁(x₂) − D₁(x₁)</div>
+    <table>
+      <tr><th>الفترة</th><th>ΔD₁</th><th>القراءة</th></tr>
+      <tr><td>10M → 20M</td><td class="pos">+41.369</td><td>عودة نحو الصفر</td></tr>
+      <tr><td>20M → 30M</td><td class="neg">−56.061</td><td>ابتعاد</td></tr>
+      <tr><td>30M → 40M</td><td class="neg">−8.342</td><td>ابتعاد محدود</td></tr>
+      <tr><td>40M → 50M</td><td class="neg">−60.988</td><td>ابتعاد</td></tr>
+      <tr><td>50M → 60M</td><td class="neg">−145.050</td><td>هبوط قوي</td></tr>
+      <tr><td>60M → 70M</td><td class="pos">+47.548</td><td>عودة نحو الصفر</td></tr>
+      <tr><td>70M → 80M</td><td class="neg">−187.816</td><td>أكبر هبوط في C</td></tr>
+      <tr><td>80M → 90M</td><td class="neg">−147.479</td><td>هبوط قوي</td></tr>
+      <tr><td>90M → 100M</td><td class="pos">+101.849</td><td>أكبر عودة في C</td></tr>
+    </table>
+    <div class="note">أكبر عودة نحو الصفر حدثت في نهاية C، بعد أكبر هبوط محلي في المرحلة نفسها. هذا لا يعني أن D₁ يتبع دورة دورية؛ حتى الآن نرى تذبذبًا في نقاط متباعدة بعرض عشرة ملايين، ولا نملك بعد ما يكفي لإثبات دورية أو تردد محدد.</div>
+  </div>
+
+  <div class="card">
+    <h2>3. الانحراف النسبي — تصحيح لغوي مهم</h2>
+    <p>من 10M إلى 100M:</p>
+    <div class="formula">0.0509% ⟶ 0.0131%</div>
+    <p>أي أن الانحراف النسبي النهائي أصبح نحو <b>25.7%</b> من نسبته عند بداية C، أو انخفاض نسبي يقارب 74.3%.</p>
+    <p><b>لكن هذا انخفاض بين نقطتي البداية والنهاية، وليس انخفاضًا متصلًا.</b> ارتفع من 0.0141% إلى 0.0159% (50M→60M)، ومن 0.0126% إلى 0.0152% إلى 0.0164% (70M→90M)، ثم هبط إلى 0.0131%. هذا التمييز مهم جدًا، وقد حُوفظ عليه في السجل.</p>
+  </div>
+
+  <div class="card">
+    <h2>4. الكثافة: استمرار النمط عبر المراحل الثلاث</h2>
+    <table>
+      <tr><th>نهاية النطاق</th><th>كثافة آخر نافذة</th><th>متوسط الفجوة</th></tr>
+      <tr><td>A — 1M</td><td>0.07224</td><td>13.84</td></tr>
+      <tr><td>B — 10M</td><td>0.06209</td><td>16.11</td></tr>
+      <tr><td>C — 100M</td><td>0.05445</td><td>18.37</td></tr>
+    </table>
+    <p><b>تمييز مهم:</b> استمرار الاتجاه بين نقاط القياس واضح. لكن إثبات الرتابة في كل نافذة أو عند كل قيمة x هو ادعاء أقوى، ولا تثبته نقاط الإغلاق وحدها. هذه الصياغة تجعل السجل العلمي أقوى بدلًا من توسيع الاستنتاج أكثر من البيانات.</p>
+    <table>
+      <tr><th>النافذة</th><th>عدد الأوليات</th><th>ρ</th><th>ḡ</th></tr>
+      <tr><td>10M – 20M</td><td>606,028</td><td>0.06060</td><td>16.50</td></tr>
+      <tr><td>20M – 30M</td><td>587,252</td><td>0.05873</td><td>17.03</td></tr>
+      <tr><td>30M – 40M</td><td>575,795</td><td>0.05758</td><td>17.37</td></tr>
+      <tr><td>40M – 50M</td><td>567,480</td><td>0.05675</td><td>17.62</td></tr>
+      <tr><td>50M – 60M</td><td>560,981</td><td>0.05610</td><td>17.83</td></tr>
+      <tr><td>60M – 70M</td><td>555,949</td><td>0.05559</td><td>17.99</td></tr>
+      <tr><td>70M – 80M</td><td>551,318</td><td>0.05513</td><td>18.14</td></tr>
+      <tr><td>80M – 90M</td><td>547,572</td><td>0.05476</td><td>18.26</td></tr>
+      <tr><td>90M – 100M</td><td>544,501</td><td>0.05445</td><td>18.37</td></tr>
+    </table>
+    <figure><img src="primeC2.png" alt="Local density"><figcaption>primeC2.png — الكثافة المحلية: تنخفض باستمرار، والانخفاض يتباطأ. نفس النمط، بلا انقطاع عبر ثلاث مراحل.</figcaption></figure>
+  </div>
+
+  <div class="card">
+    <h2>5. الفجوات — التغير الذي يستحق التسجيل</h2>
+    <div class="grid">
+      <div class="kpi"><b>12</b><span>المرتبة الثانية — ثبات ترتيبها في B و C</span></div>
+      <div class="kpi"><b>55</b><span>فرق تكرار 2 و 4 — 440,312 مقابل 440,257</span></div>
+    </div>
+    <table>
+      <tr><th>الفجوة</th><th>التكرار حتى 10⁸</th></tr>
+      <tr><td>6</td><td>768,752</td></tr>
+      <tr><td>12</td><td>538,382</td></tr>
+      <tr><td>2</td><td>440,312</td></tr>
+      <tr><td>4</td><td>440,257</td></tr>
+      <tr><td>10</td><td>430,016</td></tr>
+      <tr><td>18</td><td>384,738</td></tr>
+    </table>
+    <figure><img src="primeC3.png" alt="Gap distribution"><figcaption>primeC3.png — توزيع الفجوات وأكبر فجوة: 12 ما زالت الثانية. 2 و 4 متساويتان تقريبًا — فرق 55 فقط من أصل 440 ألف.</figcaption></figure>
+    <p>اللافت ليس فقط بقاء 12 في المرتبة الثانية؛ بل تقارب تكراري 2 و 4 إلى فرق 55 فقط من أصل نحو 440 ألف تكرار لكل منهما. هذا يُحفظ كظاهرة وصفية في سجل Prime، دون تفسير سببي حتى الآن.</p>
+    <p><b>متوسط الفجوة الكلي:</b> 17.36 — <b>أكبر فجوة:</b> 220 بين 47,326,693 و 47,326,913، في نافذة 40M–50M، ولم تُكسر حتى 10⁸.</p>
+  </div>
+
+  <div class="card">
+    <h2>6. سجل Prime بعد إغلاق C</h2>
+    <table>
+      <tr><th>المرحلة</th><th>الحالة</th><th>النطاق والنوافذ</th></tr>
+      <tr><td>Stage A</td><td>Closed</td><td>2 → 10⁶ · النوافذ 100,000</td></tr>
+      <tr><td>Stage B</td><td>Closed</td><td>10⁶ → 10⁷ · النوافذ 1,000,000</td></tr>
+      <tr><td>Stage C</td><td>Closed</td><td>10⁷ → 10⁸ · النوافذ 10,000,000</td></tr>
+    </table>
+    <div class="note"><b>PRIME — CLOSED STAGES.</b> الخط الأساسي التراكمي: حتى 100,000,000. C مغلقة وفق السجل الحسابي المقدم. لا نعيد A أو B أو C، ولا نغير تعريفات المقاييس. الخطوة الطبيعية التالية هي تجهيز سجل C وتثبيت الصور الثلاث، ثم الانتقال إلى D بنفس الاستقلالية.</div>
+    <p>🌹🌎 ما يعجبني في Prime الآن أنه لم يعد مجرد ملاحظة عن الأعداد الأولية؛ أصبح لدينا سجل متتابع يسمح بمقارنة المراحل دون تغيير المسطرة أثناء القياس.</p>
+  </div>
+</main>
+<footer>prime-c.html — Stage C Closed · S(x)=π(x) · الصور في نفس المجلد: primeC1.png, primeC2.png, primeC3.png · تم إصلاح بنية HTML: التنقل داخل header في body</footer>
+</body>
+</html>
