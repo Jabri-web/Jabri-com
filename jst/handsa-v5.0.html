@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>دفتر التحقق — 360 | 1-8 — نسخة v5 — نهائية</title>
+<title>دفتر التحقق — 360 | 1-8 هندسة— نسخة v5 — نهائية</title>
+<link rel="canonical" href="https://jabri-com.vercel.app/jst/handsa-v5.0.html" />
 <style>
 body{font-family:system-ui;max-width:950px;margin:auto;padding:16px;line-height:1.9;background:#fff;color:#111}
 h1{text-align:center}
@@ -35,11 +36,22 @@ function all(o){document.querySelectorAll('.proof').forEach(function(e){e.style.
 <a href="/jst/jst-theory-proof.html">📜 jst-theory-proof</a>
 <a href="/jst/JST-v1-2.closing-f.html">📜JST-closing</a>
 <a href="/jst/odd-even.html">📜 odd-even</a>
+<a href="/jst/seesaw.html">📜 seasaw</a>
+<a href="/jst/seesaw-v4.html">📜 seasaw4</a>
+<a href="/jst/handsa-proof.html">📜 proof</a>
+
+
+<a href="/jst/prime/prime.html">📜 prime</a>
+
+
 <a href="/jst/calc2.html">📜 calc2</a>
   
-  <p class="muted">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر 2026م</p>
+  <p class="muted">عبدالله الجبري — صنعاء — الجمهورية اليمنية — نوفمبر21, 2026م</p>
 <p><a href="https://jabri-com.vercel.app/">واحة الجبري — jabri-com.vercel.app</a></p>
   
+  
+  <button onclick="document.body.style.background=document.body.style.background==='rgb(10, 12, 18)'?'#fff':'#0a0c12';document.body.style.color=document.body.style.color==='rgb(243, 239, 228)'?'#111':'#f3efe4'">🌙 ليل / نهار</button>
+
   
   
 <h1>🌹 دفتر التحقق — 360<br><small>1 إلى 8...(version 5.0)</small></h1>
@@ -210,5 +222,192 @@ function all(o){document.querySelectorAll('.proof').forEach(function(e){e.style.
 <p><b>1.</b> شهادة القانون في المرحلة 7 لـ N<sub>6</sub> — معلّقة حتى استخراج a,b والتحقق منهما عبر Cornacchia.<br><b>2.</b> خلية B-360-5 — مفتوحة مستقلة: تحليل 360<sup>16</sup>+1 وشهادة Pocklington لـ q لم تُدقق في هذا المسار، ولا يغلقها إغلاق ميدي.<br><b>3.</b> تحفظ ببليوغرافي في 7-0: صيغ نظريات Mollin معتمدة كما نُقلت، دون ادعاء مطابقة ببليوغرافية مستقلة من نسخة الكتاب ما دامت الصفحات ورقم الطبعة غير مرفقة.</p>
 <p><b>المراحل 1–8 (ميدي) مغلقة. المفتوح فقط: شهادة N<sub>6</sub> للقانون + B-360-5 + التحفظ الببليوغرافي.</b></p>
 </div>
+
+
+<h2>المرحلة 8 — ميدي واستقلال المتمم عن الأساس (الكعكة p = 13)</h2>
+<div class="box">
+  <div class="formula">d = ord<sub>p</sub>(b) = 2m &nbsp;⟺&nbsp; a<sub>j</sub> + a<sub>j+m</sub> = b - 1</div>
+  <p><b>الحكم النظري (تصنيف المراتب):</b></p>
+  <ul>
+    <li><b>قانون مبرهن (الآلية الداخلية):</b> تتحقق خاصية المتمم خانة بخانة في أي أساس $b$ إذا وفقط إذا كانت رتبة الأساس $d = \text{ord}_p(b)$ زوجية.</li>
+    <li><b>فرضية ساقطة كشرط كافٍ (الجزء الخالي من المربعات):</b> تساوي الجزء الخالي من المربعات بين $360 = 6^2 \cdot 10$ و $10$ يضمن تساوي رمز ليجاندر فقط، ويفشل في توحيد بصمة المتمم عند $p \equiv 1 \pmod 4$.</li>
+  </ul>
+
+  <button onclick="t('p8_cake')">شهادة الكعكة الحاسمة: p = 13</button>
+  <div class="proof" id="p8_cake">
+    <b>لماذا p = 13 هي الكعكة الفاصلة؟</b><br>
+    العدد $p = 13 \equiv 1 \pmod 4$ هو أصغر أولي يفصل بين $b = 10$ و $b = 360$ رغم تساوي الجزء الخالي من المربعات ($10$) وتساوي رمز ليجاندر $(10/13) = (360/13) = +1$:
+    <table>
+      <tr>
+        <th>المعيار</th>
+        <th>الأساس b = 10</th>
+        <th>الأساس b = 360</th>
+      </tr>
+      <tr>
+        <td>الباقي b mod 13</td>
+        <td>10</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>الرتبة d = ord<sub>13</sub>(b)</td>
+        <td>6 (زوجي، m = 3)</td>
+        <td>3 (فردي)</td>
+      </tr>
+      <tr>
+        <td>رمز القوة الرابعة Q<sub>4</sub>(b)</td>
+        <td>10<sup>3</sup> ≡ -1 (mod 13)</td>
+        <td>360<sup>3</sup> ≡ 9<sup>3</sup> ≡ +1 (mod 13)</td>
+      </tr>
+      <tr>
+        <td>الدورة الكسرية 1/13</td>
+        <td>0.<span style="text-decoration:overline">076 923</span></td>
+        <td>0.<span style="text-decoration:overline">27, 249, 83</span><sub>(360)</sub></td>
+      </tr>
+      <tr>
+        <td>حالة المتمم</td>
+        <td><b>متحقق:</b> 0+9 = 7+2 = 6+3 = 9</td>
+        <td><b>مستحيل:</b> طول الدورة 3 خانات (لا نصفين)</td>
+      </tr>
+    </table>
+    <b>الجسر إلى المرحلة 7:</b> الفاصل الجبري بين البصمتين هو عامل المربع $6^2 = 36$ عبر رمز ليجاندر $(6/13) = -1$، حيث $Q_4(360) \equiv (6/13) \cdot Q_4(10) \equiv (-1)(-1) = +1 \pmod{13}$.
+  </div>
+</div>
+
+
+<!-- الملحق: الجدول الموحد — جميع الأوليات p ≤ 97 -->
+<div class="card chapter">
+<h2 class="gold">الملحق: الجدول الموحد — p ≤ 97، الأساسان 10 و 360</h2>
+<p><b>التعريف:</b> عند $p \equiv 1 \pmod 4$: $Q_4(x) = x^{(p-1)/4} \pmod p$.
+عند $p \equiv 3 \pmod 4$: $Q_4$ غير معرّف — نكتب "—" ومعناها غير معرّف، مو -1.</p>
+<p><b>قانون المتمم:</b> المتمم متحقق $\iff d = \mathrm{ord}_p(b)$ زوجي.</p>
+<table>
+<tr><th>p</th><th>p mod 4</th><th>ord(10)</th><th>Q4(10)</th><th>ord(360)</th><th>Q4(360)</th><th>متمم 10؟</th><th>متمم 360؟</th></tr>
+<tr><td>7</td><td>3</td><td>6</td><td>—</td><td>6</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>11</td><td>3</td><td>2</td><td>—</td><td>10</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td><b>13</b></td><td><b>1</b></td><td><b>6</b></td><td><b>12 = -1</b></td><td><b>3</b></td><td><b>1</b></td><td><b>نعم</b></td><td><b>لا</b></td></tr>
+<tr><td>17</td><td>1</td><td>16</td><td>4</td><td>16</td><td>13 = -4</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>19</td><td>3</td><td>18</td><td>—</td><td>2</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>23</td><td>3</td><td>22</td><td>—</td><td>22</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>29</td><td>1</td><td>28</td><td>17</td><td>4</td><td>17</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>31</td><td>3</td><td>15</td><td>—</td><td>15</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>37</td><td>1</td><td>3</td><td>1</td><td>6</td><td>36 = -1</td><td>لا</td><td>نعم</td></tr>
+<tr><td>41</td><td>1</td><td>5</td><td>1</td><td>4</td><td>40 = -1</td><td>لا</td><td>نعم</td></tr>
+<tr><td>43</td><td>3</td><td>21</td><td>—</td><td>7</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>47</td><td>3</td><td>46</td><td>—</td><td>46</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>53</td><td>1</td><td>13</td><td>1</td><td>13</td><td>1</td><td>لا</td><td>لا</td></tr>
+<tr><td>59</td><td>3</td><td>58</td><td>—</td><td>58</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>61</td><td>1</td><td>60</td><td>50</td><td>60</td><td>11</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>67</td><td>3</td><td>33</td><td>—</td><td>11</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>71</td><td>3</td><td>35</td><td>—</td><td>5</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>73</td><td>1</td><td>8</td><td>27</td><td>72</td><td>27</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>79</td><td>3</td><td>13</td><td>—</td><td>39</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>83</td><td>3</td><td>41</td><td>—</td><td>41</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>89</td><td>1</td><td>44</td><td>88 = -1</td><td>11</td><td>1</td><td>نعم</td><td>لا</td></tr>
+<tr><td>97</td><td>1</td><td>96</td><td>75</td><td>32</td><td>75</td><td>نعم</td><td>نعم</td></tr>
+</table>
+<p class="muted">مستبعدة: $p=2,3,5$ لأن $\gcd(b,p) \neq 1$ لبعض الأسس.</p>
+<div class="warn">
+<b>تحذير نظري — مثبت بالأمثلة المضادة:</b>
+$Q_4(b)=+1 \not\Rightarrow d$ فردية.
+أمثلة: $p=17,\ b=4$: $Q_4=1$ لكن $d=4$ زوجي.
+$p=41,\ b=4$: $Q_4=1$ لكن $d=10$.
+$p=73,\ b=9$: $Q_4=1$ لكن $d=6$.
+$p=89,\ b=11$: $Q_4=1$ لكن $d=22$.
+$p=97,\ b=4$: $Q_4=1$ لكن $d=24$.
+السبب: $Q_4=+1$ تعني فقط $d \mid (p-1)/4$.
+عند $p=13$ فقط كان $(p-1)/4=3$ فرديًا، فأجبر $Q_4=+1$ الرتبة على الفردية.
+لذلك $Q_4$ جزء من التفسير، والقانون الجامع يحتاج قوى ثنائية أعلى — <b>سؤال مفتوح، لا نتيجة مدّعاة.</b>
+</div>
+<p><b>أمثلة الانفصال الأربعة:</b>
+$p=13$ (10 نعم، 360 لا)، $p=89$ (10 نعم، 360 لا)،
+$p=37$ (360 نعم، 10 لا)، $p=41$ (360 نعم، 10 لا).
+كلها $\equiv 1 \pmod 4$.</p>
+</div>
+
+<!-- الكعكة: p=13 — شهادة مركزية مستقلة -->
+<div class="card chapter">
+<h2 class="gold">🍰 الكعكة: p = 13 — شهادة مركزية مستقلة</h2>
+<p><b>المرتبة:</b> مثال مضاد حاسم (Decisive Counterexample) — لا قانون، ولا فرضية.</p>
+<p><b>التعريف المثبّت:</b> عند $p \equiv 1 \pmod 4$: $Q_4(x) = x^{(p-1)/4} \pmod p$.</p>
+<table>
+<tr><th>المعيار</th><th>b = 10</th><th>b = 360</th></tr>
+<tr><td>الرتبة</td><td>ord = 6 (زوجي)</td><td>ord = 3 (فردي)</td></tr>
+<tr><td>Q4</td><td>$10^3 \equiv -1$</td><td>$360^3 \equiv +1$</td></tr>
+<tr><td>الدورة 1/13</td><td>0.076923 — متمم: 0+9 = 7+2 = 6+3 = 9</td><td>0.27, 249, 83<sub>(360)</sub> — طولها 3، لا متمم</td></tr>
+</table>
+<p><b>صيغة الربط (حساب فقط):</b> $Q_4(360) = Q_4(36)\cdot Q_4(10) = (-1)\cdot(-1) = +1$، حيث $Q_4(36) = (6/13) = -1$.</p>
+<p><b>التحذير النظري:</b> $Q_4(b)=+1$ لا تستلزم رتبة فردية عمومًا. عند $p=13$ تعمل لأن $(p-1)/4=3$ فردي. مثال مضاد عام: $p=17,\ b=4$: $Q_4=+1$ لكن ord=4 زوجي. لذلك $Q_4$ جزء من التفسير، والقانون الجامع يحتاج قوى ثنائية أعلى — وهو سؤال مفتوح، لا نتيجة مدّعاة.</p>
+<p><b>الخلاصة المثبتة فقط:</b> قانون المتمم مبرهنة. تساوي الجزء الخالي من المربعات ليس شرطًا كافيًا لتطابق البصمة. $p=13$ مثال مضاد حاسم، وهي الأصغر — $p=89$ في نفس الاتجاه، و $p=37$ و $41$ في الاتجاه المعاكس.</p>
+</div>
+
+
+<div class="warn">
+  <b>تحذير نظري — مثبت بالأمثلة المضادة:</b>
+  $Q_4(b)=+1 \not\Rightarrow d$ فردية.
+  أمثلة: $p=17,\ b=4$: $Q_4=1$ لكن $d=4$ زوجي.
+  $p=41,\ b=4$: $Q_4=1$ لكن $d=10$.
+  $p=73,\ b=9$: $Q_4=1$ لكن $d=6$.
+  $p=89,\ b=11$: $Q_4=1$ لكن $d=22$.
+  $p=97,\ b=4$: $Q_4=1$ لكن $d=24$.
+  السبب: $Q_4=+1$ تعني فقط $d \mid (p-1)/4$.
+  عند $p=13$، القيمة $(p-1)/4 = 3$ فردية. وبما أن $Q_4(360)=+1$ تعني $d \mid 3$، فإن رتبة $360 \pmod{13}$ تقسم $3$، وبالتالي تكون فردية. هذه ملاحظة خاصة بالمثال، وليست قاعدة عامة.
+  لذلك $Q_4$ جزء من التفسير، والقانون الجامع يحتاج قوى ثنائية أعلى — <b>سؤال مفتوح، لا نتيجة مدّعاة.</b>
+</div>
+
+
+<!-- ============ الملحق: الجدول الموحد — p ≤ 97 ============ -->
+<div class="card chapter">
+<h2 class="gold">الملحق: الجدول الموحد — p ≤ 97، الأساسان 10 و 360</h2>
+<p><b>التعريف:</b> عند $p \equiv 1 \pmod 4$: $Q_4(x) = x^{(p-1)/4} \pmod p$.
+عند $p \equiv 3 \pmod 4$: $Q_4$ غير معرّف — نكتب "—".</p>
+<p><b>قانون المتمم:</b> المتمم متحقق $\iff d = \mathrm{ord}_p(b)$ زوجي.</p>
+<table>
+<tr><th>p</th><th>p mod 4</th><th>ord(10)</th><th>Q4(10)</th><th>ord(360)</th><th>Q4(360)</th><th>متمم 10؟</th><th>متمم 360؟</th></tr>
+<tr><td>7</td><td>3</td><td>6</td><td>—</td><td>6</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>11</td><td>3</td><td>2</td><td>—</td><td>10</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td><b>13</b></td><td><b>1</b></td><td><b>6</b></td><td><b>12 = -1</b></td><td><b>3</b></td><td><b>1</b></td><td><b>نعم</b></td><td><b>لا</b></td></tr>
+<tr><td>17</td><td>1</td><td>16</td><td>4</td><td>16</td><td>13 = -4</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>19</td><td>3</td><td>18</td><td>—</td><td>2</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>23</td><td>3</td><td>22</td><td>—</td><td>22</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>29</td><td>1</td><td>28</td><td>17</td><td>4</td><td>17</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>31</td><td>3</td><td>15</td><td>—</td><td>15</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>37</td><td>1</td><td>3</td><td>1</td><td>6</td><td>36 = -1</td><td>لا</td><td>نعم</td></tr>
+<tr><td>41</td><td>1</td><td>5</td><td>1</td><td>4</td><td>40 = -1</td><td>لا</td><td>نعم</td></tr>
+<tr><td>43</td><td>3</td><td>21</td><td>—</td><td>7</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>47</td><td>3</td><td>46</td><td>—</td><td>46</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>53</td><td>1</td><td>13</td><td>1</td><td>13</td><td>1</td><td>لا</td><td>لا</td></tr>
+<tr><td>59</td><td>3</td><td>58</td><td>—</td><td>58</td><td>—</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>61</td><td>1</td><td>60</td><td>50</td><td>60</td><td>11</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>67</td><td>3</td><td>33</td><td>—</td><td>11</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>71</td><td>3</td><td>35</td><td>—</td><td>5</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>73</td><td>1</td><td>8</td><td>27</td><td>72</td><td>27</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>79</td><td>3</td><td>13</td><td>—</td><td>39</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>83</td><td>3</td><td>41</td><td>—</td><td>41</td><td>—</td><td>لا</td><td>لا</td></tr>
+<tr><td>89</td><td>1</td><td>44</td><td>88 = -1</td><td>11</td><td>1</td><td>نعم</td><td>لا</td></tr>
+<tr><td>97</td><td>1</td><td>96</td><td>75</td><td>32</td><td>75</td><td>نعم</td><td>نعم</td></tr>
+</table>
+<p class="muted">مستبعدة: $p=2,3,5$ لأن $\gcd(b,p) \neq 1$ لبعض الأسس.</p>
+<p><b>أمثلة الانفصال الأربع:</b>
+$p=13$ (10 نعم، 360 لا)، $p=89$ (10 نعم، 360 لا)،
+$p=37$ (360 نعم، 10 لا)، $p=41$ (360 نعم، 10 لا).
+كلها $\equiv 1 \pmod 4$.</p>
+</div>
+
+<!-- ============ الكعكة: p = 13 — شهادة الفصل المركزية ============ -->
+<section id="cake-p13-central">
+<h2>🍰 p = 13 — شهادة الفصل المركزية</h2>
+<p><b>المرتبة:</b> مثال مضاد حاسم — شهادة فصل، لا قانون ولا فرضية.</p>
+<p>360 = 36·10 = 6²·10 — نفس الجزء الخالي من المربعات (10). لكن mod 13:</p>
+<table>
+<tr><th>الأساس</th><th>الباقي mod 13</th><th>الرتبة</th><th>المتمم</th></tr>
+<tr><td>10</td><td>10</td><td>6 (زوجي)</td><td>نعم: 0.076923 — a_j + a_{j+3} = 9</td></tr>
+<tr><td>360</td><td>9</td><td>3 (فردي)</td><td>لا: 0.27, 249, 83<sub>(360)</sub> — طولها 3، لا نصف دورة</td></tr>
+</table>
+<p><b>الرابط:</b> 13 ≡ 1 (mod 4)، فـ Q₄(b) = b³ mod 13. Q₄(10) = −1، Q₄(360) = +1، و Q₄(360) = Q₄(36)·Q₄(10) = (−1)(−1) = +1.</p>
+<p><b>لماذا 13 بالذات؟</b> لأن (13−1)/4 = 3 فردي، فـ Q₄ = +1 تُجبر الرتبة على الفردية هنا. هذا ظرف خاص بـ 13 — فعند p = 17 مثلاً، b = 4 يعطي Q₄ = +1 مع رتبة 4 زوجية. لذلك Q₄ جزء من التفسير، والقانون الجامع يحتاج قوى ثنائية أعلى.</p>
+<p><b>الخلاصة المثبتة فقط:</b> الجزء الخالي من المربعات ورمز ليجاندر لا يكفيان لتحديد سلوك المتمم. p = 13 هي الأصغر — p = 89 في نفس الاتجاه، و p = 37 و 41 في الاتجاه المعاكس.</p>
+</section>
+
+
 
 </body></html>
