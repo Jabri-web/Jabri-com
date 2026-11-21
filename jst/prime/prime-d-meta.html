@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prime D — Final Closure | S(x)=π(x) من 10⁸ إلى 10⁹</title>
+<style>
+body{font-family:system-ui;max-width:980px;margin:auto;padding:16px;line-height:1.9;background:#fbfbfc;color:#111}
+header{background:#111;color:#fff;padding:28px 20px;text-align:center;border-radius:14px}
+.card{background:#fff;border:1px solid #eee;border-radius:16px;padding:20px;margin:16px 0}
+h2{color:#C0392B}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;direction:ltr;text-align:center}
+th{background:#111;color:#fff;padding:8px 6px}td{padding:8px 6px;border-bottom:1px solid #eee}
+img{width:100%;border-radius:12px;border:1px solid #eee}
+.formula{text-align:center;direction:ltr;font-size:18px;background:#f6f6f6;padding:10px;border-radius:8px}
+.note{background:#fff8e6;border:1px solid #ffe9a8;border-radius:12px;padding:14px}
+.ok{background:#f0fff0;border:1px solid #080;border-radius:12px;padding:14px}
+.muted{color:#666;font-size:13px;text-align:center}
+.pos{color:#1e7a34;font-weight:700}.neg{color:#C0392B;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+<h1>🌹🇾🇪 Prime D — Final Closure</h1>
+<p>S(x) = π(x) · من 10⁸ إلى 10⁹ · بنفس المسطرة، دون تغيير تعريف</p>
+<p><b>π(10⁹) = 50,847,534</b></p>
+</header>
+
+<div class="card">
+<h2>تعريف القياس الثابت — عبر A و B و C و D</h2>
+<div class="formula">S(x) = π(x) &nbsp;|&nbsp; Li₂(x) = ∫₂ˣ dt/ln t &nbsp;|&nbsp; D₁ = π − Li₂ &nbsp;|&nbsp; D₂ = π − x/ln x</div>
+<div class="formula">ρ(a,b) = (π(b)−π(a))/(b−a) &nbsp;|&nbsp; ḡ = 1/ρ &nbsp;|&nbsp; R = |D₁|/π &nbsp;|&nbsp; ΔD₁ = D₁(x₂)−D₁(x₁)</div>
+<p>العدّ: غربال إراتوستينس (مجزأ في D). الفجوات: بين أوليين متتاليين ≤ x فقط. النوافذ في D: ثابتة العرض 100,000,000 - تسع نوافذ.</p>
+</div>
+
+<div class="card">
+<h2>1. جدول D النهائي</h2>
+<table><tr><th>x</th><th>π(x)</th><th>Li₂(x)</th><th>D₁</th><th>R</th><th>D₂</th></tr>
+<tr><td>100M</td><td>5,761,455</td><td>5,762,208.330</td><td>-753.330</td><td>0.0131%</td><td>+332,774.0</td></tr>
+<tr><td>200M</td><td>11,078,937</td><td>11,079,973.808</td><td>-1,036.808</td><td>0.0094%</td><td>+615,308.2</td></tr>
+<tr><td>300M</td><td>16,252,325</td><td>16,253,408.102</td><td>-1,083.102</td><td>0.0067%</td><td>+882,915.9</td></tr>
+<tr><td>400M</td><td>21,336,326</td><td>21,337,376.967</td><td>-1,050.967</td><td>0.0049%</td><td>+1,141,420.0</td></tr>
+<tr><td>500M</td><td>26,355,867</td><td>26,356,831.104</td><td>-964.104</td><td>0.0037%</td><td>+1,393,458.7</td></tr>
+<tr><td>600M</td><td>31,324,703</td><td>31,326,044.207</td><td>-1,341.207</td><td>0.0043%</td><td>+1,640,014.1</td></tr>
+<tr><td>700M</td><td>36,252,931</td><td>36,254,240.999</td><td>-1,309.999</td><td>0.0036%</td><td>+1,882,917.7</td></tr>
+<tr><td>800M</td><td>41,146,179</td><td>41,147,861.188</td><td>-1,682.188</td><td>0.0041%</td><td>+2,122,021.5</td></tr>
+<tr><td>900M</td><td>46,009,215</td><td>46,011,647.589</td><td>-2,432.589</td><td>0.0053%</td><td>+2,357,836.0</td></tr>
+<tr><td>1,000M</td><td><b>50,847,534</b></td><td><b>50,849,233.913</b></td><td><b>-1,699.913</b></td><td><b>0.0033%</b></td><td><b>+2,592,591.6</b></td></tr></table>
+<img src="primeD1.png" alt="Prime D1 - D1">
+<p>D₁ سالب في كل النقاط، لكنه ليس مساراً هابطاً منتظماً - يتذبذب، وأكبر عودة نحو الصفر هي الأخيرة: +732.676.</p>
+</div>
+
+<div class="card">
+<h2>2. ΔD₁ - التذبذب مثبت</h2>
+<table><tr><th>الفترة</th><th>ΔD₁</th></tr>
+<tr><td>100M → 200M</td><td class="neg">-283.478</td></tr>
+<tr><td>200M → 300M</td><td class="neg">-46.294</td></tr>
+<tr><td>300M → 400M</td><td class="pos">+32.135</td></tr>
+<tr><td>400M → 500M</td><td class="pos">+86.863</td></tr>
+<tr><td>500M → 600M</td><td class="neg">-377.103</td></tr>
+<tr><td>600M → 700M</td><td class="pos">+31.208</td></tr>
+<tr><td>700M → 800M</td><td class="neg">-372.189</td></tr>
+<tr><td>800M → 900M</td><td class="neg">-750.401</td></tr>
+<tr><td>900M → 1,000M</td><td class="pos">+732.676</td></tr></table>
+</div>
+
+<div class="card">
+<h2>3. الكثافة - نوافذ 100 مليون</h2>
+<table><tr><th>النافذة</th><th>عدد الأوليات</th><th>ρ</th><th>ḡ</th></tr>
+<tr><td>100M-200M</td><td>5,317,482</td><td>0.05317</td><td>18.81</td></tr>
+<tr><td>200M-300M</td><td>5,173,388</td><td>0.05173</td><td>19.33</td></tr>
+<tr><td>300M-400M</td><td>5,084,001</td><td>0.05084</td><td>19.67</td></tr>
+<tr><td>400M-500M</td><td>5,019,541</td><td>0.05020</td><td>19.92</td></tr>
+<tr><td>500M-600M</td><td>4,968,836</td><td>0.04969</td><td>20.13</td></tr>
+<tr><td>600M-700M</td><td>4,928,228</td><td>0.04928</td><td>20.29</td></tr>
+<tr><td>700M-800M</td><td>4,893,248</td><td>0.04893</td><td>20.44</td></tr>
+<tr><td>800M-900M</td><td>4,863,036</td><td>0.04863</td><td>20.56</td></tr>
+<tr><td>900M-1,000M</td><td>4,838,319</td><td>0.04838</td><td>20.67</td></tr></table>
+<img src="primeD2.png" alt="Prime D2 - density">
+<p>الكثافة تنخفض باستمرار، والانخفاض يتباطأ.</p>
+</div>
+
+<div class="card">
+<h2>4. الفجوات</h2>
+<table><tr><th>الفجوة</th><th>التكرار التراكمي حتى 10⁹</th></tr>
+<tr><td>6</td><td>6,089,791</td></tr>
+<tr><td>12</td><td>4,468,957</td></tr>
+<tr><td>10</td><td>3,484,767</td></tr>
+<tr><td>4</td><td>3,424,679</td></tr>
+<tr><td>2</td><td>3,424,506</td></tr>
+<tr><td>18</td><td>3,351,032</td></tr></table>
+<img src="primeD3.png" alt="Prime D3 - gaps">
+<p>أكبر فجوة: <b>282</b> - بين <b>436,273,009 و 436,273,291</b>، في نافذة 400M-500M. متوسط الفجوة الكلي: 19.67.</p>
+<p><b>تغيّر رصدي:</b> 10 صعدت إلى الثالثة. 2 و 4 متساويتان تقريباً - فرق 173 فقط.</p>
+</div>
+
+<div class="card">
+<h2>5. مقارنة A → B → C → D</h2>
+<table><tr><th>المرحلة</th><th>نقطة الإغلاق</th><th>π(x)</th><th>D₁</th><th>R</th><th>ترتيب الفجوات</th><th>أكبر فجوة</th></tr>
+<tr><td>A</td><td>10⁶</td><td>78,498</td><td>-128.504</td><td>0.1637%</td><td>6، 2، 4، 12</td><td>114</td></tr>
+<tr><td>B</td><td>10⁷</td><td>664,579</td><td>-338.360</td><td>0.0509%</td><td>6، 12، 2، 4</td><td>154</td></tr>
+<tr><td>C</td><td>10⁸</td><td>5,761,455</td><td>-753.330</td><td>0.0131%</td><td>6، 12، 2، 4</td><td>220</td></tr>
+<tr><td>D</td><td>10⁹</td><td>50,847,534</td><td>-1,699.913</td><td>0.0033%</td><td>6، 12، 10، 4، 2، 18</td><td>282</td></tr></table>
+</div>
+
+<div class="card">
+<h2>6. ما الذي ثبت، وما الذي لم يثبت</h2>
+<p><b>ثبت حسابياً:</b> الكثافة تنخفض بتباطؤ مستمر. D₁ سالب في كل النقاط الأربعين من 10⁵ حتى 10⁹. R يتقلص من 0.1637% إلى 0.0033% عند نقاط الإغلاق. ترتيب الفجوات تغيّر مرتين. أكبر فجوة تكبر: 114 ← 154 ← 220 ← 282.</p>
+<p><b>لم يثبت:</b> أي قانون لدورية التذبذب. أي تفسير لترتيب الفجوات. أي ادعاء أن D₁ سيبقى سالباً بعد المليار. أي استنتاج نظري يتجاوز ما قالته الأرقام.</p>
+<div class="note"><b>ملاحظة التقريب:</b> قيم Li₂ معروضة إلى ثلاثة أرقام عشرية. D₁ و R محسوبة من القيم الكاملة ثم مقرّبة للعرض. الفرق لا يتجاوز 0.001 في D₁.</div>
+</div>
+
+<div class="card">
+<h2>7. سجل التحقق المستقل — PRIME D VERIFIED</h2>
+<p><b>Status: VERIFIED. No numerical corrections were adopted.</b></p>
+<p>أُعيد تشغيل غربال مجزّأ مستقل حتى المليار. وأثناء التحقق ظهرت الرواية الخاطئة نفسها مرة أخرى: غربالٌ يحسب العدد 1 ضمن الأوليات يعطي π(600M) = 31,324,704 و π(700M) = 36,252,932 و π(10⁹) = 50,847,535 — أي زيادة ظاهرية بمقدار واحد في كل نقطة. بعد استبعاد 1 صراحة، عادت المطابقة الكاملة مع القيم الأصلية. لذلك رُفض تعديل +1: سببه خطأ في أداة التحقق، لا في عدّ D.</p>
+<p>ما تأكد مستقلًا: النقاط التراكمية العشر مطابقة. النوافذ التسع مطابقة. مجموع النوافذ 45,086,079. أكبر فجوة 282 بين 436,273,009 و 436,273,291. ترتيب أعلى 15 فجوة داخل D مطابق.</p>
+<p><b>تصحيح نسخي واحد مستقل عن ذلك كله:</b> عدد نافذة 100M–200M كان مسجلًا 5,316,482، والصحيح من فرق π هو 5,317,482 (فرق 1000). صُححت النافذة إلى 5,317,482 و ρ إلى 0.05317، وبقي ḡ = 18.81. لم يتغير أي رقم آخر.</p>
+<p>ملاحظة منهجية: جدول الفجوات التراكمي حتى 10⁹ وجدول فجوات D فقط (طرفها العلوي &gt; 100M) جدولان مختلفان، ولا يجوز خلطهما. في D فقط: 2 تكررت 2,984,194 و 4 تكررت 2,984,422، والفرق 228.</p>
+</div>
+
+<div class="card ok">
+<h2>سجل الإغلاق</h2>
+<p><b>PRIME — STAGE D CLOSED.</b> النطاق: 10⁸ → 10⁹. العد النهائي: 50,847,534. المنهج: لم يتغير عن A و B و C. الحالة: مغلقة حسابياً، والجدول أعلاه هو المرجع الثابت.</p>
+<p>من صنعاء بدأت الحكاية، لكن الذي أوصلها إلى المليار هو ثبات المسطرة. 🇾🇪✊🌹</p>
+</div>
+
+<p class="muted">prime-d.html — Stage D Final Closure · S(x)=π(x) · الصور في نفس المجلد: primeD1.png (D₁)، primeD2.png (الكثافة)، primeD3.png (الفجوات)</p>
+</body>
+</html>
