@@ -38,6 +38,19 @@ Zenodo DOI: to be assigned on deposit}
 \begin{document}
 \maketitle
 \thispagestyle{firstpage}
+
+% --- Reproducibility — first page, DOI/Zenodo ---
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{
+\textbf{Reproducibility and Computational Materials}\\[2mm]
+The computational scripts, data-processing procedures, and supporting materials used to generate the reported results are available at:\\[1mm]
+\textbf{GitHub Repository:} [Repository Link]\\[1mm]
+\textbf{Archived Release:} [Release Link]\\[1mm]
+The archived release corresponds to the version used in this study and provides the materials needed to inspect and reproduce the reported computations. Reproducibility materials cover only the results already presented in this paper; no reproduction is promised for tests not yet closed, including M1-E, until they are closed and their version is fixed.
+}}
+\end{center}
+\vspace{0.3cm}
+
 \begin{center}
 \textbf{We count primes, compute their edges (gaps), and present what comparisons across ranges showed.}
 \end{center}
@@ -175,24 +188,6 @@ Across the nine $100\text{M}$ windows of Stage $D$, local prime density $\rho_k$
 15 & 36 & $1{,}057{,}496$ \\
 \bottomrule
 \end{tabular}
-
-\begin{table}[H]
-\centering
-\caption{Comparison of top-5 gap rankings across ranges — fill only from verified counts, not from figures}
-\begin{tabular}{llll}
-\toprule
-\textbf{Rank} & \textbf{B: Gap — Count} & \textbf{C: Gap — Count} & \textbf{D: Gap — Count} \\
-\midrule
-1 & to be inserted from verified count & to be inserted from verified count & $6$ — $5{,}321{,}039$ \\
-2 & to be inserted from verified count & to be inserted from verified count & $12$ — $3{,}930{,}575$ \\
-3 & to be inserted from verified count & to be inserted from verified count & $10$ — $3{,}054{,}751$ \\
-4 & to be inserted from verified count & to be inserted from verified count & $4$ — $2{,}984{,}422$ \\
-5 & to be inserted from verified count & to be inserted from verified count & $2$ — $2{,}984{,}194$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-% Closing note: do not deposit this table until B and C cells are filled from the count file itself, not from figures.
-
 \caption{Top 15 prime gap frequencies in Stage $D$ — Total in $D$: $45,086,079$}
 \end{table}
 \subsection{Visual Diagnostics ($B$, $C$, and $D$)}
@@ -224,24 +219,11 @@ Let the consecutive gap sequence be $(g_1,g_2,\ldots,g_m)$, and let \(S_n\in\{1,
 \text{Small}: g\leq6, \quad \text{Medium}: 8\leq g\leq14, \quad \text{Large}: g\geq16.
 \]
 Model M1 tests $P(S_{n+1}\mid S_n)$, while M1-E tests $P(S_{n+1}\mid g_n)$. Hence the central question is: Does $g_n$ add predictive information beyond $S_n$ when predicting $S_{n+1}$?
-\paragraph{Probability estimation (specified explicitly).}
-Conditional probabilities in both models are estimated by the direct conditional frequency table with Laplace smoothing $\alpha=1$, and no other probabilistic model is used:
-\[
-P(S_{n+1}=s \mid X_n=x) = \frac{\mathrm{count}_{\mathrm{train}}(X_n=x,\, S_{n+1}=s) + \alpha}{\mathrm{count}_{\mathrm{train}}(X_n=x) + \alpha \cdot 3},
-\]
-where $X_n = S_n$ in M1 and $X_n = g_n$ (or its merged category) in M1-E, and there are $3$ possible values of $S_{n+1}$. The same smoothing formula and the same $\alpha$ apply to both models.
-\paragraph{Fair-comparison conditions (frozen).}
-\begin{enumerate}
-    \item Training data alone are used to build conditional distributions and to merge categories. Test data do not enter category selection or model tuning.
-    \item Log-Loss is computed on the same test transitions for both models.
-    \item Paired Bootstrap resamples test transitions in the same way for both models in each repetition.
-    \item Improvement direction is fixed: $\Delta = \text{Log-Loss}_{M1} - \text{Log-Loss}_{M1-E}$, with positive values favouring M1-E.
-\end{enumerate}
 \paragraph{Test protocol (frozen, in progress).}
 \begin{enumerate}
     \item Splitting transition data into training and test sets at \(50\%/50\%\).
     \item Representing exact gap values up to \(30\), and using fixed logarithmic bins for larger gaps.
-    \item A merging threshold of \(200\), a fixed ascending merging system, with Laplace smoothing \(\alpha=1\). Merging detail: rare categories are merged ascendingly from largest to smallest until each merged category reaches at least $200$ in training; ties in frequency are broken deterministically by choosing the smaller value first, independently of the seed. This is a test setting, not a statistical guarantee.
+    \item A merging threshold of \(200\), a fixed ascending merging system, with Laplace smoothing \(\alpha=1\). Merging detail: rare categories are merged ascendingly from largest to smallest until each merged category reaches at least $200$ in training; ties in frequency are broken by choosing the smaller value first, under the seed below. This is a test setting, not a statistical guarantee.
     \item Block Bootstrap with block length \(100\) (fixed test setting), and \(B=2000\) repetitions.
     \item Evaluating improvement with Log-Loss, with the Pearson coefficient evaluated independently and the two judgments not merged into a single criterion.
     \item No change to the protocol after inspecting results.
@@ -251,7 +233,7 @@ where $X_n = S_n$ in M1 and $X_n = g_n$ (or its merged category) in M1-E, and th
     \item \textbf{Split:} Chronological sequential split. The first half of the ordered transition sequence is training and the second half is test. Transitions are not randomly shuffled across the split.
     \item \textbf{Pearson, defined:} The Pearson coefficient reported independently is the lag-1 correlation $r_1$ between consecutive class codes $S_n$ and $S_{n+1}$, with encoding Small $=1$, Medium $=2$, Large $=3$. This encoding imposes a numerical order on the classes, so $r_1$ is interpreted as a linear rank correlation on this encoding specifically, not as a general measure of all forms of dependence.
     \item \textbf{Bootstrap, paired:} Block Bootstrap resamples blocks of length $100$ from test transitions. The same resampled blocks are used for both M1 and M1-E in each repetition, so the comparison is paired. The confidence interval for $\Delta = \text{Log-Loss}_{M1} - \text{Log-Loss}_{M1-E}$ is obtained from percentiles of the $B=2000$ paired values.
-    \item \textbf{Seed, scoped:} \texttt{SEED = 20261120} is a fixed reproducibility setting for Bootstrap resampling only. Tie-breaking during category merging is deterministic (smallest value first) and does not depend on the seed. The chronological split is deterministic and is not decided by the seed. The seed alone does not prove correctness.
+    \item \textbf{Seed, scoped:} \texttt{SEED = 20261120} is a fixed reproducibility setting for the stochastic part (Bootstrap resampling and tie-breaking). The chronological split is deterministic and is not decided by the seed. The seed alone does not prove correctness.
 \end{enumerate}
 \paragraph{Evaluation criterion.}
 M1-E performance is measured on test data compared with M1. A lower Log-Loss is interpreted as an improvement in predictive performance, with magnitude and uncertainty evaluated under the adopted protocol. Absence of a clear improvement means no additional predictive evidence was found within the tested data and settings; it does not prove absence of additional information in general.
@@ -292,11 +274,11 @@ Stages $A$--$D$ do not by themselves establish that $D_1(x)$ remains negative be
 \subsection*{Extra-Memory Test Protocol (M1-E) --- Summary for the Committee}
 M1-E tests whether the exact value $g_n$ adds predictive information beyond class $S_n$ when predicting $S_{n+1}$, comparing $P(S_{n+1}\mid S_n)$ with $P(S_{n+1}\mid g_n)$. The protocol is frozen and in progress (chronological 50\%/50\% split, exact representation up to $30$, merging threshold $200$, Laplace smoothing $\alpha=1$, paired Block Bootstrap with block length $100$ and $B=2000$, evaluation by Log-Loss, $r_1$ evaluated independently). The final result has not yet been adopted, and no simulation is presented as a result from the original sequence.
 \textbf{How does M1-E differ from the shuffled control?} The shuffled control is only an auxiliary test of order effect; it preserves class distribution and breaks order. Alone, it does not prove an exclusive cause, and does not substitute for the exact-value test.
-\textbf{Why seed \texttt{SEED = 20261120}?} For reproducibility and to prevent biased selection of results; derived from the protocol freeze date (20 November 2026). It is used for Bootstrap resampling only; it does not govern tie-breaking or the chronological split.
+\textbf{Why seed \texttt{SEED = 20261120}?} For reproducibility and to prevent biased selection of results; derived from the protocol freeze date (20 November 2026). It governs only the stochastic part; the chronological split is deterministic.
 \textbf{Did $r_1=-0.03006$ prove repulsion or absence of memory?} No. It is a weak negative linear correlation on the documented encoding, conditional on correctness of calculation. Pearson does not measure all forms of dependence, does not prove a specific causal mechanism, and does not rule out memory in general. M1-E was designed to test whether the exact value adds information that classes did not reveal.
 % ==========================================
 \section{Reproducibility and Conclusion}
-All prime-generation and counting computations reported in Stages $A$--$D$ were performed in \texttt{Python 3} using the Sieve of Eratosthenes, with $1$ excluded from the prime set. The M1-E protocol and its reproducibility settings have been frozen, but the final M1-E evaluation on the actual prime-gap dataset remains in progress.
+All prime-generation and counting computations reported in Stages $A$--$D$ were performed in \texttt{Python 3} using the Sieve of Eratosthenes, with $1$ excluded from the prime set. The M1-E protocol and its reproducibility settings have been frozen, but the final M1-E evaluation on the actual prime-gap dataset remains in progress. The code is deposited when the final Prime version is ready for deposit, after three closures: (1) fixing the counting script and data production, (2) completing the M1 and M1-E tests or stating precisely what was and was not executed, (3) matching the tables and numbers in the paper with the files produced by the final run. The code is then uploaded to a GitHub repository, a specific version (Release/Tag) is fixed, and the link to that version — not a mutable link to the latest GitHub files — is placed on the first DOI/Zenodo page.
 
 This study presents the results of the computational survey of prime gaps within the specified range, and what comparisons showed in terms of changes in prime density, gap distribution, and frequency rankings. These results form a basis for later comparisons and tests, including the test of additional information that the exact gap value may carry. Evaluation of the results, their implications, and the place of this work is left to the reader and referees.
 
