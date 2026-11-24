@@ -1,8 +1,14 @@
 Jabri-web
 └── /Jabri-com/zx/
+├── zx-about.md
+
+├── zx-final.html
+├── zx-section20.html
 ├── zx-doc.html
 ├── zx-waha.html
-├── zx-eq.html
+├── zx-equt.html
+├── zx-react.html
+
 ├── zx-file.txt
 ├── README.md
 ├── zx1.md
@@ -10,8 +16,17 @@ Jabri-web
 ├── zx3.md
 ├── zx4.md
 ├── zx5.md
+├── zx6.md
+├── zx7.md
+├── zx8.md
+├── zx9.md
+├── zx10.md
+├── zx-derivation.md
+├── zx-type.md
 .....
+.......
 ├── zx/en/
 ├── zx-waha.html
 
-...
+....
+.......
