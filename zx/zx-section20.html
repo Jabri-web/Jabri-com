@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>§20 — ZX Derivative & Integral Exploration (Rev. B)</title>
+<title>§20 — ZX Derivative & Integral Exploration (Rev. C — Corrected)</title>
 <link rel="canonical" href="https://jabri-com.vercel.app/zx/zx-section20.html" />
 <style>
 :root{color-scheme:light;--ink:#20252b;--muted:#59636e;--line:#d8dee6;--bg:#f5f7fa;--card:#fff;--accent:#245b8f}
@@ -15,6 +15,7 @@ h1,h2{line-height:1.4}h1{font-size:clamp(1.4rem,4vw,2rem);margin-top:0;color:var
 table{border-collapse:collapse;width:100%;margin:1rem 0;direction:rtl}th,td{border:1px solid var(--line);padding:10px;text-align:right;vertical-align:top}th{background:#f0f4f8}
 .note{border-right:4px solid var(--accent);padding:12px 16px;background:#f2f7fb;border-radius:8px;margin:1rem 0}
 .note.fix{border-right-color:#b45309;background:#fdf6ec}
+.note.pass{border-right-color:#1a7f37;background:#f0fdf4}
 .small{font-size:.94rem;color:var(--muted)}footer{border-top:1px solid var(--line);margin-top:2rem;padding-top:1rem;color:var(--muted);font-size:.9rem}
 @media print{body{background:white}main{margin:0;padding:0}article{box-shadow:none;border:0}}
 </style>
@@ -25,7 +26,7 @@ table{border-collapse:collapse;width:100%;margin:1rem 0;direction:rtl}th,td{bord
 
 <h1>§20 — ZX Derivative &amp; Integral Exploration</h1>
 <p class="meta">استكشاف مفتوح — مساران متكاملان</p>
-<p><span class="status">OPEN · Exploratory</span></p>
+<p><span class="status">OPEN · Exploratory · Rev. C — Corrected</span></p>
 
 <h2>التعريف المعتمد</h2>
 <div class="math">Z<sub>x</sub>(n,t)=2πn+ln(n)+C(t), &nbsp; n≥1</div>
@@ -65,6 +66,45 @@ table{border-collapse:collapse;width:100%;margin:1rem 0;direction:rtl}th,td{bord
 <h2>ملاحظة تباين المسارين (Rev. B)</h2>
 <p>التكامل على محور n يُظهر حدًا مختلطًا <span dir="ltr">−ne<sup>−at</sup></span>، بينما التكامل على محور t لا يُظهر حدًا مختلطًا، لأن <span dir="ltr">2πn + ln(n) + 1</span> ثابتة بالنسبة إلى t. هذا التباين يستحق الملاحظة صراحة، دون منحه معنى بنيويًا جديدًا قبل اختباره رياضيًا.</p>
 
+<h2>المستويات الثلاثة لقراءة دالة ZX (Rev. C)</h2>
+<p>تثبيت منهجي: لا نقرأ ZX برقم واحد، بل بثلاث قراءات مترابطة رياضيًا.</p>
+
+<h2>1. الحالة الراهنة</h2>
+<div class="math">Zx(n, t<sub>now</sub>)</div>
+<p>قيمة الدالة عند الزمن الحالي. تخبرنا بحالتها الآن، ولا تكشف وحدها تاريخ تطورها.</p>
+
+<h2>2. الحصيلة التراكمية</h2>
+<div class="math">I(n) = ∫<sub>t<sub>BB</sub></sub><sup>t<sub>now</sub></sup> Zx(n,t) dt</div>
+<p>تلخص التراكم على الفترة كلها. لكنها ليست بصمة فريدة للمسار؛ فقد تنتج مسارات مختلفة القيمة النهائية نفسها.</p>
+
+<h2>3. سجل التراكم</h2>
+<div class="math">I(n,t) = ∫<sub>t<sub>BB</sub></sub><sup>t</sup> Zx(n,s) ds</div>
+<p>يعرض كيف تغير التراكم مع الزمن. وبحسب مبرهنة التفاضل والتكامل، إذا كانت Zx متصلة:</p>
+<div class="math">∂I(n,t) / ∂t = Zx(n,t)</div>
+<div class="note"><strong>توضيح Rev. C:</strong> إذا احتفظنا بمنحنى التراكم كاملًا، نستعيد قيم الدالة زمنيًا بالاشتقاق، ضمن شروط الاشتقاق. لكننا لا نستعيد تلقائيًا كل ما قد نقصده بالتاريخ الفيزيائي للكون؛ فهذا يتطلب أن تكون Zx نفسها ممثلة كافية للحالة التي نريد وصفها. أما التكامل النهائي وحده فلا يكفي لاستعادة المسار.</div>
+
+<h2>اختبار المسارين ذوي النهاية المشتركة (Rev. C — PASS — مصحح)</h2>
+<div class="note fix"><strong>تصحيح التسمية Rev. C:</strong> الاختبار أدناه يحسب تكامل <strong>المركبة الزمنية C(t)</strong>، وليس تكامل ZX الكامل. الأرقام صحيحة، والتصحيح في التسمية فقط. لا نسمّي تكامل المركبة الزمنية تكامل ZX الكامل.</div>
+<p>نثبت النهاية نفسها، ثم نختبر هل الحصيلتان مختلفتان:</p>
+<div class="math">C<sub>a</sub>(t) = 1 − e<sup>−at</sup> &nbsp; , &nbsp; C<sub>b</sub>(t) = 0.5024205318 × t / 13.799</div>
+<div class="math">C<sub>a</sub>(t<sub>now</sub>) = C<sub>b</sub>(t<sub>now</sub>) = 0.5024205318</div>
+<div class="math">I<sub>a,C</sub> = ∫<sub>0</sub><sup>13.799</sup> C<sub>a</sub>(t) dt = 3.8664771950</div>
+<div class="math">I<sub>b,C</sub> = ∫<sub>0</sub><sup>13.799</sup> C<sub>b</sub>(t) dt = 3.4664504589</div>
+<div class="math">I<sub>a,C</sub> − I<sub>b,C</sub> = 0.4000267361</div>
+<p>عند تثبيت n، ينتقل الفرق نفسه إلى تكاملي ZX الكاملين، لأن الجزء <span dir="ltr">(2πn + ln(n))·T</span> مشترك في المسارين:</p>
+<div class="math">∫ Zx dt = (2πn + ln(n))·T + ∫ C(t) dt</div>
+<div class="math">∫<sub>0</sub><sup>13.799</sup> Zx(2,t) dt = 186.8345632471</div>
+<div class="note pass"><strong>النتيجة:</strong> حالة راهنة واحدة، وحصيلتان تاريخيتان مختلفتان. مثال مضاد واضح: نفس النهاية لا تعني نفس التكامل. وقد تمت مطابقة الصيغ والحسابات من المصدر تحليليًا وعدديًا قبل التثبيت.</div>
+<div class="note"><strong>تحقق:</strong> عند n=2، التكامل الكامل <span dir="ltr">∫<sub>0</sub><sup>13.799</sup> Zx(2,t) dt = 186.8345632471</span>، وهو يساوي <span dir="ltr">(2π·2 + ln(2))·13.799 + 3.8664771950</span>. والمسار الخطي المقابل يعطي <span dir="ltr">186.4345365110</span>، والفرق بينهما هو نفسه <span dir="ltr">0.4000267361</span>.</div>
+
+<h2>نتيجة التمييز (Rev. C)</h2>
+<div class="math">نفس البداية والنهاية ⇏ نفس التكامل &nbsp; , &nbsp; نفس التكامل ⇏ نفس المسار</div>
+<p>التكامل النهائي ملخص للمسار، وليس بصمة فريدة له. وسجل التراكم أقوى من الرقم النهائي، لأنه يحفظ كيف تشكل التراكم لحظة بعد لحظة.</p>
+
+<h2>ثوابت إطار التكامل الزمني (Rev. C)</h2>
+<div class="math">t<sub>1</sub> = t<sub>BB</sub> &nbsp; , &nbsp; t<sub>n</sub> = t<sub>now</sub></div>
+<p><strong>H<sub>0</sub>:</strong> معايرة للحالة الراهنة، لا حد زمني للتكامل. لا ندخل H<sub>0</sub> كنهاية للزمن، بل كقياس للحالة التي نقيس عندها الآن.</p>
+
 <h2>الملاحظة المنهجية</h2>
 <p>عدم ظهور تفاعل بين المحورين حتى الآن هو نتيجة للاستكشاف، وليس افتراضًا بأن التفاعل مستحيل. ولا يُمنح أي تركيب ناتج عن التكامل معنى بنيويًا جديدًا قبل اختباره رياضيًا.</p>
 
@@ -73,11 +113,12 @@ table{border-collapse:collapse;width:100%;margin:1rem 0;direction:rtl}th,td{bord
 <li>الاشتقاق يجيب عن سؤال السلوك المحلي، ويبقى إنجازًا مستقلًا.</li>
 <li>التكامل مسار مكمّل يسأل عن التراكم عبر المجال.</li>
 <li>حتى الآن، التكامل يؤكد قابلية الفصل ولا يكشف تفاعلًا جديدًا مثبتًا.</li>
+<li>المستويات الثلاثة تثبت أن القيمة النهائية ≠ التاريخ الكامل، وأن سجل التراكم يحمل معلومة لا يحملها الرقم النهائي وحده.</li>
 <li>السؤال عن العلاقة المشتركة بين المحورين مفتوح، دون فرض نتيجة مسبقًا.</li>
 </ul>
 
 <footer>
-<p><strong>سجل المراجعات:</strong> Rev. A — النسخة الأولى. Rev. B — تصحيح تكامل محور t (إدخال الحد +1 داخل القوس)، وإضافة ملاحظة تباين المسارين، وتوضيح المشتق المختلط.</p>
+<p><strong>سجل المراجعات:</strong> Rev. A — النسخة الأولى. Rev. B — تصحيح تكامل محور t (إدخال الحد +1 داخل القوس)، وإضافة ملاحظة تباين المسارين، وتوضيح المشتق المختلط. Rev. C — تثبيت المستويات الثلاثة (مصححة: توضيح أن اختبار المسارين يحسب تكامل المركبة الزمنية C(t) وليس تكامل ZX الكامل، وإضافة التحقق ∫ Zx(2,t) dt = 186.8345632471) (الحالة الراهنة / الحصيلة التراكمية / سجل التراكم)، إضافة اختبار المسارين ذوي النهاية المشتركة 0.5024205318 والحصيلتين 3.8664771950 و 3.4664504589 والفرق 0.4000267361، تثبيت t<sub>1</sub>=t<sub>BB</sub> و t<sub>n</sub>=t<sub>now</sub> و H<sub>0</sub> كمعايرة للحالة الراهنة، وتوضيح أن سجل التراكم يستعيد الدالة بالاشتقاق لا التاريخ الفيزيائي الكامل تلقائيًا.</p>
 <p>هذه المسودة مخصصة لسجل العمل §20 فقط. لا تعديل للنسخة القاعدية، ولا مساس بالأقسام المجمدة، ولا فتح S4.</p>
 <p><a href="zx-doc-v5-final.html" style="color:var(--accent);font-weight:600;text-decoration:none;">← الرجوع إلى ZX Final</a></p>
 </footer>
