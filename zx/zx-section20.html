@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>§20 — ZX Derivative & Integral Exploration (Rev. B)</title>
+<style>
+:root{color-scheme:light;--ink:#20252b;--muted:#59636e;--line:#d8dee6;--bg:#f5f7fa;--card:#fff;--accent:#245b8f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.85}
+main{max-width:920px;margin:28px auto;padding:24px}article{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,4vw,36px);box-shadow:0 4px 18px #00000008}
+h1,h2{line-height:1.4}h1{font-size:clamp(1.4rem,4vw,2rem);margin-top:0;color:var(--accent)}h2{font-size:1.2rem;margin-top:2rem;border-bottom:1px solid var(--line);padding-bottom:.4rem}
+.meta{color:var(--muted);font-weight:600}.status{display:inline-block;border:1px solid #b6c9dc;background:#edf5fc;color:#235782;padding:3px 12px;border-radius:999px;font-size:.9rem}
+.math{direction:ltr;text-align:center;overflow-wrap:anywhere;font-family:Georgia,"Times New Roman",serif;font-size:1.08rem;background:#f7f9fb;border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;direction:rtl}th,td{border:1px solid var(--line);padding:10px;text-align:right;vertical-align:top}th{background:#f0f4f8}
+.note{border-right:4px solid var(--accent);padding:12px 16px;background:#f2f7fb;border-radius:8px;margin:1rem 0}
+.note.fix{border-right-color:#b45309;background:#fdf6ec}
+.small{font-size:.94rem;color:var(--muted)}footer{border-top:1px solid var(--line);margin-top:2rem;padding-top:1rem;color:var(--muted);font-size:.9rem}
+@media print{body{background:white}main{margin:0;padding:0}article{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<main><article>
+<p><a href="zx-doc-v5-final.html" style="color:var(--accent);font-weight:600;text-decoration:none;">← الرجوع إلى ZX Final — الأقسام الأساسية §01–§19</a></p>
+
+<h1>§20 — ZX Derivative &amp; Integral Exploration</h1>
+<p class="meta">استكشاف مفتوح — مساران متكاملان</p>
+<p><span class="status">OPEN · Exploratory</span></p>
+
+<h2>التعريف المعتمد</h2>
+<div class="math">Z<sub>x</sub>(n,t)=2πn+ln(n)+C(t), &nbsp; n≥1</div>
+<div class="math">C(t)=1−e<sup>−at</sup>, &nbsp; a=69.8/1379.9 ≈ 0.0505833756</div>
+<p>لا تغيير في تعريف ZX أو مجالها. هذه الصفحة تخص سجل العمل §20، وليست تعديلًا للنسخة القاعدية.</p>
+
+<div class="note"><strong>تصريح الامتداد المستمر — يُقرأ قبل الاشتقاق والتكامل:</strong> المشتقات والتكاملات بالنسبة إلى n تُحسب على الامتداد المستمر لـ Z<sub>x</sub> إلى n حقيقي، لا على المجال الصحيح الأصلي وحده.</div>
+
+<h2>المسار الأول: الاشتقاق — السلوك المحلي</h2>
+<p><strong>السؤال:</strong> ماذا يكشف تغير الدالة محليًا؟</p>
+<div class="math">∂Z<sub>x</sub>/∂n = 2π + 1/n</div>
+<div class="math">∂Z<sub>x</sub>/∂t = ae<sup>−at</sup></div>
+<div class="math">∂²Z<sub>x</sub>/(∂n∂t) = 0</div>
+<p><strong>النتيجة:</strong> استقلال محوري n وt في المشتق المختلط، مع ثبات نتائج الاشتقاق السابقة. هذه نتيجة مستقلة ولا تُستبدل بالتكامل.</p>
+<p class="small">ملاحظة: ∂Z<sub>x</sub>/∂n لا يعتمد على t، لذا المشتق المختلط صفر بترتيب أي من المحورين (نظرية شوارتز). الصفر ناتج عن استقلال المحورين في التعريف، وليس اكتشافًا جديدًا.</p>
+
+<h2>المسار الثاني: التكامل — التراكم عبر المجال</h2>
+<p><strong>السؤال:</strong> ماذا ينتج عند تراكم الدالة أو مشتقاتها؟</p>
+<table>
+<thead><tr><th>التكامل</th><th>النتيجة</th><th>المعنى</th></tr></thead>
+<tbody>
+<tr><td>∫ Z<sub>x</sub> dn</td><td dir="ltr">πn² + n ln(n) − ne<sup>−at</sup> + K</td><td>تراكم الدالة نفسها على محور n</td></tr>
+<tr><td>∫ Z<sub>x</sub> dt</td><td dir="ltr">(2πn + ln(n) + 1)·t + e<sup>−at</sup>/a + K</td><td>تراكم الدالة نفسها على محور t</td></tr>
+<tr><td>∫ Z′<sub>n</sub> dn</td><td dir="ltr">2πn + ln(n) + K = Z<sub>x</sub> − C(t) + K</td><td>إعادة الدالة بعد إزالة الجزء الزمني</td></tr>
+<tr><td>∫ C′(t) dt</td><td dir="ltr">C(t) + K = 1 − e<sup>−at</sup> + K</td><td>تراكم معدل C نفسه</td></tr>
+</tbody></table>
+<p><strong>النتيجة حتى الآن:</strong> قابلية الفصل محفوظة، ولم يظهر تفاعل جديد مثبت.</p>
+
+<div class="note fix"><strong>تصحيح Rev. B — تكامل محور t:</strong> الصيغة السابقة كتبت <span dir="ltr">(2πn + ln(n))·t + t + e<sup>−at</sup>/a + K</span>، وهذا خطأ في ترتيب الحد الثابت. الحد <span dir="ltr">+1</span> جزء من Z<sub>x</sub> نفسها، فيدخل داخل القوس مع <span dir="ltr">(2πn + ln(n))</span>. الصيغة الصحيحة: <span dir="ltr">(2πn + ln(n) + 1)·t + e<sup>−at</sup>/a + K</span>.</div>
+
+<h2>تفصيلة الإلغاء عند التكامل على محور n</h2>
+<div class="math">∫ Z<sub>x</sub> dn = πn² + n ln(n) − n + n(1−e<sup>−at</sup>) + K</div>
+<div class="math">−n + n(1−e<sup>−at</sup>) = −ne<sup>−at</sup></div>
+<div class="math">∫ Z<sub>x</sub> dn = πn² + n ln(n) − ne<sup>−at</sup> + K</div>
+<div class="note"><strong>التفسير الدقيق:</strong> الحد −ne<sup>−at</sup> حاصل ضرب يجمع المتغيرين، لكنه ليس تفاعلًا جديدًا داخل الدالة الأصلية؛ بل ناتج عن إعادة ترتيب وتكامل الحد الزمني. ظهور حاصل ضرب المتغيرين لا يعني تلقائيًا اكتشاف اقتران رياضي جديد.</div>
+
+<h2>ملاحظة تباين المسارين (Rev. B)</h2>
+<p>التكامل على محور n يُظهر حدًا مختلطًا <span dir="ltr">−ne<sup>−at</sup></span>، بينما التكامل على محور t لا يُظهر حدًا مختلطًا، لأن <span dir="ltr">2πn + ln(n) + 1</span> ثابتة بالنسبة إلى t. هذا التباين يستحق الملاحظة صراحة، دون منحه معنى بنيويًا جديدًا قبل اختباره رياضيًا.</p>
+
+<h2>الملاحظة المنهجية</h2>
+<p>عدم ظهور تفاعل بين المحورين حتى الآن هو نتيجة للاستكشاف، وليس افتراضًا بأن التفاعل مستحيل. ولا يُمنح أي تركيب ناتج عن التكامل معنى بنيويًا جديدًا قبل اختباره رياضيًا.</p>
+
+<h2>الخلاصة المرحلية</h2>
+<ul>
+<li>الاشتقاق يجيب عن سؤال السلوك المحلي، ويبقى إنجازًا مستقلًا.</li>
+<li>التكامل مسار مكمّل يسأل عن التراكم عبر المجال.</li>
+<li>حتى الآن، التكامل يؤكد قابلية الفصل ولا يكشف تفاعلًا جديدًا مثبتًا.</li>
+<li>السؤال عن العلاقة المشتركة بين المحورين مفتوح، دون فرض نتيجة مسبقًا.</li>
+</ul>
+
+<footer>
+<p><strong>سجل المراجعات:</strong> Rev. A — النسخة الأولى. Rev. B — تصحيح تكامل محور t (إدخال الحد +1 داخل القوس)، وإضافة ملاحظة تباين المسارين، وتوضيح المشتق المختلط.</p>
+<p>هذه المسودة مخصصة لسجل العمل §20 فقط. لا تعديل للنسخة القاعدية، ولا مساس بالأقسام المجمدة، ولا فتح S4.</p>
+<p><a href="zx-doc-v5-final.html" style="color:var(--accent);font-weight:600;text-decoration:none;">← الرجوع إلى ZX Final</a></p>
+</footer>
+</article></main>
+</body>
+</html>
