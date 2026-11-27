@@ -1,1 +1,18 @@
-test
+oe= odd-even
+______________
+/oe/oe-files.txt:
+
+/oe/oe-proof.md
+/oe/oe-proof-en.md
+/oe/oe.md
+/oe/oe.ipynb
+/oe/oe-en.ipynb
+/oe/oe.html
+/oe/oe-en.html
+/oe/oe-tree1.png
+/oe/oe-tree2.png
+/oe/oe-tree3.png
+/oe/oe-tree.png
+
+
+__________________
