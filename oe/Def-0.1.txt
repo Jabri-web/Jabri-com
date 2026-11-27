@@ -1,0 +1,11 @@
+OE — Definition 0.1 — FROZEN
+Odd-only compressed structure
+
+Nodes: V subset of {1,3,5,7,...}
+Parent of odd n: P(n) = S(n)
+Children of odd m: C(m) = {(m*2^k -1)/3 : k>=1, m*2^k = 1 mod 3, n>1, n != m}
+Even numbers are NOT nodes in OE compressed structure.
+Structural property: every node has exactly one parent, a parent may have many children.
+Reproducibility SHA-256: 6cf3052a8eae982b3b5a5de2dab403bccead4c64d3258b8dee20d3a4eff60a15
+Nodes=300 Edges=299 OE STRUCTURE: PASS REPRODUCIBILITY: PASS
+Z + C + A = 1

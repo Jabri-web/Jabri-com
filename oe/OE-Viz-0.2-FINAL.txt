@@ -1,0 +1,32 @@
+OE — Visualization 0.2 — FINAL — PASS مع إصلاح اسم الملف
+Date: Friday 27 November 2026, 09:52
+Fix: print name corrected to match savefig name.
+
+Before:
+  plt.savefig("oe-viz-0.2-final.png")
+  print("Saved: oe-viz-0.2.png")  # mismatch
+
+After:
+  plt.savefig("oe-viz-0.2-final.png")
+  print("Saved: oe-viz-0.2-final.png")  # match
+
+Effect: None on image, none on Def 0.1, none on sample.
+  Sample still: 300 nodes / 299 edges
+  Shown still: 15 nodes
+
+Visual audit: PASS
+  Independence from Def 0.1: سليم
+  Sample build: 300 / 299
+  Shown nodes: 15
+  Arrow direction: child -> parent
+  Caption below: إضافة صحيحة
+
+Methodology phrase (pinned):
+  الرسم يصف ما بنيناه، ولا يثبت ما لم نبرهنه.
+  The drawing describes what we built, it does not prove what we have not proven.
+
+Project status:
+  Def 0.0: مجمّد
+  Def 0.1: مجمّد
+  Visualization 0.2: مستقل، واستكشافي
+  إثبات وصول كل عدد فردي إلى 1: ما زال مفتوحاً

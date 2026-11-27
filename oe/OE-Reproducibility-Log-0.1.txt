@@ -1,0 +1,37 @@
+OE — Reproducibility Log — Def 0.1
+Date: Friday 27 November 2026, 08:41
+Method: Two independent runs from scratch, same parameters.
+
+Parameters:
+  max_nodes = 300
+  max_depth = 8
+  k range for C(m) = 1..59
+
+Run 1:
+  nodes = 300
+  edges = 299
+  sha256 = 6cf3052a8eae982b3b5a5de2dab403bccead4c64d3258b8dee20d3a4eff60a15
+
+Run 2:
+  nodes = 300
+  edges = 299
+  sha256 = 6cf3052a8eae982b3b5a5de2dab403bccead4c64d3258b8dee20d3a4eff60a15
+
+Checks:
+  Nodes identical: True
+  Edges identical: True
+  Depths identical: True
+  SHA identical: True
+  All odd: True
+  No duplicate edges: True
+  OE STRUCTURE: PASS
+  REPRODUCIBILITY: PASS
+
+Scope:
+  This proves reproducibility of the FINITE truncated tree (300 nodes, 8 levels).
+  It does NOT prove completeness of the infinite tree.
+  It does NOT prove the Collatz conjecture.
+
+Next document (separate, after this lock):
+  OE — Reverse Tree Visualization 0.1
+  Function: draw the FROZEN structure without modifying the definition.
