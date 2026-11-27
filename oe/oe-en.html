@@ -49,6 +49,9 @@ input{padding:11px;font-size:18px;border-radius:10px;text-align:center;width:150
 .node{position:absolute;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;cursor:pointer;z-index:2}
 .node:hover{transform:scale(1.2)}
 .even{background:#6ae3ff}.odd{background:#6affb5}.root{background:#FFD700;width:56px;height:56px}
+.warn{background:rgba(251,191,36,.08);border:1px solid var(--gold);border-radius:14px;padding:18px 20px;margin-top:14px}
+.warn b{color:var(--gold)}
+code{background:#0b1020;padding:2px 8px;border-radius:6px}
 </style>
 </head>
 <body>
@@ -60,33 +63,43 @@ input{padding:11px;font-size:18px;border-radius:10px;text-align:center;width:150
 </header>
 <main>
 
-<!-- Notation Lock - CORRECTED: mod 3 = 0 is the CONDITION, /3 is the RESULT -->
+<!-- CLARIFICATION: RAW vs COMPRESSED - this is the fix -->
+<h2 class="section-title">⚠️ Do Not Mix: Raw vs Compressed</h2>
+<div class="warn">
+<b>RAW (one step at a time):</b> <code>T(n) = 3n+1</code> if n odd, <code>T(n) = n/2</code> if n even. Every single division by 2 counts.<br>
+<b>COMPRESSED (one jump to the next odd):</b> <code>S(n) = n / 2^&nu;₂(n)</code> if even, <code>S(n) = (3n+1) / 2^&nu;₂(3n+1)</code> if odd. All the consecutive /2 steps are folded into one jump.<br><br>
+<b>Rule:</b> In this page, <b>S</b> always means compressed. <b>T</b> always means raw. The tree below uses <b>S</b> only. Example: 27 → raw: 27 → 82 → 41 ... | compressed: 27 → 41 (because 82/2 = 41). Same road, different counting.
+</div>
+
+<!-- Notation Lock -->
 <h2 class="section-title">🔒 Notation Lock - Def. 0.0</h2>
 <p class="section-desc">Never changes in all /oe/ files — φ = mod 3 is the gate, /3 is the result after the gate</p>
 <table>
-<tr><th>Symbol</th><th>Direction</th><th>Condition φ</th><th>Result</th></tr>
-<tr><td>3n+1</td><td>Down ↓</td><td>n odd</td><td>3n+1</td></tr>
-<tr><td>n/2</td><td>Down ↓</td><td>n even</td><td>n/2</td></tr>
-<tr><td>2n</td><td>Up ↑</td><td>Always exists - no condition</td><td>2n</td></tr>
-<tr><td>(n-1) mod 3 = 0</td><td>Up ↑</td><td>If (n-1) mod 3 = 0</td><td>Then (n-1)/3</td></tr>
-<tr><td>(2^k n -1) mod 3 = 0</td><td>Up ↑</td><td>If (2^k n -1) mod 3 = 0, i.e. 2^k n ≡ 1 (mod 3)</td><td>Then (2^k n -1)/3</td></tr>
+<tr><th>Symbol</th><th>Direction</th><th>Level</th><th>Condition φ</th><th>Result</th></tr>
+<tr><td>3n+1</td><td>Down ↓</td><td>RAW T</td><td>n odd</td><td>3n+1</td></tr>
+<tr><td>n/2</td><td>Down ↓</td><td>RAW T</td><td>n even</td><td>n/2</td></tr>
+<tr><td>S(n)</td><td>Down ↓</td><td>COMPRESSED S</td><td>always</td><td>next odd after T</td></tr>
+<tr><td>2n</td><td>Up ↑</td><td>Both</td><td>Always exists - no condition</td><td>2n</td></tr>
+<tr><td>(n-1) mod 3 = 0</td><td>Up ↑</td><td>COMPRESSED S⁻¹</td><td>If (n-1) mod 3 = 0</td><td>Then (n-1)/3</td></tr>
+<tr><td>(2^k n -1) mod 3 = 0</td><td>Up ↑</td><td>COMPRESSED S⁻¹</td><td>If (2^k n -1) mod 3 = 0, i.e. 2^k n ≡ 1 (mod 3)</td><td>Then (2^k n -1)/3</td></tr>
 </table>
 <p style="color:var(--gold)">Example: n=16 → (16-1) mod 3 = 0 ✅ → (16-1)/3 = 5 exists | n=8 → (8-1) mod 3 = 2 ❌ → no odd parent</p>
 
 <!-- Formula -->
-<h2 class="section-title">🧮 Al-Jabri Formula</h2>
+<h2 class="section-title">🧮 Al-Jabri Formula — Compressed Only</h2>
 <div class="convo">
 <b>S(n) = n / 2^ν₂(n)</b> if even<br>
 <b>S(n) = (3n+1) / 2^ν₂(3n+1)</b> if odd<br>
 <b>S⁻¹(n) = {2n} ∪ {(2^k n -1)/3 | (2^k n -1) mod 3 = 0}</b><br><br>
-<b>Z + C + A = 1</b> — Even + Odd + Network = The One
+<b>Z + C + A = 1</b> — Even + Odd + Network = The One<br><br>
+<span style="color:var(--muted)">Note: S⁻¹ here lists the compressed parents. The raw parent of an even number is just 2n. The (2^k n -1)/3 parents are the odd parents after folding the /2 steps.</span>
 </div>
 
 <!-- Interactive Network -->
-<h2 class="section-title">🌳 Interactive Network - Click any node</h2>
-<p class="section-desc">Gold = 1 | Blue = Even | Green = Odd</p>
+<h2 class="section-title">🌳 Interactive Network - Click any node (Compressed S)</h2>
+<p class="section-desc">Gold = 1 | Blue = Even | Green = Odd — Edges are S, not single T steps</p>
 <input id="inp" type="number" value="27">
-<button class="btn" onclick="showPath()">Show Path</button>
+<button class="btn" onclick="showPath()">Show Path (S)</button>
 <button class="btn purple" onclick="build(6)">Build Network</button>
 <div id="info" style="margin:12px;color:var(--gold)"></div>
 <div id="net"><svg id="lines" style="position:absolute;inset:0;width:100%;height:100%"></svg></div>
@@ -116,7 +129,7 @@ input{padding:11px;font-size:18px;border-radius:10px;text-align:center;width:150
 </div>
 </div>
 
-<!-- Images - CORRECTED: 3 images only, no oe-tree3.png, no broken tags -->
+<!-- Images -->
 <h2 class="section-title">🖼️ Images (Trees)</h2>
 <p class="section-desc">The three explanation tree diagrams - Corrected.</p>
 <div class="gallery">
@@ -149,10 +162,10 @@ function build(depth=6){
  for(let n in nodes){n=+n;if(n===1)continue;let p=S(n);if(pos[p]){html+=`<line x1="${pos[n].x}%" y1="${pos[n].y}%" x2="${pos[p].x}%" y2="${pos[p].y}%" stroke="#666" stroke-width="1"/>`}}
  svg.innerHTML=html;
  for(let n in nodes){n=+n;let d=document.createElement('div');d.className='node '+(n===1?'root':n%2==0?'even':'odd');d.style.left=`calc(${pos[n].x}% - 21px)`;d.style.top=`calc(${pos[n].y}% - 21px)`;d.textContent=n;d.onclick=()=>{document.getElementById('info').textContent=`${n} -> ${pathStr(n)}`};net.appendChild(d)}
- document.getElementById('info').textContent=`Nodes: ${Object.keys(nodes).length} - Click any node to see its path to 1`;
+ document.getElementById('info').textContent=`Nodes: ${Object.keys(nodes).length} - Click any node to see its path to 1 (compressed S)`;
 }
 function pathStr(n){let a=[n];while(n>1){n=S(n);a.push(n);if(a.length>50)break}return a.join(' -> ')}
-function showPath(){let n=+document.getElementById('inp').value;document.getElementById('info').textContent=`Path of ${n} : ${pathStr(n)}`}
+function showPath(){let n=+document.getElementById('inp').value;document.getElementById('info').textContent=`Path of ${n} (S) : ${pathStr(n)}`}
 build(6);
 </script>
 </body>
