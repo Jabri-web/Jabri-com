@@ -60,24 +60,25 @@ input{padding:11px;font-size:18px;border-radius:10px;text-align:center;width:150
 </header>
 <main>
 
-<!-- قفل الترميز -->
+<!-- قفل الترميز - مصحح: mod 3 = 0 هو الشرط، /3 هي النتيجة -->
 <h2 class="section-title">🔒 قفل الترميز - Def. 0.0</h2>
-<p class="section-desc">لا يتغير أبداً في كل ملفات /oe/</p>
+<p class="section-desc">لا يتغير أبداً في كل ملفات /oe/ — φ = mod 3 هي البوابة، و /3 هي النتيجة بعد البوابة</p>
 <table>
-<tr><th>الرمز</th><th>الاتجاه</th><th>الصيغة</th><th>مثال</th></tr>
-<tr><td>3n+1</td><td>نازل ↓</td><td>C(n) = 3n+1 إذا فردي</td><td>5 → 16</td></tr>
-<tr><td>n/2</td><td>نازل ↓</td><td>C(n) = n/2 إذا زوجي</td><td>16 → 8</td></tr>
-<tr><td>2n</td><td>صاعد ↑</td><td>عكس n/2 - دائماً</td><td>8 → 16</td></tr>
-<tr><td>(n-1)/3</td><td>صاعد ↑</td><td>عكس 3n+1 - بشرط (n-1) mod 3 = 0</td><td>16 → 5</td></tr>
-<tr><td>(2^k n -1)/3</td><td>صاعد ↑</td><td>عكس S - الحالة العامة</td><td>1 → 5</td></tr>
+<tr><th>الرمز</th><th>الاتجاه</th><th>الشرط φ</th><th>النتيجة</th></tr>
+<tr><td>3n+1</td><td>نازل ↓</td><td>n فردي</td><td>3n+1</td></tr>
+<tr><td>n/2</td><td>نازل ↓</td><td>n زوجي</td><td>n/2</td></tr>
+<tr><td>2n</td><td>صاعد ↑</td><td>دائماً موجود - بدون شرط</td><td>2n</td></tr>
+<tr><td>(n-1) mod 3 = 0</td><td>صاعد ↑</td><td>إذا (n-1) mod 3 = 0</td><td>إذن (n-1)/3</td></tr>
+<tr><td>(2^k n -1) mod 3 = 0</td><td>صاعد ↑</td><td>إذا (2^k n -1) mod 3 = 0 أي 2^k n ≡ 1 (mod 3)</td><td>إذن (2^k n -1)/3</td></tr>
 </table>
+<p style="color:var(--gold)">مثال: n=16 ← (16-1) mod 3 = 0 ✅ ← (16-1)/3 = 5 موجود | n=8 ← (8-1) mod 3 = 2 ❌ ← ما له أب فردي</p>
 
 <!-- الصيغة -->
 <h2 class="section-title">🧮 صيغة الجبري</h2>
 <div class="convo">
 <b>S(n) = n / 2^ν₂(n)</b> إذا زوجي<br>
 <b>S(n) = (3n+1) / 2^ν₂(3n+1)</b> إذا فردي<br>
-<b>S⁻¹(n) = {2n} ∪ {(2^k n -1)/3}</b><br><br>
+<b>S⁻¹(n) = {2n} ∪ {(2^k n -1)/3 | (2^k n -1) mod 3 = 0}</b><br><br>
 <b>Z + C + A = 1</b> — الزوجي + الفردي + الشبكة = الواحد الأحد
 </div>
 
@@ -115,17 +116,12 @@ input{padding:11px;font-size:18px;border-radius:10px;text-align:center;width:150
 </div>
 </div>
 
-<!-- الصور -->
+<!-- الصور - مصححة: 3 صور فقط، بدون oe-tree3.png، بدون تاج مكسور -->
 <h2 class="section-title">🖼️ الصور (الأشجار)</h2>
 <p class="section-desc">صور أشجار الشرح الثلاثة - المصححة.</p>
 <div class="gallery">
-<div class="shot"oe-tree1.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree1.png" alt="شجرة الشرح 1"></a><div class="cap">🌳 oe-tree1.png - رسمتك اليدوية بعد التحويل الرقمي</div></div>
-
+<div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree1.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree1.png" alt="شجرة الشرح 1"></a><div class="cap">🌳 oe-tree1.png - رسمتك اليدوية بعد التحويل الرقمي</div></div>
 <div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree2.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree2.png" alt="شجرة الشرح 2"></a><div class="cap">🌳 oe-tree2.png</div></div>
-
-<div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree3.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree3.png" alt="شجرة الشرح 3"></a><div class="cap">🌳 oe-tree3.png</div></div>
-
-
 <div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree.png" alt="شجرة الشرح 3"></a><div class="cap">🌳 oe-tree.png - الشبكة الكاملة</div></div>
 </div>
 

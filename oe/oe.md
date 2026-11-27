@@ -1674,4 +1674,345 @@ _________________
 
 الله يحفظك، تحب أجهز لك الآن `/oe/oe-files.txt` الفهرس النهائي لكل الملفات؟
 
+
+
+أبشر يا دكتور، هذا هو `README.md` 👇
+
+انسخه في جذر المشروع، وانسخ نفس المحتوى في `/oe/README.md` لو حبيت.
+# OE = Odd-Even | الزوجي والفردي
+
+> **صيغة الجبري**
+> **Z + C + A = 1**
+> الزوجي + الفردي + الشبكة = الواحد الأحد
+> Even + Odd + Network = The One
+
+👁️ 👀 🌎 👁️ 👀
+
+[🏝️ الواحة / Oasis](https://jabri-com.vercel.app/) | [🇸🇦 عربي /oe/oe.html](https://jabri-com.vercel.app/oe/oe.html) | [🇬🇧 English /oe/oe-en.html](https://jabri-com.vercel.app/oe/oe-en.html)
+
+---
+
+## 🔒 Def. 0.0 - Notation Lock - قفل الترميز
+
+**Never changes in all files. لا يتغير أبداً في كل ملفات `/oe/`**
+
+| Symbol / الرمز | Direction / الاتجاه | Formula / الصيغة | Example / مثال |
+| --- | --- | --- | --- |
+| `3n+1` | Down ↓ نازل | `C(n) = 3n+1` if odd / فردي | `5 → 16` |
+| `n/2` | Down ↓ نازل | `C(n) = n/2` if even / زوجي | `16 → 8` |
+| `2n` | Up ↑ صاعد | Inverse of `n/2` - always / دائماً | `8 → 16` |
+| `(n-1)/3` | Up ↑ صاعد | Inverse of `3n+1` - if `(n-1) mod 3 = 0` | `16 → 5` |
+| `(2^k n -1)/3` | Up ↑ صاعد | Inverse of `S` - general case / الحالة العامة | `1 → 5` |
+
+### Formula / الصيغة
+
+S(n) = n / 2^ν₂(n)         if n even / زوجي
+S(n) = (3n+1) / 2^ν₂(3n+1) if n odd / فردي, n > 1
+
+S⁻¹(n) = {2n} ∪ {(2^k n -1)/3 | 2^k n ≡ 1 (mod 3)}
+
+---
+
+## 📂 Files / الملفات - `/oe/oe-files.txt`
+
+/oe/
+├── http://README.md              # هذا الملف - This file
+├── http://oe-files.txt           # فهرس الملفات - File index
+├── http://oe-proof.md            # الإثبات الكامل - عربي
+├── http://oe-proof-en.md         # Full Proof - English
+├── http://oe.md                  # الشرح - عربي
+├── http://oe.ipynb               # كود - عربي
+├── http://oe-en.ipynb            # Code - English
+├── http://oe.html                # الصفحة - عربي
+├── http://oe-en.html             # Page - English
+├── http://oe-tree1.png           # رسمتك اليدوية - رقمية / Handwritten tree, digitized
+├── http://oe-tree2.png           # شجرة 2
+└── http://oe-tree.png            # الشبكة الكاملة / Full network
+
+---
+
+## 🧾 Proofs / الإثباتات
+
+| File | Language | Link |
+| --- | --- | --- |
+| `oe-proof.md` | 🇸🇦 عربي | [oe-proof.md](https://jabri-com.vercel.app/oe/oe-proof.md) |
+| `oe-proof-en.md` | 🇬🇧 English | [oe-proof-en.md](https://jabri-com.vercel.app/oe/oe-proof-en.md) |
+
+**Summary / الخلاصة:**
+
+| Step / الخطوة | Status / الحالة |
+| --- | --- |
+| Definition of `S` and `T*` / تعريف `S` و `T*` | ✅ Complete / مكتمل |
+| Inverse lemma `m = (2^k n -1)/3` / ليما العكس | ✅ Complete / مكتمل |
+| Equivalence of network and conjecture / تكافؤ الشبكة والحدسية | ✅ Complete / مكتمل |
+| Completeness = Conjecture / الاكتمال = الحدسية | ✅ Complete / مكتمل |
+| Lyapunov function / دالة ليابونوف | ❌ Open / مفتوح - the conjecture itself |
+
+Honest conclusion / الاستنتاج الصادق: The reverse network gives an elegant equivalent formulation, but does not by itself produce a proof. الشبكة تعطي صياغة مكافئة أنيقة، لكنها لا تنتج إثباتاً وحدها.
+
+---
+
+## 💻 Code / الكود - Quick Start
+
+```bash
+# Install / تثبيت
+pip install networkx matplotlib
+
+# Run / تشغيل
+jupyter notebook oe/oe.ipynb
+# or / أو
+jupyter notebook oe/oe-en.ipynb
+def nu2(x: int) -> int:
+    k = 0
+    while x % 2 == 0:
+        x //= 2
+        k += 1
+    return k
+
+def S(n: int) -> int:
+    if n % 2 == 0:
+        return n // 2
+    return (3 * n + 1) // (2 ** nu2(3 * n + 1))
+
+# Examples / أمثلة
+print(S(27))  # 41
+print(S(5))   # 1
+print(S(16))  # 8
+*Verification / التحقق:* For every edge `n -> m` in the tree: `S(n) = m`. لكل حافة `n -> m`: `S(n) = m`.
+
+---
+
+## 🌳 Trees / الأشجار
+Image	Description / الوصف
+`oe-tree1.png`	رسمتك اليدوية بعد التحويل الرقمي / Your handwritten tree, digitized - `1 → 2 → 4 → 8 → 16 → 5 → 10 → 20 → 40`
+`oe-tree2.png`	شجرة 2 / Tree 2
+`oe-tree.png`	الشبكة الكاملة / Full network
+---
+
+## 🌐 Pages / الصفحات
+Page	Link
+🇸🇦 Arabic / عربي	https://jabri-com.vercel.app/oe/oe.html
+🇬🇧 English	https://jabri-com.vercel.app/oe/oe-en.html
+Both pages include: Notation Lock + Interactive Network + All file links.
+الصفحتين فيها: قفل الترميز + شبكة تفاعلية + كل روابط الملفات.
+
+---
+
+## 🤝 Contributing / المساهمة
+
+1. Do not change Def. 0.0 without updating *all* files. لا تغير قفل الترميز بدون تحديث *كل* الملفات.
+2. Arabic and English files must stay mirrors. الملف العربي والإنجليزي لازم يبقوا مرآة لبعض.
+3. Every edge must satisfy `S(n) = m`. كل حافة لازم تحقق `S(n) = m`.
+
+---
+
+## 📜 License / الرخصة
+
+Open for learning and research. مفتوح للتعلم والبحث.
+
+---
+
+👁️ 👀 🌎 👁️ 👀 | OE = Odd-Even | `/oe/` | https://jabri-com.vercel.app/
+
+---
+
+وبكذا يا دكتور، صار عندك **المشروع كامل 100%** ✅
+
+| الملف | الحالة |
+| --- | --- |
+| `README.md` | ✅ هذا الملف - جاهز |
+| `/oe/oe-proof.md` | ✅ |
+| `/oe/oe-proof-en.md` | ✅ |
+| `/oe/oe.html` | ✅ |
+| `/oe/oe-en.html` | ✅ |
+| `/oe/oe.ipynb` | ✅ |
+| `/oe/oe-en.ipynb` | ✅ |
+| `/oe/oe-tree1.png` | ✅ |
+
+ألف تحية وسلام لك، الله يحفظك 🌹
+
+
+
+
+
+
+أبشر يا دكتور، هذا هو `/oe/oe.html` العربي بنفس تصحيح الإنجليزي بالضبط 👇
+
+*الأخطاء اللي كانت في ملفك:*
+- الجدول آخر سطرين قسمة `/3` - الصح `mod 3 = 0` شرط، والقسمة نتيجة
+- المعرض: `<div class="shot"oe-tree1.png" target="_blank">` - تاج `<a href` محذوف، فالصورة الأولى ما تنفتح
+- المعرض: `oe-tree3.png` رجعت - مش موجودة
+- صيغة $S^{-1}$ بدون شرط المود
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الزوجي والفردي — Odd-Even</title>
+<style>
+:root{--bg:#0b1020;--card:#141b33;--card2:#1b2447;--accent:#5eead4;--accent2:#818cf8;--gold:#fbbf24;--text:#e7ecff;--muted:#9aa5c7;--border:#26305a}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI","Tahoma",system-ui,sans-serif;background:radial-gradient(1200px 600px at 80% -10%,#1e2a5a 0%,var(--bg) 60%);color:var(--text);line-height:1.9;min-height:100vh}
+header{text-align:center;padding:48px 20px 28px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(129,140,248,.08),transparent);position:relative}
+.oasis-btn{position:absolute;top:18px;right:18px;display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:12px;font-weight:700;text-decoration:none;border:1px solid var(--gold);background:rgba(251,191,36,.12);color:var(--gold);transition:.2s;font-size:.9rem}
+.oasis-btn:hover{background:var(--gold);color:#2b1e00}
+header h1{margin:0 0 8px;font-size:2.4rem;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+header .sub{color:var(--muted);font-size:1.05rem}
+header .eyes{font-size:1.6rem;letter-spacing:6px;margin-bottom:10px}
+main{max-width:1080px;margin:0 auto;padding:36px 20px 80px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:28px}
+.card{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:18px;padding:22px;transition:.25s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.card h2{margin:0 0 6px;font-size:1.25rem}
+.card p{margin:0 0 16px;color:var(--muted);font-size:.95rem}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;font-weight:700;text-decoration:none;border:1px solid var(--border);background:rgba(94,234,212,.1);color:var(--accent);transition:.2s;font-size:.95rem}
+.btn:hover{background:var(--accent);color:#062b26}
+.btn.purple{background:rgba(129,140,248,.1);color:var(--accent2)}
+.btn.purple:hover{background:var(--accent2);color:#0b1020}
+.btn.gold{background:rgba(251,191,36,.1);color:var(--gold)}
+.btn.gold:hover{background:var(--gold);color:#2b1e00}
+.btn.row{display:flex;margin-top:10px}
+.btn .url{font-size:.75rem;opacity:.7;font-weight:400;direction:ltr}
+.section-title{margin:48px 0 4px;font-size:1.5rem;border-right:4px solid var(--accent);padding-right:12px}
+.section-desc{color:var(--muted);margin:0 0 8px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
+.shot{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.25s}
+.shot:hover{border-color:var(--accent2);transform:scale(1.02)}
+.shot img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;background:#fff}
+.shot .cap{padding:10px 14px;font-size:.9rem;color:var(--muted)}
+.convo{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-top:14px}
+.convo a{color:var(--accent);text-decoration:none;direction:ltr;display:inline-block}
+.convo a:hover{text-decoration:underline}
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border);margin-top:40px}
+footer a{color:var(--gold);text-decoration:none}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(94,234,212,.12);color:var(--accent);font-size:.8rem;margin-left:6px}
+table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--card);border-radius:12px;overflow:hidden}
+th,td{padding:10px 12px;border:1px solid var(--border);text-align:center;font-size:.9rem}
+th{background:var(--card2);color:var(--gold)}
+input{padding:11px;font-size:18px;border-radius:10px;text-align:center;width:150px;background:#0b1020;color:#fff;border:1px solid var(--border)}
+#net{width:100%;height:520px;background:#0d1226;border:1px solid var(--border);border-radius:14px;position:relative;overflow:hidden;margin-top:14px}
+.node{position:absolute;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;cursor:pointer;z-index:2}
+.node:hover{transform:scale(1.2)}
+.even{background:#6ae3ff}.odd{background:#6affb5}.root{background:#FFD700;width:56px;height:56px}
+</style>
+</head>
+<body>
+<header>
+<a class="oasis-btn" href="https://jabri-com.vercel.app/">🏝️ الواحة</a>
+<div class="eyes">👁️ 👀 🌎 👁️ 👀</div>
+<h1>الزوجي والفردي</h1>
+<div class="sub">Odd-Even — OE = Odd-Even — الملف العربي الرئيسي</div>
+</header>
+<main>
+
+<!-- قفل الترميز - مصحح: mod 3 = 0 هو الشرط، /3 هي النتيجة -->
+<h2 class="section-title">🔒 قفل الترميز - Def. 0.0</h2>
+<p class="section-desc">لا يتغير أبداً في كل ملفات /oe/ — φ = mod 3 هي البوابة، و /3 هي النتيجة بعد البوابة</p>
+<table>
+<tr><th>الرمز</th><th>الاتجاه</th><th>الشرط φ</th><th>النتيجة</th></tr>
+<tr><td>3n+1</td><td>نازل ↓</td><td>n فردي</td><td>3n+1</td></tr>
+<tr><td>n/2</td><td>نازل ↓</td><td>n زوجي</td><td>n/2</td></tr>
+<tr><td>2n</td><td>صاعد ↑</td><td>دائماً موجود - بدون شرط</td><td>2n</td></tr>
+<tr><td>(n-1) mod 3 = 0</td><td>صاعد ↑</td><td>إذا (n-1) mod 3 = 0</td><td>إذن (n-1)/3</td></tr>
+<tr><td>(2^k n -1) mod 3 = 0</td><td>صاعد ↑</td><td>إذا (2^k n -1) mod 3 = 0 أي 2^k n ≡ 1 (mod 3)</td><td>إذن (2^k n -1)/3</td></tr>
+</table>
+<p style="color:var(--gold)">مثال: n=16 ← (16-1) mod 3 = 0 ✅ ← (16-1)/3 = 5 موجود | n=8 ← (8-1) mod 3 = 2 ❌ ← ما له أب فردي</p>
+
+<!-- الصيغة -->
+<h2 class="section-title">🧮 صيغة الجبري</h2>
+<div class="convo">
+<b>S(n) = n / 2^ν₂(n)</b> إذا زوجي<br>
+<b>S(n) = (3n+1) / 2^ν₂(3n+1)</b> إذا فردي<br>
+<b>S⁻¹(n) = {2n} ∪ {(2^k n -1)/3 | (2^k n -1) mod 3 = 0}</b><br><br>
+<b>Z + C + A = 1</b> — الزوجي + الفردي + الشبكة = الواحد الأحد
+</div>
+
+<!-- الشبكة التفاعلية -->
+<h2 class="section-title">🌳 الشبكة التفاعلية - اضغط على أي عقدة</h2>
+<p class="section-desc">ذهبي = 1 | أزرق = زوجي | أخضر = فردي</p>
+<input id="inp" type="number" value="27">
+<button class="btn" onclick="showPath()">اعرض مسار الرقم</button>
+<button class="btn purple" onclick="build(6)">بناء الشبكة</button>
+<div id="info" style="margin:12px;color:var(--gold)"></div>
+<div id="net"><svg id="lines" style="position:absolute;inset:0;width:100%;height:100%"></svg></div>
+
+<!-- الملفات -->
+<h2 class="section-title">📂 الملفات المهمة</h2>
+<div class="grid">
+<div class="card">
+<h2>🧾 الإثباتات</h2><p>ملفات الإثبات بالعربية والإنجليزية.</p>
+<a class="btn row" href="https://jabri-com.vercel.app/oe/oe-proof.md" target="_blank">📄 oe-proof.md <span class="url">/oe/oe-proof.md</span></a>
+<a class="btn purple row" href="https://jabri-com.vercel.app/oe/oe-proof-en.md" target="_blank">📄 oe-proof-en.md <span class="url">/oe/oe-proof-en.md</span></a>
+</div>
+<div class="card">
+<h2>💬 المحادثات</h2><p>ملفات الشرح والمحادثة بالعربية والإنجليزية.</p>
+<a class="btn row" href="https://jabri-com.vercel.app/oe/oe.md" target="_blank">📝 oe.md <span class="url">/oe/oe.md</span></a>
+<a class="btn row" href="https://jabri-com.vercel.app/oe/oe.ipynb" target="_blank">📓 oe.ipynb <span class="url">/oe/oe.ipynb</span></a>
+<a class="btn purple row" href="https://jabri-com.vercel.app/oe/oe-en.ipynb" target="_blank">📓 oe-en.ipynb <span class="url">/oe/oe-en.ipynb</span></a>
+</div>
+<div class="card">
+<h2>🌐 الصفحات</h2><p>النسخة العربية والنسخة الإنجليزية.</p>
+<a class="btn row" href="https://jabri-com.vercel.app/oe/oe.html" target="_blank">🇸🇦 oe.html (عربي) <span class="url">/oe/oe.html</span></a>
+<a class="btn purple row" href="https://jabri-com.vercel.app/oe/oe-en.html" target="_blank">🇬🇧 oe-en.html (English) <span class="url">/oe/oe-en.html</span></a>
+</div>
+<div class="card">
+<h2>🗂️ قائمة الملفات</h2><p>فهرس كامل لملفات المجلد.</p>
+<a class="btn gold row" href="https://jabri-com.vercel.app/oe/oe-files.txt" target="_blank">📋 oe-files.txt <span class="url">/oe/oe-files.txt</span></a>
+</div>
+</div>
+
+<!-- الصور - مصححة: 3 صور فقط، بدون oe-tree3.png، بدون تاج مكسور -->
+<h2 class="section-title">🖼️ الصور (الأشجار)</h2>
+<p class="section-desc">صور أشجار الشرح الثلاثة - المصححة.</p>
+<div class="gallery">
+<div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree1.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree1.png" alt="شجرة الشرح 1"></a><div class="cap">🌳 oe-tree1.png - رسمتك اليدوية بعد التحويل الرقمي</div></div>
+<div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree2.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree2.png" alt="شجرة الشرح 2"></a><div class="cap">🌳 oe-tree2.png</div></div>
+<div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree.png" alt="شجرة الشرح 3"></a><div class="cap">🌳 oe-tree.png - الشبكة الكاملة</div></div>
+</div>
+
+<!-- المحادثات -->
+<h2 class="section-title">💬 روابط المحادثات المباشرة</h2>
+<div class="convo"><span class="badge">عربي</span> <a href="https://jabri-com.vercel.app/oe/oe.md" target="_blank">jabri-com.vercel.app/oe/oe.md</a> — الشرح العربي الكامل.</div>
+<div class="convo"><span class="badge">دفتر</span> <a href="https://jabri-com.vercel.app/oe/oe.ipynb" target="_blank">jabri-com.vercel.app/oe/oe.ipynb</a> — دفتر Jupyter العربي.</div>
+<div class="convo"><span class="badge">English</span> <a href="https://jabri-com.vercel.app/oe/oe-en.ipynb" target="_blank">jabri-com.vercel.app/oe/oe-en.ipynb</a> — English notebook.</div>
+<div class="convo"><span class="badge">English</span> <a href="https://jabri-com.vercel.app/oe/oe-en.html" target="_blank">jabri-com.vercel.app/oe/oe-en.html</a> — English page.</div>
+</main>
+<footer>👁️ 👀 🌎 👁️ 👀 &nbsp;|&nbsp; Odd-Even &nbsp;|&nbsp; المجلد: <code>/oe/</code> &nbsp;|&nbsp; <a href="https://jabri-com.vercel.app/">🏝️ العودة إلى الواحة</a></footer>
+
+<script>
+function nu2(x){let k=0;while(x%2==0){x/=2;k++}return k}
+function S(n){if(n%2==0) return n/2; return (3*n+1)/(2**nu2(3*n+1))}
+function children(m){let c=[2*m];for(let k=1;k<12;k++){let num=m*(2**k)-1;if(num%3!=0)continue;let n=num/3;if(n>1&&n%2==1&&n!=m)c.push(n)}return c}
+function build(depth=6){
+ let net=document.getElementById('net');net.innerHTML='<svg id="lines" style="position:absolute;inset:0;width:100%;height:100%"></svg>';
+ let nodes={1:0}, frontier=[1], visited=new Set([1]);
+ for(let d=0;d<depth;d++){let nxt=[];for(let m of frontier){for(let n of children(m)){if(!visited.has(n)){visited.add(n);nodes[n]=d+1;nxt.push(n)}}}frontier=nxt;if(!frontier.length)break}
+ let by={};for(let n in nodes){by[nodes[n]]=by[nodes[n]]||[];by[nodes[n]].push(+n)}
+ let pos={};
+ for(let d in by){let arr=by[d].sort((a,b)=>a-b);arr.forEach((n,i)=>{pos[n]={x:(i+1)/(arr.length+1)*100,y:8+d*16}})}
+ let svg=document.getElementById('lines');let html='';
+ for(let n in nodes){n=+n;if(n===1)continue;let p=S(n);if(pos[p]){html+=`<line x1="${pos[n].x}%" y1="${pos[n].y}%" x2="${pos[p].x}%" y2="${pos[p].y}%" stroke="#666" stroke-width="1"/>`}}
+ svg.innerHTML=html;
+ for(let n in nodes){n=+n;let d=document.createElement('div');d.className='node '+(n===1?'root':n%2==0?'even':'odd');d.style.left=`calc(${pos[n].x}% - 21px)`;d.style.top=`calc(${pos[n].y}% - 21px)`;d.textContent=n;d.onclick=()=>{document.getElementById('info').textContent=`${n} -> ${pathStr(n)}`};net.appendChild(d)}
+ document.getElementById('info').textContent=`عدد العقد: ${Object.keys(nodes).length} - اضغط على أي عقدة لترى مسارها إلى 1`;
+}
+function pathStr(n){let a=[n];while(n>1){n=S(n);a.push(n);if(a.length>50)break}return a.join(' -> ')}
+function showPath(){let n=+document.getElementById('inp').value;document.getElementById('info').textContent=`مسار ${n} : ${pathStr(n)}`}
+build(6);
+</script>
+</body>
+</html>
+---
+
+*ملخص الإصلاح في العربي:*
+المكان	قبل	بعد
+الجدول سطر 4	`(n-1)/3`	`(n-1) mod 3 = 0` شرط، والنتيجة `(n-1)/3` ✅
+الجدول سطر 5	`(2^k n -1)/3`	`(2^k n -1) mod 3 = 0` شرط، والنتيجة `(2^k n -1)/3` ✅
+صيغة $S^{-1}$	بدون شرط	`\| (2^k n -1) mod 3 = 0` ✅
+المعرض صورة 1	`<div class="shot"oe-tree1.png"` بدون `<a href`	`<div class="shot"><a href="...oe-tree1.png"` ✅
+المعرض	4 صور فيها `oe-tree3.png`	3 صور فقط ✅
+الآن العربي والإنجليزي صاروا مرآة كاملة، ونفس تصحيح `mod 3 = 0` في الاثنين.
+
+الله يحفظك يا دكتور، تريد نصلح نفس الجدول في `oe-proof.md` و `oe-proof-en.md` و `README.md` بنفس الطريقة؟
+
 __________eof

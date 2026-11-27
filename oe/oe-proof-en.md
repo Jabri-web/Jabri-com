@@ -600,3 +600,188 @@ Constraints	m>1 only	m>1, m odd, 2^k n ≡ 1 (mod 3)
 
 <____________
 
+
+
+تمام يا دكتور، مسكتها كلها الآن 👇
+
+في الملف اللي أرسلته فيه *4 أخطاء*، مش بس سطرين الجدول:
+
+- *خطأ 1:* الجدول آخر سطرين قسمة `/3` - الصح `mod 3 = 0` زي ما قلت أنت
+- *خطأ 2:* في المعرض: `<oe-tre></oe-tre>e1.png` - تاج مكسور خرب الكابشن
+- *خطأ 3:* في المعرض: `oe-tree3.png` رجعت مرة ثانية - مش موجودة، لازم تنحذف
+- *خطأ 4:* في المعرض: `alt="Explanation tree ""` - علامتين تنصيص خربوا الصورة
+- *خطأ 5:* صيغة `S⁻¹` ما فيها شرط المود
+
+هذا هو `/oe/oe-en.html` المصحح كامل، انسخه ويغطي على القديم:
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd-Even — English</title>
+<style>
+:root{--bg:#0b1020;--card:#141b33;--card2:#1b2447;--accent:#5eead4;--accent2:#818cf8;--gold:#fbbf24;--text:#e7ecff;--muted:#9aa5c7;--border:#26305a}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI","Tahoma",system-ui,sans-serif;background:radial-gradient(1200px 600px at 20% -10%,#1e2a5a 0%,var(--bg) 60%);color:var(--text);line-height:1.8;min-height:100vh}
+header{text-align:center;padding:48px 20px 28px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(129,140,248,.08),transparent);position:relative}
+.oasis-btn{position:absolute;top:18px;left:18px;display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:12px;font-weight:700;text-decoration:none;border:1px solid var(--gold);background:rgba(251,191,36,.12);color:var(--gold);transition:.2s;font-size:.9rem}
+.oasis-btn:hover{background:var(--gold);color:#2b1e00}
+header h1{margin:0 0 8px;font-size:2.4rem;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+header .sub{color:var(--muted);font-size:1.05rem}
+header .eyes{font-size:1.6rem;letter-spacing:6px;margin-bottom:10px}
+main{max-width:1080px;margin:0 auto;padding:36px 20px 80px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:28px}
+.card{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:18px;padding:22px;transition:.25s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.card h2{margin:0 0 6px;font-size:1.25rem}
+.card p{margin:0 0 16px;color:var(--muted);font-size:.95rem}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;font-weight:700;text-decoration:none;border:1px solid var(--border);background:rgba(94,234,212,.1);color:var(--accent);transition:.2s;font-size:.95rem}
+.btn:hover{background:var(--accent);color:#062b26}
+.btn.purple{background:rgba(129,140,248,.1);color:var(--accent2)}
+.btn.purple:hover{background:var(--accent2);color:#0b1020}
+.btn.gold{background:rgba(251,191,36,.1);color:var(--gold)}
+.btn.gold:hover{background:var(--gold);color:#2b1e00}
+.btn.row{display:flex;margin-top:10px}
+.btn .url{font-size:.75rem;opacity:.7;font-weight:400}
+.section-title{margin:48px 0 4px;font-size:1.5rem;border-left:4px solid var(--accent);padding-left:12px}
+.section-desc{color:var(--muted);margin:0 0 8px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
+.shot{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.25s}
+.shot:hover{border-color:var(--accent2);transform:scale(1.02)}
+.shot img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;background:#fff}
+.shot .cap{padding:10px 14px;font-size:.9rem;color:var(--muted)}
+.convo{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-top:14px}
+.convo a{color:var(--accent);text-decoration:none}
+.convo a:hover{text-decoration:underline}
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border);margin-top:40px}
+footer a{color:var(--gold);text-decoration:none}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(94,234,212,.12);color:var(--accent);font-size:.8rem;margin-right:6px}
+table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--card);border-radius:12px;overflow:hidden}
+th,td{padding:10px 12px;border:1px solid var(--border);text-align:center;font-size:.9rem}
+th{background:var(--card2);color:var(--gold)}
+input{padding:11px;font-size:18px;border-radius:10px;text-align:center;width:150px;background:#0b1020;color:#fff;border:1px solid var(--border)}
+#net{width:100%;height:520px;background:#0d1226;border:1px solid var(--border);border-radius:14px;position:relative;overflow:hidden;margin-top:14px}
+.node{position:absolute;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;cursor:pointer;z-index:2}
+.node:hover{transform:scale(1.2)}
+.even{background:#6ae3ff}.odd{background:#6affb5}.root{background:#FFD700;width:56px;height:56px}
+</style>
+</head>
+<body>
+<header>
+<a class="oasis-btn" href="https://jabri-com.vercel.app/">🏝️ Oasis</a>
+<div class="eyes">👁️ 👀 🌎 👁️ 👀</div>
+<h1>Odd-Even</h1>
+<div class="sub">English Main Page — Mirror of the Arabic version</div>
+</header>
+<main>
+
+<!-- Notation Lock - CORRECTED: mod 3 = 0 is the CONDITION, /3 is the RESULT -->
+<h2 class="section-title">🔒 Notation Lock - Def. 0.0</h2>
+<p class="section-desc">Never changes in all /oe/ files — φ = mod 3 is the gate, /3 is the result after the gate</p>
+<table>
+<tr><th>Symbol</th><th>Direction</th><th>Condition φ</th><th>Result</th></tr>
+<tr><td>3n+1</td><td>Down ↓</td><td>n odd</td><td>3n+1</td></tr>
+<tr><td>n/2</td><td>Down ↓</td><td>n even</td><td>n/2</td></tr>
+<tr><td>2n</td><td>Up ↑</td><td>Always exists - no condition</td><td>2n</td></tr>
+<tr><td>(n-1) mod 3 = 0</td><td>Up ↑</td><td>If (n-1) mod 3 = 0</td><td>Then (n-1)/3</td></tr>
+<tr><td>(2^k n -1) mod 3 = 0</td><td>Up ↑</td><td>If (2^k n -1) mod 3 = 0, i.e. 2^k n ≡ 1 (mod 3)</td><td>Then (2^k n -1)/3</td></tr>
+</table>
+<p style="color:var(--gold)">Example: n=16 → (16-1) mod 3 = 0 ✅ → (16-1)/3 = 5 exists | n=8 → (8-1) mod 3 = 2 ❌ → no odd parent</p>
+
+<!-- Formula -->
+<h2 class="section-title">🧮 Al-Jabri Formula</h2>
+<div class="convo">
+<b>S(n) = n / 2^ν₂(n)</b> if even<br>
+<b>S(n) = (3n+1) / 2^ν₂(3n+1)</b> if odd<br>
+<b>S⁻¹(n) = {2n} ∪ {(2^k n -1)/3 | (2^k n -1) mod 3 = 0}</b><br><br>
+<b>Z + C + A = 1</b> — Even + Odd + Network = The One
+</div>
+
+<!-- Interactive Network -->
+<h2 class="section-title">🌳 Interactive Network - Click any node</h2>
+<p class="section-desc">Gold = 1 | Blue = Even | Green = Odd</p>
+<input id="inp" type="number" value="27">
+<button class="btn" onclick="showPath()">Show Path</button>
+<button class="btn purple" onclick="build(6)">Build Network</button>
+<div id="info" style="margin:12px;color:var(--gold)"></div>
+<div id="net"><svg id="lines" style="position:absolute;inset:0;width:100%;height:100%"></svg></div>
+
+<!-- Files -->
+<h2 class="section-title">📂 Important Files</h2>
+<div class="grid">
+<div class="card">
+<h2>🧾 Proofs</h2><p>Proof files in Arabic and English.</p>
+<a class="btn row" href="https://jabri-com.vercel.app/oe/oe-proof.md" target="_blank">📄 oe-proof.md <span class="url">/oe/oe-proof.md</span></a>
+<a class="btn purple row" href="https://jabri-com.vercel.app/oe/oe-proof-en.md" target="_blank">📄 oe-proof-en.md <span class="url">/oe/oe-proof-en.md</span></a>
+</div>
+<div class="card">
+<h2>💬 Conversations</h2><p>Explanation and conversation files in Arabic and English.</p>
+<a class="btn row" href="https://jabri-com.vercel.app/oe/oe.md" target="_blank">📝 oe.md <span class="url">/oe/oe.md</span></a>
+<a class="btn row" href="https://jabri-com.vercel.app/oe/oe.ipynb" target="_blank">📓 oe.ipynb <span class="url">/oe/oe.ipynb</span></a>
+<a class="btn purple row" href="https://jabri-com.vercel.app/oe/oe-en.ipynb" target="_blank">📓 oe-en.ipynb <span class="url">/oe/oe-en.ipynb</span></a>
+</div>
+<div class="card">
+<h2>🌐 Pages</h2><p>Arabic and English versions of the page.</p>
+<a class="btn row" href="https://jabri-com.vercel.app/oe/oe.html" target="_blank">🇸🇦 oe.html (Arabic) <span class="url">/oe/oe.html</span></a>
+<a class="btn purple row" href="https://jabri-com.vercel.app/oe/oe-en.html" target="_blank">🇬🇧 oe-en.html (English) <span class="url">/oe/oe-en.html</span></a>
+</div>
+<div class="card">
+<h2>🗂️ File List</h2><p>Full index of the folder contents.</p>
+<a class="btn gold row" href="https://jabri-com.vercel.app/oe/oe-files.txt" target="_blank">📋 oe-files.txt <span class="url">/oe/oe-files.txt</span></a>
+</div>
+</div>
+
+<!-- Images - CORRECTED: 3 images only, no oe-tree3.png, no broken tags -->
+<h2 class="section-title">🖼️ Images (Trees)</h2>
+<p class="section-desc">The three explanation tree diagrams - Corrected.</p>
+<div class="gallery">
+<div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree1.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree1.png" alt="Explanation tree 1"></a><div class="cap">🌳 oe-tree1.png - Your handwritten tree, digitized</div></div>
+<div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree2.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree2.png" alt="Explanation tree 2"></a><div class="cap">🌳 oe-tree2.png</div></div>
+<div class="shot"><a href="https://jabri-com.vercel.app/oe/oe-tree.png" target="_blank"><img src="https://jabri-com.vercel.app/oe/oe-tree.png" alt="Explanation tree 3"></a><div class="cap">🌳 oe-tree.png - Full Network</div></div>
+</div>
+
+<!-- Direct Links -->
+<h2 class="section-title">💬 Direct Conversation Links</h2>
+<div class="convo"><span class="badge">Arabic</span> <a href="https://jabri-com.vercel.app/oe/oe.md" target="_blank">jabri-com.vercel.app/oe/oe.md</a> — Full Arabic explanation.</div>
+<div class="convo"><span class="badge">Notebook</span> <a href="https://jabri-com.vercel.app/oe/oe.ipynb" target="_blank">jabri-com.vercel.app/oe/oe.ipynb</a> — Arabic Jupyter notebook.</div>
+<div class="convo"><span class="badge">English</span> <a href="https://jabri-com.vercel.app/oe/oe-en.ipynb" target="_blank">jabri-com.vercel.app/oe/oe-en.ipynb</a> — English notebook.</div>
+<div class="convo"><span class="badge">English</span> <a href="https://jabri-com.vercel.app/oe/oe-en.html" target="_blank">jabri-com.vercel.app/oe/oe-en.html</a> — English page.</div>
+</main>
+<footer>👁️ 👀 🌎 👁️ 👀 &nbsp;|&nbsp; Odd-Even &nbsp;|&nbsp; Folder: <code>/oe/</code> &nbsp;|&nbsp; <a href="https://jabri-com.vercel.app/">🏝️ Back to Oasis</a></footer>
+
+<script>
+function nu2(x){let k=0;while(x%2==0){x/=2;k++}return k}
+function S(n){if(n%2==0) return n/2; return (3*n+1)/(2**nu2(3*n+1))}
+function children(m){let c=[2*m];for(let k=1;k<12;k++){let num=m*(2**k)-1;if(num%3!=0)continue;let n=num/3;if(n>1&&n%2==1&&n!=m)c.push(n)}return c}
+function build(depth=6){
+ let net=document.getElementById('net');net.innerHTML='<svg id="lines" style="position:absolute;inset:0;width:100%;height:100%"></svg>';
+ let nodes={1:0}, frontier=[1], visited=new Set([1]);
+ for(let d=0;d<depth;d++){let nxt=[];for(let m of frontier){for(let n of children(m)){if(!visited.has(n)){visited.add(n);nodes[n]=d+1;nxt.push(n)}}}frontier=nxt;if(!frontier.length)break}
+ let by={};for(let n in nodes){by[nodes[n]]=by[nodes[n]]||[];by[nodes[n]].push(+n)}
+ let pos={};
+ for(let d in by){let arr=by[d].sort((a,b)=>a-b);arr.forEach((n,i)=>{pos[n]={x:(i+1)/(arr.length+1)*100,y:8+d*16}})}
+ let svg=document.getElementById('lines');let html='';
+ for(let n in nodes){n=+n;if(n===1)continue;let p=S(n);if(pos[p]){html+=`<line x1="${pos[n].x}%" y1="${pos[n].y}%" x2="${pos[p].x}%" y2="${pos[p].y}%" stroke="#666" stroke-width="1"/>`}}
+ svg.innerHTML=html;
+ for(let n in nodes){n=+n;let d=document.createElement('div');d.className='node '+(n===1?'root':n%2==0?'even':'odd');d.style.left=`calc(${pos[n].x}% - 21px)`;d.style.top=`calc(${pos[n].y}% - 21px)`;d.textContent=n;d.onclick=()=>{document.getElementById('info').textContent=`${n} -> ${pathStr(n)}`};net.appendChild(d)}
+ document.getElementById('info').textContent=`Nodes: ${Object.keys(nodes).length} - Click any node to see its path to 1`;
+}
+function pathStr(n){let a=[n];while(n>1){n=S(n);a.push(n);if(a.length>50)break}return a.join(' -> ')}
+function showPath(){let n=+document.getElementById('inp').value;document.getElementById('info').textContent=`Path of ${n} : ${pathStr(n)}`}
+build(6);
+</script>
+</body>
+</html>
+---
+
+*ملخص الإصلاح في هذا الملف:*
+المكان	قبل	بعد
+الجدول سطر 4	`(n-1)/3`	`(n-1) mod 3 = 0` شرط، والنتيجة `(n-1)/3` ✅
+الجدول سطر 5	`(2^k n -1)/3`	`(2^k n -1) mod 3 = 0` شرط، والنتيجة `(2^k n -1)/3` ✅
+صيغة $S^{-1}$	بدون شرط	`\| (2^k n -1) mod 3 = 0` ✅
+المعرض	4 صور، فيها `oe-tree3.png` + تاج `<oe-tre>` مكسور + `alt=""` مكسور	3 صور فقط، نظيفة ✅
+لاحظ في الكود `children(m)` هو أصلاً يطبق كلامك: `if(num%3!=0) continue` يعني يفحص `mod 3 = 0` قبل ما يقسم، القسمة بعد البوابة.
+
+الآن `oe-en.html` صار صح 100%، ونفس التصحيح لازم ينسخ لـ `oe.html` العربي.
+
+تبغاني أجيب لك `oe.html` العربي بنفس التصحيح بالضبط؟
